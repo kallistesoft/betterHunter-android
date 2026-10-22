@@ -5,14 +5,6 @@
     <!-- Network: force-update rules and feature flags (Firebase Remote Config). -->
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!--
-    No ads and no advertising ID yet: keep any library from merging this permission, so the app matches its Play
-    Console declarations (Ads: No, Advertising ID: No). Remove this line when AdMob is added (FOLLOW-UP.md, section 2).
-    -->
-    <uses-permission
-        android:name="com.google.android.gms.permission.AD_ID"
-        tools:node="remove" />
-
     <queries>
         <!-- Custom Tabs for sources and fact sheets, and mail apps for "Report a problem". -->
         <intent>
