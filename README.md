@@ -8,7 +8,7 @@ The questions, exam recipes and photos come from the [hunt](https://github.com/k
 Flutter proof of concept and the question pipeline); this app ships a copy of them.
 
 Console setup still to do (Firebase, AdMob, Play): see [FOLLOW-UP.md](FOLLOW-UP.md). Product ideas (two parts,
-monetization): [IDEAS.md](IDEAS.md).
+monetization): [IDEAS.md](IDEAS.md). Decisions and why: [DECISIONS.md](DECISIONS.md).
 
 > Independent study aid: not affiliated with or endorsed by the RCMP, the Canadian Firearms Program, the Government
 > of Québec, FédéCP or any provincial agency.
