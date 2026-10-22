@@ -24,7 +24,7 @@ android {
     namespace = "ca.kallistesoft.hunt"
 
     defaultConfig {
-        applicationId = "ca.kallistesoft.betterhunter"
+        applicationId = "ca.kallistesoft.hunt"
         // Every Play upload needs a higher versionCode; CI can pass -PversionCode=<n>.
         versionCode = (findProperty("versionCode") as String?)?.toInt() ?: 1
         versionName = "1.0.0"
@@ -33,7 +33,7 @@ android {
         // Force update: the oldest versionCode allowed to run is read from this file (see README).
         buildConfigField("String", "UPDATE_CONFIG_URL", "\"https://hunt.kallistesoft.ca/android/update.json\"")
         // Play listing opened when in-app updates aren't available (also used by the debug build).
-        buildConfigField("String", "STORE_PACKAGE", "\"ca.kallistesoft.betterhunter\"")
+        buildConfigField("String", "STORE_PACKAGE", "\"ca.kallistesoft.hunt\"")
     }
 
     signingConfigs {

@@ -18,8 +18,8 @@ navigation3 = "1.2.0"
 profileinstaller = "1.4.1"
 # Google Play and Firebase
 playAppUpdate = "2.1.0"
-firebaseBom = "35.0.2"
-googleServices = "4.4.4"
+firebaseBom = "35.1.0"
+googleServices = "4.5.0"
 # Kotlin and third party
 coil = "3.6.3"
 kotlinxCoroutines = "1.11.0"

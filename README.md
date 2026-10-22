@@ -7,6 +7,8 @@ recognising Canada's game animals. Bilingual French/English, everything stays on
 The questions, exam recipes and photos come from the [hunt](https://github.com/kallistesoft/hunt) repo (the
 Flutter proof of concept and the question pipeline); this app ships a copy of them.
 
+Console setup still to do (Firebase, AdMob, Play): see [FOLLOW-UP.md](FOLLOW-UP.md).
+
 > Independent study aid: not affiliated with or endorsed by the RCMP, the Canadian Firearms Program, the Government
 > of Québec, FédéCP or any provincial agency.
 
@@ -45,7 +47,7 @@ feature/about        Disclaimer, how it works, sources, contact, privacy
 
 | | `debug` | `release` |
 |---|---|---|
-| Application ID | `ca.kallistesoft.betterhunter.debug` (installs next to the Play app) | `ca.kallistesoft.betterhunter` |
+| Application ID | `ca.kallistesoft.hunt.debug` (installs next to the Play app) | `ca.kallistesoft.hunt` |
 | Name | BetterHunter Dev | BetterHunter |
 | Version name | `1.0.0-debug` | `1.0.0` |
 | Code shrinking | no | R8 minify + resource shrinking |
@@ -118,11 +120,8 @@ the ViewModel that needs it.
 
 ### Setup
 
-1. In the [Firebase console](https://console.firebase.google.com/), create a project and add two Android apps:
-   `ca.kallistesoft.betterhunter` and `ca.kallistesoft.betterhunter.debug`.
-2. Download `google-services.json` (it lists both apps) to `app/`. For CI, store its content in the secret
-   `GOOGLE_SERVICES_JSON`.
-3. Create the parameters above in Remote Config and publish.
+Creating the Firebase project and the flags is described step by step in [FOLLOW-UP.md](FOLLOW-UP.md), along
+with the AdMob and Play Console setup.
 
 Without `google-services.json` the Google Services plugin isn't applied and the app runs with the defaults, so pull
 requests and forks still build. Remote Config uses a Firebase installation ID (already covered by "Device or other IDs"
@@ -142,6 +141,6 @@ prefix.
 
 ## Not done yet
 
-- AdMob (declared in Play Console's Data safety form, not integrated; the Flutter POC didn't have it either).
+- AdMob: declared in Play Console, not integrated yet. The account and ad unit setup is in [FOLLOW-UP.md](FOLLOW-UP.md).
 - Baseline profile (`profileinstaller` is in place; add a `:baselineprofile` module with a device in CI).
 - Instrumented UI tests (the Compose test dependencies are set up; current tests are JVM unit tests).

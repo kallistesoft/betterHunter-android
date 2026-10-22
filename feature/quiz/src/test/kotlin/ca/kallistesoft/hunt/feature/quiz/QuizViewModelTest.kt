@@ -19,8 +19,8 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.advanceTimeBy
-import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
@@ -31,6 +31,7 @@ import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class QuizViewModelTest {
+    // Virtual time: the mock exam timer only moves with advanceTimeBy, so runCurrent() runs pending work without it.
     private val dispatcher = StandardTestDispatcher()
     private val exam = Exam("PAL", mapOf(Lang.FR to "PAL"), listOf("federal"), questionCount = 3, minutes = 1)
     private val questions = (1..3).map { i ->
@@ -54,7 +55,7 @@ class QuizViewModelTest {
     fun tearDown() = Dispatchers.resetMain()
 
     private fun TestScope.viewModel(mode: QuizMode, saved: SavedStateHandle = SavedStateHandle()) =
-        QuizViewModel(exam.id, mode, content, userData, saved, DefaultFeatureFlags()).also { advanceUntilIdle() }
+        QuizViewModel(exam.id, mode, content, userData, saved, DefaultFeatureFlags()).also { runCurrent() }
 
     private val QuizViewModel.running get() = uiState.value as QuizUiState.Running
 
@@ -63,7 +64,7 @@ class QuizViewModelTest {
         val vm = viewModel(QuizMode.PRACTICE)
         repeat(3) {
             vm.choose(1)
-            advanceUntilIdle()
+            runCurrent()
             vm.next()
         }
         assertEquals(3, userData.recorded.size)
@@ -78,13 +79,13 @@ class QuizViewModelTest {
         vm.choose(0)
         vm.choose(1) // changed
         vm.next()
-        advanceUntilIdle()
+        runCurrent()
         assertTrue(userData.recorded.isEmpty())
         vm.choose(0)
         vm.next()
         vm.choose(1)
         vm.next()
-        advanceUntilIdle()
+        runCurrent()
         assertEquals(listOf("q1", "q2", "q3").toSet(), userData.recorded.map { it.first }.toSet())
         assertEquals(2, (vm.uiState.value as QuizUiState.Finished).session.correctCount)
     }
