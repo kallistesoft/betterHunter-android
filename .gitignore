@@ -1,0 +1,19 @@
+# Gradle and Kotlin
+.gradle/
+.kotlin/
+build/
+local.properties
+
+# Android Studio
+.idea/
+*.iml
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Release signing: never commit
+keystore.properties
+*.jks
+*.keystore
+
+.DS_Store

@@ -1,0 +1,33 @@
+{
+  "_comment": "Exam recipes: which scopes feed each exam. questionCount / minutes / passMark must be checked against the official format before launch (verified=false until then).",
+  "PAL": {
+    "name": {"fr": "Examen PPA (CCSMAF, armes sans restriction)", "en": "PAL exam (CFSC, non-restricted)"},
+    "scopes": ["federal"],
+    "questionCount": 50, "minutes": 60, "passMark": 0.8,
+    "verified": false
+  },
+  "ICAF": {
+    "name": {"fr": "Initiation à la chasse avec arme à feu (Québec)", "en": "Hunter education with firearms (Québec)"},
+    "scopes": ["hunter-common", "QC"],
+    "questionCount": 50, "minutes": 60, "passMark": 0.8,
+    "verified": false
+  },
+  "ABHE": {
+    "name": {"fr": "Éducation à la chasse et à la conservation (Alberta)", "en": "Alberta Conservation and Hunter Education"},
+    "scopes": ["hunter-common", "AB"],
+    "questionCount": 50, "minutes": 60, "passMark": 0.8,
+    "verified": false
+  },
+  "ID": {
+    "name": {"fr": "Qu'est-ce que c'est?", "en": "What is it?"},
+    "scopes": ["wildlife-id"],
+    "questionCount": 20, "minutes": 15, "passMark": 0.8,
+    "verified": true
+  },
+  "CRFSC": {
+    "name": {"fr": "Examen CCSMAFAR (armes à autorisation restreinte)", "en": "CRFSC exam (restricted)"},
+    "scopes": ["federal-restricted"],
+    "questionCount": 50, "minutes": 60, "passMark": 0.8,
+    "verified": false
+  }
+}

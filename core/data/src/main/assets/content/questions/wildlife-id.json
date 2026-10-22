@@ -1,0 +1,2812 @@
+[
+  {
+    "id": "id-white-tailed-deer",
+    "scope": "wildlife-id",
+    "chapter": "hoofed",
+    "objectiveId": "id-white-tailed-deer",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/white-tailed-deer/",
+    "image": "assets/wildlife/2ff1851c66ea.jpg",
+    "imageCredit": {
+      "author": "USDA photo by Scott Bauer",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:White-tailed_deer.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Cerf mulet",
+        "Cerf de Virginie",
+        "Wapiti",
+        "Antilocapre d'Amérique"
+      ],
+      "explanation": "Cerf brun-roux (gris en hiver) au ventre blanc; sa large queue, brune dessus et blanche dessous, se dresse comme un drapeau quand il fuit. Les bois du mâle ont une tige principale vers l'avant d'où partent des pointes simples.",
+      "habitat": "Sud du Canada, de la Colombie-Britannique à la Nouvelle-Écosse, y compris le sud du Québec. Forêts mixtes, lisières, terres agricoles et boisés de ferme."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Mule deer",
+        "White-tailed deer",
+        "Elk",
+        "Pronghorn"
+      ],
+      "explanation": "Reddish-brown deer (greyer in winter) with a white belly; its broad tail, brown on top and white underneath, is raised like a flag when it runs. The buck's antlers have a forward-curving main beam with single tines rising from it.",
+      "habitat": "Southern Canada from British Columbia to Nova Scotia, including southern Quebec. Mixed forests, forest edges, farmland and woodlots."
+    },
+    "imageSize": [
+      640,
+      486
+    ]
+  },
+  {
+    "id": "id-mule-deer",
+    "scope": "wildlife-id",
+    "chapter": "hoofed",
+    "objectiveId": "id-mule-deer",
+    "reviewYear": null,
+    "answerIndex": 0,
+    "sourceRef": "",
+    "sourceUrl": "https://a100.gov.bc.ca/pub/eswp/esr.do?id=15272",
+    "image": "assets/wildlife/43222ef68acc.jpg",
+    "imageCredit": {
+      "author": "Oregon Department of Fish & Wildlife",
+      "license": "CC BY-SA 2.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Mule_buck_elk_creek_m_myatt_(5489214303).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Cerf mulet",
+        "Cerf de Virginie",
+        "Wapiti",
+        "Antilocapre d'Amérique"
+      ],
+      "explanation": "Très grandes oreilles et croupe blanche avec une petite queue mince à bout noir. Les bois du mâle se divisent en fourches successives (en Y).",
+      "habitat": "Ouest du Canada : Colombie-Britannique, Alberta, Saskatchewan, sud-ouest du Manitoba et sud du Yukon. Montagnes, contreforts, prairies accidentées et vallées sèches."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Mule deer",
+        "White-tailed deer",
+        "Elk",
+        "Pronghorn"
+      ],
+      "explanation": "Very large ears and a white rump patch with a small, thin, black-tipped tail. The buck's antlers branch into repeated forks (Y-shaped).",
+      "habitat": "Western Canada: British Columbia, Alberta, Saskatchewan, southwestern Manitoba and southern Yukon. Mountains, foothills, rough prairie and dry valleys."
+    },
+    "imageSize": [
+      640,
+      457
+    ]
+  },
+  {
+    "id": "id-elk",
+    "scope": "wildlife-id",
+    "chapter": "hoofed",
+    "objectiveId": "id-elk",
+    "reviewYear": null,
+    "answerIndex": 2,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/north-american-elk/",
+    "image": "assets/wildlife/b2926c5c899d.jpg",
+    "imageCredit": {
+      "author": "Membeth",
+      "license": "CC0",
+      "page": "https://commons.wikimedia.org/wiki/File:Jasper.Wapiti-Hirsch.P1033401.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Orignal",
+        "Cerf de Virginie",
+        "Wapiti",
+        "Cerf mulet"
+      ],
+      "explanation": "Grand cerf au corps beige, au cou et à la tête brun foncé, avec une grande tache pâle sur la croupe. Le mâle porte de très grands bois ramifiés, rejetés vers l'arrière.",
+      "habitat": "Surtout en Colombie-Britannique, en Alberta, en Saskatchewan et au Manitoba (Rocheuses, contreforts et forêt-parc); petites populations réintroduites en Ontario. Forêts claires et lisières près de prés."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Moose",
+        "White-tailed deer",
+        "Elk",
+        "Mule deer"
+      ],
+      "explanation": "Large deer with a tan body, a dark brown neck and head, and a big pale rump patch. The bull carries very large, branched antlers that sweep backward.",
+      "habitat": "Mainly British Columbia, Alberta, Saskatchewan and Manitoba (Rockies, foothills and aspen parkland); small reintroduced herds in Ontario. Open forests and forest edges next to meadows."
+    },
+    "imageSize": [
+      640,
+      598
+    ]
+  },
+  {
+    "id": "id-moose",
+    "scope": "wildlife-id",
+    "chapter": "hoofed",
+    "objectiveId": "id-moose",
+    "reviewYear": null,
+    "answerIndex": 2,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/moose/",
+    "image": "assets/wildlife/a9327e3c5e1b.jpg",
+    "imageCredit": {
+      "author": "Ryan Hagerty",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:A_male_moose_takes_a_rest_in_a_field_during_a_light_rainshower.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Wapiti",
+        "Caribou",
+        "Orignal",
+        "Bison des plaines"
+      ],
+      "explanation": "Le plus grand cervidé : très haut sur pattes, brun foncé presque noir, museau long et tombant, avec un fanon sous la gorge. Le mâle a des bois larges et aplatis en palette.",
+      "habitat": "Partout dans la forêt boréale et mixte, de Terre-Neuve au Yukon et à la Colombie-Britannique (absent de l'Île-du-Prince-Édouard). Forêts entrecoupées de lacs, marais et coupes forestières."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Elk",
+        "Caribou",
+        "Moose",
+        "Plains bison"
+      ],
+      "explanation": "The largest deer: very long-legged, dark brown to almost black, with a long overhanging muzzle and a flap of skin (bell) under the throat. The bull has broad, flat, palm-shaped antlers.",
+      "habitat": "Throughout the boreal and mixed forest from Newfoundland to Yukon and British Columbia (absent from Prince Edward Island). Forests mixed with lakes, marshes and cutovers."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-caribou",
+    "scope": "wildlife-id",
+    "chapter": "hoofed",
+    "objectiveId": "id-caribou",
+    "reviewYear": null,
+    "answerIndex": 0,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/caribou/",
+    "image": "assets/wildlife/ad3a4ce5ae6e.jpg",
+    "imageCredit": {
+      "author": "Dean Biggins (U.S. Fish and Wildlife Service)",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:Caribou.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Caribou",
+        "Wapiti",
+        "Orignal",
+        "Cerf de Virginie"
+      ],
+      "explanation": "Cervidé brun au cou et à la crinière blanchâtres, avec de larges sabots. C'est le seul cervidé dont la femelle porte souvent des bois; ceux du mâle sont grands, en arc, avec une pointe aplatie au-dessus du museau.",
+      "habitat": "Toundra arctique et forêt boréale, du Yukon à Terre-Neuve-et-Labrador. La chasse se pratique surtout dans le Nord et sur l'île de Terre-Neuve; elle est fermée au Labrador et la chasse sportive est fermée au Québec, car plusieurs populations sont en péril."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Caribou",
+        "Elk",
+        "Moose",
+        "White-tailed deer"
+      ],
+      "explanation": "Brown deer with a whitish neck and mane and large, broad hooves. It is the only deer whose females usually grow antlers; the male's antlers are large and arched, with a flattened tine over the face.",
+      "habitat": "Arctic tundra and boreal forest from Yukon to Newfoundland and Labrador. Hunting is mostly in the North and on the island of Newfoundland; it is closed in Labrador and sport hunting is closed in Quebec, as many populations are at risk."
+    },
+    "imageSize": [
+      640,
+      419
+    ]
+  },
+  {
+    "id": "id-pronghorn",
+    "scope": "wildlife-id",
+    "chapter": "hoofed",
+    "objectiveId": "id-pronghorn",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/pronghorn/",
+    "image": "assets/wildlife/88f0ca661811.jpg",
+    "imageCredit": {
+      "author": "www.naturespicsonline.com",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Antilocapra_americana.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Cerf de Virginie",
+        "Cerf mulet",
+        "Mouflon d'Amérique",
+        "Antilocapre d'Amérique"
+      ],
+      "explanation": "Petit ongulé fauve au ventre et à la croupe blancs, avec deux bandes blanches sur la gorge. Le mâle a des cornes noires munies d'une pointe vers l'avant (le « prong »).",
+      "habitat": "Prairies du sud-est de l'Alberta et du sud-ouest de la Saskatchewan. Plaines ouvertes de graminées et d'armoise."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "White-tailed deer",
+        "Mule deer",
+        "Bighorn sheep",
+        "Pronghorn"
+      ],
+      "explanation": "Small tan hoofed animal with a white belly and rump and two white bands across the throat. The male has black horns with a forward-pointing prong.",
+      "habitat": "Prairie of southeastern Alberta and southwestern Saskatchewan. Open grassland and sagebrush plains."
+    },
+    "imageSize": [
+      640,
+      536
+    ]
+  },
+  {
+    "id": "id-bighorn-sheep",
+    "scope": "wildlife-id",
+    "chapter": "hoofed",
+    "objectiveId": "id-bighorn-sheep",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/mountain-sheep/",
+    "image": "assets/wildlife/e5f288aaf837.jpg",
+    "imageCredit": {
+      "author": "Alan D. Wilson",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Big_Horn_Sheep.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Mouflon de Dall",
+        "Mouflon d'Amérique",
+        "Chèvre de montagne",
+        "Antilocapre d'Amérique"
+      ],
+      "explanation": "Mouton brun à la croupe et au museau blancs. Le bélier porte d'énormes cornes brunes, épaisses et enroulées autour des oreilles; la brebis a de courtes cornes minces.",
+      "habitat": "Montagnes Rocheuses de l'Alberta et de la Colombie-Britannique, et vallées sèches du sud de l'intérieur de la C.-B. Pentes herbeuses abruptes près de falaises."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Dall's sheep",
+        "Bighorn sheep",
+        "Mountain goat",
+        "Pronghorn"
+      ],
+      "explanation": "Brown sheep with a white rump and muzzle. The ram has massive, thick brown horns that curl around the ears; the ewe has short, slender horns.",
+      "habitat": "Rocky Mountains of Alberta and British Columbia, and dry valleys of the southern BC interior. Steep grassy slopes close to cliffs."
+    },
+    "imageSize": [
+      427,
+      640
+    ]
+  },
+  {
+    "id": "id-thinhorn-sheep",
+    "scope": "wildlife-id",
+    "chapter": "hoofed",
+    "objectiveId": "id-thinhorn-sheep",
+    "reviewYear": null,
+    "answerIndex": 0,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/mountain-sheep/",
+    "image": "assets/wildlife/14b303ec6dd8.jpg",
+    "imageCredit": {
+      "author": "Jacob W. Frank",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:A_Dall_sheep_ram_in_Denali_(adebbb4a-dde3-4672-9e8c-5e53097192b2).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Mouflon de Dall",
+        "Mouflon d'Amérique",
+        "Chèvre de montagne",
+        "Bœuf musqué"
+      ],
+      "explanation": "Mouton de montagne blanc (mouflon de Dall) ou gris foncé (mouflon de Stone). Le bélier a des cornes jaunâtres plus minces que celles du mouflon d'Amérique, qui s'écartent vers l'extérieur en spirale.",
+      "habitat": "Montagnes du Yukon, des Territoires du Nord-Ouest et du nord de la Colombie-Britannique. Prés alpins et pentes escarpées près des falaises."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Dall's sheep",
+        "Bighorn sheep",
+        "Mountain goat",
+        "Muskox"
+      ],
+      "explanation": "Mountain sheep that is white (Dall's sheep) or dark grey (Stone's sheep). The ram's yellowish horns are thinner than a bighorn's and flare outward in a spiral.",
+      "habitat": "Mountains of Yukon, the Northwest Territories and northern British Columbia. Alpine meadows and steep slopes near cliffs."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-mountain-goat",
+    "scope": "wildlife-id",
+    "chapter": "hoofed",
+    "objectiveId": "id-mountain-goat",
+    "reviewYear": null,
+    "answerIndex": 2,
+    "sourceRef": "",
+    "sourceUrl": "https://www2.gov.bc.ca/gov/content/environment/plants-animals-ecosystems/wildlife/wildlife-conservation/wild-sheep-and-mountain-goat",
+    "image": "assets/wildlife/2b3e13490348.jpg",
+    "imageCredit": {
+      "author": "Darklich14",
+      "license": "CC BY 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Mountain_Goat_Mount_Massive.JPG"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Mouflon de Dall",
+        "Mouflon d'Amérique",
+        "Chèvre de montagne",
+        "Bœuf musqué"
+      ],
+      "explanation": "Pelage blanc, long et hirsute, avec une barbe. Les deux sexes ont de courtes cornes noires, minces et pointues, légèrement recourbées vers l'arrière; sabots noirs.",
+      "habitat": "Montagnes de la Colombie-Britannique (environ la moitié de la population mondiale), de l'ouest de l'Alberta, du sud du Yukon et du sud-ouest des T.N.-O. Falaises et escarpements rocheux près de la limite des arbres."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Dall's sheep",
+        "Bighorn sheep",
+        "Mountain goat",
+        "Muskox"
+      ],
+      "explanation": "Long, shaggy white coat with a beard. Both sexes have short, thin, sharp black horns that curve slightly backward; black hooves.",
+      "habitat": "Mountains of British Columbia (about half the world population), western Alberta, southern Yukon and southwestern NWT. Cliffs and rocky ledges near treeline."
+    },
+    "imageSize": [
+      640,
+      480
+    ]
+  },
+  {
+    "id": "id-muskox",
+    "scope": "wildlife-id",
+    "chapter": "hoofed",
+    "objectiveId": "id-muskox",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/muskox/",
+    "image": "assets/wildlife/57758a80c4a4.jpg",
+    "imageCredit": {
+      "author": "Unknown",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:Ovibos_moschatus.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Bison des plaines",
+        "Chèvre de montagne",
+        "Caribou",
+        "Bœuf musqué"
+      ],
+      "explanation": "Trapu, avec une très longue toison brun foncé qui pend presque jusqu'au sol et une selle pâle sur le dos. Les cornes forment une large plaque sur le front, puis descendent le long de la tête et remontent en crochet.",
+      "habitat": "Toundra arctique : îles de l'Arctique, Nunavut et T.N.-O., avec des populations introduites au Nunavik (Québec) et sur le versant nord du Yukon."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Plains bison",
+        "Mountain goat",
+        "Caribou",
+        "Muskox"
+      ],
+      "explanation": "Stocky, with a very long dark brown coat hanging almost to the ground and a pale saddle on the back. The horns form a wide plate across the forehead, then sweep down beside the head and hook upward.",
+      "habitat": "Arctic tundra: the Arctic islands, Nunavut and NWT, with introduced herds in Nunavik (Quebec) and on Yukon's North Slope."
+    },
+    "imageSize": [
+      640,
+      421
+    ]
+  },
+  {
+    "id": "id-plains-bison",
+    "scope": "wildlife-id",
+    "chapter": "hoofed",
+    "objectiveId": "id-plains-bison",
+    "reviewYear": null,
+    "answerIndex": 0,
+    "sourceRef": "",
+    "sourceUrl": "https://www.canada.ca/en/environment-climate-change/services/species-risk-public-registry/cosewic-assessments-status-reports/plains-bison-wood-bison-2013.html",
+    "image": "assets/wildlife/46f6b77bf87a.jpg",
+    "imageCredit": {
+      "author": "Jack Dykinga",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:American_bison_k5680-1.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Bison des plaines",
+        "Bœuf musqué",
+        "Orignal",
+        "Wapiti"
+      ],
+      "explanation": "Très gros bovin brun foncé avec une haute bosse aux épaules, une tête massive et de courtes cornes noires recourbées. L'avant du corps est couvert d'une longue toison laineuse.",
+      "habitat": "Il reste peu de troupeaux sauvages : parc national de Prince Albert (Sask.), parc national Banff (Alb.) et Pink Mountain dans le nord-est de la C.-B., où une chasse limitée existe. Prairies et prés boisés; la plupart des bisons sont en élevage.",
+      "confuse": "Le bison des bois, en péril, vit plus au nord (nord de l'Alberta, T.N.-O., Yukon). Il est plus grand, sa bosse est plus haute et plus carrée, et il a moins de longs poils sur la tête et les pattes avant."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Plains bison",
+        "Muskox",
+        "Moose",
+        "Elk"
+      ],
+      "explanation": "Very large dark brown wild cattle with a high shoulder hump, a massive head and short, curved black horns. The front of the body is covered in long, woolly hair.",
+      "habitat": "Few wild herds remain: Prince Albert National Park (Sask.), Banff National Park (Alta.) and Pink Mountain in northeastern BC, where limited hunting exists. Grasslands and wooded meadows; most bison are ranched.",
+      "confuse": "The threatened wood bison lives farther north (northern Alberta, NWT, Yukon). It is larger, with a taller, squarer hump and less long hair on the head and front legs."
+    },
+    "imageSize": [
+      640,
+      417
+    ]
+  },
+  {
+    "id": "id-cougar",
+    "scope": "wildlife-id",
+    "chapter": "carnivores",
+    "objectiveId": "id-cougar",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/cougar/",
+    "image": "assets/wildlife/0307849505d2.jpg",
+    "imageCredit": {
+      "author": "Carlos",
+      "license": "CC BY 2.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Puma_-_49044464307.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Lynx du Canada",
+        "Couguar",
+        "Lynx roux",
+        "Loup gris"
+      ],
+      "explanation": "Grand félin au pelage fauve uni, sans taches, avec une petite tête et une très longue queue épaisse à bout noir.",
+      "habitat": "Surtout en Colombie-Britannique (dont l'île de Vancouver) et dans le sud-ouest de l'Alberta; observations rares plus à l'est. Forêts et montagnes riches en cerfs."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Canada lynx",
+        "Cougar",
+        "Bobcat",
+        "Grey wolf"
+      ],
+      "explanation": "Large cat with a plain tawny coat and no spots, a small head and a very long, thick, black-tipped tail.",
+      "habitat": "Mainly British Columbia (including Vancouver Island) and southwestern Alberta; rare sightings farther east. Forests and mountains with plenty of deer."
+    },
+    "imageSize": [
+      426,
+      640
+    ]
+  },
+  {
+    "id": "id-canada-lynx",
+    "scope": "wildlife-id",
+    "chapter": "carnivores",
+    "objectiveId": "id-canada-lynx",
+    "reviewYear": null,
+    "answerIndex": 0,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/canada-lynx/",
+    "image": "assets/wildlife/1c29059a7fd1.jpg",
+    "imageCredit": {
+      "author": "Michael Zahra",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Canada_lynx_by_Michael_Zahra.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Lynx du Canada",
+        "Lynx roux",
+        "Couguar",
+        "Renard roux"
+      ],
+      "explanation": "Félin gris aux longues pattes, aux énormes pattes poilues et aux longues touffes noires au bout des oreilles. La queue courte a le bout entièrement noir.",
+      "habitat": "Forêt boréale de tout le Canada, du Yukon à Terre-Neuve-et-Labrador. Ses effectifs suivent le cycle du lièvre d'Amérique, sa proie principale."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Canada lynx",
+        "Bobcat",
+        "Cougar",
+        "Red fox"
+      ],
+      "explanation": "Grey, long-legged cat with huge furry feet and long black ear tufts. Its short tail has a tip that is black all the way around.",
+      "habitat": "Boreal forest across Canada, from Yukon to Newfoundland and Labrador. Its numbers follow the cycle of the snowshoe hare, its main prey."
+    },
+    "imageSize": [
+      426,
+      640
+    ]
+  },
+  {
+    "id": "id-bobcat",
+    "scope": "wildlife-id",
+    "chapter": "carnivores",
+    "objectiveId": "id-bobcat",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.quebec.ca/agriculture-environnement-et-ressources-naturelles/faune/animaux-sauvages-quebec/fiches-especes-fauniques/lynx-roux",
+    "image": "assets/wildlife/2821edca3e9d.jpg",
+    "imageCredit": {
+      "author": "Becker1999 (Paul and Cathy)",
+      "license": "CC BY 2.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Bobcat_at_Columbus_Zoo_Boo.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Lynx du Canada",
+        "Lynx roux",
+        "Couguar",
+        "Renard roux"
+      ],
+      "explanation": "Petit félin brun-roux tacheté de noir, aux courtes touffes d'oreilles et aux pattes plus petites que le lynx du Canada. Sa courte queue est rayée, noire seulement sur le dessus et blanche dessous.",
+      "habitat": "Sud du Canada : sud de la C.-B., des Prairies, de l'Ontario et du Québec, Nouveau-Brunswick et Nouvelle-Écosse. Forêts mixtes, broussailles et terrains rocailleux où la neige est peu profonde."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Canada lynx",
+        "Bobcat",
+        "Cougar",
+        "Red fox"
+      ],
+      "explanation": "Small reddish-brown cat with black spots, short ear tufts and smaller feet than a Canada lynx. Its short tail is barred, black only on top and white underneath.",
+      "habitat": "Southern Canada: southern BC, the southern Prairies, southern Ontario and Quebec, New Brunswick and Nova Scotia. Mixed forest, brushland and rocky ground where snow is not deep."
+    },
+    "imageSize": [
+      428,
+      640
+    ]
+  },
+  {
+    "id": "id-gray-wolf",
+    "scope": "wildlife-id",
+    "chapter": "carnivores",
+    "objectiveId": "id-gray-wolf",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/wolf/",
+    "image": "assets/wildlife/35c419ab858d.jpg",
+    "imageCredit": {
+      "author": "Musicaline",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Loup_du_Canada_DSCF5743.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Coyote",
+        "Loup gris",
+        "Renard arctique",
+        "Renard roux"
+      ],
+      "explanation": "Grand canidé aux longues pattes, au museau large et aux grosses pattes, bien plus gros qu'un coyote. Pelage souvent gris, mais pouvant aller du blanc au noir; queue portée droite.",
+      "habitat": "Presque tout le Canada, sauf les régions très peuplées du sud, les Maritimes et l'île de Terre-Neuve. Forêts, montagnes et toundra où vivent ses proies (orignal, cerf, caribou).",
+      "confuse": "En Ontario, le loup de l'Est (loup algonquin), menacé, vit surtout dans le parc Algonquin et ses environs; il est plus petit et roussâtre, entre le loup gris et le coyote. La chasse au loup et au coyote est interdite autour des parcs Algonquin, Killarney, Kawartha Highlands et Queen Elizabeth II Wildlands."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Coyote",
+        "Grey wolf",
+        "Arctic fox",
+        "Red fox"
+      ],
+      "explanation": "Large, long-legged canine with a broad muzzle and big feet, much larger than a coyote. Coat is often grey but ranges from white to black; tail held straight.",
+      "habitat": "Most of Canada except the heavily settled south, the Maritimes and the island of Newfoundland. Forests, mountains and tundra wherever its prey (moose, deer, caribou) lives.",
+      "confuse": "In Ontario, the threatened eastern (Algonquin) wolf lives mainly in and around Algonquin Park; it is smaller and reddish, between a grey wolf and a coyote in size. Wolf and coyote hunting is closed around Algonquin, Killarney, Kawartha Highlands and Queen Elizabeth II Wildlands parks."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-coyote",
+    "scope": "wildlife-id",
+    "chapter": "carnivores",
+    "objectiveId": "id-coyote",
+    "reviewYear": null,
+    "answerIndex": 0,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/coyote/",
+    "image": "assets/wildlife/d569bbaf8a4d.jpg",
+    "imageCredit": {
+      "author": "Yathin S Krishnappa",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:2009-Coyote-Yosemite.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Coyote",
+        "Loup gris",
+        "Renard roux",
+        "Renard arctique"
+      ],
+      "explanation": "Canidé moyen gris-fauve au museau étroit et pointu et aux grandes oreilles pointues. Sa queue touffue à bout noir est portée basse en courant.",
+      "habitat": "Partout dans le sud du Canada, d'un océan à l'autre (y compris Terre-Neuve), et jusqu'au Yukon. Champs, lisières de forêt, broussailles et même en ville.",
+      "confuse": "En Ontario, le loup de l'Est (loup algonquin), menacé, ressemble à un gros coyote roussâtre; la chasse au loup et au coyote est interdite autour des parcs Algonquin, Killarney, Kawartha Highlands et Queen Elizabeth II Wildlands."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Coyote",
+        "Grey wolf",
+        "Red fox",
+        "Arctic fox"
+      ],
+      "explanation": "Medium-sized grey-tan canine with a narrow, pointed muzzle and large pointed ears. Its bushy, black-tipped tail is held low when it runs.",
+      "habitat": "Throughout southern Canada from coast to coast (including Newfoundland) and north to Yukon. Fields, forest edges, brushland and even cities.",
+      "confuse": "In Ontario, the threatened eastern (Algonquin) wolf looks like a large reddish coyote; wolf and coyote hunting is closed around Algonquin, Killarney, Kawartha Highlands and Queen Elizabeth II Wildlands parks."
+    },
+    "imageSize": [
+      551,
+      640
+    ]
+  },
+  {
+    "id": "id-red-fox",
+    "scope": "wildlife-id",
+    "chapter": "carnivores",
+    "objectiveId": "id-red-fox",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/red-fox/",
+    "image": "assets/wildlife/25c72887b3bd.jpg",
+    "imageCredit": {
+      "author": "ClaudiaTen",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Portrait_of_a_red_fox_in_Rautas_fj%C3%A4llurskog_(cropped).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Renard arctique",
+        "Coyote",
+        "Loup gris",
+        "Renard roux"
+      ],
+      "explanation": "Petit canidé au pelage roux orangé, aux pattes et à l'arrière des oreilles noirs, avec une queue très touffue au bout blanc. Il existe aussi des formes croisée et argentée.",
+      "habitat": "Presque partout au Canada, des terres agricoles du sud jusqu'à l'Arctique. Lisières de forêt, champs, broussailles et banlieues.",
+      "confuse": "Le renard arctique est plus petit, avec un museau court, de petites oreilles arrondies et une queue sans bout blanc; il est tout blanc en hiver et brun-gris en été, et vit dans la toundra."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Arctic fox",
+        "Coyote",
+        "Grey wolf",
+        "Red fox"
+      ],
+      "explanation": "Small canine with an orange-red coat, black legs and ear backs, and a very bushy white-tipped tail. Cross and silver colour phases also occur.",
+      "habitat": "Almost everywhere in Canada, from southern farmland to the Arctic. Forest edges, fields, brushland and suburbs.",
+      "confuse": "The Arctic fox is smaller, with a short muzzle, small rounded ears and a tail without a white tip; it is all white in winter and grey-brown in summer, and lives on the tundra."
+    },
+    "imageSize": [
+      640,
+      424
+    ]
+  },
+  {
+    "id": "id-black-bear",
+    "scope": "wildlife-id",
+    "chapter": "carnivores",
+    "objectiveId": "id-black-bear",
+    "reviewYear": null,
+    "answerIndex": 0,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/black-bear/",
+    "image": "assets/wildlife/2065e8814ba5.jpg",
+    "imageCredit": {
+      "author": "California Department of Fish and Wildlife",
+      "license": "CC BY 2.0",
+      "page": "https://commons.wikimedia.org/wiki/File:American_black_bear_(19647087094).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Ours noir",
+        "Grizzli",
+        "Carcajou",
+        "Ours blanc"
+      ],
+      "explanation": "Ours généralement tout noir (parfois brun ou cannelle) au museau brun pâle et au profil du visage droit, sans bosse aux épaules, avec de grandes oreilles dressées et de courtes griffes.",
+      "habitat": "Forêts de toutes les provinces et territoires, sauf l'Île-du-Prince-Édouard. Forêts, lisières, tourbières et zones à petits fruits.",
+      "confuse": "Le grizzli, sans saison de chasse en Alberta et en Colombie-Britannique, a une bosse aux épaules, un visage creusé, de petites oreilles rondes et de longues griffes pâles; la couleur seule ne suffit pas."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "American black bear",
+        "Grizzly bear",
+        "Wolverine",
+        "Polar bear"
+      ],
+      "explanation": "Bear usually all black (sometimes brown or cinnamon) with a pale brown muzzle and a straight face profile, no shoulder hump, tall upright ears and short claws.",
+      "habitat": "Forests of every province and territory except Prince Edward Island. Forests, forest edges, bogs and berry patches.",
+      "confuse": "The grizzly, which has no hunting season in Alberta or British Columbia, has a shoulder hump, a dished face, small round ears and long pale claws; colour alone is not enough."
+    },
+    "imageSize": [
+      423,
+      640
+    ]
+  },
+  {
+    "id": "id-grizzly-bear",
+    "scope": "wildlife-id",
+    "chapter": "carnivores",
+    "objectiveId": "id-grizzly-bear",
+    "reviewYear": null,
+    "answerIndex": 2,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/grizzly-bear/",
+    "image": "assets/wildlife/d18dff31758e.jpg",
+    "imageCredit": {
+      "author": "USFWS/Jon Nickles",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:Grizzlybear55.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Ours noir",
+        "Ours blanc",
+        "Grizzli",
+        "Carcajou"
+      ],
+      "explanation": "Gros ours brun aux poils souvent pâles au bout (aspect argenté), avec une bosse musculaire aux épaules, un visage creusé, de petites oreilles rondes et de longues griffes pâles.",
+      "habitat": "Colombie-Britannique, ouest de l'Alberta, Yukon, T.N.-O. et partie continentale du Nunavut, des montagnes à la toundra. Aucune saison de chasse en C.-B. ni en Alberta; la chasse est permise sous quota dans le Nord.",
+      "confuse": "L'ours blanc, espèce préoccupante, est blanc crème avec un long cou et une tête plus petite et allongée; il vit sur la côte et la banquise de l'Arctique."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "American black bear",
+        "Polar bear",
+        "Grizzly bear",
+        "Wolverine"
+      ],
+      "explanation": "Big brown bear, often with pale-tipped (silvery) fur, a muscular shoulder hump, a dished face, small round ears and long pale claws.",
+      "habitat": "British Columbia, western Alberta, Yukon, NWT and mainland Nunavut, from mountains to tundra. There is no hunting season in BC or Alberta; it is allowed under quota in the North.",
+      "confuse": "The polar bear, a species of special concern, is creamy white with a long neck and a smaller, longer head; it lives on the Arctic coast and sea ice."
+    },
+    "imageSize": [
+      640,
+      424
+    ]
+  },
+  {
+    "id": "id-snowshoe-hare",
+    "scope": "wildlife-id",
+    "chapter": "small-mammals",
+    "objectiveId": "id-snowshoe-hare",
+    "reviewYear": null,
+    "answerIndex": 2,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/snowshoe-hare/",
+    "image": "assets/wildlife/4c46aa8e6965.jpg",
+    "imageCredit": {
+      "author": "Walter Siegmund",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Lepus_americanus_5459_cropped.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Lièvre arctique",
+        "Lapin à queue blanche",
+        "Lièvre d'Amérique",
+        "Lièvre de Townsend"
+      ],
+      "explanation": "Lièvre brun en été et blanc en hiver, avec de très grandes pattes arrière poilues (« raquettes ») et des oreilles moyennes à bout foncé.",
+      "habitat": "Forêts boréales et montagneuses de toutes les provinces et territoires. Forêts de conifères denses, jeunes peuplements et broussailles.",
+      "confuse": "Le lièvre arctique est plus gros, reste blanc presque toute l'année dans le Grand Nord, a des oreilles plus courtes et vit dans la toundra, au-delà de la limite des arbres."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Arctic hare",
+        "Eastern cottontail",
+        "Snowshoe hare",
+        "White-tailed jackrabbit"
+      ],
+      "explanation": "Hare that is brown in summer and white in winter, with very large, furry hind feet (\"snowshoes\") and medium-length ears with dark tips.",
+      "habitat": "Boreal and mountain forests of every province and territory. Dense conifer forest, young regrowth and thickets.",
+      "confuse": "The Arctic hare is bigger, stays white most of the year in the far North, has shorter ears and lives on the tundra beyond the treeline."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-white-tailed-jackrabbit",
+    "scope": "wildlife-id",
+    "chapter": "small-mammals",
+    "objectiveId": "id-white-tailed-jackrabbit",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.alberta.ca/rabbits-and-hares",
+    "image": "assets/wildlife/45c5c7a3d461.jpg",
+    "imageCredit": {
+      "author": "Adam Lowe",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:White-tailed_Jackrabbit.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Lièvre d'Amérique",
+        "Lièvre de Townsend",
+        "Lapin à queue blanche",
+        "Lièvre arctique"
+      ],
+      "explanation": "Grand lièvre aux pattes très longues et aux très longues oreilles à bout noir. Gris-brun en été, blanc en hiver, mais sa queue reste blanche toute l'année.",
+      "habitat": "Prairies de l'Alberta, de la Saskatchewan et du sud du Manitoba. Prairies ouvertes, pâturages, champs cultivés et même en ville."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Snowshoe hare",
+        "White-tailed jackrabbit",
+        "Eastern cottontail",
+        "Arctic hare"
+      ],
+      "explanation": "Large hare with very long legs and very long, black-tipped ears. Grey-brown in summer and white in winter, but its tail stays white all year.",
+      "habitat": "Prairies of Alberta, Saskatchewan and southern Manitoba. Open grassland, pastures, cropland and even towns."
+    },
+    "imageSize": [
+      640,
+      480
+    ]
+  },
+  {
+    "id": "id-eastern-cottontail",
+    "scope": "wildlife-id",
+    "chapter": "small-mammals",
+    "objectiveId": "id-eastern-cottontail",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.quebec.ca/agriculture-environnement-et-ressources-naturelles/faune/animaux-sauvages-quebec/fiches-especes-fauniques/lapin-queue-blanche",
+    "image": "assets/wildlife/eacf3660a7a6.jpg",
+    "imageCredit": {
+      "author": "The High Fin Sperm Whale",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Eastern_Cottontail_(Sylvilagus_floridanus).JPG"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Lièvre d'Amérique",
+        "Lièvre de Townsend",
+        "Lièvre arctique",
+        "Lapin à queue blanche"
+      ],
+      "explanation": "Petit lapin gris-brun toute l'année (il ne blanchit pas), aux oreilles plus courtes sans bout noir. Le dessous de sa petite queue ronde est blanc comme du coton.",
+      "habitat": "Sud de l'Ontario et du Québec, et sud du Manitoba et de la Saskatchewan; introduit dans le sud-ouest de la C.-B. Champs en friche, haies, broussailles et banlieues."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Snowshoe hare",
+        "White-tailed jackrabbit",
+        "Arctic hare",
+        "Eastern cottontail"
+      ],
+      "explanation": "Small rabbit that stays grey-brown all year (it never turns white), with shorter ears lacking black tips. The underside of its small round tail is cotton-white.",
+      "habitat": "Southern Ontario and Quebec, and southern Manitoba and Saskatchewan; introduced in southwestern BC. Old fields, hedgerows, brushland and suburbs."
+    },
+    "imageSize": [
+      640,
+      520
+    ]
+  },
+  {
+    "id": "id-groundhog",
+    "scope": "wildlife-id",
+    "chapter": "small-mammals",
+    "objectiveId": "id-groundhog",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/woodchuck/",
+    "image": "assets/wildlife/5578139b470e.jpg",
+    "imageCredit": {
+      "author": "ElC",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Groundhog3.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Porc-épic d'Amérique",
+        "Raton laveur",
+        "Écureuil gris",
+        "Marmotte commune"
+      ],
+      "explanation": "Rongeur trapu brun grisonnant, aux pattes courtes, aux petites oreilles rondes et à la courte queue touffue. On le voit souvent assis droit près de l'entrée de son terrier.",
+      "habitat": "Du Labrador et des Maritimes jusqu'à l'Alberta, au nord-est de la C.-B. et au Yukon. Champs, pâturages, bords de route et lisières de forêt où il creuse ses terriers.",
+      "confuse": "Le porc-épic d'Amérique, qui n'est pas une espèce de petit gibier, est couvert de piquants pâles, a une queue épaisse et se trouve souvent dans les arbres."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "North American porcupine",
+        "Raccoon",
+        "Eastern grey squirrel",
+        "Groundhog"
+      ],
+      "explanation": "Stocky, grizzled brown rodent with short legs, small round ears and a short bushy tail. Often seen sitting upright near its burrow entrance.",
+      "habitat": "From Labrador and the Maritimes to Alberta, northeastern BC and Yukon. Fields, pastures, roadsides and forest edges where it digs burrows.",
+      "confuse": "The North American porcupine, which is not a small-game species, is covered in pale quills, has a thick tail and is often seen up in trees."
+    },
+    "imageSize": [
+      640,
+      480
+    ]
+  },
+  {
+    "id": "id-raccoon",
+    "scope": "wildlife-id",
+    "chapter": "small-mammals",
+    "objectiveId": "id-raccoon",
+    "reviewYear": null,
+    "answerIndex": 2,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/raccoon/",
+    "image": "assets/wildlife/0dab596dfbda.jpg",
+    "imageCredit": {
+      "author": "Rhododendrites",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Raccoon_in_Central_Park_(35264).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Marmotte commune",
+        "Porc-épic d'Amérique",
+        "Raton laveur",
+        "Écureuil gris"
+      ],
+      "explanation": "Pelage gris avec un masque noir autour des yeux et une queue touffue marquée d'anneaux noirs et pâles. Pattes avant habiles comme des mains.",
+      "habitat": "Sud du Canada, de la Nouvelle-Écosse à la Colombie-Britannique (absent de l'île de Terre-Neuve). Forêts feuillues près de l'eau, terres agricoles et villes."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Groundhog",
+        "North American porcupine",
+        "Raccoon",
+        "Eastern grey squirrel"
+      ],
+      "explanation": "Grey coat with a black mask around the eyes and a bushy tail with black and pale rings. Its front paws are nimble, like hands.",
+      "habitat": "Southern Canada from Nova Scotia to British Columbia (absent from the island of Newfoundland). Hardwood forests near water, farmland and cities."
+    },
+    "imageSize": [
+      640,
+      501
+    ]
+  },
+  {
+    "id": "id-eastern-gray-squirrel",
+    "scope": "wildlife-id",
+    "chapter": "small-mammals",
+    "objectiveId": "id-eastern-gray-squirrel",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/mammals/eastern-grey-squirrel/",
+    "image": "assets/wildlife/090d2a14e2c7.jpg",
+    "imageCredit": {
+      "author": "Dominic Nelson",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Grey_squirrel_standing,_Bute_Park,_Cardiff.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Écureuil roux",
+        "Marmotte commune",
+        "Raton laveur",
+        "Écureuil gris"
+      ],
+      "explanation": "Écureuil assez gros, gris (ou entièrement noir chez la forme noire), avec une grande queue touffue bordée de poils pâles et un ventre pâle.",
+      "habitat": "Sud de l'Ontario et du Québec, sud du Manitoba et Nouveau-Brunswick; introduit en C.-B. Forêts de feuillus à noix (chênes, noyers), parcs et villes.",
+      "confuse": "L'écureuil roux est bien plus petit, roux sur le dos avec un ventre blanc et un anneau blanc autour de l'œil; il vit surtout dans les conifères."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "American red squirrel",
+        "Groundhog",
+        "Raccoon",
+        "Eastern grey squirrel"
+      ],
+      "explanation": "Fairly large squirrel, grey (or all black in the black form), with a big bushy tail fringed with pale hairs and a pale belly.",
+      "habitat": "Southern Ontario and Quebec, southern Manitoba and New Brunswick; introduced in BC. Nut-bearing hardwood forests (oaks, hickories), parks and cities.",
+      "confuse": "The red squirrel is much smaller, red on the back with a white belly and a white eye ring; it lives mostly in conifers."
+    },
+    "imageSize": [
+      640,
+      494
+    ]
+  },
+  {
+    "id": "id-ruffed-grouse",
+    "scope": "wildlife-id",
+    "chapter": "upland-birds",
+    "objectiveId": "id-ruffed-grouse",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/birds/ruffed-grouse/",
+    "image": "assets/wildlife/4283f13c7806.jpg",
+    "imageCredit": {
+      "author": "Mad Tinman",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Bonasa-umbellus-001edit1.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Tétras du Canada",
+        "Gélinotte huppée",
+        "Tétras à queue fine",
+        "Tétras sombre"
+      ],
+      "explanation": "Oiseau brun-roux ou gris finement barré, avec une petite huppe sur la tête et une collerette noire sur les côtés du cou. Longue queue en éventail avec une large bande noire près du bout.",
+      "habitat": "Présente dans les forêts de toutes les provinces et territoires, sauf l'extrême Nord. Préfère les forêts mixtes et feuillues jeunes, surtout avec des trembles."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Spruce Grouse",
+        "Ruffed Grouse",
+        "Sharp-tailed Grouse",
+        "Dusky Grouse"
+      ],
+      "explanation": "Mottled reddish-brown or grey bird with a small crest and black ruff patches on the sides of the neck. Long fan-shaped tail with a broad black band near the tip.",
+      "habitat": "Found in forests across every province and territory except the far North. Prefers young mixed and deciduous forests, especially with aspen."
+    },
+    "imageSize": [
+      640,
+      457
+    ]
+  },
+  {
+    "id": "id-spruce-grouse",
+    "scope": "wildlife-id",
+    "chapter": "upland-birds",
+    "objectiveId": "id-spruce-grouse",
+    "reviewYear": null,
+    "answerIndex": 2,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/spruce-grouse",
+    "image": "assets/wildlife/2aa76f7550b8.jpg",
+    "imageCredit": {
+      "author": "Mdf",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Falcipennis-canadensis-002.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Gélinotte huppée",
+        "Tétras sombre",
+        "Tétras du Canada",
+        "Tétras à queue fine"
+      ],
+      "explanation": "Tétras sombre et trapu. Le mâle est gris-noir avec une gorge et une poitrine noires bordées de blanc et un sourcil rouge; la femelle est brune barrée de noir et de blanc. Queue courte et foncée, sans huppe ni collerette.",
+      "habitat": "Forêt boréale de conifères (épinettes, pins gris, sapins), du Yukon jusqu'à Terre-Neuve (où il a été introduit), jusqu'à la limite des arbres. Absent de l'Île-du-Prince-Édouard."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Ruffed Grouse",
+        "Dusky Grouse",
+        "Spruce Grouse",
+        "Sharp-tailed Grouse"
+      ],
+      "explanation": "Dark, chunky grouse. The male is grey-black with a black throat and breast edged in white and a red comb over the eye; the female is brown barred with black and white. Short dark tail, no crest or ruff.",
+      "habitat": "Boreal conifer forests (spruce, jack pine, fir) from Yukon to Newfoundland (where it was introduced), north to the treeline. Absent from Prince Edward Island."
+    },
+    "imageSize": [
+      640,
+      640
+    ]
+  },
+  {
+    "id": "id-sharp-tailed-grouse",
+    "scope": "wildlife-id",
+    "chapter": "upland-birds",
+    "objectiveId": "id-sharp-tailed-grouse",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/sharp-tailed-grouse",
+    "image": "assets/wildlife/d87d61e36441.jpg",
+    "imageCredit": {
+      "author": "USFWS Mountain-Prairie",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:Sharp-Tailed_Grouse_(26089894256)_(cropped).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Tétras des armoises",
+        "Tétras à queue fine",
+        "Gélinotte huppée",
+        "Perdrix grise"
+      ],
+      "explanation": "Tétras pâle, brun tacheté de blanc, avec des marques en forme de V sur le ventre blanchâtre. Queue courte et pointue aux plumes centrales plus longues, blanche sur les côtés en vol.",
+      "habitat": "Prairies, parcs à trembles et clairières boréales de l'Ouest et du Nord : C.-B., Alberta, Saskatchewan, Manitoba, Yukon, T.N.-O., nord de l'Ontario et ouest du Québec.",
+      "confuse": "Le tétras des armoises (protégé, en voie de disparition) est beaucoup plus gros, avec un ventre noir et une longue queue aux plumes pointues; il vit seulement dans l'armoise du sud-est de l'Alberta et du sud-ouest de la Saskatchewan."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Greater Sage-Grouse",
+        "Sharp-tailed Grouse",
+        "Ruffed Grouse",
+        "Gray Partridge"
+      ],
+      "explanation": "Pale grouse, brown speckled with white, with V-shaped marks on a whitish belly. Short, pointed tail with longer central feathers, showing white on the sides in flight.",
+      "habitat": "Prairies, aspen parkland and boreal openings of western and northern Canada: B.C., Alberta, Saskatchewan, Manitoba, Yukon, N.W.T., northern Ontario and western Québec.",
+      "confuse": "The Greater Sage-Grouse (protected, endangered) is much larger, with a black belly and a long tail of spiky feathers; it lives only in sagebrush of southeastern Alberta and southwestern Saskatchewan."
+    },
+    "imageSize": [
+      640,
+      516
+    ]
+  },
+  {
+    "id": "id-dusky-grouse",
+    "scope": "wildlife-id",
+    "chapter": "upland-birds",
+    "objectiveId": "id-dusky-grouse",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/dusky-grouse",
+    "image": "assets/wildlife/556e320a99f6.jpg",
+    "imageCredit": {
+      "author": "Yellowstone National Park",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:Male_dusky_grouse_in_display,_Beaver_Ponds_Trail_(34579551542).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Tétras du Canada",
+        "Gélinotte huppée",
+        "Tétras à queue fine",
+        "Tétras sombre"
+      ],
+      "explanation": "Grand tétras gris-bleu (mâle) ou brun tacheté (femelle), avec une longue queue carrée foncée bordée d'une bande grise au bout. Le mâle a un sourcil jaune-orangé et peut gonfler une poche de peau rouge sur le cou.",
+      "habitat": "Montagnes de l'Ouest : intérieur de la C.-B., Rocheuses de l'Alberta, Yukon et sud-ouest des T.N.-O. Forêts claires de conifères et lisières, montant en altitude l'hiver."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Spruce Grouse",
+        "Ruffed Grouse",
+        "Sharp-tailed Grouse",
+        "Dusky Grouse"
+      ],
+      "explanation": "Large grouse, bluish-grey (male) or mottled brown (female), with a long, dark, square tail tipped with a grey band. The male has a yellow-orange comb over the eye and can show a reddish neck patch.",
+      "habitat": "Western mountains: interior B.C., the Alberta Rockies, Yukon and southwestern N.W.T. Open conifer forests and edges, moving upslope in winter."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-willow-ptarmigan",
+    "scope": "wildlife-id",
+    "chapter": "upland-birds",
+    "objectiveId": "id-willow-ptarmigan",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/birds/ptarmigan/",
+    "image": "assets/wildlife/8a7ae022be4f.jpg",
+    "imageCredit": {
+      "author": "USFWSAlaska",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:Willow_Ptarmigan_male_(14072667851).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Lagopède alpin",
+        "Lagopède des saules",
+        "Lagopède à queue blanche",
+        "Tétras du Canada"
+      ],
+      "explanation": "Lagopède tout blanc l'hiver avec une queue noire; l'été, brun-roux avec ailes et ventre blancs. Bec noir plus épais que celui du lagopède alpin, sans trait noir devant l'œil chez le mâle d'hiver.",
+      "habitat": "Toundra et forêt boréale clairsemée du Nord, du Yukon au Labrador et à Terre-Neuve, et zones subalpines de la C.-B. Fréquente les saules et bouleaux nains; descend vers le sud l'hiver."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Rock Ptarmigan",
+        "Willow Ptarmigan",
+        "White-tailed Ptarmigan",
+        "Spruce Grouse"
+      ],
+      "explanation": "All white in winter with a black tail; in summer reddish-brown with white wings and belly. Black bill thicker than the Rock Ptarmigan's, and the winter male has no black line through the eye.",
+      "habitat": "Tundra and open northern boreal forest from Yukon to Labrador and Newfoundland, and subalpine areas of B.C. Favours willow and dwarf birch thickets; moves south in winter."
+    },
+    "imageSize": [
+      640,
+      480
+    ]
+  },
+  {
+    "id": "id-rock-ptarmigan",
+    "scope": "wildlife-id",
+    "chapter": "upland-birds",
+    "objectiveId": "id-rock-ptarmigan",
+    "reviewYear": null,
+    "answerIndex": 0,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/birds/ptarmigan/",
+    "image": "assets/wildlife/071b29b89c4c.jpg",
+    "imageCredit": {
+      "author": "Tim Bowman",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:Lagopus_muta2.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Lagopède alpin",
+        "Lagopède des saules",
+        "Lagopède à queue blanche",
+        "Tétras du Canada"
+      ],
+      "explanation": "Lagopède blanc l'hiver à queue noire; le mâle a un trait noir entre le bec et l'œil. L'été, plumage gris-brun finement marqué avec ailes blanches. Bec noir plus fin que celui du lagopède des saules.",
+      "habitat": "Toundra arctique et montagnes du Nord : Nunavut, T.N.-O., Yukon, nord de la C.-B., nord du Québec, Labrador et Terre-Neuve. Terrains plus rocheux, secs et dénudés que le lagopède des saules."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Rock Ptarmigan",
+        "Willow Ptarmigan",
+        "White-tailed Ptarmigan",
+        "Spruce Grouse"
+      ],
+      "explanation": "White in winter with a black tail; the male has a black line from the bill to the eye. In summer, finely marked grey-brown with white wings. Black bill smaller than the Willow Ptarmigan's.",
+      "habitat": "Arctic tundra and northern mountains: Nunavut, N.W.T., Yukon, northern B.C., northern Québec, Labrador and Newfoundland. Uses rockier, drier, barer ground than the Willow Ptarmigan."
+    },
+    "imageSize": [
+      640,
+      434
+    ]
+  },
+  {
+    "id": "id-white-tailed-ptarmigan",
+    "scope": "wildlife-id",
+    "chapter": "upland-birds",
+    "objectiveId": "id-white-tailed-ptarmigan",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/birds/ptarmigan/",
+    "image": "assets/wildlife/3f904d419bca.jpg",
+    "imageCredit": {
+      "author": "USFWS - Pacific Region",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:Mount_Rainier_White-Tailed_Ptarmigan_(53058740798).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Lagopède alpin",
+        "Lagopède des saules",
+        "Tétras sombre",
+        "Lagopède à queue blanche"
+      ],
+      "explanation": "Le plus petit lagopède, avec une queue entièrement blanche en toute saison (les autres lagopèdes ont la queue noire). Tout blanc l'hiver; l'été, tacheté gris-brun avec ventre et ailes blancs.",
+      "habitat": "Hautes montagnes de l'Ouest : C.-B., Rocheuses de l'Alberta, Yukon et T.N.-O. Toundra alpine rocheuse au-dessus de la limite des arbres."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Rock Ptarmigan",
+        "Willow Ptarmigan",
+        "Dusky Grouse",
+        "White-tailed Ptarmigan"
+      ],
+      "explanation": "The smallest ptarmigan, with an all-white tail in every season (other ptarmigans have black tails). All white in winter; in summer, mottled grey-brown with white belly and wings.",
+      "habitat": "High western mountains: B.C., the Alberta Rockies, Yukon and N.W.T. Rocky alpine tundra above the treeline."
+    },
+    "imageSize": [
+      640,
+      578
+    ]
+  },
+  {
+    "id": "id-ring-necked-pheasant",
+    "scope": "wildlife-id",
+    "chapter": "upland-birds",
+    "objectiveId": "id-ring-necked-pheasant",
+    "reviewYear": null,
+    "answerIndex": 2,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/ring-necked-pheasant",
+    "image": "assets/wildlife/944d306fb037.jpg",
+    "imageCredit": {
+      "author": "Charles J. Sharp",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Common_pheasant_(Phasianus_colchicus)_male_3.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Perdrix grise",
+        "Tétras à queue fine",
+        "Faisan de Colchide",
+        "Perdrix choukar"
+      ],
+      "explanation": "Très longue queue pointue. Le mâle est cuivré avec la tête vert foncé, une caroncule rouge autour de l'œil et souvent un collier blanc; la femelle est brun pâle tachetée de noir.",
+      "habitat": "Espèce introduite des terres agricoles : sud de la C.-B., sud des Prairies, sud de l'Ontario et du Québec (lâchers), Nouvelle-Écosse et Î.-P.-É. Champs, haies et bordures de marais."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Gray Partridge",
+        "Sharp-tailed Grouse",
+        "Ring-necked Pheasant",
+        "Chukar"
+      ],
+      "explanation": "Very long pointed tail. The male is coppery with a dark green head, red facial skin and often a white neck ring; the female is pale brown spotted with black.",
+      "habitat": "Introduced bird of farmland: southern B.C., the southern Prairies, southern Ontario and Québec (released birds), Nova Scotia and P.E.I. Fields, hedgerows and marsh edges."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-gray-partridge",
+    "scope": "wildlife-id",
+    "chapter": "upland-birds",
+    "objectiveId": "id-gray-partridge",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/gray-partridge",
+    "image": "assets/wildlife/d344b63a7294.jpg",
+    "imageCredit": {
+      "author": "Marek Szczepanek",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Perdix_perdix_(Marek_Szczepanek).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Perdrix choukar",
+        "Faisan de Colchide",
+        "Tétras à queue fine",
+        "Perdrix grise"
+      ],
+      "explanation": "Petit gallinacé rond et gris à queue courte rousse sur les côtés. Face orange-chamois, flancs barrés de marron et souvent une tache marron en fer à cheval sur le ventre.",
+      "habitat": "Espèce introduite des terres agricoles, surtout dans les Prairies (Alberta, Saskatchewan, Manitoba), avec de plus petites populations en C.-B., en Ontario et au Québec. Champs cultivés et haies."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Chukar",
+        "Ring-necked Pheasant",
+        "Sharp-tailed Grouse",
+        "Gray Partridge"
+      ],
+      "explanation": "Small, round grey gamebird with a short tail showing rusty sides. Orange-buff face, chestnut-barred flanks and often a dark chestnut horseshoe patch on the belly.",
+      "habitat": "Introduced bird of farmland, mostly in the Prairies (Alberta, Saskatchewan, Manitoba), with smaller populations in B.C., Ontario and Québec. Cropland and hedgerows."
+    },
+    "imageSize": [
+      640,
+      414
+    ]
+  },
+  {
+    "id": "id-chukar",
+    "scope": "wildlife-id",
+    "chapter": "upland-birds",
+    "objectiveId": "id-chukar",
+    "reviewYear": null,
+    "answerIndex": 0,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/chukar",
+    "image": "assets/wildlife/acabe7a4e2b8.jpg",
+    "imageCredit": {
+      "author": "Imran Shah from Islamabad, Pakistan",
+      "license": "CC BY-SA 2.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Chukar_Partridge_(Alectoris_chukar)_(39660989151).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Perdrix choukar",
+        "Perdrix grise",
+        "Faisan de Colchide",
+        "Tétras à queue fine"
+      ],
+      "explanation": "Perdrix gris-beige à bec et pattes rouges, avec une gorge blanchâtre entourée d'un collier noir qui passe par l'œil. Flancs barrés noir et blanc.",
+      "habitat": "Espèce introduite, surtout dans les vallées sèches de l'intérieur sud de la C.-B. (Okanagan, Thompson, Fraser). Pentes rocheuses arides avec herbes et armoise."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Chukar",
+        "Gray Partridge",
+        "Ring-necked Pheasant",
+        "Sharp-tailed Grouse"
+      ],
+      "explanation": "Grey-buff partridge with a red bill and legs and a whitish throat framed by a black band running through the eye. Flanks boldly barred black and white.",
+      "habitat": "Introduced bird found mainly in dry valleys of the southern interior of B.C. (Okanagan, Thompson, Fraser). Arid rocky slopes with grass and sagebrush."
+    },
+    "imageSize": [
+      640,
+      480
+    ]
+  },
+  {
+    "id": "id-wild-turkey",
+    "scope": "wildlife-id",
+    "chapter": "upland-birds",
+    "objectiveId": "id-wild-turkey",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/wild-turkey",
+    "image": "assets/wildlife/797b3838bce4.jpg",
+    "imageCredit": {
+      "author": "Frank Schulenburg",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Male_wild_turkey_(Meleagris_gallopavo)_strutting.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Faisan de Colchide",
+        "Gélinotte huppée",
+        "Tétras des armoises",
+        "Dindon sauvage"
+      ],
+      "explanation": "Très gros oiseau brun foncé aux reflets cuivrés, tête nue bleue et rouge. Le mâle a une « barbe » de plumes qui pend de la poitrine et fait la roue avec sa queue en éventail.",
+      "habitat": "Forêts feuillues et mixtes entrecoupées de champs du sud du Canada : surtout le sud de l'Ontario et du Québec, aussi le sud-ouest du Nouveau-Brunswick et le sud du Manitoba, avec de petites populations locales en Saskatchewan, en Alberta et en C.-B."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Ring-necked Pheasant",
+        "Ruffed Grouse",
+        "Greater Sage-Grouse",
+        "Wild Turkey"
+      ],
+      "explanation": "Very large dark brown bird with a bronze sheen and a bare blue-and-red head. The male has a hair-like 'beard' hanging from the breast and fans its tail in display.",
+      "habitat": "Deciduous and mixed woods mixed with fields in southern Canada: mainly southern Ontario and Québec, also southwestern New Brunswick and southern Manitoba, with small local populations in Saskatchewan, Alberta and B.C."
+    },
+    "imageSize": [
+      640,
+      640
+    ]
+  },
+  {
+    "id": "id-mallard",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-mallard",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/birds/mallard/",
+    "image": "assets/wildlife/76582dc92d60.jpg",
+    "imageCredit": {
+      "author": "Rolf Dietrich Brecher from Germany",
+      "license": "CC BY 2.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Anas_platyrhynchos_(mixed_pair)_(32428014687).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Canard noir",
+        "Canard colvert",
+        "Canard chipeau",
+        "Canard pilet"
+      ],
+      "explanation": "Le mâle a la tête vert brillant, un collier blanc, la poitrine brun-roux et un bec jaune. La femelle est brune tachetée avec un bec orange taché de noir. Les deux ont un miroir bleu bordé de blanc sur l'aile.",
+      "habitat": "Le canard le plus répandu au Canada : niche dans toutes les provinces et territoires, surtout dans les Prairies. Fréquente les marais, étangs, rivières et même les parcs en ville."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "American Black Duck",
+        "Mallard",
+        "Gadwall",
+        "Northern Pintail"
+      ],
+      "explanation": "The male has a glossy green head, a white neck ring, a chestnut breast and a yellow bill. The female is mottled brown with an orange bill blotched with black. Both show a blue wing patch bordered with white.",
+      "habitat": "The most widespread duck in Canada, nesting in every province and territory, especially on the Prairies. Uses marshes, ponds, rivers and even city parks."
+    },
+    "imageSize": [
+      640,
+      479
+    ]
+  },
+  {
+    "id": "id-american-black-duck",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-american-black-duck",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/birds/american-black-duck/",
+    "image": "assets/wildlife/eacff85000a8.jpg",
+    "imageCredit": {
+      "author": "ALAN SCHMIERER",
+      "license": "CC0",
+      "page": "https://commons.wikimedia.org/wiki/File:028_-_AMERICAN_BLACK_DUCK_(2-19-11)_Quidi_Vidi_Lake,_St_John%27s,_Newfoundland_(8710694225).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Canard colvert",
+        "Canard noir",
+        "Canard chipeau",
+        "Canard pilet"
+      ],
+      "explanation": "Gros canard brun très foncé, presque noir, avec la tête et le cou plus pâles (gris-brun). Miroir violet sans bordure blanche; en vol, le dessous des ailes est blanc et contraste fortement. Bec jaune-vert chez le mâle, olive terne chez la femelle.",
+      "habitat": "Canard de l'Est du Canada, du Manitoba et de l'Ontario jusqu'à Terre-Neuve-et-Labrador. Niche dans les milieux humides boréaux et les marais côtiers; hiverne sur les côtes et les eaux libres du Saint-Laurent."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Mallard",
+        "American Black Duck",
+        "Gadwall",
+        "Northern Pintail"
+      ],
+      "explanation": "Large, very dark brown duck with a paler grey-brown head and neck. Purple wing patch with no white border; in flight the white underwings contrast strongly. Bill yellow-green in males, dull olive in females.",
+      "habitat": "A duck of eastern Canada, from Manitoba and Ontario to Newfoundland and Labrador. Nests in boreal wetlands and coastal marshes; winters on the coasts and open water of the St. Lawrence."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-northern-pintail",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-northern-pintail",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/northern-pintail",
+    "image": "assets/wildlife/b06a455602a5.jpg",
+    "imageCredit": {
+      "author": "Frank Schulenburg",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Male_northern_pintail_at_Llano_Seco.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Canard colvert",
+        "Canard pilet",
+        "Canard chipeau",
+        "Canard d'Amérique"
+      ],
+      "explanation": "Canard élancé au long cou mince. Le mâle a la tête brun chocolat, une fine ligne blanche qui monte sur le côté du cou et une longue queue pointue. La femelle est brune, avec un long cou et une queue pointue.",
+      "habitat": "Niche dans tout le Canada, surtout dans les Prairies, la forêt-parc et la toundra du Nord. Préfère les milieux humides peu profonds et les champs ouverts."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Mallard",
+        "Northern Pintail",
+        "Gadwall",
+        "American Wigeon"
+      ],
+      "explanation": "Slender duck with a long thin neck. The male has a chocolate-brown head, a thin white stripe running up the side of the neck and a long pointed tail. The female is plain brown with a long neck and pointed tail.",
+      "habitat": "Nests across Canada, mainly on the Prairies, in the parkland and on northern tundra. Prefers shallow wetlands and open fields."
+    },
+    "imageSize": [
+      640,
+      400
+    ]
+  },
+  {
+    "id": "id-gadwall",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-gadwall",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/gadwall",
+    "image": "assets/wildlife/db14999a32a3.jpg",
+    "imageCredit": {
+      "author": "Rhododendrites",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Gadwall_male_(00188).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Canard colvert",
+        "Canard chipeau",
+        "Canard d'Amérique",
+        "Canard noir"
+      ],
+      "explanation": "Le mâle est gris finement vermiculé avec l'arrière-train noir. La femelle ressemble à une cane colvert, mais son bec est orange sur les côtés avec le dessus gris foncé. Les deux ont un petit miroir blanc sur l'aile.",
+      "habitat": "Surtout dans les Prairies (Alberta, Saskatchewan, Manitoba), en expansion vers l'est jusqu'aux Grands Lacs et au Saint-Laurent. Fréquente les marais et étangs riches en végétation."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Mallard",
+        "Gadwall",
+        "American Wigeon",
+        "American Black Duck"
+      ],
+      "explanation": "The male is finely patterned grey with a black rear end. The female resembles a female Mallard, but her bill is orange on the sides with a dark grey top. Both show a small white wing patch.",
+      "habitat": "Mainly on the Prairies (Alberta, Saskatchewan, Manitoba), expanding east to the Great Lakes and the St. Lawrence. Uses marshes and ponds rich in vegetation."
+    },
+    "imageSize": [
+      640,
+      438
+    ]
+  },
+  {
+    "id": "id-american-wigeon",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-american-wigeon",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/american-wigeon",
+    "image": "assets/wildlife/2fb162853c97.jpg",
+    "imageCredit": {
+      "author": "USFWS Pacific Southwest Region",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:American_wigeon_drake_(49485760412).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Canard chipeau",
+        "Canard pilet",
+        "Sarcelle d'hiver",
+        "Canard d'Amérique"
+      ],
+      "explanation": "Petit bec gris-bleu à bout noir et tête ronde. Le mâle a le front blanc crème, une large bande verte derrière l'œil et une grande tache blanche sur le dessus de l'aile; la femelle a la tête grise et les flancs roux-orangé.",
+      "habitat": "Niche surtout dans l'Ouest et le Nord : Prairies, forêt boréale, Yukon et Territoires du Nord-Ouest; moins commun dans l'Est. Fréquente les étangs et broute souvent dans les champs."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Gadwall",
+        "Northern Pintail",
+        "Green-winged Teal",
+        "American Wigeon"
+      ],
+      "explanation": "Short blue-grey bill with a black tip and a rounded head. The male has a creamy white forehead, a wide green patch behind the eye and a large white patch on the upper wing; the female has a grey head and orange-brown flanks.",
+      "habitat": "Nests mainly in the West and North: Prairies, boreal forest, Yukon and Northwest Territories; less common in the East. Uses ponds and often grazes in fields."
+    },
+    "imageSize": [
+      640,
+      431
+    ]
+  },
+  {
+    "id": "id-northern-shoveler",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-northern-shoveler",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/northern-shoveler",
+    "image": "assets/wildlife/202fc1998f78.jpg",
+    "imageCredit": {
+      "author": "Rhododendrites",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Northern_shoveler_male_in_Marine_Park_(33296).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Canard colvert",
+        "Sarcelle à ailes bleues",
+        "Canard chipeau",
+        "Canard souchet"
+      ],
+      "explanation": "Très long bec large en forme de cuillère, plus long que la tête. Le mâle a la tête verte, la poitrine blanche et les flancs roux; la femelle est brune tachetée comme une cane colvert, mais avec ce bec énorme. Tache bleu pâle sur le dessus de l'aile.",
+      "habitat": "Surtout dans les Prairies et la forêt-parc, mais niche aussi dans le sud de la plupart des provinces. Fréquente les marais peu profonds et vaseux."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Mallard",
+        "Blue-winged Teal",
+        "Gadwall",
+        "Northern Shoveler"
+      ],
+      "explanation": "Very long, wide spoon-shaped bill, longer than the head. The male has a green head, white breast and chestnut flanks; the female is mottled brown like a female Mallard but with that huge bill. Pale blue patch on the upper wing.",
+      "habitat": "Mainly on the Prairies and in the parkland, but also nests across southern parts of most provinces. Uses shallow, muddy marshes."
+    },
+    "imageSize": [
+      640,
+      431
+    ]
+  },
+  {
+    "id": "id-green-winged-teal",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-green-winged-teal",
+    "reviewYear": null,
+    "answerIndex": 0,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/green-winged-teal",
+    "image": "assets/wildlife/2a94d8fe67fd.jpg",
+    "imageCredit": {
+      "author": "DickDaniels (http://theworldbirds.org/)",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Green-winged_male_RWD4.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Sarcelle d'hiver",
+        "Sarcelle à ailes bleues",
+        "Canard d'Amérique",
+        "Petit garrot"
+      ],
+      "explanation": "Le plus petit canard barboteur, avec un petit bec. Le mâle a la tête rousse avec une large bande verte derrière l'œil et une barre blanche verticale sur le côté de la poitrine. La femelle est brune tachetée avec un miroir vert sur l'aile.",
+      "habitat": "Niche dans toutes les provinces et territoires, de la forêt boréale aux Prairies. Fréquente les étangs, marais et vasières peu profondes; migre tard à l'automne."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Green-winged Teal",
+        "Blue-winged Teal",
+        "American Wigeon",
+        "Bufflehead"
+      ],
+      "explanation": "The smallest dabbling duck, with a small bill. The male has a chestnut head with a wide green band behind the eye and a vertical white bar on the side of the breast. The female is mottled brown with a green wing patch.",
+      "habitat": "Nests in every province and territory, from the boreal forest to the Prairies. Uses ponds, marshes and shallow mudflats; migrates late in the fall."
+    },
+    "imageSize": [
+      640,
+      480
+    ]
+  },
+  {
+    "id": "id-blue-winged-teal",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-blue-winged-teal",
+    "reviewYear": null,
+    "answerIndex": 2,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/blue-winged-teal",
+    "image": "assets/wildlife/9621274ee869.jpg",
+    "imageCredit": {
+      "author": "ADJ82",
+      "license": "CC BY 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Blue-wingedTeal-16DEC2017.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Sarcelle d'hiver",
+        "Canard souchet",
+        "Sarcelle à ailes bleues",
+        "Canard chipeau"
+      ],
+      "explanation": "Petit canard barboteur. Le mâle a la tête gris-bleu avec un grand croissant blanc devant l'œil et le corps brun tacheté. La femelle est brune avec une tache pâle à la base du bec. Grande tache bleu pâle sur le dessus de l'aile, visible en vol.",
+      "habitat": "Niche surtout dans les Prairies, mais aussi dans le sud des autres provinces. Fréquente les étangs et marais peu profonds; un des premiers canards à partir vers le sud, dès septembre."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Green-winged Teal",
+        "Northern Shoveler",
+        "Blue-winged Teal",
+        "Gadwall"
+      ],
+      "explanation": "Small dabbling duck. The male has a blue-grey head with a large white crescent in front of the eye and a spotted brown body. The female is brown with a pale spot at the base of the bill. Large pale blue patch on the upper wing, visible in flight.",
+      "habitat": "Nests mainly on the Prairies but also across the south of other provinces. Uses shallow ponds and marshes; one of the first ducks to head south, as early as September."
+    },
+    "imageSize": [
+      640,
+      440
+    ]
+  },
+  {
+    "id": "id-wood-duck",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-wood-duck",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/birds/wood-duck/",
+    "image": "assets/wildlife/1c03856ee877.jpg",
+    "imageCredit": {
+      "author": "Paul Danese",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:20240603_wood_duck_south_meadows_PD208594.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Canard d'Amérique",
+        "Sarcelle d'hiver",
+        "Petit garrot",
+        "Canard branchu"
+      ],
+      "explanation": "Le mâle est très coloré : tête verte et violette avec une huppe tombante rayée de blanc, œil rouge et gorge blanche. La femelle est gris-brun avec une huppe et une grande tache blanche en forme de goutte autour de l'œil. Longue queue carrée.",
+      "habitat": "Sud du Canada : sud de la Colombie-Britannique et du Manitoba jusqu'aux Maritimes, dont le sud du Québec et de l'Ontario. Fréquente les marécages boisés, étangs de castor et rivières calmes; niche dans les cavités d'arbres."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "American Wigeon",
+        "Green-winged Teal",
+        "Bufflehead",
+        "Wood Duck"
+      ],
+      "explanation": "The male is very colourful: green and purple head with a drooping crest striped with white, red eye and white throat. The female is grey-brown with a crest and a large white teardrop patch around the eye. Long squared tail.",
+      "habitat": "Southern Canada: southern British Columbia and from Manitoba east to the Maritimes, including southern Québec and Ontario. Uses wooded swamps, beaver ponds and slow rivers; nests in tree cavities."
+    },
+    "imageSize": [
+      640,
+      640
+    ]
+  },
+  {
+    "id": "id-canvasback",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-canvasback",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/birds/canvasback/",
+    "image": "assets/wildlife/f84b9f89323a.jpg",
+    "imageCredit": {
+      "author": "Frank Schulenburg",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Aythya_valisineria_at_Las_Gallinas_Wildlife_Ponds.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Fuligule à tête rouge",
+        "Petit fuligule",
+        "Fuligule à collier",
+        "Fuligule à dos blanc"
+      ],
+      "explanation": "Gros canard plongeur au profil en pente : front et long bec noir forment une ligne droite. Le mâle a la tête rousse, la poitrine noire et le dos très blanc; la femelle a la tête brun pâle et le dos gris pâle.",
+      "habitat": "Niche surtout dans les cuvettes des Prairies et la forêt-parc (Alberta, Saskatchewan, Manitoba), ainsi qu'au Yukon et dans les Territoires du Nord-Ouest. Fréquente les étangs profonds bordés de quenouilles."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Redhead",
+        "Lesser Scaup",
+        "Ring-necked Duck",
+        "Canvasback"
+      ],
+      "explanation": "Large diving duck with a sloping profile: the forehead and long black bill form a straight line. The male has a chestnut head, black breast and very white back; the female has a pale brown head and pale grey back.",
+      "habitat": "Nests mainly in prairie potholes and parkland (Alberta, Saskatchewan, Manitoba), and in Yukon and the Northwest Territories. Uses deep ponds edged with cattails."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-redhead",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-redhead",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/birds/redhead/",
+    "image": "assets/wildlife/cf53d781fd6b.jpg",
+    "imageCredit": {
+      "author": "Dick Daniels (http://theworldbirds.org/)",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Redhead_male_RWD.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Fuligule à dos blanc",
+        "Fuligule à tête rouge",
+        "Fuligule à collier",
+        "Petit fuligule"
+      ],
+      "explanation": "Canard plongeur à tête ronde et bec gris-bleu à bout noir. Le mâle a la tête rousse, la poitrine noire et le dos gris (plus foncé que le fuligule à dos blanc). La femelle est brun uni avec un bec gris à bout noir et un léger anneau pâle autour de l'œil.",
+      "habitat": "Niche surtout dans les cuvettes des Prairies (Alberta, Saskatchewan, Manitoba) et l'intérieur de la Colombie-Britannique, en plus petit nombre en Ontario et au Québec. Fréquente les marais profonds à végétation dense."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Canvasback",
+        "Redhead",
+        "Ring-necked Duck",
+        "Lesser Scaup"
+      ],
+      "explanation": "Diving duck with a rounded head and a blue-grey bill with a black tip. The male has a reddish head, black breast and grey back (darker than a Canvasback). The female is plain brown with a grey, black-tipped bill and a faint pale eye ring.",
+      "habitat": "Nests mainly in prairie potholes (Alberta, Saskatchewan, Manitoba) and interior British Columbia, with smaller numbers in Ontario and Québec. Uses deep marshes with dense vegetation."
+    },
+    "imageSize": [
+      640,
+      480
+    ]
+  },
+  {
+    "id": "id-lesser-scaup",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-lesser-scaup",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/lesser-scaup",
+    "image": "assets/wildlife/20eb0e8c426c.jpg",
+    "imageCredit": {
+      "author": "JeffreyGammon",
+      "license": "CC BY 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Lesser_Scaup_Male_JG.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Fuligule à collier",
+        "Petit fuligule",
+        "Fuligule à tête rouge",
+        "Fuligule à dos blanc"
+      ],
+      "explanation": "Le mâle a la tête noire à reflets violets un peu pointue à l'arrière, les flancs blancs et le dos gris finement rayé; bec bleu pâle. La femelle est brune avec une tache blanche nette à la base du bec. Œil jaune chez les adultes.",
+      "habitat": "Niche surtout dans l'Ouest et le Nord-Ouest : Prairies, forêt-parc, forêt boréale, Yukon et Territoires du Nord-Ouest. Passe en migration dans tout le sud du Canada sur les lacs et grandes rivières."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Ring-necked Duck",
+        "Lesser Scaup",
+        "Redhead",
+        "Canvasback"
+      ],
+      "explanation": "The male has a black head with purple gloss and a slight peak at the back, white flanks and a finely barred grey back; pale blue bill. The female is brown with a clear white patch at the base of the bill. Adults have yellow eyes.",
+      "habitat": "Nests mainly in the West and Northwest: Prairies, parkland, boreal forest, Yukon and Northwest Territories. Migrates across southern Canada on lakes and large rivers."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-ring-necked-duck",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-ring-necked-duck",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/ring-necked-duck",
+    "image": "assets/wildlife/4b644df3c89c.jpg",
+    "imageCredit": {
+      "author": "Alan Vernon",
+      "license": "CC BY 2.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Aythya_collaris_-San_Luis_Obispo,_California,_USA_-male-8.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Petit fuligule",
+        "Fuligule à tête rouge",
+        "Fuligule à dos blanc",
+        "Fuligule à collier"
+      ],
+      "explanation": "Tête à sommet pointu et bec gris avec un anneau blanc et un bout noir. Le mâle est noir avec les flancs gris et une barre blanche verticale devant l'aile. La femelle est brune avec un cercle blanc autour de l'œil et un visage pâle.",
+      "habitat": "Niche dans toute la forêt boréale, de la Colombie-Britannique à Terre-Neuve. Fréquente les étangs, tourbières et lacs peu profonds entourés d'arbres."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Lesser Scaup",
+        "Redhead",
+        "Canvasback",
+        "Ring-necked Duck"
+      ],
+      "explanation": "Peaked head and a grey bill with a white ring and black tip. The male is black with grey flanks and a vertical white bar in front of the wing. The female is brown with a white eye ring and a pale face.",
+      "habitat": "Nests throughout the boreal forest, from British Columbia to Newfoundland. Uses ponds, bogs and shallow lakes surrounded by trees."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-common-goldeneye",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-common-goldeneye",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/common-goldeneye",
+    "image": "assets/wildlife/1e6b916f7f8b.jpg",
+    "imageCredit": {
+      "author": "Calibas",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Common_Goldeneye.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Petit garrot",
+        "Garrot à œil d'or",
+        "Petit fuligule",
+        "Grand harle"
+      ],
+      "explanation": "Œil jaune doré et grosse tête triangulaire. Le mâle est surtout blanc avec la tête noire à reflets verts et une tache ronde blanche entre l'œil et le bec. La femelle a la tête brun chocolat, le corps gris et souvent un bout de bec jaune.",
+      "habitat": "Niche dans la forêt boréale de presque toutes les provinces et territoires, dans les cavités d'arbres près des lacs. Hiverne là où l'eau reste libre : Grands Lacs, Saint-Laurent et côtes."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Bufflehead",
+        "Common Goldeneye",
+        "Lesser Scaup",
+        "Common Merganser"
+      ],
+      "explanation": "Golden-yellow eye and large triangular head. The male is mostly white with a green-glossed black head and a round white spot between the eye and bill. The female has a chocolate-brown head, grey body and often a yellow bill tip.",
+      "habitat": "Nests in the boreal forest of almost every province and territory, in tree cavities near lakes. Winters wherever water stays open: Great Lakes, St. Lawrence and coasts."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-bufflehead",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-bufflehead",
+    "reviewYear": null,
+    "answerIndex": 0,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/birds/bufflehead/",
+    "image": "assets/wildlife/921b929e5219.jpg",
+    "imageCredit": {
+      "author": "DickDaniels (http://theworldbirds.org/)",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Bufflehead_male_RWD14.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Petit garrot",
+        "Garrot à œil d'or",
+        "Arlequin plongeur",
+        "Harelde kakawi"
+      ],
+      "explanation": "Très petit canard plongeur à grosse tête ronde. Le mâle est blanc et noir avec une grande tache blanche à l'arrière de la tête (reflets verts et violets). La femelle est gris-brun avec une petite tache blanche ovale sous l'œil.",
+      "habitat": "Niche dans la forêt boréale et la forêt-parc, surtout de la Colombie-Britannique au Manitoba et dans le nord de l'Ontario et du Québec, dans de vieux trous de pics. Hiverne sur les côtes et les Grands Lacs.",
+      "confuse": "L'arlequin plongeur, protégé dans l'Est, est plus foncé : le mâle est bleu ardoise avec des flancs roux et plusieurs taches blanches sur la tête; la femelle est brun foncé avec trois taches blanches sur la tête, au lieu d'une seule tache sous l'œil."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Bufflehead",
+        "Common Goldeneye",
+        "Harlequin Duck",
+        "Long-tailed Duck"
+      ],
+      "explanation": "Very small diving duck with a big rounded head. The male is black and white with a large white patch on the back of the head (green-purple gloss). The female is grey-brown with a small oval white patch below the eye.",
+      "habitat": "Nests in the boreal forest and parkland, mostly from British Columbia to Manitoba and in northern Ontario and Québec, in old woodpecker holes. Winters on the coasts and the Great Lakes.",
+      "confuse": "The Harlequin Duck, protected in the East, is darker: the male is slate-blue with chestnut flanks and several white spots on the head; the female is dark brown with three white spots on the head instead of a single spot below the eye."
+    },
+    "imageSize": [
+      640,
+      480
+    ]
+  },
+  {
+    "id": "id-long-tailed-duck",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-long-tailed-duck",
+    "reviewYear": null,
+    "answerIndex": 0,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/long-tailed-duck",
+    "image": "assets/wildlife/3fcf8784b4eb.jpg",
+    "imageCredit": {
+      "author": "Wolfgang Wander",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Long-tailed-duck.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Harelde kakawi",
+        "Arlequin plongeur",
+        "Macreuse à front blanc",
+        "Petit garrot"
+      ],
+      "explanation": "Canard de mer noir, blanc et brun au petit bec. Le mâle a deux très longues plumes de queue fines; en hiver il est surtout blanc avec une tache noire sur la joue. La femelle est brune et blanche, avec la queue courte.",
+      "habitat": "Niche dans la toundra arctique (Yukon, Territoires du Nord-Ouest, Nunavut, nord du Québec et du Labrador). Hiverne sur les côtes du Pacifique et de l'Atlantique et sur les Grands Lacs.",
+      "confuse": "L'arlequin plongeur, protégé dans l'Est, est petit et foncé : le mâle est bleu ardoise avec des flancs roux et des taches et lignes blanches sur la tête et le cou; la femelle est brun foncé avec trois taches blanches sur la tête. Il fréquente les eaux agitées près des rochers."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Long-tailed Duck",
+        "Harlequin Duck",
+        "Surf Scoter",
+        "Bufflehead"
+      ],
+      "explanation": "Black, white and brown sea duck with a short bill. The male has two very long, thin tail feathers; in winter it is mostly white with a dark cheek patch. The female is brown and white with a short tail.",
+      "habitat": "Nests on Arctic tundra (Yukon, Northwest Territories, Nunavut, northern Québec and Labrador). Winters on the Pacific and Atlantic coasts and on the Great Lakes.",
+      "confuse": "The Harlequin Duck, protected in the East, is small and dark: the male is slate-blue with chestnut flanks and white spots and stripes on the head and neck; the female is dark brown with three white spots on the head. It favours rough water near rocks."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-common-eider",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-common-eider",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/birds/common-eider/",
+    "image": "assets/wildlife/730f8294df5d.jpg",
+    "imageCredit": {
+      "author": "Rhododendrites",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Common_eider_male_at_Jones_Beach_(04738).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Macreuse à front blanc",
+        "Arlequin plongeur",
+        "Harelde kakawi",
+        "Eider à duvet"
+      ],
+      "explanation": "Le plus gros canard de l'hémisphère Nord, avec un long bec en pente qui prolonge le front. Le mâle a le dos et la poitrine blancs, le ventre et la calotte noirs et la nuque vert pâle. La femelle est brun-roux finement barrée de noir.",
+      "habitat": "Canard marin de l'Arctique et de la côte atlantique : estuaire et golfe du Saint-Laurent, Maritimes, Terre-Neuve-et-Labrador, baie d'Hudson et Nunavut. Niche en colonies sur les îles côtières.",
+      "confuse": "L'arlequin plongeur, protégé dans l'Est, est beaucoup plus petit, avec un petit bec court. La femelle arlequin est brun foncé uni avec trois taches blanches sur la tête, sans barres fines; le mâle est bleu ardoise avec des flancs roux."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Surf Scoter",
+        "Harlequin Duck",
+        "Long-tailed Duck",
+        "Common Eider"
+      ],
+      "explanation": "The largest duck in the Northern Hemisphere, with a long sloping bill that continues the forehead. The male has a white back and breast, black belly and cap and a pale green nape. The female is reddish-brown with fine black barring.",
+      "habitat": "A sea duck of the Arctic and Atlantic coast: St. Lawrence estuary and gulf, the Maritimes, Newfoundland and Labrador, Hudson Bay and Nunavut. Nests in colonies on coastal islands.",
+      "confuse": "The Harlequin Duck, protected in the East, is much smaller with a small, short bill. The female Harlequin is plain dark brown with three white spots on the head and no fine barring; the male is slate-blue with chestnut flanks."
+    },
+    "imageSize": [
+      640,
+      462
+    ]
+  },
+  {
+    "id": "id-surf-scoter",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-surf-scoter",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/surf-scoter",
+    "image": "assets/wildlife/6fa086b17346.jpg",
+    "imageCredit": {
+      "author": "Alan D. Wilson",
+      "license": "CC BY-SA 2.5",
+      "page": "https://commons.wikimedia.org/wiki/File:Melanitta_perspicillata.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Eider à duvet",
+        "Macreuse à front blanc",
+        "Arlequin plongeur",
+        "Harelde kakawi"
+      ],
+      "explanation": "Canard de mer trapu au gros bec. Le mâle est tout noir avec des taches blanches sur le front et la nuque et un bec orange, blanc et noir très coloré. La femelle est brun foncé avec deux taches pâles sur le côté de la tête.",
+      "habitat": "Niche près des lacs de la forêt boréale, de l'Alaska et du Yukon jusqu'au Labrador. Hiverne sur les côtes du Pacifique et de l'Atlantique; nombreuse en migration dans l'estuaire du Saint-Laurent.",
+      "confuse": "L'arlequin plongeur, protégé dans l'Est, est plus petit avec un petit bec court et gris. La femelle arlequin a trois taches blanches sur la tête (la macreuse en a deux, plus floues); le mâle arlequin est bleu ardoise avec des flancs roux, pas noir."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Common Eider",
+        "Surf Scoter",
+        "Harlequin Duck",
+        "Long-tailed Duck"
+      ],
+      "explanation": "Stocky sea duck with a large bill. The male is all black with white patches on the forehead and nape and a colourful orange, white and black bill. The female is dark brown with two pale patches on the side of the head.",
+      "habitat": "Nests near boreal forest lakes from Alaska and Yukon to Labrador. Winters on the Pacific and Atlantic coasts; common in migration on the St. Lawrence estuary.",
+      "confuse": "The Harlequin Duck, protected in the East, is smaller with a short, small grey bill. The female Harlequin has three white spots on the head (the scoter has two, more blurry); the male Harlequin is slate-blue with chestnut flanks, not black."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-common-merganser",
+    "scope": "wildlife-id",
+    "chapter": "ducks",
+    "objectiveId": "id-common-merganser",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/common-merganser",
+    "image": "assets/wildlife/3417d6e42fe9.jpg",
+    "imageCredit": {
+      "author": "Paul Danese",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:20240315_common_merganser_south_meadows_PD204189.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Garrot à œil d'or",
+        "Canard colvert",
+        "Eider à duvet",
+        "Grand harle"
+      ],
+      "explanation": "Grand canard au long corps et au bec rouge mince et crochu au bout. Le mâle a le corps blanc et la tête vert foncé. La femelle a le corps gris et la tête rousse avec une huppe ébouriffée et un menton blanc bien délimité.",
+      "habitat": "Niche dans les régions boisées de tout le Canada, dans les cavités d'arbres près des rivières et des lacs clairs. Hiverne sur les eaux libres du sud du pays et sur les côtes."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Common Goldeneye",
+        "Mallard",
+        "Common Eider",
+        "Common Merganser"
+      ],
+      "explanation": "Large, long-bodied duck with a thin red bill hooked at the tip. The male has a white body and dark green head. The female has a grey body and a reddish head with a shaggy crest and a sharply defined white chin.",
+      "habitat": "Nests in forested regions across Canada, in tree cavities near rivers and clear lakes. Winters on open water in the south and on the coasts."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-canada-goose",
+    "scope": "wildlife-id",
+    "chapter": "geese-swans",
+    "objectiveId": "id-canada-goose",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/birds/canada-goose/",
+    "image": "assets/wildlife/342d0e827f15.jpg",
+    "imageCredit": {
+      "author": "Karrackoo",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Canadagoose.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Bernache de Hutchins",
+        "Bernache cravant",
+        "Oie rieuse",
+        "Bernache du Canada"
+      ],
+      "explanation": "Grande oie au corps brun, à la poitrine pâle et au long cou noir avec une mentonnière blanche qui monte sur les joues. Queue noire avec une bande blanche dessous.",
+      "habitat": "Niche dans toutes les provinces et territoires, de la toundra arctique jusqu'aux villes du sud. Fréquente les lacs, marais, rivières et champs agricoles; de plus en plus présente à l'année dans le sud."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Cackling Goose",
+        "Brant",
+        "Greater White-fronted Goose",
+        "Canada Goose"
+      ],
+      "explanation": "Large goose with a brown body, pale breast and long black neck with a white chinstrap running up the cheeks. Black tail with a white band underneath.",
+      "habitat": "Nests in every province and territory, from the Arctic tundra to southern cities. Uses lakes, marshes, rivers and farm fields; increasingly present year-round in the south."
+    },
+    "imageSize": [
+      640,
+      480
+    ]
+  },
+  {
+    "id": "id-cackling-goose",
+    "scope": "wildlife-id",
+    "chapter": "geese-swans",
+    "objectiveId": "id-cackling-goose",
+    "reviewYear": null,
+    "answerIndex": 0,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/cackling-goose",
+    "image": "assets/wildlife/c4897df1e211.jpg",
+    "imageCredit": {
+      "author": "Roy Lowe/U.S. Fish and Wildlife Service",
+      "license": "Public domain",
+      "page": "https://commons.wikimedia.org/wiki/File:AleutianCanadaGoose2.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Bernache de Hutchins",
+        "Bernache du Canada",
+        "Bernache cravant",
+        "Oie rieuse"
+      ],
+      "explanation": "Ressemble à une petite bernache du Canada (les plus petites à peine plus grosses qu'un canard colvert) : même cou noir et mentonnière blanche, mais bec très court, tête ronde et cou plus court.",
+      "habitat": "Niche dans la toundra de l'Arctique (Nunavut, Territoires du Nord-Ouest). Passe en migration surtout dans les Prairies, avec les bernaches du Canada dans les champs et les marais."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Cackling Goose",
+        "Canada Goose",
+        "Brant",
+        "Greater White-fronted Goose"
+      ],
+      "explanation": "Looks like a small Canada Goose (the smallest barely bigger than a Mallard): same black neck and white chinstrap, but a very short bill, round head and shorter neck.",
+      "habitat": "Nests on Arctic tundra (Nunavut, Northwest Territories). Migrates mainly through the Prairies, mixing with Canada Geese in fields and marshes."
+    },
+    "imageSize": [
+      579,
+      640
+    ]
+  },
+  {
+    "id": "id-snow-goose",
+    "scope": "wildlife-id",
+    "chapter": "geese-swans",
+    "objectiveId": "id-snow-goose",
+    "reviewYear": null,
+    "answerIndex": 2,
+    "sourceRef": "",
+    "sourceUrl": "https://www.hww.ca/wildlife/birds/greater-snow-goose/",
+    "image": "assets/wildlife/3f8525d716a4.jpg",
+    "imageCredit": {
+      "author": "Andy Reago & Chrissy McClarren",
+      "license": "CC BY 2.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Snow_Goose_(24510697391).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Oie de Ross",
+        "Cygne siffleur",
+        "Oie des neiges",
+        "Cygne trompette"
+      ],
+      "explanation": "Oie blanche au bout des ailes noir, au bec rose avec une ligne noire en « sourire » et aux pattes roses. Une forme foncée (« oie bleue ») a le corps gris-brun et la tête blanche.",
+      "habitat": "Niche en colonies dans la toundra arctique. La grande oie des neiges fait halte en grand nombre au Québec (Cap-Tourmente, Montmagny, Baie-du-Febvre) au printemps et à l'automne; la petite oie des neiges migre surtout par les Prairies.",
+      "confuse": "Les cygnes (protégés) sont beaucoup plus gros, avec un très long cou et les ailes entièrement blanches, sans bouts noirs. Les oies blanches ont un cou court, un bec rose et le bout des ailes noir."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Ross's Goose",
+        "Tundra Swan",
+        "Snow Goose",
+        "Trumpeter Swan"
+      ],
+      "explanation": "White goose with black wingtips, a pink bill with a black \"grin\" line and pink legs. A dark form (\"blue goose\") has a grey-brown body and a white head.",
+      "habitat": "Nests in colonies on Arctic tundra. The Greater Snow Goose stops over in huge numbers in Québec (Cap-Tourmente, Montmagny, Baie-du-Febvre) in spring and fall; the Lesser Snow Goose migrates mainly through the Prairies.",
+      "confuse": "Swans (protected) are much larger, with a very long neck and all-white wings with no black tips. White geese have a short neck, a pink bill and black wingtips."
+    },
+    "imageSize": [
+      640,
+      492
+    ]
+  },
+  {
+    "id": "id-ross-goose",
+    "scope": "wildlife-id",
+    "chapter": "geese-swans",
+    "objectiveId": "id-ross-goose",
+    "reviewYear": null,
+    "answerIndex": 2,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/rosss-goose",
+    "image": "assets/wildlife/f33d3f7a9f1b.jpg",
+    "imageCredit": {
+      "author": "DickDaniels (http://theworldbirds.org/)",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Ross%27s_Goose_RWD.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Oie des neiges",
+        "Cygne siffleur",
+        "Oie de Ross",
+        "Bernache de Hutchins"
+      ],
+      "explanation": "Ressemble à une petite oie des neiges : blanche avec le bout des ailes noir, mais plus petite, avec une tête ronde et un petit bec triangulaire sans ligne noire en « sourire ».",
+      "habitat": "Niche dans la toundra du centre de l'Arctique (golfe de la Reine-Maud, Nunavut). Passe en migration surtout en Saskatchewan et en Alberta, avec les oies des neiges dans les champs.",
+      "confuse": "Les cygnes (protégés) sont beaucoup plus gros, avec un très long cou et les ailes entièrement blanches, sans bouts noirs. Les oies blanches ont un cou court, un bec rose et le bout des ailes noir."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Snow Goose",
+        "Tundra Swan",
+        "Ross's Goose",
+        "Cackling Goose"
+      ],
+      "explanation": "Looks like a small Snow Goose: white with black wingtips, but smaller, with a round head and a short triangular bill lacking the black \"grin\" line.",
+      "habitat": "Nests on central Arctic tundra (Queen Maud Gulf, Nunavut). Migrates mainly through Saskatchewan and Alberta, feeding in fields with Snow Geese.",
+      "confuse": "Swans (protected) are much larger, with a very long neck and all-white wings with no black tips. White geese have a short neck, a pink bill and black wingtips."
+    },
+    "imageSize": [
+      640,
+      480
+    ]
+  },
+  {
+    "id": "id-greater-white-fronted-goose",
+    "scope": "wildlife-id",
+    "chapter": "geese-swans",
+    "objectiveId": "id-greater-white-fronted-goose",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/greater-white-fronted-goose",
+    "image": "assets/wildlife/e3d92478fd76.jpg",
+    "imageCredit": {
+      "author": "Anant.wildlife",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Greater_white-fronted_goose_clicked_at_Llano_Seco_Unit,_California,_US-IMG_11.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Bernache du Canada",
+        "Oie des neiges",
+        "Bernache de Hutchins",
+        "Oie rieuse"
+      ],
+      "explanation": "Oie brun-gris avec une bande blanche à la base du bec rose-orangé, des barres noires irrégulières sur le ventre et des pattes orange. Pas de cou noir ni de mentonnière blanche.",
+      "habitat": "Niche dans la toundra de l'Ouest de l'Arctique (Yukon, Territoires du Nord-Ouest, Nunavut). Passe en migration surtout dans les Prairies (Alberta, Saskatchewan); rare dans l'Est."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Canada Goose",
+        "Snow Goose",
+        "Cackling Goose",
+        "Greater White-fronted Goose"
+      ],
+      "explanation": "Grey-brown goose with a white band at the base of the pinkish-orange bill, irregular black bars on the belly and orange legs. No black neck or white chinstrap.",
+      "habitat": "Nests on western Arctic tundra (Yukon, Northwest Territories, Nunavut). Migrates mainly through the Prairies (Alberta, Saskatchewan); rare in the East."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-brant",
+    "scope": "wildlife-id",
+    "chapter": "geese-swans",
+    "objectiveId": "id-brant",
+    "reviewYear": null,
+    "answerIndex": 0,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/brant",
+    "image": "assets/wildlife/bdb0e3ce0f71.jpg",
+    "imageCredit": {
+      "author": "Lucwrte",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Black_Brant_at_Vacation_Isle,_San_Diego.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Bernache cravant",
+        "Bernache du Canada",
+        "Bernache de Hutchins",
+        "Oie rieuse"
+      ],
+      "explanation": "Petite oie foncée au cou court : tête, cou et poitrine noirs avec un petit collier blanc sur le haut du cou, sans mentonnière blanche. Arrière-train blanc.",
+      "habitat": "Niche dans le Haut-Arctique. Migre le long des côtes : par la baie James et l'estuaire du Saint-Laurent dans l'Est, et le long de la côte de la Colombie-Britannique dans l'Ouest; se nourrit de zostère dans les baies côtières."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Brant",
+        "Canada Goose",
+        "Cackling Goose",
+        "Greater White-fronted Goose"
+      ],
+      "explanation": "Small, dark, short-necked goose: black head, neck and breast with a small white necklace high on the neck, and no white chinstrap. White rear end.",
+      "habitat": "Nests in the High Arctic. Migrates along coasts: via James Bay and the St. Lawrence estuary in the East, and along the British Columbia coast in the West; feeds on eelgrass in coastal bays."
+    },
+    "imageSize": [
+      640,
+      426
+    ]
+  },
+  {
+    "id": "id-american-woodcock",
+    "scope": "wildlife-id",
+    "chapter": "other-birds",
+    "objectiveId": "id-american-woodcock",
+    "reviewYear": null,
+    "answerIndex": 1,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/american-woodcock",
+    "image": "assets/wildlife/602b8c082eaa.jpg",
+    "imageCredit": {
+      "author": "Rhododendrites",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:American_woodcock_(95252).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Bécassine de Wilson",
+        "Bécasse d'Amérique",
+        "Pluvier kildir",
+        "Tourterelle triste"
+      ],
+      "explanation": "Oiseau rond couleur feuilles mortes, au cou très court et au très long bec droit. Yeux placés haut sur la tête, larges barres noires en travers du dessus de la tête, poitrine chamois uni.",
+      "habitat": "Est du Canada, du sud du Manitoba aux Maritimes et au sud de Terre-Neuve, surtout dans le sud de l'Ontario, du Québec et les Maritimes. Jeunes forêts humides, aulnaies et friches près de clairières."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Wilson's Snipe",
+        "American Woodcock",
+        "Killdeer",
+        "Mourning Dove"
+      ],
+      "explanation": "Round, leaf-coloured bird with almost no neck and a very long straight bill. Eyes set high on the head, broad black bars across the top of the head, plain buff breast.",
+      "habitat": "Eastern Canada, from southern Manitoba to the Maritimes and southern Newfoundland, mostly southern Ontario, Québec and the Maritimes. Moist young forests, alder thickets and old fields near openings."
+    },
+    "imageSize": [
+      640,
+      458
+    ]
+  },
+  {
+    "id": "id-wilsons-snipe",
+    "scope": "wildlife-id",
+    "chapter": "other-birds",
+    "objectiveId": "id-wilsons-snipe",
+    "reviewYear": null,
+    "answerIndex": 2,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/wilsons-snipe",
+    "image": "assets/wildlife/f30d45be6420.jpg",
+    "imageCredit": {
+      "author": "en:User:Talshiarr (Sean Breazeal)",
+      "license": "CC BY-SA 3.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Wilson%27s_Snipe_on_a_fencepost,_central_Utah.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Bécasse d'Amérique",
+        "Pluvier kildir",
+        "Bécassine de Wilson",
+        "Gallinule d'Amérique"
+      ],
+      "explanation": "Oiseau brun rayé au très long bec droit, plus élancé que la bécasse. Rayures pâles longitudinales sur le dos et la tête (et non en travers), ventre blanc et flancs barrés.",
+      "habitat": "Niche dans toutes les provinces et territoires, dans les milieux humides ouverts : marais, tourbières, prés humides et bords d'étangs."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "American Woodcock",
+        "Killdeer",
+        "Wilson's Snipe",
+        "Common Gallinule"
+      ],
+      "explanation": "Streaked brown bird with a very long straight bill, slimmer than a woodcock. Pale stripes run lengthwise on the back and head (not across), with a white belly and barred flanks.",
+      "habitat": "Breeds in every province and territory in open wetlands: marshes, bogs, wet meadows and pond edges."
+    },
+    "imageSize": [
+      623,
+      640
+    ]
+  },
+  {
+    "id": "id-mourning-dove",
+    "scope": "wildlife-id",
+    "chapter": "other-birds",
+    "objectiveId": "id-mourning-dove",
+    "reviewYear": null,
+    "answerIndex": 2,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/mourning-dove",
+    "image": "assets/wildlife/dd74d3ea0dde.jpg",
+    "imageCredit": {
+      "author": "Rhododendrites",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Mourning_dove_perched_(61179).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Pigeon biset",
+        "Pluvier kildir",
+        "Tourterelle triste",
+        "Bécasse d'Amérique"
+      ],
+      "explanation": "Oiseau mince beige-gris à petite tête et longue queue pointue bordée de blanc. Quelques taches noires sur les ailes et une petite tache foncée sous l'œil.",
+      "habitat": "Sud du Canada, de la C.-B. aux Maritimes, dans les champs, villes et lisières boisées. Chassée seulement dans certaines provinces (C.-B. et Ontario).",
+      "confuse": "Le pigeon biset (non chassable comme gibier migrateur) est plus trapu, avec une queue courte et carrée, un croupion blanc et souvent deux barres noires sur l'aile."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Rock Pigeon",
+        "Killdeer",
+        "Mourning Dove",
+        "American Woodcock"
+      ],
+      "explanation": "Slender grey-buff bird with a small head and a long, pointed tail edged in white. A few black spots on the wings and a small dark mark below the eye.",
+      "habitat": "Southern Canada from B.C. to the Maritimes, in farmland, towns and woodland edges. Hunted only in some provinces (B.C. and Ontario).",
+      "confuse": "The Rock Pigeon (not a migratory game bird) is stockier, with a short square tail, white rump and often two black wing bars."
+    },
+    "imageSize": [
+      640,
+      484
+    ]
+  },
+  {
+    "id": "id-sandhill-crane",
+    "scope": "wildlife-id",
+    "chapter": "other-birds",
+    "objectiveId": "id-sandhill-crane",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/sandhill-crane",
+    "image": "assets/wildlife/c3821f06e360.jpg",
+    "imageCredit": {
+      "author": "Nigel",
+      "license": "CC BY 2.0",
+      "page": "https://commons.wikimedia.org/wiki/File:Sandhill_Crane_-_IMG0288.jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Grue blanche",
+        "Grand héron",
+        "Foulque d'Amérique",
+        "Grue du Canada"
+      ],
+      "explanation": "Grand oiseau gris (parfois taché de roux) aux longues pattes et long cou tendu en vol, avec une calotte rouge sur le front. Plumes arrière en « coussin » au-dessus de la queue.",
+      "habitat": "Niche dans les milieux humides ouverts de presque tout le Canada, de la toundra arctique aux tourbières boréales et aux prairies. Chassée au Yukon, en Alberta, en Saskatchewan et au Manitoba, et depuis 2026 dans certaines parties de l'Ontario et du Québec.",
+      "confuse": "La grue blanche (protégée, en voie de disparition) est toute blanche avec le bout des ailes noir; elle peut accompagner les grues du Canada en Saskatchewan durant la migration. Le grand héron replie le cou en vol."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Whooping Crane",
+        "Great Blue Heron",
+        "American Coot",
+        "Sandhill Crane"
+      ],
+      "explanation": "Tall grey bird (sometimes stained rusty) with long legs and a neck held straight in flight, and a red crown on the forehead. Bushy 'bustle' of feathers over the tail.",
+      "habitat": "Breeds in open wetlands across most of Canada, from Arctic tundra to boreal bogs and prairie marshes. Hunted in Yukon, Alberta, Saskatchewan and Manitoba, and since 2026 in parts of Ontario and Québec.",
+      "confuse": "The Whooping Crane (protected, endangered) is all white with black wingtips and can travel with Sandhill Cranes in Saskatchewan during migration. The Great Blue Heron folds its neck in flight."
+    },
+    "imageSize": [
+      640,
+      454
+    ]
+  },
+  {
+    "id": "id-american-coot",
+    "scope": "wildlife-id",
+    "chapter": "other-birds",
+    "objectiveId": "id-american-coot",
+    "reviewYear": null,
+    "answerIndex": 3,
+    "sourceRef": "",
+    "sourceUrl": "https://www.audubon.org/field-guide/bird/american-coot",
+    "image": "assets/wildlife/2b376274ba90.jpg",
+    "imageCredit": {
+      "author": "Rhododendrites",
+      "license": "CC BY-SA 4.0",
+      "page": "https://commons.wikimedia.org/wiki/File:American_coot_in_Prospect_Park_(06152).jpg"
+    },
+    "fr": {
+      "q": "Quel est cet animal?",
+      "choices": [
+        "Gallinule d'Amérique",
+        "Bécassine de Wilson",
+        "Pluvier kildir",
+        "Foulque d'Amérique"
+      ],
+      "explanation": "Oiseau aquatique gris-noir et rond qui nage comme un canard, avec un bec blanc épais (une petite bande sombre près du bout) et une plaque frontale blanche. Pattes verdâtres aux doigts lobés.",
+      "habitat": "Niche surtout dans les marais et étangs des Prairies et de l'intérieur de la C.-B., plus rare dans l'Est (sud de l'Ontario et du Québec). Eaux peu profondes avec quenouilles et joncs.",
+      "confuse": "La gallinule d'Amérique (non chassée dans la plupart des provinces) a un bec et une plaque frontale rouges à bout jaune et une ligne blanche sur le flanc."
+    },
+    "en": {
+      "q": "What animal is this?",
+      "choices": [
+        "Common Gallinule",
+        "Wilson's Snipe",
+        "Killdeer",
+        "American Coot"
+      ],
+      "explanation": "Round slate-black waterbird that swims like a duck, with a thick white bill (small dark band near the tip) and white forehead shield. Greenish feet with lobed toes.",
+      "habitat": "Breeds mainly in marshes and ponds of the Prairies and interior B.C., less common in the East (southern Ontario and Québec). Shallow water with cattails and rushes.",
+      "confuse": "The Common Gallinule (not hunted in most provinces) has a red bill and forehead shield with a yellow tip and a white stripe along the flank."
+    },
+    "imageSize": [
+      640,
+      490
+    ]
+  }
+]

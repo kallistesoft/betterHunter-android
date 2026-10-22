@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Exam picker -->
+    <string name="picker_title">Quel examen préparez-vous?</string>
+    <string name="picker_subtitle">Choisissez un ou plusieurs tests. Vous pourrez changer plus tard.</string>
+    <string name="action_continue">Continuer</string>
+    <string name="action_skip">Passer</string>
+
+    <!-- Dashboard -->
+    <string name="hub_exams">Entraînement aux examens</string>
+    <string name="hub_exams_sub">Permis d\'armes à feu et examens de chasse : pratique et examens simulés.</string>
+    <string name="hub_id">Sauriez-vous les reconnaître?</string>
+    <string name="hub_id_sub">Jeux d\'identification des animaux chassés au Canada.</string>
+    <plurals name="exams_count">
+        <item quantity="one">%1$d examen</item>
+        <item quantity="many">%1$d examens</item>
+        <item quantity="other">%1$d examens</item>
+    </plurals>
+    <plurals name="games_count">
+        <item quantity="one">%1$d jeu</item>
+        <item quantity="many">%1$d jeux</item>
+        <item quantity="other">%1$d jeux</item>
+    </plurals>
+    <plurals name="animals_count">
+        <item quantity="one">%1$d animal</item>
+        <item quantity="many">%1$d animaux</item>
+        <item quantity="other">%1$d animaux</item>
+    </plurals>
+    <string name="my_exams">Mes examens</string>
+    <string name="action_change">Modifier</string>
+    <string name="other_tests">Autres tests</string>
+    <string name="today">Aujourd\'hui</string>
+    <string name="goal_progress">%1$d / %2$d questions aujourd\'hui</string>
+    <string name="goal_done">Objectif du jour atteint!</string>
+    <string name="practise_now">S\'exercer maintenant</string>
+    <string name="photo_of_day">Photo du jour</string>
+    <string name="play_id">Jouer à « Qu\'est-ce que c\'est? »</string>
+    <string name="about">À propos</string>
+    <string name="footer">Outil indépendant · non officiel · erreurs possibles.</string>
+    <string name="learn_more">En savoir plus</string>
+    <string name="language">Langue</string>
+    <string name="sample_banner">Contenu d\'exemple, non révisé. Ne pas utiliser pour étudier.</string>
+    <plurals name="streak">
+        <item quantity="one">%1$d jour de suite</item>
+        <item quantity="many">%1$d jours de suite</item>
+        <item quantity="other">%1$d jours de suite</item>
+    </plurals>
+
+    <!-- About -->
+    <string name="how_it_works">Comment ça marche</string>
+    <string name="sources">Sources</string>
+    <string name="photos_credit">Photos : Wikimedia Commons, sous licences libres. L\'auteur et la licence sont indiqués sous chaque photo.</string>
+    <string name="contact">Contact</string>
+    <string name="privacy">Politique de confidentialité</string>
+    <string name="privacy_url">https://kallistesoft.ca/confidentialite/</string>
+    <string name="how_practice">Correction et explication après chaque question</string>
+    <string name="how_exam">Chronométré, résultat à la fin, comme le vrai</string>
+    <string name="version">Version %1$s</string>
+    <string name="disclaimer">Outil d\'étude indépendant, non affilié à la GRC, au Programme canadien des armes à feu, au gouvernement du Québec ni à la FédéCP, et non approuvé par eux. Les questions sont des questions de pratique originales, rédigées à partir des manuels officiels; ce ne sont pas les questions des examens officiels. Des erreurs sont possibles et les lois changent : vérifiez toujours dans le manuel officiel et la réglementation en vigueur. Aucune garantie de réussite.</string>
+
+    <!-- Exams -->
+    <string name="group_firearms">Permis d\'armes à feu</string>
+    <string name="group_hunting">Éducation à la chasse</string>
+    <string name="group_id">Identification</string>
+    <string name="to_pass">%1$d %% pour réussir</string>
+    <string name="minutes">%1$d min</string>
+    <string name="review_mistakes">Revoir mes erreurs (%1$d)</string>
+    <string name="practice">Pratique</string>
+    <string name="exam_sim">Examen simulé</string>
+    <string name="coming_soon">Bientôt disponible</string>
+    <plurals name="questions_count">
+        <item quantity="one">%1$d question</item>
+        <item quantity="many">%1$d questions</item>
+        <item quantity="other">%1$d questions</item>
+    </plurals>
+    <string name="readiness">Préparation</string>
+    <string name="readiness_value">Préparation %1$d %%</string>
+
+    <!-- Quiz -->
+    <string name="question_progress">Question %1$d/%2$d</string>
+    <string name="next">Suivant</string>
+    <string name="finish">Terminer</string>
+    <string name="how_recognise">Comment le reconnaître</string>
+    <string name="where_lives">Où il vit</string>
+    <string name="dont_confuse">Ne pas confondre : </string>
+    <string name="zoom_photo">Agrandir la photo</string>
+    <string name="photo_by">Photo : %1$s, %2$s</string>
+    <string name="why">Pourquoi?</string>
+    <string name="correct">Bonne réponse!</string>
+    <string name="wrong">Mauvaise réponse</string>
+    <string name="time_left">Temps restant %1$s</string>
+    <string name="no_questions">Aucune question disponible.</string>
+    <string name="no_weak">Aucune question à revoir pour l\'instant.</string>
+    <string name="source">Source :</string>
+    <string name="species_page">Fiche de l\'espèce</string>
+    <string name="current_rule">Règle officielle à jour</string>
+    <string name="report">Signaler un problème</string>
+    <string name="report_subject">Erreur dans une question %1$s</string>
+    <string name="report_body">Décrivez le problème (erreur, règle changée, traduction…) :\n\n\n</string>
+    <string name="report_fallback">Écrivez-nous à %1$s (question %2$s)</string>
+    <string name="quit_title">Quitter le test?</string>
+    <string name="quit_body">Votre progression dans ce test sera perdue.</string>
+    <string name="quit">Quitter</string>
+    <string name="cancel">Annuler</string>
+    <string name="back">Retour</string>
+
+    <!-- Results -->
+    <string name="score">Résultat</string>
+    <string name="passed">Réussi</string>
+    <string name="failed">Échoué</string>
+    <string name="pass_result">%1$s · Note de passage %2$d %%</string>
+    <string name="missed_title">Questions à revoir</string>
+    <string name="all_correct">Aucune erreur, bravo!</string>
+    <string name="answer">Bonne réponse : %1$s</string>
+    <string name="your_answer">Votre réponse : %1$s</string>
+    <string name="again">Recommencer</string>
+    <string name="home">Accueil</string>
+    <string name="time_up">Temps écoulé</string>
+</resources>

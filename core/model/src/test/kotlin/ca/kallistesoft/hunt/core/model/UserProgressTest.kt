@@ -1,0 +1,69 @@
+package ca.kallistesoft.hunt.core.model
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class UserProgressTest {
+    private val today = 20_000L
+
+    @Test
+    fun `a missed question stays weak until answered correctly twice`() {
+        val q = testPool.first()
+        var p = UserProgress().record(q.id, correct = false, today)
+        assertEquals(setOf(q.id), p.weakIds(testPool))
+        p = p.record(q.id, correct = true, today)
+        assertEquals(setOf(q.id), p.weakIds(testPool))
+        p = p.record(q.id, correct = true, today)
+        assertTrue(p.weakIds(testPool).isEmpty())
+    }
+
+    @Test
+    fun `readiness is the share of questions last answered correctly`() {
+        val p = UserProgress()
+            .record(testPool[0].id, correct = true, today)
+            .record(testPool[1].id, correct = false, today)
+        assertEquals(1f / 5, p.readiness(testPool), 1e-6f)
+        assertEquals(0f, p.readiness(emptyList()), 0f)
+    }
+
+    @Test
+    fun `streak counts consecutive days`() {
+        val p = UserProgress()
+            .record("q1", correct = true, today - 1)
+            .record("q1", correct = true, today)
+            .record("q2", correct = true, today) // same day: unchanged
+        assertEquals(2, p.currentStreak(today))
+        assertEquals(2, p.currentStreak(today + 1)) // still alive until a day is missed
+    }
+
+    @Test
+    fun `a missed day resets the streak`() {
+        val p = UserProgress().record("q1", correct = true, today - 3)
+        assertEquals(0, p.currentStreak(today))
+        assertEquals(1, p.record("q1", correct = true, today).currentStreak(today))
+    }
+
+    @Test
+    fun `daily count resets on a new day`() {
+        val p = UserProgress().record("q1", true, today - 1).record("q2", true, today - 1)
+        assertEquals(2, p.answeredToday(today - 1))
+        assertEquals(0, p.answeredToday(today))
+        assertEquals(1, p.record("q3", false, today).answeredToday(today))
+    }
+
+    @Test
+    fun `photo of the day choice only counts for its day`() {
+        val p = UserProgress().withPhotoOfDayChoice(2, today)
+        assertEquals(2, p.photoOfDayChoice(today))
+        assertNull(p.photoOfDayChoice(today + 1))
+    }
+
+    @Test
+    fun `photo of the day is stable for a day and rotates`() {
+        assertEquals(photoOfDay(testPool, today), photoOfDay(testPool, today))
+        assertEquals(testPool[(today % 5).toInt()], photoOfDay(testPool, today))
+        assertNull(photoOfDay(emptyList(), today))
+    }
+}

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_title" translatable="false">BetterHunter</string>
+
+    <!-- Exam picker -->
+    <string name="picker_title">Which exam are you preparing for?</string>
+    <string name="picker_subtitle">Pick one or more. You can change this later.</string>
+    <string name="action_continue">Continue</string>
+    <string name="action_skip">Skip</string>
+
+    <!-- Dashboard -->
+    <string name="hub_exams">Exam training</string>
+    <string name="hub_exams_sub">Firearms licence and hunter exams: practice and mock exams.</string>
+    <string name="hub_id">Can you recognise them?</string>
+    <string name="hub_id_sub">Identification games for Canada\'s game animals.</string>
+    <plurals name="exams_count">
+        <item quantity="one">%1$d exam</item>
+        <item quantity="other">%1$d exams</item>
+    </plurals>
+    <plurals name="games_count">
+        <item quantity="one">%1$d game</item>
+        <item quantity="other">%1$d games</item>
+    </plurals>
+    <plurals name="animals_count">
+        <item quantity="one">%1$d animal</item>
+        <item quantity="other">%1$d animals</item>
+    </plurals>
+    <string name="my_exams">My exams</string>
+    <string name="action_change">Change</string>
+    <string name="other_tests">Other tests</string>
+    <string name="today">Today</string>
+    <string name="goal_progress">%1$d / %2$d questions today</string>
+    <string name="goal_done">Today\'s goal reached!</string>
+    <string name="practise_now">Practise now</string>
+    <string name="photo_of_day">Photo of the day</string>
+    <string name="play_id">Play \"What is it?\"</string>
+    <string name="about">About</string>
+    <string name="footer">Independent tool · unofficial · errors possible.</string>
+    <string name="learn_more">Learn more</string>
+    <string name="language">Language</string>
+    <string name="sample_banner">Sample content, not reviewed. Do not use to study.</string>
+    <plurals name="streak">
+        <item quantity="one">%1$d-day streak</item>
+        <item quantity="other">%1$d-day streak</item>
+    </plurals>
+
+    <!-- About -->
+    <string name="how_it_works">How it works</string>
+    <string name="sources">Sources</string>
+    <string name="photos_credit">Photos: Wikimedia Commons, under free licences. Author and licence are shown under each photo.</string>
+    <string name="contact">Contact</string>
+    <string name="privacy">Privacy policy</string>
+    <string name="privacy_url">https://kallistesoft.ca/en/privacy/</string>
+    <string name="how_practice">Answer and explanation after every question</string>
+    <string name="how_exam">Timed, results at the end, like the real one</string>
+    <string name="version">Version %1$s</string>
+    <string name="disclaimer">Independent study aid, not affiliated with or endorsed by the RCMP, the Canadian Firearms Program, the Government of Québec or FédéCP. Questions are original practice questions based on the official manuals; they are not the official exam questions. Errors are possible and laws change: always check the official manual and current regulations. No guarantee of passing.</string>
+
+    <!-- Exams -->
+    <string name="group_firearms">Firearms licence</string>
+    <string name="group_hunting">Hunter education</string>
+    <string name="group_id">Identification</string>
+    <string name="to_pass">%1$d%% to pass</string>
+    <string name="minutes">%1$d min</string>
+    <string name="review_mistakes">Review my mistakes (%1$d)</string>
+    <string name="practice">Practice</string>
+    <string name="exam_sim">Mock exam</string>
+    <string name="coming_soon">Coming soon</string>
+    <plurals name="questions_count">
+        <item quantity="one">%1$d question</item>
+        <item quantity="other">%1$d questions</item>
+    </plurals>
+    <string name="readiness">Readiness</string>
+    <string name="readiness_value">Readiness %1$d%%</string>
+
+    <!-- Quiz -->
+    <string name="question_progress">Question %1$d/%2$d</string>
+    <string name="next">Next</string>
+    <string name="finish">Finish</string>
+    <string name="how_recognise">How to recognise it</string>
+    <string name="where_lives">Where it lives</string>
+    <string name="dont_confuse">Don\'t confuse it: </string>
+    <string name="zoom_photo">Enlarge photo</string>
+    <string name="photo_by">Photo: %1$s, %2$s</string>
+    <string name="why">Why?</string>
+    <string name="correct">Correct!</string>
+    <string name="wrong">Incorrect</string>
+    <string name="time_left">Time left %1$s</string>
+    <string name="no_questions">No questions available.</string>
+    <string name="no_weak">Nothing to review yet.</string>
+    <string name="source">Source:</string>
+    <string name="species_page">Species fact sheet</string>
+    <string name="current_rule">Current official rule</string>
+    <string name="report">Report a problem</string>
+    <string name="report_subject">Problem with a question %1$s</string>
+    <string name="report_body">Describe the problem (error, rule change, translation…):\n\n\n</string>
+    <string name="report_fallback">Email us at %1$s (question %2$s)</string>
+    <string name="quit_title">Quit this test?</string>
+    <string name="quit_body">Your progress in this test will be lost.</string>
+    <string name="quit">Quit</string>
+    <string name="cancel">Cancel</string>
+    <string name="back">Back</string>
+
+    <!-- Results -->
+    <string name="score">Score</string>
+    <string name="passed">Passed</string>
+    <string name="failed">Not passed</string>
+    <string name="pass_result">%1$s · Pass mark %2$d%%</string>
+    <string name="missed_title">Questions to review</string>
+    <string name="all_correct">No mistakes, well done!</string>
+    <string name="answer">Correct answer: %1$s</string>
+    <string name="your_answer">Your answer: %1$s</string>
+    <string name="again">Try again</string>
+    <string name="home">Home</string>
+    <string name="time_up">Time is up</string>
+</resources>

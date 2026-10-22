@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_required_title">Mise à jour requise</string>
+    <string name="update_required_body">Cette version de BetterHunter n\'est plus prise en charge. Mettez l\'application à jour pour continuer avec des questions et des règlements à jour.</string>
+    <string name="update_now">Mettre à jour</string>
+</resources>

@@ -1,0 +1,78 @@
+package ca.kallistesoft.hunt.feature.home
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import ca.kallistesoft.hunt.core.data.ContentRepository
+import ca.kallistesoft.hunt.core.data.Today
+import ca.kallistesoft.hunt.core.data.UserDataRepository
+import ca.kallistesoft.hunt.core.model.Exam
+import ca.kallistesoft.hunt.core.model.PHOTO_ID_EXAM
+import ca.kallistesoft.hunt.core.model.Question
+import ca.kallistesoft.hunt.core.model.UserProgress
+import ca.kallistesoft.hunt.core.model.photoOfDay
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+data class PhotoOfDayState(val examId: String, val question: Question, val choice: Int?)
+
+data class HomeUiState(
+    val loading: Boolean = true,
+    val hasSampleContent: Boolean = false,
+    val answeredToday: Int = 0,
+    val streak: Int = 0,
+    /** First of "my exams", for "Practise now"; null hides the button. */
+    val mainExam: Exam? = null,
+    val trainingExamCount: Int = 0,
+    /** Average readiness over the user's exams; null when they have none. */
+    val readiness: Float? = null,
+    val gameCount: Int = 0,
+    val animalCount: Int = 0,
+    val photoOfDay: PhotoOfDayState? = null,
+) {
+    val dailyGoal: Int get() = UserProgress.DAILY_GOAL
+}
+
+/** Dashboard built around the exams the user is preparing for. */
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    contentRepository: ContentRepository,
+    private val userData: UserDataRepository,
+    private val today: Today,
+) : ViewModel() {
+    val uiState: StateFlow<HomeUiState> = combine(contentRepository.content, userData.progress) { content, progress ->
+        val day = today()
+        val chosen = progress.myExams.orEmpty()
+        val mine = content.trainingExams.filter { it.id in chosen }
+        val photoExam = content.games.firstOrNull { it.id == PHOTO_ID_EXAM }
+        val photos = photoExam?.let(content::questionsFor).orEmpty()
+        HomeUiState(
+            loading = false,
+            hasSampleContent = content.hasSampleContent,
+            answeredToday = progress.answeredToday(day),
+            streak = progress.currentStreak(day),
+            mainExam = mine.firstOrNull(),
+            trainingExamCount = content.trainingExams.size,
+            readiness = mine.takeIf { it.isNotEmpty() }
+                ?.map { progress.readiness(content.questionsFor(it)) }?.average()?.toFloat(),
+            gameCount = content.games.size,
+            animalCount = photos.size,
+            photoOfDay = photoExam?.let { exam ->
+                photoOfDay(photos, day)?.let { PhotoOfDayState(exam.id, it, progress.photoOfDayChoice(day)) }
+            },
+        )
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), HomeUiState())
+
+    /** Answers the photo of the day; it counts toward the goal, the streak and weak spots. */
+    fun answerPhotoOfDay(choice: Int) {
+        val photo = uiState.value.photoOfDay ?: return
+        if (photo.choice != null) return
+        viewModelScope.launch {
+            userData.answerPhotoOfDay(photo.question.id, choice, choice == photo.question.answerIndex)
+        }
+    }
+}
