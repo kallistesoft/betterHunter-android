@@ -32,6 +32,7 @@ Console setup still to do (Firebase, AdMob, Play): see [FOLLOW-UP.md](FOLLOW-UP.
 ```
 app/                 Activity, Navigation 3 graph, Hilt app, build types and signing
 core/model           Pure Kotlin: exams, questions, quiz session, progress rules, sources (JVM unit tests)
+core/testing         Test doubles (fake repositories and flags, sample content), main dispatcher rule, Turbine helpers
 core/data            Bundled content (assets/), progress repository (DataStore)
 core/designsystem    Theme (from the icon's green), shared components
 core/flags           Feature flags: Firebase Remote Config, with in-app defaults
@@ -143,4 +144,5 @@ prefix.
 
 - AdMob: declared in Play Console, not integrated yet. The account and ad unit setup is in [FOLLOW-UP.md](FOLLOW-UP.md).
 - Baseline profile (`profileinstaller` is in place; add a `:baselineprofile` module with a device in CI).
-- Instrumented UI tests (the Compose test dependencies are set up; current tests are JVM unit tests).
+- Instrumented UI tests (the Compose test dependencies are set up; current tests are JVM unit tests: model rules,
+  bundled content, force update, and every ViewModel's state stream with Turbine).

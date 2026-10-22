@@ -1,0 +1,52 @@
+package ca.kallistesoft.hunt.core.testing
+
+import ca.kallistesoft.hunt.core.data.ContentRepository
+import ca.kallistesoft.hunt.core.data.UserDataRepository
+import ca.kallistesoft.hunt.core.flags.FeatureFlag
+import ca.kallistesoft.hunt.core.flags.FeatureFlags
+import ca.kallistesoft.hunt.core.model.Content
+import ca.kallistesoft.hunt.core.model.UserProgress
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.update
+
+/** Day number used by the fakes and tests. */
+const val TEST_DAY = 20_000L
+
+class FakeContentRepository(content: Content = TestContent.content) : ContentRepository {
+    override val content: Flow<Content> = flowOf(content)
+}
+
+/** Applies the real progress rules on [TEST_DAY], and remembers every recorded answer. */
+class FakeUserDataRepository(initial: UserProgress = UserProgress()) : UserDataRepository {
+    override val progress = MutableStateFlow(initial)
+    val recorded = mutableListOf<Pair<String, Boolean>>()
+
+    override suspend fun record(questionId: String, correct: Boolean) {
+        recorded += questionId to correct
+        progress.update { it.record(questionId, correct, TEST_DAY) }
+    }
+
+    override suspend fun recordAll(results: List<Pair<String, Boolean>>) {
+        results.forEach { (id, correct) -> record(id, correct) }
+    }
+
+    override suspend fun setMyExams(ids: List<String>) {
+        progress.update { it.copy(myExams = ids) }
+    }
+
+    override suspend fun answerPhotoOfDay(questionId: String, choice: Int, correct: Boolean) {
+        recorded += questionId to correct
+        progress.update { it.withPhotoOfDayChoice(choice, TEST_DAY).record(questionId, correct, TEST_DAY) }
+    }
+}
+
+/** Flags that can be flipped during a test. */
+class FakeFeatureFlags(vararg off: FeatureFlag) : FeatureFlags {
+    override val values = MutableStateFlow(FeatureFlag.entries.associateWith { it !in off && it.defaultValue })
+
+    fun set(flag: FeatureFlag, enabled: Boolean) = values.update { it + (flag to enabled) }
+
+    override suspend fun refresh() = Unit
+}

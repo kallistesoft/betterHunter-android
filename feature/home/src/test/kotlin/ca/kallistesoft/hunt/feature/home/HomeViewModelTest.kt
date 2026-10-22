@@ -1,84 +1,74 @@
 package ca.kallistesoft.hunt.feature.home
 
-import ca.kallistesoft.hunt.core.data.ContentRepository
+import app.cash.turbine.test
 import ca.kallistesoft.hunt.core.data.Today
-import ca.kallistesoft.hunt.core.data.UserDataRepository
-import ca.kallistesoft.hunt.core.flags.DefaultFeatureFlags
 import ca.kallistesoft.hunt.core.flags.FeatureFlag
-import ca.kallistesoft.hunt.core.model.Content
-import ca.kallistesoft.hunt.core.model.Exam
-import ca.kallistesoft.hunt.core.model.Lang
-import ca.kallistesoft.hunt.core.model.PHOTO_ID_EXAM
-import ca.kallistesoft.hunt.core.model.Question
-import ca.kallistesoft.hunt.core.model.QuestionText
 import ca.kallistesoft.hunt.core.model.UserProgress
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.resetMain
+import ca.kallistesoft.hunt.core.testing.FakeContentRepository
+import ca.kallistesoft.hunt.core.testing.FakeFeatureFlags
+import ca.kallistesoft.hunt.core.testing.FakeUserDataRepository
+import ca.kallistesoft.hunt.core.testing.MainDispatcherRule
+import ca.kallistesoft.hunt.core.testing.TEST_DAY
+import ca.kallistesoft.hunt.core.testing.TestContent
+import ca.kallistesoft.hunt.core.testing.awaitItemMatching
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
-import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class HomeViewModelTest {
-    private val pal = Exam("PAL", mapOf(Lang.FR to "PAL"), listOf("federal"))
-    private val photoGame = Exam(PHOTO_ID_EXAM, mapOf(Lang.FR to "ID"), listOf("wildlife-id"))
-    private fun question(id: String, scope: String) =
-        Question(id, scope, "c", mapOf(Lang.FR to QuestionText("?", listOf("A", "B", "C", "D"), "E")), answerIndex = 0)
+    @get:Rule
+    val mainDispatcherRule = MainDispatcherRule()
 
-    private val content = object : ContentRepository {
-        override val content = flowOf(
-            Content(
-                listOf(pal, photoGame),
-                mapOf("federal" to listOf(question("q1", "federal")), "wildlife-id" to listOf(question("id1", "wildlife-id"))),
-            ),
-        )
-    }
-    private val userData = object : UserDataRepository {
-        override val progress = MutableStateFlow(UserProgress(myExams = listOf("PAL")))
-        override suspend fun record(questionId: String, correct: Boolean) = Unit
-        override suspend fun recordAll(results: List<Pair<String, Boolean>>) = Unit
-        override suspend fun setMyExams(ids: List<String>) = Unit
-        override suspend fun answerPhotoOfDay(questionId: String, choice: Int, correct: Boolean) = Unit
-    }
+    private val userData = FakeUserDataRepository(UserProgress(myExams = listOf("PAL")))
+    private val flags = FakeFeatureFlags()
+    private val viewModel by lazy { HomeViewModel(FakeContentRepository(), userData, Today { TEST_DAY }, flags) }
 
-    @Before
-    fun setUp() = Dispatchers.setMain(UnconfinedTestDispatcher())
-
-    @After
-    fun tearDown() = Dispatchers.resetMain()
-
-    private suspend fun state(vararg off: FeatureFlag): HomeUiState {
-        val flags = DefaultFeatureFlags(off.associateWith { false })
-        val vm = HomeViewModel(content, userData, Today { 20_000L }, flags)
-        return vm.uiState.first { !it.loading }
+    @Test
+    fun `the dashboard is built around the user's exams`() = runTest {
+        viewModel.uiState.test {
+            val state = awaitItemMatching { !it.loading }
+            assertEquals(TestContent.pal, state.mainExam)
+            assertEquals(2, state.trainingExamCount)
+            assertEquals(0f, state.readiness)
+            assertEquals(1, state.gameCount)
+            assertEquals(3, state.animalCount)
+            assertNull(assertNotNull(state.photoOfDay).choice)
+            assertEquals(0, state.answeredToday)
+        }
     }
 
     @Test
-    fun `everything shows by default`() = runTest {
-        val state = state()
-        assertEquals(pal, state.mainExam)
-        assertEquals(1, state.gameCount)
-        assertNotNull(state.photoOfDay)
+    fun `answering the photo of the day counts toward the goal and the streak`() = runTest {
+        viewModel.uiState.test {
+            val photo = awaitItemMatching { !it.loading }.photoOfDay!!
+            viewModel.answerPhotoOfDay(photo.question.answerIndex)
+
+            val after = awaitItem()
+            assertEquals(photo.question.answerIndex, after.photoOfDay?.choice)
+            assertEquals(1, after.answeredToday)
+            assertEquals(1, after.streak)
+
+            viewModel.answerPhotoOfDay(0) // already answered today: ignored
+            expectNoEvents()
+        }
     }
 
     @Test
-    fun `flags hide the recognition hub and the photo of the day`() = runTest {
-        val noGames = state(FeatureFlag.RECOGNITION_GAMES)
-        assertEquals(0, noGames.gameCount)
-        assertNotNull(noGames.photoOfDay)
+    fun `feature flags hide the recognition games and the photo of the day live`() = runTest {
+        viewModel.uiState.test {
+            assertEquals(1, awaitItemMatching { !it.loading }.gameCount)
 
-        val noPhoto = state(FeatureFlag.PHOTO_OF_THE_DAY)
-        assertEquals(1, noPhoto.gameCount)
-        assertNull(noPhoto.photoOfDay)
+            flags.set(FeatureFlag.RECOGNITION_GAMES, false)
+            val noGames = awaitItem()
+            assertEquals(0, noGames.gameCount)
+            assertNotNull(noGames.photoOfDay)
+
+            flags.set(FeatureFlag.PHOTO_OF_THE_DAY, false)
+            assertNull(awaitItem().photoOfDay)
+        }
     }
+
+    private fun <T> assertNotNull(value: T?): T = value.also { org.junit.Assert.assertNotNull(it) }!!
 }
