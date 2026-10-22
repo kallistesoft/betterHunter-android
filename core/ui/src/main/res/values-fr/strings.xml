@@ -82,7 +82,7 @@
     <string name="finish">Terminer</string>
     <string name="how_recognise">Comment le reconnaître</string>
     <string name="where_lives">Où il vit</string>
-    <string name="dont_confuse">Ne pas confondre : </string>
+    <string name="dont_confuse">Ne pas confondre :</string>
     <string name="zoom_photo">Agrandir la photo</string>
     <string name="photo_by">Photo : %1$s, %2$s</string>
     <string name="why">Pourquoi?</string>

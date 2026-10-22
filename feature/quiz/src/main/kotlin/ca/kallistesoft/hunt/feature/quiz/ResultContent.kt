@@ -4,9 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -30,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
+import ca.kallistesoft.hunt.core.designsystem.component.BottomActionBar
 import ca.kallistesoft.hunt.core.designsystem.component.ProgressRing
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
@@ -59,10 +58,7 @@ internal fun ResultContent(state: QuizUiState.Finished, onHome: () -> Unit, onAg
     Scaffold(
         topBar = { BackTopAppBar(stringResource(R.string.score), onBack = null) },
         bottomBar = {
-            Row(
-                Modifier.navigationBarsPadding().padding(Spacing.l).fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Spacing.m),
-            ) {
+            BottomActionBar {
                 OutlinedButton(onClick = onHome, modifier = Modifier.weight(1f)) { Text(stringResource(R.string.home)) }
                 Button(onClick = onAgain, modifier = Modifier.weight(1f).testTag("again")) {
                     Text(stringResource(R.string.again))

@@ -1,10 +1,6 @@
 package ca.kallistesoft.hunt.feature.exams
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -29,6 +25,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.BadgeSize
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
+import ca.kallistesoft.hunt.core.designsystem.component.BottomActionBar
 import ca.kallistesoft.hunt.core.designsystem.component.SectionTitle
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
@@ -74,10 +71,7 @@ internal fun ExamPickerContent(
     Scaffold(
         topBar = { BackTopAppBar("", onBack.takeUnless { firstRun }) },
         bottomBar = {
-            Row(
-                Modifier.navigationBarsPadding().padding(Spacing.l).fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Spacing.s),
-            ) {
+            BottomActionBar {
                 if (firstRun) {
                     TextButton(onClick = onSkip, Modifier.testTag("picker-skip")) {
                         Text(stringResource(R.string.action_skip))

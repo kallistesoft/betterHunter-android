@@ -2,6 +2,7 @@ package ca.kallistesoft.hunt.core.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -13,6 +14,7 @@ import androidx.compose.material.icons.outlined.School
 import androidx.compose.material.icons.outlined.Timer
 import androidx.compose.material.icons.rounded.Replay
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
@@ -90,16 +92,26 @@ fun ExamCard(
                 if (summary.available) ReadinessRing(summary.readiness)
             }
             if (summary.available) {
+                // Half-width buttons: tighter padding so labels fit in French ("Examen simulé").
+                val compactPadding = PaddingValues(horizontal = Spacing.m, vertical = ButtonDefaults.ContentPadding.calculateTopPadding())
                 Spacer(Modifier.height(Spacing.l))
                 Row(horizontalArrangement = Arrangement.spacedBy(Spacing.s)) {
-                    Button(onClick = onPractice, modifier = Modifier.weight(1f).testTag("practice-${exam.id}")) {
+                    Button(
+                        onClick = onPractice,
+                        modifier = Modifier.weight(1f).testTag("practice-${exam.id}"),
+                        contentPadding = compactPadding,
+                    ) {
                         Icon(Icons.Outlined.School, contentDescription = null, Modifier.size(Sizes.iconM))
-                        Spacer(Modifier.width(Spacing.s))
+                        Spacer(Modifier.width(Spacing.xs))
                         Text(stringResource(R.string.practice), maxLines = 1, overflow = TextOverflow.Ellipsis)
                     }
-                    OutlinedButton(onClick = onExam, modifier = Modifier.weight(1f).testTag("exam-${exam.id}")) {
+                    OutlinedButton(
+                        onClick = onExam,
+                        modifier = Modifier.weight(1f).testTag("exam-${exam.id}"),
+                        contentPadding = compactPadding,
+                    ) {
                         Icon(Icons.Outlined.Timer, contentDescription = null, Modifier.size(Sizes.iconM))
-                        Spacer(Modifier.width(Spacing.s))
+                        Spacer(Modifier.width(Spacing.xs))
                         Text(stringResource(R.string.exam_sim), maxLines = 1, overflow = TextOverflow.Ellipsis)
                     }
                 }

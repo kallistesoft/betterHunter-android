@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -56,6 +55,7 @@ import ca.kallistesoft.hunt.core.designsystem.component.AnswerChoice
 import ca.kallistesoft.hunt.core.designsystem.component.AnswerResult
 import ca.kallistesoft.hunt.core.designsystem.component.AnswerState
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
+import ca.kallistesoft.hunt.core.designsystem.component.BottomActionBar
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
@@ -175,12 +175,14 @@ internal fun QuestionContent(
             }
         },
         bottomBar = {
-            Button(
-                onClick = onNext,
-                enabled = chosen != null,
-                modifier = Modifier.navigationBarsPadding().padding(Spacing.l).fillMaxWidth().testTag("next"),
-            ) {
-                Text(stringResource(if (s.isLast) R.string.finish else R.string.next))
+            BottomActionBar {
+                Button(
+                    onClick = onNext,
+                    enabled = chosen != null,
+                    modifier = Modifier.weight(1f).testTag("next"),
+                ) {
+                    Text(stringResource(if (s.isLast) R.string.finish else R.string.next))
+                }
             }
         },
         snackbarHost = { SnackbarHost(snackbar) },
@@ -284,6 +286,7 @@ private fun Feedback(q: Question, chosen: Int?, modifier: Modifier = Modifier) {
                     Text(
                         buildAnnotatedString {
                             withStyle(SpanStyle(fontWeight = FontWeight.SemiBold)) { append(label) }
+                            append(" ")
                             append(confuse)
                         },
                     )
