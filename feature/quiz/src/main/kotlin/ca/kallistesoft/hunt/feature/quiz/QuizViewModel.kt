@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ca.kallistesoft.hunt.core.data.ContentRepository
 import ca.kallistesoft.hunt.core.data.UserDataRepository
+import ca.kallistesoft.hunt.core.flags.FeatureFlag
+import ca.kallistesoft.hunt.core.flags.FeatureFlags
 import ca.kallistesoft.hunt.core.model.Content
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.model.QuizSession
@@ -15,9 +17,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -44,6 +48,7 @@ class QuizViewModel @AssistedInject constructor(
     private val contentRepository: ContentRepository,
     private val userData: UserDataRepository,
     private val savedState: SavedStateHandle,
+    featureFlags: FeatureFlags,
 ) : ViewModel() {
     @AssistedFactory
     interface Factory {
@@ -52,6 +57,10 @@ class QuizViewModel @AssistedInject constructor(
 
     private val _uiState = MutableStateFlow<QuizUiState>(QuizUiState.Loading)
     val uiState: StateFlow<QuizUiState> = _uiState.asStateFlow()
+
+    /** "Report a problem" on each question, behind a feature flag. */
+    val canReport: StateFlow<Boolean> = featureFlags.isEnabled(FeatureFlag.REPORT_QUESTION)
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), FeatureFlag.REPORT_QUESTION.defaultValue)
 
     private var timer: Job? = null
 
@@ -147,7 +156,7 @@ class QuizViewModel @AssistedInject constructor(
             is QuizUiState.Finished -> state.session
             else -> null
         }
-        savedState[KEY_IDS] = session?.questions?.map { it.id }?.let(::ArrayList)
+        savedState[KEY_IDS] = session?.questions?.map { it.id }?.let { ArrayList(it) }
         savedState[KEY_ANSWERS] = session?.let { s -> IntArray(s.questions.size) { s.answers[it] ?: -1 } }
         savedState[KEY_CURRENT] = session?.current
         savedState[KEY_SECONDS] = (state as? QuizUiState.Running)?.secondsLeft

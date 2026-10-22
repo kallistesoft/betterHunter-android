@@ -1,14 +1,13 @@
 package ca.kallistesoft.hunt.feature.about
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material.icons.automirrored.rounded.OpenInNew
 import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material.icons.outlined.PrivacyTip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -28,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
+import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.model.manuals
 import ca.kallistesoft.hunt.core.ui.BackTopAppBar
 import ca.kallistesoft.hunt.core.ui.CONTACT_EMAIL
@@ -42,7 +42,7 @@ fun AboutScreen(versionName: String, onBack: () -> Unit) {
     val lang = currentLang()
     val privacyUrl = stringResource(R.string.privacy_url)
     Scaffold(topBar = { BackTopAppBar(stringResource(R.string.about), onBack) }) { padding ->
-        LazyColumn(contentPadding = PaddingValues(16.dp, 0.dp, 16.dp, 32.dp), modifier = Modifier.padding(padding)) {
+        LazyColumn(contentPadding = padding.plus(bottom = 32.dp)) {
             item {
                 BhCard(containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.5f), border = null) {
                     Text(stringResource(R.string.disclaimer), Modifier.padding(16.dp).testTag("disclaimer"))

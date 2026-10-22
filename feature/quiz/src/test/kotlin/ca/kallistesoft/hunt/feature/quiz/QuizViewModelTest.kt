@@ -3,6 +3,7 @@ package ca.kallistesoft.hunt.feature.quiz
 import androidx.lifecycle.SavedStateHandle
 import ca.kallistesoft.hunt.core.data.ContentRepository
 import ca.kallistesoft.hunt.core.data.UserDataRepository
+import ca.kallistesoft.hunt.core.flags.DefaultFeatureFlags
 import ca.kallistesoft.hunt.core.model.Content
 import ca.kallistesoft.hunt.core.model.Exam
 import ca.kallistesoft.hunt.core.model.Lang
@@ -53,7 +54,7 @@ class QuizViewModelTest {
     fun tearDown() = Dispatchers.resetMain()
 
     private fun TestScope.viewModel(mode: QuizMode, saved: SavedStateHandle = SavedStateHandle()) =
-        QuizViewModel(exam.id, mode, content, userData, saved).also { advanceUntilIdle() }
+        QuizViewModel(exam.id, mode, content, userData, saved, DefaultFeatureFlags()).also { advanceUntilIdle() }
 
     private val QuizViewModel.running get() = uiState.value as QuizUiState.Running
 

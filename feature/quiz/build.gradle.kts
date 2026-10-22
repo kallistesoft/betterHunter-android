@@ -7,5 +7,6 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:flags"))
     implementation(libs.androidx.activity.compose)
 }

@@ -27,6 +27,21 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
+      # For keeping gradle/libs.versions.toml current (Google Maven can't be reached from every dev environment).
+      - name: Latest Google Maven versions
+        continue-on-error: true
+        run: |
+          for a in com/android/tools/build/gradle androidx/compose/compose-bom com/google/firebase/firebase-bom com/google/gms/google-services; do
+            echo "$a: $(curl -s https://dl.google.com/dl/android/maven2/$a/maven-metadata.xml | grep -o '<release>[^<]*' | cut -d'>' -f2)"
+          done
+
+      # Firebase is optional: without this secret the app builds with default feature flags.
+      - name: Firebase config
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          if [ -n "$GOOGLE_SERVICES_JSON" ]; then echo "$GOOGLE_SERVICES_JSON" > app/google-services.json; fi
+
       - name: Unit tests
         run: ./gradlew testDebugUnitTest :core:model:test --stacktrace
 

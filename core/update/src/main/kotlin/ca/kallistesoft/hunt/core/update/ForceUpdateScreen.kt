@@ -13,14 +13,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.SystemUpdate
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -61,9 +60,9 @@ fun ForceUpdateScreen(storePackage: String, modifier: Modifier = Modifier) {
         scope.launch { manager.resumeImmediateUpdate(launcher) }
     }
 
-    Surface(modifier.fillMaxSize().testTag("force-update")) {
+    Scaffold(modifier.testTag("force-update")) { padding ->
         Column(
-            Modifier.safeDrawingPadding().padding(32.dp),
+            Modifier.fillMaxSize().padding(padding).padding(32.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {

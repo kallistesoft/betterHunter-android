@@ -130,10 +130,10 @@ fun QuestionPhoto(question: Question, modifier: Modifier = Modifier, maxHeightFr
     if (zoomed) FullPhoto(image, description, onDismiss = { zoomed = false })
 }
 
-/** Full-screen photo with pinch-to-zoom; closing resets the zoom. */
+/** Full-screen photo with pinch-to-zoom, drawn edge to edge; closing resets the zoom. */
 @Composable
 private fun FullPhoto(image: String, description: String, onDismiss: () -> Unit) {
-    Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
+    Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false)) {
         var scale by remember { mutableFloatStateOf(1f) }
         var offset by remember { mutableStateOf(Offset.Zero) }
         val state = rememberTransformableState { zoom, pan, _ ->

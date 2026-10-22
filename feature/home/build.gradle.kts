@@ -5,3 +5,7 @@ plugins {
 android {
     namespace = "ca.kallistesoft.hunt.feature.home"
 }
+
+dependencies {
+    implementation(project(":core:flags"))
+}

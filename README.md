@@ -22,7 +22,7 @@ Flutter proof of concept and the question pipeline); this app ships a copy of th
 | DI | Hilt 2.60.1 with KSP 2.3.12 |
 | Storage | DataStore (progress as JSON; cached update rules as preferences) |
 | Images | Coil 3 (bundled photos from assets) |
-| Other | Per-app language (AppCompat), Custom Tabs, Play In-App Updates |
+| Other | Firebase Remote Config (feature flags), per-app language (AppCompat), Custom Tabs, Play In-App Updates |
 | SDK | compileSdk / targetSdk 37, minSdk 26 |
 
 ## Modules
@@ -32,6 +32,7 @@ app/                 Activity, Navigation 3 graph, Hilt app, build types and sig
 core/model           Pure Kotlin: exams, questions, quiz session, progress rules, sources (JVM unit tests)
 core/data            Bundled content (assets/), progress repository (DataStore)
 core/designsystem    Theme (from the icon's green), shared components
+core/flags           Feature flags: Firebase Remote Config, with in-app defaults
 core/ui              Shared composables (exam card, question photo, source links) and all UI strings (EN/FR)
 core/update          Force update: remote rules, cache, update screen with Play In-App Updates
 feature/home         Dashboard: daily goal, streak, hubs, photo of the day
@@ -44,7 +45,7 @@ feature/about        Disclaimer, how it works, sources, contact, privacy
 
 | | `debug` | `release` |
 |---|---|---|
-| Application ID | `ca.kallistesoft.hunt.debug` (installs next to the Play app) | `ca.kallistesoft.hunt` |
+| Application ID | `ca.kallistesoft.betterhunter.debug` (installs next to the Play app) | `ca.kallistesoft.betterhunter` |
 | Name | BetterHunter Dev | BetterHunter |
 | Version name | `1.0.0-debug` | `1.0.0` |
 | Code shrinking | no | R8 minify + resource shrinking |
@@ -96,6 +97,36 @@ Host the files on the web app's site (`hunt.kallistesoft.ca`), e.g. in the hunt 
 and `app/web/android/update-debug.json`; they are deployed with the site. To force everyone onto a new release:
 publish it on Play, wait until it is available, then raise `minVersionCode` to its `versionCode`. Use the debug file to
 try the flow on a debug build without affecting users.
+
+## Feature flags (Firebase Remote Config)
+
+Flags are Boolean Remote Config parameters, declared in `core/flags/.../FeatureFlag.kt` with their in-app default:
+
+| Parameter | Default | Controls |
+|---|---|---|
+| `photo_of_the_day` | `true` | The photo of the day on the dashboard |
+| `recognition_games` | `true` | The "Can you recognise them?" hub |
+| `report_question` | `true` | "Report a problem" on each question |
+
+ViewModels read them as a `Flow` (`FeatureFlags.isEnabled(flag)` or `values`), so screens update as soon as new values
+are activated: at launch and on each return to the foreground (`fetchAndActivate`, at most hourly in release, every time
+in debug), and live through Remote Config's real-time updates while the app is open. A flag keeps its default until
+the console gives it a value, and when Firebase is offline or not configured.
+
+To add a flag: add an entry to `FeatureFlag`, create the parameter in the Firebase console (Remote Config), and read it in
+the ViewModel that needs it.
+
+### Setup
+
+1. In the [Firebase console](https://console.firebase.google.com/), create a project and add two Android apps:
+   `ca.kallistesoft.betterhunter` and `ca.kallistesoft.betterhunter.debug`.
+2. Download `google-services.json` (it lists both apps) to `app/`. For CI, store its content in the secret
+   `GOOGLE_SERVICES_JSON`.
+3. Create the parameters above in Remote Config and publish.
+
+Without `google-services.json` the Google Services plugin isn't applied and the app runs with the defaults, so pull
+requests and forks still build. Remote Config uses a Firebase installation ID (already covered by "Device or other IDs"
+in the Play Console data safety form); no analytics are collected.
 
 ## Content
 

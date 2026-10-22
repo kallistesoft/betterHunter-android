@@ -1,8 +1,7 @@
 package ca.kallistesoft.hunt.feature.exams
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -36,6 +35,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.SectionTitle
+import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.ui.BackTopAppBar
 import ca.kallistesoft.hunt.core.ui.ExamAvatar
@@ -66,7 +66,7 @@ internal fun ExamTrainingContent(
 ) {
     var sheetExamId by rememberSaveable { mutableStateOf<String?>(null) }
     Scaffold(topBar = { BackTopAppBar(stringResource(R.string.hub_exams), onBack) }) { padding ->
-        LazyColumn(contentPadding = PaddingValues(16.dp, 0.dp, 16.dp, 24.dp), modifier = Modifier.padding(padding)) {
+        LazyColumn(contentPadding = padding.plus()) {
             item {
                 SectionTitle(stringResource(R.string.my_exams)) {
                     TextButton(onClick = onChangeExams, modifier = Modifier.testTag("change-exams")) {

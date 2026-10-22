@@ -2,7 +2,6 @@ package ca.kallistesoft.hunt.feature.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -51,6 +50,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.ProgressRing
+import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.model.Lang
 import ca.kallistesoft.hunt.core.model.QuizMode
@@ -106,9 +106,8 @@ internal fun HomeContent(
     ) { padding ->
         if (state.loading) return@Scaffold
         LazyColumn(
-            contentPadding = PaddingValues(16.dp, 4.dp, 16.dp, 24.dp),
+            contentPadding = padding.plus(top = 4.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.padding(padding),
         ) {
             if (state.hasSampleContent) item { SampleBanner() }
             item { TodayCard(state, onPractise = { exam -> onStartQuiz(exam, QuizMode.PRACTICE) }) }

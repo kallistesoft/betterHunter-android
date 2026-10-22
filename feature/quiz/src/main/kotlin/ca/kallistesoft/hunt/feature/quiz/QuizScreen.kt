@@ -5,7 +5,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,6 +24,7 @@ import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.WarningAmber
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -59,6 +59,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
+import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.model.Question
 import ca.kallistesoft.hunt.core.model.QuizMode
@@ -83,10 +84,25 @@ fun QuizScreen(
     ),
 ) {
     when (val state = viewModel.uiState.collectAsStateWithLifecycle().value) {
-        QuizUiState.Loading -> Box(Modifier.fillMaxSize())
+        QuizUiState.Loading -> LoadingQuiz(onClose)
         is QuizUiState.Empty -> EmptyQuiz(state.mode, onClose)
-        is QuizUiState.Running -> QuestionContent(state, viewModel::choose, viewModel::next, onClose)
+        is QuizUiState.Running -> QuestionContent(
+            state,
+            canReport = viewModel.canReport.collectAsStateWithLifecycle().value,
+            onChoose = viewModel::choose,
+            onNext = viewModel::next,
+            onClose = onClose,
+        )
         is QuizUiState.Finished -> ResultContent(state, onHome = onClose, onAgain = viewModel::restart)
+    }
+}
+
+@Composable
+private fun LoadingQuiz(onClose: () -> Unit) {
+    Scaffold(topBar = { BackTopAppBar("", onClose) }) { padding ->
+        Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
+        }
     }
 }
 
@@ -106,6 +122,7 @@ private fun EmptyQuiz(mode: QuizMode, onClose: () -> Unit) {
 @Composable
 private fun QuestionContent(
     state: QuizUiState.Running,
+    canReport: Boolean,
     onChoose: (Int) -> Unit,
     onNext: () -> Unit,
     onClose: () -> Unit,
@@ -139,7 +156,7 @@ private fun QuestionContent(
                     title = stringResource(R.string.question_progress, s.current + 1, s.questions.size),
                     onBack = { confirmQuit = true },
                     actions = {
-                        IconButton(
+                        if (canReport) IconButton(
                             onClick = {
                                 if (!links.email(CONTACT_EMAIL, reportSubject, reportBody)) {
                                     scope.launch { snackbar.showSnackbar(reportFallback) }
@@ -169,7 +186,7 @@ private fun QuestionContent(
         },
         snackbarHost = { SnackbarHost(snackbar) },
     ) { padding ->
-        LazyColumn(state = listState, contentPadding = PaddingValues(16.dp), modifier = Modifier.padding(padding)) {
+        LazyColumn(state = listState, contentPadding = padding.plus(top = 16.dp, bottom = 16.dp)) {
             if (q.image != null) {
                 item { QuestionPhoto(q) }
                 // Photo questions: the animal's card goes right under the photo, where the eye already is.

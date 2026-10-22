@@ -2,7 +2,6 @@ package ca.kallistesoft.hunt.feature.exams
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -38,6 +37,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.SectionTitle
+import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.model.ExamGroup
 import ca.kallistesoft.hunt.core.ui.BackTopAppBar
 import ca.kallistesoft.hunt.core.ui.R
@@ -80,7 +80,7 @@ fun ExamPickerScreen(
             }
         },
     ) { padding ->
-        LazyColumn(contentPadding = PaddingValues(16.dp, 0.dp, 16.dp, 24.dp), modifier = Modifier.padding(padding)) {
+        LazyColumn(contentPadding = padding.plus()) {
             item {
                 Text(
                     stringResource(R.string.picker_title),

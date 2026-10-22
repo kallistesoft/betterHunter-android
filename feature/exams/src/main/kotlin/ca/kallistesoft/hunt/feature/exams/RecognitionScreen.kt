@@ -1,6 +1,5 @@
 package ca.kallistesoft.hunt.feature.exams
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -14,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.ui.BackTopAppBar
 import ca.kallistesoft.hunt.core.ui.ExamCard
@@ -28,7 +28,7 @@ fun RecognitionScreen(
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     Scaffold(topBar = { BackTopAppBar(stringResource(R.string.hub_id), onBack) }) { padding ->
-        LazyColumn(contentPadding = PaddingValues(16.dp, 8.dp, 16.dp, 24.dp), modifier = Modifier.padding(padding)) {
+        LazyColumn(contentPadding = padding.plus(top = 8.dp)) {
             item {
                 Text(
                     stringResource(R.string.hub_id_sub),

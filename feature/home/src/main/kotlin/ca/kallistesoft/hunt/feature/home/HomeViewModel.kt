@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import ca.kallistesoft.hunt.core.data.ContentRepository
 import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.data.UserDataRepository
+import ca.kallistesoft.hunt.core.flags.FeatureFlag
+import ca.kallistesoft.hunt.core.flags.FeatureFlags
 import ca.kallistesoft.hunt.core.model.Exam
 import ca.kallistesoft.hunt.core.model.PHOTO_ID_EXAM
 import ca.kallistesoft.hunt.core.model.Question
@@ -43,11 +45,17 @@ class HomeViewModel @Inject constructor(
     contentRepository: ContentRepository,
     private val userData: UserDataRepository,
     private val today: Today,
+    featureFlags: FeatureFlags,
 ) : ViewModel() {
-    val uiState: StateFlow<HomeUiState> = combine(contentRepository.content, userData.progress) { content, progress ->
+    val uiState: StateFlow<HomeUiState> = combine(
+        contentRepository.content,
+        userData.progress,
+        featureFlags.values,
+    ) { content, progress, flags ->
         val day = today()
         val chosen = progress.myExams.orEmpty()
         val mine = content.trainingExams.filter { it.id in chosen }
+        val games = if (flags.getValue(FeatureFlag.RECOGNITION_GAMES)) content.games else emptyList()
         val photoExam = content.games.firstOrNull { it.id == PHOTO_ID_EXAM }
         val photos = photoExam?.let(content::questionsFor).orEmpty()
         HomeUiState(
@@ -59,9 +67,9 @@ class HomeViewModel @Inject constructor(
             trainingExamCount = content.trainingExams.size,
             readiness = mine.takeIf { it.isNotEmpty() }
                 ?.map { progress.readiness(content.questionsFor(it)) }?.average()?.toFloat(),
-            gameCount = content.games.size,
-            animalCount = photos.size,
-            photoOfDay = photoExam?.let { exam ->
+            gameCount = games.size,
+            animalCount = if (games.isEmpty()) 0 else photos.size,
+            photoOfDay = photoExam?.takeIf { flags.getValue(FeatureFlag.PHOTO_OF_THE_DAY) }?.let { exam ->
                 photoOfDay(photos, day)?.let { PhotoOfDayState(exam.id, it, progress.photoOfDayChoice(day)) }
             },
         )

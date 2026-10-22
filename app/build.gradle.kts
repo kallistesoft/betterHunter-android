@@ -7,6 +7,12 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
+// Firebase (feature flags) is set up only when the project's config file is present, so the app also builds without
+// it (pull requests, forks): flags then keep their defaults. A file under src/debug or src/release wins for that build.
+if (listOf("", "src/debug/", "src/release/").any { file("${it}google-services.json").exists() }) {
+    apply(plugin = libs.plugins.google.services.get().pluginId)
+}
+
 // Release signing comes from keystore.properties (local, never committed) or environment variables (CI).
 val keystoreProperties = Properties().apply {
     rootProject.file("keystore.properties").takeIf { it.exists() }?.inputStream()?.use(::load)
@@ -18,7 +24,7 @@ android {
     namespace = "ca.kallistesoft.hunt"
 
     defaultConfig {
-        applicationId = "ca.kallistesoft.hunt"
+        applicationId = "ca.kallistesoft.betterhunter"
         // Every Play upload needs a higher versionCode; CI can pass -PversionCode=<n>.
         versionCode = (findProperty("versionCode") as String?)?.toInt() ?: 1
         versionName = "1.0.0"
@@ -27,7 +33,7 @@ android {
         // Force update: the oldest versionCode allowed to run is read from this file (see README).
         buildConfigField("String", "UPDATE_CONFIG_URL", "\"https://hunt.kallistesoft.ca/android/update.json\"")
         // Play listing opened when in-app updates aren't available (also used by the debug build).
-        buildConfigField("String", "STORE_PACKAGE", "\"ca.kallistesoft.hunt\"")
+        buildConfigField("String", "STORE_PACKAGE", "\"ca.kallistesoft.betterhunter\"")
     }
 
     signingConfigs {
@@ -70,6 +76,7 @@ android {
 dependencies {
     implementation(project(":core:data"))
     implementation(project(":core:designsystem"))
+    implementation(project(":core:flags"))
     implementation(project(":core:ui"))
     implementation(project(":core:update"))
     implementation(project(":feature:about"))
