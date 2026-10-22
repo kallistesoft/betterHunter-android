@@ -79,8 +79,8 @@ its default (on).
 
 ## 2. AdMob (ads)
 
-Play Console already declares that the app contains ads (AdMob) and uses the advertising ID. The ads aren't in the app
-yet: these steps create everything AdMob needs, and give the IDs that go into the code. The planned placement, as in
+Play Console declared ads (AdMob) and the advertising ID for the prototype; version 1 ships without them, so the
+declarations are switched off first (section 3, *Privacy declarations*). The ads aren't in the app yet: these steps create everything AdMob needs, and give the IDs that go into the code. The planned placement, as in
 the Flutter prototype, is one **interstitial between a finished test and its results**, never during a question.
 
 ### Create the account
@@ -141,8 +141,9 @@ the Flutter prototype, is one **interstitial between a finished test and its res
 
 ### Hand over
 
-20. Send the **App ID** (step 6) and the **interstitial ad unit ID** (step 9). The code work then is: add the Google
-    Mobile Ads SDK and the UMP consent SDK, the App ID in the manifest, the ad unit per build type (test IDs in
+20. Send the **App ID** (step 6) and the **interstitial ad unit ID** (step 9). The code work then is: allow the
+    `AD_ID` permission again (it's removed from the manifest while there are no ads), add the Google Mobile Ads SDK and
+    the UMP consent SDK, the App ID in the manifest, the ad unit per build type (test IDs in
     debug), the consent form at launch, and the interstitial after a finished test. An `ads_enabled` Remote Config
     flag can switch ads off without a release.
 
@@ -161,8 +162,65 @@ declarations (see `store/play-console.md` in the hunt repo). Left to do:
    from CI (`app-release.aab`, signed). Add testers by email, then promote to closed testing and production.
 3. **Force update file:** publish `https://hunt.kallistesoft.ca/android/update.json` with `{"minVersionCode": 0}`
    (and the same for `update-debug.json`) so the URL exists before the first release.
-4. **Data safety:** no change for Remote Config (installation ID, already under "Device or other IDs"). Review it
-   again when the AdMob SDK is added.
+4. **Privacy declarations:** update them before the first release (below).
+
+### Privacy declarations
+
+The declarations entered on 2026-10-21 describe the app *with AdMob*. The native app ships without ads, so they
+must be changed to match it before the first release: Play checks the declarations against the app (manifest, SDKs)
+and can reject a release that doesn't match.
+
+**What the app does with data (version 1, no ads):**
+
+| | |
+|---|---|
+| Stored on the device only | Progress (answers, mistakes, streak, chosen exams), language, cached update rules |
+| Sent off the device | Firebase Remote Config: a Firebase installation ID, to fetch the feature flags. A plain download of `update.json` (no identifier) |
+| Not collected | Name, email, location, contacts, photos, analytics, crash reports, advertising ID |
+| User-initiated | "Report a problem" opens the user's own mail app; the app sends nothing itself |
+
+In Play Console, **Policy and programs** → **App content**:
+
+| Declaration | Was | Set to (version 1) |
+|---|---|---|
+| Ads | Yes (AdMob) | **No** |
+| Advertising ID | Yes | **No** (the manifest removes `AD_ID`, so Play's check agrees) |
+| Privacy policy | https://kallistesoft.ca/en/privacy/ | Same URL, with the policy updated (below) |
+| App access, Target audience (18+), Content rating, Government, Financial, Health | — | Unchanged |
+
+**Data safety** form (**App content** → **Data safety** → **Manage**):
+
+1. *Does your app collect or share any of the required user data types?* **Yes**.
+2. *Is all of the user data collected by your app encrypted in transit?* **Yes** (HTTPS only).
+3. *Which account creation methods does your app support?* **None** (no accounts).
+4. *Data types*: select only **Device or other IDs**; unselect approximate location, app interactions and
+   diagnostics.
+5. *Device or other IDs*: **Collected**, **not shared** (Firebase acts as a service provider), **not processed
+   ephemerally**, **required** (no opt-out), purpose **App functionality** only.
+6. Submit, then check the preview of the store listing's "Data safety" section.
+
+If Firebase isn't set up when version 1 ships, nothing leaves the device but the update file: then answer **No** to
+question 1 (no data collected).
+
+**Privacy policy** (FR and EN pages on kallistesoft.ca), to update at the same time:
+
+- Progress stays on the device; Android's own backup may copy it to the user's Google account.
+- The app contacts hunt.kallistesoft.ca (update check) and Firebase Remote Config (feature settings, with a Firebase
+  installation ID); link Google's privacy policy for Firebase.
+- No ads, no tracking, no account. "Report a problem" uses the user's mail app.
+- Contact: contact@kallistesoft.ca.
+
+### When AdMob is added (later release)
+
+1. In the app: delete the `AD_ID` removal from `app/src/main/AndroidManifest.xml`, add the SDKs (section 2,
+   *Hand over*).
+2. **Ads**: Yes. **Advertising ID**: Yes, purposes advertising or marketing, analytics, fraud prevention.
+3. **Data safety**: add approximate location, app interactions, diagnostics, device or other IDs, *collected and
+   shared*, purposes analytics, advertising or marketing, fraud prevention (Google's AdMob guidance).
+4. Privacy policy: add AdMob, the advertising ID and the consent choice.
+5. Publish the updated declarations *before* rolling out the release that contains ads.
+
+The hunt repo's `store/play-console.md` still describes the AdMob version; this section supersedes it.
 
 ---
 
