@@ -161,24 +161,28 @@ declarations (see `store/play-console.md` in the hunt repo). Left to do:
    from CI (`app-release.aab`, signed). Add testers by email, then promote to closed testing and production.
 3. **Force update file:** publish `https://hunt.kallistesoft.ca/android/update.json` with `{"minVersionCode": 0}`
    (and the same for `update-debug.json`) so the URL exists before the first release.
-4. **Privacy declarations:** keep them; check the points below before the first release.
+4. **Before releasing:** check the Play Console declarations against what the release really does (below).
 
-### Privacy declarations
+### Before releasing: Play Console vs. the app
 
-The declarations entered on 2026-10-21 (Ads: Yes, Advertising ID: Yes, Data safety with the AdMob data types) are
-right for the first release, which will include AdMob. Keep them, and before releasing check:
+The declarations were entered on 2026-10-21, before the native app existed. When the release candidate is ready,
+compare them with what that build really does, and fix whichever side is wrong.
 
-1. **Data safety, Device or other IDs:** besides AdMob's purposes, tick **App functionality** (Firebase Remote Config
-   uses an installation ID to fetch the feature flags). Nothing else changes: Remote Config's data is not shared.
-2. **Privacy policy** (FR and EN pages on kallistesoft.ca) mentions:
-   - progress stays on the device (Android's own backup may copy it to the user's Google account);
-   - the app contacts hunt.kallistesoft.ca (update check) and Firebase Remote Config (feature settings, with a
-     Firebase installation ID);
-   - AdMob, the advertising ID and the consent choice (section 2), with links to Google's policies;
-   - no account; "Report a problem" uses the user's own mail app; contact@kallistesoft.ca.
-3. **The release really contains ads** (AdMob SDK and the `AD_ID` permission in the AAB). If a release ever ships
-   without ads, switch **Ads** and **Advertising ID** to No and keep only *Device or other IDs* (collected, not
-   shared, app functionality) in Data safety first; Play checks the declarations against the app.
+1. **List what the release does:**
+   - Upload the AAB to internal testing, then **Test and release** → **App bundle explorer**: note its permissions
+     (look for `AD_ID`, `INTERNET`, location) and the SDKs Play detects (AdMob, Firebase…).
+   - Note what leaves the device: servers contacted, identifiers sent, anything typed by the user. Today: the update
+     check (hunt.kallistesoft.ca), Firebase Remote Config (installation ID) and, once added, AdMob.
+2. **Compare with Play Console**, **Policy and programs** → **App content**:
+   - **Ads** and **Advertising ID**: Yes only if the AdMob SDK and `AD_ID` are in the bundle.
+   - **Data safety**: every data type sent off the device is declared, with the right *collected / shared*,
+     *required / optional* and purposes (Remote Config's installation ID: app functionality; AdMob: Google's AdMob
+     guidance); nothing is declared that the app doesn't do.
+   - **Target audience**, **Content rating**, **App access**: still true for this version.
+3. **Privacy policy** (FR and EN on kallistesoft.ca) describes the same things: data kept on the device, the servers
+   contacted and why, ads and consent if present, contact address.
+4. **Fix and record:** update the declarations or the app, save, and note the answers given (date and version) in the
+   hunt repo's `store/play-console.md` so the next release starts from them.
 
 ---
 
