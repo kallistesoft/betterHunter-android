@@ -7,6 +7,7 @@ Steps to do outside the code, in the Firebase, AdMob and Play consoles. They use
 - [1. Firebase project (feature flags)](#1-firebase-project-feature-flags)
 - [2. AdMob (ads)](#2-admob-ads)
 - [3. Play Console](#3-play-console)
+- [4. Possible next step: questions from an online API](#4-possible-next-step-questions-from-an-online-api)
 
 ---
 
@@ -162,3 +163,71 @@ declarations (see `store/play-console.md` in the hunt repo). Left to do:
    (and the same for `update-debug.json`) so the URL exists before the first release.
 4. **Data safety:** no change for Remote Config (installation ID, already under "Device or other IDs"). Review it
    again when the AdMob SDK is added.
+
+---
+
+## 4. Possible next step: questions from an online API
+
+Not started; to decide. Today the questions ship inside the app, so a corrected question or a new season's rules need
+a release. Serving them online lets the app update its content by itself.
+
+### Recommended: a static API on the GoDaddy site
+
+The hunt repo already deploys `hunt.kallistesoft.ca` to GoDaddy on every push. The same deploy can publish the
+approved questions as files, which the app reads like an API. No database, no server code, nothing to secure or back
+up, and the review workflow stays (only approved questions are published).
+
+```
+https://hunt.kallistesoft.ca/api/v1/manifest.json      {"version": 12, "format": 1, "minAppVersion": 3, "sha256": "…"}
+https://hunt.kallistesoft.ca/api/v1/content-12.json    exam recipes and questions
+https://hunt.kallistesoft.ca/api/v1/wildlife/<id>.jpg  photos
+```
+
+**Hunt repo (publishing):**
+
+1. `python -m qgen bundle` also writes the content pack (exams and approved questions) and the manifest: content
+   version, format version, oldest app versionCode that can read it, SHA-256 of the pack.
+2. The GoDaddy deploy workflow copies `api/v1/` with the web app. Packs are never overwritten: a change is a new
+   version, so an app never reads a half-uploaded file.
+
+**App (reading):**
+
+1. Questions move to **Room** (`core:data`): exams, questions and their texts, replaced in one transaction per
+   content version.
+2. A **WorkManager** job (daily, and at launch) reads the manifest. If its version is newer and its format is one the
+   app knows, it downloads the pack, checks the SHA-256 and installs it. On any failure the app keeps its questions.
+3. A **pack still ships in the APK**, so the app works on first launch and with no network (hunters study offline).
+4. **Photos** are downloaded with Coil and kept in its disk cache; the bundled ones stay as a fallback.
+5. **Progress** is unchanged: it's keyed by question ID, so a corrected question keeps its history and a removed one
+   simply leaves the readiness count.
+6. **Emergency:** a Remote Config parameter `content_min_version` (Firebase, section 1) makes the app sync at once
+   when a wrong rule must be corrected quickly.
+
+Only `ContentRepository` gets a new implementation; screens and ViewModels don't change.
+
+### Later, if needed: a database and a small backend
+
+Worth it only for features a static API can't offer:
+
+- an admin page to edit questions in a browser,
+- accounts, with progress synced across devices or shared with an instructor,
+- question reports and statistics stored on a server (most missed questions),
+- content chosen by the server for each user.
+
+Options, with what each means to run:
+
+| Option | Fits | Cost and care |
+|---|---|---|
+| GoDaddy shared hosting: PHP + MySQL | Admin page, simple API | Included in the plan; you own security (protected admin, prepared SQL), updates and backups |
+| Firebase: Firestore + Cloud Functions + Auth | Accounts and sync, already in the project | No server to maintain; billed per read and write beyond the free quota |
+
+Keep the API versioned (`/api/v1/…`) and the content format stable: a backend can later serve the same manifest and
+pack from a database, and the app won't need to change.
+
+### Store and privacy impact
+
+- Static API: the app downloads public files and sends nothing about the user. The Play data safety form doesn't
+  change.
+- Accounts or server-side reports: declare the collected data (email, user IDs, app activity) in data safety and in
+  the privacy policy before releasing.
+
