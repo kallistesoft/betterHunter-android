@@ -30,8 +30,6 @@ android {
         versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // Force update: the oldest versionCode allowed to run is read from this file (see README).
-        buildConfigField("String", "UPDATE_CONFIG_URL", "\"https://hunt.kallistesoft.ca/android/update.json\"")
         // Play listing opened when in-app updates aren't available (also used by the debug build).
         buildConfigField("String", "STORE_PACKAGE", "\"ca.kallistesoft.hunt\"")
     }
@@ -48,12 +46,12 @@ android {
         }
     }
 
+    // Code that differs by build type lives in src/debug and src/release (never `if (BuildConfig.DEBUG)`).
     buildTypes {
         debug {
             // Installs next to the Play version, with its own name and update rules.
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
-            buildConfigField("String", "UPDATE_CONFIG_URL", "\"https://hunt.kallistesoft.ca/android/update-debug.json\"")
         }
         release {
             isMinifyEnabled = true

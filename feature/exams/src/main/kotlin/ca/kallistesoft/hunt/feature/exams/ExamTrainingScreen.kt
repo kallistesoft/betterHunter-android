@@ -25,12 +25,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.SectionTitle
 import ca.kallistesoft.hunt.core.designsystem.component.plus
+import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.ui.BackTopAppBar
@@ -65,7 +65,7 @@ internal fun ExamTrainingContent(
             item {
                 SectionTitle(stringResource(R.string.my_exams)) {
                     TextButton(onClick = onChangeExams, modifier = Modifier.testTag("change-exams")) {
-                        Icon(Icons.Rounded.Tune, contentDescription = null, Modifier.size(18.dp))
+                        Icon(Icons.Rounded.Tune, contentDescription = null, Modifier.size(Sizes.iconM))
                         Spacer(Modifier.width(Spacing.s))
                         Text(stringResource(R.string.action_change))
                     }
@@ -85,7 +85,7 @@ internal fun ExamTrainingContent(
                 item {
                     BhCard {
                         state.others.forEachIndexed { i, summary ->
-                            if (i > 0) HorizontalDivider(Modifier.padding(start = 72.dp))
+                            if (i > 0) HorizontalDivider(Modifier.padding(start = Sizes.listDividerInset))
                             OtherExamRow(summary, onClick = { sheetExamId = summary.exam.id })
                         }
                     }

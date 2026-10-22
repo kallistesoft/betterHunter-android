@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ImageNotSupported
 import androidx.compose.material.icons.outlined.Photo
@@ -48,10 +47,10 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Question
 import coil3.SingletonImageLoader
@@ -77,19 +76,19 @@ fun QuestionPhoto(question: Question, modifier: Modifier = Modifier, maxHeightFr
         BoxWithConstraints(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
             val aspect = question.imageAspect ?: (4f / 3f)
             // The window size can be unknown (0) in previews: then only the width limits the photo.
-            val maxHeight = if (screenHeight > 0.dp) screenHeight * maxHeightFraction else Dp.Infinity
+            val maxHeight = if (screenHeight.value > 0f) screenHeight * maxHeightFraction else Dp.Infinity
             val height = min(maxWidth / aspect, maxHeight)
             Box(
                 Modifier
                     .size(width = height * aspect, height = height)
-                    .clip(RoundedCornerShape(16.dp))
+                    .clip(MaterialTheme.shapes.medium)
                     .background(MaterialTheme.colorScheme.surfaceContainerHighest)
                     .clickable(onClickLabel = stringResource(R.string.zoom_photo)) { zoomed = true }
                     .testTag("question-photo"),
             ) {
                 // Previews and screenshot tests draw a fixed placeholder instead of loading the photo.
                 if (LocalInspectionMode.current) {
-                    Icon(Icons.Outlined.Photo, contentDescription = null, Modifier.size(40.dp).align(Alignment.Center))
+                    Icon(Icons.Outlined.Photo, contentDescription = null, Modifier.size(Sizes.iconXl).align(Alignment.Center))
                 } else {
                     SubcomposeAsyncImage(
                         model = assetPhoto(image),
@@ -99,12 +98,12 @@ fun QuestionPhoto(question: Question, modifier: Modifier = Modifier, maxHeightFr
                         modifier = Modifier.fillMaxSize(),
                         loading = {
                             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                                CircularProgressIndicator(Modifier.size(28.dp), strokeWidth = 3.dp)
+                                CircularProgressIndicator(Modifier.size(Sizes.loader), strokeWidth = Sizes.loaderStroke)
                             }
                         },
                         error = {
                             Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                                Icon(Icons.Outlined.ImageNotSupported, contentDescription = null, Modifier.size(40.dp))
+                                Icon(Icons.Outlined.ImageNotSupported, contentDescription = null, Modifier.size(Sizes.iconXl))
                             }
                         },
                     )
@@ -117,8 +116,8 @@ fun QuestionPhoto(question: Question, modifier: Modifier = Modifier, maxHeightFr
                         .align(Alignment.BottomEnd)
                         .padding(Spacing.s)
                         .background(Color.Black.copy(alpha = 0.45f), CircleShape)
-                        .padding(6.dp)
-                        .size(18.dp),
+                        .padding(Sizes.badgeInsetS)
+                        .size(Sizes.iconM),
                 )
             }
         }
@@ -176,8 +175,8 @@ private fun FullPhoto(image: String, description: String, onDismiss: () -> Unit)
 @Composable
 fun PhotoThumb(image: String, modifier: Modifier = Modifier) {
     val box = modifier
-        .size(72.dp)
-        .clip(RoundedCornerShape(10.dp))
+        .size(Sizes.photoThumb)
+        .clip(MaterialTheme.shapes.small)
         .background(MaterialTheme.colorScheme.surfaceContainerHighest)
     if (LocalInspectionMode.current) {
         Box(box)

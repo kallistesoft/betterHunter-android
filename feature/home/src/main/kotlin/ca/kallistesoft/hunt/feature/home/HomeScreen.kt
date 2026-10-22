@@ -40,7 +40,6 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
@@ -50,6 +49,7 @@ import ca.kallistesoft.hunt.core.designsystem.component.NoticeTone
 import ca.kallistesoft.hunt.core.designsystem.component.ProgressRing
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
+import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Lang
 import ca.kallistesoft.hunt.core.model.QuizMode
@@ -191,8 +191,8 @@ private fun TodayCard(state: HomeUiState, onPractise: (examId: String) -> Unit) 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 ProgressRing(
                     done.toFloat() / goal,
-                    size = 64.dp,
-                    strokeWidth = 7.dp,
+                    size = Sizes.ringM,
+                    strokeWidth = Sizes.ringStrokeM,
                     trackColor = scheme.surface,
                 ) {
                     if (done >= goal) {
@@ -214,7 +214,7 @@ private fun TodayCard(state: HomeUiState, onPractise: (examId: String) -> Unit) 
                                 Icons.Rounded.LocalFireDepartment,
                                 contentDescription = null,
                                 tint = BetterHunterTheme.extendedColors.streak,
-                                modifier = Modifier.size(18.dp),
+                                modifier = Modifier.size(Sizes.iconM),
                             )
                             Spacer(Modifier.width(Spacing.xs))
                             Text(pluralStringResource(R.plurals.streak, state.streak, state.streak))
@@ -223,7 +223,7 @@ private fun TodayCard(state: HomeUiState, onPractise: (examId: String) -> Unit) 
                 }
             }
             state.mainExam?.let { exam ->
-                Spacer(Modifier.size(14.dp))
+                Spacer(Modifier.size(Spacing.m))
                 Text(
                     exam.name(currentLang()),
                     style = MaterialTheme.typography.labelMedium,
@@ -231,7 +231,7 @@ private fun TodayCard(state: HomeUiState, onPractise: (examId: String) -> Unit) 
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
-                Spacer(Modifier.size(6.dp))
+                Spacer(Modifier.size(Spacing.s))
                 Button(onClick = { onPractise(exam.id) }, Modifier.fillMaxWidth().testTag("today-practice")) {
                     Icon(Icons.Rounded.PlayArrow, contentDescription = null)
                     Spacer(Modifier.width(Spacing.s))
@@ -247,7 +247,7 @@ private fun TodayCard(state: HomeUiState, onPractise: (examId: String) -> Unit) 
 private fun Footer(onOpenAbout: () -> Unit) {
     val muted = MaterialTheme.colorScheme.onSurfaceVariant
     Row(Modifier.padding(top = Spacing.s), verticalAlignment = Alignment.CenterVertically) {
-        Icon(Icons.Outlined.Info, contentDescription = null, tint = muted, modifier = Modifier.size(16.dp))
+        Icon(Icons.Outlined.Info, contentDescription = null, tint = muted, modifier = Modifier.size(Sizes.iconS))
         Spacer(Modifier.width(Spacing.s))
         Text(
             stringResource(R.string.footer),

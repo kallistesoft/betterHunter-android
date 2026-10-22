@@ -25,13 +25,13 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.BadgeSize
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.SectionTitle
 import ca.kallistesoft.hunt.core.designsystem.component.plus
+import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.ExamGroup
 import ca.kallistesoft.hunt.core.ui.BackTopAppBar
@@ -123,7 +123,7 @@ private fun PickerChoice(item: PickerExam, selected: Boolean, onToggle: () -> Un
             .testTag("picker-${item.exam.id}")
             .toggleable(value = selected, role = Role.Checkbox, onValueChange = { onToggle() }),
         containerColor = if (selected) scheme.primaryContainer else scheme.surfaceContainerLow,
-        border = BorderStroke(if (selected) 2.dp else 1.dp, if (selected) scheme.primary else scheme.outlineVariant),
+        border = BorderStroke(if (selected) Sizes.borderEmphasis else Sizes.border, if (selected) scheme.primary else scheme.outlineVariant),
     ) {
         ExamListItem(
             item.exam,

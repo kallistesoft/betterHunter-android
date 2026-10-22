@@ -11,14 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 
 /** Small uppercase section label in the primary colour, with an optional action on the right. */
 @Composable
 fun SectionTitle(text: String, modifier: Modifier = Modifier, action: @Composable RowScope.() -> Unit = {}) {
-    Row(modifier.padding(top = Spacing.l, bottom = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+    Row(modifier.padding(top = Spacing.l, bottom = Spacing.s), verticalAlignment = Alignment.CenterVertically) {
         Text(
             text.uppercase(),
             modifier = Modifier.weight(1f).semantics { heading() },

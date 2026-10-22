@@ -12,15 +12,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
+import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 
 /** Circular progress (0..1) with content in the middle: readiness, daily goal, score. */
 @Composable
 fun ProgressRing(
     progress: Float,
     modifier: Modifier = Modifier,
-    size: Dp = 48.dp,
-    strokeWidth: Dp = 5.dp,
+    size: Dp = Sizes.ringS,
+    strokeWidth: Dp = Sizes.ringStrokeS,
     color: Color = ProgressIndicatorDefaults.circularColor,
     trackColor: Color = MaterialTheme.colorScheme.surfaceContainerHighest,
     content: @Composable () -> Unit = {},
@@ -33,7 +34,7 @@ fun ProgressRing(
             strokeWidth = strokeWidth,
             trackColor = trackColor,
             strokeCap = StrokeCap.Round,
-            gapSize = 0.dp,
+            gapSize = Spacing.none,
         )
         content()
     }

@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.unit.dp
+import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 
 /** A row that opens something outside the app (web page, email), marked with the "open in new" icon. */
 @Composable
@@ -21,7 +21,7 @@ fun LinkRow(icon: ImageVector, label: String, onClick: () -> Unit, modifier: Mod
     ListItem(
         headlineContent = { Text(label) },
         leadingContent = { Icon(icon, contentDescription = null) },
-        trailingContent = { Icon(Icons.AutoMirrored.Rounded.OpenInNew, contentDescription = null, Modifier.size(18.dp)) },
+        trailingContent = { Icon(Icons.AutoMirrored.Rounded.OpenInNew, contentDescription = null, Modifier.size(Sizes.iconM)) },
         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
         modifier = modifier.clickable(role = Role.Button, onClick = onClick),
     )

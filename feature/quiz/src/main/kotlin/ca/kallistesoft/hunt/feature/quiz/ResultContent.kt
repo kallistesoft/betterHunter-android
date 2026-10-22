@@ -29,11 +29,11 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.ProgressRing
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
+import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.ui.BackTopAppBar
@@ -86,7 +86,7 @@ internal fun ResultContent(state: QuizUiState.Finished, onHome: () -> Unit, onAg
             }
             item {
                 Box(Modifier.fillMaxWidth().padding(vertical = Spacing.m), contentAlignment = Alignment.Center) {
-                    ProgressRing(s.score.toFloat(), size = 160.dp, strokeWidth = 12.dp, color = color) {
+                    ProgressRing(s.score.toFloat(), size = Sizes.ringL, strokeWidth = Sizes.ringStrokeL, color = color) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
                                 "${(s.score * 100).roundToInt()} %",
@@ -119,11 +119,11 @@ internal fun ResultContent(state: QuizUiState.Finished, onHome: () -> Unit, onAg
                                 Icon(
                                     if (s.passed) Icons.Rounded.Verified else Icons.Outlined.ErrorOutline,
                                     contentDescription = null,
-                                    modifier = Modifier.size(20.dp),
+                                    modifier = Modifier.size(Sizes.iconL),
                                 )
                             },
                             colors = AssistChipDefaults.assistChipColors(labelColor = color, leadingIconContentColor = color),
-                            border = BorderStroke(1.dp, color),
+                            border = BorderStroke(Sizes.border, color),
                         )
                     }
                 }

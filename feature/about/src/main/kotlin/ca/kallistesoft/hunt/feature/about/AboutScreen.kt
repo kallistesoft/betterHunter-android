@@ -17,7 +17,6 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.dp
 import ca.kallistesoft.hunt.core.designsystem.component.BhPreviews
 import ca.kallistesoft.hunt.core.designsystem.component.LinkRow
 import ca.kallistesoft.hunt.core.designsystem.component.NoticeCard
@@ -39,7 +38,7 @@ fun AboutScreen(versionName: String, onBack: () -> Unit) {
     val lang = currentLang()
     val privacyUrl = stringResource(R.string.privacy_url)
     Scaffold(topBar = { BackTopAppBar(stringResource(R.string.about), onBack) }) { padding ->
-        LazyColumn(contentPadding = padding.plus(bottom = 32.dp)) {
+        LazyColumn(contentPadding = padding.plus(bottom = Spacing.xxxl)) {
             item { NoticeCard(stringResource(R.string.disclaimer), NoticeTone.Info, Modifier.testTag("disclaimer")) }
             item { Heading(stringResource(R.string.how_it_works)) }
             item { Labelled(stringResource(R.string.practice), stringResource(R.string.how_practice)) }
@@ -87,7 +86,7 @@ private fun Labelled(label: String, text: String) {
             withStyle(SpanStyle(fontWeight = FontWeight.SemiBold)) { append("$label : ") }
             append(text)
         },
-        modifier = Modifier.padding(bottom = 6.dp),
+        modifier = Modifier.padding(bottom = Spacing.s),
     )
 }
 

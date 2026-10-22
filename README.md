@@ -128,11 +128,21 @@ Without `google-services.json` the Google Services plugin isn't applied and the 
 requests and forks still build. Remote Config uses a Firebase installation ID (already covered by "Device or other IDs"
 in the Play Console data safety form); no analytics are collected.
 
+## Conventions
+
+Checked by `scripts/check-conventions.sh` (CI runs it on every push):
+
+- **No build-type branches in code.** Never `if (BuildConfig.DEBUG)`: code that differs goes in `app/src/debug` and
+  `app/src/release`. Today each provides a `BuildTypeModule` (Hilt) with the build type's `BuildTypeConfig`: its
+  force-update rules and its feature-flag fetch interval.
+- **No dp literals outside the theme.** Gaps come from `Spacing`, component sizes from `Sizes` (both in
+  `core/designsystem/.../theme`), corners from `MaterialTheme.shapes`. A new size is added there first.
+
 ## UI components and screenshots
 
 Reusable pieces live in two modules:
 
-- `core:designsystem`, no app knowledge: theme and `Spacing`, `BhCard`, `IconBadge`, `AnswerChoice` (idle, selected,
+- `core:designsystem`, no app knowledge: theme, `Spacing` and `Sizes`, `BhCard`, `IconBadge`, `AnswerChoice` (idle, selected,
   correct, wrong), `AnswerResult`, `NoticeCard`, `HubCard`, `LinkRow`, `ProgressRing`, `SectionTitle`.
 - `core:ui`, built on the app's models: `ExamCard`, `ExamListItem`, `ExamAvatar`, `ReadinessRing`, `QuestionPhoto`,
   `SourceLinks`, `BackTopAppBar`, plus `PreviewData` (sample exams and questions).

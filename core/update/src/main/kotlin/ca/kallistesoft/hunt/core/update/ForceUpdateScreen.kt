@@ -30,12 +30,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import ca.kallistesoft.hunt.core.designsystem.component.BhPreviews
 import ca.kallistesoft.hunt.core.designsystem.component.PreviewSurface
+import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -77,14 +77,14 @@ fun ForceUpdateScreen(storePackage: String, modifier: Modifier = Modifier) {
 internal fun ForceUpdateContent(onUpdate: () -> Unit, modifier: Modifier = Modifier) {
     Scaffold(modifier.testTag("force-update")) { padding ->
         Column(
-            Modifier.fillMaxSize().padding(padding).padding(32.dp),
+            Modifier.fillMaxSize().padding(padding).padding(Spacing.xxxl),
             verticalArrangement = Arrangement.spacedBy(Spacing.l, Alignment.CenterVertically),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Icon(
                 Icons.Rounded.SystemUpdate,
                 contentDescription = null,
-                modifier = Modifier.size(72.dp),
+                modifier = Modifier.size(Sizes.iconHero),
                 tint = MaterialTheme.colorScheme.primary,
             )
             Text(

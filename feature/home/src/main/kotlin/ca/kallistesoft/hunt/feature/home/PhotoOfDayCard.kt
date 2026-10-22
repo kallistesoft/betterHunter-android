@@ -21,11 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import ca.kallistesoft.hunt.core.designsystem.component.AnswerChoice
 import ca.kallistesoft.hunt.core.designsystem.component.AnswerResult
 import ca.kallistesoft.hunt.core.designsystem.component.AnswerState
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
+import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.ui.QuestionPhoto
 import ca.kallistesoft.hunt.core.ui.R
@@ -83,12 +83,12 @@ internal fun PhotoOfDayCard(photo: PhotoOfDayState, onAnswer: (Int) -> Unit, onP
                     text = stringResource(if (right) R.string.correct else R.string.wrong),
                     style = MaterialTheme.typography.titleSmall,
                 )
-                Spacer(Modifier.size(6.dp))
+                Spacer(Modifier.size(Spacing.s))
                 Text(stringResource(R.string.how_recognise), style = MaterialTheme.typography.labelLarge)
                 Text(text.explanation)
                 Spacer(Modifier.size(Spacing.s))
                 OutlinedButton(onClick = onPlay, modifier = Modifier.fillMaxWidth().testTag("pod-play")) {
-                    Icon(Icons.Outlined.PhotoLibrary, contentDescription = null, Modifier.size(18.dp))
+                    Icon(Icons.Outlined.PhotoLibrary, contentDescription = null, Modifier.size(Sizes.iconM))
                     Spacer(Modifier.width(Spacing.s))
                     Text(stringResource(R.string.play_id))
                 }

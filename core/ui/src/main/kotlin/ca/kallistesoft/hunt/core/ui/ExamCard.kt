@@ -31,11 +31,11 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import ca.kallistesoft.hunt.core.designsystem.component.BadgeSize
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.IconBadge
 import ca.kallistesoft.hunt.core.designsystem.component.ProgressRing
+import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Content
 import ca.kallistesoft.hunt.core.model.Exam
@@ -74,7 +74,7 @@ fun ExamCard(
                 Spacer(Modifier.width(Spacing.m))
                 Column(Modifier.weight(1f)) {
                     Text(exam.name(lang), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                    Spacer(Modifier.height(2.dp))
+                    Spacer(Modifier.height(Spacing.xxs))
                     val muted = MaterialTheme.typography.bodySmall
                     Text(
                         if (summary.available) {
@@ -93,19 +93,19 @@ fun ExamCard(
                 Spacer(Modifier.height(Spacing.l))
                 Row(horizontalArrangement = Arrangement.spacedBy(Spacing.s)) {
                     Button(onClick = onPractice, modifier = Modifier.weight(1f).testTag("practice-${exam.id}")) {
-                        Icon(Icons.Outlined.School, contentDescription = null, Modifier.size(18.dp))
+                        Icon(Icons.Outlined.School, contentDescription = null, Modifier.size(Sizes.iconM))
                         Spacer(Modifier.width(Spacing.s))
                         Text(stringResource(R.string.practice), maxLines = 1, overflow = TextOverflow.Ellipsis)
                     }
                     OutlinedButton(onClick = onExam, modifier = Modifier.weight(1f).testTag("exam-${exam.id}")) {
-                        Icon(Icons.Outlined.Timer, contentDescription = null, Modifier.size(18.dp))
+                        Icon(Icons.Outlined.Timer, contentDescription = null, Modifier.size(Sizes.iconM))
                         Spacer(Modifier.width(Spacing.s))
                         Text(stringResource(R.string.exam_sim), maxLines = 1, overflow = TextOverflow.Ellipsis)
                     }
                 }
                 if (summary.weakCount > 0) {
                     TextButton(onClick = onReview, modifier = Modifier.padding(top = Spacing.xs).testTag("review-${exam.id}")) {
-                        Icon(Icons.Rounded.Replay, contentDescription = null, Modifier.size(18.dp))
+                        Icon(Icons.Rounded.Replay, contentDescription = null, Modifier.size(Sizes.iconM))
                         Spacer(Modifier.width(Spacing.s))
                         Text(stringResource(R.string.review_mistakes, summary.weakCount))
                     }

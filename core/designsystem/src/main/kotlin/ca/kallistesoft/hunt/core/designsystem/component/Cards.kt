@@ -8,14 +8,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 
 /** Flat card with a hairline border, the app's main surface for grouped content. */
 @Composable
 fun BhCard(
     modifier: Modifier = Modifier,
     containerColor: Color = MaterialTheme.colorScheme.surfaceContainerLow,
-    border: BorderStroke? = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)),
+    border: BorderStroke? = BorderStroke(Sizes.border, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)),
     onClick: (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {

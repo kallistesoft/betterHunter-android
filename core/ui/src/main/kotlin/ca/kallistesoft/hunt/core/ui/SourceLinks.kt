@@ -15,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
+import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Question
 import ca.kallistesoft.hunt.core.model.SourceRef
@@ -45,7 +45,7 @@ fun SourceLinks(question: Question, modifier: Modifier = Modifier) {
 @Composable
 private fun LinkButton(label: String, onClick: () -> Unit) {
     TextButton(onClick = onClick) {
-        Icon(Icons.AutoMirrored.Rounded.OpenInNew, contentDescription = null, Modifier.size(14.dp))
+        Icon(Icons.AutoMirrored.Rounded.OpenInNew, contentDescription = null, Modifier.size(Sizes.iconXs))
         Spacer(Modifier.width(Spacing.xs))
         Text(label, style = MaterialTheme.typography.labelMedium)
     }

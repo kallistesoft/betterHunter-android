@@ -16,19 +16,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 
 /** Round badge sizes: the circle and the inset of the icon inside it. */
 enum class BadgeSize(val size: Dp, val iconInset: Dp) {
     /** Answer letters (A, B, C, D). */
-    Small(28.dp, 6.dp),
-    Medium(40.dp, 8.dp),
+    Small(Sizes.badgeS, Sizes.badgeInsetS),
+    Medium(Sizes.badgeM, Sizes.badgeInsetM),
 
     /** Exams in lists and cards. */
-    Large(44.dp, 10.dp),
+    Large(Sizes.badgeL, Sizes.badgeInsetL),
 
     /** Section entry points on the dashboard. */
-    ExtraLarge(60.dp, 14.dp),
+    ExtraLarge(Sizes.badgeXl, Sizes.badgeInsetXl),
 }
 
 /** A coloured circle holding an icon or a letter. */

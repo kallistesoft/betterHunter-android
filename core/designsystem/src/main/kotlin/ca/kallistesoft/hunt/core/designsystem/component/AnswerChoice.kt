@@ -23,8 +23,8 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
+import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 
 /** How an answer is shown: not chosen, chosen (mock exam), or revealed as right or wrong. */
@@ -59,7 +59,7 @@ fun AnswerChoice(
     }
     val content: @Composable () -> Unit = {
         if (letter != null) {
-            Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+            Row(Modifier.padding(Sizes.answerPadding), verticalAlignment = Alignment.CenterVertically) {
                 IconBadge(size = BadgeSize.Small, containerColor = scheme.secondaryContainer) {
                     Text(letter, style = MaterialTheme.typography.labelLarge)
                 }
@@ -73,7 +73,7 @@ fun AnswerChoice(
             }
         } else {
             Box(
-                Modifier.fillMaxWidth().heightIn(min = 52.dp).padding(horizontal = Spacing.s),
+                Modifier.fillMaxWidth().heightIn(min = Sizes.answerTileMinHeight).padding(horizontal = Spacing.s),
                 contentAlignment = Alignment.Center,
             ) {
                 Text(text, textAlign = TextAlign.Center, maxLines = 2, overflow = TextOverflow.Ellipsis)
@@ -81,7 +81,7 @@ fun AnswerChoice(
         }
     }
     val shape = MaterialTheme.shapes.small
-    val stroke = BorderStroke(if (state == AnswerState.Idle) 1.dp else 2.dp, border)
+    val stroke = BorderStroke(if (state == AnswerState.Idle) Sizes.border else Sizes.borderEmphasis, border)
     if (onClick != null) {
         Surface(onClick = onClick, modifier = described, shape = shape, color = fill, border = stroke, content = content)
     } else {

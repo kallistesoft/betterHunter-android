@@ -50,7 +50,6 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.AnswerChoice
@@ -59,6 +58,7 @@ import ca.kallistesoft.hunt.core.designsystem.component.AnswerState
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
+import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Question
 import ca.kallistesoft.hunt.core.model.QuizMode
@@ -108,7 +108,7 @@ private fun LoadingQuiz(onClose: () -> Unit) {
 @Composable
 private fun EmptyQuiz(mode: QuizMode, onClose: () -> Unit) {
     Scaffold(topBar = { BackTopAppBar("", onClose) }) { padding ->
-        Box(Modifier.fillMaxSize().padding(padding).padding(32.dp), contentAlignment = Alignment.Center) {
+        Box(Modifier.fillMaxSize().padding(padding).padding(Spacing.xxxl), contentAlignment = Alignment.Center) {
             Text(
                 stringResource(if (mode == QuizMode.REVIEW) R.string.no_weak else R.string.no_questions),
                 textAlign = TextAlign.Center,
@@ -209,7 +209,7 @@ internal fun QuestionContent(
                     text = choice,
                     state = answerState,
                     onClick = { onChoose(i) },
-                    modifier = Modifier.padding(bottom = 10.dp).fillMaxWidth().testTag("choice-$i"),
+                    modifier = Modifier.padding(bottom = Spacing.m).fillMaxWidth().testTag("choice-$i"),
                     letter = "ABCD"[i].toString(),
                     stateDescription = when (answerState) {
                         AnswerState.Correct -> stringResource(R.string.correct)
@@ -257,7 +257,7 @@ private fun Feedback(q: Question, chosen: Int?, modifier: Modifier = Modifier) {
     val right = chosen == q.answerIndex
     val color = if (right) BetterHunterTheme.extendedColors.success else MaterialTheme.colorScheme.error
     BhCard(modifier.testTag("feedback"), containerColor = color.copy(alpha = 0.08f), border = null) {
-        Column(Modifier.padding(Spacing.l), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        Column(Modifier.padding(Spacing.l), verticalArrangement = Arrangement.spacedBy(Spacing.xxs)) {
             AnswerResult(correct = right, text = stringResource(if (right) R.string.correct else R.string.wrong))
             Spacer(Modifier.size(Spacing.s))
             Text(
@@ -277,9 +277,9 @@ private fun Feedback(q: Question, chosen: Int?, modifier: Modifier = Modifier) {
                         Icons.Rounded.WarningAmber,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.tertiary,
-                        modifier = Modifier.size(20.dp),
+                        modifier = Modifier.size(Sizes.iconL),
                     )
-                    Spacer(Modifier.width(6.dp))
+                    Spacer(Modifier.width(Spacing.s))
                     val label = stringResource(R.string.dont_confuse)
                     Text(
                         buildAnnotatedString {
