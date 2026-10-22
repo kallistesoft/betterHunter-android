@@ -1,0 +1,38 @@
+name: Record screenshots
+
+# Records the reference images of every Compose preview and commits them to the branch it runs on.
+# Run it after an intended UI change; the Android CI workflow then checks new changes against them.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Record
+        run: ./gradlew recordRoborazziDebug
+
+      - name: Commit the reference images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          find . -path '*/src/test/screenshots/*.png' -print0 | xargs -0 -r git add
+          if git diff --cached --quiet; then
+            echo "Screenshots unchanged."
+          else
+            git commit -m "Update screenshot references"
+            git push
+          fi

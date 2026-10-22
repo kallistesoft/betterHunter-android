@@ -1,7 +1,6 @@
 package ca.kallistesoft.hunt.feature.quiz
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,11 +15,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Flag
-import androidx.compose.material.icons.rounded.Cancel
-import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.WarningAmber
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -32,7 +28,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -58,9 +53,13 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import ca.kallistesoft.hunt.core.designsystem.component.AnswerChoice
+import ca.kallistesoft.hunt.core.designsystem.component.AnswerResult
+import ca.kallistesoft.hunt.core.designsystem.component.AnswerState
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
+import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Question
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.ui.BackTopAppBar
@@ -120,7 +119,7 @@ private fun EmptyQuiz(mode: QuizMode, onClose: () -> Unit) {
 }
 
 @Composable
-private fun QuestionContent(
+internal fun QuestionContent(
     state: QuizUiState.Running,
     canReport: Boolean,
     onChoose: (Int) -> Unit,
@@ -179,36 +178,47 @@ private fun QuestionContent(
             Button(
                 onClick = onNext,
                 enabled = chosen != null,
-                modifier = Modifier.navigationBarsPadding().padding(16.dp).fillMaxWidth().testTag("next"),
+                modifier = Modifier.navigationBarsPadding().padding(Spacing.l).fillMaxWidth().testTag("next"),
             ) {
                 Text(stringResource(if (s.isLast) R.string.finish else R.string.next))
             }
         },
         snackbarHost = { SnackbarHost(snackbar) },
     ) { padding ->
-        LazyColumn(state = listState, contentPadding = padding.plus(top = 16.dp, bottom = 16.dp)) {
+        LazyColumn(state = listState, contentPadding = padding.plus(top = Spacing.l, bottom = Spacing.l)) {
             if (q.image != null) {
                 item { QuestionPhoto(q) }
                 // Photo questions: the animal's card goes right under the photo, where the eye already is.
-                if (showFeedback) item { Feedback(q, chosen, Modifier.padding(bottom = 16.dp)) }
+                if (showFeedback) item { Feedback(q, chosen, Modifier.padding(bottom = Spacing.l)) }
             }
             item {
                 Text(
                     text.q,
                     style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.padding(bottom = 20.dp),
+                    modifier = Modifier.padding(bottom = Spacing.xl),
                 )
             }
             itemsIndexed(text.choices) { i, choice ->
-                val choiceState = when {
-                    showFeedback && i == q.answerIndex -> ChoiceState.CORRECT
-                    showFeedback && i == chosen -> ChoiceState.WRONG
-                    isExam && i == chosen -> ChoiceState.SELECTED
-                    else -> ChoiceState.IDLE
+                val answerState = when {
+                    showFeedback && i == q.answerIndex -> AnswerState.Correct
+                    showFeedback && i == chosen -> AnswerState.Wrong
+                    isExam && i == chosen -> AnswerState.Selected
+                    else -> AnswerState.Idle
                 }
-                ChoiceTile("ABCD"[i].toString(), choice, choiceState, onClick = { onChoose(i) }, Modifier.testTag("choice-$i"))
+                AnswerChoice(
+                    text = choice,
+                    state = answerState,
+                    onClick = { onChoose(i) },
+                    modifier = Modifier.padding(bottom = 10.dp).fillMaxWidth().testTag("choice-$i"),
+                    letter = "ABCD"[i].toString(),
+                    stateDescription = when (answerState) {
+                        AnswerState.Correct -> stringResource(R.string.correct)
+                        AnswerState.Wrong -> stringResource(R.string.wrong)
+                        else -> null
+                    },
+                )
             }
-            if (showFeedback && q.image == null) item { Feedback(q, chosen, Modifier.padding(top = 8.dp)) }
+            if (showFeedback && q.image == null) item { Feedback(q, chosen, Modifier.padding(top = Spacing.s)) }
         }
     }
 
@@ -236,42 +246,8 @@ private fun Countdown(secondsLeft: Int) {
         label,
         style = MaterialTheme.typography.titleMedium.copy(fontFeatureSettings = "tnum"),
         color = if (minutes < 5) MaterialTheme.colorScheme.error else Color.Unspecified,
-        modifier = Modifier.padding(end = 16.dp).semantics { contentDescription = description },
+        modifier = Modifier.padding(end = Spacing.l).semantics { contentDescription = description },
     )
-}
-
-private enum class ChoiceState { IDLE, SELECTED, CORRECT, WRONG }
-
-@Composable
-private fun ChoiceTile(letter: String, label: String, state: ChoiceState, onClick: () -> Unit, modifier: Modifier) {
-    val scheme = MaterialTheme.colorScheme
-    val success = BetterHunterTheme.extendedColors.success
-    val (border, fill) = when (state) {
-        ChoiceState.IDLE -> scheme.outlineVariant to Color.Transparent
-        ChoiceState.SELECTED -> scheme.primary to scheme.primaryContainer
-        ChoiceState.CORRECT -> success to success.copy(alpha = 0.12f)
-        ChoiceState.WRONG -> scheme.error to scheme.error.copy(alpha = 0.12f)
-    }
-    Surface(
-        onClick = onClick,
-        modifier = modifier.padding(bottom = 10.dp).fillMaxWidth(),
-        shape = MaterialTheme.shapes.small,
-        color = fill,
-        border = BorderStroke(if (state == ChoiceState.IDLE) 1.dp else 2.dp, border),
-    ) {
-        Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
-            Surface(Modifier.size(28.dp), shape = CircleShape, color = scheme.secondaryContainer) {
-                Box(contentAlignment = Alignment.Center) { Text(letter, style = MaterialTheme.typography.labelLarge) }
-            }
-            Spacer(Modifier.width(12.dp))
-            Text(label, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
-            when (state) {
-                ChoiceState.CORRECT -> Icon(Icons.Rounded.CheckCircle, contentDescription = stringResource(R.string.correct), tint = border)
-                ChoiceState.WRONG -> Icon(Icons.Rounded.Cancel, contentDescription = stringResource(R.string.wrong), tint = border)
-                else -> Unit
-            }
-        }
-    }
 }
 
 /** Right or wrong, with the explanation and, for animals, where they live and what not to confuse them with. */
@@ -281,30 +257,21 @@ private fun Feedback(q: Question, chosen: Int?, modifier: Modifier = Modifier) {
     val right = chosen == q.answerIndex
     val color = if (right) BetterHunterTheme.extendedColors.success else MaterialTheme.colorScheme.error
     BhCard(modifier.testTag("feedback"), containerColor = color.copy(alpha = 0.08f), border = null) {
-        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(if (right) Icons.Rounded.CheckCircle else Icons.Rounded.Cancel, contentDescription = null, tint = color)
-                Spacer(Modifier.width(8.dp))
-                Text(
-                    stringResource(if (right) R.string.correct else R.string.wrong),
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = color,
-                )
-            }
-            Spacer(Modifier.size(8.dp))
+        Column(Modifier.padding(Spacing.l), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            AnswerResult(correct = right, text = stringResource(if (right) R.string.correct else R.string.wrong))
+            Spacer(Modifier.size(Spacing.s))
             Text(
                 stringResource(if (q.image != null) R.string.how_recognise else R.string.why),
                 style = MaterialTheme.typography.labelLarge,
             )
             Text(text.explanation)
             text.habitat?.let {
-                Spacer(Modifier.size(8.dp))
+                Spacer(Modifier.size(Spacing.s))
                 Text(stringResource(R.string.where_lives), style = MaterialTheme.typography.labelLarge)
                 Text(it)
             }
             text.confuse?.let { confuse ->
-                Spacer(Modifier.size(8.dp))
+                Spacer(Modifier.size(Spacing.s))
                 Row {
                     Icon(
                         Icons.Rounded.WarningAmber,
@@ -322,7 +289,7 @@ private fun Feedback(q: Question, chosen: Int?, modifier: Modifier = Modifier) {
                     )
                 }
             }
-            Spacer(Modifier.size(4.dp))
+            Spacer(Modifier.size(Spacing.xs))
             SourceLinks(q)
         }
     }

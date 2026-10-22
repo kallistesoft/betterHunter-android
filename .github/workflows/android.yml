@@ -45,6 +45,16 @@ jobs:
       - name: Unit tests
         run: ./gradlew testDebugUnitTest :core:model:test --stacktrace
 
+      # Compares the UI with the reference images in */src/test/screenshots (recorded by the "Record screenshots"
+      # workflow). Skipped until references exist.
+      - name: Screenshot tests
+        run: |
+          if find . -path '*/src/test/screenshots/*.png' | grep -q .; then
+            ./gradlew verifyRoborazziDebug
+          else
+            echo "::notice::No screenshot references yet: run the Record screenshots workflow."
+          fi
+
       - name: Lint
         run: ./gradlew :app:lintDebug
 
@@ -81,3 +91,4 @@ jobs:
           path: |
             **/build/reports/
             **/build/test-results/
+            **/build/outputs/roborazzi/

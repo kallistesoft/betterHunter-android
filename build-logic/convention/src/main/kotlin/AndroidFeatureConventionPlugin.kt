@@ -9,6 +9,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             pluginManager.apply("betterhunter.android.library")
             pluginManager.apply("betterhunter.android.compose")
             pluginManager.apply("betterhunter.hilt")
+            pluginManager.apply("betterhunter.android.screenshot")
             dependencies {
                 add("implementation", project(":core:model"))
                 add("implementation", project(":core:data"))
@@ -18,7 +19,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 add("implementation", libs.lib("androidx-lifecycle-runtime-compose"))
                 add("implementation", libs.lib("androidx-lifecycle-viewmodel-compose"))
                 add("implementation", libs.lib("androidx-hilt-lifecycle-viewmodel-compose"))
-                add("testImplementation", project(":core:testing"))
             }
         }
     }

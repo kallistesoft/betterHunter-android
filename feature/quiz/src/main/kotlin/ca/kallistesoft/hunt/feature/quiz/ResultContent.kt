@@ -34,6 +34,7 @@ import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.ProgressRing
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
+import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.ui.BackTopAppBar
 import ca.kallistesoft.hunt.core.ui.PhotoThumb
@@ -59,8 +60,8 @@ internal fun ResultContent(state: QuizUiState.Finished, onHome: () -> Unit, onAg
         topBar = { BackTopAppBar(stringResource(R.string.score), onBack = null) },
         bottomBar = {
             Row(
-                Modifier.navigationBarsPadding().padding(16.dp).fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                Modifier.navigationBarsPadding().padding(Spacing.l).fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(Spacing.m),
             ) {
                 OutlinedButton(onClick = onHome, modifier = Modifier.weight(1f)) { Text(stringResource(R.string.home)) }
                 Button(onClick = onAgain, modifier = Modifier.weight(1f).testTag("again")) {
@@ -70,8 +71,8 @@ internal fun ResultContent(state: QuizUiState.Finished, onHome: () -> Unit, onAg
         },
     ) { padding ->
         LazyColumn(
-            contentPadding = padding.plus(top = 16.dp, bottom = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            contentPadding = padding.plus(top = Spacing.l, bottom = Spacing.l),
+            verticalArrangement = Arrangement.spacedBy(Spacing.s),
         ) {
             if (state.timeUp) {
                 item {
@@ -84,7 +85,7 @@ internal fun ResultContent(state: QuizUiState.Finished, onHome: () -> Unit, onAg
                 }
             }
             item {
-                Box(Modifier.fillMaxWidth().padding(vertical = 12.dp), contentAlignment = Alignment.Center) {
+                Box(Modifier.fillMaxWidth().padding(vertical = Spacing.m), contentAlignment = Alignment.Center) {
                     ProgressRing(s.score.toFloat(), size = 160.dp, strokeWidth = 12.dp, color = color) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
@@ -131,15 +132,15 @@ internal fun ResultContent(state: QuizUiState.Finished, onHome: () -> Unit, onAg
                 Text(
                     stringResource(R.string.missed_title),
                     style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.padding(top = 16.dp),
+                    modifier = Modifier.padding(top = Spacing.l),
                 )
             }
             if (s.missed.isEmpty()) item { Text(stringResource(R.string.all_correct)) }
             items(s.missed, key = { it.first.id }) { (q, picked) ->
                 val text = q.text(lang)
                 BhCard {
-                    Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        q.image?.let { PhotoThumb(it, Modifier.padding(bottom = 4.dp)) }
+                    Column(Modifier.padding(Spacing.m), verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
+                        q.image?.let { PhotoThumb(it, Modifier.padding(bottom = Spacing.xs)) }
                         Text(text.q, style = MaterialTheme.typography.titleSmall)
                         picked?.let {
                             Text(stringResource(R.string.your_answer, text.choices[it]), color = MaterialTheme.colorScheme.error)

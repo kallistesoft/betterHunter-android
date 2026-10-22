@@ -13,8 +13,6 @@ import androidx.compose.material.icons.rounded.Tune
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ListItem
-import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -25,24 +23,21 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.SectionTitle
 import ca.kallistesoft.hunt.core.designsystem.component.plus
+import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.ui.BackTopAppBar
-import ca.kallistesoft.hunt.core.ui.ExamAvatar
 import ca.kallistesoft.hunt.core.ui.ExamCard
+import ca.kallistesoft.hunt.core.ui.ExamListItem
 import ca.kallistesoft.hunt.core.ui.ExamSummary
 import ca.kallistesoft.hunt.core.ui.R
-import ca.kallistesoft.hunt.core.ui.currentLang
 
 /** "Exam training": the user's exams as full cards, the other exams as compact rows. */
 @Composable
@@ -71,7 +66,7 @@ internal fun ExamTrainingContent(
                 SectionTitle(stringResource(R.string.my_exams)) {
                     TextButton(onClick = onChangeExams, modifier = Modifier.testTag("change-exams")) {
                         Icon(Icons.Rounded.Tune, contentDescription = null, Modifier.size(18.dp))
-                        Spacer(Modifier.width(8.dp))
+                        Spacer(Modifier.width(Spacing.s))
                         Text(stringResource(R.string.action_change))
                     }
                 }
@@ -82,7 +77,7 @@ internal fun ExamTrainingContent(
                     onPractice = { onStartQuiz(summary.exam.id, QuizMode.PRACTICE) },
                     onExam = { onStartQuiz(summary.exam.id, QuizMode.EXAM) },
                     onReview = { onStartQuiz(summary.exam.id, QuizMode.REVIEW) },
-                    modifier = Modifier.padding(bottom = 12.dp),
+                    modifier = Modifier.padding(bottom = Spacing.m),
                 )
             }
             if (state.others.isNotEmpty()) {
@@ -106,7 +101,7 @@ internal fun ExamTrainingContent(
                 onPractice = { sheetExamId = null; onStartQuiz(summary.exam.id, QuizMode.PRACTICE) },
                 onExam = { sheetExamId = null; onStartQuiz(summary.exam.id, QuizMode.EXAM) },
                 onReview = { sheetExamId = null; onStartQuiz(summary.exam.id, QuizMode.REVIEW) },
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 24.dp),
+                modifier = Modifier.padding(start = Spacing.l, end = Spacing.l, bottom = Spacing.xxl),
             )
         }
     }
@@ -114,18 +109,10 @@ internal fun ExamTrainingContent(
 
 @Composable
 private fun OtherExamRow(summary: ExamSummary, onClick: () -> Unit) {
-    val exam = summary.exam
-    ListItem(
-        headlineContent = { Text(exam.name(currentLang()), fontWeight = FontWeight.SemiBold) },
-        supportingContent = {
-            Text(
-                "${exam.region} · " +
-                    pluralStringResource(R.plurals.questions_count, summary.questionCount, summary.questionCount),
-            )
-        },
-        leadingContent = { ExamAvatar(exam.id) },
-        trailingContent = { Icon(Icons.AutoMirrored.Rounded.KeyboardArrowRight, contentDescription = null) },
-        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
-        modifier = Modifier.testTag("other-${exam.id}").clickable(onClick = onClick),
+    ExamListItem(
+        summary.exam,
+        summary.questionCount,
+        modifier = Modifier.testTag("other-${summary.exam.id}").clickable(onClick = onClick),
+        trailing = { Icon(Icons.AutoMirrored.Rounded.KeyboardArrowRight, contentDescription = null) },
     )
 }

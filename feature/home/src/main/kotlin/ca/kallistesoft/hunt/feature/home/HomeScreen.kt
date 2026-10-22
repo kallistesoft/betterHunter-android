@@ -9,9 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.School
 import androidx.compose.material.icons.outlined.Visibility
@@ -28,7 +26,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -36,8 +33,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -49,9 +44,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
+import ca.kallistesoft.hunt.core.designsystem.component.HubCard
+import ca.kallistesoft.hunt.core.designsystem.component.NoticeCard
+import ca.kallistesoft.hunt.core.designsystem.component.NoticeTone
 import ca.kallistesoft.hunt.core.designsystem.component.ProgressRing
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
+import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Lang
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.ui.R
@@ -106,10 +105,14 @@ internal fun HomeContent(
     ) { padding ->
         if (state.loading) return@Scaffold
         LazyColumn(
-            contentPadding = padding.plus(top = 4.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = padding.plus(top = Spacing.xs),
+            verticalArrangement = Arrangement.spacedBy(Spacing.m),
         ) {
-            if (state.hasSampleContent) item { SampleBanner() }
+            if (state.hasSampleContent) {
+                item {
+                    NoticeCard(stringResource(R.string.sample_banner), NoticeTone.Warning, icon = Icons.Rounded.WarningAmber)
+                }
+            }
             item { TodayCard(state, onPractise = { exam -> onStartQuiz(exam, QuizMode.PRACTICE) }) }
             item {
                 HubCard(
@@ -120,8 +123,8 @@ internal fun HomeContent(
                         pluralStringResource(R.plurals.exams_count, state.trainingExamCount, state.trainingExamCount),
                         state.readiness?.let { stringResource(R.string.readiness_value, (it * 100).roundToInt()) },
                     ),
-                    color = scheme.primaryContainer,
-                    onColor = scheme.onPrimaryContainer,
+                    containerColor = scheme.primaryContainer,
+                    contentColor = scheme.onPrimaryContainer,
                     onClick = onOpenExams,
                     modifier = Modifier.testTag("hub-exams"),
                 )
@@ -137,8 +140,8 @@ internal fun HomeContent(
                             state.animalCount.takeIf { it > 0 }
                                 ?.let { pluralStringResource(R.plurals.animals_count, it, it) },
                         ),
-                        color = scheme.tertiaryContainer,
-                        onColor = scheme.onTertiaryContainer,
+                        containerColor = scheme.tertiaryContainer,
+                        contentColor = scheme.onTertiaryContainer,
                         onClick = onOpenRecognition,
                         modifier = Modifier.testTag("hub-recognise"),
                     )
@@ -184,7 +187,7 @@ private fun TodayCard(state: HomeUiState, onPractise: (examId: String) -> Unit) 
     val done = state.answeredToday
     val goal = state.dailyGoal
     BhCard(containerColor = scheme.primaryContainer.copy(alpha = 0.6f), border = null) {
-        Column(Modifier.padding(16.dp)) {
+        Column(Modifier.padding(Spacing.l)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 ProgressRing(
                     done.toFloat() / goal,
@@ -198,7 +201,7 @@ private fun TodayCard(state: HomeUiState, onPractise: (examId: String) -> Unit) 
                         Text("$done", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
                     }
                 }
-                Spacer(Modifier.width(16.dp))
+                Spacer(Modifier.width(Spacing.l))
                 Column(Modifier.weight(1f)) {
                     Text(stringResource(R.string.today), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                     Text(
@@ -206,14 +209,14 @@ private fun TodayCard(state: HomeUiState, onPractise: (examId: String) -> Unit) 
                         modifier = Modifier.testTag("goal-text"),
                     )
                     if (state.streak > 0) {
-                        Row(Modifier.padding(top = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Row(Modifier.padding(top = Spacing.xs), verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 Icons.Rounded.LocalFireDepartment,
                                 contentDescription = null,
                                 tint = BetterHunterTheme.extendedColors.streak,
                                 modifier = Modifier.size(18.dp),
                             )
-                            Spacer(Modifier.width(4.dp))
+                            Spacer(Modifier.width(Spacing.xs))
                             Text(pluralStringResource(R.plurals.streak, state.streak, state.streak))
                         }
                     }
@@ -231,59 +234,10 @@ private fun TodayCard(state: HomeUiState, onPractise: (examId: String) -> Unit) 
                 Spacer(Modifier.size(6.dp))
                 Button(onClick = { onPractise(exam.id) }, Modifier.fillMaxWidth().testTag("today-practice")) {
                     Icon(Icons.Rounded.PlayArrow, contentDescription = null)
-                    Spacer(Modifier.width(8.dp))
+                    Spacer(Modifier.width(Spacing.s))
                     Text(stringResource(R.string.practise_now))
                 }
             }
-        }
-    }
-}
-
-/** Big entry card for a section of the app (exam training, recognition games…). */
-@Composable
-private fun HubCard(
-    icon: ImageVector,
-    title: String,
-    subtitle: String,
-    facts: List<String>,
-    color: Color,
-    onColor: Color,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    BhCard(modifier, containerColor = color, border = null, onClick = onClick) {
-        Row(Modifier.padding(20.dp), verticalAlignment = Alignment.CenterVertically) {
-            Surface(Modifier.size(60.dp), shape = CircleShape, color = onColor.copy(alpha = 0.12f)) {
-                Icon(icon, contentDescription = null, Modifier.padding(14.dp), tint = onColor)
-            }
-            Spacer(Modifier.width(16.dp))
-            Column(Modifier.weight(1f)) {
-                Text(title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold, color = onColor)
-                Spacer(Modifier.size(4.dp))
-                Text(subtitle, style = MaterialTheme.typography.bodyMedium, color = onColor.copy(alpha = 0.85f))
-                if (facts.isNotEmpty()) {
-                    Spacer(Modifier.size(8.dp))
-                    Text(
-                        facts.joinToString(" · "),
-                        style = MaterialTheme.typography.labelLarge,
-                        fontWeight = FontWeight.SemiBold,
-                        color = onColor,
-                    )
-                }
-            }
-            Icon(Icons.AutoMirrored.Rounded.KeyboardArrowRight, contentDescription = null, tint = onColor)
-        }
-    }
-}
-
-@Composable
-private fun SampleBanner() {
-    val scheme = MaterialTheme.colorScheme
-    BhCard(containerColor = scheme.errorContainer, border = null) {
-        Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Rounded.WarningAmber, contentDescription = null, tint = scheme.onErrorContainer)
-            Spacer(Modifier.width(12.dp))
-            Text(stringResource(R.string.sample_banner), color = scheme.onErrorContainer)
         }
     }
 }
@@ -292,9 +246,9 @@ private fun SampleBanner() {
 @Composable
 private fun Footer(onOpenAbout: () -> Unit) {
     val muted = MaterialTheme.colorScheme.onSurfaceVariant
-    Row(Modifier.padding(top = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+    Row(Modifier.padding(top = Spacing.s), verticalAlignment = Alignment.CenterVertically) {
         Icon(Icons.Outlined.Info, contentDescription = null, tint = muted, modifier = Modifier.size(16.dp))
-        Spacer(Modifier.width(8.dp))
+        Spacer(Modifier.width(Spacing.s))
         Text(
             stringResource(R.string.footer),
             style = MaterialTheme.typography.bodySmall,

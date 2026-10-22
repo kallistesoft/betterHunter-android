@@ -34,6 +34,9 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
+import ca.kallistesoft.hunt.core.designsystem.component.BhPreviews
+import ca.kallistesoft.hunt.core.designsystem.component.PreviewSurface
+import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.appupdate.AppUpdateOptions
@@ -60,10 +63,22 @@ fun ForceUpdateScreen(storePackage: String, modifier: Modifier = Modifier) {
         scope.launch { manager.resumeImmediateUpdate(launcher) }
     }
 
+    ForceUpdateContent(
+        onUpdate = {
+            scope.launch {
+                if (!manager.startImmediateUpdate(launcher)) context.openStoreListing(storePackage)
+            }
+        },
+        modifier = modifier,
+    )
+}
+
+@Composable
+internal fun ForceUpdateContent(onUpdate: () -> Unit, modifier: Modifier = Modifier) {
     Scaffold(modifier.testTag("force-update")) { padding ->
         Column(
             Modifier.fillMaxSize().padding(padding).padding(32.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+            verticalArrangement = Arrangement.spacedBy(Spacing.l, Alignment.CenterVertically),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Icon(
@@ -83,19 +98,16 @@ fun ForceUpdateScreen(storePackage: String, modifier: Modifier = Modifier) {
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
             )
-            Button(
-                onClick = {
-                    scope.launch {
-                        if (!manager.startImmediateUpdate(launcher)) context.openStoreListing(storePackage)
-                    }
-                },
-                modifier = Modifier.fillMaxWidth().testTag("force-update-button"),
-            ) {
+            Button(onClick = onUpdate, modifier = Modifier.fillMaxWidth().testTag("force-update-button")) {
                 Text(stringResource(R.string.update_now))
             }
         }
     }
 }
+
+@BhPreviews
+@Composable
+internal fun ForceUpdatePreview() = PreviewSurface { ForceUpdateContent(onUpdate = {}) }
 
 /** Starts Play's immediate update flow; false when Play has no update to offer for this install. */
 private suspend fun AppUpdateManager.startImmediateUpdate(

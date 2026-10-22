@@ -8,21 +8,22 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.School
 import androidx.compose.material.icons.outlined.Timer
 import androidx.compose.material.icons.rounded.Replay
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -31,8 +32,11 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import ca.kallistesoft.hunt.core.designsystem.component.BadgeSize
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
+import ca.kallistesoft.hunt.core.designsystem.component.IconBadge
 import ca.kallistesoft.hunt.core.designsystem.component.ProgressRing
+import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Content
 import ca.kallistesoft.hunt.core.model.Exam
 import ca.kallistesoft.hunt.core.model.UserProgress
@@ -64,10 +68,10 @@ fun ExamCard(
     }.joinToString(" · ")
 
     BhCard(modifier.testTag("exam-card-${exam.id}")) {
-        Column(Modifier.padding(16.dp)) {
+        Column(Modifier.padding(Spacing.l)) {
             Row(verticalAlignment = Alignment.Top) {
                 ExamAvatar(exam.id)
-                Spacer(Modifier.width(12.dp))
+                Spacer(Modifier.width(Spacing.m))
                 Column(Modifier.weight(1f)) {
                     Text(exam.name(lang), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     Spacer(Modifier.height(2.dp))
@@ -86,23 +90,23 @@ fun ExamCard(
                 if (summary.available) ReadinessRing(summary.readiness)
             }
             if (summary.available) {
-                Spacer(Modifier.height(16.dp))
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Spacer(Modifier.height(Spacing.l))
+                Row(horizontalArrangement = Arrangement.spacedBy(Spacing.s)) {
                     Button(onClick = onPractice, modifier = Modifier.weight(1f).testTag("practice-${exam.id}")) {
                         Icon(Icons.Outlined.School, contentDescription = null, Modifier.size(18.dp))
-                        Spacer(Modifier.width(8.dp))
+                        Spacer(Modifier.width(Spacing.s))
                         Text(stringResource(R.string.practice), maxLines = 1, overflow = TextOverflow.Ellipsis)
                     }
                     OutlinedButton(onClick = onExam, modifier = Modifier.weight(1f).testTag("exam-${exam.id}")) {
                         Icon(Icons.Outlined.Timer, contentDescription = null, Modifier.size(18.dp))
-                        Spacer(Modifier.width(8.dp))
+                        Spacer(Modifier.width(Spacing.s))
                         Text(stringResource(R.string.exam_sim), maxLines = 1, overflow = TextOverflow.Ellipsis)
                     }
                 }
                 if (summary.weakCount > 0) {
-                    TextButton(onClick = onReview, modifier = Modifier.padding(top = 4.dp).testTag("review-${exam.id}")) {
+                    TextButton(onClick = onReview, modifier = Modifier.padding(top = Spacing.xs).testTag("review-${exam.id}")) {
                         Icon(Icons.Rounded.Replay, contentDescription = null, Modifier.size(18.dp))
-                        Spacer(Modifier.width(8.dp))
+                        Spacer(Modifier.width(Spacing.s))
                         Text(stringResource(R.string.review_mistakes, summary.weakCount))
                     }
                 }
@@ -113,15 +117,35 @@ fun ExamCard(
 
 /** Round icon badge for an exam. */
 @Composable
-fun ExamAvatar(examId: String, modifier: Modifier = Modifier) {
-    Surface(modifier.size(44.dp), shape = CircleShape, color = MaterialTheme.colorScheme.primaryContainer) {
-        Icon(
-            examIcon(examId),
-            contentDescription = null,
-            modifier = Modifier.padding(10.dp),
-            tint = MaterialTheme.colorScheme.onPrimaryContainer,
-        )
-    }
+fun ExamAvatar(
+    examId: String,
+    modifier: Modifier = Modifier,
+    size: BadgeSize = BadgeSize.Large,
+    containerColor: Color = MaterialTheme.colorScheme.primaryContainer,
+    contentColor: Color = MaterialTheme.colorScheme.onPrimaryContainer,
+) {
+    IconBadge(examIcon(examId), modifier, size, containerColor, contentColor)
+}
+
+/** One exam in a list: badge, name, region and number of questions, with an optional trailing control. */
+@Composable
+fun ExamListItem(
+    exam: Exam,
+    questionCount: Int,
+    modifier: Modifier = Modifier,
+    leading: @Composable () -> Unit = { ExamAvatar(exam.id) },
+    trailing: @Composable () -> Unit = {},
+) {
+    ListItem(
+        headlineContent = { Text(exam.name(currentLang()), fontWeight = FontWeight.SemiBold) },
+        supportingContent = {
+            Text("${exam.region} · " + pluralStringResource(R.plurals.questions_count, questionCount, questionCount))
+        },
+        leadingContent = leading,
+        trailingContent = trailing,
+        colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+        modifier = modifier,
+    )
 }
 
 /** Small ring showing how ready the user is for an exam. */
@@ -136,7 +160,7 @@ fun ReadinessRing(value: Float, modifier: Modifier = Modifier) {
         ProgressRing(value) {
             Text("$pct%", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
         }
-        Spacer(Modifier.height(4.dp))
+        Spacer(Modifier.height(Spacing.xs))
         Text(stringResource(R.string.readiness), style = MaterialTheme.typography.labelSmall)
     }
 }

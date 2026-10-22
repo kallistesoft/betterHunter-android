@@ -37,6 +37,10 @@ gradlePlugin {
             id = libs.plugins.betterhunter.android.feature.get().pluginId
             implementationClass = "AndroidFeatureConventionPlugin"
         }
+        register("androidScreenshot") {
+            id = libs.plugins.betterhunter.android.screenshot.get().pluginId
+            implementationClass = "AndroidScreenshotConventionPlugin"
+        }
         register("hilt") {
             id = libs.plugins.betterhunter.hilt.get().pluginId
             implementationClass = "HiltConventionPlugin"

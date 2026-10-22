@@ -128,6 +128,31 @@ Without `google-services.json` the Google Services plugin isn't applied and the 
 requests and forks still build. Remote Config uses a Firebase installation ID (already covered by "Device or other IDs"
 in the Play Console data safety form); no analytics are collected.
 
+## UI components and screenshots
+
+Reusable pieces live in two modules:
+
+- `core:designsystem`, no app knowledge: theme and `Spacing`, `BhCard`, `IconBadge`, `AnswerChoice` (idle, selected,
+  correct, wrong), `AnswerResult`, `NoticeCard`, `HubCard`, `LinkRow`, `ProgressRing`, `SectionTitle`.
+- `core:ui`, built on the app's models: `ExamCard`, `ExamListItem`, `ExamAvatar`, `ReadinessRing`, `QuestionPhoto`,
+  `SourceLinks`, `BackTopAppBar`, plus `PreviewData` (sample exams and questions).
+
+Screens are split into a stateful entry point (ViewModel) and a stateless `…Content` composable. Every component and
+screen has `@BhPreviews` previews: light in English and dark in French.
+
+### Screenshot tests
+
+Each preview is also a [Roborazzi](https://github.com/takahirom/roborazzi) screenshot test (Robolectric, no device),
+in `*ScreenshotTest.kt` of its module. Reference images live in `src/test/screenshots/`.
+
+```sh
+./gradlew recordRoborazziDebug   # write or update the references
+./gradlew verifyRoborazziDebug   # compare; diffs go to build/outputs/roborazzi
+```
+
+CI verifies on every push. After an intended UI change, run the **Record screenshots** workflow (Actions tab): it
+records on CI's machine and commits the new references, so they match what CI renders.
+
 ## Content
 
 Questions and photos live in `core/data/src/main/assets/` and are checked by `BundledContentTest`. To update them

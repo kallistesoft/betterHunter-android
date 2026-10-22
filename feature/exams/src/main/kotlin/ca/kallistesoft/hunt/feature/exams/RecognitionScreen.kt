@@ -10,10 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.plus
+import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.ui.BackTopAppBar
 import ca.kallistesoft.hunt.core.ui.ExamCard
@@ -27,13 +27,22 @@ fun RecognitionScreen(
     viewModel: ExamsViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    RecognitionContent(state, onBack, onStartQuiz)
+}
+
+@Composable
+internal fun RecognitionContent(
+    state: ExamsUiState,
+    onBack: () -> Unit,
+    onStartQuiz: (examId: String, mode: QuizMode) -> Unit,
+) {
     Scaffold(topBar = { BackTopAppBar(stringResource(R.string.hub_id), onBack) }) { padding ->
-        LazyColumn(contentPadding = padding.plus(top = 8.dp)) {
+        LazyColumn(contentPadding = padding.plus(top = Spacing.s)) {
             item {
                 Text(
                     stringResource(R.string.hub_id_sub),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(bottom = 16.dp),
+                    modifier = Modifier.padding(bottom = Spacing.l),
                 )
             }
             items(state.games, key = { it.exam.id }) { summary ->
@@ -42,7 +51,7 @@ fun RecognitionScreen(
                     onPractice = { onStartQuiz(summary.exam.id, QuizMode.PRACTICE) },
                     onExam = { onStartQuiz(summary.exam.id, QuizMode.EXAM) },
                     onReview = { onStartQuiz(summary.exam.id, QuizMode.REVIEW) },
-                    modifier = Modifier.padding(bottom = 12.dp),
+                    modifier = Modifier.padding(bottom = Spacing.m),
                 )
             }
         }

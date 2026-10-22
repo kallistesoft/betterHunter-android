@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.betterhunter.android.library)
     alias(libs.plugins.betterhunter.android.compose)
+    alias(libs.plugins.betterhunter.android.screenshot)
 }
 
 android {

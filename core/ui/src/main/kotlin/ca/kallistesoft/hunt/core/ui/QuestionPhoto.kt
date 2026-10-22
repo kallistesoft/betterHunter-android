@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ImageNotSupported
+import androidx.compose.material.icons.outlined.Photo
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.ZoomOutMap
 import androidx.compose.material3.CircularProgressIndicator
@@ -41,14 +42,17 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Question
 import coil3.SingletonImageLoader
 import coil3.compose.SubcomposeAsyncImage
@@ -72,7 +76,8 @@ fun QuestionPhoto(question: Question, modifier: Modifier = Modifier, maxHeightFr
     Column(modifier.fillMaxWidth()) {
         BoxWithConstraints(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
             val aspect = question.imageAspect ?: (4f / 3f)
-            val maxHeight = screenHeight * maxHeightFraction
+            // The window size can be unknown (0) in previews: then only the width limits the photo.
+            val maxHeight = if (screenHeight > 0.dp) screenHeight * maxHeightFraction else Dp.Infinity
             val height = min(maxWidth / aspect, maxHeight)
             Box(
                 Modifier
@@ -82,30 +87,35 @@ fun QuestionPhoto(question: Question, modifier: Modifier = Modifier, maxHeightFr
                     .clickable(onClickLabel = stringResource(R.string.zoom_photo)) { zoomed = true }
                     .testTag("question-photo"),
             ) {
-                SubcomposeAsyncImage(
-                    model = assetPhoto(image),
-                    contentDescription = description,
-                    // Never crop: heads and tails must stay visible.
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier.fillMaxSize(),
-                    loading = {
-                        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                            CircularProgressIndicator(Modifier.size(28.dp), strokeWidth = 3.dp)
-                        }
-                    },
-                    error = {
-                        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                            Icon(Icons.Outlined.ImageNotSupported, contentDescription = null, Modifier.size(40.dp))
-                        }
-                    },
-                )
+                // Previews and screenshot tests draw a fixed placeholder instead of loading the photo.
+                if (LocalInspectionMode.current) {
+                    Icon(Icons.Outlined.Photo, contentDescription = null, Modifier.size(40.dp).align(Alignment.Center))
+                } else {
+                    SubcomposeAsyncImage(
+                        model = assetPhoto(image),
+                        contentDescription = description,
+                        // Never crop: heads and tails must stay visible.
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier.fillMaxSize(),
+                        loading = {
+                            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                                CircularProgressIndicator(Modifier.size(28.dp), strokeWidth = 3.dp)
+                            }
+                        },
+                        error = {
+                            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                                Icon(Icons.Outlined.ImageNotSupported, contentDescription = null, Modifier.size(40.dp))
+                            }
+                        },
+                    )
+                }
                 Icon(
                     Icons.Rounded.ZoomOutMap,
                     contentDescription = null,
                     tint = Color.White,
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
-                        .padding(8.dp)
+                        .padding(Spacing.s)
                         .background(Color.Black.copy(alpha = 0.45f), CircleShape)
                         .padding(6.dp)
                         .size(18.dp),
@@ -165,21 +175,26 @@ private fun FullPhoto(image: String, description: String, onDismiss: () -> Unit)
 /** Small thumbnail for lists (results screen); whole photo, never cropped. */
 @Composable
 fun PhotoThumb(image: String, modifier: Modifier = Modifier) {
-    SubcomposeAsyncImage(
-        model = assetPhoto(image),
-        contentDescription = null,
-        contentScale = ContentScale.Fit,
-        modifier = modifier
-            .size(72.dp)
-            .clip(RoundedCornerShape(10.dp))
-            .background(MaterialTheme.colorScheme.surfaceContainerHighest),
-    )
+    val box = modifier
+        .size(72.dp)
+        .clip(RoundedCornerShape(10.dp))
+        .background(MaterialTheme.colorScheme.surfaceContainerHighest)
+    if (LocalInspectionMode.current) {
+        Box(box)
+    } else {
+        SubcomposeAsyncImage(
+            model = assetPhoto(image),
+            contentDescription = null,
+            contentScale = ContentScale.Fit,
+            modifier = box,
+        )
+    }
 }
 
 /** Loads [image] ahead of time (the next question's photo), so it appears without a wait. */
 @Composable
 fun PrefetchPhoto(image: String?) {
-    if (image == null) return
+    if (image == null || LocalInspectionMode.current) return
     val context = LocalContext.current
     LaunchedEffect(image) {
         SingletonImageLoader.get(context).enqueue(ImageRequest.Builder(context).data(assetPhoto(image)).build())
