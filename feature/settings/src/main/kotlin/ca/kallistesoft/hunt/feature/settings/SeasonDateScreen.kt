@@ -8,9 +8,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,7 +24,6 @@ import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.NotificationsActive
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -50,6 +52,7 @@ import ca.kallistesoft.hunt.core.designsystem.component.IconBadge
 import ca.kallistesoft.hunt.core.designsystem.component.LinkButton
 import ca.kallistesoft.hunt.core.designsystem.component.Overline
 import ca.kallistesoft.hunt.core.designsystem.component.PrimaryButton
+import ca.kallistesoft.hunt.core.designsystem.component.TooltipIconButton
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
@@ -117,9 +120,14 @@ internal fun SeasonDateContent(
                 }
             }
         },
+        contentWindowInsets = WindowInsets.safeDrawing,
     ) { padding ->
         if (state.loading) return@Scaffold
-        LazyColumn(contentPadding = padding.plus(top = Spacing.s), verticalArrangement = Arrangement.spacedBy(Spacing.l)) {
+        LazyColumn(
+            Modifier.consumeWindowInsets(padding),
+            contentPadding = padding.plus(top = Spacing.s),
+            verticalArrangement = Arrangement.spacedBy(Spacing.l),
+        ) {
             item {
                 Column(verticalArrangement = Arrangement.spacedBy(Spacing.s)) {
                     Text(stringResource(R.string.season_date_title), style = MaterialTheme.typography.headlineMedium)
@@ -153,22 +161,26 @@ private fun Calendar(state: SeasonDateUiState, onPick: (Long) -> Unit) {
     BhCard(Modifier.testTag("calendar")) {
         Column(Modifier.padding(Spacing.l), verticalArrangement = Arrangement.spacedBy(Spacing.s)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(
+                TooltipIconButton(
+                    Icons.AutoMirrored.Rounded.KeyboardArrowLeft,
+                    label = stringResource(R.string.previous_month),
                     onClick = { shown = month.minusMonths(1).atDay(1).toEpochDay() },
                     enabled = month > YearMonth.from(today),
                     modifier = Modifier.testTag("calendar-prev"),
-                ) { Icon(Icons.AutoMirrored.Rounded.KeyboardArrowLeft, contentDescription = stringResource(R.string.previous_month)) }
+                )
                 Text(
                     month.atDay(1).format(DateTimeFormatter.ofPattern("LLLL yyyy", locale)).replaceFirstChar { it.titlecase(locale) },
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.weight(1f),
                 )
-                IconButton(
+                TooltipIconButton(
+                    Icons.AutoMirrored.Rounded.KeyboardArrowRight,
+                    label = stringResource(R.string.next_month),
                     onClick = { shown = month.plusMonths(1).atDay(1).toEpochDay() },
                     enabled = month < YearMonth.from(last),
                     modifier = Modifier.testTag("calendar-next"),
-                ) { Icon(Icons.AutoMirrored.Rounded.KeyboardArrowRight, contentDescription = stringResource(R.string.next_month)) }
+                )
             }
             Row {
                 (0 until 7).forEach { i ->

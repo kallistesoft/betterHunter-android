@@ -8,11 +8,9 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.SystemUpdate
@@ -35,6 +33,7 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import ca.kallistesoft.hunt.core.designsystem.component.BhPreviews
 import ca.kallistesoft.hunt.core.designsystem.component.PreviewSurface
 import ca.kallistesoft.hunt.core.designsystem.component.PrimaryButton
+import ca.kallistesoft.hunt.core.designsystem.component.StatusColumn
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -75,12 +74,9 @@ fun ForceUpdateScreen(storePackage: String, modifier: Modifier = Modifier) {
 
 @Composable
 internal fun ForceUpdateContent(onUpdate: () -> Unit, modifier: Modifier = Modifier) {
-    Scaffold(modifier.testTag("force-update")) { padding ->
-        Column(
-            Modifier.fillMaxSize().padding(padding).padding(Spacing.xxxl),
-            verticalArrangement = Arrangement.spacedBy(Spacing.l, Alignment.CenterVertically),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
+    Scaffold(modifier.testTag("force-update"), contentWindowInsets = WindowInsets.safeDrawing) { padding ->
+        // Scrolls in a short window (landscape, split screen): "Update now" is the only way on, it must stay reachable.
+        StatusColumn(padding, spacing = Spacing.l) {
             Icon(
                 Icons.Rounded.SystemUpdate,
                 contentDescription = null,

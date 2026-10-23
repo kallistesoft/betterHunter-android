@@ -2,17 +2,23 @@ package ca.kallistesoft.hunt.feature.about
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -37,12 +43,22 @@ import ca.kallistesoft.hunt.core.ui.currentLang
 import ca.kallistesoft.hunt.core.ui.rememberLinkOpener
 
 /** Disclaimer, how the app works and its sources (contact, privacy and the version are in Settings). */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutScreen(onBack: () -> Unit) {
     val links = rememberLinkOpener()
     val lang = currentLang()
-    Scaffold(topBar = { BackTopAppBar(stringResource(R.string.about), onBack) }) { padding ->
-        LazyColumn(contentPadding = padding.plus(bottom = Spacing.xxxl), verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = { BackTopAppBar(stringResource(R.string.about), onBack, scrollBehavior = scrollBehavior) },
+        contentWindowInsets = WindowInsets.safeDrawing,
+    ) { padding ->
+        LazyColumn(
+            Modifier.consumeWindowInsets(padding),
+            contentPadding = padding.plus(bottom = Spacing.xxxl),
+            verticalArrangement = Arrangement.spacedBy(Spacing.xs),
+        ) {
             item {
                 NoticeCard(stringResource(R.string.disclaimer), NoticeTone.Info, Modifier.testTag("disclaimer"), icon = Icons.Outlined.Info)
             }

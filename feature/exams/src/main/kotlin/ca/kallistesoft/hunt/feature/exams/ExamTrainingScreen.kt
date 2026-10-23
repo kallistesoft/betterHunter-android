@@ -1,7 +1,10 @@
 package ca.kallistesoft.hunt.feature.exams
 
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -62,8 +65,11 @@ internal fun ExamTrainingContent(
     onStartQuiz: (examId: String, mode: QuizMode) -> Unit,
     onPassedRealExam: (examId: String) -> Unit,
 ) {
-    Scaffold(topBar = { BackTopAppBar(stringResource(R.string.hub_exams), onBack) }) { padding ->
-        LazyColumn(contentPadding = padding.plus()) {
+    Scaffold(
+        topBar = { BackTopAppBar(stringResource(R.string.hub_exams), onBack) },
+        contentWindowInsets = WindowInsets.safeDrawing,
+    ) { padding ->
+        LazyColumn(Modifier.consumeWindowInsets(padding), contentPadding = padding.plus()) {
             item {
                 SectionTitle(stringResource(R.string.my_exams)) {
                     LinkButton(onClick = onOpenProvinces, modifier = Modifier.testTag("change-exams")) {

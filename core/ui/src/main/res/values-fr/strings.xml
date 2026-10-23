@@ -173,6 +173,9 @@
     <string name="report_subject">Erreur dans une question %1$s</string>
     <string name="report_body">Décrivez le problème (erreur, règle changée, traduction…) :\n\n\n</string>
     <string name="report_fallback">Écrivez-nous à %1$s (question %2$s)</string>
+    <string name="shortcuts_quiz">Pendant une question</string>
+    <string name="shortcut_answer">Choisir la réponse %1$s</string>
+    <string name="shortcut_next">Question suivante</string>
     <string name="quit_title">Quitter le test?</string>
     <string name="quit_body">Votre progression dans ce test sera perdue.</string>
     <string name="quit">Quitter</string>

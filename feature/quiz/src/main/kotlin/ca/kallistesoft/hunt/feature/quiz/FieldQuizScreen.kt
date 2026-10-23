@@ -6,9 +6,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,15 +25,18 @@ import androidx.compose.material.icons.rounded.EmojiEvents
 import androidx.compose.material.icons.rounded.LocalFireDepartment
 import androidx.compose.material.icons.rounded.TrendingUp
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -48,6 +54,7 @@ import ca.kallistesoft.hunt.core.designsystem.component.PrimaryButton
 import ca.kallistesoft.hunt.core.designsystem.component.ProgressRing
 import ca.kallistesoft.hunt.core.designsystem.component.SecondaryButton
 import ca.kallistesoft.hunt.core.designsystem.component.SectionTitle
+import ca.kallistesoft.hunt.core.designsystem.component.StatusColumn
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
@@ -78,11 +85,19 @@ fun FieldQuizScreen(
 ) {
     val askPermission = rememberNotificationPermission(viewModel::turnOnDailyReminders)
     when (val state = viewModel.uiState.collectAsStateWithLifecycle().value) {
-        FieldQuizUiState.Loading -> Scaffold(topBar = { BackTopAppBar("", onClose) }) { padding ->
-            Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
+        FieldQuizUiState.Loading -> Scaffold(
+            topBar = { BackTopAppBar("", onClose) },
+            contentWindowInsets = WindowInsets.safeDrawing,
+        ) { padding ->
+            Box(Modifier.fillMaxSize().padding(padding).consumeWindowInsets(padding), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator()
+            }
         }
-        is FieldQuizUiState.Empty -> Scaffold(topBar = { BackTopAppBar(runTitle(run, skill), onClose) }) { padding ->
-            Box(Modifier.fillMaxSize().padding(padding).padding(Spacing.xxxl), contentAlignment = Alignment.Center) {
+        is FieldQuizUiState.Empty -> Scaffold(
+            topBar = { BackTopAppBar(runTitle(run, skill), onClose) },
+            contentWindowInsets = WindowInsets.safeDrawing,
+        ) { padding ->
+            StatusColumn(padding) {
                 Text(
                     stringResource(if (run == FieldRun.MISTAKES) R.string.nothing_to_review else R.string.no_questions),
                     textAlign = TextAlign.Center,
@@ -138,6 +153,7 @@ private fun runOverline(state: FieldQuizUiState.Running): String = when (state.r
  * Results of a field run: the score, then how the skill moved ("Skill getting stronger 62% → 70%", or "Skill
  * mastered"), or every skill the mix touched, then the questions to review.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun FieldResultContent(
     state: FieldQuizUiState.Finished,
@@ -150,8 +166,17 @@ internal fun FieldResultContent(
     val muted = MaterialTheme.colorScheme.onSurfaceVariant
     val missed = session.missed
     val single = state.changes.singleOrNull()?.takeIf { state.run == FieldRun.SKILL }
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
-        topBar = { BackTopAppBar(runTitle(state.run, state.skill), onBack = null, overline = stringResource(R.string.field_results)) },
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            BackTopAppBar(
+                runTitle(state.run, state.skill),
+                onBack = null,
+                overline = stringResource(R.string.field_results),
+                scrollBehavior = scrollBehavior,
+            )
+        },
         bottomBar = {
             BottomActionBar {
                 SecondaryButton(
@@ -171,8 +196,10 @@ internal fun FieldResultContent(
                 }
             }
         },
+        contentWindowInsets = WindowInsets.safeDrawing,
     ) { padding ->
         LazyColumn(
+            Modifier.consumeWindowInsets(padding),
             contentPadding = padding.plus(top = Spacing.s, bottom = Spacing.l),
             verticalArrangement = Arrangement.spacedBy(Spacing.m),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -296,8 +323,10 @@ internal fun DailyDoneContent(
                 }
             }
         },
+        contentWindowInsets = WindowInsets.safeDrawing,
     ) { padding ->
         LazyColumn(
+            Modifier.consumeWindowInsets(padding),
             contentPadding = padding.plus(top = Spacing.l, bottom = Spacing.l),
             verticalArrangement = Arrangement.spacedBy(Spacing.l),
             horizontalAlignment = Alignment.CenterHorizontally,

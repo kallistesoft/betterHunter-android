@@ -2,7 +2,10 @@ package ca.kallistesoft.hunt.feature.settings
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -105,9 +108,16 @@ internal fun SettingsContent(
     onDailyReminders: (Boolean) -> Unit = {},
     onSeasonReminders: (Boolean) -> Unit = {},
 ) {
-    Scaffold(topBar = { BackTopAppBar(stringResource(R.string.settings), onBack) }) { padding ->
+    Scaffold(
+        topBar = { BackTopAppBar(stringResource(R.string.settings), onBack) },
+        contentWindowInsets = WindowInsets.safeDrawing,
+    ) { padding ->
         if (state.loading) return@Scaffold
-        LazyColumn(contentPadding = padding.plus(), verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
+        LazyColumn(
+            Modifier.consumeWindowInsets(padding),
+            contentPadding = padding.plus(),
+            verticalArrangement = Arrangement.spacedBy(Spacing.xs),
+        ) {
             item { SectionTitle(stringResource(R.string.your_profile)) }
             item { ProfileCard(state, onEdit, onOpenProvinces, onOpenSeasonDate) }
             if (state.fieldHunter) {

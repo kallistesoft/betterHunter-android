@@ -1,5 +1,7 @@
 package ca.kallistesoft.hunt.feature.settings
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -60,6 +62,7 @@ internal fun ProfileEditContent(
                 )
             }
         },
+        contentWindowInsets = WindowInsets.safeDrawing,
     ) { padding ->
         if (state.loading) return@Scaffold
         when (state.field) {

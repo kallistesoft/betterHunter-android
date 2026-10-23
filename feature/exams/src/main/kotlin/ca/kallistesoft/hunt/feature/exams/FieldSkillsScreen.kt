@@ -5,8 +5,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -71,9 +74,16 @@ internal fun FieldSkillsContent(
     onStart: (run: FieldRun, skill: FieldSkill?) -> Unit,
 ) {
     val muted = MaterialTheme.colorScheme.onSurfaceVariant
-    Scaffold(topBar = { BackTopAppBar(stringResource(R.string.hub_skills), onBack) }) { padding ->
+    Scaffold(
+        topBar = { BackTopAppBar(stringResource(R.string.hub_skills), onBack) },
+        contentWindowInsets = WindowInsets.safeDrawing,
+    ) { padding ->
         if (state.loading) return@Scaffold
-        LazyColumn(contentPadding = padding.plus(top = Spacing.s), verticalArrangement = Arrangement.spacedBy(Spacing.s)) {
+        LazyColumn(
+            Modifier.consumeWindowInsets(padding),
+            contentPadding = padding.plus(top = Spacing.s),
+            verticalArrangement = Arrangement.spacedBy(Spacing.s),
+        ) {
             item {
                 Text(
                     stringResource(if (state.allMastered) R.string.skills_all_mastered_sub else R.string.skills_sub),

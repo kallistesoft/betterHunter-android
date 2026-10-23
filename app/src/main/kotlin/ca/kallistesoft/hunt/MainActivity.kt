@@ -1,6 +1,8 @@
 package ca.kallistesoft.hunt
 
 import android.os.Bundle
+import android.view.KeyboardShortcutGroup
+import android.view.Menu
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -12,6 +14,7 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.update.ForceUpdateScreen
+import ca.kallistesoft.hunt.feature.quiz.quizShortcutGroup
 import dagger.hilt.android.AndroidEntryPoint
 
 /** Single activity. AppCompat only provides the per-app language API; the UI is all Compose. */
@@ -40,5 +43,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    /** Lists the quiz's keyboard shortcuts in the system's Keyboard Shortcut Helper (Meta + /). */
+    override fun onProvideKeyboardShortcuts(data: MutableList<KeyboardShortcutGroup>, menu: Menu?, deviceId: Int) {
+        super.onProvideKeyboardShortcuts(data, menu, deviceId)
+        data += quizShortcutGroup(this)
     }
 }

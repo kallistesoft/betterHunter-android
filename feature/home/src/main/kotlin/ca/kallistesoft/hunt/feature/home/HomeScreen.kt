@@ -6,10 +6,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,17 +27,19 @@ import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.LocalFireDepartment
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.WarningAmber
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -52,6 +57,7 @@ import ca.kallistesoft.hunt.core.designsystem.component.NoticeTone
 import ca.kallistesoft.hunt.core.designsystem.component.Overline
 import ca.kallistesoft.hunt.core.designsystem.component.PrimaryButton
 import ca.kallistesoft.hunt.core.designsystem.component.ProgressRing
+import ca.kallistesoft.hunt.core.designsystem.component.TooltipIconButton
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.designsystem.theme.BhTextStyles
@@ -104,6 +110,7 @@ fun HomeScreen(
  * kept for refreshers. A new hunter from onboarding (P11): the season card, today's 6 questions, then "What is it?"
  * and Field skills.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun HomeContent(
     state: HomeUiState,
@@ -120,17 +127,24 @@ internal fun HomeContent(
     onStartField: (FieldRun) -> Unit = {},
     onOpenSeasonDate: () -> Unit = {},
 ) {
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            BrandTopAppBar(onSetLanguage) {
-                IconButton(onClick = onOpenSettings, modifier = Modifier.testTag("settings")) {
-                    Icon(Icons.Outlined.Settings, contentDescription = stringResource(R.string.settings))
-                }
+            BrandTopAppBar(onSetLanguage, scrollBehavior) {
+                TooltipIconButton(
+                    Icons.Outlined.Settings,
+                    label = stringResource(R.string.settings),
+                    onClick = onOpenSettings,
+                    modifier = Modifier.testTag("settings"),
+                )
             }
         },
+        contentWindowInsets = WindowInsets.safeDrawing,
     ) { padding ->
         if (state.loading) return@Scaffold
         LazyColumn(
+            Modifier.consumeWindowInsets(padding),
             contentPadding = padding.plus(top = Spacing.xs),
             verticalArrangement = Arrangement.spacedBy(Spacing.m + Spacing.xxs),
         ) {
@@ -191,9 +205,13 @@ private fun NewHunterBanner(onDismiss: () -> Unit) {
                 Text(stringResource(R.string.new_hunter_welcome), style = MaterialTheme.typography.titleSmall)
                 Text(stringResource(R.string.new_hunter_welcome_sub), style = MaterialTheme.typography.bodySmall, color = scheme.onSurfaceVariant)
             }
-            IconButton(onClick = onDismiss, modifier = Modifier.testTag("banner-close")) {
-                Icon(Icons.Rounded.Close, contentDescription = stringResource(R.string.close), tint = scheme.onSurfaceVariant)
-            }
+            TooltipIconButton(
+                Icons.Rounded.Close,
+                label = stringResource(R.string.close),
+                onClick = onDismiss,
+                modifier = Modifier.testTag("banner-close"),
+                tint = scheme.onSurfaceVariant,
+            )
         }
     }
 }

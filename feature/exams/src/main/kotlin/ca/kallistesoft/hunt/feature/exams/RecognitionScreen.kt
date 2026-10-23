@@ -1,6 +1,9 @@
 package ca.kallistesoft.hunt.feature.exams
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
@@ -36,8 +39,11 @@ internal fun RecognitionContent(
     onBack: () -> Unit,
     onStartQuiz: (examId: String, mode: QuizMode) -> Unit,
 ) {
-    Scaffold(topBar = { BackTopAppBar(stringResource(R.string.hub_id), onBack) }) { padding ->
-        LazyColumn(contentPadding = padding.plus(top = Spacing.s)) {
+    Scaffold(
+        topBar = { BackTopAppBar(stringResource(R.string.hub_id), onBack) },
+        contentWindowInsets = WindowInsets.safeDrawing,
+    ) { padding ->
+        LazyColumn(Modifier.consumeWindowInsets(padding), contentPadding = padding.plus(top = Spacing.s)) {
             item {
                 Text(
                     stringResource(R.string.hub_id_sub),
