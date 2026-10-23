@@ -129,6 +129,8 @@ during a question (DECISIONS.md, P8). `:core:ads` holds the rules (`AdsManager`)
   show at once and the next one loads. A loaded ad older than an hour is dropped.
 - **Capped.** At most one every 3 minutes in the app (the AdMob ad unit has the same frequency cap).
 - **Switch.** `ads_enabled` (Remote Config) turns ads off without a release.
+- **Not in instrumented tests.** Under the flow tests and the release smoke test (AndroidX Test loaded in the app's
+  process) ads are off, consent request included: an interstitial would cover the screens they drive.
 
 **IDs.** In `app/build.gradle.kts` (`admobRelease`, `admobTest`): the AdMob App ID goes in the manifest through the
 `admobAppId` placeholder, the ad unit in `BuildConfig.ADMOB_INTERSTITIAL_ID`. Only `release` uses the real IDs;
