@@ -17,9 +17,11 @@ import ca.kallistesoft.hunt.core.model.UserProgress
 import ca.kallistesoft.hunt.core.model.photoOfDay
 import ca.kallistesoft.hunt.core.model.skillPools
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -107,7 +109,8 @@ class HomeViewModel @Inject constructor(
             skillsReadiness = if (field) progress.readinessFresh(skillQuestions, day) else 0f,
             season = if (field) SeasonStatus.of(progress.seasonStart, day) else null,
         )
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), HomeUiState())
+    }.flowOn(Dispatchers.Default) // readiness over every question: off the main thread
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), HomeUiState())
 
     private fun dailyState(questions: List<Question>, results: Map<String, Boolean>): DailyState {
         val (species, general) = questions.partition { it.image != null }

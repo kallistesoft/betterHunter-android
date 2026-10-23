@@ -10,9 +10,11 @@ import ca.kallistesoft.hunt.core.model.FieldTraining
 import ca.kallistesoft.hunt.core.model.SkillSummary
 import ca.kallistesoft.hunt.core.model.skillPools
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
@@ -45,5 +47,6 @@ class FieldSkillsViewModel @Inject constructor(
             skills = pools.map { (skill, pool) -> progress.skillSummary(skill, pool, day) },
             mistakes = pools.values.flatten().distinctBy { it.id }.count { it.id in progress.weak },
         )
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), FieldSkillsUiState())
+    }.flowOn(Dispatchers.Default) // readiness over every question: off the main thread
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), FieldSkillsUiState())
 }
