@@ -73,7 +73,7 @@ internal fun ExamTrainingContent(
                     }
                 }
             }
-            items(state.mine, key = { it.exam.id }) { summary ->
+            items(state.mine, key = { it.exam.id }, contentType = { "exam" }) { summary ->
                 val id = summary.exam.id
                 ExamCard(
                     summary,

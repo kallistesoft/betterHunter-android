@@ -30,7 +30,7 @@ EXAM TRAINING
 BUILT TO HELP YOU LEARN
 • Daily goal and streak
 • Readiness score for each exam
-• English and French, following your phone's language
+• English and French (switch in the app)
 • Report a problem on any question in one tap
 
 Independent study tool, not affiliated with or endorsed by the RCMP, the Canadian Firearms Program, the Government of Québec, FédéCP or the Government of Alberta. Questions are original practice questions written from the official manuals; they are not the official exam questions. Errors are possible and rules change: always check the official manual and current regulations.
@@ -61,7 +61,7 @@ ENTRAÎNEMENT AUX EXAMENS
 CONÇU POUR APPRENDRE
 • Objectif quotidien et série de jours
 • Indice de préparation pour chaque examen
-• En français et en anglais, selon la langue de votre téléphone
+• En français et en anglais (au choix dans l'appli)
 • Signalez un problème sur n'importe quelle question en un geste
 
 Outil d'étude indépendant, non affilié à la GRC, au Programme canadien des armes à feu, au gouvernement du Québec, à la FédéCP ni au gouvernement de l'Alberta, et non approuvé par eux. Les questions sont des questions de pratique originales, rédigées à partir des manuels officiels; ce ne sont pas les questions des examens officiels. Des erreurs sont possibles et les règles changent : vérifiez toujours dans le manuel officiel et la réglementation en vigueur.

@@ -126,6 +126,14 @@ the mockup's colours mapped onto its roles (primary = orange, secondary = green;
 colour. "What is it?" answers show the name in both languages; an answered photo shows the animal's card instead of the
 choices. iOS uses the same token values.
 
+**D7. No Compose Styles API.** *Android.* Components keep their parameters and Material 3 theming; they aren't moved to
+`Style` (`skills/styles`). *Why:* the API is still `@ExperimentalFoundationStyleApi`; most design-system components wrap
+Material 3 components, which Styles doesn't cover (`Buttons`, `Cards`, `LinkRow`, `AnswerChoice`, `ChoiceCard`,
+`PillToggle`, `IconBadge`, `ProgressRing`); and the look is fixed (D6), so there's little for it to add. The
+prerequisites are met (foundation 1.12.1, compile SDK 37). *Revisit when:* the API is stable or Material 3 supports it.
+A pilot would add the opt-in to the `betterhunter.android.compose` convention plugin, a `ComponentStyles.kt`, and move
+`NoticeCard` alone, its Roborazzi screenshot checking that nothing changed.
+
 ## Android engineering
 
 **A1. Latest stable versions** at the time of writing (no RC or alpha): Kotlin 2.4.21, AGP 9.4.0 (built-in Kotlin),

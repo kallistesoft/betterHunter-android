@@ -28,6 +28,8 @@ data class ProfileEditUiState(
     val weapons: Set<Weapon> = emptySet(),
     val province: Province? = null,
     val loading: Boolean = true,
+    /** The answer is saved: the screen closes. */
+    val saved: Boolean = false,
 ) {
     val canSave: Boolean
         get() = !loading && when (this.field) {
@@ -63,13 +65,16 @@ class ProfileEditViewModel @AssistedInject constructor(
         ),
     )
 
-    val uiState: StateFlow<ProfileEditUiState> = combine(userData.progress, draft) { saved, pick ->
+    private val saved = MutableStateFlow(false)
+
+    val uiState: StateFlow<ProfileEditUiState> = combine(userData.progress, draft, saved) { stored, pick, done ->
         ProfileEditUiState(
             field = field,
-            hunterType = pick.hunterType ?: saved.hunterType,
-            weapons = pick.weapons ?: saved.weapons,
-            province = pick.province ?: saved.homeProvince,
+            hunterType = pick.hunterType ?: stored.hunterType,
+            weapons = pick.weapons ?: stored.weapons,
+            province = pick.province ?: stored.homeProvince,
             loading = false,
+            saved = done,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ProfileEditUiState(field))
 
@@ -84,7 +89,8 @@ class ProfileEditViewModel @AssistedInject constructor(
 
     fun chooseProvince(province: Province) = edit { it.copy(province = province) }
 
-    fun save(onSaved: () -> Unit) {
+    /** Saves the pick, then sets [ProfileEditUiState.saved] (the screen navigates on it, so a rotation can't lose it). */
+    fun save() {
         val state = uiState.value
         if (!state.canSave || saving) return
         saving = true
@@ -94,7 +100,7 @@ class ProfileEditViewModel @AssistedInject constructor(
                 ProfileField.WEAPONS -> userData.setWeapons(state.weapons)
                 ProfileField.HOME_PROVINCE -> userData.setHomeProvince(state.province!!)
             }
-            onSaved()
+            saved.value = true
         }
     }
 

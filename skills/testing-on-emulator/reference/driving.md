@@ -69,5 +69,6 @@ $ADB shell am start -n $PKG/ca.kallistesoft.hunt.MainActivity    # should reopen
 | "No app window on screen" | App crashed or is in background: run `$S/check_crash.sh`, then relaunch with `install.sh --no-build` |
 | "No matching elements" | Label is a content description (`desc=…`), is off screen (scroll to it), or the screen is in French |
 | Tap succeeds but screen doesn't change | Element disabled (e.g. Continue before choosing an exam), or a dialog is on top: dump the layout |
+| Debug app opens on "Update required" (`testTag` `force-update`) | Firebase Remote Config's `min_version_code_debug` is greater than the local build's `versionCode` (1): set it back to 1 in the Firebase console, or build with `-PversionCode=<n>` |
 | `INSTALL_FAILED_*` | `install.sh` already handles signature mismatch; for anything else show the message to the user |
 | `android` CLI missing | `brew install --cask android-commandlinetools`, or use `$ADB shell uiautomator dump` and `$ADB exec-out screencap -p > shot.png` |

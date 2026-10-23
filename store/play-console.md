@@ -26,15 +26,18 @@ Created 2026-10-21: default language en-CA, App, Free, Play App Signing.
 | Advertising ID | Yes: advertising/marketing, analytics, fraud prevention/security/compliance |
 
 ### Data safety
-The app itself collects nothing; everything declared comes from the AdMob SDK
+The app's own code collects nothing. Firebase Remote Config (feature flags, force update) sends a Firebase
+installation ID at launch: declare it as *device or other IDs*, collected, not shared, required, purpose app
+functionality. Everything else comes from the AdMob SDK
 ([Google's guidance](https://developers.google.com/admob/android/privacy/play-data-disclosure)).
 - Collects or shares data: Yes. Encrypted in transit: Yes. Account creation: none, no external sign-in.
 - Data types: approximate location (from IP), app interactions, diagnostics, device or other IDs.
-- For each type: collected and shared, not ephemeral, required.
+- For each AdMob type: collected and shared, not ephemeral, required.
   Purposes for both collection and sharing: analytics, advertising or marketing, fraud prevention/security/compliance.
 
-**Keep in sync:** if the app ships without AdMob, change Ads and Advertising ID to "No" and Data safety to
-"no data collected". If another SDK is added (analytics, crash reporting…), update Data safety.
+**Keep in sync:** if the app ships without AdMob, change Ads and Advertising ID to "No" and keep only Remote
+Config's installation ID in Data safety. If another SDK is added (analytics, crash reporting…), update Data safety and
+the privacy policy (FOLLOW-UP.md, section 3).
 
 ## Still to do
 1. AdMob: the account is created by the owner; then integrate the SDK, add app-ads.txt and a consent form (UMP).

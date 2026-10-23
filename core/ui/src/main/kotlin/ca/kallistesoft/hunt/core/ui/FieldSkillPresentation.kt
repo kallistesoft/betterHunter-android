@@ -23,6 +23,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.Locale
+import java.util.concurrent.ConcurrentHashMap
 
 @get:StringRes
 val FieldSkill.nameRes: Int
@@ -54,18 +55,30 @@ val FieldSkill.icon: ImageVector
         FieldSkill.SURVIVAL -> Icons.Outlined.HealthAndSafety
     }
 
+// One formatter per locale, built on first use: the season calendar formats a date for each of its ~35 day cells.
+private val longDates = ConcurrentHashMap<Locale, DateTimeFormatter>()
+private val shortDates = ConcurrentHashMap<Locale, DateTimeFormatter>()
+private val timesOfDay = ConcurrentHashMap<Locale, DateTimeFormatter>()
+
 /** "Saturday, November 14" / « samedi 14 novembre », for a day number. */
-fun longDate(day: Long, locale: Locale = Locale.getDefault()): String =
-    LocalDate.ofEpochDay(day).format(DateTimeFormatter.ofPattern(if (locale.language == "fr") "EEEE d MMMM" else "EEEE, MMMM d", locale))
-        .replaceFirstChar { it.titlecase(locale) }
+fun longDate(day: Long, locale: Locale = Locale.getDefault()): String {
+    val formatter = longDates.getOrPut(locale) {
+        DateTimeFormatter.ofPattern(if (locale.language == "fr") "EEEE d MMMM" else "EEEE, MMMM d", locale)
+    }
+    return LocalDate.ofEpochDay(day).format(formatter).replaceFirstChar { it.titlecase(locale) }
+}
 
 /** "Nov 14" / « 14 nov. », for a day number. */
-fun shortDate(day: Long, locale: Locale = Locale.getDefault()): String =
-    LocalDate.ofEpochDay(day).format(DateTimeFormatter.ofPattern(if (locale.language == "fr") "d MMM" else "MMM d", locale))
+fun shortDate(day: Long, locale: Locale = Locale.getDefault()): String {
+    val formatter = shortDates.getOrPut(locale) { DateTimeFormatter.ofPattern(if (locale.language == "fr") "d MMM" else "MMM d", locale) }
+    return LocalDate.ofEpochDay(day).format(formatter)
+}
 
 /** "7:00 PM" / « 19 h 00 », for minutes after midnight. */
-fun timeOfDay(minute: Int, locale: Locale = Locale.getDefault()): String =
-    java.time.LocalTime.of(minute / 60, minute % 60).format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(locale))
+fun timeOfDay(minute: Int, locale: Locale = Locale.getDefault()): String {
+    val formatter = timesOfDay.getOrPut(locale) { DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(locale) }
+    return java.time.LocalTime.of(minute / 60, minute % 60).format(formatter)
+}
 
 /**
  * Asks for the notification permission (Android 13+; granted before), then calls back with the answer. Reminders are

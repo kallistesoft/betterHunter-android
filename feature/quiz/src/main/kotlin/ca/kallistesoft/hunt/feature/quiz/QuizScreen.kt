@@ -212,8 +212,7 @@ internal fun QuestionContent(
     LaunchedEffect(s.current) { listState.scrollToItem(0) }
 
     val reportSubject = stringResource(R.string.report_subject, q.id)
-    val reportBody = stringResource(R.string.report_body) + "---\n${q.id} (${q.sourceRef})\n${text.q}\n" +
-        text.choices.mapIndexed { i, c -> "${"ABCD"[i]}. $c" }.joinToString("\n")
+    val reportIntro = stringResource(R.string.report_body)
     val reportFallback = stringResource(R.string.report_fallback, CONTACT_EMAIL, q.id)
 
     // Mock exams hide right and wrong until the end: one plain bar. Otherwise one segment per question.
@@ -241,6 +240,9 @@ internal fun QuestionContent(
                     actions = {
                         if (canReport) IconButton(
                             onClick = {
+                                // Built on tap only: a mock exam recomposes every second.
+                                val reportBody = reportIntro + "---\n${q.id} (${q.sourceRef})\n${text.q}\n" +
+                                    text.choices.mapIndexed { i, c -> "${"ABCD"[i]}. $c" }.joinToString("\n")
                                 if (!links.email(CONTACT_EMAIL, reportSubject, reportBody)) {
                                     scope.launch { snackbar.showSnackbar(reportFallback) }
                                 }
@@ -285,7 +287,7 @@ internal fun QuestionContent(
             verticalArrangement = Arrangement.spacedBy(Spacing.l),
         ) {
             if (isPhoto) {
-                item {
+                item(key = "photo", contentType = "photo") {
                     QuestionPhoto(q) {
                         if (showFeedback) {
                             val right = chosen == q.answerIndex
@@ -300,17 +302,17 @@ internal fun QuestionContent(
             }
             if (isPhoto && showFeedback) {
                 // Answered "What is it?": the animal's card replaces the choices, like a field guide page.
-                item { AnimalName(q, chosen) }
-                item { Feedback(q, chosen, inTheField) }
-                text.confuse?.let { item { ConfuseCard(it) } }
+                item(key = "animal", contentType = "animal") { AnimalName(q, chosen) }
+                item(key = "feedback", contentType = "feedback") { Feedback(q, chosen, inTheField) }
+                text.confuse?.let { item(key = "confuse", contentType = "confuse") { ConfuseCard(it) } }
             } else {
-                item {
+                item(key = "question", contentType = "question") {
                     Text(
                         text.q,
                         style = if (isPhoto) MaterialTheme.typography.headlineMedium else MaterialTheme.typography.headlineSmall,
                     )
                 }
-                item {
+                item(key = "choices", contentType = "choices") {
                     Choices(
                         q,
                         isPhoto = isPhoto,
@@ -326,10 +328,10 @@ internal fun QuestionContent(
                     )
                 }
                 if (showFeedback) {
-                    item { Feedback(q, chosen, inTheField) }
-                    text.confuse?.let { item { ConfuseCard(it) } }
+                    item(key = "feedback", contentType = "feedback") { Feedback(q, chosen, inTheField) }
+                    text.confuse?.let { item(key = "confuse", contentType = "confuse") { ConfuseCard(it) } }
                 }
-                if (isExam) item { ExamInfo((s.exam.passMark * 100).roundToInt()) }
+                if (isExam) item(key = "exam-info", contentType = "exam-info") { ExamInfo((s.exam.passMark * 100).roundToInt()) }
             }
         }
     }
