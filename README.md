@@ -69,8 +69,14 @@ A third build type, `qa`, is the release build signed with the debug key, only f
 ./gradlew assembleDebug          # app/build/outputs/apk/debug/
 ./gradlew bundleRelease          # app/build/outputs/bundle/release/ (upload to Play Console)
 ./gradlew testDebugUnitTest :core:model:test
+./gradlew koverVerifyUnit        # unit test coverage: every class needs 90% of its lines (see below)
 ./gradlew :app:lintDebug
 ```
+
+Coverage is measured by [Kover](https://github.com/Kotlin/kotlinx-kover) (`KoverConventionPlugin` in build-logic) over
+the unit tests of every module except `:core:testing` and `:smoketest`, merged at the root, so a class may be covered
+by another module's tests. `./gradlew koverHtmlReportUnit` writes `build/reports/kover/htmlUnit/` with the missed
+lines. Only generated code (Hilt, Dagger, Compose singletons, `BuildConfig`) and `@Preview` functions are left out.
 
 The `versionCode` is 1 unless `-PversionCode=<n>` is given (CI uses the run number). Every upload to Play needs a
 higher one; bump `versionName` in `app/build.gradle.kts` for each release.
