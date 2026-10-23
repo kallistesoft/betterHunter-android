@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dev build icon foreground: the release buck, a little smaller and higher, over the "DEV" tag. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:bottom="14dp"
+        android:drawable="@drawable/ic_launcher_foreground"
+        android:left="7dp"
+        android:right="7dp" />
+    <item android:drawable="@drawable/ic_launcher_dev_tag" />
+</layer-list>
