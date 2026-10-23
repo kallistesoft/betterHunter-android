@@ -9,18 +9,36 @@ implements it in `core/designsystem` (theme, components) and the feature screens
 
 ## Screens
 
-| Screen | Dark | Light |
-|---|---|---|
-| Splash screen (the native Android splash: icon on the green, nothing else; taps through to onboarding) | `Splash.dc.html` | `SplashLight.dc.html` |
-| Home | `Main.dc.html` | `MainLight.dc.html` |
-| What is it? (question) | `PhotoQuiz.dc.html` | `PhotoQuizLight.dc.html` |
-| What is it? (answer) | `PhotoAnswer.dc.html` | `PhotoAnswerLight.dc.html` |
-| Mock exam (question) | `ExamQuestion.dc.html` | `ExamQuestionLight.dc.html` |
-| Onboarding: what kind of hunter? (first launch, after the splash screen) | `HunterProfile.dc.html` | `HunterProfileLight.dc.html` |
-| Onboarding: what are you preparing for? (only after "Working on it") | `ExamPicker.dc.html` | `ExamPickerLight.dc.html` |
+The whole app, in the order of the flow (left to right on the canvas; dark row on top, light row below). "Built" means
+the screen exists in the app; "restyle" means its layout in the app still differs from the mockup.
 
-Phone frames are 390×844. Dark screens are the top row of the canvas, light screens the row below, in the order of
-the flow: splash, onboarding, home, then the quizzes. Screens link to each other (click through them on the canvas).
+| Screen | Dark | Light | In the app |
+|---|---|---|---|
+| Splash screen: the native Android splash, icon on the green | `Splash.dc.html` | `SplashLight.dc.html` | built |
+| Onboarding: what kind of hunter? (first launch) | `HunterProfile.dc.html` | `HunterProfileLight.dc.html` | not built |
+| Onboarding: what are you preparing for? (only after "Working on it") | `ExamPicker.dc.html` | `ExamPickerLight.dc.html` | built (today's first-run exam picker), restyle |
+| Home | `Main.dc.html` | `MainLight.dc.html` | built; the gear (Settings) is new |
+| Settings: hunter type, my exams, language, daily goal; About inside | `Settings.dc.html` | `SettingsLight.dc.html` | not built |
+| About | `About.dc.html` | `AboutLight.dc.html` | built, restyle |
+| Exam training | `ExamTraining.dc.html` | `ExamTrainingLight.dc.html` | built, restyle |
+| Practice: question answered (text question, wrong answer) | `PracticeQuestion.dc.html` | `PracticeQuestionLight.dc.html` | built |
+| Practice: results | `PracticeResults.dc.html` | `PracticeResultsLight.dc.html` | built, restyle |
+| Review my mistakes: nothing to review | `NothingToReview.dc.html` | `NothingToReviewLight.dc.html` | built, restyle |
+| Mock exam: question | `ExamQuestion.dc.html` | `ExamQuestionLight.dc.html` | built |
+| Mock exam: quit this test? (dialog) | `QuitDialog.dc.html` | `QuitDialogLight.dc.html` | built |
+| Mock exam: results | `ExamResults.dc.html` | `ExamResultsLight.dc.html` | built, restyle |
+| Can you recognise them? (recognition games) | `Recognition.dc.html` | `RecognitionLight.dc.html` | built, restyle; "Tracks" and "Calls" are ideas |
+| What is it?: question | `PhotoQuiz.dc.html` | `PhotoQuizLight.dc.html` | built |
+| What is it?: photo full screen | `PhotoZoom.dc.html` | `PhotoZoomLight.dc.html` | built |
+| What is it?: answer | `PhotoAnswer.dc.html` | `PhotoAnswerLight.dc.html` | built |
+| Update required (force update) | `UpdateRequired.dc.html` | `UpdateRequiredLight.dc.html` | built, restyle |
+
+Phone frames are 390×844. Screens link to each other: click through them on the canvas. Notes on the canvas explain
+each group (onboarding, home & settings, exams, What is it?, system).
+
+The screens added for the full app are generated: `generator/screens.py` (shared themes, header, cards, buttons and
+icons; `python3 generator/screens.py <out_dir>` writes both themes), `generator/buck.py` and `generator/logos.py` (the
+logo boards). Edit the generator, regenerate, then publish the changed files to the canvas and copy them here.
 
 **Onboarding (not built yet).** First launch, after the splash: "What kind of hunter are you?" (Working on it:
 preparing for the licence or hunter course; New hunter: licensed, a few seasons; Experienced hunter: many seasons),
@@ -32,7 +50,7 @@ question ("Where do you hunt?") can come later, when more provinces are covered.
 
 `Logos.dc.html` (one 1280×1000 board, below the light row) compares four directions for a new logo, each as the app
 icon, on dark, on light and at 48/32/20 px: A *Blaze buck* (flat buck head, orange antlers), B *Track* (deer hoof
-print), C *Tine monogram* (condensed B with an antler), D *Field patch* (today's antler mark in a round crest). None is
+print), C *Tine monogram* (condensed B with an antler), D *Field patch* (today's antler mark in a round crest).
 **Concept A, Blaze buck, is chosen**: it is the app icon (`app/src/main/res/drawable/ic_launcher_foreground.xml`,
 with a monochrome version for themed icons), the splash icon and the dashboard header (`BuckLogo` in
 `core/designsystem`), drawn from the same 64-unit shapes. The app icon background is `#1F4229`. Exports in `logo/`: `buck.svg` (the mark), `app-icon.svg`
