@@ -18,3 +18,5 @@ Repo skills live in `skills/`. Read the skill's `SKILL.md` and follow it when th
   emulator (smoke test, a change, a release/R8 build before a Play upload)
 - [skills/viewmodel-state](skills/viewmodel-state/SKILL.md): how ViewModels build their state (no `init`; `combine` +
   `stateIn`, or `asStateFlow().onStart { }` + `stateIn`), enforced by `scripts/check-conventions.sh`
+- [skills/unit-testing](skills/unit-testing/SKILL.md): unit tests (JVM, Robolectric Compose) and Kover coverage, 90% of
+  lines for every class (`./gradlew :koverVerifyUnit`); use with any code change and when the Coverage step fails

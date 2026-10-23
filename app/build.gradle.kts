@@ -79,6 +79,8 @@ android {
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
         animationsDisabled = true
+        // Robolectric tests (src/test) run the real app with its resources and content assets.
+        unitTests.isIncludeAndroidResources = true
     }
 
     buildFeatures {
@@ -116,7 +118,10 @@ dependencies {
     implementation(libs.androidx.work.runtime)
     implementation(libs.kotlinx.serialization.json)
 
-    testImplementation(libs.junit)
+    testImplementation(project(":core:testing"))
+    testImplementation(libs.androidx.datastore.preferences)
+    testImplementation(libs.androidx.test.ext.junit)
+    testImplementation(libs.androidx.work.testing)
 
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.ext.junit)

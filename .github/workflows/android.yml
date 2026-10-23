@@ -48,6 +48,11 @@ jobs:
       - name: Unit tests
         run: ./gradlew testDebugUnitTest :core:model:test --stacktrace
 
+      # Every class needs 90% of its lines covered by the unit tests (KoverConventionPlugin). On failure, the report
+      # (build/reports/kover/htmlUnit) is in the reports artifact.
+      - name: Coverage
+        run: ./gradlew :koverVerifyUnit :koverHtmlReportUnit
+
       # Compares the UI with the reference images in */src/test/screenshots (recorded by the "Record screenshots"
       # workflow). Skipped until references exist.
       - name: Screenshot tests

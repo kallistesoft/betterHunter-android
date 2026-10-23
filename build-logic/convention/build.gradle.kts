@@ -17,6 +17,7 @@ kotlin {
 
 dependencies {
     compileOnly(libs.android.gradle.plugin)
+    compileOnly(libs.kover.gradle.plugin)
 }
 
 gradlePlugin {
@@ -44,6 +45,10 @@ gradlePlugin {
         register("hilt") {
             id = libs.plugins.betterhunter.hilt.get().pluginId
             implementationClass = "HiltConventionPlugin"
+        }
+        register("kover") {
+            id = libs.plugins.betterhunter.kover.get().pluginId
+            implementationClass = "KoverConventionPlugin"
         }
         register("jvmLibrary") {
             id = libs.plugins.betterhunter.jvm.library.get().pluginId
