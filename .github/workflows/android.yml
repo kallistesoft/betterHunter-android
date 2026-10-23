@@ -121,6 +121,31 @@ jobs:
       - name: Build the apps and tests
         run: ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :app:assembleQa :smoketest:assembleQa
 
+      # The system image and a booted emulator snapshot are cached: downloading the image on every run is slow and
+      # occasionally fails (corrupt archive), which isn't a test result.
+      - name: Emulator cache
+        uses: actions/cache@v4
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+            /usr/local/lib/android/sdk/system-images/android-35/google_apis/x86_64
+          key: avd-35-google_apis-x86_64-pixel_6
+
+      - name: Create the emulator and its snapshot
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          target: google_apis
+          profile: pixel_6
+          force-avd-creation: false
+          disable-animations: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          script: echo "Emulator snapshot created for the cache."
+
       - name: Flow tests and release smoke test
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -128,8 +153,9 @@ jobs:
           arch: x86_64
           target: google_apis
           profile: pixel_6
+          force-avd-creation: false
           disable-animations: true
-          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           script: ./gradlew :app:connectedDebugAndroidTest :smoketest:connectedQaAndroidTest
 
       - name: Test reports
