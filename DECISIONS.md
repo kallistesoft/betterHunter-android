@@ -134,6 +134,11 @@ Gradle 9.8.2, Compose BOM 2026.09.00, compile/target SDK 37, min SDK 26.
 **A2. Architecture.** Modules `core/*` and `feature/*` with convention plugins (`build-logic`), MVVM with unidirectional
 data flow (StateFlow UI state, stateless `…Content` composables), Hilt, Navigation 3, a single activity.
 
+**A2b. ViewModel state starts when collected.** No `init` in a ViewModel: `uiState` is derived with `combine` +
+`stateIn(WhileSubscribed(5_000))`, or a one-time setup runs in `_uiState.asStateFlow().onStart { }` guarded by the
+loading state. *Why:* nothing runs for a ViewModel no screen shows, no race with the first collection, state always
+follows the repositories. Checked in CI (`check-conventions.sh`); how-to in `skills/viewmodel-state`.
+
 **A3. Storage: DataStore, not Room.** Progress is one small typed object (JSON); questions are read-only assets parsed
 once. *Switch to Room when:* answer history is kept, or questions are downloaded and updated on the device.
 

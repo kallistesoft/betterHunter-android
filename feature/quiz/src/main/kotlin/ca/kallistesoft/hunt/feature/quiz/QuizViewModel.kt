@@ -24,6 +24,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -61,7 +62,11 @@ class QuizViewModel @AssistedInject constructor(
     }
 
     private val _uiState = MutableStateFlow<QuizUiState>(QuizUiState.Loading)
+
+    /** The run is drawn (or restored) when the screen starts collecting, not when the ViewModel is created. */
     val uiState: StateFlow<QuizUiState> = _uiState.asStateFlow()
+        .onStart { if (_uiState.value == QuizUiState.Loading) load() }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), QuizUiState.Loading)
 
     /** "Report a problem" on each question, behind a feature flag. */
     val canReport: StateFlow<Boolean> = featureFlags.isEnabled(FeatureFlag.REPORT_QUESTION)
@@ -74,12 +79,10 @@ class QuizViewModel @AssistedInject constructor(
 
     private var timer: Job? = null
 
-    init {
-        viewModelScope.launch {
-            val content = contentRepository.content.first()
-            val restored = restore(content)
-            if (restored != null) show(restored) else start(content)
-        }
+    private suspend fun load() {
+        val content = contentRepository.content.first()
+        val restored = restore(content)
+        if (restored != null) show(restored) else start(content)
     }
 
     fun choose(choice: Int) {
