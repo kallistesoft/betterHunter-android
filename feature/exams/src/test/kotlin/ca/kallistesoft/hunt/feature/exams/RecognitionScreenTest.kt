@@ -2,6 +2,7 @@ package ca.kallistesoft.hunt.feature.exams
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -42,6 +43,8 @@ class RecognitionScreenTest {
                 )
             }
         }
+        // The state is built on Dispatchers.Default, which Compose doesn't wait for.
+        compose.waitUntil { compose.onAllNodesWithTag("practice-$PHOTO_ID_EXAM").fetchSemanticsNodes().isNotEmpty() }
         compose.onNodeWithText(string(R.string.hub_id_sub)).assertIsDisplayed()
         compose.onNodeWithTag("practice-$PHOTO_ID_EXAM").performClick()
         compose.onNodeWithTag("exam-$PHOTO_ID_EXAM").performClick()
