@@ -143,7 +143,7 @@ internal fun EmptyQuiz(state: QuizUiState.Empty, onClose: () -> Unit, onStartPra
             if (review) {
                 BottomActionBar {
                     PrimaryButton(
-                        stringResource(R.string.practise_exam, state.exam!!.id),
+                        stringResource(R.string.practise_exam, state.exam.id),
                         onClick = onStartPractice,
                         modifier = Modifier.weight(1f).testTag("empty-practise"),
                         icon = Icons.Rounded.PlayArrow,

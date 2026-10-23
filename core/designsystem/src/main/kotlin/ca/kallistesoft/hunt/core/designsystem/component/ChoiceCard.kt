@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
@@ -51,14 +52,16 @@ fun ChoiceCard(
         ChoiceMode.Single -> Modifier.selectable(selected = selected, role = Role.RadioButton, onClick = onClick)
         ChoiceMode.Multiple -> Modifier.toggleable(value = selected, role = Role.Checkbox, onValueChange = { onClick() })
     }
+    val shape = MaterialTheme.shapes.large
+    // The card itself is the radio or checkbox: one node for screen readers and tests, the ripple clipped to it.
     Surface(
-        modifier,
-        shape = MaterialTheme.shapes.large,
+        modifier.clip(shape).then(selection),
+        shape = shape,
         color = if (selected) scheme.primaryContainer else scheme.surfaceContainerLow,
         border = BorderStroke(if (selected) Sizes.borderEmphasis else Sizes.border, if (selected) scheme.primary else scheme.outlineVariant),
     ) {
         Row(
-            selection.heightIn(min = Sizes.choiceMinHeight).padding(Spacing.l),
+            Modifier.heightIn(min = Sizes.choiceMinHeight).padding(Spacing.l),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             IconBadge(
