@@ -173,6 +173,12 @@ Left to do:
 4. **Before releasing:** check the Play Console declarations against what the release really does (below).
 5. **Refresh the listing:** new icon (`store/icon-512.png`), screenshots of this app instead of the Flutter
    prototype, feature graphics with the new logo, and descriptions without the RPAL exam (`store/listing.md`).
+6. **Privacy policy:** the pages on kallistesoft.ca (`en/privacy/` and `confidentialite/`, in the kallistesoft-site
+   repo) don't name Firebase Remote Config yet. Add a BetterHunter section: at launch and when it comes back to the
+   foreground, the app asks Google's Firebase Remote Config for its settings (features on or off, the minimum version);
+   the request carries a Firebase installation ID, a random ID for this install of the app (not the advertising ID,
+   not linked to the user), and the IP address, and is used only to run the app. Add AdMob and the consent form (UMP)
+   to BetterHunter's part only when those SDKs ship (section 2, step 15).
 
 ### Before releasing: Play Console vs. the app
 
