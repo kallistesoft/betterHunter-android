@@ -56,6 +56,7 @@ Design mockup (visual reference for new screens, dark and light): [design/](desi
 |---|---|---|
 | Application ID | `ca.kallistesoft.hunt.debug` (installs next to the Play app) | `ca.kallistesoft.hunt` |
 | Name | BetterHunter Dev | BetterHunter |
+| Icon | slate, with an orange "DEV" tag (`app/src/debug/res`) | the green buck (`app/src/main/res`) |
 | Version name | `1.0.0-debug` | `1.0.0` |
 | Code shrinking | no | R8 minify + resource shrinking |
 | Force update parameter | `min_version_code_debug` | `min_version_code` |
