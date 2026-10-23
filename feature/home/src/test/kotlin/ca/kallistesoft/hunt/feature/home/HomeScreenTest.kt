@@ -2,6 +2,7 @@ package ca.kallistesoft.hunt.feature.home
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -211,12 +212,14 @@ class HomeScreenTest {
                 )
             }
         }
+        // Home's state is built on Dispatchers.Default, which Compose doesn't wait for: wait for each change.
+        compose.waitUntil { compose.onAllNodesWithTag("banner-close").fetchSemanticsNodes().isNotEmpty() }
         compose.onNodeWithTag("banner-close").performClick()
-        compose.onNodeWithTag("new-hunter-banner").assertDoesNotExist()
+        compose.waitUntil { compose.onAllNodesWithTag("new-hunter-banner").fetchSemanticsNodes().isEmpty() }
         assertFalse(userData.progress.value.newHunterBanner)
 
         compose.onNodeWithTag("pod-choice-1").performClick()
-        compose.onNodeWithTag("pod-play").assertExists()
+        compose.waitUntil { compose.onAllNodesWithTag("pod-play").fetchSemanticsNodes().isNotEmpty() }
         assertEquals(1, viewModel.uiState.value.answeredToday)
         assertEquals(TestContent.photoGame.id, viewModel.uiState.value.photoGameId)
     }

@@ -59,17 +59,17 @@ class SeasonDateScreenTest {
         compose.onNodeWithText("October 2024").assertIsDisplayed()
         compose.onNodeWithTag("season-save").assertIsNotEnabled()
         compose.onNodeWithText("Pick your first hunting day").assertIsDisplayed()
-        compose.onNodeWithTag("calendar-prev").assertIsNotEnabled()
+        compose.onNodeWithContentDescription("Previous month").assertIsNotEnabled()
         compose.onNodeWithTag("day-${TEST_DAY - 1}").assertIsNotEnabled()
 
         compose.onNodeWithTag("day-${TEST_DAY - 1}").performClick()
         compose.onNodeWithTag("day-$TEST_DAY").performClick()
         compose.onNodeWithTag("day-${TEST_DAY + 20}").performClick()
 
-        compose.onNodeWithTag("calendar-next").performClick()
+        compose.onNodeWithContentDescription("Next month").performClick()
         compose.onNodeWithText("November 2024").assertIsDisplayed()
         compose.onNodeWithTag("day-${TEST_DAY + 40}").performClick()
-        compose.onNodeWithTag("calendar-prev").assertIsEnabled().performClick()
+        compose.onNodeWithContentDescription("Previous month").assertIsEnabled().performClick()
         compose.onNodeWithText("October 2024").assertIsDisplayed()
 
         compose.onNodeWithTag("season-dont-know").performClick()
@@ -81,7 +81,7 @@ class SeasonDateScreenTest {
     fun `the calendar ends a year ahead`() {
         setSeasonDate(SeasonDateUiState(loading = false, today = TEST_DAY, picked = TEST_DAY + SeasonDateViewModel.MAX_DAYS_AHEAD))
         compose.onNodeWithText("October 2025").assertIsDisplayed()
-        compose.onNodeWithTag("calendar-next").assertIsNotEnabled()
+        compose.onNodeWithContentDescription("Next month").assertIsNotEnabled()
         compose.onNodeWithTag("day-${TEST_DAY + SeasonDateViewModel.MAX_DAYS_AHEAD + 1}").assertIsNotEnabled()
     }
 

@@ -48,8 +48,8 @@ class QuestionPhotoTest {
         }
         full.assertIsDisplayed()
 
-        compose.onNodeWithContentDescription("Back").performClick()
-        compose.onNodeWithContentDescription("Back").assertDoesNotExist()
+        compose.onNodeWithContentDescription("Close").performClick()
+        compose.onNodeWithContentDescription("Close").assertDoesNotExist()
     }
 
     @Test

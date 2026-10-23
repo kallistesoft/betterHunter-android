@@ -2,6 +2,7 @@ package ca.kallistesoft.hunt.feature.exams
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -56,6 +57,8 @@ class FieldSkillsScreenTest {
                 )
             }
         }
+        // The state is built on Dispatchers.Default, which Compose doesn't wait for.
+        compose.waitUntil { compose.onAllNodesWithTag("start-mix").fetchSemanticsNodes().isNotEmpty() }
         compose.onNodeWithText(string(R.string.skills_sub)).assertIsDisplayed()
         compose.onNodeWithText(string(R.string.mix_sub, FieldRun.MIX.size)).assertIsDisplayed()
         compose.onNodeWithText(string(R.string.my_mistakes_count, 1)).assertIsDisplayed()
