@@ -9,3 +9,10 @@ To add or change screens, read the canvas with the Artifact tool (`action: "read
 the screens' `project/*.dc.html` files) and publish to that same URL; don't create a new canvas. Follow the palette,
 fonts and patterns in `design/README.md`, and give every new screen a dark and a light version. After publishing,
 copy the changed files into `design/mockup/` and update `design/README.md`.
+
+## Skills
+
+Repo skills live in `skills/`. Read the skill's `SKILL.md` and follow it when the task matches:
+
+- [skills/testing-on-emulator](skills/testing-on-emulator/SKILL.md): build, install and test the app on the Android
+  emulator (smoke test, a change, a release/R8 build before a Play upload)
