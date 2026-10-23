@@ -45,7 +45,7 @@ internal fun RecognitionContent(
                     modifier = Modifier.padding(bottom = Spacing.l),
                 )
             }
-            items(state.games, key = { it.exam.id }) { summary ->
+            items(state.games, key = { it.exam.id }, contentType = { "exam" }) { summary ->
                 ExamCard(
                     summary,
                     onPractice = { onStartQuiz(summary.exam.id, QuizMode.PRACTICE) },

@@ -31,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -57,8 +58,10 @@ import ca.kallistesoft.hunt.core.model.FieldSkill
 import ca.kallistesoft.hunt.core.model.FieldTraining
 import ca.kallistesoft.hunt.core.ui.BackTopAppBar
 import ca.kallistesoft.hunt.core.ui.R
+import ca.kallistesoft.hunt.core.ui.currentLang
 import ca.kallistesoft.hunt.core.ui.icon
 import ca.kallistesoft.hunt.core.ui.nameRes
+import ca.kallistesoft.hunt.core.ui.rememberLinkOpener
 import ca.kallistesoft.hunt.core.ui.rememberNotificationPermission
 import kotlin.math.roundToInt
 
@@ -146,6 +149,9 @@ internal fun FieldResultContent(
     onAgain: () -> Unit,
 ) {
     val session = state.session ?: return
+    val lang = currentLang()
+    val links = rememberLinkOpener()
+    val inspection = LocalInspectionMode.current
     val success = BetterHunterTheme.extendedColors.success
     val muted = MaterialTheme.colorScheme.onSurfaceVariant
     val missed = session.missed
@@ -216,7 +222,9 @@ internal fun FieldResultContent(
             } else {
                 item { Text(stringResource(R.string.to_my_mistakes), Modifier.fillMaxWidth(), style = MaterialTheme.typography.bodySmall, color = muted) }
             }
-            items(missed, key = { it.first.id }) { (q, picked) -> MissedCard(q, picked) }
+            items(missed, key = { it.first.id }, contentType = { "missed" }) { (q, picked) ->
+                MissedCard(q, picked, lang, links, inspection)
+            }
         }
     }
 }

@@ -27,7 +27,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -37,6 +37,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -188,14 +189,17 @@ private fun FullPhoto(image: String, description: String, onDismiss: () -> Unit)
     }
 }
 
-/** Small thumbnail for lists (results screen); whole photo, never cropped. */
+/**
+ * Small thumbnail for lists (results screen); whole photo, never cropped. A list passes [inspection] (previews and
+ * screenshot tests show an empty box) read once rather than once per item.
+ */
 @Composable
-fun PhotoThumb(image: String, modifier: Modifier = Modifier) {
+fun PhotoThumb(image: String, modifier: Modifier = Modifier, inspection: Boolean = LocalInspectionMode.current) {
     val box = modifier
         .size(Sizes.photoThumb)
         .clip(MaterialTheme.shapes.small)
         .background(MaterialTheme.colorScheme.surfaceContainerHighest)
-    if (LocalInspectionMode.current) {
+    if (inspection) {
         Box(box)
     } else {
         SubcomposeAsyncImage(
@@ -212,7 +216,8 @@ fun PhotoThumb(image: String, modifier: Modifier = Modifier) {
 fun PrefetchPhoto(image: String?) {
     if (image == null || LocalInspectionMode.current) return
     val context = LocalContext.current
-    LaunchedEffect(image) {
+    // enqueue returns at once: no coroutine needed. The call is skipped (no new request) until [image] changes.
+    SideEffect {
         SingletonImageLoader.get(context).enqueue(ImageRequest.Builder(context).data(assetPhoto(image)).build())
     }
 }
@@ -228,12 +233,13 @@ fun BoxScope.PhotoCaption(overline: String, title: String, subtitle: String? = n
         Modifier
             .align(Alignment.BottomStart)
             .fillMaxWidth()
-            .background(
-                Brush.verticalGradient(
+            .drawWithCache {
+                val fade = Brush.verticalGradient(
                     0f to extended.photoScrim.copy(alpha = 0f),
                     0.6f to extended.photoScrim.copy(alpha = 0.9f),
-                ),
-            )
+                )
+                onDrawBehind { drawRect(fade) }
+            }
             .padding(start = Spacing.l, end = Spacing.l, top = Spacing.xxxl, bottom = Spacing.m),
         verticalArrangement = Arrangement.spacedBy(Spacing.xxs),
     ) {
