@@ -30,7 +30,12 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | Mock exam: quit this test? (dialog) | `QuitDialog.dc.html` | `QuitDialogLight.dc.html` | built |
 | Mock exam: results | `ExamResults.dc.html` | `ExamResultsLight.dc.html` | built |
 | I passed the real exam: confirm (from Exam training) | `PassedExam.dc.html` | `PassedExamLight.dc.html` | built |
-| Home, new hunter (after passing the real exam) | `MainNewHunter.dc.html` | `MainNewHunterLight.dc.html` | built |
+| Home, new hunter (after passing the real exam) | `MainNewHunter.dc.html` | `MainNewHunterLight.dc.html` | built; its Exam training tile now opens the new-hunter version (not built) |
+| Onboarding as a new hunter: what kind of hunter? → New hunter, then the same two questions | `HunterProfileNewHunter.dc.html`, `HuntWithNewHunter.dc.html`, `HuntWhereNewHunter.dc.html` | `…Light.dc.html` | built, except the new-hunter wording of "Where do you hunt?" |
+| Home, new hunter (from onboarding: no congratulations banner) | `HomeNewHunter.dc.html` | `HomeNewHunterLight.dc.html` | no |
+| Exam training, new hunter: course passed, quick refresher, readiness by topic | `ExamTrainingNewHunter.dc.html` | `ExamTrainingNewHunterLight.dc.html` | no |
+| Refresher: question (topic, 10 questions) | `RefresherQuestion.dc.html` | `RefresherQuestionLight.dc.html` | no |
+| Refresher: results (the topic's progress) | `RefresherResults.dc.html` | `RefresherResultsLight.dc.html` | no |
 | Can you recognise them? (recognition games) | `Recognition.dc.html` | `RecognitionLight.dc.html` | built, restyle; "Tracks" and "Calls" are ideas |
 | What is it?: question | `PhotoQuiz.dc.html` | `PhotoQuizLight.dc.html` | built |
 | What is it?: photo full screen | `PhotoZoom.dc.html` | `PhotoZoomLight.dc.html` | built |
@@ -44,10 +49,11 @@ The canvas has one **page per flow** (dark row on top, light row below, screens 
 | Page | Screens |
 |---|---|
 | 1 · Working on it: exam prep (opens first) | 1 Splash → 2 What kind of hunter? → 3 What do you hunt with? → 4 Where do you hunt? → 5 Home → 6 Exam training → 7 Practice question → 8 Practice results (8b nothing to review) → 9 Mock exam question (9b quit) → 10 Mock exam results → 11 I passed the real exam → 12 Home, new hunter |
-| 2 · What is it? | 1 Recognition hub → 2 Photo question → 3 Photo full screen → 4 Answer |
-| 3 · Settings & About | 1 Settings → 2 My provinces → 3 About |
-| 4 · System | 1 Update required |
-| 5 · Logo | Logo concepts, buck variants |
+| 2 · New hunter: first seasons | 1 What kind of hunter? → New hunter → 2 What do you hunt with? → 3 Where do you hunt? → 4 Home, new hunter → 5 Exam training (refreshers) → 6 Refresher question → 7 Refresher results |
+| 3 · What is it? | 1 Recognition hub → 2 Photo question → 3 Photo full screen → 4 Answer |
+| 4 · Settings & About | 1 Settings → 2 My provinces → 3 About |
+| 5 · System | 1 Update required |
+| 6 · Logo | Logo concepts, buck variants |
 
 The screens added for the full app are generated: `generator/screens.py` (shared themes, header, cards, buttons and
 icons; `python3 generator/screens.py <out_dir>` writes both themes), `generator/buck.py` and `generator/logos.py` (the
@@ -66,6 +72,15 @@ New hunter (changeable back in Settings) and lands on Home's new-hunter version:
 goal played on "What is it?", and Exam training kept as a tile ("ICAF passed") for refreshers. The example user is a Québec hunter preparing ICAF
 (main exam) and the PAL (optional). The app takes the user's
 word; nothing is verified.
+
+**New hunter: first seasons (mockup, not built).** A user who picks "New hunter" at onboarding (or becomes one by
+passing the real exam) has passed the hunter course, so Exam training changes from preparing to refreshing: the course
+card shows "Passed", the main action is a **quick refresher** (10 questions, mostly from the weakest topics; the mock
+exam stays), and **Refresh by topic** lists readiness per topic, grouped from the course chapters (laws and permits,
+safe firearm handling, shot placement, after the shot, survival and first aid). A topic opens a 10-question practice;
+its results show the topic's readiness before and after. Home is the new-hunter Home (daily goal on "What is it?"),
+without the congratulations banner when the user came from onboarding. The topic names and their grouping of the
+ICAF chapters are placeholders to check against the manual.
 
 ## Logo concepts
 
