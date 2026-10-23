@@ -35,8 +35,17 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | What is it?: answer | `PhotoAnswer.dc.html` | `PhotoAnswerLight.dc.html` | built |
 | Update required (force update) | `UpdateRequired.dc.html` | `UpdateRequiredLight.dc.html` | built, restyle |
 
-Phone frames are 390×844. Screens link to each other: click through them on the canvas. Notes on the canvas explain
-each group (onboarding, home & settings, exams, What is it?, system).
+Phone frames are 390×844. Screens link to each other: click through them on the canvas.
+
+The canvas has one **page per flow** (dark row on top, light row below, screens numbered in the order of the flow):
+
+| Page | Screens |
+|---|---|
+| 1 · Working on it: exam prep (opens first) | 1 Splash → 2 What kind of hunter? → 3 What are you preparing for? → 4 Home → 5 Exam training → 6 Practice question → 7 Practice results (7b nothing to review) → 8 Mock exam question (8b quit) → 9 Mock exam results → 10 I passed the real exam → 11 Home, new hunter |
+| 2 · What is it? | 1 Recognition hub → 2 Photo question → 3 Photo full screen → 4 Answer |
+| 3 · Settings & About | 1 Settings → 2 About |
+| 4 · System | 1 Update required |
+| 5 · Logo | Logo concepts, buck variants |
 
 The screens added for the full app are generated: `generator/screens.py` (shared themes, header, cards, buttons and
 icons; `python3 generator/screens.py <out_dir>` writes both themes), `generator/buck.py` and `generator/logos.py` (the
