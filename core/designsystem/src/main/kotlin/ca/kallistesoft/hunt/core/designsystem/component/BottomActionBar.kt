@@ -21,8 +21,8 @@ import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 fun BottomActionBar(modifier: Modifier = Modifier, content: @Composable RowScope.() -> Unit) {
     Surface(modifier, color = MaterialTheme.colorScheme.background) {
         Row(
-            Modifier.navigationBarsPadding().padding(Spacing.l).fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(Spacing.m),
+            Modifier.navigationBarsPadding().padding(horizontal = Spacing.screen, vertical = Spacing.m).fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(Spacing.s + Spacing.xxs),
             verticalAlignment = Alignment.CenterVertically,
             content = content,
         )

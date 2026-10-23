@@ -51,6 +51,7 @@ fun AboutScreen(versionName: String, onBack: () -> Unit) {
                 Text(
                     stringResource(R.string.photos_credit),
                     style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = Spacing.xs),
                 )
             }
@@ -73,8 +74,7 @@ fun AboutScreen(versionName: String, onBack: () -> Unit) {
 private fun Heading(text: String) {
     Text(
         text,
-        style = MaterialTheme.typography.titleMedium,
-        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.titleLarge,
         modifier = Modifier.padding(top = Spacing.xxl, bottom = Spacing.s),
     )
 }

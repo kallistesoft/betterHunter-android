@@ -10,11 +10,11 @@ import androidx.compose.material.icons.automirrored.rounded.OpenInNew
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import ca.kallistesoft.hunt.core.designsystem.component.LinkButton
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Question
@@ -32,10 +32,10 @@ fun SourceLinks(question: Question, modifier: Modifier = Modifier) {
     if (manual == null && rule == null) return
     val links = rememberLinkOpener()
     FlowRow(modifier, itemVerticalAlignment = Alignment.CenterVertically) {
-        Text(stringResource(R.string.source), style = MaterialTheme.typography.labelMedium)
-        manual?.let { LinkButton(it.label) { links.open(it.url) } }
+        Text(stringResource(R.string.source), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        manual?.let { SourceLink(it.label) { links.open(it.url) } }
         rule?.let {
-            LinkButton(stringResource(if (question.image != null) R.string.species_page else R.string.current_rule)) {
+            SourceLink(stringResource(if (question.image != null) R.string.species_page else R.string.current_rule)) {
                 links.open(it)
             }
         }
@@ -43,8 +43,8 @@ fun SourceLinks(question: Question, modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun LinkButton(label: String, onClick: () -> Unit) {
-    TextButton(onClick = onClick) {
+private fun SourceLink(label: String, onClick: () -> Unit) {
+    LinkButton(onClick = onClick) {
         Icon(Icons.AutoMirrored.Rounded.OpenInNew, contentDescription = null, Modifier.size(Sizes.iconXs))
         Spacer(Modifier.width(Spacing.xs))
         Text(label, style = MaterialTheme.typography.labelMedium)

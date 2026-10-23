@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,7 +21,7 @@ fun ProgressRing(
     modifier: Modifier = Modifier,
     size: Dp = Sizes.ringS,
     strokeWidth: Dp = Sizes.ringStrokeS,
-    color: Color = ProgressIndicatorDefaults.circularColor,
+    color: Color = MaterialTheme.colorScheme.secondary,
     trackColor: Color = MaterialTheme.colorScheme.surfaceContainerHighest,
     content: @Composable () -> Unit = {},
 ) {

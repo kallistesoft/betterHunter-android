@@ -35,7 +35,7 @@ app/                 Activity, Navigation 3 graph, Hilt app, build types and sig
 core/model           Pure Kotlin: exams, questions, quiz session, progress rules, sources (JVM unit tests)
 core/testing         Test doubles (fake repositories and flags, sample content), main dispatcher rule, Turbine helpers
 core/data            Bundled content (assets/), progress repository (DataStore)
-core/designsystem    Theme (from the icon's green), shared components
+core/designsystem    Theme (the mockup's palette, Barlow fonts), shared components
 core/flags           Feature flags: Firebase Remote Config, with in-app defaults
 core/ui              Shared composables (exam card, question photo, source links) and all UI strings (EN/FR)
 core/update          Force update: remote rules, cache, update screen with Play In-App Updates
@@ -145,10 +145,17 @@ Checked by `scripts/check-conventions.sh` (CI runs it on every push):
 
 Reusable pieces live in two modules:
 
-- `core:designsystem`, no app knowledge: theme, `Spacing` and `Sizes`, `BhCard`, `IconBadge`, `AnswerChoice` (idle, selected,
-  correct, wrong), `AnswerResult`, `NoticeCard`, `HubCard`, `LinkRow`, `ProgressRing`, `SectionTitle`.
-- `core:ui`, built on the app's models: `ExamCard`, `ExamListItem`, `ExamAvatar`, `ReadinessRing`, `QuestionPhoto`,
-  `SourceLinks`, `BackTopAppBar`, plus `PreviewData` (sample exams and questions).
+- `core:designsystem`, no app knowledge: theme (colours, Barlow typography, shapes), `Spacing` and `Sizes`, `BhCard`,
+  `IconBadge`, `AnswerChoice` (idle, selected, correct, wrong; lettered row or two-by-two tile), `AnswerResult`,
+  `ResultChip`, `NoticeCard`, `HubCard`, `LinkRow`, `ProgressRing`, `MeterBar`, `QuizProgress`, `PillToggle`,
+  `PrimaryButton` / `SecondaryButton` / `LinkButton`, `SectionTitle` / `Overline`, `BhIcons`.
+- `core:ui`, built on the app's models: `ExamCard`, `ExamListItem`, `ExamAvatar`, `ReadinessRing`, `QuestionPhoto`
+  (with `PhotoCaption`), `SourceLinks`, `BackTopAppBar`, plus `PreviewData` (sample exams and questions).
+
+The look follows the design mockup ([design/](design/README.md)): forest greens, blaze orange for the one main action
+and the current selection, green for progress and right answers, Barlow Condensed headings over Barlow text. The fonts
+are bundled in `core/designsystem/src/main/res/font` (SIL Open Font License, copy in
+`core/designsystem/src/main/assets/licenses/barlow-OFL.txt`).
 
 Screens are split into a stateful entry point (ViewModel) and a stateless `…Content` composable. Every component and
 screen has `@BhPreviews` previews: light in English and dark in French.

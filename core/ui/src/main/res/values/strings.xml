@@ -10,9 +10,9 @@
 
     <!-- Dashboard -->
     <string name="hub_exams">Exam training</string>
-    <string name="hub_exams_sub">Firearms licence and hunter exams: practice and mock exams.</string>
+    <string name="hub_exams_sub">Licence and hunter exams</string>
     <string name="hub_id">Can you recognise them?</string>
-    <string name="hub_id_sub">Identification games for Canada\'s game animals.</string>
+    <string name="hub_id_sub">Identify Canada\'s game animals</string>
     <plurals name="exams_count">
         <item quantity="one">%1$d exam</item>
         <item quantity="other">%1$d exams</item>
@@ -29,10 +29,15 @@
     <string name="action_change">Change</string>
     <string name="other_tests">Other tests</string>
     <string name="today">Today</string>
-    <string name="goal_progress">%1$d / %2$d questions today</string>
+    <plurals name="goal_remaining">
+        <item quantity="one">%1$d question to your daily goal</item>
+        <item quantity="other">%1$d questions to your daily goal</item>
+    </plurals>
+    <string name="goal_of">of %1$d</string>
     <string name="goal_done">Today\'s goal reached!</string>
     <string name="practise_now">Practise now</string>
     <string name="photo_of_day">Photo of the day</string>
+    <string name="what_is_it">What is it?</string>
     <string name="play_id">Play \"What is it?\"</string>
     <string name="about">About</string>
     <string name="footer">Independent tool · unofficial · errors possible.</string>
@@ -72,6 +77,7 @@
     </plurals>
     <string name="readiness">Readiness</string>
     <string name="readiness_value">Readiness %1$d%%</string>
+    <string name="percent">%1$d%%</string>
 
     <!-- Quiz -->
     <string name="question_progress">Question %1$d/%2$d</string>
@@ -90,6 +96,8 @@
     <string name="no_weak">Nothing to review yet.</string>
     <string name="source">Source:</string>
     <string name="species_page">Species fact sheet</string>
+    <string name="fact_sheet">Fact sheet</string>
+    <string name="exam_info">Answers are revealed at the end. Pass mark: %1$d%%.</string>
     <string name="current_rule">Current official rule</string>
     <string name="report">Report a problem</string>
     <string name="report_subject">Problem with a question %1$s</string>

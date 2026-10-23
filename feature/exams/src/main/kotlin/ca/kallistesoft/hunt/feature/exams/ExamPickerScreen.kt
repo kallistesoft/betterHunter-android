@@ -8,24 +8,23 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.RadioButtonUnchecked
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.BadgeSize
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.BottomActionBar
+import ca.kallistesoft.hunt.core.designsystem.component.LinkButton
+import ca.kallistesoft.hunt.core.designsystem.component.PrimaryButton
 import ca.kallistesoft.hunt.core.designsystem.component.SectionTitle
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
@@ -73,27 +72,22 @@ internal fun ExamPickerContent(
         bottomBar = {
             BottomActionBar {
                 if (firstRun) {
-                    TextButton(onClick = onSkip, Modifier.testTag("picker-skip")) {
+                    LinkButton(onClick = onSkip, Modifier.testTag("picker-skip")) {
                         Text(stringResource(R.string.action_skip))
                     }
                 }
-                Button(
+                PrimaryButton(
+                    stringResource(R.string.action_continue),
                     onClick = onContinue,
                     enabled = state.chosen.isNotEmpty(),
                     modifier = Modifier.weight(1f).testTag("picker-continue"),
-                ) {
-                    Text(stringResource(R.string.action_continue))
-                }
+                )
             }
         },
     ) { padding ->
         LazyColumn(contentPadding = padding.plus()) {
             item {
-                Text(
-                    stringResource(R.string.picker_title),
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                )
+                Text(stringResource(R.string.picker_title), style = MaterialTheme.typography.headlineMedium)
                 Text(stringResource(R.string.picker_subtitle), color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             for (group in ExamGroup.entries) {
@@ -117,13 +111,14 @@ private fun PickerChoice(item: PickerExam, selected: Boolean, onToggle: () -> Un
             .testTag("picker-${item.exam.id}")
             .toggleable(value = selected, role = Role.Checkbox, onValueChange = { onToggle() }),
         containerColor = if (selected) scheme.primaryContainer else scheme.surfaceContainerLow,
-        border = BorderStroke(if (selected) Sizes.borderEmphasis else Sizes.border, if (selected) scheme.primary else scheme.outlineVariant),
+        border = BorderStroke(Sizes.borderEmphasis, if (selected) scheme.primary else scheme.outline),
+        shape = MaterialTheme.shapes.medium,
     ) {
         ExamListItem(
             item.exam,
             item.questionCount,
             leading = {
-                ExamAvatar(item.exam.id, size = BadgeSize.Medium, containerColor = scheme.surface, contentColor = scheme.primary)
+                ExamAvatar(item.exam.id, size = BadgeSize.Medium)
             },
             trailing = {
                 Icon(

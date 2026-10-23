@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -18,29 +17,34 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 
-/** Round badge sizes: the circle and the inset of the icon inside it. */
+/** Badge sizes: the tile and the inset of the icon inside it. */
 enum class BadgeSize(val size: Dp, val iconInset: Dp) {
     /** Answer letters (A, B, C, D). */
     Small(Sizes.badgeS, Sizes.badgeInsetS),
     Medium(Sizes.badgeM, Sizes.badgeInsetM),
 
-    /** Exams in lists and cards. */
+    /** Exams in lists and cards, section tiles on the dashboard. */
     Large(Sizes.badgeL, Sizes.badgeInsetL),
 
-    /** Section entry points on the dashboard. */
+    /** Big icon at the top of a screen. */
     ExtraLarge(Sizes.badgeXl, Sizes.badgeInsetXl),
 }
 
-/** A coloured circle holding an icon or a letter. */
+/** A tinted rounded tile holding an icon or a letter (green tint by default). */
 @Composable
 fun IconBadge(
     modifier: Modifier = Modifier,
     size: BadgeSize = BadgeSize.Large,
-    containerColor: Color = MaterialTheme.colorScheme.primaryContainer,
+    containerColor: Color = MaterialTheme.colorScheme.secondaryContainer,
     contentColor: Color = contentColorFor(containerColor),
     content: @Composable BoxScope.() -> Unit,
 ) {
-    Surface(modifier.size(size.size), shape = CircleShape, color = containerColor, contentColor = contentColor) {
+    Surface(
+        modifier.size(size.size),
+        shape = MaterialTheme.shapes.extraSmall,
+        color = containerColor,
+        contentColor = contentColor,
+    ) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center, content = content)
     }
 }
@@ -50,7 +54,7 @@ fun IconBadge(
     icon: ImageVector,
     modifier: Modifier = Modifier,
     size: BadgeSize = BadgeSize.Large,
-    containerColor: Color = MaterialTheme.colorScheme.primaryContainer,
+    containerColor: Color = MaterialTheme.colorScheme.secondaryContainer,
     contentColor: Color = contentColorFor(containerColor),
 ) {
     IconBadge(modifier, size, containerColor, contentColor) {

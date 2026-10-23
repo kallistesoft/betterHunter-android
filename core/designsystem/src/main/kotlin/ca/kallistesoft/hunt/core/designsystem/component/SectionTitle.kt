@@ -8,24 +8,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
+import ca.kallistesoft.hunt.core.designsystem.theme.BhTextStyles
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 
-/** Small uppercase section label in the primary colour, with an optional action on the right. */
+/** Small uppercase label ("TODAY", "HOW TO RECOGNISE IT"), orange by default. */
+@Composable
+fun Overline(text: String, modifier: Modifier = Modifier, color: Color = MaterialTheme.colorScheme.tertiary) {
+    Text(text.uppercase(), modifier, style = BhTextStyles.overline, color = color)
+}
+
+/** Section label of a list, with an optional action on the right. */
 @Composable
 fun SectionTitle(text: String, modifier: Modifier = Modifier, action: @Composable RowScope.() -> Unit = {}) {
     Row(modifier.padding(top = Spacing.l, bottom = Spacing.s), verticalAlignment = Alignment.CenterVertically) {
-        Text(
-            text.uppercase(),
-            modifier = Modifier.weight(1f).semantics { heading() },
-            style = MaterialTheme.typography.labelLarge,
-            color = MaterialTheme.colorScheme.primary,
-            fontWeight = FontWeight.SemiBold,
-            letterSpacing = 0.8.sp,
-        )
+        Overline(text, Modifier.weight(1f).semantics { heading() })
         action()
     }
 }

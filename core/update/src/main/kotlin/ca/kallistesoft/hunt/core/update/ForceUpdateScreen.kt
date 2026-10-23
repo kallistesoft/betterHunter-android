@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.SystemUpdate
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -35,6 +34,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import ca.kallistesoft.hunt.core.designsystem.component.BhPreviews
 import ca.kallistesoft.hunt.core.designsystem.component.PreviewSurface
+import ca.kallistesoft.hunt.core.designsystem.component.PrimaryButton
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -89,7 +89,7 @@ internal fun ForceUpdateContent(onUpdate: () -> Unit, modifier: Modifier = Modif
             )
             Text(
                 stringResource(R.string.update_required_title),
-                style = MaterialTheme.typography.headlineSmall,
+                style = MaterialTheme.typography.headlineMedium,
                 textAlign = TextAlign.Center,
             )
             Text(
@@ -98,9 +98,11 @@ internal fun ForceUpdateContent(onUpdate: () -> Unit, modifier: Modifier = Modif
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
             )
-            Button(onClick = onUpdate, modifier = Modifier.fillMaxWidth().testTag("force-update-button")) {
-                Text(stringResource(R.string.update_now))
-            }
+            PrimaryButton(
+                stringResource(R.string.update_now),
+                onClick = onUpdate,
+                modifier = Modifier.fillMaxWidth().testTag("force-update-button"),
+            )
         }
     }
 }

@@ -8,9 +8,9 @@
 
     <!-- Dashboard -->
     <string name="hub_exams">Entraînement aux examens</string>
-    <string name="hub_exams_sub">Permis d\'armes à feu et examens de chasse : pratique et examens simulés.</string>
+    <string name="hub_exams_sub">Permis et examens de chasse</string>
     <string name="hub_id">Sauriez-vous les reconnaître?</string>
-    <string name="hub_id_sub">Jeux d\'identification des animaux chassés au Canada.</string>
+    <string name="hub_id_sub">Identifier le gibier du Canada</string>
     <plurals name="exams_count">
         <item quantity="one">%1$d examen</item>
         <item quantity="many">%1$d examens</item>
@@ -30,10 +30,15 @@
     <string name="action_change">Modifier</string>
     <string name="other_tests">Autres tests</string>
     <string name="today">Aujourd\'hui</string>
-    <string name="goal_progress">%1$d / %2$d questions aujourd\'hui</string>
+    <plurals name="goal_remaining">
+        <item quantity="one">Encore %1$d question pour l\'objectif du jour</item>
+        <item quantity="other">Encore %1$d questions pour l\'objectif du jour</item>
+    </plurals>
+    <string name="goal_of">sur %1$d</string>
     <string name="goal_done">Objectif du jour atteint!</string>
     <string name="practise_now">S\'exercer maintenant</string>
     <string name="photo_of_day">Photo du jour</string>
+    <string name="what_is_it">Qu\'est-ce que c\'est?</string>
     <string name="play_id">Jouer à « Qu\'est-ce que c\'est? »</string>
     <string name="about">À propos</string>
     <string name="footer">Outil indépendant · non officiel · erreurs possibles.</string>
@@ -75,6 +80,7 @@
     </plurals>
     <string name="readiness">Préparation</string>
     <string name="readiness_value">Préparation %1$d %%</string>
+    <string name="percent">%1$d %%</string>
 
     <!-- Quiz -->
     <string name="question_progress">Question %1$d/%2$d</string>
@@ -93,6 +99,8 @@
     <string name="no_weak">Aucune question à revoir pour l\'instant.</string>
     <string name="source">Source :</string>
     <string name="species_page">Fiche de l\'espèce</string>
+    <string name="fact_sheet">Fiche</string>
+    <string name="exam_info">Les réponses sont dévoilées à la fin. Note de passage : %1$d %%.</string>
     <string name="current_rule">Règle officielle à jour</string>
     <string name="report">Signaler un problème</string>
     <string name="report_subject">Erreur dans une question %1$s</string>

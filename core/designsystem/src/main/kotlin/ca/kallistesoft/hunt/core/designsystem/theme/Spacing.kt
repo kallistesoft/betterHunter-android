@@ -15,5 +15,5 @@ object Spacing {
     val xxxl = 32.dp
 
     /** Side margin of a screen's content. */
-    val screen = l
+    val screen = xl
 }

@@ -20,7 +20,7 @@ internal val previewHomeState = HomeUiState(
 @BhPreviews
 @Composable
 internal fun HomePreview() = PreviewSurface {
-    HomeContent(previewHomeState, {}, {}, {}, { _, _ -> }, {}, {})
+    HomeContent(previewHomeState, {}, {}, {}, {}, { _, _ -> }, {}, {})
 }
 
 /** Goal reached, sample-content warning, photo of the day answered wrong. */
@@ -33,7 +33,7 @@ internal fun HomeAnsweredPreview() = PreviewSurface {
             answeredToday = 20,
             photoOfDay = previewHomeState.photoOfDay?.copy(choice = 0),
         ),
-        {}, {}, {}, { _, _ -> }, {}, {},
+        {}, {}, {}, {}, { _, _ -> }, {}, {},
     )
 }
 

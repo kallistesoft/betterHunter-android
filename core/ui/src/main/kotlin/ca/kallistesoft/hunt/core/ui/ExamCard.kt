@@ -2,7 +2,6 @@ package ca.kallistesoft.hunt.core.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -10,18 +9,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.School
 import androidx.compose.material.icons.outlined.Timer
+import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.Replay
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,11 +27,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import ca.kallistesoft.hunt.core.designsystem.component.BadgeSize
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.IconBadge
+import ca.kallistesoft.hunt.core.designsystem.component.LinkButton
+import ca.kallistesoft.hunt.core.designsystem.component.PrimaryButton
 import ca.kallistesoft.hunt.core.designsystem.component.ProgressRing
+import ca.kallistesoft.hunt.core.designsystem.component.SecondaryButton
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Content
@@ -75,7 +72,7 @@ fun ExamCard(
                 ExamAvatar(exam.id)
                 Spacer(Modifier.width(Spacing.m))
                 Column(Modifier.weight(1f)) {
-                    Text(exam.name(lang), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text(exam.name(lang), style = MaterialTheme.typography.titleMedium)
                     Spacer(Modifier.height(Spacing.xxs))
                     val muted = MaterialTheme.typography.bodySmall
                     Text(
@@ -92,31 +89,23 @@ fun ExamCard(
                 if (summary.available) ReadinessRing(summary.readiness)
             }
             if (summary.available) {
-                // Half-width buttons: tighter padding so labels fit in French ("Examen simulé").
-                val compactPadding = PaddingValues(horizontal = Spacing.m, vertical = ButtonDefaults.ContentPadding.calculateTopPadding())
                 Spacer(Modifier.height(Spacing.l))
-                Row(horizontalArrangement = Arrangement.spacedBy(Spacing.s)) {
-                    Button(
+                Row(horizontalArrangement = Arrangement.spacedBy(Spacing.s + Spacing.xxs)) {
+                    PrimaryButton(
+                        stringResource(R.string.practice),
                         onClick = onPractice,
                         modifier = Modifier.weight(1f).testTag("practice-${exam.id}"),
-                        contentPadding = compactPadding,
-                    ) {
-                        Icon(Icons.Outlined.School, contentDescription = null, Modifier.size(Sizes.iconM))
-                        Spacer(Modifier.width(Spacing.xs))
-                        Text(stringResource(R.string.practice), maxLines = 1, overflow = TextOverflow.Ellipsis)
-                    }
-                    OutlinedButton(
+                        icon = Icons.Rounded.PlayArrow,
+                    )
+                    SecondaryButton(
+                        stringResource(R.string.exam_sim),
                         onClick = onExam,
                         modifier = Modifier.weight(1f).testTag("exam-${exam.id}"),
-                        contentPadding = compactPadding,
-                    ) {
-                        Icon(Icons.Outlined.Timer, contentDescription = null, Modifier.size(Sizes.iconM))
-                        Spacer(Modifier.width(Spacing.xs))
-                        Text(stringResource(R.string.exam_sim), maxLines = 1, overflow = TextOverflow.Ellipsis)
-                    }
+                        icon = Icons.Outlined.Timer,
+                    )
                 }
                 if (summary.weakCount > 0) {
-                    TextButton(onClick = onReview, modifier = Modifier.padding(top = Spacing.xs).testTag("review-${exam.id}")) {
+                    LinkButton(onClick = onReview, modifier = Modifier.padding(top = Spacing.xs).testTag("review-${exam.id}")) {
                         Icon(Icons.Rounded.Replay, contentDescription = null, Modifier.size(Sizes.iconM))
                         Spacer(Modifier.width(Spacing.s))
                         Text(stringResource(R.string.review_mistakes, summary.weakCount))
@@ -127,14 +116,14 @@ fun ExamCard(
     }
 }
 
-/** Round icon badge for an exam. */
+/** Icon tile for an exam. */
 @Composable
 fun ExamAvatar(
     examId: String,
     modifier: Modifier = Modifier,
     size: BadgeSize = BadgeSize.Large,
-    containerColor: Color = MaterialTheme.colorScheme.primaryContainer,
-    contentColor: Color = MaterialTheme.colorScheme.onPrimaryContainer,
+    containerColor: Color = MaterialTheme.colorScheme.secondaryContainer,
+    contentColor: Color = MaterialTheme.colorScheme.secondary,
 ) {
     IconBadge(examIcon(examId), modifier, size, containerColor, contentColor)
 }
@@ -170,10 +159,10 @@ fun ReadinessRing(value: Float, modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         ProgressRing(value) {
-            Text("$pct%", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
+            Text("$pct%", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.secondary)
         }
         Spacer(Modifier.height(Spacing.xs))
-        Text(stringResource(R.string.readiness), style = MaterialTheme.typography.labelSmall)
+        Text(stringResource(R.string.readiness), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 

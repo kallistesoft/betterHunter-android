@@ -13,10 +13,10 @@ import androidx.compose.material.icons.rounded.Tune
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
+import ca.kallistesoft.hunt.core.designsystem.component.LinkButton
 import ca.kallistesoft.hunt.core.designsystem.component.SectionTitle
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
@@ -64,7 +65,7 @@ internal fun ExamTrainingContent(
         LazyColumn(contentPadding = padding.plus()) {
             item {
                 SectionTitle(stringResource(R.string.my_exams)) {
-                    TextButton(onClick = onChangeExams, modifier = Modifier.testTag("change-exams")) {
+                    LinkButton(onClick = onChangeExams, modifier = Modifier.testTag("change-exams")) {
                         Icon(Icons.Rounded.Tune, contentDescription = null, Modifier.size(Sizes.iconM))
                         Spacer(Modifier.width(Spacing.s))
                         Text(stringResource(R.string.action_change))
@@ -85,7 +86,7 @@ internal fun ExamTrainingContent(
                 item {
                     BhCard {
                         state.others.forEachIndexed { i, summary ->
-                            if (i > 0) HorizontalDivider(Modifier.padding(start = Sizes.listDividerInset))
+                            if (i > 0) HorizontalDivider(Modifier.padding(start = Sizes.listDividerInset), color = MaterialTheme.colorScheme.outlineVariant)
                             OtherExamRow(summary, onClick = { sheetExamId = summary.exam.id })
                         }
                     }

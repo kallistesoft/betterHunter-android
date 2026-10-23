@@ -1,6 +1,7 @@
 # BetterHunter design mockup
 
-The visual reference for new BetterHunter screens (Android, and iOS through the shared token values).
+The visual reference for BetterHunter screens (Android, and iOS through the shared token values). The Android app
+implements it in `core/designsystem` (theme, components) and the feature screens; see DECISIONS.md, D6.
 
 - **Live canvas (source of truth):** https://claude.ai/artifact/NSq8SRajcbQ8UmAv5cJaer (a claude.ai Design canvas,
   private to its owner). Add new screens there, then copy the files back here.

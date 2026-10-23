@@ -4,7 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.rememberTransformableState
 import androidx.compose.foundation.gestures.transformable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -36,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
@@ -45,11 +48,14 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.min
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import ca.kallistesoft.hunt.core.designsystem.component.Overline
+import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Question
@@ -62,10 +68,18 @@ fun assetPhoto(path: String): String = "file:///android_asset/$path"
 
 /**
  * Photo of a "What is it?" question with the credit its free licence requires. The box has the photo's exact shape
- * before it loads (no jump), capped at [maxHeightFraction] of the screen so the choices stay visible.
+ * before it loads (no jump), capped at [maxHeightFraction] of the screen so the choices stay visible. Tapping it opens
+ * it full screen; [zoomHint] shows the corner button saying so. [overlay] is drawn over the photo (result chip,
+ * caption).
  */
 @Composable
-fun QuestionPhoto(question: Question, modifier: Modifier = Modifier, maxHeightFraction: Float = 0.42f) {
+fun QuestionPhoto(
+    question: Question,
+    modifier: Modifier = Modifier,
+    maxHeightFraction: Float = 0.42f,
+    zoomHint: Boolean = true,
+    overlay: @Composable BoxScope.() -> Unit = {},
+) {
     val image = question.image ?: return
     val links = rememberLinkOpener()
     val description = question.text(currentLang()).q
@@ -81,7 +95,7 @@ fun QuestionPhoto(question: Question, modifier: Modifier = Modifier, maxHeightFr
             Box(
                 Modifier
                     .size(width = height * aspect, height = height)
-                    .clip(MaterialTheme.shapes.medium)
+                    .clip(MaterialTheme.shapes.large)
                     .background(MaterialTheme.colorScheme.surfaceContainerHighest)
                     .clickable(onClickLabel = stringResource(R.string.zoom_photo)) { zoomed = true }
                     .testTag("question-photo"),
@@ -108,17 +122,20 @@ fun QuestionPhoto(question: Question, modifier: Modifier = Modifier, maxHeightFr
                         },
                     )
                 }
-                Icon(
-                    Icons.Rounded.ZoomOutMap,
-                    contentDescription = null,
-                    tint = Color.White,
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(Spacing.s)
-                        .background(Color.Black.copy(alpha = 0.45f), CircleShape)
-                        .padding(Sizes.badgeInsetS)
-                        .size(Sizes.iconM),
-                )
+                overlay()
+                if (zoomHint) {
+                    val extended = BetterHunterTheme.extendedColors
+                    Box(
+                        Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(Spacing.m)
+                            .size(Sizes.touchTarget)
+                            .background(extended.photoScrim.copy(alpha = 0.72f), CircleShape),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Icon(Icons.Rounded.ZoomOutMap, contentDescription = null, tint = extended.onPhoto, modifier = Modifier.size(Sizes.iconM))
+                    }
+                }
             }
         }
         question.imageCredit?.let { credit ->
@@ -128,7 +145,7 @@ fun QuestionPhoto(question: Question, modifier: Modifier = Modifier, maxHeightFr
             ) {
                 Text(
                     stringResource(R.string.photo_by, credit.author, credit.license),
-                    style = MaterialTheme.typography.labelSmall,
+                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Normal),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -197,5 +214,31 @@ fun PrefetchPhoto(image: String?) {
     val context = LocalContext.current
     LaunchedEffect(image) {
         SingletonImageLoader.get(context).enqueue(ImageRequest.Builder(context).data(assetPhoto(image)).build())
+    }
+}
+
+/**
+ * Caption at the bottom of a photo ([QuestionPhoto]'s overlay): an orange [overline], a [title] and an optional
+ * [subtitle], on a dark fade so they stay readable in light and dark themes.
+ */
+@Composable
+fun BoxScope.PhotoCaption(overline: String, title: String, subtitle: String? = null) {
+    val extended = BetterHunterTheme.extendedColors
+    Column(
+        Modifier
+            .align(Alignment.BottomStart)
+            .fillMaxWidth()
+            .background(
+                Brush.verticalGradient(
+                    0f to extended.photoScrim.copy(alpha = 0f),
+                    0.6f to extended.photoScrim.copy(alpha = 0.9f),
+                ),
+            )
+            .padding(start = Spacing.l, end = Spacing.l, top = Spacing.xxxl, bottom = Spacing.m),
+        verticalArrangement = Arrangement.spacedBy(Spacing.xxs),
+    ) {
+        Overline(overline, color = extended.onPhotoAccent)
+        Text(title, style = MaterialTheme.typography.titleLarge, color = extended.onPhoto)
+        if (subtitle != null) Text(subtitle, style = MaterialTheme.typography.bodySmall, color = extended.onPhotoMuted)
     }
 }

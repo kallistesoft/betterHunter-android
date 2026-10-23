@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Match the Compose theme so there is no flash before the first frame. -->
-    <color name="window_background">#FFF6FBF2</color>
+    <color name="window_background">#FFF5F2EA</color>
     <!-- Middle of the icon's green gradient. -->
     <color name="splash_background">#FF2D5B38</color>
 </resources>

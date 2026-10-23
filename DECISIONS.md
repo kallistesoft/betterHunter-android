@@ -68,9 +68,9 @@ secrets). CI builds an unsigned release without the secrets. `versionCode` = CI 
 
 ## Design
 
-**D1. Material 3 with a fixed brand palette.** Colour scheme generated (tonal spot) from the icon's green `#2F5D3A`,
-light and dark; *no dynamic colour*, so the app always matches its icon and store listing. Default M3 type scale.
-*Declined for now:* Material Symbols instead of material-icons-extended, a custom typography, M3 Expressive.
+**D1. Material 3 with a fixed brand palette.** *Replaced by D6.* Colour scheme generated (tonal spot) from the icon's
+green `#2F5D3A`, light and dark; *no dynamic colour*, so the app always matches its icon and store listing. Default M3
+type scale. *Declined for now:* Material Symbols instead of material-icons-extended, a custom typography, M3 Expressive.
 
 **D2. Design tokens only.** Sizes come from `Spacing` and `Sizes`, corners from the theme's shapes; no literal sizes in
 screens (checked in CI). iOS should reuse the same token values.
@@ -83,6 +83,14 @@ actions sit in an opaque bar.
 
 **D5. Visual references.** Every component and screen has previews in two variants (light in English, dark in French)
 and a screenshot test; the reference images (`*/src/test/screenshots`) are the visual target, iOS included.
+
+**D6. The "field guide" look of the design mockup.** *Product.* The mockup in `design/` (claude.ai Design canvas)
+sets the look: dark forest greens / warm cream in light mode, blaze orange only for the one main action of a screen and
+the current selection, green for progress, links and right answers; Barlow Condensed headings over Barlow text
+(bundled, SIL OFL); 22 dp cards, 16 dp answers, 14 dp buttons, 44 dp touch targets. Still Material 3 underneath, with
+the mockup's colours mapped onto its roles (primary = orange, secondary = green; see `Color.kt`), and still no dynamic
+colour. "What is it?" answers show the name in both languages; an answered photo shows the animal's card instead of the
+choices. iOS uses the same token values.
 
 ## Android engineering
 

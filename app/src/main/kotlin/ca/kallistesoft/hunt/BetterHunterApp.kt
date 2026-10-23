@@ -45,6 +45,7 @@ fun BetterHunterApp(firstRun: Boolean, versionName: String) {
                         onOpenExams = { backStack.add(ExamTraining) },
                         onOpenRecognition = { backStack.add(Recognition) },
                         onOpenAbout = { backStack.add(About) },
+                        onChangeExams = { backStack.add(ExamPicker) },
                         onStartQuiz = { examId, mode -> backStack.add(Quiz(examId, mode)) },
                         onSetLanguage = ::setAppLanguage,
                     )

@@ -14,10 +14,8 @@ import androidx.compose.material.icons.outlined.ErrorOutline
 import androidx.compose.material.icons.rounded.Verified
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,7 +27,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.BottomActionBar
+import ca.kallistesoft.hunt.core.designsystem.component.PrimaryButton
 import ca.kallistesoft.hunt.core.designsystem.component.ProgressRing
+import ca.kallistesoft.hunt.core.designsystem.component.SecondaryButton
+import ca.kallistesoft.hunt.core.designsystem.component.SectionTitle
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
@@ -50,7 +51,7 @@ internal fun ResultContent(state: QuizUiState.Finished, onHome: () -> Unit, onAg
     val isExam = s.mode == QuizMode.EXAM
     val success = BetterHunterTheme.extendedColors.success
     val color = when {
-        !isExam -> MaterialTheme.colorScheme.primary
+        !isExam -> MaterialTheme.colorScheme.secondary
         s.passed -> success
         else -> MaterialTheme.colorScheme.error
     }
@@ -59,10 +60,8 @@ internal fun ResultContent(state: QuizUiState.Finished, onHome: () -> Unit, onAg
         topBar = { BackTopAppBar(stringResource(R.string.score), onBack = null) },
         bottomBar = {
             BottomActionBar {
-                OutlinedButton(onClick = onHome, modifier = Modifier.weight(1f)) { Text(stringResource(R.string.home)) }
-                Button(onClick = onAgain, modifier = Modifier.weight(1f).testTag("again")) {
-                    Text(stringResource(R.string.again))
-                }
+                SecondaryButton(stringResource(R.string.home), onClick = onHome, modifier = Modifier.weight(1f))
+                PrimaryButton(stringResource(R.string.again), onClick = onAgain, modifier = Modifier.weight(1f).testTag("again"))
             }
         },
     ) { padding ->
@@ -85,9 +84,8 @@ internal fun ResultContent(state: QuizUiState.Finished, onHome: () -> Unit, onAg
                     ProgressRing(s.score.toFloat(), size = Sizes.ringL, strokeWidth = Sizes.ringStrokeL, color = color) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
-                                "${(s.score * 100).roundToInt()} %",
-                                style = MaterialTheme.typography.displaySmall,
-                                fontWeight = FontWeight.Bold,
+                                stringResource(R.string.percent, (s.score * 100).roundToInt()),
+                                style = MaterialTheme.typography.displayMedium,
                                 color = color,
                                 modifier = Modifier.testTag("score"),
                             )
@@ -124,18 +122,12 @@ internal fun ResultContent(state: QuizUiState.Finished, onHome: () -> Unit, onAg
                     }
                 }
             }
-            item {
-                Text(
-                    stringResource(R.string.missed_title),
-                    style = MaterialTheme.typography.titleMedium,
-                    modifier = Modifier.padding(top = Spacing.l),
-                )
-            }
+            item { SectionTitle(stringResource(R.string.missed_title)) }
             if (s.missed.isEmpty()) item { Text(stringResource(R.string.all_correct)) }
             items(s.missed, key = { it.first.id }) { (q, picked) ->
                 val text = q.text(lang)
-                BhCard {
-                    Column(Modifier.padding(Spacing.m), verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
+                BhCard(shape = MaterialTheme.shapes.medium) {
+                    Column(Modifier.padding(Spacing.l), verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
                         q.image?.let { PhotoThumb(it, Modifier.padding(bottom = Spacing.xs)) }
                         Text(text.q, style = MaterialTheme.typography.titleSmall)
                         picked?.let {
@@ -146,7 +138,7 @@ internal fun ResultContent(state: QuizUiState.Finished, onHome: () -> Unit, onAg
                             color = success,
                             fontWeight = FontWeight.SemiBold,
                         )
-                        Text(text.explanation, style = MaterialTheme.typography.bodySmall)
+                        Text(text.explanation, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         SourceLinks(q)
                     }
                 }
