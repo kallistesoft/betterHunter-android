@@ -102,12 +102,37 @@ Play Console already declares that the app contains ads (AdMob) and uses the adv
 include them. The placement, as in the Flutter prototype, is one **interstitial between a finished test and its
 results**, never during a question.
 
-**Status (2026-10-23).** The AdMob account, the app **BetterHunter** (App ID `ca-app-pub-7557144664039757~4450187296`)
-and the interstitial ad unit **Quiz finished** (`ca-app-pub-7557144664039757/7902432864`, frequency cap 1 per
-3 minutes) are created, and the code is in the app (step 20). The real IDs are in `app/build.gradle.kts`
-(`admobRelease`), used by release builds only. Still to do: steps 2 (payments and tax, if not finished), 4 (link the
-app to Play once it's published), 11-12 (app-ads.txt), 13-17 (consent messages, privacy policy, ad content) and 18
-(test device).
+### Status (2026-10-23)
+
+Done:
+
+- **Account:** publisher `pub-7557144664039757`, Canada, CAD. Payment profile complete. Account approval by AdMob
+  pending (up to 24 h).
+- **Android app** **BetterHunter**, App ID `ca-app-pub-7557144664039757~4450187296`, and its interstitial ad unit
+  **Quiz finished**, `ca-app-pub-7557144664039757/7902432864`, frequency cap 1 impression per 3 minutes per user.
+- **Code:** in the app (step 20). The real IDs are in `app/build.gradle.kts` (`admobRelease`), used by release builds
+  only; debug and qa use Google's test IDs.
+- **Blocking controls:** maximum ad content rating left at **MA** (the user's choice, instead of PG in step 16);
+  **Get rich quick** and **Dating** blocked; alcohol and gambling are blocked by default.
+- **Consent messages:** European regulations message published in **English and French**, with a **Do not consent**
+  button; US state regulations message published in **English only** (AdMob doesn't offer French for it).
+- **app-ads.txt** live at https://kallistesoft.ca/app-ads.txt (`google.com, pub-7557144664039757, DIRECT,
+  f08c47fec0942fa0`).
+- **Privacy policy** pages (FR and EN) updated for AdMob, the advertising ID and consent (kallistesoft-site commit
+  `e3f93ec`).
+
+To do:
+
+- [ ] **Link the app to Play, once the app is published on Play:** AdMob → **Apps** → **BetterHunter** → **App
+      settings** → **Add app store details** → search `ca.kallistesoft.hunt` → **Add**. AdMob then reviews the app
+      (a few days) and verifies app-ads.txt; **real ads only serve after that.** (Also in section 3, step 3.)
+- [ ] **Test device:** register the user's Pixel as an AdMob test device (step 18) **before testing a release build**,
+      which requests real ads.
+- [ ] **`ads_enabled`** parameter in Firebase Remote Config (step 21).
+- [ ] **iOS:** add the iOS app and its interstitial ad unit in AdMob once the iOS app exists (and its app-ads.txt
+      line stays the same publisher).
+
+The steps below are the full procedure, kept for reference and for the iOS app.
 
 ### Create the account
 
@@ -191,17 +216,21 @@ Left to do:
    `BH_KEY_PASSWORD` (see the README).
 2. **First release:** **Test and release** → **Testing** → **Internal testing** → create a release and upload the AAB
    from CI (`app-release.aab`, signed). Add testers by email, then promote to closed testing and production.
-3. **Force update:** the `min_version_code` parameters exist in Remote Config with 0 (section 1, step 14), so a
+3. - [ ] **Link AdMob, once the app is published on Play:** AdMob → **Apps** → **BetterHunter** → **App settings** →
+   **Add app store details** → search `ca.kallistesoft.hunt` → **Add**. AdMob reviews the app (a few days) and
+   verifies https://kallistesoft.ca/app-ads.txt; real ads only serve after that (section 2, "To do"). Before testing
+   the release build on a phone, register it as an AdMob test device (section 2, step 18).
+4. **Force update:** the `min_version_code` parameters exist in Remote Config with 0 (section 1, step 14), so a
    release can be forced out later.
-4. **Before releasing:** check the Play Console declarations against what the release really does (below).
-5. **Refresh the listing:** new icon (`store/icon-512.png`), screenshots of this app instead of the Flutter
+5. **Before releasing:** check the Play Console declarations against what the release really does (below).
+6. **Refresh the listing:** new icon (`store/icon-512.png`), screenshots of this app instead of the Flutter
    prototype, feature graphics with the new logo, and descriptions without the RPAL exam (`store/listing.md`).
-6. **Privacy policy:** the pages on kallistesoft.ca (`en/privacy/` and `confidentialite/`, in the kallistesoft-site
+7. **Privacy policy:** the pages on kallistesoft.ca (`en/privacy/` and `confidentialite/`, in the kallistesoft-site
    repo) don't name Firebase Remote Config yet. Add a BetterHunter section: at launch and when it comes back to the
    foreground, the app asks Google's Firebase Remote Config for its settings (features on or off, the minimum version);
    the request carries a Firebase installation ID, a random ID for this install of the app (not the advertising ID,
-   not linked to the user), and the IP address, and is used only to run the app. Add AdMob and the consent form (UMP)
-   to BetterHunter's part only when those SDKs ship (section 2, step 15).
+   not linked to the user), and the IP address, and is used only to run the app. AdMob, the advertising ID and the
+   consent choice were added on 2026-10-23 (kallistesoft-site `e3f93ec`, section 2).
 
 ### Before releasing: Play Console vs. the app
 
