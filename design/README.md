@@ -38,7 +38,7 @@ with a monochrome version for themed icons), the splash icon and the dashboard h
 
 `BuckVariants.dc.html` (beside it) tries three signature details to make the buck more distinctive: *Blaze
 patch* (orange triangle on the forehead), *Uneven rack* (3 points one side, 4 the other) and *First light* (orange sun
-between the antlers). Not chosen yet.
+between the antlers), plus *Blaze + uneven rack*, the mix of the first two (highlighted). Not chosen yet.
 
 ## Photos
 
