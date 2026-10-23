@@ -2,6 +2,7 @@ package ca.kallistesoft.hunt.feature.settings
 
 import android.Manifest
 import androidx.activity.ComponentActivity
+import androidx.lifecycle.SavedStateHandle
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
@@ -112,7 +113,7 @@ class SeasonDateScreenTest {
     private val userData = FakeUserDataRepository(UserProgress())
 
     private fun setScreen(): SeasonDateViewModel {
-        val viewModel = SeasonDateViewModel(userData, Today { TEST_DAY })
+        val viewModel = SeasonDateViewModel(userData, Today { TEST_DAY }, SavedStateHandle())
         compose.setContent {
             BetterHunterTheme { SeasonDateScreen(onDone = { events += "done" }, viewModel = viewModel) }
         }

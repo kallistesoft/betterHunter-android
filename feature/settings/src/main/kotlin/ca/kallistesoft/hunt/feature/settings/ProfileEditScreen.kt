@@ -2,6 +2,7 @@ package ca.kallistesoft.hunt.feature.settings
 
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -29,12 +30,13 @@ fun ProfileEditScreen(
     ),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    if (state.saved) LaunchedEffect(Unit) { onDone() }
     ProfileEditContent(
         state,
         onChooseHunterType = viewModel::chooseHunterType,
         onToggleWeapon = viewModel::toggleWeapon,
         onChooseProvince = viewModel::chooseProvince,
-        onSave = { viewModel.save(onDone) },
+        onSave = viewModel::save,
         onBack = onDone,
     )
 }

@@ -42,7 +42,7 @@ else
 fi
 
 if ! "$ADB" devices | grep -q $'\tdevice$'; then
-    echo "No device connected. Run scripts/emulator.sh first." >&2
+    echo "No device connected. Run skills/testing-on-emulator/scripts/emulator.sh first." >&2
     exit 1
 fi
 
