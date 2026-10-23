@@ -529,24 +529,24 @@ def main_new_hunter(t, passed=True, season=False):
       {meter(t, "Readiness", "88%" if season else "64%", 88 if season else 64)}
     </a>'''
     def daily_row(target, ic, tone, title, sub, done, divider):
-        dots = "".join(f'<span style="width: 8px; height: 8px; border-radius: 999px; background: {t["bar"] if n < done else t["track"]}"></span>' for n in range(5))
+        dots = "".join(f'<span style="width: 8px; height: 8px; border-radius: 999px; background: {t["bar"] if n < done else t["track"]}"></span>' for n in range(3))
         return (f'<a href="{href(t, target)}" style="display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 6px 0; '
                 f'{"border-top: 1px solid " + t["border"] + ";" if divider else ""} color: {t["text"]}; text-decoration: none">{tile(t, ic, tone, 40, 11)}'
                 f'<span style="display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0"><span style="font-weight: 600; font-size: 15px">{title}</span>'
                 f'<span style="font-size: 12px; color: {t["muted"]}">{sub}</span></span>'
                 f'<span style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px"><span style="display: flex; gap: 4px">{dots}</span>'
-                f'<span style="font-size: 12px; font-weight: 600; color: {t["green"] if done else t["muted"]}">{done} / 5</span></span></a>')
+                f'<span style="font-size: 12px; font-weight: 600; color: {t["green"] if done else t["muted"]}">{done} / 3</span></span></a>')
     daily_card = card(t, f'''<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
       <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
         {label(t, "Today")}
-        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 22px; line-height: 1.15">Stay up to date: 10 questions</span>
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 22px; line-height: 1.15">Stay up to date: 6 questions</span>
         <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: {t["muted"]}">{icon("flame", 14, t["orange"], 2.2)} 6-day streak · new questions every day</span>
       </div></div>
     <div style="display: flex; flex-direction: column">
-      {daily_row("PhotoQuiz", "eye", "orange", "5 species", "Name the animal from its photo", 2, False)}
-      {daily_row("DailyQuestion", "book", "green", "5 general", "Rules, safety, shot placement", 0, True)}
+      {daily_row("PhotoQuiz", "eye", "orange", "3 species", "Name the animal from its photo", 2, False)}
+      {daily_row("DailyQuestion", "book", "green", "3 general", "Rules, safety, shot placement", 0, True)}
     </div>
-    {primary(t, "Continue: 3 species left", href(t, "PhotoQuiz"), "; height: 52px", "play")}''', pad="16px 18px 18px", gap=10)
+    {primary(t, "Continue: 1 species left", href(t, "PhotoQuiz"), "; height: 52px", "play")}''', pad="16px 18px 18px", gap=10)
     ring_html = ring(t, 25, 84, 8, t["orange"], f'<span style="font-family: \'Barlow Condensed\', sans-serif; font-weight: 700; font-size: 28px; line-height: 1">5</span><span style="font-size: 11px; color: {t["muted"]}">of 20</span>')
     goal_card = card(t, f'''<div style="display: flex; align-items: center; gap: 16px">{ring_html}
       <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
@@ -728,7 +728,7 @@ def field_skills(t, state="start"):
 
 def skill_question(t, season=False, daily=False):
     if daily:
-        title, back, over, states, nxt = "Question 2 / 5", "HomeNewHunter", "Today · 5 general", "r" + "u" * 4, "HomeNewHunter"
+        title, back, over, states, nxt = "Question 2 / 3", "HomeNewHunter", "Today · 3 general", "r" + "u" * 2, "HomeNewHunter"
     elif season:
         title, back, over, states, nxt = "Question 4 / 15", "HomeSeasonCheck", "Season check · all skills", "rrwr" + "u" * 11, "FieldSkillsAllMastered"
     else:

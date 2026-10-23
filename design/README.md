@@ -32,8 +32,8 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | I passed the real exam: confirm (from Exam training) | `PassedExam.dc.html` | `PassedExamLight.dc.html` | built |
 | Home, new hunter (after passing the real exam) | `MainNewHunter.dc.html` | `MainNewHunterLight.dc.html` | built |
 | Onboarding as a new hunter: what kind of hunter? → New hunter, then the same two questions | `HunterProfileNewHunter.dc.html`, `HuntWithNewHunter.dc.html`, `HuntWhereNewHunter.dc.html` | `…Light.dc.html` | built, except the new-hunter wording of "Where do you hunt?" |
-| Home, new hunter (from onboarding): today's 5 species + 5 general questions, Field skills instead of Exam training | `HomeNewHunter.dc.html` | `HomeNewHunterLight.dc.html` | no |
-| Today: a general question (5 a day) | `DailyQuestion.dc.html` | `DailyQuestionLight.dc.html` | no |
+| Home, new hunter (from onboarding): today's 3 species + 3 general questions, Field skills instead of Exam training | `HomeNewHunter.dc.html` | `HomeNewHunterLight.dc.html` | no |
+| Today: a general question (3 a day) | `DailyQuestion.dc.html` | `DailyQuestionLight.dc.html` | no |
 | Field skills: today's mix, readiness per skill | `FieldSkills.dc.html` | `FieldSkillsLight.dc.html` | no |
 | Field skills: question (one skill, 10 questions) | `SkillQuestion.dc.html` | `SkillQuestionLight.dc.html` | no |
 | Field skills: results (the skill's progress) | `SkillResults.dc.html` | `SkillResultsLight.dc.html` | no |
@@ -81,7 +81,7 @@ word; nothing is verified.
 
 **New hunter: first seasons (mockup, not built).** A user who picks "New hunter" at onboarding is done with exams:
 nothing in the flow mentions a course, a pass mark or a mock exam. The goal is to keep them up to date, so Home leads
-with **today's 10 questions**: 5 random species questions (a photo to name, as in "What is it?") and 5 random general
+with **today's 6 questions**: 3 random species questions (a photo to name, as in "What is it?") and 3 random general
 questions (rules, safety, shot placement, tracking), each with its own progress and one "Continue" button; new
 questions every day, and they keep the streak. Below them, Home swaps the Exam training tile for **Field skills**, which practises hunting know-how one skill at a time: shot placement, after the
 shot (tracking, recovery, tagging), safe firearm handling, rules in the field (hours, tags, transport), survival and
