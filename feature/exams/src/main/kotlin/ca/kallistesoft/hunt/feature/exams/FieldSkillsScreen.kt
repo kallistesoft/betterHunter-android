@@ -89,7 +89,7 @@ internal fun FieldSkillsContent(
                     }
                 }
             }
-            items(state.skills, key = { it.skill.name }) { summary ->
+            items(state.skills, key = { it.skill.name }, contentType = { "skill" }) { summary ->
                 SkillRow(summary, onClick = { onStart(FieldRun.SKILL, summary.skill) })
             }
             item {

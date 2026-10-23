@@ -9,9 +9,11 @@ import ca.kallistesoft.hunt.core.model.Province
 import ca.kallistesoft.hunt.core.ui.ExamSummary
 import ca.kallistesoft.hunt.core.ui.examSummary
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
@@ -46,5 +48,6 @@ class ExamsViewModel @Inject constructor(
             games = content.games.map { examSummary(content, progress, it) },
             loading = false,
         )
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ExamsUiState())
+    }.flowOn(Dispatchers.Default) // readiness over every question: off the main thread
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ExamsUiState())
 }

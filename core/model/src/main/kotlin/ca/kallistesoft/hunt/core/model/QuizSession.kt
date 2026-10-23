@@ -28,13 +28,17 @@ data class QuizSession(
 
     fun next(): QuizSession = if (isLast) this else copy(current = current + 1)
 
-    val correctCount: Int get() = questions.indices.count { answers[it] == questions[it].answerIndex }
+    // Computed once per session (it is immutable), not on each read: the results screens read them several times.
+    val correctCount: Int by lazy(LazyThreadSafetyMode.PUBLICATION) {
+        questions.indices.count { answers[it] == questions[it].answerIndex }
+    }
     val score: Double get() = if (questions.isEmpty()) 0.0 else correctCount.toDouble() / questions.size
     val passed: Boolean get() = score >= exam.passMark
 
     /** Missed questions with the choice the user picked (null if left unanswered). */
-    val missed: List<Pair<Question, Int?>>
-        get() = questions.indices.filter { answers[it] != questions[it].answerIndex }.map { questions[it] to answers[it] }
+    val missed: List<Pair<Question, Int?>> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+        questions.indices.filter { answers[it] != questions[it].answerIndex }.map { questions[it] to answers[it] }
+    }
 
     companion object {
         const val PRACTICE_SIZE = 20
