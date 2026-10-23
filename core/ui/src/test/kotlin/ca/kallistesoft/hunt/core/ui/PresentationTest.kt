@@ -1,6 +1,7 @@
 package ca.kallistesoft.hunt.core.ui
 
 import android.Manifest
+import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.School
@@ -72,5 +73,15 @@ class PresentationTest {
         compose.setContent { ask = rememberNotificationPermission { granted = it } }
         compose.runOnIdle { ask() }
         compose.runOnIdle { assertEquals(true, granted) }
+    }
+
+    @Test
+    fun `the notification settings open on this app's page`() {
+        lateinit var open: () -> Unit
+        compose.setContent { open = rememberNotificationSettingsOpener() }
+        compose.runOnIdle { open() }
+        val intent = shadowOf(compose.activity.application).nextStartedActivity
+        assertEquals(Settings.ACTION_APP_NOTIFICATION_SETTINGS, intent.action)
+        assertEquals(compose.activity.packageName, intent.getStringExtra(Settings.EXTRA_APP_PACKAGE))
     }
 }

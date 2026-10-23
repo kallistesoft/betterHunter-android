@@ -1,5 +1,6 @@
 package ca.kallistesoft.hunt
 
+import android.content.Intent
 import androidx.annotation.StringRes
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.SemanticsMatcher
@@ -31,6 +32,17 @@ class AppRobot(private val rule: ComposeTestRule) {
     fun launch(progress: suspend UserDataRepository.() -> Unit = {}) {
         runBlocking { app.userData.progress() }
         scenario = ActivityScenario.launch(MainActivity::class.java)
+    }
+
+    /** Like [launch], with the [intent] a notification sends. */
+    fun launch(intent: Intent, progress: suspend UserDataRepository.() -> Unit = {}) {
+        runBlocking { app.userData.progress() }
+        scenario = ActivityScenario.launch(intent)
+    }
+
+    /** Closes the app if [launch] started it. */
+    fun close() {
+        if (::scenario.isInitialized) scenario.close()
     }
 
     fun str(@StringRes id: Int, vararg args: Any): String = app.getString(id, *args)
