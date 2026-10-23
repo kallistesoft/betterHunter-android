@@ -126,8 +126,9 @@ To do:
 - [ ] **Link the app to Play, once the app is published on Play:** AdMob → **Apps** → **BetterHunter** → **App
       settings** → **Add app store details** → search `ca.kallistesoft.hunt` → **Add**. AdMob then reviews the app
       (a few days) and verifies app-ads.txt; **real ads only serve after that.** (Also in section 3, step 3.)
-- [ ] **Test device:** register the user's Pixel as an AdMob test device (step 18) **before testing a release build**,
-      which requests real ads.
+- [x] **Test device:** the user's Pixel 10 is registered as an AdMob test device (2026-10-23, step 18). It gets test
+      ads even from release builds with the real IDs, so testing a release build on it is safe. Register any other
+      phone the same way before testing a release build on it.
 - [ ] **`ads_enabled`** parameter in Firebase Remote Config (step 21).
 - [ ] **iOS:** add the iOS app and its interstitial ad unit in AdMob once the iOS app exists (and its app-ads.txt
       line stays the same publisher).
@@ -218,8 +219,9 @@ Left to do:
    from CI (`app-release.aab`, signed). Add testers by email, then promote to closed testing and production.
 3. - [ ] **Link AdMob, once the app is published on Play:** AdMob → **Apps** → **BetterHunter** → **App settings** →
    **Add app store details** → search `ca.kallistesoft.hunt` → **Add**. AdMob reviews the app (a few days) and
-   verifies https://kallistesoft.ca/app-ads.txt; real ads only serve after that (section 2, "To do"). Before testing
-   the release build on a phone, register it as an AdMob test device (section 2, step 18).
+   verifies https://kallistesoft.ca/app-ads.txt; real ads only serve after that (section 2, "To do"). The user's Pixel
+   10 is already an AdMob test device; register any other phone (section 2, step 18) before testing a release build
+   on it.
 4. **Force update:** the `min_version_code` parameters exist in Remote Config with 0 (section 1, step 14), so a
    release can be forced out later.
 5. **Before releasing:** check the Play Console declarations against what the release really does (below).
