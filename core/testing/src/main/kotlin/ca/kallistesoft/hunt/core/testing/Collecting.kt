@@ -8,7 +8,7 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 
 /**
  * Collects [flows] for the rest of the test, as a screen does. ViewModels share their state `WhileSubscribed` and
- * load in `onStart` (see skills/viewmodel-state), so a test that reads `uiState.value` must collect it first.
+ * load in `onStart` (see .claude/skills/viewmodel-state), so a test that reads `uiState.value` must collect it first.
  */
 @OptIn(ExperimentalCoroutinesApi::class)
 fun TestScope.collecting(vararg flows: Flow<*>) {

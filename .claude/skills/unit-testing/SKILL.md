@@ -1,6 +1,6 @@
 ---
 name: unit-testing
-description: How to write and run BetterHunter's unit tests (JVM + Robolectric, no device) and keep Kover coverage at 90% of lines for every class. Use when adding or changing any code (a ViewModel, a screen, a repository, a worker), writing or fixing a test, when `koverVerifyUnit` or the CI "Coverage" step fails, or when asked to raise coverage. For tests on a device or emulator, see skills/testing-on-emulator.
+description: How to write and run BetterHunter's unit tests (JVM + Robolectric, no device) and keep Kover coverage at 90% of lines for every class. Use when adding or changing any code (a ViewModel, a screen, a repository, a worker), writing or fixing a test, when `koverVerifyUnit` or the CI "Coverage" step fails, or when asked to raise coverage. For tests on a device or emulator, see .claude/skills/testing-on-emulator.
 ---
 
 # Unit tests and coverage in BetterHunter
@@ -63,7 +63,7 @@ a second fake in a module.
 
 ### A ViewModel test
 
-The state only loads while collected (skills/viewmodel-state), so collect it first:
+The state only loads while collected (.claude/skills/viewmodel-state), so collect it first:
 
 ```kotlin
 @get:Rule

@@ -20,13 +20,13 @@ if [ -n "$literals" ]; then
   status=1
 fi
 
-# 3. No init block in a ViewModel: its state starts when the screen collects it (skills/viewmodel-state).
+# 3. No init block in a ViewModel: its state starts when the screen collects it (.claude/skills/viewmodel-state).
 inits=$(grep -rlE --include='*.kt' --exclude-dir=build ':[[:space:]]*ViewModel\(\)' . \
   | xargs grep -nE '^[[:space:]]*init[[:space:]]*\{' /dev/null)
 if [ -n "$inits" ]; then
   echo "$inits"
   echo "error: no init in a ViewModel; derive uiState with combine, or load in _uiState.asStateFlow().onStart { }"
-  echo "       (see skills/viewmodel-state/SKILL.md)."
+  echo "       (see .claude/skills/viewmodel-state/SKILL.md)."
   status=1
 fi
 
