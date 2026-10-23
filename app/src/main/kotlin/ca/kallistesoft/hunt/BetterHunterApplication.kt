@@ -12,8 +12,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/** Open only for the Robolectric tests, whose subclass sets up a test WorkManager before [onCreate] runs. */
 @HiltAndroidApp
-class BetterHunterApplication : Application() {
+open class BetterHunterApplication : Application() {
     @Inject lateinit var userData: UserDataRepository
 
     override fun onCreate() {
