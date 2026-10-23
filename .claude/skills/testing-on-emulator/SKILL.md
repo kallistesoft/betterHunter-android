@@ -5,11 +5,11 @@ description: Builds BetterHunter, installs it on the Android emulator and tests 
 
 # Testing BetterHunter on the emulator
 
-Scripts are in `skills/testing-on-emulator/scripts/` (`$S` below). Run them; don't read them first.
+Scripts are in `.claude/skills/testing-on-emulator/scripts/` (`$S` below). Run them; don't read them first.
 Screenshots and notes go in `build/emulator-test/` (git-ignored).
 
 ```sh
-S=skills/testing-on-emulator/scripts
+S=.claude/skills/testing-on-emulator/scripts
 mkdir -p build/emulator-test
 ```
 

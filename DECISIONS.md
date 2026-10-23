@@ -127,7 +127,7 @@ colour. "What is it?" answers show the name in both languages; an answered photo
 choices. iOS uses the same token values.
 
 **D7. No Compose Styles API.** *Android.* Components keep their parameters and Material 3 theming; they aren't moved to
-`Style` (`skills/styles`). *Why:* the API is still `@ExperimentalFoundationStyleApi`; most design-system components wrap
+`Style` (`.claude/skills/styles`). *Why:* the API is still `@ExperimentalFoundationStyleApi`; most design-system components wrap
 Material 3 components, which Styles doesn't cover (`Buttons`, `Cards`, `LinkRow`, `AnswerChoice`, `ChoiceCard`,
 `PillToggle`, `IconBadge`, `ProgressRing`); and the look is fixed (D6), so there's little for it to add. The
 prerequisites are met (foundation 1.12.1, compile SDK 37). *Revisit when:* the API is stable or Material 3 supports it.
@@ -145,7 +145,7 @@ data flow (StateFlow UI state, stateless `…Content` composables), Hilt, Naviga
 **A2b. ViewModel state starts when collected.** No `init` in a ViewModel: `uiState` is derived with `combine` +
 `stateIn(WhileSubscribed(5_000))`, or a one-time setup runs in `_uiState.asStateFlow().onStart { }` guarded by the
 loading state. *Why:* nothing runs for a ViewModel no screen shows, no race with the first collection, state always
-follows the repositories. Checked in CI (`check-conventions.sh`); how-to in `skills/viewmodel-state`.
+follows the repositories. Checked in CI (`check-conventions.sh`); how-to in `.claude/skills/viewmodel-state`.
 
 **A3. Storage: DataStore, not Room.** Progress is one small typed object (JSON); questions are read-only assets parsed
 once. *Switch to Room when:* answer history is kept, or questions are downloaded and updated on the device.
