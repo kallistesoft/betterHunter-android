@@ -44,7 +44,8 @@ feature/onboarding   First launch: what kind of hunter, what they hunt with, whe
 feature/home         Dashboard: daily goal, streak, hubs, photo of the day (new-hunter version after a real exam)
 feature/exams        Exam training, My provinces, "I passed the real exam", recognition games
 feature/quiz         Practice, mock exam (timed), review of mistakes, results
-feature/about        Disclaimer, how it works, sources, contact, privacy
+feature/settings     Settings: profile (hunter type, weapons, where you hunt, my provinces), language, daily goal
+feature/about        Disclaimer, how it works, sources
 ```
 
 Design mockup (visual reference for new screens, dark and light): [design/](design/README.md).
@@ -145,10 +146,10 @@ Reusable pieces live in two modules:
 
 - `core:designsystem`, no app knowledge: theme (colours, Barlow typography, shapes), `Spacing` and `Sizes`, `BhCard`,
   `IconBadge`, `AnswerChoice` (idle, selected, correct, wrong; lettered row or two-by-two tile), `AnswerResult`,
-  `ResultChip`, `NoticeCard`, `HubCard`, `ChoiceCard`, `LinkRow`, `ProgressRing`, `MeterBar`, `QuizProgress`, `PillToggle`,
+  `ResultChip`, `NoticeCard`, `HubCard`, `ChoiceCard`, `SettingRow` / `SettingsCard`, `LinkRow`, `ProgressRing`, `MeterBar`, `QuizProgress`, `PillToggle`,
   `PrimaryButton` / `SecondaryButton` / `LinkButton`, `SectionTitle` / `Overline`, `BuckLogo`.
 - `core:ui`, built on the app's models: `ExamCard`, `ExamListItem`, `ExamAvatar`, `ReadinessRing`, `QuestionPhoto`
-  (with `PhotoCaption`), `SourceLinks`, `BackTopAppBar`, `BrandTopAppBar`, `HuntIcons`, plus `PreviewData` (sample exams and questions).
+  (with `PhotoCaption`), `SourceLinks`, `BackTopAppBar`, `BrandTopAppBar`, `HuntIcons`, `ChoiceQuestion`, plus `PreviewData` (sample exams and questions).
 
 The look follows the design mockup ([design/](design/README.md)): forest greens, blaze orange for the one main action
 and the current selection, green for progress and right answers, Barlow Condensed headings over Barlow text. The fonts

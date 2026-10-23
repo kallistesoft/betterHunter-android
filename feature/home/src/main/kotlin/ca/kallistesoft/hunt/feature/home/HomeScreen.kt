@@ -17,6 +17,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.EmojiEvents
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.School
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
@@ -69,6 +70,7 @@ fun HomeScreen(
     onOpenExams: () -> Unit,
     onOpenRecognition: () -> Unit,
     onOpenAbout: () -> Unit,
+    onOpenSettings: () -> Unit,
     onOpenProvinces: () -> Unit,
     onStartQuiz: (examId: String, mode: QuizMode) -> Unit,
     onSetLanguage: (Lang) -> Unit,
@@ -80,6 +82,7 @@ fun HomeScreen(
         onOpenExams = onOpenExams,
         onOpenRecognition = onOpenRecognition,
         onOpenAbout = onOpenAbout,
+        onOpenSettings = onOpenSettings,
         onOpenProvinces = onOpenProvinces,
         onStartQuiz = onStartQuiz,
         onSetLanguage = onSetLanguage,
@@ -99,6 +102,7 @@ internal fun HomeContent(
     onOpenExams: () -> Unit,
     onOpenRecognition: () -> Unit,
     onOpenAbout: () -> Unit,
+    onOpenSettings: () -> Unit,
     onOpenProvinces: () -> Unit,
     onStartQuiz: (examId: String, mode: QuizMode) -> Unit,
     onSetLanguage: (Lang) -> Unit,
@@ -108,8 +112,8 @@ internal fun HomeContent(
     Scaffold(
         topBar = {
             BrandTopAppBar(onSetLanguage) {
-                IconButton(onClick = onOpenAbout, modifier = Modifier.testTag("about")) {
-                    Icon(Icons.Outlined.Info, contentDescription = stringResource(R.string.about))
+                IconButton(onClick = onOpenSettings, modifier = Modifier.testTag("settings")) {
+                    Icon(Icons.Outlined.Settings, contentDescription = stringResource(R.string.settings))
                 }
             }
         },

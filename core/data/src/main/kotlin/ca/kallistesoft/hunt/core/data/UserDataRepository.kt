@@ -45,6 +45,15 @@ interface UserDataRepository {
 
     suspend fun dismissNewHunterBanner()
 
+    // Settings
+    suspend fun setHunterType(type: HunterType)
+
+    suspend fun setWeapons(weapons: Set<Weapon>)
+
+    suspend fun setHomeProvince(province: Province)
+
+    suspend fun setDailyGoal(goal: Int)
+
     /** Answers today's photo of the day; it also counts toward the goal, streak and weak spots. */
     suspend fun answerPhotoOfDay(questionId: String, choice: Int, correct: Boolean)
 }
@@ -80,6 +89,22 @@ internal class DataStoreUserDataRepository @Inject constructor(
 
     override suspend fun dismissNewHunterBanner() {
         store.updateData { it.copy(newHunterBanner = false) }
+    }
+
+    override suspend fun setHunterType(type: HunterType) {
+        store.updateData { it.withHunterType(type) }
+    }
+
+    override suspend fun setWeapons(weapons: Set<Weapon>) {
+        store.updateData { it.withWeapons(weapons) }
+    }
+
+    override suspend fun setHomeProvince(province: Province) {
+        store.updateData { it.withHomeProvince(province) }
+    }
+
+    override suspend fun setDailyGoal(goal: Int) {
+        store.updateData { it.withDailyGoal(goal) }
     }
 
     override suspend fun answerPhotoOfDay(questionId: String, choice: Int, correct: Boolean) {

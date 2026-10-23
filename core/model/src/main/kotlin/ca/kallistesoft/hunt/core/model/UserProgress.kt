@@ -29,6 +29,8 @@ data class UserProgress(
     val passedExams: Set<String> = emptySet(),
     /** The "Welcome, new hunter" banner on Home, shown after passing a real exam until it is closed. */
     val newHunterBanner: Boolean = false,
+    /** Questions a day for the goal ring (Settings: one of [DAILY_GOALS]). */
+    val dailyGoal: Int = DEFAULT_DAILY_GOAL,
 ) {
     val onboarded: Boolean get() = hunterType != null && homeProvince != null
 
@@ -51,6 +53,18 @@ data class UserProgress(
         provinces == setOf(province) -> this
         else -> copy(provinces = provinces - province)
     }
+
+    /** Settings → Hunter type. Going back to "Working on it" also drops the new-hunter welcome. */
+    fun withHunterType(type: HunterType): UserProgress =
+        copy(hunterType = type, newHunterBanner = newHunterBanner && type == HunterType.NEW_HUNTER)
+
+    /** Settings → Hunting with; at least one weapon. */
+    fun withWeapons(weapons: Set<Weapon>): UserProgress = if (weapons.isEmpty()) this else copy(weapons = weapons)
+
+    /** Settings → Where you hunt: the new home province's quizzes are added and come first; others stay as they were. */
+    fun withHomeProvince(home: Province): UserProgress = copy(homeProvince = home, provinces = provinces + home)
+
+    fun withDailyGoal(goal: Int): UserProgress = if (goal in DAILY_GOALS) copy(dailyGoal = goal) else this
 
     /** "Yes, I passed": the user becomes a new hunter, welcomed by a banner on Home. */
     fun withExamPassed(examId: String): UserProgress =
@@ -98,8 +112,11 @@ data class UserProgress(
         if (pool.isEmpty()) 0f else pool.count { lastResult[it.id] == true }.toFloat() / pool.size
 
     companion object {
-        /** Questions a day for the dashboard's goal ring. */
-        const val DAILY_GOAL = 20
+        /** Questions a day for the dashboard's goal ring, until changed in Settings. */
+        const val DEFAULT_DAILY_GOAL = 20
+
+        /** The daily goals Settings offers. */
+        val DAILY_GOALS = listOf(10, 20, 30)
 
         /** A missed question leaves the weak list after this many correct answers in a row. */
         const val CORRECT_TO_CLEAR = 2

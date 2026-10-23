@@ -44,9 +44,8 @@ data class HomeUiState(
     val gameCount: Int = 0,
     val animalCount: Int = 0,
     val photoOfDay: PhotoOfDayState? = null,
-) {
-    val dailyGoal: Int get() = UserProgress.DAILY_GOAL
-}
+    val dailyGoal: Int = UserProgress.DEFAULT_DAILY_GOAL,
+)
 
 /** Dashboard built around the exams the user is preparing for, or around "What is it?" for hunters. */
 @HiltViewModel
@@ -72,6 +71,7 @@ class HomeViewModel @Inject constructor(
             hunter = progress.isHunter,
             newHunterBanner = progress.newHunterBanner,
             answeredToday = progress.answeredToday(day),
+            dailyGoal = progress.dailyGoal,
             streak = progress.currentStreak(day),
             mainExam = mine.firstOrNull(),
             trainingExamCount = content.trainingExams.size,

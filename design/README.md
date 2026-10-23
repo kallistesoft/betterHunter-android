@@ -18,10 +18,10 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | Onboarding: what kind of hunter? (first launch) | `HunterProfile.dc.html` | `HunterProfileLight.dc.html` | built |
 | Onboarding: what do you hunt with? (firearm, bow, crossbow) | `HuntWith.dc.html` | `HuntWithLight.dc.html` | built |
 | Onboarding: where do you hunt? (Québec, Alberta, elsewhere in Canada) | `HuntWhere.dc.html` | `HuntWhereLight.dc.html` | built |
-| Home | `Main.dc.html` | `MainLight.dc.html` | built; the gear (Settings) waits for Settings, About keeps its icon |
-| Settings: hunter type, hunting with, where you hunt, my provinces, language, daily goal; About inside | `Settings.dc.html` | `SettingsLight.dc.html` | not built |
-| My provinces: one switch per province (Québec; Alberta; elsewhere in Canada, the PAL) adds or hides its quizzes | `Provinces.dc.html` | `ProvincesLight.dc.html` | built (from Exam training) |
-| About | `About.dc.html` | `AboutLight.dc.html` | built, restyle |
+| Home | `Main.dc.html` | `MainLight.dc.html` | built |
+| Settings: hunter type, hunting with, where you hunt, my provinces, language, daily goal; About inside | `Settings.dc.html` | `SettingsLight.dc.html` | built (each profile row reopens its onboarding question with Save) |
+| My provinces: one switch per province (Québec; Alberta; elsewhere in Canada, the PAL) adds or hides its quizzes | `Provinces.dc.html` | `ProvincesLight.dc.html` | built (from Settings and Exam training) |
+| About | `About.dc.html` | `AboutLight.dc.html` | built |
 | Exam training | `ExamTraining.dc.html` | `ExamTrainingLight.dc.html` | built |
 | Practice: question answered (text question, wrong answer) | `PracticeQuestion.dc.html` | `PracticeQuestionLight.dc.html` | built |
 | Practice: results | `PracticeResults.dc.html` | `PracticeResultsLight.dc.html` | built |

@@ -66,6 +66,9 @@ object Sizes {
     val choiceMinHeight = 80.dp
     val selectionMark = 22.dp
     val checkboxCorner = 6.dp
+
+    /** A row of a settings card (icon tile, title, value). */
+    val settingRowMinHeight = 72.dp
     val photoThumb = 72.dp
 
     /** Start inset of a divider in a list of items led by a large badge (aligns with the text). */
