@@ -21,9 +21,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 data class PhotoOfDayState(val examId: String, val question: Question, val choice: Int?)
@@ -76,41 +76,44 @@ class HomeViewModel @Inject constructor(
         userData.progress,
         featureFlags.values,
     ) { content, progress, flags ->
-        val day = today()
-        val mine = progress.myExamIds.mapNotNull { id -> content.trainingExams.firstOrNull { it.id == id } }
-        val games = if (flags.getValue(FeatureFlag.RECOGNITION_GAMES)) content.games else emptyList()
-        val photoExam = content.games.firstOrNull { it.id == PHOTO_ID_EXAM }
-        val photos = photoExam?.let(content::questionsFor).orEmpty()
-        val field = progress.isFieldHunter
-        val pools = if (field) content.skillPools(FieldSkill.forWeapons(progress.weapons), progress.provinces) else emptyMap()
-        val skillQuestions = pools.values.flatten().distinctBy { it.id }
-        HomeUiState(
-            loading = false,
-            hasSampleContent = content.hasSampleContent,
-            hunter = progress.isHunter,
-            newHunterBanner = progress.newHunterBanner,
-            answeredToday = progress.answeredToday(day),
-            dailyGoal = progress.dailyGoal,
-            streak = progress.currentStreak(day),
-            mainExam = mine.firstOrNull(),
-            trainingExamCount = content.trainingExams.size,
-            readiness = mine.takeIf { it.isNotEmpty() }
-                ?.map { progress.readiness(content.questionsFor(it)) }?.average()?.toFloat(),
-            passedExamId = mine.firstOrNull { it.id in progress.passedExams }?.id,
-            photoGameId = photoExam?.id?.takeIf { photoExam in games },
-            photoReadiness = progress.readiness(photos),
-            gameCount = games.size,
-            animalCount = if (games.isEmpty()) 0 else photos.size,
-            photoOfDay = photoExam?.takeIf { flags.getValue(FeatureFlag.PHOTO_OF_THE_DAY) }?.let { exam ->
-                photoOfDay(photos, day)?.let { PhotoOfDayState(exam.id, it, progress.photoOfDayChoice(day)) }
-            },
-            fieldHunter = field,
-            daily = if (field) dailyState(FieldTraining.daily(photos, skillQuestions, day), progress.dailyResults(day)) else null,
-            skillsReadiness = if (field) progress.readinessFresh(skillQuestions, day) else 0f,
-            season = if (field) SeasonStatus.of(progress.seasonStart, day) else null,
-        )
-    }.flowOn(Dispatchers.Default) // readiness over every question: off the main thread
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), HomeUiState())
+        // Readiness over every question: off the main thread. withContext, not flowOn, so stateIn keeps
+        // setting the state on the main thread.
+        withContext(Dispatchers.Default) {
+            val day = today()
+            val mine = progress.myExamIds.mapNotNull { id -> content.trainingExams.firstOrNull { it.id == id } }
+            val games = if (flags.getValue(FeatureFlag.RECOGNITION_GAMES)) content.games else emptyList()
+            val photoExam = content.games.firstOrNull { it.id == PHOTO_ID_EXAM }
+            val photos = photoExam?.let(content::questionsFor).orEmpty()
+            val field = progress.isFieldHunter
+            val pools = if (field) content.skillPools(FieldSkill.forWeapons(progress.weapons), progress.provinces) else emptyMap()
+            val skillQuestions = pools.values.flatten().distinctBy { it.id }
+            HomeUiState(
+                loading = false,
+                hasSampleContent = content.hasSampleContent,
+                hunter = progress.isHunter,
+                newHunterBanner = progress.newHunterBanner,
+                answeredToday = progress.answeredToday(day),
+                dailyGoal = progress.dailyGoal,
+                streak = progress.currentStreak(day),
+                mainExam = mine.firstOrNull(),
+                trainingExamCount = content.trainingExams.size,
+                readiness = mine.takeIf { it.isNotEmpty() }
+                    ?.map { progress.readiness(content.questionsFor(it)) }?.average()?.toFloat(),
+                passedExamId = mine.firstOrNull { it.id in progress.passedExams }?.id,
+                photoGameId = photoExam?.id?.takeIf { photoExam in games },
+                photoReadiness = progress.readiness(photos),
+                gameCount = games.size,
+                animalCount = if (games.isEmpty()) 0 else photos.size,
+                photoOfDay = photoExam?.takeIf { flags.getValue(FeatureFlag.PHOTO_OF_THE_DAY) }?.let { exam ->
+                    photoOfDay(photos, day)?.let { PhotoOfDayState(exam.id, it, progress.photoOfDayChoice(day)) }
+                },
+                fieldHunter = field,
+                daily = if (field) dailyState(FieldTraining.daily(photos, skillQuestions, day), progress.dailyResults(day)) else null,
+                skillsReadiness = if (field) progress.readinessFresh(skillQuestions, day) else 0f,
+                season = if (field) SeasonStatus.of(progress.seasonStart, day) else null,
+            )
+        }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), HomeUiState())
 
     private fun dailyState(questions: List<Question>, results: Map<String, Boolean>): DailyState {
         val (species, general) = questions.partition { it.image != null }

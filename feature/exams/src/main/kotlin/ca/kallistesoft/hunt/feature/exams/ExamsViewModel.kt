@@ -13,8 +13,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 data class ExamsUiState(
@@ -40,14 +40,17 @@ class ExamsViewModel @Inject constructor(
     userData: UserDataRepository,
 ) : ViewModel() {
     val uiState: StateFlow<ExamsUiState> = combine(contentRepository.content, userData.progress) { content, progress ->
-        val mine = progress.myExamIds.mapNotNull { id -> content.trainingExams.firstOrNull { it.id == id } }
-        ExamsUiState(
-            mine = mine.map { examSummary(content, progress, it) },
-            passed = progress.passedExams,
-            otherProvinces = Province.entries.filterNot { it in progress.provinces },
-            games = content.games.map { examSummary(content, progress, it) },
-            loading = false,
-        )
-    }.flowOn(Dispatchers.Default) // readiness over every question: off the main thread
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ExamsUiState())
+        // Readiness over every question: off the main thread. withContext, not flowOn, so stateIn keeps
+        // setting the state on the main thread.
+        withContext(Dispatchers.Default) {
+            val mine = progress.myExamIds.mapNotNull { id -> content.trainingExams.firstOrNull { it.id == id } }
+            ExamsUiState(
+                mine = mine.map { examSummary(content, progress, it) },
+                passed = progress.passedExams,
+                otherProvinces = Province.entries.filterNot { it in progress.provinces },
+                games = content.games.map { examSummary(content, progress, it) },
+                loading = false,
+            )
+        }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ExamsUiState())
 }
