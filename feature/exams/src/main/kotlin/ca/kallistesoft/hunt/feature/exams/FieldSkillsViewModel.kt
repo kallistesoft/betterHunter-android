@@ -14,8 +14,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 data class FieldSkillsUiState(
@@ -39,14 +39,17 @@ class FieldSkillsViewModel @Inject constructor(
     today: Today,
 ) : ViewModel() {
     val uiState: StateFlow<FieldSkillsUiState> = combine(contentRepository.content, userData.progress) { content, progress ->
-        val day = today()
-        val pools = content.skillPools(FieldSkill.forWeapons(progress.weapons), progress.provinces)
-            .filterValues { it.isNotEmpty() }
-        FieldSkillsUiState(
-            loading = false,
-            skills = pools.map { (skill, pool) -> progress.skillSummary(skill, pool, day) },
-            mistakes = pools.values.flatten().distinctBy { it.id }.count { it.id in progress.weak },
-        )
-    }.flowOn(Dispatchers.Default) // readiness over every question: off the main thread
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), FieldSkillsUiState())
+        // Readiness over every question: off the main thread. withContext, not flowOn, so stateIn keeps
+        // setting the state on the main thread.
+        withContext(Dispatchers.Default) {
+            val day = today()
+            val pools = content.skillPools(FieldSkill.forWeapons(progress.weapons), progress.provinces)
+                .filterValues { it.isNotEmpty() }
+            FieldSkillsUiState(
+                loading = false,
+                skills = pools.map { (skill, pool) -> progress.skillSummary(skill, pool, day) },
+                mistakes = pools.values.flatten().distinctBy { it.id }.count { it.id in progress.weak },
+            )
+        }
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), FieldSkillsUiState())
 }
