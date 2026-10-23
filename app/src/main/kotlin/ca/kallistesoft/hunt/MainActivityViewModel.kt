@@ -27,7 +27,7 @@ sealed interface MainUiState {
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    userData: UserDataRepository,
+    private val userData: UserDataRepository,
     private val forceUpdate: ForceUpdateRepository,
     private val featureFlags: FeatureFlags,
 ) : ViewModel() {
@@ -35,9 +35,13 @@ class MainActivityViewModel @Inject constructor(
         MainUiState.Ready(firstRun = !progress.onboarded, updateRequired = required)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), MainUiState.Loading)
 
-    /** Fetches the latest minimum version and feature flags; called whenever the app comes to the foreground. */
-    fun refreshRemoteConfig() {
+    /**
+     * The app came to the foreground: fetches the latest minimum version and feature flags, and stops ignored
+     * reminders from backing off.
+     */
+    fun onForeground() {
         viewModelScope.launch { forceUpdate.refresh() }
         viewModelScope.launch { featureFlags.refresh() }
+        viewModelScope.launch { userData.appOpened() }
     }
 }

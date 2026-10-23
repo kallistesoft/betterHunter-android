@@ -4,6 +4,7 @@ import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.DataStoreFactory
 import ca.kallistesoft.hunt.core.model.HunterType
 import ca.kallistesoft.hunt.core.model.Province
+import ca.kallistesoft.hunt.core.model.Reminder
 import ca.kallistesoft.hunt.core.model.UserProgress
 import ca.kallistesoft.hunt.core.model.Weapon
 import kotlinx.coroutines.flow.first
@@ -37,7 +38,7 @@ class UserDataRepositoryTest {
         assertEquals(setOf("q1", "q3"), p.weak.keys)
         assertEquals(3, p.answeredToday(day))
         assertEquals(1, p.currentStreak(day))
-        assertNotNull("learned when the hunter plays", p.playMinute)
+        assertNotNull("learned when the hunter plays", p.playMinutes[day])
     }
 
     @Test
@@ -98,11 +99,19 @@ class UserDataRepositoryTest {
         assertTrue(p.seasonReminders)
         assertFalse(p.dailyReminderAsked)
 
+        repo.notNowDailyReminders()
+        assertEquals(day, repo.progress.first().dailyReminderNotNowDay)
         repo.markDailyReminderAsked()
         assertTrue(repo.progress.first().dailyReminderAsked)
         repo.setDailyReminders(true)
         p = repo.progress.first()
         assertTrue(p.dailyReminders)
+
+        repo.reminderShown(Reminder.Kind.DAILY, day)
+        assertEquals(day, repo.progress.first().reminderDay)
+        assertEquals(1, repo.progress.first().ignoredReminders)
+        repo.appOpened()
+        assertEquals(0, repo.progress.first().ignoredReminders)
 
         repo.setSeasonStart(null) // "I don't know yet"
         assertNull(repo.progress.first().seasonStart)

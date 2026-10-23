@@ -7,6 +7,7 @@ import ca.kallistesoft.hunt.core.flags.FeatureFlags
 import ca.kallistesoft.hunt.core.model.Content
 import ca.kallistesoft.hunt.core.model.HunterType
 import ca.kallistesoft.hunt.core.model.Province
+import ca.kallistesoft.hunt.core.model.Reminder
 import ca.kallistesoft.hunt.core.model.UserProgress
 import ca.kallistesoft.hunt.core.model.Weapon
 import kotlinx.coroutines.flow.Flow
@@ -91,6 +92,18 @@ class FakeUserDataRepository(initial: UserProgress = UserProgress()) : UserDataR
 
     override suspend fun markDailyReminderAsked() {
         progress.update { it.copy(dailyReminderAsked = true) }
+    }
+
+    override suspend fun notNowDailyReminders() {
+        progress.update { it.copy(dailyReminderNotNowDay = TEST_DAY) }
+    }
+
+    override suspend fun reminderShown(kind: Reminder.Kind, day: Long) {
+        progress.update { it.withReminderShown(kind, day) }
+    }
+
+    override suspend fun appOpened() {
+        progress.update { it.withAppOpened() }
     }
 }
 

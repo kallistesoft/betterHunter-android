@@ -97,8 +97,12 @@ never between 9 pm and 8 am, at the hunter's usual playing time. *In the app (20
 each skill to chapters of the banks (a first pass, to check against the questions; safe firearm handling only for
 firearm hunters), `FieldTraining` draws the runs, `SeasonStatus` and `Reminder` hold the season and reminder rules
 (core:model, tested on the JVM). Only a New hunter from onboarding gets this Home; one who passed the exam in the app
-keeps Exam training (as in flow 1). Reminders are one WorkManager job, rescheduled whenever the progress changes; a
-late one still shows that day, before 9 pm.
+keeps Exam training (as in flow 1). Reminders are one WorkManager job, rescheduled whenever the progress changes and
+when the time zone or the time changes or the phone restarts; a late one still shows that day, before 9 pm (#8). The
+usual time is the median time of the first answer on the last 14 days played (7 pm until 5 days). "Not now" asks again a
+week later; a refused system dialog stops asking. After 3 daily reminders ignored in a row they come every other day,
+until the app is opened. Without a date for the coming season, one "Hunting season is coming" on August 25. A season
+reminder opens the season check.
 
 ## Design
 

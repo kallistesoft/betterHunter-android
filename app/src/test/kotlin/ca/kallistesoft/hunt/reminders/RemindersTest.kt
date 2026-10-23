@@ -9,6 +9,7 @@ import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.testing.WorkManagerTestInitHelper
 import ca.kallistesoft.hunt.MainActivity
+import ca.kallistesoft.hunt.core.model.FieldRun
 import ca.kallistesoft.hunt.core.model.HunterType
 import ca.kallistesoft.hunt.core.model.Province
 import ca.kallistesoft.hunt.core.model.Reminder
@@ -16,6 +17,7 @@ import ca.kallistesoft.hunt.core.model.UserProgress
 import ca.kallistesoft.hunt.core.model.Weapon
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -65,7 +67,7 @@ class RemindersTest {
 
     @Test
     fun nothingIsShownWithoutTheNotificationPermission() {
-        Reminders.show(context, Reminder(Reminder.Kind.DAILY, DAY, MINUTE), streak = 0)
+        assertFalse(Reminders.show(context, Reminder(Reminder.Kind.DAILY, DAY, MINUTE), streak = 0))
 
         assertTrue(notifications.allNotifications.isEmpty())
     }
@@ -115,6 +117,26 @@ class RemindersTest {
 
         val notification = notifications.getNotification(Reminder.Kind.SEASON.ordinal)
         assertEquals(context.getString(UiR.string.notif_season_text, "15 mars"), notification.text)
+    }
+
+    @Test
+    fun withoutADateLateAugustSaysTheSeasonIsComing() {
+        allowNotifications()
+
+        assertTrue(Reminders.show(context, Reminder(Reminder.Kind.SEASON, DAY, MINUTE), streak = 0))
+
+        val notification = notifications.getNotification(Reminder.Kind.SEASON.ordinal)
+        assertEquals(context.getString(UiR.string.season_coming), notification.title)
+        assertEquals(context.getString(UiR.string.season_coming_sub, FieldRun.SEASON_CHECK.size), notification.text)
+    }
+
+    @Test
+    fun theJobWaitsUntilTheReminderInLocalTime() {
+        val now = LocalDate.ofEpochDay(DAY).atTime(9, 0)
+
+        Reminders.schedule(context, fieldHunter.copy(dailyReminders = true), now)
+
+        assertEquals(TimeUnit.HOURS.toMillis(10), reminderWork().initialDelayMillis)
     }
 
     /** Shows a season reminder [daysLeft] days before March 15 and returns its title. */

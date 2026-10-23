@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.core.Serializer
 import ca.kallistesoft.hunt.core.model.HunterType
 import ca.kallistesoft.hunt.core.model.Province
+import ca.kallistesoft.hunt.core.model.Reminder
 import ca.kallistesoft.hunt.core.model.UserProgress
 import ca.kallistesoft.hunt.core.model.Weapon
 import kotlinx.coroutines.flow.Flow
@@ -70,8 +71,17 @@ interface UserDataRepository {
 
     suspend fun setSeasonReminders(enabled: Boolean)
 
-    /** "Want a nudge tomorrow?" was answered either way: it isn't asked again. */
+    /** "Want a nudge tomorrow?" can't lead anywhere (the system dialog refused): it isn't asked again. */
     suspend fun markDailyReminderAsked()
+
+    /** "Want a nudge tomorrow?" was answered "Not now": asked again in a week. */
+    suspend fun notNowDailyReminders()
+
+    /** A reminder of [kind] was shown on [day]. */
+    suspend fun reminderShown(kind: Reminder.Kind, day: Long)
+
+    /** The app came to the foreground: ignored reminders stop backing off. */
+    suspend fun appOpened()
 }
 
 @Singleton
@@ -82,7 +92,8 @@ internal class DataStoreUserDataRepository @Inject constructor(
     override val progress: Flow<UserProgress> = store.data
 
     override suspend fun record(questionId: String, correct: Boolean) {
-        store.updateData { it.record(questionId, correct, today()).withPlayTime(minuteNow()) }
+        val day = today()
+        store.updateData { it.record(questionId, correct, day).withPlayTime(day, minuteNow()) }
     }
 
     override suspend fun recordAll(results: List<Pair<String, Boolean>>) {
@@ -125,11 +136,12 @@ internal class DataStoreUserDataRepository @Inject constructor(
 
     override suspend fun answerPhotoOfDay(questionId: String, choice: Int, correct: Boolean) {
         val day = today()
-        store.updateData { it.withPhotoOfDayChoice(choice, day).record(questionId, correct, day).withPlayTime(minuteNow()) }
+        store.updateData { it.withPhotoOfDayChoice(choice, day).record(questionId, correct, day).withPlayTime(day, minuteNow()) }
     }
 
     override suspend fun recordDaily(questionId: String, correct: Boolean) {
-        store.updateData { it.recordDaily(questionId, correct, today()).withPlayTime(minuteNow()) }
+        val day = today()
+        store.updateData { it.recordDaily(questionId, correct, day).withPlayTime(day, minuteNow()) }
     }
 
     override suspend fun setSeasonStart(day: Long?) {
@@ -146,6 +158,18 @@ internal class DataStoreUserDataRepository @Inject constructor(
 
     override suspend fun markDailyReminderAsked() {
         store.updateData { it.copy(dailyReminderAsked = true) }
+    }
+
+    override suspend fun notNowDailyReminders() {
+        store.updateData { it.copy(dailyReminderNotNowDay = today()) }
+    }
+
+    override suspend fun reminderShown(kind: Reminder.Kind, day: Long) {
+        store.updateData { it.withReminderShown(kind, day) }
+    }
+
+    override suspend fun appOpened() {
+        store.updateData { it.withAppOpened() }
     }
 
     /** When the user plays, to time reminders (learned on the device only). */

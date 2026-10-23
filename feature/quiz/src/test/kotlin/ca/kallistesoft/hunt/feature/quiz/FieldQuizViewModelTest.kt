@@ -92,6 +92,24 @@ class FieldQuizViewModelTest {
     }
 
     @Test
+    fun `Not now waits a week, a refused permission stops asking`() = runTest(mainDispatcherRule.testDispatcher) {
+        val vm = viewModel(FieldRun.DAILY)
+        runCurrent()
+        answerAll(vm)
+        vm.declineDailyReminders()
+        runCurrent()
+        assertEquals(TEST_DAY, userData.progress.value.dailyReminderNotNowDay)
+        assertFalse((vm.uiState.value as FieldQuizUiState.Finished).daily!!.askReminders)
+        assertFalse(userData.progress.value.asksDailyReminders(TEST_DAY + 6))
+        assertTrue(userData.progress.value.asksDailyReminders(TEST_DAY + 7))
+
+        vm.turnOnDailyReminders(granted = false)
+        runCurrent()
+        assertFalse(userData.progress.value.dailyReminders)
+        assertFalse(userData.progress.value.asksDailyReminders(TEST_DAY + 7))
+    }
+
+    @Test
     fun `today's questions resume where the hunter left off`() = runTest(mainDispatcherRule.testDispatcher) {
         val vm = viewModel(FieldRun.DAILY)
         runCurrent()

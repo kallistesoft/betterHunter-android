@@ -159,7 +159,7 @@ class FieldQuizViewModel @AssistedInject constructor(
     }
 
     fun declineDailyReminders() {
-        viewModelScope.launch { userData.markDailyReminderAsked() }
+        viewModelScope.launch { userData.notNowDailyReminders() }
         hideNudge()
     }
 
@@ -227,7 +227,7 @@ class FieldQuizViewModel @AssistedInject constructor(
                 generalRight = general.count { results[it.id] == true },
                 generalTotal = general.size,
                 streak = progress.currentStreak(day),
-                askReminders = !progress.dailyReminders && !progress.dailyReminderAsked,
+                askReminders = progress.asksDailyReminders(day),
             )
         } else {
             null

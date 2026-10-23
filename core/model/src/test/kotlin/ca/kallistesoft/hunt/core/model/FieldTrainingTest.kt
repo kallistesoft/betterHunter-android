@@ -107,9 +107,22 @@ class FieldTrainingTest {
     }
 
     @Test
-    fun `play time is a moving average`() {
-        assertEquals(19 * 60, UserProgress().withPlayTime(19 * 60).playMinute)
-        assertEquals(19 * 60 - 12, UserProgress().withPlayTime(19 * 60).withPlayTime(18 * 60).playMinute)
+    fun `the playing time is the first answer of each day, for the last 14 days played`() {
+        val p = UserProgress().withPlayTime(today, 19 * 60).withPlayTime(today, 22 * 60)
+        assertEquals(mapOf(today to 19 * 60), p.playMinutes)
+        val month = (0L until 20).fold(UserProgress()) { acc, d -> acc.withPlayTime(today + d, 12 * 60) }
+        assertEquals((today + 6 until today + 20).toSet(), month.playMinutes.keys)
+    }
+
+    @Test
+    fun `reminders come at 7 pm until 5 days were played, then at the median time`() {
+        fun played(vararg hours: Int) =
+            hours.foldIndexed(UserProgress()) { d, acc, h -> acc.withPlayTime(today + d, h * 60) }.reminderMinute
+        assertEquals(UserProgress.DEFAULT_PLAY_MINUTE, played(9, 9, 9, 9))
+        // The median ignores an odd late evening.
+        assertEquals(9 * 60, played(9, 9, 20, 9, 9))
+        // An even count: halfway between the two middle times.
+        assertEquals((9 * 60 + 12 * 60) / 2, played(9, 9, 9, 12, 12, 12))
     }
 
     @Test

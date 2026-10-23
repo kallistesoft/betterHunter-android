@@ -41,10 +41,16 @@ data class UserProgress(
     /** Local reminders, opt-in: today's questions, and before the hunter's season. */
     val dailyReminders: Boolean = false,
     val seasonReminders: Boolean = false,
-    /** "Want a nudge tomorrow?" was answered (asked once). */
+    /** "Want a nudge tomorrow?" won't be asked again: reminders were turned on, or the system dialog refused. */
     val dailyReminderAsked: Boolean = false,
-    /** When this hunter usually plays, in minutes after midnight (a moving average); null until they play. */
-    val playMinute: Int? = null,
+    /** The day "Want a nudge tomorrow?" was answered "Not now": asked again [ASK_AGAIN_DAYS] later. */
+    val dailyReminderNotNowDay: Long? = null,
+    /** When this hunter plays: per day played (the last [PLAY_DAYS]), the minute after midnight of the first answer. */
+    val playMinutes: Map<Long, Int> = emptyMap(),
+    /** The day the last reminder was shown (at most one a day). */
+    val reminderDay: Long? = null,
+    /** Daily reminders shown since the app was last opened: they back off after [Reminder.BACK_OFF_AFTER]. */
+    val ignoredReminders: Int = 0,
 ) {
     val onboarded: Boolean get() = hunterType != null && homeProvince != null
 
@@ -145,13 +151,38 @@ data class UserProgress(
     /** Today's daily answers (empty on a new day). */
     fun dailyResults(today: Long): Map<String, Boolean> = if (dailyDay == today) dailyResults else emptyMap()
 
-    /** Learns when this hunter plays: a moving average of the minutes after midnight. */
-    fun withPlayTime(minute: Int): UserProgress =
-        copy(playMinute = playMinute?.let { (it * 4 + minute) / 5 } ?: minute)
+    /** Learns when this hunter plays: the first answer of [day], at [minute] after midnight. */
+    fun withPlayTime(day: Long, minute: Int): UserProgress =
+        if (day in playMinutes) {
+            this
+        } else {
+            copy(playMinutes = (playMinutes + (day to minute)).entries.sortedBy { it.key }.takeLast(PLAY_DAYS).associate { it.toPair() })
+        }
 
-    /** When reminders come: when this hunter usually plays, kept between 8 am and 9 pm (7 pm until learned). */
+    /**
+     * When reminders come: the median time of the first answer on the last days played, kept between 8 am and
+     * 9 pm. 7 pm until [PLAY_DAYS_TO_LEARN] days were played.
+     */
     val reminderMinute: Int
-        get() = (playMinute ?: DEFAULT_PLAY_MINUTE).coerceIn(QUIET_UNTIL_MINUTE, QUIET_FROM_MINUTE - 30)
+        get() {
+            val usual = if (playMinutes.size < PLAY_DAYS_TO_LEARN) {
+                DEFAULT_PLAY_MINUTE
+            } else {
+                playMinutes.values.sorted().let { (it[(it.size - 1) / 2] + it[it.size / 2]) / 2 }
+            }
+            return usual.coerceIn(QUIET_UNTIL_MINUTE, QUIET_FROM_MINUTE - 30)
+        }
+
+    /** "Done for today" offers daily reminders: not once they're on or refused, and not for a week after "Not now". */
+    fun asksDailyReminders(today: Long): Boolean =
+        !dailyReminders && !dailyReminderAsked && dailyReminderNotNowDay.let { it == null || today - it >= ASK_AGAIN_DAYS }
+
+    /** A reminder of [kind] was shown on [day]. */
+    fun withReminderShown(kind: Reminder.Kind, day: Long): UserProgress =
+        copy(reminderDay = day, ignoredReminders = if (kind == Reminder.Kind.DAILY) ignoredReminders + 1 else ignoredReminders)
+
+    /** The hunter opened the app: daily reminders come every day again. */
+    fun withAppOpened(): UserProgress = if (ignoredReminders == 0) this else copy(ignoredReminders = 0)
 
     fun withSeasonStart(day: Long?): UserProgress = copy(seasonStart = day)
 
@@ -182,5 +213,12 @@ data class UserProgress(
         const val DEFAULT_PLAY_MINUTE = 19 * 60
         const val QUIET_FROM_MINUTE = 21 * 60
         const val QUIET_UNTIL_MINUTE = 8 * 60
+
+        /** The usual playing time comes from the last 14 days played, once there are 5. */
+        const val PLAY_DAYS = 14
+        const val PLAY_DAYS_TO_LEARN = 5
+
+        /** "Not now" on "Want a nudge tomorrow?": asked again a week later. */
+        const val ASK_AGAIN_DAYS = 7
     }
 }
