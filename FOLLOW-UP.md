@@ -4,17 +4,17 @@ Steps to do outside the code, in the Firebase, AdMob and Play consoles. They use
 `ca.kallistesoft.hunt`, the one registered in Play Console (it can never change); debug builds are
 `ca.kallistesoft.hunt.debug`.
 
-- [1. Firebase project (feature flags)](#1-firebase-project-feature-flags)
+- [1. Firebase project (feature flags, force update)](#1-firebase-project-feature-flags-force-update)
 - [2. AdMob (ads)](#2-admob-ads)
 - [3. Play Console](#3-play-console)
 - [4. Possible next step: questions from an online API](#4-possible-next-step-questions-from-an-online-api)
 
 ---
 
-## 1. Firebase project (feature flags)
+## 1. Firebase project (feature flags, force update)
 
-The app reads its feature flags from Firebase Remote Config. Until these steps are done it runs with every flag at
-its default (on).
+The app reads its feature flags and its force-update minimum from Firebase Remote Config. Until these steps are done
+it runs with every flag at its default (on) and can't force an update.
 
 ### Create the project
 
@@ -58,6 +58,14 @@ its default (on).
     | `photo_of_the_day` | Photo of the day on the dashboard |
     | `recognition_games` | "Can you recognise them?" hub and games |
     | `report_question` | "Report a problem" on each question |
+
+    Then the force-update minimum (see the README, "Force update"): two parameters, **Data type: Number**,
+    **Default value: 0**:
+
+    | Parameter name | Description |
+    |---|---|
+    | `min_version_code` | Oldest versionCode release builds may run; raise it to force an update |
+    | `min_version_code_debug` | The same for debug builds, to try the "Update required" screen |
 
 15. Click **Publish changes**.
 
@@ -160,8 +168,8 @@ Left to do:
    `BH_KEY_PASSWORD` (see the README).
 2. **First release:** **Test and release** → **Testing** → **Internal testing** → create a release and upload the AAB
    from CI (`app-release.aab`, signed). Add testers by email, then promote to closed testing and production.
-3. **Force update file:** publish `https://hunt.kallistesoft.ca/android/update.json` with `{"minVersionCode": 0}`
-   (and the same for `update-debug.json`) so the URL exists before the first release.
+3. **Force update:** the `min_version_code` parameters exist in Remote Config with 0 (section 1, step 14), so a
+   release can be forced out later.
 4. **Before releasing:** check the Play Console declarations against what the release really does (below).
 5. **Refresh the listing:** new icon (`store/icon-512.png`), screenshots of this app instead of the Flutter
    prototype, feature graphics with the new logo, and descriptions without the RPAL exam (`store/listing.md`).
@@ -175,7 +183,7 @@ compare them with what that build really does, and fix whichever side is wrong.
    - Upload the AAB to internal testing, then **Test and release** → **App bundle explorer**: note its permissions
      (look for `AD_ID`, `INTERNET`, location) and the SDKs Play detects (AdMob, Firebase…).
    - Note what leaves the device: servers contacted, identifiers sent, anything typed by the user. Today: the update
-     check (hunt.kallistesoft.ca), Firebase Remote Config (installation ID) and, once added, AdMob.
+     Firebase Remote Config (feature flags and the force-update minimum; installation ID) and, once added, AdMob.
 2. **Compare with Play Console**, **Policy and programs** → **App content**:
    - **Ads** and **Advertising ID**: Yes only if the AdMob SDK and `AD_ID` are in the bundle.
    - **Data safety**: every data type sent off the device is declared, with the right *collected / shared*,

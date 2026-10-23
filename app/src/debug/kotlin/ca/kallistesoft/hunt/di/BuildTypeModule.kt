@@ -9,12 +9,12 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 object BuildTypeModule {
     /**
-     * Debug: separate update rules, so the force-update flow can be tried without affecting users, and feature flags
-     * fetched on every refresh so console changes show at once.
+     * Debug: its own minimum version parameter, so the force-update flow can be tried without affecting users, and
+     * Remote Config fetched on every refresh so console changes show at once.
      */
     @Provides
     fun buildTypeConfig() = BuildTypeConfig(
-        updateConfigUrl = "https://hunt.kallistesoft.ca/android/update-debug.json",
+        minVersionParameter = "min_version_code_debug",
         featureFlagFetchIntervalSeconds = 0,
     )
 }

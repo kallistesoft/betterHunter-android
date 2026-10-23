@@ -36,11 +36,11 @@ at the end; time up ends it. Review uses only the user's mistakes; a mistake cle
 Daily goal 20 questions; the streak counts consecutive days with at least one answer. Photo of the day: the same photo
 for everyone, chosen by the day number. Rules and tests: `core/model` (`QuizSession`, `UserProgress`).
 
-**P6. Force update.** *Product.* A remote file `{"minVersionCode": N}` (per platform build number) blocks older builds
-with an "Update required" screen; the last value is cached so a blocked build stays blocked offline; never block when
-the rules were never fetched. Android: Play immediate in-app update, else the store page. Files on
-hunt.kallistesoft.ca (`android/update.json`, `update-debug.json`). *Considered, not done:* moving the minimum to
-Remote Config.
+**P6. Force update.** *Product.* A minimum build number (per platform) blocks older builds with an "Update required"
+screen; the last value is cached so a blocked build stays blocked offline; never block when it was never fetched.
+Android: Play immediate in-app update, else the store page. The minimum is a Firebase Remote Config Number parameter,
+`min_version_code` (`min_version_code_debug` for debug builds). *Replaced:* a JSON file on hunt.kallistesoft.ca,
+published from the hunt proof-of-concept repo, which is retired.
 
 **P7. Feature flags with Firebase Remote Config.** *Product.* Boolean parameters with in-app defaults (`photo_of_the_day`,
 `recognition_games`, `report_question`, all on), fetched on launch and foreground, plus real-time updates. The app

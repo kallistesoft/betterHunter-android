@@ -14,14 +14,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 /**
- * Feature flags from Firebase Remote Config. Values fetched on a previous launch apply at start; new ones arrive on
- * [refresh] (app back in the foreground) and through Remote Config's real-time updates while the app is open.
+ * Feature flags and other values from Firebase Remote Config. Values fetched on a previous launch apply at start; new
+ * ones arrive on [refresh] (app back in the foreground) and through Remote Config's real-time updates while the app
+ * is open.
  */
 internal class FirebaseFeatureFlags(
     private val remoteConfig: FirebaseRemoteConfig,
     settings: FeatureFlagSettings,
     scope: CoroutineScope,
-) : FeatureFlags {
+) : FeatureFlags, RemoteConfigValues {
     private val state = MutableStateFlow(read())
     override val values: StateFlow<Map<FeatureFlag, Boolean>> = state.asStateFlow()
 
@@ -44,6 +45,17 @@ internal class FirebaseFeatureFlags(
         state.value = read()
     }
 
+    override suspend fun fetchLong(key: String): Long? {
+        val fetched = runCatching { remoteConfig.fetchAndActivate().await() }.isSuccess
+        state.value = read()
+        val value = remoteConfig.getValue(key)
+        return when {
+            value.source == FirebaseRemoteConfig.VALUE_SOURCE_REMOTE -> value.asLong()
+            fetched -> 0 // The server answered without this parameter.
+            else -> null
+        }
+    }
+
     /** A value only counts once it comes from the server; otherwise the flag's own default applies. */
     private fun read(): Map<FeatureFlag, Boolean> = FeatureFlag.entries.associateWith { flag ->
         val value = remoteConfig.getValue(flag.key)
@@ -51,7 +63,7 @@ internal class FirebaseFeatureFlags(
     }
 
     companion object {
-        fun create(settings: FeatureFlagSettings, scope: CoroutineScope): FeatureFlags =
+        fun create(settings: FeatureFlagSettings, scope: CoroutineScope): FirebaseFeatureFlags =
             FirebaseFeatureFlags(Firebase.remoteConfig, settings, scope)
     }
 }

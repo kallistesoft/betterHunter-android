@@ -13,7 +13,7 @@ import dagger.hilt.components.SingletonComponent
 object AppModule {
     @Provides
     fun forceUpdateSettings(config: BuildTypeConfig) = ForceUpdateSettings(
-        configUrl = config.updateConfigUrl,
+        parameter = config.minVersionParameter,
         currentVersionCode = BuildConfig.VERSION_CODE.toLong(),
         storePackage = BuildConfig.STORE_PACKAGE,
     )

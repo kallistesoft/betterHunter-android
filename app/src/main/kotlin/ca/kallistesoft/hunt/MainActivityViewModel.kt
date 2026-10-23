@@ -35,7 +35,7 @@ class MainActivityViewModel @Inject constructor(
         MainUiState.Ready(firstRun = progress.myExams == null, updateRequired = required)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), MainUiState.Loading)
 
-    /** Fetches the latest update rules and feature flags; called whenever the app comes to the foreground. */
+    /** Fetches the latest minimum version and feature flags; called whenever the app comes to the foreground. */
     fun refreshRemoteConfig() {
         viewModelScope.launch { forceUpdate.refresh() }
         viewModelScope.launch { featureFlags.refresh() }

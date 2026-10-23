@@ -8,10 +8,10 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 object BuildTypeModule {
-    /** Release: the update rules users get, and feature flags fetched at most hourly (Remote Config's quota). */
+    /** Release: the minimum version users get, and Remote Config fetched at most hourly (its quota). */
     @Provides
     fun buildTypeConfig() = BuildTypeConfig(
-        updateConfigUrl = "https://hunt.kallistesoft.ca/android/update.json",
+        minVersionParameter = "min_version_code",
         featureFlagFetchIntervalSeconds = 3_600,
     )
 }

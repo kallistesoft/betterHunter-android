@@ -24,14 +24,8 @@ class ForceUpdateTest {
     }
 
     @Test
-    fun `config parsing ignores unknown fields and defaults to no minimum`() {
-        assertEquals(7L, RemoteUpdateConfig.parse("""{"minVersionCode": 7, "note": "x"}""").minVersionCode)
-        assertEquals(0L, RemoteUpdateConfig.parse("{}").minVersionCode)
-    }
-
-    @Test
     fun `the last fetched minimum is kept when the network fails`() = runTest {
-        var remote: RemoteUpdateConfig? = RemoteUpdateConfig(minVersionCode = 3)
+        var remote: Long? = 3
         val repo = repository(this, currentVersionCode = 2) { remote }
 
         assertFalse("never blocked before the rules are known", repo.updateRequired.first())
@@ -42,17 +36,30 @@ class ForceUpdateTest {
         repo.refresh()
         assertTrue("still blocked offline", repo.updateRequired.first())
 
-        remote = RemoteUpdateConfig(minVersionCode = 1) // minimum lowered again
+        remote = 1 // minimum lowered again
         repo.refresh()
         assertFalse(repo.updateRequired.first())
     }
 
-    private fun repository(scope: TestScope, currentVersionCode: Long, fetch: () -> RemoteUpdateConfig?) =
+    @Test
+    fun `the remote parameter of this build type is read`() = runTest {
+        var asked: String? = null
+        val repo = ForceUpdateRepository(
+            store = PreferenceDataStoreFactory.create(scope = backgroundScope) { tmp.root.resolve("asked.preferences_pb") },
+            source = { parameter -> asked = parameter; 0 },
+            settings = ForceUpdateSettings("min_version_code_debug", currentVersionCode = 2, storePackage = "ca.example"),
+        )
+        repo.refresh()
+        assertEquals("min_version_code_debug", asked)
+        assertFalse(repo.updateRequired.first())
+    }
+
+    private fun repository(scope: TestScope, currentVersionCode: Long, fetch: () -> Long?) =
         ForceUpdateRepository(
             store = PreferenceDataStoreFactory.create(scope = scope.backgroundScope) {
                 tmp.root.resolve("force_update.preferences_pb")
             },
             source = { fetch() },
-            settings = ForceUpdateSettings("https://example.com/update.json", currentVersionCode, "ca.example"),
+            settings = ForceUpdateSettings("min_version_code", currentVersionCode, "ca.example"),
         )
 }

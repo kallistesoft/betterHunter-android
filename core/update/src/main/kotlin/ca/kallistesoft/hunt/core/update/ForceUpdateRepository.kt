@@ -17,17 +17,17 @@ import javax.inject.Singleton
 @Singleton
 class ForceUpdateRepository @Inject constructor(
     @ForceUpdateStore private val store: DataStore<Preferences>,
-    private val source: UpdateConfigSource,
+    private val source: MinVersionSource,
     private val settings: ForceUpdateSettings,
 ) {
     val updateRequired: Flow<Boolean> = store.data
         .map { isUpdateRequired(settings.currentVersionCode, it[MIN_VERSION_CODE]) }
         .distinctUntilChanged()
 
-    /** Fetches the latest rules; keeps the cached ones when that fails. */
+    /** Fetches the latest minimum; keeps the cached one when that fails. */
     suspend fun refresh() {
-        val config = source.fetch(settings.configUrl) ?: return
-        store.edit { it[MIN_VERSION_CODE] = config.minVersionCode }
+        val minVersionCode = source.fetch(settings.parameter) ?: return
+        store.edit { it[MIN_VERSION_CODE] = minVersionCode }
     }
 
     private companion object {

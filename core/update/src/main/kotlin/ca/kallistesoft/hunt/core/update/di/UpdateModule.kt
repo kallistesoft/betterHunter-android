@@ -6,8 +6,8 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import ca.kallistesoft.hunt.core.update.ForceUpdateStore
-import ca.kallistesoft.hunt.core.update.HttpUpdateConfigSource
-import ca.kallistesoft.hunt.core.update.UpdateConfigSource
+import ca.kallistesoft.hunt.core.update.MinVersionSource
+import ca.kallistesoft.hunt.core.update.RemoteConfigMinVersionSource
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -20,7 +20,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 internal abstract class UpdateModule {
     @Binds
-    abstract fun configSource(impl: HttpUpdateConfigSource): UpdateConfigSource
+    abstract fun minVersionSource(impl: RemoteConfigMinVersionSource): MinVersionSource
 
     companion object {
         @Provides

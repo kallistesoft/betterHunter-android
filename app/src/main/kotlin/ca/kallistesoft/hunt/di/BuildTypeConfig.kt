@@ -5,8 +5,8 @@ package ca.kallistesoft.hunt.di
  * (`BuildTypeModule`), so the code never branches on the build type.
  */
 data class BuildTypeConfig(
-    /** Force update rules (see README). */
-    val updateConfigUrl: String,
+    /** Remote Config parameter holding the minimum versionCode (force update, see README). */
+    val minVersionParameter: String,
     /** Minimum time between two Remote Config fetches. */
     val featureFlagFetchIntervalSeconds: Long,
 )

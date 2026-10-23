@@ -56,7 +56,7 @@ Design mockup (visual reference for new screens, dark and light): [design/](desi
 | Name | BetterHunter Dev | BetterHunter |
 | Version name | `1.0.0-debug` | `1.0.0` |
 | Code shrinking | no | R8 minify + resource shrinking |
-| Update rules | `…/android/update-debug.json` | `…/android/update.json` |
+| Force update parameter | `min_version_code_debug` | `min_version_code` |
 | Signing | debug key | release key if configured, unsigned otherwise |
 
 ```sh
@@ -86,24 +86,20 @@ Play App Signing, so this is the upload key.
 
 ## Force update
 
-On every launch and every return to the foreground, the app reads a small JSON file:
+On every launch and every return to the foreground, the app reads the minimum allowed `versionCode` from Firebase
+Remote Config: the Number parameter `min_version_code` (release builds) or `min_version_code_debug` (debug builds).
 
-```json
-{ "minVersionCode": 3 }
-```
+If the installed `versionCode` is below it, the app shows only a blocking "Update required" screen. Its button starts
+Google Play's **immediate in-app update** when Play offers one, and opens the Play Store listing otherwise (sideloaded
+or debug builds). An update interrupted by leaving the app resumes when the user comes back.
 
-If the installed `versionCode` is below `minVersionCode`, the app shows only a blocking "Update required" screen.
-Its button starts Google Play's **immediate in-app update** when Play offers one, and opens the Play Store listing
-otherwise (sideloaded or debug builds). An update interrupted by leaving the app resumes when the user comes back.
+- The last minimum fetched is kept on the device, so a blocked version stays blocked offline.
+- If it was never fetched (offline on first launch, Firebase not configured), the app is never blocked.
+- A parameter missing in the console counts as 0 (nobody blocked).
 
-- The last rules fetched are kept on the device, so a blocked version stays blocked offline.
-- If the file can't be read (offline before the first fetch, 404, bad JSON), the app is never blocked.
-- Unknown fields are ignored, so the file can carry more settings later.
-
-Host the files on the web app's site (`hunt.kallistesoft.ca`), e.g. in the hunt repo at `app/web/android/update.json`
-and `app/web/android/update-debug.json`; they are deployed with the site. To force everyone onto a new release:
-publish it on Play, wait until it is available, then raise `minVersionCode` to its `versionCode`. Use the debug file to
-try the flow on a debug build without affecting users.
+To force everyone onto a new release: publish it on Play, wait until it is available, then set `min_version_code` to
+its `versionCode` in the Firebase console and publish. Use `min_version_code_debug` to try the flow on a debug build
+without affecting users. Setup: [FOLLOW-UP.md](FOLLOW-UP.md), section 1.
 
 ## Feature flags (Firebase Remote Config)
 
@@ -138,7 +134,7 @@ Checked by `scripts/check-conventions.sh` (CI runs it on every push):
 
 - **No build-type branches in code.** Never `if (BuildConfig.DEBUG)`: code that differs goes in `app/src/debug` and
   `app/src/release`. Today each provides a `BuildTypeModule` (Hilt) with the build type's `BuildTypeConfig`: its
-  force-update rules and its feature-flag fetch interval.
+  force-update parameter and its Remote Config fetch interval.
 - **No dp literals outside the theme.** Gaps come from `Spacing`, component sizes from `Sizes` (both in
   `core/designsystem/.../theme`), corners from `MaterialTheme.shapes`. A new size is added there first.
 
