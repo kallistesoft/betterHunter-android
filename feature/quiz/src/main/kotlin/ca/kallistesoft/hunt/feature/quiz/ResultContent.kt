@@ -6,9 +6,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,16 +20,19 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
@@ -61,6 +67,7 @@ import kotlin.math.roundToInt
  * mistakes", for a mock exam pass or fail and the time used; then every missed question with the right answer, why,
  * and its source.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ResultContent(
     state: QuizUiState.Finished,
@@ -82,13 +89,16 @@ internal fun ResultContent(
     }
     val muted = MaterialTheme.colorScheme.onSurfaceVariant
     val missed = s.missed
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             BackTopAppBar(
                 stringResource(if (isExam) R.string.exam_results else R.string.practice_results),
                 onBack = null,
                 overline = examLabel(s.exam),
+                scrollBehavior = scrollBehavior,
             )
         },
         bottomBar = {
@@ -97,8 +107,10 @@ internal fun ResultContent(
                 PrimaryButton(stringResource(R.string.again), onClick = onAgain, modifier = Modifier.weight(1f).testTag("again"))
             }
         },
+        contentWindowInsets = WindowInsets.safeDrawing,
     ) { padding ->
         LazyColumn(
+            Modifier.consumeWindowInsets(padding),
             contentPadding = padding.plus(top = Spacing.s, bottom = Spacing.l),
             verticalArrangement = Arrangement.spacedBy(Spacing.m),
             horizontalAlignment = Alignment.CenterHorizontally,
