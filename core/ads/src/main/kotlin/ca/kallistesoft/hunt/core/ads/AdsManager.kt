@@ -39,6 +39,7 @@ internal class AdsManager(
     private var lastShown: Long? = null
 
     override fun gatherConsent(activity: Activity) {
+        if (!config.enabled) return
         scope.launch {
             // Consent given on an earlier launch: ads can start while the information is refreshed.
             startIfAllowed()
@@ -72,7 +73,7 @@ internal class AdsManager(
     }
 
     private suspend fun allowed(): Boolean =
-        consent.canRequestAds() && flags.isEnabled(FeatureFlag.ADS_ENABLED).first()
+        config.enabled && consent.canRequestAds() && flags.isEnabled(FeatureFlag.ADS_ENABLED).first()
 
     private suspend fun startIfAllowed() {
         if (allowed()) preload()

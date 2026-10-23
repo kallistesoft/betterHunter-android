@@ -25,8 +25,8 @@ class AdsManagerTest {
     private var now = 0L
     private var onScreen: Activity? = activity
 
-    private fun TestScope.manager() = AdsManager(
-        consent, sdk, flags, { onScreen }, AdsConfig("unit-1"), backgroundScope, { now },
+    private fun TestScope.manager(config: AdsConfig = AdsConfig("unit-1")) = AdsManager(
+        consent, sdk, flags, { onScreen }, config, backgroundScope, { now },
     )
 
     /** Consent gathered at launch, ads allowed: the SDK starts and an ad is preloaded. */
@@ -48,6 +48,18 @@ class AdsManagerTest {
         ads.showBeforeResults()
         assertEquals("no ad without consent", 0, sdk.shown)
         assertEquals(0, sdk.initialized)
+    }
+
+    @Test
+    fun `ads turned off in the config ask nothing and show nothing`() = runTest {
+        val ads = manager(AdsConfig("unit-1", enabled = false))
+        ads.gatherConsent(activity)
+        runCurrent()
+        ads.showBeforeResults()
+        runCurrent()
+        assertEquals("no consent request", 0, consent.updates)
+        assertEquals(0 to 0, sdk.initialized to sdk.loads)
+        assertEquals(0, sdk.shown)
     }
 
     @Test

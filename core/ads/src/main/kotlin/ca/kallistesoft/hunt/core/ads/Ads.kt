@@ -31,5 +31,8 @@ interface AdConsent {
     fun showPrivacyOptions()
 }
 
-/** The ad unit of the interstitial; the build type chooses it (Google's test unit in debug, see app/build.gradle.kts). */
-data class AdsConfig(val interstitialUnitId: String)
+/**
+ * The ad unit of the interstitial; the build type chooses it (Google's test unit in debug, see app/build.gradle.kts).
+ * [enabled] false turns ads off entirely, consent request included (the app's instrumented tests).
+ */
+data class AdsConfig(val interstitialUnitId: String, val enabled: Boolean = true)

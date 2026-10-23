@@ -13,7 +13,10 @@ import com.google.android.ump.ConsentInformation
 import com.google.android.ump.ConsentInformation.PrivacyOptionsRequirementStatus
 import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.UserMessagingPlatform
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 
 /** The consent SDK, as [AdsManager] needs it. Errors (offline, no form configured) only end the call. */
@@ -62,10 +65,13 @@ internal class UmpConsent(private val info: ConsentInformation) : ConsentGateway
     }
 }
 
-/** Google Mobile Ads. */
-internal class GoogleAdsSdk(private val context: Context) : AdsSdk {
-    override suspend fun initialize() = suspendCancellableCoroutine { done ->
-        MobileAds.initialize(context) { done.resume(Unit) }
+/** Google Mobile Ads. Initialised off the main thread ([background]), as Google recommends. */
+internal class GoogleAdsSdk(
+    private val context: Context,
+    private val background: CoroutineDispatcher = Dispatchers.IO,
+) : AdsSdk {
+    override suspend fun initialize() = withContext(background) {
+        suspendCancellableCoroutine { done -> MobileAds.initialize(context) { done.resume(Unit) } }
     }
 
     override suspend fun loadInterstitial(unitId: String): Interstitial? = suspendCancellableCoroutine { done ->

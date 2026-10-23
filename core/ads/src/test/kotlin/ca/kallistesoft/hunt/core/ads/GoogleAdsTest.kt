@@ -22,6 +22,7 @@ import io.mockk.slot
 import io.mockk.unmockkAll
 import io.mockk.verify
 import kotlinx.coroutines.async
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -101,7 +102,7 @@ class GoogleAdsTest {
         every { MobileAds.initialize(context, capture(initialized)) } returns Unit
         val loaded = slot<InterstitialAdLoadCallback>()
         every { InterstitialAd.load(context, "unit-1", any(), capture(loaded)) } returns Unit
-        val sdk = GoogleAdsSdk(context)
+        val sdk = GoogleAdsSdk(context, StandardTestDispatcher(testScheduler))
 
         val init = async { sdk.initialize() }
         runCurrent()
