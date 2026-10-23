@@ -2,7 +2,10 @@ package ca.kallistesoft.hunt.feature.settings
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Event
 import androidx.compose.material.icons.outlined.NotificationsActive
+import androidx.compose.material.icons.outlined.NotificationsOff
 import androidx.compose.material.icons.outlined.GpsFixed
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Language
@@ -25,11 +29,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.PillToggle
 import ca.kallistesoft.hunt.core.designsystem.component.RowEnd
@@ -50,7 +57,9 @@ import ca.kallistesoft.hunt.core.ui.icon
 import ca.kallistesoft.hunt.core.ui.longDate
 import ca.kallistesoft.hunt.core.ui.nameRes
 import ca.kallistesoft.hunt.core.ui.rememberLinkOpener
+import ca.kallistesoft.hunt.core.ui.notificationsEnabled
 import ca.kallistesoft.hunt.core.ui.rememberNotificationPermission
+import ca.kallistesoft.hunt.core.ui.rememberNotificationSettingsOpener
 import ca.kallistesoft.hunt.core.ui.shortDate
 import ca.kallistesoft.hunt.core.ui.timeOfDay
 
@@ -69,6 +78,10 @@ fun SettingsScreen(
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val askDaily = rememberNotificationPermission(viewModel::setDailyReminders)
     val askSeason = rememberNotificationPermission(viewModel::setSeasonReminders)
+    val openNotificationSettings = rememberNotificationSettingsOpener()
+    val context = LocalContext.current
+    // Notifications can be turned off in system settings while the app is away: check on each return.
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { viewModel.setNotificationsAllowed(notificationsEnabled(context)) }
     val links = rememberLinkOpener()
     val privacyUrl = stringResource(R.string.privacy_url)
     SettingsContent(
@@ -81,9 +94,23 @@ fun SettingsScreen(
         onSetLanguage = onSetLanguage,
         onSetDailyGoal = viewModel::setDailyGoal,
         onOpenSeasonDate = onOpenSeasonDate,
-        // Turning a reminder on asks for the notification permission first; off needs nothing.
-        onDailyReminders = { on -> if (on) askDaily() else viewModel.setDailyReminders(false) },
-        onSeasonReminders = { on -> if (on) askSeason() else viewModel.setSeasonReminders(false) },
+        // Turning a reminder on asks for the notification permission first (or, if notifications were turned off
+        // in system settings, opens them: asking again would be refused at once); off needs nothing.
+        onDailyReminders = { on ->
+            when {
+                !on -> viewModel.setDailyReminders(false)
+                state.notificationsBlocked -> openNotificationSettings()
+                else -> askDaily()
+            }
+        },
+        onSeasonReminders = { on ->
+            when {
+                !on -> viewModel.setSeasonReminders(false)
+                state.notificationsBlocked -> openNotificationSettings()
+                else -> askSeason()
+            }
+        },
+        onOpenNotificationSettings = openNotificationSettings,
         onContact = { links.email(CONTACT_EMAIL) },
         onPrivacy = { links.open(privacyUrl) },
     )
@@ -104,15 +131,23 @@ internal fun SettingsContent(
     onOpenSeasonDate: () -> Unit = {},
     onDailyReminders: (Boolean) -> Unit = {},
     onSeasonReminders: (Boolean) -> Unit = {},
+    onOpenNotificationSettings: () -> Unit = {},
 ) {
-    Scaffold(topBar = { BackTopAppBar(stringResource(R.string.settings), onBack) }) { padding ->
+    Scaffold(
+        topBar = { BackTopAppBar(stringResource(R.string.settings), onBack) },
+        contentWindowInsets = WindowInsets.safeDrawing,
+    ) { padding ->
         if (state.loading) return@Scaffold
-        LazyColumn(contentPadding = padding.plus(), verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
+        LazyColumn(
+            Modifier.consumeWindowInsets(padding),
+            contentPadding = padding.plus(),
+            verticalArrangement = Arrangement.spacedBy(Spacing.xs),
+        ) {
             item { SectionTitle(stringResource(R.string.your_profile)) }
             item { ProfileCard(state, onEdit, onOpenProvinces, onOpenSeasonDate) }
             if (state.fieldHunter) {
                 item { SectionTitle(stringResource(R.string.reminders)) }
-                item { RemindersCard(state, onDailyReminders, onSeasonReminders) }
+                item { RemindersCard(state, onDailyReminders, onSeasonReminders, onOpenNotificationSettings) }
                 item {
                     Text(
                         stringResource(R.string.quiet_hours),
@@ -224,12 +259,32 @@ private fun ProfileCard(state: SettingsUiState, onEdit: (ProfileField) -> Unit, 
     )
 }
 
-/** Daily questions and season reminders, each with its switch (on asks for the notification permission). */
+/**
+ * Daily questions and season reminders, each with its switch (on asks for the notification permission), under a
+ * "Notifications are off" row when system settings block them.
+ */
 @Composable
-private fun RemindersCard(state: SettingsUiState, onDaily: (Boolean) -> Unit, onSeason: (Boolean) -> Unit) {
+private fun RemindersCard(
+    state: SettingsUiState,
+    onDaily: (Boolean) -> Unit,
+    onSeason: (Boolean) -> Unit,
+    onOpenNotificationSettings: () -> Unit,
+) {
     val hasDate = state.seasonStart != null
+    // Reminders are on but notifications were turned off in system settings: say so, with the way back.
+    val blockedRow: @Composable ColumnScope.() -> Unit = {
+        SettingRow(
+            Icons.Outlined.NotificationsOff,
+            stringResource(R.string.notifications_blocked),
+            subtitle = stringResource(R.string.notifications_blocked_sub),
+            onClick = onOpenNotificationSettings,
+            orange = true,
+            modifier = Modifier.testTag("settings-notifications-blocked"),
+        )
+    }
     SettingsCard(
-        rows = listOf(
+        rows = listOfNotNull<@Composable ColumnScope.() -> Unit>(
+            blockedRow.takeIf { state.notificationsBlocked },
             {
                 SettingRow(
                     Icons.Outlined.NotificationsActive,

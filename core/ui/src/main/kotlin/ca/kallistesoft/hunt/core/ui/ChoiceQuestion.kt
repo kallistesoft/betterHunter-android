@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -74,7 +75,7 @@ fun <T : Enum<T>> ChoiceQuestion(
     @StringRes note: Int? = null,
 ) {
     LazyColumn(
-        Modifier.fillMaxSize(),
+        Modifier.fillMaxSize().consumeWindowInsets(padding),
         contentPadding = padding.plus(top = Spacing.s),
         verticalArrangement = Arrangement.spacedBy(Spacing.m),
     ) {

@@ -7,10 +7,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -26,7 +29,6 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -43,6 +45,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
@@ -64,6 +67,8 @@ import ca.kallistesoft.hunt.core.designsystem.component.QuizProgress
 import ca.kallistesoft.hunt.core.designsystem.component.ResultChip
 import ca.kallistesoft.hunt.core.designsystem.component.SecondaryButton
 import ca.kallistesoft.hunt.core.designsystem.component.SegmentState
+import ca.kallistesoft.hunt.core.designsystem.component.StatusColumn
+import ca.kallistesoft.hunt.core.designsystem.component.TooltipIconButton
 import ca.kallistesoft.hunt.core.designsystem.component.plus
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
@@ -117,8 +122,8 @@ fun QuizScreen(
 
 @Composable
 private fun LoadingQuiz(onClose: () -> Unit) {
-    Scaffold(topBar = { BackTopAppBar("", onClose) }) { padding ->
-        Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
+    Scaffold(topBar = { BackTopAppBar("", onClose) }, contentWindowInsets = WindowInsets.safeDrawing) { padding ->
+        Box(Modifier.fillMaxSize().padding(padding).consumeWindowInsets(padding), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
         }
     }
@@ -151,12 +156,9 @@ internal fun EmptyQuiz(state: QuizUiState.Empty, onClose: () -> Unit, onStartPra
                 }
             }
         },
+        contentWindowInsets = WindowInsets.safeDrawing,
     ) { padding ->
-        Column(
-            Modifier.fillMaxSize().padding(padding).padding(Spacing.xxxl),
-            verticalArrangement = Arrangement.spacedBy(Spacing.m, Alignment.CenterVertically),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
+        StatusColumn(padding) {
             if (review) {
                 IconBadge(Icons.Rounded.Check, size = BadgeSize.Hero, modifier = Modifier.padding(bottom = Spacing.s))
                 Text(
@@ -205,11 +207,15 @@ internal fun QuestionContent(
     val scope = rememberCoroutineScope()
     val links = rememberLinkOpener()
     val listState = rememberLazyListState()
+    val shortcutFocus = remember { FocusRequester() }
 
     BackHandler { confirmQuit = true }
     PrefetchPhoto(s.questions.getOrNull(s.current + 1)?.image)
-    // Each question starts scrolled to the top.
-    LaunchedEffect(s.current) { listState.scrollToItem(0) }
+    // Each question starts scrolled to the top, with the keyboard shortcuts' focus on the screen.
+    LaunchedEffect(s.current) {
+        listState.scrollToItem(0)
+        shortcutFocus.requestFocus()
+    }
 
     val reportSubject = stringResource(R.string.report_subject, q.id)
     val reportIntro = stringResource(R.string.report_body)
@@ -230,6 +236,13 @@ internal fun QuestionContent(
     }
 
     Scaffold(
+        modifier = Modifier.quizShortcuts(
+            shortcutFocus,
+            choiceCount = if (isPhoto && showFeedback) 0 else text.choices.size,
+            canGoNext = chosen != null,
+            onChoose = onChoose,
+            onNext = onNext,
+        ),
         topBar = {
             Column {
                 BackTopAppBar(
@@ -238,18 +251,20 @@ internal fun QuestionContent(
                     overline = overline ?: if (isExam) "${stringResource(R.string.exam_sim)} · ${s.exam.id}" else null,
                     closeIcon = isExam,
                     actions = {
-                        if (canReport) IconButton(
-                            onClick = {
-                                // Built on tap only: a mock exam recomposes every second.
-                                val reportBody = reportIntro + "---\n${q.id} (${q.sourceRef})\n${text.q}\n" +
-                                    text.choices.mapIndexed { i, c -> "${"ABCD"[i]}. $c" }.joinToString("\n")
-                                if (!links.email(CONTACT_EMAIL, reportSubject, reportBody)) {
-                                    scope.launch { snackbar.showSnackbar(reportFallback) }
-                                }
-                            },
-                            modifier = Modifier.testTag("report"),
-                        ) {
-                            Icon(Icons.Outlined.Flag, contentDescription = stringResource(R.string.report))
+                        if (canReport) {
+                            TooltipIconButton(
+                                Icons.Outlined.Flag,
+                                label = stringResource(R.string.report),
+                                onClick = {
+                                    // Built on tap only: a mock exam recomposes every second.
+                                    val reportBody = reportIntro + "---\n${q.id} (${q.sourceRef})\n${text.q}\n" +
+                                        text.choices.mapIndexed { i, c -> "${"ABCD"[i]}. $c" }.joinToString("\n")
+                                    if (!links.email(CONTACT_EMAIL, reportSubject, reportBody)) {
+                                        scope.launch { snackbar.showSnackbar(reportFallback) }
+                                    }
+                                },
+                                modifier = Modifier.testTag("report"),
+                            )
                         }
                         state.secondsLeft?.let { Countdown(it) }
                     },
@@ -280,8 +295,10 @@ internal fun QuestionContent(
             }
         },
         snackbarHost = { SnackbarHost(snackbar) },
+        contentWindowInsets = WindowInsets.safeDrawing,
     ) { padding ->
         LazyColumn(
+            Modifier.consumeWindowInsets(padding),
             state = listState,
             contentPadding = padding.plus(top = Spacing.l, bottom = Spacing.l),
             verticalArrangement = Arrangement.spacedBy(Spacing.l),

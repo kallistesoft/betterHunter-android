@@ -22,7 +22,6 @@ import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.ZoomOutMap
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -31,7 +30,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -56,6 +55,7 @@ import androidx.compose.ui.unit.min
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import ca.kallistesoft.hunt.core.designsystem.component.Overline
+import ca.kallistesoft.hunt.core.designsystem.component.TooltipIconButton
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
@@ -157,12 +157,15 @@ fun QuestionPhoto(
     if (zoomed) FullPhoto(image, description, onDismiss = { zoomed = false })
 }
 
-/** Full-screen photo with pinch-to-zoom, drawn edge to edge; closing resets the zoom. */
+/** Saves a pan [Offset] as its two coordinates. */
+private val OffsetSaver = Saver<Offset, FloatArray>(save = { floatArrayOf(it.x, it.y) }, restore = { Offset(it[0], it[1]) })
+
+/** Full-screen photo with pinch-to-zoom, drawn edge to edge; the zoom survives a rotation, closing resets it. */
 @Composable
 private fun FullPhoto(image: String, description: String, onDismiss: () -> Unit) {
     Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false)) {
-        var scale by remember { mutableFloatStateOf(1f) }
-        var offset by remember { mutableStateOf(Offset.Zero) }
+        var scale by rememberSaveable { mutableFloatStateOf(1f) }
+        var offset by rememberSaveable(stateSaver = OffsetSaver) { mutableStateOf(Offset.Zero) }
         val state = rememberTransformableState { zoom, pan, _ ->
             scale = (scale * zoom).coerceIn(1f, 5f)
             offset = if (scale == 1f) Offset.Zero else offset + pan
@@ -182,9 +185,13 @@ private fun FullPhoto(image: String, description: String, onDismiss: () -> Unit)
                         translationY = offset.y
                     },
             )
-            IconButton(onClick = onDismiss, modifier = Modifier.safeDrawingPadding().align(Alignment.TopStart)) {
-                Icon(Icons.Rounded.Close, contentDescription = stringResource(R.string.back), tint = Color.White)
-            }
+            TooltipIconButton(
+                Icons.Rounded.Close,
+                label = stringResource(R.string.close),
+                onClick = onDismiss,
+                modifier = Modifier.safeDrawingPadding().align(Alignment.TopStart),
+                tint = Color.White,
+            )
         }
     }
 }

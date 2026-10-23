@@ -30,6 +30,16 @@ class SettingsScreenshotTest {
 
     @Test
     @Config(qualifiers = LIGHT_EN)
+    fun settingsNotificationsBlockedLightEn() =
+        compose.captureScreenshot("settings_notifications_blocked_light_en") { SettingsNotificationsBlockedPreview() }
+
+    @Test
+    @Config(qualifiers = DARK_FR)
+    fun settingsNotificationsBlockedDarkFr() =
+        compose.captureScreenshot("settings_notifications_blocked_dark_fr") { SettingsNotificationsBlockedPreview() }
+
+    @Test
+    @Config(qualifiers = LIGHT_EN)
     fun profileEditLightEn() = compose.captureScreenshot("profile_edit_light_en") { ProfileEditPreview() }
 
     @Test

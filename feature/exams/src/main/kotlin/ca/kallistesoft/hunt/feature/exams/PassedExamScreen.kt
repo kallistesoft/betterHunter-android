@@ -4,8 +4,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -83,8 +86,13 @@ internal fun PassedExamContent(examId: String, onConfirm: () -> Unit, onBack: ()
                 )
             }
         },
+        contentWindowInsets = WindowInsets.safeDrawing,
     ) { padding ->
-        LazyColumn(contentPadding = padding.plus(top = Spacing.l), horizontalAlignment = Alignment.CenterHorizontally) {
+        LazyColumn(
+            Modifier.consumeWindowInsets(padding),
+            contentPadding = padding.plus(top = Spacing.l),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
             item {
                 IconBadge(
                     Icons.Outlined.EmojiEvents,

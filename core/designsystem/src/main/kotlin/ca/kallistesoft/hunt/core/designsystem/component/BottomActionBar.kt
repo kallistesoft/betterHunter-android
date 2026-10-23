@@ -6,7 +6,11 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -17,8 +21,8 @@ import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 
 /**
  * The main actions of a screen, pinned to the bottom (a Scaffold's `bottomBar`). Opaque, so the list scrolling under
- * it never shows through the buttons, and above the navigation bar when drawing edge to edge. [below] goes under the
- * buttons, centred (a short note, or a link-like second action).
+ * it never shows through the buttons, and above the navigation bar and clear of a display cutout when drawing edge to
+ * edge. [below] goes under the buttons, centred (a short note, or a link-like second action).
  */
 @Composable
 fun BottomActionBar(
@@ -28,7 +32,9 @@ fun BottomActionBar(
 ) {
     Surface(modifier, color = MaterialTheme.colorScheme.background) {
         Column(
-            Modifier.navigationBarsPadding().padding(horizontal = Spacing.screen, vertical = Spacing.m).fillMaxWidth(),
+            Modifier
+                .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom))
+                .padding(horizontal = Spacing.screen, vertical = Spacing.m).fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(Spacing.s),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
