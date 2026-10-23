@@ -6,6 +6,7 @@ import ca.kallistesoft.hunt.core.model.Province
 import ca.kallistesoft.hunt.core.model.Weapon
 import ca.kallistesoft.hunt.core.testing.FakeUserDataRepository
 import ca.kallistesoft.hunt.core.testing.MainDispatcherRule
+import ca.kallistesoft.hunt.core.testing.collecting
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -22,8 +23,9 @@ class OnboardingViewModelTest {
     private fun viewModel() = OnboardingViewModel(userData, savedState)
 
     @Test
-    fun `each question needs an answer before continuing`() {
+    fun `each question needs an answer before continuing`() = runTest {
         val vm = viewModel()
+        collecting(vm.uiState)
         assertFalse(vm.uiState.value.canContinue)
         vm.next()
         assertEquals(OnboardingStep.HUNTER_TYPE, vm.uiState.value.step)
@@ -60,8 +62,9 @@ class OnboardingViewModelTest {
     }
 
     @Test
-    fun `back returns to the previous question, keeping the answers`() {
+    fun `back returns to the previous question, keeping the answers`() = runTest {
         val vm = viewModel()
+        collecting(vm.uiState)
         assertFalse(vm.back())
         vm.chooseHunterType(HunterType.NEW_HUNTER)
         vm.next()
@@ -71,12 +74,13 @@ class OnboardingViewModelTest {
     }
 
     @Test
-    fun `the answers survive process death`() {
+    fun `the answers survive process death`() = runTest {
         viewModel().apply {
             chooseHunterType(HunterType.EXPERIENCED)
             next()
             toggleWeapon(Weapon.BOW)
         }
+        // Restored before the screen collects: the first frame already shows the restored question.
         val restored = viewModel().uiState.value
         assertEquals(OnboardingStep.WEAPONS, restored.step)
         assertEquals(HunterType.EXPERIENCED, restored.hunterType)
