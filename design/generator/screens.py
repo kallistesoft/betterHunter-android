@@ -68,6 +68,8 @@ ICONS = {
     "eye": '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
     "school": '<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c2 1.5 4 2 6 2s4-.5 6-2v-5"/><path d="M22 9v6"/>',
     "flame": '<path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5.5 2 1.5 2.5 2.5 2.5C11 8 11 5.5 12 3z"/>',
+    "bow": '<path d="M7 3c6 3.5 6 14.5 0 18"/><path d="M7 3v18"/><path d="M3 12h17"/><path d="M17 9l3 3-3 3"/>',
+    "crossbow": '<path d="M3 8c5-4 13-4 18 0"/><path d="M3 8l9 5 9-5"/><path d="M12 3v18"/><path d="M10 18h4"/>',
     "expand": '<path d="M4 9V4h5"/><path d="M20 9V4h-5"/><path d="M4 15v5h5"/><path d="M20 15v5h-5"/>',
 }
 
@@ -514,15 +516,15 @@ def exam_picker(t):
 
     more = (f'<p style="margin: 2px 0 0; font-size: 13px; color: {t["muted"]}; display: flex; align-items: center; gap: 8px">'
             f'{icon("goal", 16)} More provinces coming.</p>')
-    body = f'''<header style="display: flex; align-items: center; height: 48px; flex-shrink: 0">{round_link(t, href(t, "HunterProfile"), "Back", "back")}</header>
+    body = f'''<header style="display: flex; align-items: center; height: 48px; flex-shrink: 0">{round_link(t, href(t, "HuntWith"), "Back", "back")}</header>
   <div style="display: flex; flex-direction: column; gap: 8px">
     {label(t, "One more question")}
     <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 34px; line-height: 1.05">What are you preparing for?</h1>
     <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Your hunter course is what makes you a hunter. Pick one or more; you can change this later.</p>
   </div>
   {group("Hunter education", more,
-         option("tree", "Hunter education with firearms (ICAF)", "Québec · 228 questions", selected=True)
-         + option("target", "Bow and crossbow hunter education (ICAA)", "Québec", soon=True)
+         option("tree", "Hunter education with firearms (ICAF)", "Québec · 228 questions · for firearm hunting", selected=True)
+         + option("bow", "Bow and crossbow hunter education (ICAA)", "Québec · for bow and crossbow hunting", soon=True)
          + option("mountain", "Conservation and Hunter Education", "Alberta · 285 questions"))}
   {group("Firearms licence (optional)", "",
          option("shield", "PAL exam (CFSC, non-restricted)", "To own or buy firearms. Not needed to hunt with a bow or crossbow.", selected=True))}
@@ -533,12 +535,42 @@ def exam_picker(t):
     return page(t, "BetterHunter onboarding: what are you preparing for", body, gap=14)
 
 
+def hunt_with(t):
+    def option(name, title, sub, selected=False):
+        bg, border = (t["sel"], t["orange"]) if selected else (t["card"], t["outline"])
+        if selected:
+            mark = (f'<span style="width: 22px; height: 22px; flex-shrink: 0; border-radius: 6px; background: {t["orange"]}; color: {t["on_orange"]}; '
+                    f'display: flex; align-items: center; justify-content: center">{icon("check", 14, width=3)}</span>')
+        else:
+            mark = f'<span style="width: 22px; height: 22px; flex-shrink: 0; box-sizing: border-box; border-radius: 6px; border: 2px solid {t["box"]}"></span>'
+        return (f'<label style="display: flex; align-items: center; gap: 14px; min-height: 84px; box-sizing: border-box; padding: 14px 16px; border-radius: 18px; '
+                f'background: {bg}; border: 1.5px solid {border}">'
+                f'<input type="checkbox"{" checked" if selected else ""} style="position: absolute; opacity: 0; width: 1px; height: 1px">'
+                f'{tile(t, name, "orange" if selected else "green")}<span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0">'
+                f'<span style="font-family: \'Barlow Condensed\', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">{title}</span>'
+                f'<span style="font-size: 13px; line-height: 1.35; color: {t["muted"]}">{sub}</span></span>{mark}</label>')
+    body = f'''<header style="display: flex; align-items: center; height: 48px; flex-shrink: 0">{round_link(t, href(t, "HunterProfile"), "Back", "back")}</header>
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    {label(t, "Next question")}
+    <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 34px; line-height: 1.05">What do you hunt with?</h1>
+    <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Pick all that apply. It decides which hunter course and rules you'll see.</p>
+  </div>
+  <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+    <legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">What do you hunt with?</legend>
+    {option("target", "Firearm", "Rifle, shotgun or muzzleloader", selected=True)}
+    {option("bow", "Bow", "Compound, recurve or longbow")}
+    {option("crossbow", "Crossbow", "Hunting with a crossbow")}
+  </fieldset>
+  <div style="margin-top: auto">{primary(t, "Continue", href(t, "ExamPicker"))}</div>'''
+    return page(t, "BetterHunter onboarding: what do you hunt with", body, gap=16, padding="12px 20px 24px")
+
+
 SCREENS = {
     "Settings": settings, "About": about, "ExamTraining": exam_training, "PracticeQuestion": practice_question,
     "PracticeResults": lambda t: results(t, exam=False), "ExamResults": lambda t: results(t, exam=True),
     "QuitDialog": quit_dialog, "PhotoZoom": photo_zoom, "NothingToReview": nothing_to_review,
     "Recognition": recognition, "UpdateRequired": update_required, "PassedExam": passed_exam,
-    "MainNewHunter": main_new_hunter, "ExamPicker": exam_picker,
+    "MainNewHunter": main_new_hunter, "ExamPicker": exam_picker, "HuntWith": hunt_with,
 }
 
 if __name__ == "__main__":

@@ -16,6 +16,7 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 |---|---|---|---|
 | Splash screen: the native Android splash, icon on the green | `Splash.dc.html` | `SplashLight.dc.html` | built |
 | Onboarding: what kind of hunter? (first launch) | `HunterProfile.dc.html` | `HunterProfileLight.dc.html` | not built |
+| Onboarding: what do you hunt with? (firearm, bow, crossbow) | `HuntWith.dc.html` | `HuntWithLight.dc.html` | not built |
 | Onboarding: what are you preparing for? (only after "Working on it") | `ExamPicker.dc.html` | `ExamPickerLight.dc.html` | built (today's first-run exam picker), restyle |
 | Home | `Main.dc.html` | `MainLight.dc.html` | built; the gear (Settings) is new |
 | Settings: hunter type, my exams, language, daily goal; About inside | `Settings.dc.html` | `SettingsLight.dc.html` | not built |
@@ -41,7 +42,7 @@ The canvas has one **page per flow** (dark row on top, light row below, screens 
 
 | Page | Screens |
 |---|---|
-| 1 · Working on it: exam prep (opens first) | 1 Splash → 2 What kind of hunter? → 3 What are you preparing for? → 4 Home → 5 Exam training → 6 Practice question → 7 Practice results (7b nothing to review) → 8 Mock exam question (8b quit) → 9 Mock exam results → 10 I passed the real exam → 11 Home, new hunter |
+| 1 · Working on it: exam prep (opens first) | 1 Splash → 2 What kind of hunter? → 3 What do you hunt with? → 4 What are you preparing for? → 5 Home → 6 Exam training → 7 Practice question → 8 Practice results (8b nothing to review) → 9 Mock exam question (9b quit) → 10 Mock exam results → 11 I passed the real exam → 12 Home, new hunter |
 | 2 · What is it? | 1 Recognition hub → 2 Photo question → 3 Photo full screen → 4 Answer |
 | 3 · Settings & About | 1 Settings → 2 About |
 | 4 · System | 1 Update required |
@@ -53,7 +54,9 @@ logo boards). Edit the generator, regenerate, then publish the changed files to 
 
 **Onboarding (not built yet).** First launch, after the splash: "What kind of hunter are you?" (Working on it:
 preparing for the licence or hunter course; New hunter: licensed, a few seasons; Experienced hunter: many seasons),
-saved on the device. Only "Working on it" goes on to "What are you preparing for?", the exam picker: hunter
+saved on the device, then "What do you hunt with?" (firearm, bow, crossbow; pick all that apply; everyone answers, it
+decides the hunter course and rules shown). Only "Working on it" goes on to "What are you preparing for?", pre-ticked
+from the weapons (firearm → ICAF, bow or crossbow → ICAA), the exam picker: hunter
 education first (Québec ICAF, Québec bow and crossbow ICAA "coming soon", Alberta; "More provinces coming"), then the
 PAL as an optional firearms licence (DECISIONS.md, P10), then Home; new and experienced hunters go straight to Home. A province
 question ("Where do you hunt?") can come later, when more provinces are covered.
