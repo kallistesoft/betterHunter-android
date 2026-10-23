@@ -1,5 +1,6 @@
 package ca.kallistesoft.hunt
 
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -25,7 +26,9 @@ class SettingsFlowTest {
         app.waitForText(app.str(R.string.hunter_new))
         app.back()
 
-        app.waitForTag("today-play-id")
+        // A new hunter without a passed exam gets the field Home (P11): Field skills instead of Exam training.
+        app.waitForTag("hub-skills")
+        rule.onNode(hasTestTag("hub-exams")).assertDoesNotExist()
     }
 
     @Test
