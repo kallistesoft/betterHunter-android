@@ -85,6 +85,12 @@ provinces are in `UserProgress` (`myExamIds`: home province first), hunter cours
 order), My provinces is reached from Exam training, and "Yes, I passed" makes a New hunter with Home's new-hunter
 version. Settings changes each answer (hunter type, weapons, where you hunt), My provinces and the daily goal.
 
+**P11. New hunters practise field skills, not exams.** *Product.* A New hunter is done with exams: their Home and
+Field skills never show a course, a pass mark or a mock exam. Skills are practised by topic; a skill at 100% is
+mastered, right answers count for 3 months (then the question counts as unanswered again), each mix keeps 1 or 2
+questions from mastered skills, "Keep your edge" replaces the mix once every skill is mastered, and Home offers a season
+check a few weeks before the season. *Mockup only (2026-10-23, `design/`, page 2); not built.*
+
 ## Design
 
 **D1. Material 3 with a fixed brand palette.** *Replaced by D6.* Colour scheme generated (tonal spot) from the icon's

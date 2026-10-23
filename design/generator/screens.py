@@ -502,7 +502,7 @@ def passed_exam(t):
     return page(t, "BetterHunter passed the real exam", body, gap=16)
 
 
-def main_new_hunter(t, passed=True):
+def main_new_hunter(t, passed=True, season=False):
     pill = (f'<span style="display: flex; border: 1px solid {t["outline"]}; border-radius: 999px; padding: 3px; background: {t["card"] if t["name"] == "light" else "transparent"}">'
             f'<span style="color: {t["muted"]}; font: 600 13px Barlow, sans-serif; height: 38px; min-width: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center">FR</span>'
             f'<span style="background: {t["green_tint"] if t["name"] == "light" else t["track"]}; color: {t["text"]}; font: 600 13px Barlow, sans-serif; height: 38px; min-width: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center">EN</span></span>')
@@ -511,6 +511,11 @@ def main_new_hunter(t, passed=True):
     <span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">Hunter course passed. Welcome, new hunter!</span><span style="font-size: 13px; color: {t["muted"]}">Now sharpen your eye in the field.</span></span>
     <a href="#" aria-label="Dismiss" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: {t["muted"]}; margin-right: -10px">{icon("close", 18)}</a>
   </section>'''
+    season_card = f'''<a href="{href(t, "SeasonCheckQuestion")}" style="display: flex; align-items: center; gap: 12px; padding: 12px 6px 12px 14px; border-radius: 16px; background: {t["sel"]}; border: 1px solid {t["warm_border"]}; color: {t["text"]}; text-decoration: none">
+    {tile(t, "flag", "orange", 40, 10)}
+    <span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">Deer season opens in 3 weeks</span><span style="font-size: 13px; color: {t["muted"]}">Season check: 15 questions across all your skills</span></span>
+    <span style="width: 36px; display: flex; justify-content: center; color: {t["muted"]}">{icon("chevron", 18)}</span>
+  </a>'''
     exam_tile = f'''<a href="{href(t, "ExamTraining")}" style="background: {t["card"]}; border: 1px solid {t["border"]}; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">
       {tile(t, "school")}
       <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">Exam training</span>
@@ -521,14 +526,14 @@ def main_new_hunter(t, passed=True):
       {tile(t, "target")}
       <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">Field skills</span>
       <span style="font-size: 13px; color: {t["muted"]}; line-height: 1.35">Shot placement, tracking, safety</span>
-      {meter(t, "Readiness", "64%", 64)}
+      {meter(t, "Readiness", "88%" if season else "64%", 88 if season else 64)}
     </a>'''
     ring_html = ring(t, 25, 84, 8, t["orange"], f'<span style="font-family: \'Barlow Condensed\', sans-serif; font-weight: 700; font-size: 28px; line-height: 1">5</span><span style="font-size: 11px; color: {t["muted"]}">of 20</span>')
     body = f'''<header style="display: flex; align-items: center; justify-content: space-between; height: 48px; flex-shrink: 0">
     <div style="display: flex; align-items: center; gap: 10px">{buck(34, t["text"], t["orange"])}<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.2px">BetterHunter</span></div>
     <div style="display: flex; align-items: center; gap: 8px">{pill}{round_link(t, href(t, "Settings"), "Settings", "gear", t["muted"])}</div>
   </header>
-  {banner if passed else ""}
+  {banner if passed else season_card if season else ""}
   {card(t, f'''<div style="display: flex; align-items: center; gap: 16px">{ring_html}
       <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
         {label(t, "Today")}
@@ -552,7 +557,7 @@ def main_new_hunter(t, passed=True):
       <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 24px">What is it?</span>
     </div>
   </section>'''
-    return page(t, "BetterHunter home, new hunter" + ("" if passed else " (from onboarding)"), body, gap=14, padding="20px 20px 24px")
+    return page(t, "BetterHunter home, new hunter" + ("" if passed else ", before the season" if season else " (from onboarding)"), body, gap=14, padding="20px 20px 24px")
 
 
 def hunt_with(t, new_hunter=False):
@@ -645,39 +650,68 @@ SKILLS = [
 ]
 
 
-def field_skills(t):
+FADE = "Right answers count for 3 months, so a skill comes back before each season."
+
+
+def mastered_chip(t):
+    return (f'<span style="display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: {t["green"]}">'
+            f'{icon("check", 13, t["green"], 2.8)} Mastered</span>')
+
+
+def field_skills(t, state="start"):
+    """state: "start" (first weeks), "upkeep" (some skills mastered, one faded), "all" (every skill mastered)."""
+    if state == "all":
+        mix_title, mix_sub, go = "Keep your edge", "10 questions across all your skills, oldest answers first", "Start"
+        rows = [(ic, title, sub, 100, "mastered") for ic, title, sub, _ in SKILLS]
+    elif state == "upkeep":
+        mix_title, mix_sub, go = "Today's mix", "8 from your weakest skills, 2 to keep mastered ones sharp", "Start the mix"
+        rows = [("target", "Shot placement", "Vital zones, angles, distance", 100, "mastered"),
+                ("paw", "After the shot", "Was mastered · 2 answers expired", 80, "faded"),
+                ("shield", "Safe firearm handling", "Carrying, crossing, zones of fire", 100, "mastered"),
+                ("book", "Rules in the field", "Hunting hours, tags, transport", 92, None),
+                ("first_aid", "Survival and first aid", "Lost, cold, hurt in the woods", 71, None)]
+    else:
+        mix_title, mix_sub, go = "Today's mix", "10 questions, mostly from your weakest skills", "Start the mix"
+        rows = [sk + (None,) for sk in SKILLS]
     mix = f'''<div style="display: flex; gap: 12px; align-items: center">
-      {tile(t, "flame", "orange")}
+      {tile(t, "trophy" if state == "all" else "flame", "orange")}
       <span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0">
-        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">Today's mix</span>
-        <span style="font-size: 13px; line-height: 1.35; color: {t["muted"]}">10 questions, mostly from your weakest skills</span>
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">{mix_title}</span>
+        <span style="font-size: 13px; line-height: 1.35; color: {t["muted"]}">{mix_sub}</span>
       </span>
     </div>
-    {primary(t, "Start the mix", href(t, "SkillQuestion"), "; height: 52px", "play")}'''
+    {primary(t, go, href(t, "SkillQuestion"), "; height: 52px", "play")}'''
 
-    def skill(i, ic, title, sub, pct):
+    def skill(i, ic, title, sub, pct, st):
+        value = mastered_chip(t) if st == "mastered" else f'<span style="font-size: 13px; font-weight: 600; color: {t["green"]}">{pct}%</span>'
         return (f'<a href="{href(t, "SkillQuestion")}" style="display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 8px 0; '
                 f'{"border-top: 1px solid " + t["border"] + ";" if i else ""} color: {t["text"]}; text-decoration: none">{tile(t, ic, size=40, radius=11)}'
                 f'<span style="display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 0">'
-                f'<span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-weight: 600; font-size: 15px">{title}</span>'
-                f'<span style="font-size: 13px; font-weight: 600; color: {t["green"]}">{pct}%</span></span>'
+                f'<span style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span style="font-weight: 600; font-size: 15px">{title}</span>{value}</span>'
                 f'<span style="font-size: 12px; color: {t["muted"]}">{sub}</span>'
                 f'<span style="height: 5px; border-radius: 3px; background: {t["track"]}; display: block"><span style="display: block; width: {pct}%; height: 5px; border-radius: 3px; background: {t["bar"]}"></span></span>'
                 f'</span>{icon("chevron", 18, t["muted"])}</a>')
-    skills = "".join(skill(i, *sk) for i, sk in enumerate(SKILLS))
-    body = f'''{header(t, "Field skills", back=href(t, "HomeNewHunter"))}
-  <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Sharpen what matters in the field, one skill at a time.</p>
+    skills = "".join(skill(i, *sk) for i, sk in enumerate(rows))
+    intro = ("Every skill mastered. Keep them sharp for the next season." if state == "all"
+             else "Sharpen what matters in the field, one skill at a time.")
+    note = (f'<p style="margin: 0; font-size: 13px; line-height: 1.4; color: {t["muted"]}; display: flex; gap: 8px">{icon("info", 16)}<span>{FADE}</span></p>'
+            if state != "start" else "")
+    back = {"start": "HomeNewHunter", "upkeep": "HomeNewHunter", "all": "HomeSeasonCheck"}[state]
+    body = f'''{header(t, "Field skills", back=href(t, back))}
+  <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">{intro}</p>
   {card(t, mix, pad="18px", gap=14)}
-  <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 2px">{label(t, "Skills", t["muted"])}<a href="{href(t, "NothingToReview")}" style="display: flex; align-items: center; gap: 6px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px">{icon("replay", 15)} My mistakes (2)</a></div>
-  {card(t, skills, pad="4px 16px", gap=0)}'''
-    return page(t, "BetterHunter field skills", body, gap=12)
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 2px">{label(t, "Skills", t["muted"])}<a href="{href(t, "NothingToReview")}" style="display: flex; align-items: center; gap: 6px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px">{icon("replay", 15)} My mistakes ({0 if state == "all" else 2})</a></div>
+  {card(t, skills, pad="4px 16px", gap=0)}
+  {note}'''
+    return page(t, "BetterHunter field skills" + {"start": "", "upkeep": ", skills mastered", "all": ", all mastered"}[state], body, gap=12)
 
 
-def skill_question(t):
+def skill_question(t, season=False):
     right = round_link(t, "#", "Report a problem", "flag", t["muted"])
     body = f'''<div style="display: flex; flex-direction: column; gap: 10px">
-{header(t, "Question 4 / 10", back=href(t, "FieldSkills"), right=right, overline="Field skills · Shot placement", close=True)}
-  {segments(t, "rrwr" + "u" * 6)}
+{header(t, "Question 4 / 15" if season else "Question 4 / 10", back=href(t, "HomeSeasonCheck" if season else "FieldSkills"), right=right,
+         overline="Season check · all skills" if season else "Field skills · Shot placement", close=True)}
+  {segments(t, "rrwr" + "u" * (11 if season else 6))}
   </div>
   <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 26px; line-height: 1.15">{Q}</h1>
   <div style="display: flex; flex-direction: column; gap: 8px">
@@ -689,8 +723,8 @@ def skill_question(t):
   {card(t, f"""<span style="display: flex; align-items: center; gap: 8px; color: {t["green"]}; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px">{icon("check", 20, t["green"], 2.6)} Correct</span>
     <span style="display: flex; flex-direction: column; gap: 4px">{label(t, "In the field", t["green"])}<span style="font-size: 14px; line-height: 1.4">Wait for a broadside bear to step its near front leg forward, then aim slightly behind the shoulder.</span></span>
     <span style="font-size: 13px; color: {t["muted"]}">Source: <a href="#" style="font-weight: 600; text-decoration: none">ICAF manual (FédéCP, 2020), p. 61 ↗</a></span>""", pad="14px 16px", gap=10, radius=16)}
-  <div style="margin-top: auto">{primary(t, "Next", href(t, "SkillResults"))}</div>'''
-    return page(t, "BetterHunter field skills question, answered", body, gap=14)
+  <div style="margin-top: auto">{primary(t, "Next", href(t, "FieldSkillsAllMastered" if season else "SkillResults"))}</div>'''
+    return page(t, "BetterHunter " + ("season check" if season else "field skills") + " question, answered", body, gap=14)
 
 
 def skill_results(t):
@@ -714,6 +748,28 @@ def skill_results(t):
     return page(t, "BetterHunter field skills results", body, gap=12)
 
 
+def skill_mastered(t):
+    inner = (f'<span style="font-family: \'Barlow Condensed\', sans-serif; font-weight: 700; font-size: 44px; line-height: 1; color: {t["green"]}">100%</span>'
+             f'<span style="font-size: 15px; color: {t["muted"]}">10 / 10</span>')
+    keep = "".join(
+        f'<div style="display: flex; gap: 12px; align-items: flex-start">{tile(t, ic, "green", 36, 10)}<span style="font-size: 14px; line-height: 1.4; padding-top: 2px">{text}</span></div>'
+        for ic, text in [
+            ("replay", "Each mix keeps 1 or 2 shot placement questions, to keep it sharp."),
+            ("x", "Miss one and it's back in practice until you get it right."),
+            ("timer", FADE),
+        ])
+    body = f'''{header(t, "Shot placement", overline="Field skills · results")}
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
+    {ring(t, 100, 150, 12, t["green"], inner)}
+    <span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; background: {t["green_tint"]}; color: {t["green"]}; font-weight: 600; font-size: 14px">{icon("trophy", 16, t["green"], 2.2)} Skill mastered</span>
+    <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 28px; line-height: 1.1">Every shot placement question, right.</h1>
+  </div>
+  {label(t, "Staying mastered", t["muted"], "; margin-top: 4px")}
+  {card(t, keep, pad="16px", gap=14, radius=18)}
+  <div style="margin-top: auto; display: flex; gap: 10px">{secondary(t, "Skills", href(t, "FieldSkillsMastered"), "; flex: 1")}{primary(t, "Next: After the shot", href(t, "SkillQuestion"), "; flex: 1.5")}</div>'''
+    return page(t, "BetterHunter field skill mastered", body, gap=12)
+
+
 SCREENS = {
     "Settings": settings, "About": about, "ExamTraining": exam_training, "PracticeQuestion": practice_question,
     "PracticeResults": lambda t: results(t, exam=False), "ExamResults": lambda t: results(t, exam=True),
@@ -724,6 +780,9 @@ SCREENS = {
     "HunterProfileNewHunter": hunter_profile_new, "HuntWithNewHunter": lambda t: hunt_with(t, new_hunter=True),
     "HuntWhereNewHunter": lambda t: hunt_where(t, new_hunter=True), "HomeNewHunter": lambda t: main_new_hunter(t, passed=False),
     "FieldSkills": field_skills, "SkillQuestion": skill_question, "SkillResults": skill_results,
+    "SkillMastered": skill_mastered, "FieldSkillsMastered": lambda t: field_skills(t, "upkeep"),
+    "FieldSkillsAllMastered": lambda t: field_skills(t, "all"), "HomeSeasonCheck": lambda t: main_new_hunter(t, passed=False, season=True),
+    "SeasonCheckQuestion": lambda t: skill_question(t, season=True),
 }
 
 if __name__ == "__main__":
