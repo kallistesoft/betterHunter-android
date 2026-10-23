@@ -25,13 +25,22 @@ data class PhotoOfDayState(val examId: String, val question: Question, val choic
 data class HomeUiState(
     val loading: Boolean = true,
     val hasSampleContent: Boolean = false,
+    /** New or experienced hunter: Home is built around "What is it?"; otherwise around exam practice. */
+    val hunter: Boolean = false,
+    /** "Welcome, new hunter!" after passing a real exam, until closed. */
+    val newHunterBanner: Boolean = false,
     val answeredToday: Int = 0,
     val streak: Int = 0,
-    /** First of "my exams", for "Practise now"; null hides the button. */
+    /** First of the user's exams (their home province's hunter course), for "Practise now"; null hides it. */
     val mainExam: Exam? = null,
     val trainingExamCount: Int = 0,
     /** Average readiness over the user's exams; null when they have none. */
     val readiness: Float? = null,
+    /** A real exam the user passed ("ICAF passed" on the Exam training tile). */
+    val passedExamId: String? = null,
+    /** The photo game ("Play What is it?" for hunters) and the user's readiness on it; null when hidden. */
+    val photoGameId: String? = null,
+    val photoReadiness: Float = 0f,
     val gameCount: Int = 0,
     val animalCount: Int = 0,
     val photoOfDay: PhotoOfDayState? = null,
@@ -39,7 +48,7 @@ data class HomeUiState(
     val dailyGoal: Int get() = UserProgress.DAILY_GOAL
 }
 
-/** Dashboard built around the exams the user is preparing for. */
+/** Dashboard built around the exams the user is preparing for, or around "What is it?" for hunters. */
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     contentRepository: ContentRepository,
@@ -53,20 +62,24 @@ class HomeViewModel @Inject constructor(
         featureFlags.values,
     ) { content, progress, flags ->
         val day = today()
-        val chosen = progress.myExams.orEmpty()
-        val mine = content.trainingExams.filter { it.id in chosen }
+        val mine = progress.myExamIds.mapNotNull { id -> content.trainingExams.firstOrNull { it.id == id } }
         val games = if (flags.getValue(FeatureFlag.RECOGNITION_GAMES)) content.games else emptyList()
         val photoExam = content.games.firstOrNull { it.id == PHOTO_ID_EXAM }
         val photos = photoExam?.let(content::questionsFor).orEmpty()
         HomeUiState(
             loading = false,
             hasSampleContent = content.hasSampleContent,
+            hunter = progress.isHunter,
+            newHunterBanner = progress.newHunterBanner,
             answeredToday = progress.answeredToday(day),
             streak = progress.currentStreak(day),
             mainExam = mine.firstOrNull(),
             trainingExamCount = content.trainingExams.size,
             readiness = mine.takeIf { it.isNotEmpty() }
                 ?.map { progress.readiness(content.questionsFor(it)) }?.average()?.toFloat(),
+            passedExamId = mine.firstOrNull { it.id in progress.passedExams }?.id,
+            photoGameId = photoExam?.id?.takeIf { photoExam in games },
+            photoReadiness = progress.readiness(photos),
             gameCount = games.size,
             animalCount = if (games.isEmpty()) 0 else photos.size,
             photoOfDay = photoExam?.takeIf { flags.getValue(FeatureFlag.PHOTO_OF_THE_DAY) }?.let { exam ->
@@ -74,6 +87,10 @@ class HomeViewModel @Inject constructor(
             },
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), HomeUiState())
+
+    fun dismissNewHunterBanner() {
+        viewModelScope.launch { userData.dismissNewHunterBanner() }
+    }
 
     /** Answers the photo of the day; it counts toward the goal, the streak and weak spots. */
     fun answerPhotoOfDay(choice: Int) {

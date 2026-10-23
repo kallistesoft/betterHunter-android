@@ -9,16 +9,20 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import ca.kallistesoft.hunt.core.model.Lang
+import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.feature.about.AboutScreen
-import ca.kallistesoft.hunt.feature.exams.ExamPickerScreen
 import ca.kallistesoft.hunt.feature.exams.ExamTrainingScreen
+import ca.kallistesoft.hunt.feature.exams.PassedExamScreen
+import ca.kallistesoft.hunt.feature.exams.ProvincesScreen
 import ca.kallistesoft.hunt.feature.exams.RecognitionScreen
 import ca.kallistesoft.hunt.feature.home.HomeScreen
+import ca.kallistesoft.hunt.feature.onboarding.OnboardingScreen
 import ca.kallistesoft.hunt.feature.quiz.QuizScreen
 import ca.kallistesoft.hunt.navigation.About
-import ca.kallistesoft.hunt.navigation.ExamPicker
 import ca.kallistesoft.hunt.navigation.ExamTraining
 import ca.kallistesoft.hunt.navigation.Home
+import ca.kallistesoft.hunt.navigation.PassedExam
+import ca.kallistesoft.hunt.navigation.Provinces
 import ca.kallistesoft.hunt.navigation.Quiz
 import ca.kallistesoft.hunt.navigation.Recognition
 
@@ -27,6 +31,7 @@ import ca.kallistesoft.hunt.navigation.Recognition
 fun BetterHunterApp(firstRun: Boolean, versionName: String) {
     val backStack = rememberNavBackStack(Home)
     val back: () -> Unit = { backStack.removeLastOrNull() }
+    val startQuiz: (String, QuizMode) -> Unit = { examId, mode -> backStack.add(Quiz(examId, mode)) }
 
     NavDisplay(
         backStack = backStack,
@@ -38,15 +43,15 @@ fun BetterHunterApp(firstRun: Boolean, versionName: String) {
         entryProvider = entryProvider {
             entry<Home> {
                 if (firstRun) {
-                    // First launch: choose exams; saving them turns this entry into the dashboard.
-                    ExamPickerScreen(firstRun = true, onDone = {}, onBack = {})
+                    // First launch: saving the last answer ends onboarding and turns this entry into the dashboard.
+                    OnboardingScreen(onSetLanguage = ::setAppLanguage)
                 } else {
                     HomeScreen(
                         onOpenExams = { backStack.add(ExamTraining) },
                         onOpenRecognition = { backStack.add(Recognition) },
                         onOpenAbout = { backStack.add(About) },
-                        onChangeExams = { backStack.add(ExamPicker) },
-                        onStartQuiz = { examId, mode -> backStack.add(Quiz(examId, mode)) },
+                        onOpenProvinces = { backStack.add(Provinces) },
+                        onStartQuiz = startQuiz,
                         onSetLanguage = ::setAppLanguage,
                     )
                 }
@@ -54,18 +59,36 @@ fun BetterHunterApp(firstRun: Boolean, versionName: String) {
             entry<ExamTraining> {
                 ExamTrainingScreen(
                     onBack = back,
-                    onChangeExams = { backStack.add(ExamPicker) },
-                    onStartQuiz = { examId, mode -> backStack.add(Quiz(examId, mode)) },
+                    onOpenProvinces = { backStack.add(Provinces) },
+                    onStartQuiz = startQuiz,
+                    onPassedRealExam = { examId -> backStack.add(PassedExam(examId)) },
                 )
             }
-            entry<ExamPicker> {
-                ExamPickerScreen(firstRun = false, onDone = back, onBack = back)
+            entry<Provinces> {
+                ProvincesScreen(onBack = back)
+            }
+            entry<PassedExam> { key ->
+                PassedExamScreen(
+                    examId = key.examId,
+                    // The user is now a new hunter: straight back to Home, in its new-hunter version.
+                    onConfirmed = { backStack.retainAll { it == Home } },
+                    onBack = back,
+                )
             }
             entry<Recognition> {
-                RecognitionScreen(onBack = back, onStartQuiz = { examId, mode -> backStack.add(Quiz(examId, mode)) })
+                RecognitionScreen(onBack = back, onStartQuiz = startQuiz)
             }
             entry<Quiz> { key ->
-                QuizScreen(examId = key.examId, mode = key.mode, onClose = back)
+                QuizScreen(
+                    examId = key.examId,
+                    mode = key.mode,
+                    onClose = back,
+                    // Nothing left to review: practise the same exam instead, in place of the review.
+                    onStartPractice = {
+                        backStack.removeLastOrNull()
+                        backStack.add(Quiz(key.examId, QuizMode.PRACTICE))
+                    },
+                )
             }
             entry<About> {
                 AboutScreen(versionName = versionName, onBack = back)

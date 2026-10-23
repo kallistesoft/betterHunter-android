@@ -4,12 +4,15 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ca.kallistesoft.hunt.core.data.ContentRepository
+import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.data.UserDataRepository
 import ca.kallistesoft.hunt.core.flags.FeatureFlag
 import ca.kallistesoft.hunt.core.flags.FeatureFlags
 import ca.kallistesoft.hunt.core.model.Content
+import ca.kallistesoft.hunt.core.model.Exam
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.model.QuizSession
+import ca.kallistesoft.hunt.core.model.UserProgress
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -21,6 +24,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -28,13 +32,14 @@ import kotlinx.coroutines.launch
 sealed interface QuizUiState {
     data object Loading : QuizUiState
 
-    /** Nothing to ask: no questions, or no mistakes left to review. */
-    data class Empty(val mode: QuizMode) : QuizUiState
+    /** Nothing to ask: no questions, or no mistakes left to review ([exam] null when it doesn't exist). */
+    data class Empty(val mode: QuizMode, val exam: Exam? = null) : QuizUiState
 
     /** [secondsLeft] counts down in mock exams; null otherwise. */
     data class Running(val session: QuizSession, val secondsLeft: Int?) : QuizUiState
 
-    data class Finished(val session: QuizSession, val timeUp: Boolean) : QuizUiState
+    /** [secondsLeft]: what was left on a mock exam's clock when it ended (0 when time ran out). */
+    data class Finished(val session: QuizSession, val timeUp: Boolean, val secondsLeft: Int? = null) : QuizUiState
 }
 
 /**
@@ -49,6 +54,7 @@ class QuizViewModel @AssistedInject constructor(
     private val userData: UserDataRepository,
     private val savedState: SavedStateHandle,
     featureFlags: FeatureFlags,
+    today: Today,
 ) : ViewModel() {
     @AssistedFactory
     interface Factory {
@@ -61,6 +67,11 @@ class QuizViewModel @AssistedInject constructor(
     /** "Report a problem" on each question, behind a feature flag. */
     val canReport: StateFlow<Boolean> = featureFlags.isEnabled(FeatureFlag.REPORT_QUESTION)
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), FeatureFlag.REPORT_QUESTION.defaultValue)
+
+    /** "Daily goal reached" on the results, counting every answer given today. */
+    val dailyGoalReached: StateFlow<Boolean> = userData.progress
+        .map { it.answeredToday(today()) >= UserProgress.DAILY_GOAL }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
 
     private var timer: Job? = null
 
@@ -105,7 +116,7 @@ class QuizViewModel @AssistedInject constructor(
         val session = QuizSession.start(exam, pool, mode, onlyIds = weak)
         show(
             if (session.isEmpty) {
-                QuizUiState.Empty(mode)
+                QuizUiState.Empty(mode, exam)
             } else {
                 QuizUiState.Running(session, secondsLeft = if (mode == QuizMode.EXAM) exam.minutes * 60 else null)
             },
@@ -121,7 +132,7 @@ class QuizViewModel @AssistedInject constructor(
             }
             viewModelScope.launch { userData.recordAll(results) }
         }
-        show(QuizUiState.Finished(session, timeUp))
+        show(QuizUiState.Finished(session, timeUp, secondsLeft = if (timeUp) 0 else state.secondsLeft))
     }
 
     private fun show(state: QuizUiState) {
@@ -159,7 +170,11 @@ class QuizViewModel @AssistedInject constructor(
         savedState[KEY_IDS] = session?.questions?.map { it.id }?.let { ArrayList(it) }
         savedState[KEY_ANSWERS] = session?.let { s -> IntArray(s.questions.size) { s.answers[it] ?: -1 } }
         savedState[KEY_CURRENT] = session?.current
-        savedState[KEY_SECONDS] = (state as? QuizUiState.Running)?.secondsLeft
+        savedState[KEY_SECONDS] = when (state) {
+            is QuizUiState.Running -> state.secondsLeft
+            is QuizUiState.Finished -> state.secondsLeft
+            else -> null
+        }
         savedState[KEY_FINISHED] = state is QuizUiState.Finished
         savedState[KEY_TIME_UP] = (state as? QuizUiState.Finished)?.timeUp
     }
@@ -173,7 +188,7 @@ class QuizViewModel @AssistedInject constructor(
             ?.withIndex()?.filter { it.value >= 0 }?.associate { it.index to it.value }.orEmpty()
         val session = QuizSession(exam, mode, questions, answers, savedState.get<Int>(KEY_CURRENT) ?: 0)
         return if (savedState.get<Boolean>(KEY_FINISHED) == true) {
-            QuizUiState.Finished(session, savedState.get<Boolean>(KEY_TIME_UP) == true)
+            QuizUiState.Finished(session, savedState.get<Boolean>(KEY_TIME_UP) == true, savedState.get<Int>(KEY_SECONDS))
         } else {
             QuizUiState.Running(session, savedState.get<Int>(KEY_SECONDS))
         }

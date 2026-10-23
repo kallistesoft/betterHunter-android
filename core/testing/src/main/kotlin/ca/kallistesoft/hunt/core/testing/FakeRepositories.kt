@@ -5,7 +5,10 @@ import ca.kallistesoft.hunt.core.data.UserDataRepository
 import ca.kallistesoft.hunt.core.flags.FeatureFlag
 import ca.kallistesoft.hunt.core.flags.FeatureFlags
 import ca.kallistesoft.hunt.core.model.Content
+import ca.kallistesoft.hunt.core.model.HunterType
+import ca.kallistesoft.hunt.core.model.Province
 import ca.kallistesoft.hunt.core.model.UserProgress
+import ca.kallistesoft.hunt.core.model.Weapon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
@@ -32,8 +35,20 @@ class FakeUserDataRepository(initial: UserProgress = UserProgress()) : UserDataR
         results.forEach { (id, correct) -> record(id, correct) }
     }
 
-    override suspend fun setMyExams(ids: List<String>) {
-        progress.update { it.copy(myExams = ids) }
+    override suspend fun saveProfile(type: HunterType, weapons: Set<Weapon>, home: Province) {
+        progress.update { it.withProfile(type, weapons, home) }
+    }
+
+    override suspend fun setProvince(province: Province, enabled: Boolean) {
+        progress.update { it.withProvince(province, enabled) }
+    }
+
+    override suspend fun markExamPassed(examId: String) {
+        progress.update { it.withExamPassed(examId) }
+    }
+
+    override suspend fun dismissNewHunterBanner() {
+        progress.update { it.copy(newHunterBanner = false) }
     }
 
     override suspend fun answerPhotoOfDay(questionId: String, choice: Int, correct: Boolean) {

@@ -51,4 +51,20 @@ class QuizScreenshotTest {
     @Test
     @Config(qualifiers = DARK_FR)
     fun quizResultPassedDarkFr() = compose.captureScreenshot("quiz_result_passed_dark_fr") { QuizResultPassedPreview() }
+
+    @Test
+    @Config(qualifiers = LIGHT_EN)
+    fun practiceResultLightEn() = compose.captureScreenshot("practice_result_light_en") { PracticeResultPreview() }
+
+    @Test
+    @Config(qualifiers = DARK_FR)
+    fun practiceResultDarkFr() = compose.captureScreenshot("practice_result_dark_fr") { PracticeResultPreview() }
+
+    @Test
+    @Config(qualifiers = LIGHT_EN)
+    fun nothingToReviewLightEn() = compose.captureScreenshot("nothing_to_review_light_en") { NothingToReviewPreview() }
+
+    @Test
+    @Config(qualifiers = DARK_FR)
+    fun nothingToReviewDarkFr() = compose.captureScreenshot("nothing_to_review_dark_fr") { NothingToReviewPreview() }
 }

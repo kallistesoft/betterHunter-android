@@ -2,6 +2,7 @@ package ca.kallistesoft.hunt.feature.quiz
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
+import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.flags.FeatureFlag
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.model.UserProgress
@@ -9,6 +10,7 @@ import ca.kallistesoft.hunt.core.testing.FakeContentRepository
 import ca.kallistesoft.hunt.core.testing.FakeFeatureFlags
 import ca.kallistesoft.hunt.core.testing.FakeUserDataRepository
 import ca.kallistesoft.hunt.core.testing.MainDispatcherRule
+import ca.kallistesoft.hunt.core.testing.TEST_DAY
 import ca.kallistesoft.hunt.core.testing.TestContent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -35,7 +37,7 @@ class QuizViewModelTest {
     private val flags = FakeFeatureFlags()
 
     private fun viewModel(mode: QuizMode, saved: SavedStateHandle = SavedStateHandle()) =
-        QuizViewModel(TestContent.pal.id, mode, FakeContentRepository(), userData, saved, flags)
+        QuizViewModel(TestContent.pal.id, mode, FakeContentRepository(), userData, saved, flags, Today { TEST_DAY })
 
     private val QuizUiState.running get() = this as QuizUiState.Running
 
@@ -107,6 +109,7 @@ class QuizViewModelTest {
 
             val finished = awaitItem() as QuizUiState.Finished
             assertEquals(2, finished.session.correctCount)
+            assertEquals("the time left is kept for the results", 60, finished.secondsLeft)
             cancelAndIgnoreRemainingEvents()
         }
         runCurrent()
@@ -125,6 +128,7 @@ class QuizViewModelTest {
             advanceTimeBy(59_000)
             val finished = expectMostRecentItem() as QuizUiState.Finished
             assertTrue(finished.timeUp)
+            assertEquals(0, finished.secondsLeft)
         }
     }
 
@@ -159,7 +163,7 @@ class QuizViewModelTest {
         viewModel(QuizMode.REVIEW).uiState.test {
             skipItems(1)
             runCurrent()
-            assertEquals(QuizUiState.Empty(QuizMode.REVIEW), awaitItem())
+            assertEquals(QuizUiState.Empty(QuizMode.REVIEW, TestContent.pal), awaitItem())
         }
 
         userData.progress.value = UserProgress().record("federal-2", correct = false, today = 1)
@@ -167,6 +171,17 @@ class QuizViewModelTest {
             skipItems(1)
             runCurrent()
             assertEquals(listOf("federal-2"), awaitItem().running.session.questions.map { it.id })
+        }
+    }
+
+    @Test
+    fun `results say when the daily goal is reached`() = runTest(mainDispatcherRule.testDispatcher) {
+        val vm = viewModel(QuizMode.PRACTICE)
+        vm.dailyGoalReached.test {
+            assertFalse(awaitItem())
+            userData.progress.value = (1..UserProgress.DAILY_GOAL).fold(UserProgress()) { p, i -> p.record("q$i", true, TEST_DAY) }
+            runCurrent()
+            assertTrue(awaitItem())
         }
     }
 

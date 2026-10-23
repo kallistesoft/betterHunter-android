@@ -15,22 +15,22 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | Screen | Dark | Light | In the app |
 |---|---|---|---|
 | Splash screen: the native Android splash, icon on the green | `Splash.dc.html` | `SplashLight.dc.html` | built |
-| Onboarding: what kind of hunter? (first launch) | `HunterProfile.dc.html` | `HunterProfileLight.dc.html` | not built |
-| Onboarding: what do you hunt with? (firearm, bow, crossbow) | `HuntWith.dc.html` | `HuntWithLight.dc.html` | not built |
-| Onboarding: where do you hunt? (Québec, Alberta, elsewhere in Canada) | `HuntWhere.dc.html` | `HuntWhereLight.dc.html` | not built (replaces the first-run exam picker) |
-| Home | `Main.dc.html` | `MainLight.dc.html` | built; the gear (Settings) is new |
+| Onboarding: what kind of hunter? (first launch) | `HunterProfile.dc.html` | `HunterProfileLight.dc.html` | built |
+| Onboarding: what do you hunt with? (firearm, bow, crossbow) | `HuntWith.dc.html` | `HuntWithLight.dc.html` | built |
+| Onboarding: where do you hunt? (Québec, Alberta, elsewhere in Canada) | `HuntWhere.dc.html` | `HuntWhereLight.dc.html` | built |
+| Home | `Main.dc.html` | `MainLight.dc.html` | built; the gear (Settings) waits for Settings, About keeps its icon |
 | Settings: hunter type, hunting with, where you hunt, my provinces, language, daily goal; About inside | `Settings.dc.html` | `SettingsLight.dc.html` | not built |
-| My provinces: one switch per province (Québec; Alberta; elsewhere in Canada, the PAL) adds or hides its quizzes | `Provinces.dc.html` | `ProvincesLight.dc.html` | not built (replaces "Change exams") |
+| My provinces: one switch per province (Québec; Alberta; elsewhere in Canada, the PAL) adds or hides its quizzes | `Provinces.dc.html` | `ProvincesLight.dc.html` | built (from Exam training) |
 | About | `About.dc.html` | `AboutLight.dc.html` | built, restyle |
-| Exam training | `ExamTraining.dc.html` | `ExamTrainingLight.dc.html` | built, restyle |
+| Exam training | `ExamTraining.dc.html` | `ExamTrainingLight.dc.html` | built |
 | Practice: question answered (text question, wrong answer) | `PracticeQuestion.dc.html` | `PracticeQuestionLight.dc.html` | built |
-| Practice: results | `PracticeResults.dc.html` | `PracticeResultsLight.dc.html` | built, restyle |
-| Review my mistakes: nothing to review | `NothingToReview.dc.html` | `NothingToReviewLight.dc.html` | built, restyle |
+| Practice: results | `PracticeResults.dc.html` | `PracticeResultsLight.dc.html` | built |
+| Review my mistakes: nothing to review | `NothingToReview.dc.html` | `NothingToReviewLight.dc.html` | built |
 | Mock exam: question | `ExamQuestion.dc.html` | `ExamQuestionLight.dc.html` | built |
 | Mock exam: quit this test? (dialog) | `QuitDialog.dc.html` | `QuitDialogLight.dc.html` | built |
-| Mock exam: results | `ExamResults.dc.html` | `ExamResultsLight.dc.html` | built, restyle |
-| I passed the real exam: confirm (from Exam training) | `PassedExam.dc.html` | `PassedExamLight.dc.html` | not built |
-| Home, new hunter (after passing the real exam) | `MainNewHunter.dc.html` | `MainNewHunterLight.dc.html` | not built |
+| Mock exam: results | `ExamResults.dc.html` | `ExamResultsLight.dc.html` | built |
+| I passed the real exam: confirm (from Exam training) | `PassedExam.dc.html` | `PassedExamLight.dc.html` | built |
+| Home, new hunter (after passing the real exam) | `MainNewHunter.dc.html` | `MainNewHunterLight.dc.html` | built |
 | Can you recognise them? (recognition games) | `Recognition.dc.html` | `RecognitionLight.dc.html` | built, restyle; "Tracks" and "Calls" are ideas |
 | What is it?: question | `PhotoQuiz.dc.html` | `PhotoQuizLight.dc.html` | built |
 | What is it?: photo full screen | `PhotoZoom.dc.html` | `PhotoZoomLight.dc.html` | built |
@@ -53,14 +53,14 @@ The screens added for the full app are generated: `generator/screens.py` (shared
 icons; `python3 generator/screens.py <out_dir>` writes both themes), `generator/buck.py` and `generator/logos.py` (the
 logo boards). Edit the generator, regenerate, then publish the changed files to the canvas and copy them here.
 
-**Onboarding (not built yet).** First launch, after the splash: "What kind of hunter are you?" (Working on it,
+**Onboarding (built).** First launch, after the splash: "What kind of hunter are you?" (Working on it,
 New hunter, Experienced hunter), "What do you hunt with?" (firearm, bow, crossbow; pick all that apply) and "Where do
 you hunt?" (Québec, Alberta, elsewhere in Canada), saved on the device. The province sets the quizzes of a "Working on
 it" user: Québec, the Québec hunter course (ICAF; ICAA for bow and crossbow once it has questions); Alberta, the Alberta
 course and the PAL; elsewhere, the PAL. Settings → My provinces switches other provinces on (adding their quizzes) or off. There is
 no exam list in onboarding.
 
-**Passed the real exam (not built yet).** On an exam card in Exam training, "I passed the real exam" opens a
+**Passed the real exam (built).** On an exam card in Exam training, "I passed the real exam" opens a
 confirmation on the hunter course ("Did you pass your hunter course (ICAF)?", what changes, "Yes, I passed" / "Not yet"). Confirming makes the user a
 New hunter (changeable back in Settings) and lands on Home's new-hunter version: a congratulations banner, the daily
 goal played on "What is it?", and Exam training kept as a tile ("ICAF passed") for refreshers. The example user is a Québec hunter preparing ICAF

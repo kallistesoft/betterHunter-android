@@ -3,7 +3,8 @@ package ca.kallistesoft.hunt.core.model
 import kotlinx.serialization.Serializable
 
 /**
- * Local progress: last result per question, weak spots, daily streak and goal, chosen exams, photo of the day.
+ * Local progress: last result per question, weak spots, daily streak and goal, photo of the day, and the hunter
+ * profile from onboarding (type, weapons, provinces, real exams passed).
  * Days are local calendar days since the epoch (`LocalDate.toEpochDay()`), passed in so the rules are testable.
  */
 @Serializable
@@ -17,9 +18,44 @@ data class UserProgress(
     val dayCountDay: Long? = null,
     val photoOfDayDay: Long? = null,
     val photoOfDayChoice: Int? = null,
-    /** Exams the user is preparing for; null until they've chosen (first launch shows the picker). */
-    val myExams: List<String>? = null,
+    /** Null until onboarding is done (first launch shows it). */
+    val hunterType: HunterType? = null,
+    val weapons: Set<Weapon> = emptySet(),
+    /** Where the user hunts: its quizzes come first. */
+    val homeProvince: Province? = null,
+    /** Provinces whose quizzes are shown (Settings → My provinces), the home province included. */
+    val provinces: Set<Province> = emptySet(),
+    /** Exams the user says they passed for real ("I passed the real exam"); nothing is verified. */
+    val passedExams: Set<String> = emptySet(),
+    /** The "Welcome, new hunter" banner on Home, shown after passing a real exam until it is closed. */
+    val newHunterBanner: Boolean = false,
 ) {
+    val onboarded: Boolean get() = hunterType != null && homeProvince != null
+
+    /** New and experienced hunters get the Home built around "What is it?" instead of exam practice. */
+    val isHunter: Boolean get() = hunterType != null && hunterType != HunterType.WORKING_ON_IT
+
+    /** The user's exams: the home province's first (unless switched off), then the other provinces', each once. */
+    val myExamIds: List<String>
+        get() = (listOfNotNull(homeProvince) + Province.entries).filter { it in provinces }.distinct()
+            .flatMap { it.examIds }
+            .distinct()
+
+    /** The answers to onboarding; the home province's quizzes are the only ones shown at first. */
+    fun withProfile(type: HunterType, weapons: Set<Weapon>, home: Province): UserProgress =
+        copy(hunterType = type, weapons = weapons, homeProvince = home, provinces = setOf(home))
+
+    /** Adds or hides a province's quizzes; the last province can't be switched off. */
+    fun withProvince(province: Province, enabled: Boolean): UserProgress = when {
+        enabled -> copy(provinces = provinces + province)
+        provinces == setOf(province) -> this
+        else -> copy(provinces = provinces - province)
+    }
+
+    /** "Yes, I passed": the user becomes a new hunter, welcomed by a banner on Home. */
+    fun withExamPassed(examId: String): UserProgress =
+        copy(passedExams = passedExams + examId, hunterType = HunterType.NEW_HUNTER, newHunterBanner = true)
+
     /** Questions answered today (any exam), for the daily goal. */
     fun answeredToday(today: Long): Int = if (dayCountDay == today) dayCount else 0
 

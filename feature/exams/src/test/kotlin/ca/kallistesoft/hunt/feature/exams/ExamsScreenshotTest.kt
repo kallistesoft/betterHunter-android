@@ -30,11 +30,27 @@ class ExamsScreenshotTest {
 
     @Test
     @Config(qualifiers = LIGHT_EN)
-    fun examPickerLightEn() = compose.captureScreenshot("exam_picker_light_en") { ExamPickerPreview() }
+    fun examTrainingPassedLightEn() = compose.captureScreenshot("exam_training_passed_light_en") { ExamTrainingPassedPreview() }
 
     @Test
     @Config(qualifiers = DARK_FR)
-    fun examPickerDarkFr() = compose.captureScreenshot("exam_picker_dark_fr") { ExamPickerPreview() }
+    fun examTrainingPassedDarkFr() = compose.captureScreenshot("exam_training_passed_dark_fr") { ExamTrainingPassedPreview() }
+
+    @Test
+    @Config(qualifiers = LIGHT_EN)
+    fun provincesLightEn() = compose.captureScreenshot("provinces_light_en") { ProvincesPreview() }
+
+    @Test
+    @Config(qualifiers = DARK_FR)
+    fun provincesDarkFr() = compose.captureScreenshot("provinces_dark_fr") { ProvincesPreview() }
+
+    @Test
+    @Config(qualifiers = LIGHT_EN)
+    fun passedExamLightEn() = compose.captureScreenshot("passed_exam_light_en") { PassedExamPreview() }
+
+    @Test
+    @Config(qualifiers = DARK_FR)
+    fun passedExamDarkFr() = compose.captureScreenshot("passed_exam_dark_fr") { PassedExamPreview() }
 
     @Test
     @Config(qualifiers = LIGHT_EN)
