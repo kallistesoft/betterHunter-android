@@ -82,6 +82,7 @@ dependencies {
     implementation(project(":feature:home"))
     implementation(project(":feature:onboarding"))
     implementation(project(":feature:quiz"))
+    implementation(project(":feature:settings"))
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)

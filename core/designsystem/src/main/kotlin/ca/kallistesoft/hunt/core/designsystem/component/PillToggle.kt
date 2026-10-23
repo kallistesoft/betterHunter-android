@@ -2,6 +2,7 @@ package ca.kallistesoft.hunt.core.designsystem.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -25,7 +26,10 @@ import androidx.compose.ui.semantics.semantics
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 
-/** Small pill with a few short options (FR / EN); the chosen one is filled. [description] names it for screen readers. */
+/**
+ * Small pill with a few short options (FR / EN); the chosen one is filled, in green, or with [orange] in the
+ * selection's blaze orange (a value the user picks, like the daily goal). [description] names it for screen readers.
+ */
 @Composable
 fun PillToggle(
     options: List<String>,
@@ -33,6 +37,7 @@ fun PillToggle(
     onSelect: (Int) -> Unit,
     description: String,
     modifier: Modifier = Modifier,
+    orange: Boolean = false,
 ) {
     val scheme = MaterialTheme.colorScheme
     Surface(
@@ -49,7 +54,14 @@ fun PillToggle(
                         .height(Sizes.toggleHeight)
                         .widthIn(min = Sizes.touchTarget)
                         .clip(CircleShape)
-                        .background(if (isSelected) scheme.secondaryContainer else Color.Transparent)
+                        .background(
+                            when {
+                                !isSelected -> Color.Transparent
+                                orange -> scheme.primaryContainer
+                                else -> scheme.secondaryContainer
+                            },
+                        )
+                        .then(if (isSelected && orange) Modifier.border(Sizes.border, scheme.primary, CircleShape) else Modifier)
                         .selectable(selected = isSelected, role = Role.RadioButton, onClick = { onSelect(i) })
                         .padding(horizontal = Spacing.s)
                         .testTag("toggle-$label"),

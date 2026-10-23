@@ -18,13 +18,17 @@ import ca.kallistesoft.hunt.feature.exams.RecognitionScreen
 import ca.kallistesoft.hunt.feature.home.HomeScreen
 import ca.kallistesoft.hunt.feature.onboarding.OnboardingScreen
 import ca.kallistesoft.hunt.feature.quiz.QuizScreen
+import ca.kallistesoft.hunt.feature.settings.ProfileEditScreen
+import ca.kallistesoft.hunt.feature.settings.SettingsScreen
 import ca.kallistesoft.hunt.navigation.About
+import ca.kallistesoft.hunt.navigation.EditProfile
 import ca.kallistesoft.hunt.navigation.ExamTraining
 import ca.kallistesoft.hunt.navigation.Home
 import ca.kallistesoft.hunt.navigation.PassedExam
 import ca.kallistesoft.hunt.navigation.Provinces
 import ca.kallistesoft.hunt.navigation.Quiz
 import ca.kallistesoft.hunt.navigation.Recognition
+import ca.kallistesoft.hunt.navigation.Settings
 
 /** App navigation (Navigation 3). Each entry gets its own saved state and ViewModels. */
 @Composable
@@ -50,6 +54,7 @@ fun BetterHunterApp(firstRun: Boolean, versionName: String) {
                         onOpenExams = { backStack.add(ExamTraining) },
                         onOpenRecognition = { backStack.add(Recognition) },
                         onOpenAbout = { backStack.add(About) },
+                        onOpenSettings = { backStack.add(Settings) },
                         onOpenProvinces = { backStack.add(Provinces) },
                         onStartQuiz = startQuiz,
                         onSetLanguage = ::setAppLanguage,
@@ -90,8 +95,21 @@ fun BetterHunterApp(firstRun: Boolean, versionName: String) {
                     },
                 )
             }
+            entry<Settings> {
+                SettingsScreen(
+                    versionName = versionName,
+                    onBack = back,
+                    onEdit = { field -> backStack.add(EditProfile(field)) },
+                    onOpenProvinces = { backStack.add(Provinces) },
+                    onOpenAbout = { backStack.add(About) },
+                    onSetLanguage = ::setAppLanguage,
+                )
+            }
+            entry<EditProfile> { key ->
+                ProfileEditScreen(field = key.field, onDone = back)
+            }
             entry<About> {
-                AboutScreen(versionName = versionName, onBack = back)
+                AboutScreen(onBack = back)
             }
         },
     )

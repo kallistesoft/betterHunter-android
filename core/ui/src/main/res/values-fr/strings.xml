@@ -107,7 +107,23 @@
     </plurals>
     <string name="hub_exams_refresh">Revoir les règles en tout temps</string>
 
+    <!-- Settings -->
+    <string name="settings">Paramètres</string>
+    <string name="your_profile">Votre profil</string>
+    <string name="hunter_type">Type de chasseur</string>
+    <string name="hunting_with">Vous chassez avec</string>
+    <string name="where_you_hunt_title">Où vous chassez</string>
+    <string name="my_provinces_add">%1$s · ajouter les quiz d\'autres provinces</string>
+    <string name="settings_app">Application</string>
+    <string name="daily_goal">Objectif du jour</string>
+    <string name="daily_goal_sub">Questions par jour</string>
+    <string name="about_app">À propos de BetterHunter</string>
+    <string name="about_app_sub">Fonctionnement, sources, avertissement</string>
+    <string name="version_line">BetterHunter · Version %1$s</string>
+    <string name="save">Enregistrer</string>
+
     <!-- About -->
+    <string name="label_colon">%1$s :</string>
     <string name="how_it_works">Comment ça marche</string>
     <string name="sources">Sources</string>
     <string name="photos_credit">Photos : Wikimedia Commons, sous licences libres. L\'auteur et la licence sont indiqués sous chaque photo.</string>
@@ -116,7 +132,6 @@
     <string name="privacy_url">https://kallistesoft.ca/confidentialite/</string>
     <string name="how_practice">Correction et explication après chaque question</string>
     <string name="how_exam">Chronométré, résultat à la fin, comme le vrai</string>
-    <string name="version">Version %1$s</string>
     <string name="disclaimer">Outil d\'étude indépendant, non affilié à la GRC, au Programme canadien des armes à feu, au gouvernement du Québec ni à la FédéCP, et non approuvé par eux. Les questions sont des questions de pratique originales, rédigées à partir des manuels officiels; ce ne sont pas les questions des examens officiels. Des erreurs sont possibles et les lois changent : vérifiez toujours dans le manuel officiel et la réglementation en vigueur. Aucune garantie de réussite.</string>
 
     <!-- Exams -->

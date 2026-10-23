@@ -46,4 +46,30 @@ class HunterProfileTest {
         assertTrue(p.isHunter)
         assertEquals(listOf("ICAF"), p.myExamIds) // the exam stays available for refreshers
     }
+
+    @Test
+    fun `settings change the profile without losing the provinces added`() {
+        val p = quebecer.withProvince(Province.OTHER, true).withHomeProvince(Province.AB)
+        assertEquals(Province.AB, p.homeProvince)
+        assertEquals(listOf("ABHE", "PAL", "ICAF"), p.myExamIds)
+        assertEquals(setOf(Weapon.BOW), p.withWeapons(setOf(Weapon.BOW)).weapons)
+        assertEquals(p, p.withWeapons(emptySet())) // at least one weapon
+    }
+
+    @Test
+    fun `going back to working on it drops the new-hunter welcome`() {
+        val hunter = quebecer.withExamPassed("ICAF")
+        assertTrue(hunter.withHunterType(HunterType.NEW_HUNTER).newHunterBanner)
+        val back = hunter.withHunterType(HunterType.WORKING_ON_IT)
+        assertFalse(back.isHunter)
+        assertFalse(back.newHunterBanner)
+        assertEquals(setOf("ICAF"), back.passedExams)
+    }
+
+    @Test
+    fun `the daily goal is one of the offered values`() {
+        assertEquals(UserProgress.DEFAULT_DAILY_GOAL, quebecer.dailyGoal)
+        assertEquals(30, quebecer.withDailyGoal(30).dailyGoal)
+        assertEquals(quebecer, quebecer.withDailyGoal(7))
+    }
 }

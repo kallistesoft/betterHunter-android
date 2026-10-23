@@ -33,7 +33,7 @@ only worth it for an admin page, accounts or server-side features.
 **P5. Quiz rules.** *Product.* Practice and review: 20 questions, answer final, explanation at once, recorded right
 away. Mock exam: the exam's question count, timer and pass mark from `exams.json`; answers can change and are recorded
 at the end; time up ends it. Review uses only the user's mistakes; a mistake clears after 2 correct answers in a row.
-Daily goal 20 questions; the streak counts consecutive days with at least one answer. Photo of the day: the same photo
+Daily goal 20 questions by default (10, 20 or 30 in Settings); the streak counts consecutive days with at least one answer. Photo of the day: the same photo
 for everyone, chosen by the day number. Rules and tests: `core/model` (`QuizSession`, `UserProgress`).
 
 **P6. Force update.** *Product.* A minimum build number (per platform) blocks older builds with an "Update required"
@@ -83,7 +83,7 @@ course is what turns a user into a New hunter.
 ICAA (bow and crossbow) is shown as coming soon until it has questions. *In the app (2026-10-23):* onboarding asks the three questions (no exam picker), the profile and the
 provinces are in `UserProgress` (`myExamIds`: home province first), hunter courses come before the PAL (`ExamGroup`
 order), My provinces is reached from Exam training, and "Yes, I passed" makes a New hunter with Home's new-hunter
-version. Settings (hunter type, weapons, where you hunt) is not built yet.
+version. Settings changes each answer (hunter type, weapons, where you hunt), My provinces and the daily goal.
 
 ## Design
 

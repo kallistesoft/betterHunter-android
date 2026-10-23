@@ -51,6 +51,22 @@ class FakeUserDataRepository(initial: UserProgress = UserProgress()) : UserDataR
         progress.update { it.copy(newHunterBanner = false) }
     }
 
+    override suspend fun setHunterType(type: HunterType) {
+        progress.update { it.withHunterType(type) }
+    }
+
+    override suspend fun setWeapons(weapons: Set<Weapon>) {
+        progress.update { it.withWeapons(weapons) }
+    }
+
+    override suspend fun setHomeProvince(province: Province) {
+        progress.update { it.withHomeProvince(province) }
+    }
+
+    override suspend fun setDailyGoal(goal: Int) {
+        progress.update { it.withDailyGoal(goal) }
+    }
+
     override suspend fun answerPhotoOfDay(questionId: String, choice: Int, correct: Boolean) {
         recorded += questionId to correct
         progress.update { it.withPhotoOfDayChoice(choice, TEST_DAY).record(questionId, correct, TEST_DAY) }

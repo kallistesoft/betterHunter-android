@@ -12,7 +12,6 @@ import ca.kallistesoft.hunt.core.model.Content
 import ca.kallistesoft.hunt.core.model.Exam
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.model.QuizSession
-import ca.kallistesoft.hunt.core.model.UserProgress
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -70,7 +69,7 @@ class QuizViewModel @AssistedInject constructor(
 
     /** "Daily goal reached" on the results, counting every answer given today. */
     val dailyGoalReached: StateFlow<Boolean> = userData.progress
-        .map { it.answeredToday(today()) >= UserProgress.DAILY_GOAL }
+        .map { it.answeredToday(today()) >= it.dailyGoal }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
 
     private var timer: Job? = null

@@ -179,7 +179,7 @@ class QuizViewModelTest {
         val vm = viewModel(QuizMode.PRACTICE)
         vm.dailyGoalReached.test {
             assertFalse(awaitItem())
-            userData.progress.value = (1..UserProgress.DAILY_GOAL).fold(UserProgress()) { p, i -> p.record("q$i", true, TEST_DAY) }
+            userData.progress.value = (1..UserProgress.DEFAULT_DAILY_GOAL).fold(UserProgress()) { p, i -> p.record("q$i", true, TEST_DAY) }
             runCurrent()
             assertTrue(awaitItem())
         }
