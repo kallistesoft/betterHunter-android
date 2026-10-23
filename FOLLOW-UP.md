@@ -68,6 +68,7 @@ plan by 2026-11-15 to keep scaling past the free limits. At this app's size the 
     | `photo_of_the_day` | Photo of the day on the dashboard |
     | `recognition_games` | "Can you recognise them?" hub and games |
     | `report_question` | "Report a problem" on each question |
+    | `ads_enabled` | Interstitial after a finished test (off: no ads) |
 
     Then the force-update minimum (see the README, "Force update"): two parameters, **Data type: Number**,
     **Default value: 0**:
@@ -98,8 +99,15 @@ plan by 2026-11-15 to keep scaling past the free limits. At this app's size the 
 ## 2. AdMob (ads)
 
 Play Console already declares that the app contains ads (AdMob) and uses the advertising ID: the first release will
-include them. The ads aren't in the app yet: these steps create everything AdMob needs, and give the IDs that go into the code. The planned placement, as in
-the Flutter prototype, is one **interstitial between a finished test and its results**, never during a question.
+include them. The placement, as in the Flutter prototype, is one **interstitial between a finished test and its
+results**, never during a question.
+
+**Status (2026-10-23).** The AdMob account, the app **BetterHunter** (App ID `ca-app-pub-7557144664039757~4450187296`)
+and the interstitial ad unit **Quiz finished** (`ca-app-pub-7557144664039757/7902432864`, frequency cap 1 per
+3 minutes) are created, and the code is in the app (step 20). The real IDs are in `app/build.gradle.kts`
+(`admobRelease`), used by release builds only. Still to do: steps 2 (payments and tax, if not finished), 4 (link the
+app to Play once it's published), 11-12 (app-ads.txt), 13-17 (consent messages, privacy policy, ad content) and 18
+(test device).
 
 ### Create the account
 
@@ -129,8 +137,8 @@ the Flutter prototype, is one **interstitial between a finished test and its res
 
 ### app-ads.txt
 
-10. **Apps** → **View all apps** → **app-ads.txt** column → **How to set up app-ads.txt**: copy the line, which looks
-    like `google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0`.
+10. **Apps** → **View all apps** → **app-ads.txt** column → **How to set up app-ads.txt**: copy the line. For
+    KallisteSoft it is `google.com, pub-7557144664039757, DIRECT, f08c47fec0942fa0`.
 11. Publish it at **https://kallistesoft.ca/app-ads.txt** (the root of the developer website given in the Play
     listing; not on a subdomain). Plain text, one line per ad network.
 12. AdMob checks the file after the app is linked to Play; verification can take a few days. Without it, ads are
@@ -154,15 +162,20 @@ the Flutter prototype, is one **interstitial between a finished test and its res
 
 18. **Settings** → **Test devices** → **Add test device**: your phone, with its advertising ID (Android settings →
     Google → Ads). Never tap real ads in your own app.
-19. Debug builds will use Google's sample IDs, which always serve test ads:
+19. Debug (and qa) builds use Google's sample IDs, which always serve test ads:
     App ID `ca-app-pub-3940256099942544~3347511713`, interstitial `ca-app-pub-3940256099942544/1033173712`.
 
-### Hand over
+### Hand over (done)
 
-20. Send the **App ID** (step 6) and the **interstitial ad unit ID** (step 9). The code work then is: add the
-    Google Mobile Ads SDK and the UMP consent SDK, the App ID in the manifest, the ad unit per build type (test IDs in
-    debug), the consent form at launch, and the interstitial after a finished test. An `ads_enabled` Remote Config
-    flag can switch ads off without a release.
+20. ~~Send the App ID and the interstitial ad unit ID.~~ Done 2026-10-23, and the code work is in the app: the Google
+    Mobile Ads SDK and the UMP consent SDK, the App ID in the manifest and the ad unit per build type (test IDs in
+    debug and qa), the consent form at launch (and "Privacy options" in Settings where required), the interstitial
+    after a finished test, and the `ads_enabled` Remote Config flag. How it works: README, "Ads (AdMob)".
+21. In Firebase → Remote Config, add the Boolean parameter `ads_enabled` (default **true**, description "Interstitial
+    after a finished test"), next to the other flags (section 1, step 14), and publish. Set it to false to stop ads
+    without a release.
+22. If the IDs ever change, they are two lines in `app/build.gradle.kts` (`admobRelease`). Debug and qa keep the
+    sample IDs.
 
 ---
 

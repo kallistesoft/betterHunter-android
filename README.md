@@ -34,7 +34,8 @@ monetization): [IDEAS.md](IDEAS.md). Decisions and why: [DECISIONS.md](DECISIONS
 ```
 app/                 Activity, Navigation 3 graph, Hilt app, build types and signing
 core/model           Pure Kotlin: exams, questions, quiz session, progress rules, sources (JVM unit tests)
-core/testing         Test doubles (fake repositories and flags, sample content), main dispatcher rule, Turbine helpers
+core/testing         Test doubles (fake repositories, flags and ads, sample content), main dispatcher rule, Turbine helpers
+core/ads             AdMob: consent (UMP), the interstitial after a finished test, behind InterstitialAds / AdConsent
 core/data            Bundled content (assets/), progress repository (DataStore)
 core/designsystem    Theme (the mockup's palette, Barlow fonts), shared components
 core/flags           Feature flags: Firebase Remote Config, with in-app defaults
@@ -113,6 +114,27 @@ To force everyone onto a new release: publish it on Play, wait until it is avail
 its `versionCode` in the Firebase console and publish. Use `min_version_code_debug` to try the flow on a debug build
 without affecting users. Setup: [FOLLOW-UP.md](FOLLOW-UP.md), section 1.
 
+## Ads (AdMob)
+
+One interstitial after a finished test (practice, mock exam, review, recognition game), before its results, never
+during a question (DECISIONS.md, P8). `:core:ads` holds the rules (`AdsManager`) behind two interfaces:
+`InterstitialAds` (the quiz calls `showBeforeResults()` after the last answer) and `AdConsent` (consent at launch,
+"Privacy options" in Settings). Tests use `FakeInterstitialAds` and `FakeAdConsent` from `:core:testing`.
+
+- **Consent first.** At each launch `MainActivity` asks Google's User Messaging Platform (UMP) for the consent
+  information and shows its form where required (EEA, UK, Switzerland, some US states). Mobile Ads is initialised and
+  the first ad loaded only once `canRequestAds()` is true. Settings shows **Privacy options** while UMP says the
+  privacy options are `REQUIRED`.
+- **Preloaded.** The interstitial is loaded in advance; if none is ready (no fill, offline, still loading) the results
+  show at once and the next one loads. A loaded ad older than an hour is dropped.
+- **Capped.** At most one every 3 minutes in the app (the AdMob ad unit has the same frequency cap).
+- **Switch.** `ads_enabled` (Remote Config) turns ads off without a release.
+
+**IDs.** In `app/build.gradle.kts` (`admobRelease`, `admobTest`): the AdMob App ID goes in the manifest through the
+`admobAppId` placeholder, the ad unit in `BuildConfig.ADMOB_INTERSTITIAL_ID`. Only `release` uses the real IDs;
+`debug` and `qa` (emulators, smoke tests) always use Google's sample IDs, which only serve test ads. Never tap a real
+ad in the app.
+
 ## Feature flags (Firebase Remote Config)
 
 Flags are Boolean Remote Config parameters, declared in `core/flags/.../FeatureFlag.kt` with their in-app default:
@@ -122,6 +144,7 @@ Flags are Boolean Remote Config parameters, declared in `core/flags/.../FeatureF
 | `photo_of_the_day` | `true` | The photo of the day on the dashboard |
 | `recognition_games` | `true` | The "Can you recognise them?" hub |
 | `report_question` | `true` | "Report a problem" on each question |
+| `ads_enabled` | `true` | The interstitial after a finished test (off: no ad loaded or shown) |
 
 ViewModels read them as a `Flow` (`FeatureFlags.isEnabled(flag)` or `values`), so screens update as soon as new values
 are activated: at launch and on each return to the foreground (`fetchAndActivate`, at most hourly in release, every time
@@ -226,5 +249,4 @@ answer, photos present with their credit). Image paths in the banks are written
 
 ## Not done yet
 
-- AdMob: declared in Play Console, not integrated yet. The account and ad unit setup is in [FOLLOW-UP.md](FOLLOW-UP.md).
 - Baseline profile (`profileinstaller` is in place; add a `:baselineprofile` module with a device in CI).

@@ -20,6 +20,23 @@ val keystoreProperties = Properties().apply {
 
 fun signingValue(key: String, env: String): String? = keystoreProperties.getProperty(key) ?: System.getenv(env)
 
+// AdMob IDs (FOLLOW-UP.md, section 2). Public identifiers, not secrets. Only the release build serves real ads;
+// debug and qa (emulators, smoke tests) always use Google's sample IDs, which serve test ads only.
+val admobRelease = mapOf(
+    "appId" to "ca-app-pub-7557144664039757~4450187296", // AdMob app "BetterHunter"
+    "interstitial" to "ca-app-pub-7557144664039757/7902432864", // Ad unit "Quiz finished" (cap: 1 per 3 minutes)
+)
+val admobTest = mapOf(
+    "appId" to "ca-app-pub-3940256099942544~3347511713",
+    "interstitial" to "ca-app-pub-3940256099942544/1033173712",
+)
+
+/** The AdMob App ID goes in the manifest (`${admobAppId}`), the interstitial's ad unit in BuildConfig. */
+fun com.android.build.api.dsl.ApplicationBuildType.admob(ids: Map<String, String>) {
+    manifestPlaceholders["admobAppId"] = ids.getValue("appId")
+    buildConfigField("String", "ADMOB_INTERSTITIAL_ID", "\"${ids.getValue("interstitial")}\"")
+}
+
 android {
     namespace = "ca.kallistesoft.hunt"
 
@@ -54,6 +71,7 @@ android {
             // Installs next to the Play version, with its own name and update rules.
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
+            admob(admobTest)
         }
         release {
             isMinifyEnabled = true
@@ -61,6 +79,7 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             // Unsigned when no keystore is configured (e.g. pull requests); Play App Signing re-signs uploads.
             signingConfig = signingConfigs.findByName("release")
+            admob(admobRelease)
         }
         // The release build (R8, shrinking, release code) signed with the debug key, so the release smoke test
         // (:smoketest) can install it on an emulator. Never uploaded.
@@ -68,6 +87,8 @@ android {
             initWith(getByName("release"))
             signingConfig = signingConfigs.getByName("debug")
             matchingFallbacks += "release"
+            // Installed on emulators by the smoke test: never request real ads from it.
+            admob(admobTest)
         }
     }
 
@@ -93,6 +114,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:ads"))
     implementation(project(":core:data"))
     implementation(project(":core:designsystem"))
     implementation(project(":core:flags"))

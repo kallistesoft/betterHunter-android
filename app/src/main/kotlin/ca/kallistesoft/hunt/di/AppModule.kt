@@ -1,6 +1,7 @@
 package ca.kallistesoft.hunt.di
 
 import ca.kallistesoft.hunt.BuildConfig
+import ca.kallistesoft.hunt.core.ads.AdsConfig
 import ca.kallistesoft.hunt.core.flags.FeatureFlagSettings
 import ca.kallistesoft.hunt.core.update.ForceUpdateSettings
 import dagger.Module
@@ -21,4 +22,8 @@ object AppModule {
     @Provides
     fun featureFlagSettings(config: BuildTypeConfig) =
         FeatureFlagSettings(minimumFetchIntervalSeconds = config.featureFlagFetchIntervalSeconds)
+
+    /** The interstitial's ad unit: Google's test unit except in release builds (app/build.gradle.kts). */
+    @Provides
+    fun adsConfig() = AdsConfig(interstitialUnitId = BuildConfig.ADMOB_INTERSTITIAL_ID)
 }

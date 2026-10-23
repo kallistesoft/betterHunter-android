@@ -9,6 +9,7 @@ android {
 
 // Shared test doubles, rules and screenshot helpers (testImplementation in the modules that use them).
 dependencies {
+    api(project(":core:ads"))
     api(project(":core:data"))
     api(project(":core:designsystem"))
     api(project(":core:flags"))

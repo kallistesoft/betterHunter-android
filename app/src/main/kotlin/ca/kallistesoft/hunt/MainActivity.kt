@@ -16,16 +16,20 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.NavKey
+import ca.kallistesoft.hunt.core.ads.AdConsent
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.update.ForceUpdateScreen
 import ca.kallistesoft.hunt.feature.quiz.quizShortcutGroup
 import ca.kallistesoft.hunt.navigation.ReminderLink
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /** Single activity. AppCompat only provides the per-app language API; the UI is all Compose. */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainActivityViewModel by viewModels()
+
+    @Inject lateinit var adConsent: AdConsent
 
     /** The back stack a reminder's notification asks for, until the app has opened it. */
     private var deepLink by mutableStateOf<List<NavKey>?>(null)
@@ -37,6 +41,8 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) deepLink = ReminderLink.backStack(intent)
         splash.setKeepOnScreenCondition { viewModel.uiState.value is MainUiState.Loading }
         enableEdgeToEdge()
+        // Ads consent (UMP) on each launch: the form shows only where it's required; ads start once allowed.
+        adConsent.gatherConsent(this)
 
         setContent {
             val state by viewModel.uiState.collectAsStateWithLifecycle()

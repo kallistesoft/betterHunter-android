@@ -2,6 +2,7 @@ package ca.kallistesoft.hunt.feature.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ca.kallistesoft.hunt.core.ads.AdConsent
 import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.data.UserDataRepository
 import ca.kallistesoft.hunt.core.model.HunterType
@@ -34,6 +35,8 @@ data class SettingsUiState(
     val notificationsBlocked: Boolean = false,
     /** When reminders come, in minutes after midnight. */
     val reminderMinute: Int = UserProgress.DEFAULT_PLAY_MINUTE,
+    /** The ads consent can be changed (the user's region requires it): "Privacy options" shows. */
+    val privacyOptions: Boolean = false,
 ) {
     /** Some provinces aren't added yet: My provinces invites to add their quizzes. */
     val canAddProvinces: Boolean get() = provinces.size < Province.entries.size
@@ -41,11 +44,19 @@ data class SettingsUiState(
 
 /** Settings: the profile from onboarding, the app's language and daily goal, and About. */
 @HiltViewModel
-class SettingsViewModel @Inject constructor(private val userData: UserDataRepository, private val today: Today) : ViewModel() {
+class SettingsViewModel @Inject constructor(
+    private val userData: UserDataRepository,
+    private val today: Today,
+    private val adConsent: AdConsent,
+) : ViewModel() {
     /** Whether notifications can come, checked by the screen each time it resumes (they can be turned off outside). */
     private val notificationsAllowed = MutableStateFlow(true)
 
-    val uiState: StateFlow<SettingsUiState> = combine(userData.progress, notificationsAllowed) { p, allowed ->
+    val uiState: StateFlow<SettingsUiState> = combine(
+        userData.progress,
+        notificationsAllowed,
+        adConsent.privacyOptionsRequired,
+    ) { p, allowed, privacyOptions ->
         SettingsUiState(
             p.hunterType, p.weapons, p.homeProvince, p.provinces, p.dailyGoal,
             loading = false,
@@ -55,6 +66,7 @@ class SettingsViewModel @Inject constructor(private val userData: UserDataReposi
             seasonReminders = p.seasonReminders && allowed,
             notificationsBlocked = !allowed && (p.dailyReminders || p.seasonReminders),
             reminderMinute = p.reminderMinute,
+            privacyOptions = privacyOptions,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), SettingsUiState())
 
@@ -69,6 +81,9 @@ class SettingsViewModel @Inject constructor(private val userData: UserDataReposi
     fun setSeasonReminders(enabled: Boolean) {
         viewModelScope.launch { userData.setSeasonReminders(enabled) }
     }
+
+    /** The ads consent form again (UMP), over Settings. */
+    fun showPrivacyOptions() = adConsent.showPrivacyOptions()
 
     fun setDailyGoal(goal: Int) {
         viewModelScope.launch { userData.setDailyGoal(goal) }
