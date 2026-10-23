@@ -11,13 +11,15 @@ implements it in `core/designsystem` (theme, components) and the feature screens
 
 | Screen | Dark | Light |
 |---|---|---|
+| Splash screen (launch, taps through to onboarding) | `Splash.dc.html` | `SplashLight.dc.html` |
 | Home | `Main.dc.html` | `MainLight.dc.html` |
 | What is it? (question) | `PhotoQuiz.dc.html` | `PhotoQuizLight.dc.html` |
 | What is it? (answer) | `PhotoAnswer.dc.html` | `PhotoAnswerLight.dc.html` |
 | Mock exam (question) | `ExamQuestion.dc.html` | `ExamQuestionLight.dc.html` |
 | Onboarding: what kind of hunter? (first launch, after the splash screen) | `HunterProfile.dc.html` | `HunterProfileLight.dc.html` |
 
-Phone frames are 390×844. Dark screens are the top row of the canvas, light screens the row below.
+Phone frames are 390×844. Dark screens are the top row of the canvas, light screens the row below, in the order of
+the flow: splash, onboarding, home, then the quizzes. Screens link to each other (click through them on the canvas).
 
 **Onboarding (not built yet).** Step 1 of 2 on first launch, before the exam picker: "What kind of hunter are you?"
 with three choices (Working on it: preparing for the licence or hunter course; New hunter: licensed, a few seasons;
@@ -26,11 +28,13 @@ changed later.
 
 ## Photos
 
-The screens reference photos uploaded to the canvas (`/_blob/<id>` URLs), copied from `content/wildlife-id/photos/` in the [hunt](https://github.com/kallistesoft/hunt) repo:
+The screens reference photos uploaded to the canvas (`/_blob/<id>` URLs), copied from `content/wildlife-id/photos/` in the [hunt](https://github.com/kallistesoft/hunt) repo (and the
+splash screen's deer, from this repo):
 
 | Blob id | Photo |
 |---|---|
 | `876ea656307e18bff50cd003ae123e81` | `white-tailed-deer.jpg` |
+| `1d7af3f152d0eb25bf4d048cbff96b7f` | the app icon's deer (`app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png`, this repo) |
 | `38c860d8b4e20555914ef4c9812cbd55` | `mule-deer.jpg` |
 | `ed3939a5023b68655218c7345bb481dd` | `moose.jpg` |
 
@@ -43,6 +47,7 @@ Corners: 22 px large cards, 16–20 px tiles and choices, 14 px buttons. Touch t
 
 | Role | Dark | Light |
 |---|---|---|
+| Splash background (the icon's green) | `#1F4229` | `#2D5B38` |
 | Background | `#0E1611` | `#F5F2EA` |
 | Card | `#17221A` | `#FFFFFF` |
 | Card border / divider | `#24352A` | `#E6E1D5` |
