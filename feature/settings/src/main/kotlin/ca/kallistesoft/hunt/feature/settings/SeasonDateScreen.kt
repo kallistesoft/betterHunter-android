@@ -31,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -72,7 +73,7 @@ import java.util.Locale
 @Composable
 fun SeasonDateScreen(onDone: () -> Unit, viewModel: SeasonDateViewModel = hiltViewModel()) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
-    LaunchedEffect(state.done) { if (state.done) onDone() }
+    if (state.done) LaunchedEffect(Unit) { onDone() }
     val askPermission = rememberNotificationPermission(viewModel::answerReminders)
     SeasonDateContent(
         state,
@@ -157,6 +158,9 @@ private fun Calendar(state: SeasonDateUiState, onPick: (Long) -> Unit) {
     val month = YearMonth.from(LocalDate.ofEpochDay(shown))
     val firstDay = WeekFields.of(locale).firstDayOfWeek
     val lead = (month.atDay(1).dayOfWeek.value - firstDay.value + 7) % 7
+    val title = remember(month, locale) {
+        month.atDay(1).format(DateTimeFormatter.ofPattern("LLLL yyyy", locale)).replaceFirstChar { it.titlecase(locale) }
+    }
     val scheme = MaterialTheme.colorScheme
     BhCard(Modifier.testTag("calendar")) {
         Column(Modifier.padding(Spacing.l), verticalArrangement = Arrangement.spacedBy(Spacing.s)) {
@@ -169,7 +173,7 @@ private fun Calendar(state: SeasonDateUiState, onPick: (Long) -> Unit) {
                     modifier = Modifier.testTag("calendar-prev"),
                 )
                 Text(
-                    month.atDay(1).format(DateTimeFormatter.ofPattern("LLLL yyyy", locale)).replaceFirstChar { it.titlecase(locale) },
+                    title,
                     style = MaterialTheme.typography.titleMedium,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.weight(1f),

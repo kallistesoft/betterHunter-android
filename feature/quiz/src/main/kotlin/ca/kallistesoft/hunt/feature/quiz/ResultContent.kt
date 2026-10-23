@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -49,13 +50,16 @@ import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Exam
+import ca.kallistesoft.hunt.core.model.Lang
 import ca.kallistesoft.hunt.core.model.Question
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.ui.BackTopAppBar
+import ca.kallistesoft.hunt.core.ui.LinkOpener
 import ca.kallistesoft.hunt.core.ui.PhotoThumb
 import ca.kallistesoft.hunt.core.ui.R
 import ca.kallistesoft.hunt.core.ui.SourceLinks
 import ca.kallistesoft.hunt.core.ui.currentLang
+import ca.kallistesoft.hunt.core.ui.rememberLinkOpener
 import kotlin.math.roundToInt
 
 /**
@@ -73,6 +77,8 @@ internal fun ResultContent(
 ) {
     val s = state.session
     val lang = currentLang()
+    val links = rememberLinkOpener()
+    val inspection = LocalInspectionMode.current
     val isExam = s.mode == QuizMode.EXAM
     val success = BetterHunterTheme.extendedColors.success
     val error = MaterialTheme.colorScheme.error
@@ -168,26 +174,31 @@ internal fun ResultContent(
             if (missed.isEmpty()) {
                 item { Text(stringResource(R.string.all_correct), Modifier.fillMaxWidth()) }
             }
-            items(missed, key = { it.first.id }) { (q, picked) -> MissedCard(q, picked) }
+            items(missed, key = { it.first.id }, contentType = { "missed" }) { (q, picked) ->
+                MissedCard(q, picked, lang, links, inspection)
+            }
         }
     }
 }
 
-/** A missed question: the user's answer, the right one, why, and its source. */
+/**
+ * A missed question: the user's answer, the right one, why, and its source. [lang], [links] and [inspection] are read
+ * once by the list, not once per card.
+ */
 @Composable
-internal fun MissedCard(q: Question, picked: Int?) {
-    val text = q.text(currentLang())
+internal fun MissedCard(q: Question, picked: Int?, lang: Lang, links: LinkOpener, inspection: Boolean) {
+    val text = q.text(lang)
     val success = BetterHunterTheme.extendedColors.success
     BhCard(Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.medium) {
         Column(Modifier.padding(Spacing.l), verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
-            q.image?.let { PhotoThumb(it, Modifier.padding(bottom = Spacing.xs)) }
+            q.image?.let { PhotoThumb(it, Modifier.padding(bottom = Spacing.xs), inspection) }
             Text(text.q, style = MaterialTheme.typography.titleSmall)
             picked?.let {
                 AnswerLine(Icons.Rounded.Close, stringResource(R.string.your_answer, text.choices[it]), MaterialTheme.colorScheme.error)
             }
             AnswerLine(Icons.Rounded.Check, stringResource(R.string.answer, text.choices[q.answerIndex]), success, bold = true)
             Text(text.explanation, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            SourceLinks(q)
+            SourceLinks(q, lang = lang, links = links)
         }
     }
 }

@@ -2,8 +2,12 @@ package ca.kallistesoft.hunt
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
+import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
@@ -30,19 +34,47 @@ import ca.kallistesoft.hunt.navigation.ExamTraining
 import ca.kallistesoft.hunt.navigation.FieldQuiz
 import ca.kallistesoft.hunt.navigation.FieldSkills
 import ca.kallistesoft.hunt.navigation.Home
+import ca.kallistesoft.hunt.navigation.Onboarding
 import ca.kallistesoft.hunt.navigation.PassedExam
 import ca.kallistesoft.hunt.navigation.Provinces
 import ca.kallistesoft.hunt.navigation.Quiz
 import ca.kallistesoft.hunt.navigation.Recognition
 import ca.kallistesoft.hunt.navigation.SeasonDate
 import ca.kallistesoft.hunt.navigation.Settings
+import ca.kallistesoft.hunt.navigation.push
 
-/** App navigation (Navigation 3). Each entry gets its own saved state and ViewModels. */
+/**
+ * App navigation (Navigation 3). Each entry gets its own saved state and ViewModels. [deepLink] (a reminder's
+ * notification) replaces the back stack, then [onDeepLinkOpened] clears it.
+ */
 @Composable
-fun BetterHunterApp(firstRun: Boolean, versionName: String) {
-    val backStack = rememberNavBackStack(Home)
+fun BetterHunterApp(
+    firstRun: Boolean,
+    versionName: String,
+    deepLink: List<NavKey>? = null,
+    onDeepLinkOpened: () -> Unit = {},
+) {
+    val backStack = rememberNavBackStack(if (firstRun) Onboarding else Home)
+    val currentFirstRun by rememberUpdatedState(firstRun)
+    LaunchedEffect(deepLink) {
+        val keys = deepLink ?: return@LaunchedEffect
+        // Reminders are for new hunters past onboarding; while onboarding shows, the link is dropped.
+        if (!currentFirstRun) {
+            backStack.clear()
+            backStack.addAll(keys)
+        }
+        onDeepLinkOpened()
+    }
     val back: () -> Unit = { backStack.removeLastOrNull() }
-    val startQuiz: (String, QuizMode) -> Unit = { examId, mode -> backStack.add(Quiz(examId, mode)) }
+    val startQuiz: (String, QuizMode) -> Unit = { examId, mode -> backStack.push(Quiz(examId, mode)) }
+
+    // Saving the last onboarding answer ends the first run: the dashboard replaces onboarding.
+    if (!firstRun && Onboarding in backStack) {
+        LaunchedEffect(Unit) {
+            backStack.clear()
+            backStack.add(Home)
+        }
+    }
 
     NavDisplay(
         backStack = backStack,
@@ -52,27 +84,25 @@ fun BetterHunterApp(firstRun: Boolean, versionName: String) {
             rememberViewModelStoreNavEntryDecorator(),
         ),
         entryProvider = entryProvider {
+            entry<Onboarding> {
+                OnboardingScreen(onSetLanguage = ::setAppLanguage)
+            }
             entry<Home> {
-                if (firstRun) {
-                    // First launch: saving the last answer ends onboarding and turns this entry into the dashboard.
-                    OnboardingScreen(onSetLanguage = ::setAppLanguage)
-                } else {
-                    HomeScreen(
-                        onOpenExams = { backStack.add(ExamTraining) },
-                        onOpenRecognition = { backStack.add(Recognition) },
-                        onOpenAbout = { backStack.add(About) },
-                        onOpenSettings = { backStack.add(Settings) },
-                        onOpenProvinces = { backStack.add(Provinces) },
-                        onStartQuiz = startQuiz,
-                        onSetLanguage = ::setAppLanguage,
-                        onOpenFieldSkills = { backStack.add(FieldSkills) },
-                        onStartField = { run -> backStack.add(FieldQuiz(run)) },
-                        onOpenSeasonDate = { backStack.add(SeasonDate) },
-                    )
-                }
+                HomeScreen(
+                    onOpenExams = { backStack.push(ExamTraining) },
+                    onOpenRecognition = { backStack.push(Recognition) },
+                    onOpenAbout = { backStack.push(About) },
+                    onOpenSettings = { backStack.push(Settings) },
+                    onOpenProvinces = { backStack.push(Provinces) },
+                    onStartQuiz = startQuiz,
+                    onSetLanguage = ::setAppLanguage,
+                    onOpenFieldSkills = { backStack.push(FieldSkills) },
+                    onStartField = { run -> backStack.push(FieldQuiz(run)) },
+                    onOpenSeasonDate = { backStack.push(SeasonDate) },
+                )
             }
             entry<FieldSkills> {
-                FieldSkillsScreen(onBack = back, onStart = { run, skill -> backStack.add(FieldQuiz(run, skill)) })
+                FieldSkillsScreen(onBack = back, onStart = { run, skill -> backStack.push(FieldQuiz(run, skill)) })
             }
             entry<FieldQuiz> { key ->
                 FieldQuizScreen(
@@ -92,9 +122,9 @@ fun BetterHunterApp(firstRun: Boolean, versionName: String) {
             entry<ExamTraining> {
                 ExamTrainingScreen(
                     onBack = back,
-                    onOpenProvinces = { backStack.add(Provinces) },
+                    onOpenProvinces = { backStack.push(Provinces) },
                     onStartQuiz = startQuiz,
-                    onPassedRealExam = { examId -> backStack.add(PassedExam(examId)) },
+                    onPassedRealExam = { examId -> backStack.push(PassedExam(examId)) },
                 )
             }
             entry<Provinces> {
@@ -127,11 +157,11 @@ fun BetterHunterApp(firstRun: Boolean, versionName: String) {
                 SettingsScreen(
                     versionName = versionName,
                     onBack = back,
-                    onEdit = { field -> backStack.add(EditProfile(field)) },
-                    onOpenProvinces = { backStack.add(Provinces) },
-                    onOpenAbout = { backStack.add(About) },
+                    onEdit = { field -> backStack.push(EditProfile(field)) },
+                    onOpenProvinces = { backStack.push(Provinces) },
+                    onOpenAbout = { backStack.push(About) },
                     onSetLanguage = ::setAppLanguage,
-                    onOpenSeasonDate = { backStack.add(SeasonDate) },
+                    onOpenSeasonDate = { backStack.push(SeasonDate) },
                 )
             }
             entry<EditProfile> { key ->

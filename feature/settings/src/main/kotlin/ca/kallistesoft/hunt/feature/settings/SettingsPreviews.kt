@@ -30,6 +30,32 @@ internal fun SettingsPreview() = PreviewSurface {
     )
 }
 
+/** A new hunter whose reminders are on, with notifications turned off in system settings. */
+@BhPreviews
+@Composable
+internal fun SettingsNotificationsBlockedPreview() = PreviewSurface {
+    SettingsContent(
+        SettingsUiState(
+            hunterType = HunterType.NEW_HUNTER,
+            weapons = setOf(Weapon.FIREARM),
+            homeProvince = Province.QC,
+            provinces = setOf(Province.QC),
+            loading = false,
+            fieldHunter = true,
+            notificationsBlocked = true,
+        ),
+        versionName = "1.0.0",
+        onBack = {},
+        onEdit = {},
+        onOpenProvinces = {},
+        onOpenAbout = {},
+        onSetLanguage = {},
+        onSetDailyGoal = {},
+        onContact = {},
+        onPrivacy = {},
+    )
+}
+
 /** Hunter type reopened from Settings, the saved answer selected. */
 @BhPreviews
 @Composable

@@ -317,6 +317,8 @@
     <string name="reminders_season_sub">3 semaines et 1 jour avant le %1$s</string>
     <string name="reminders_season_no_date">Indiquez d\'abord le début de votre saison</string>
     <string name="quiet_hours">Jamais entre 21 h et 8 h.</string>
+    <string name="notifications_blocked">Notifications désactivées</string>
+    <string name="notifications_blocked_sub">Les rappels ne peuvent pas vous joindre. Activez les notifications dans les paramètres.</string>
 
     <string name="notif_channel_daily">Questions du jour</string>
     <string name="notif_channel_season">Rappels de saison</string>

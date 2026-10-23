@@ -21,6 +21,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -32,6 +34,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.BadgeSize
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.BottomActionBar
@@ -57,7 +60,9 @@ fun PassedExamScreen(
         creationCallback = { factory -> factory.create(examId) },
     ),
 ) {
-    PassedExamContent(examId, onConfirm = { viewModel.confirm(onConfirmed) }, onBack = onBack)
+    val saved by viewModel.saved.collectAsStateWithLifecycle()
+    if (saved) LaunchedEffect(Unit) { onConfirmed() }
+    PassedExamContent(examId, onConfirm = viewModel::confirm, onBack = onBack)
 }
 
 @Composable

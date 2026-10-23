@@ -50,9 +50,8 @@ class SettingsViewModelTest {
         vm.chooseProvince(Province.AB)
         assertEquals(Province.QC, userData.progress.value.homeProvince)
 
-        var done = false
-        vm.save { done = true }
-        assertTrue(done)
+        vm.save()
+        assertTrue(vm.uiState.value.saved)
         assertEquals(Province.AB, userData.progress.value.homeProvince)
         assertEquals(listOf("ABHE", "PAL", "ICAF"), userData.progress.value.myExamIds)
     }
@@ -64,7 +63,7 @@ class SettingsViewModelTest {
         vm.toggleWeapon(Weapon.FIREARM)
         assertFalse(vm.uiState.value.canSave)
         vm.toggleWeapon(Weapon.BOW)
-        vm.save {}
+        vm.save()
         assertEquals(setOf(Weapon.BOW), userData.progress.value.weapons)
     }
 
@@ -99,8 +98,37 @@ class SettingsViewModelTest {
     }
 
     @Test
+    fun `reminders show off while notifications are turned off in system settings`() = runTest {
+        val hunter = FakeUserDataRepository(
+            UserProgress().withProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC).withSeasonStart(TEST_DAY + 30),
+        )
+        hunter.setDailyReminders(true)
+        val vm = SettingsViewModel(hunter, Today { TEST_DAY })
+        collecting(vm.uiState)
+        assertTrue(vm.uiState.value.dailyReminders)
+        assertFalse(vm.uiState.value.notificationsBlocked)
+
+        vm.setNotificationsAllowed(false)
+        assertFalse(vm.uiState.value.dailyReminders)
+        assertTrue(vm.uiState.value.notificationsBlocked)
+        // The choice is kept: turning notifications back on brings the reminder back.
+        assertTrue(hunter.progress.value.dailyReminders)
+        vm.setNotificationsAllowed(true)
+        assertTrue(vm.uiState.value.dailyReminders)
+        assertFalse(vm.uiState.value.notificationsBlocked)
+    }
+
+    @Test
+    fun `notifications off with no reminder on isn't shown as blocked`() = runTest {
+        val vm = SettingsViewModel(userData, Today { TEST_DAY })
+        collecting(vm.uiState)
+        vm.setNotificationsAllowed(false)
+        assertFalse(vm.uiState.value.notificationsBlocked)
+    }
+
+    @Test
     fun `saving a season date asks for season reminders`() = runTest {
-        val vm = SeasonDateViewModel(userData, Today { TEST_DAY })
+        val vm = SeasonDateViewModel(userData, Today { TEST_DAY }, SavedStateHandle())
         collecting(vm.uiState)
         assertEquals(null, vm.uiState.value.picked)
         vm.pick(TEST_DAY - 1) // the past can't be picked
@@ -115,9 +143,23 @@ class SettingsViewModelTest {
     }
 
     @Test
+    fun `a picked season date survives process death`() = runTest {
+        userData.setSeasonStart(TEST_DAY + 5)
+        val saved = SavedStateHandle()
+        SeasonDateViewModel(userData, Today { TEST_DAY }, saved).apply {
+            collecting(uiState)
+            pick(TEST_DAY + 20)
+        }
+        val restored = SeasonDateViewModel(userData, Today { TEST_DAY }, saved)
+        collecting(restored.uiState)
+        assertEquals(TEST_DAY + 20, restored.uiState.value.picked)
+        assertEquals(TEST_DAY + 5, userData.progress.value.seasonStart) // not saved until "Save"
+    }
+
+    @Test
     fun `I don't know yet clears the date`() = runTest {
         userData.setSeasonStart(TEST_DAY + 5)
-        val vm = SeasonDateViewModel(userData, Today { TEST_DAY })
+        val vm = SeasonDateViewModel(userData, Today { TEST_DAY }, SavedStateHandle())
         collecting(vm.uiState)
         assertEquals(TEST_DAY + 5, vm.uiState.value.picked)
         vm.dontKnow()

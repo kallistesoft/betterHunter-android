@@ -1,5 +1,6 @@
 package ca.kallistesoft.hunt.feature.settings
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ca.kallistesoft.hunt.core.data.Today
@@ -8,7 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
@@ -32,26 +33,34 @@ data class SeasonDateUiState(
 class SeasonDateViewModel @Inject constructor(
     private val userData: UserDataRepository,
     private val today: Today,
+    savedState: SavedStateHandle,
 ) : ViewModel() {
+    /** Everything but the picked day, which is in [picked]. */
     private val _uiState = MutableStateFlow(SeasonDateUiState())
 
+    /** The day shown as picked: in the saved state, so an unsaved pick survives process death. */
+    private val picked = savedState.getMutableStateFlow<Long?>(KEY_PICKED, null)
+
     /** Today and the saved date are read when the screen starts collecting; picks then stay until saved. */
-    val uiState: StateFlow<SeasonDateUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<SeasonDateUiState> = combine(_uiState, picked) { state, day -> state.copy(picked = day) }
         .onStart { if (_uiState.value.loading) load() }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), SeasonDateUiState())
 
     private suspend fun load() {
         val day = today()
         val saved = userData.progress.first().seasonStart?.takeIf { it >= day }
-        _uiState.update { it.copy(loading = false, today = day, picked = saved) }
+        // A pick restored after process death wins over the saved date, unless it's now in the past.
+        picked.update { pick -> pick?.takeIf { it >= day } ?: saved }
+        _uiState.update { it.copy(loading = false, today = day) }
     }
 
     fun pick(day: Long) {
-        _uiState.update { if (day >= it.today && day <= it.today + MAX_DAYS_AHEAD) it.copy(picked = day) else it }
+        val first = _uiState.value.today
+        if (day >= first && day <= first + MAX_DAYS_AHEAD) picked.value = day
     }
 
     fun save() {
-        val day = _uiState.value.picked ?: return
+        val day = picked.value ?: return
         viewModelScope.launch {
             userData.setSeasonStart(day)
             val remindersOn = userData.progress.first().seasonReminders
@@ -78,5 +87,7 @@ class SeasonDateViewModel @Inject constructor(
     companion object {
         /** The date can be picked up to a year ahead. */
         const val MAX_DAYS_AHEAD = 365L
+
+        private const val KEY_PICKED = "picked"
     }
 }

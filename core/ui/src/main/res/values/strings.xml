@@ -312,6 +312,8 @@
     <string name="reminders_season_sub">3 weeks and 1 day before %1$s</string>
     <string name="reminders_season_no_date">Set your season start first</string>
     <string name="quiet_hours">Never between 9 pm and 8 am.</string>
+    <string name="notifications_blocked">Notifications are off</string>
+    <string name="notifications_blocked_sub">Reminders can\'t reach you. Turn notifications on in settings.</string>
 
     <string name="notif_channel_daily">Daily questions</string>
     <string name="notif_channel_season">Season reminders</string>
