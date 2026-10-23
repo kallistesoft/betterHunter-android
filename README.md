@@ -45,6 +45,8 @@ feature/quiz         Practice, mock exam (timed), review of mistakes, results
 feature/about        Disclaimer, how it works, sources, contact, privacy
 ```
 
+Design mockup (visual reference for new screens, dark and light): [design/](design/README.md).
+
 ## Build types
 
 | | `debug` | `release` |
