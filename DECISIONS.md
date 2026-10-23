@@ -90,7 +90,8 @@ Field skills never show a course, a pass mark or a mock exam. To keep them up to
 random species questions and 3 random general questions. Skills are practised by topic; a skill at 100% is
 mastered, right answers count for 3 months (then the question counts as unanswered again), each mix keeps 1 or 2
 questions from mastered skills, "Keep your edge" replaces the mix once every skill is mastered, and Home offers a season
-check a few weeks before the season. *Mockup only (2026-10-23, `design/`, page 2); not built.*
+check before the season. The app never states legal season dates (zone, weapon, year): the hunter enters their own
+first hunting day and Home counts down to it; without a date, the season check is offered from late August. *Mockup only (2026-10-23, `design/`, page 2); not built.*
 
 ## Design
 

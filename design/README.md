@@ -40,7 +40,9 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | Field skills: skill mastered (results at 100%) | `SkillMastered.dc.html` | `SkillMasteredLight.dc.html` | no |
 | Field skills: mastered skills, one faded | `FieldSkillsMastered.dc.html` | `FieldSkillsMasteredLight.dc.html` | no |
 | Field skills: all mastered, "Keep your edge" | `FieldSkillsAllMastered.dc.html` | `FieldSkillsAllMasteredLight.dc.html` | no |
-| Home, new hunter, before the season (season check) | `HomeSeasonCheck.dc.html` | `HomeSeasonCheckLight.dc.html` | no |
+| Home, new hunter, season coming (no date set: from late August) | `HomeSeasonGeneric.dc.html` | `HomeSeasonGenericLight.dc.html` | no |
+| When does your season start? (the hunter's own date) | `SeasonDate.dc.html` | `SeasonDateLight.dc.html` | no |
+| Home, new hunter, 3 weeks before the hunter's date | `HomeSeasonCheck.dc.html` | `HomeSeasonCheckLight.dc.html` | no |
 | Season check: question (15, all skills) | `SeasonCheckQuestion.dc.html` | `SeasonCheckQuestionLight.dc.html` | no |
 | Can you recognise them? (recognition games) | `Recognition.dc.html` | `RecognitionLight.dc.html` | built, restyle; "Tracks" and "Calls" are ideas |
 | What is it?: question | `PhotoQuiz.dc.html` | `PhotoQuizLight.dc.html` | built |
@@ -55,7 +57,7 @@ The canvas has one **page per flow** (dark row on top, light row below, screens 
 | Page | Screens |
 |---|---|
 | 1 · Working on it: exam prep (opens first) | 1 Splash → 2 What kind of hunter? → 3 What do you hunt with? → 4 Where do you hunt? → 5 Home → 6 Exam training → 7 Practice question → 8 Practice results (8b nothing to review) → 9 Mock exam question (9b quit) → 10 Mock exam results → 11 I passed the real exam → 12 Home, new hunter |
-| 2 · New hunter: first seasons | 1 What kind of hunter? → New hunter → 2 What do you hunt with? → 3 Where do you hunt? → 4 Home, new hunter (4b today's general question) → 5 Field skills → 6 Skill question → 7 Skill results → 8 Skill mastered → 9 Mastered and faded skills → 10 All mastered → 11 Home before the season → 12 Season check question |
+| 2 · New hunter: first seasons | 1 What kind of hunter? → New hunter → 2 What do you hunt with? → 3 Where do you hunt? → 4 Home, new hunter (4b today's general question) → 5 Field skills → 6 Skill question → 7 Skill results → 8 Skill mastered → 9 Mastered and faded skills → 10 All mastered → 11 Home, season coming (no date) → 11b Season start date → 11c Home, your season in 3 weeks → 12 Season check question |
 | 3 · What is it? | 1 Recognition hub → 2 Photo question → 3 Photo full screen → 4 Answer |
 | 4 · Settings & About | 1 Settings → 2 My provinces → 3 About |
 | 5 · System | 1 Update required |
@@ -94,8 +96,12 @@ exam) still shows Exam training, as built.
 instead of a percentage. Right answers count for **3 months**: after that a question counts as unanswered again, so
 mastered skills fade back before the next season ("Was mastered · 2 answers expired"). Each mix keeps 1 or 2
 questions from mastered skills; a miss takes the skill below 100% until it is won back. With every skill mastered, the
-mix becomes **Keep your edge** (10 questions across all skills, oldest answers first). A few weeks before the season
-opens, Home offers a **season check** (15 questions across all skills); it needs each province's season dates.
+mix becomes **Keep your edge** (10 questions across all skills, oldest answers first). Before the season, Home offers a
+**season check** (15 questions across all skills). The app doesn't know legal season dates (they depend on the zone,
+the weapon and the year), so the **hunter sets their own date**: "When does your season start?" (from the Home card or
+Settings; it says to check the official regulations), and Home counts down to it ("Your season starts in 3 weeks ·
+Nov 14, the date you set"). Without a date, Home shows "Hunting season is coming" from late August, with "Set my season
+start date". The date is asked again each year.
 
 ## Logo concepts
 

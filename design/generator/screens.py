@@ -502,7 +502,7 @@ def passed_exam(t):
     return page(t, "BetterHunter passed the real exam", body, gap=16)
 
 
-def main_new_hunter(t, passed=True, season=False):
+def main_new_hunter(t, passed=True, season=None):
     pill = (f'<span style="display: flex; border: 1px solid {t["outline"]}; border-radius: 999px; padding: 3px; background: {t["card"] if t["name"] == "light" else "transparent"}">'
             f'<span style="color: {t["muted"]}; font: 600 13px Barlow, sans-serif; height: 38px; min-width: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center">FR</span>'
             f'<span style="background: {t["green_tint"] if t["name"] == "light" else t["track"]}; color: {t["text"]}; font: 600 13px Barlow, sans-serif; height: 38px; min-width: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center">EN</span></span>')
@@ -511,11 +511,20 @@ def main_new_hunter(t, passed=True, season=False):
     <span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">Hunter course passed. Welcome, new hunter!</span><span style="font-size: 13px; color: {t["muted"]}">Now sharpen your eye in the field.</span></span>
     <a href="#" aria-label="Dismiss" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: {t["muted"]}; margin-right: -10px">{icon("close", 18)}</a>
   </section>'''
-    season_card = f'''<a href="{href(t, "SeasonCheckQuestion")}" style="display: flex; align-items: center; gap: 12px; padding: 12px 6px 12px 14px; border-radius: 16px; background: {t["sel"]}; border: 1px solid {t["warm_border"]}; color: {t["text"]}; text-decoration: none">
+    # season: None, "date" (the hunter set their opening date) or "generic" (no date: shown from late August)
+    if season == "date":
+        season_title, season_sub = "Your season starts in 3 weeks", "Nov 14, the date you set · season check: 15 questions"
+    else:
+        season_title, season_sub = "Hunting season is coming", "Take your season check: 15 questions across all your skills"
+    season_main = f'''<a href="{href(t, "SeasonCheckQuestion")}" style="display: flex; align-items: center; gap: 12px; padding: 12px 6px 12px 14px; color: {t["text"]}; text-decoration: none">
     {tile(t, "flag", "orange", 40, 10)}
-    <span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">Deer season opens in 3 weeks</span><span style="font-size: 13px; color: {t["muted"]}">Season check: 15 questions across all your skills</span></span>
+    <span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">{season_title}</span><span style="font-size: 13px; color: {t["muted"]}">{season_sub}</span></span>
     <span style="width: 36px; display: flex; justify-content: center; color: {t["muted"]}">{icon("chevron", 18)}</span>
   </a>'''
+    set_date = (f'<a href="{href(t, "SeasonDate")}" style="display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border-top: 1px solid {t["warm_border"]}; '
+                f'color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none">{icon("goal", 16)} Set my season start date</a>') if season == "generic" else ""
+    season_card = (f'<section style="display: flex; flex-direction: column; border-radius: 16px; background: {t["sel"]}; border: 1px solid {t["warm_border"]}; flex-shrink: 0">'
+                   f'{season_main}{set_date}</section>')
     exam_tile = f'''<a href="{href(t, "ExamTraining")}" style="background: {t["card"]}; border: 1px solid {t["border"]}; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">
       {tile(t, "school")}
       <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">Exam training</span>
@@ -570,14 +579,14 @@ def main_new_hunter(t, passed=True, season=False):
     </a>
     {exam_tile if passed else skills_tile}
   </div>
-  <section style="position: relative; flex: 1; min-height: 0; border-radius: 22px; overflow: hidden; background: {t["track"]}">
+  <section style="position: relative; flex: 1; min-height: {"150px; flex-shrink: 0" if season else "0"}; border-radius: 22px; overflow: hidden; background: {t["track"]}">
     <img src="/_blob/876ea656307e18bff50cd003ae123e81" alt="Photo of the day, to identify" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
     <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 36px 16px 14px; background: linear-gradient(180deg, rgba(14,22,17,0) 0%, rgba(14,22,17,0.9) 60%); display: flex; flex-direction: column; gap: 2px; color: #FFFFFF">
       <span style="font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: #F7A06A">Photo of the day</span>
       <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 24px">What is it?</span>
     </div>
   </section>'''
-    return page(t, "BetterHunter home, new hunter" + ("" if passed else ", before the season" if season else " (from onboarding)"), body, gap=14, padding="20px 20px 24px")
+    return page(t, "BetterHunter home, new hunter" + ("" if passed else f", before the season ({'your date' if season == 'date' else 'no date'})" if season else " (from onboarding)"), body, gap=14, padding="20px 20px 24px")
 
 
 def hunt_with(t, new_hunter=False):
@@ -795,6 +804,41 @@ def skill_mastered(t):
     return page(t, "BetterHunter field skill mastered", body, gap=12)
 
 
+
+def season_date(t):
+    # November 2026 starts on a Sunday; weeks start on Sunday (Canada).
+    def day(n):
+        if n == 14:
+            st = f"background: {t['orange']}; color: {t['on_orange']}; font-weight: 600"
+        else:
+            st = f"background: transparent; color: {t['text']}"
+        cur = ' aria-pressed="true"' if n == 14 else ""
+        return (f'<button type="button"{cur} style="height: 40px; border: 0; border-radius: 999px; font: 500 15px Barlow, sans-serif; {st}">{n}</button>')
+    week = "".join(f'<span style="text-align: center; font-size: 12px; font-weight: 600; color: {t["muted"]}">{d}</span>' for d in "SMTWTFS")
+    days = "".join(day(n) for n in range(1, 31))
+    cal = f'''<div style="display: flex; align-items: center; justify-content: space-between">
+      {round_link(t, "#", "Previous month", "back", t["muted"])}
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 20px">November 2026</span>
+      <a href="#" aria-label="Next month" style="width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; color: {t["muted"]}">{icon("chevron", 22, width=2.2)}</a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px">{week}{days}</div>'''
+    body = f'''{header(t, "Season start", back=href(t, "HomeSeasonGeneric"))}
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.05">When does your season start?</h1>
+    <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Your first hunting day this year. We use it only to remind you to take your season check.</p>
+  </div>
+  {card(t, cal, pad="10px 12px 14px", gap=8)}
+  <section style="background: {t["green_tint"]}; border: 1px solid {t["border"]}; border-radius: 16px; padding: 12px 14px; display: flex; gap: 10px">
+    <span style="color: {t["green"]}; flex-shrink: 0; padding-top: 1px">{icon("info", 18)}</span>
+    <p style="margin: 0; font-size: 13px; line-height: 1.45">Dates depend on your zone, your weapon and the year. Check the official regulations; BetterHunter doesn't know your dates.</p>
+  </section>
+  <div style="margin-top: auto; display: flex; flex-direction: column; gap: 4px">
+    {primary(t, "Save: Saturday, November 14", href(t, "HomeSeasonCheck"))}
+    <a href="{href(t, "HomeSeasonGeneric")}" style="height: 44px; display: flex; align-items: center; justify-content: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none">I don't know yet</a>
+  </div>'''
+    return page(t, "BetterHunter season start date", body, gap=14)
+
+
 SCREENS = {
     "Settings": settings, "About": about, "ExamTraining": exam_training, "PracticeQuestion": practice_question,
     "PracticeResults": lambda t: results(t, exam=False), "ExamResults": lambda t: results(t, exam=True),
@@ -806,7 +850,8 @@ SCREENS = {
     "HuntWhereNewHunter": lambda t: hunt_where(t, new_hunter=True), "HomeNewHunter": lambda t: main_new_hunter(t, passed=False),
     "FieldSkills": field_skills, "SkillQuestion": skill_question, "SkillResults": skill_results,
     "SkillMastered": skill_mastered, "FieldSkillsMastered": lambda t: field_skills(t, "upkeep"),
-    "FieldSkillsAllMastered": lambda t: field_skills(t, "all"), "HomeSeasonCheck": lambda t: main_new_hunter(t, passed=False, season=True),
+    "FieldSkillsAllMastered": lambda t: field_skills(t, "all"), "HomeSeasonCheck": lambda t: main_new_hunter(t, passed=False, season="date"),
+    "HomeSeasonGeneric": lambda t: main_new_hunter(t, passed=False, season="generic"), "SeasonDate": season_date,
     "SeasonCheckQuestion": lambda t: skill_question(t, season=True), "DailyQuestion": lambda t: skill_question(t, daily=True),
 }
 
