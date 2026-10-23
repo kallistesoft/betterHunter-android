@@ -11,7 +11,7 @@ implements it in `core/designsystem` (theme, components) and the feature screens
 
 | Screen | Dark | Light |
 |---|---|---|
-| Splash screen (launch, taps through to onboarding) | `Splash.dc.html` | `SplashLight.dc.html` |
+| Splash screen (the native Android splash: icon on the green, nothing else; taps through to onboarding) | `Splash.dc.html` | `SplashLight.dc.html` |
 | Home | `Main.dc.html` | `MainLight.dc.html` |
 | What is it? (question) | `PhotoQuiz.dc.html` | `PhotoQuizLight.dc.html` |
 | What is it? (answer) | `PhotoAnswer.dc.html` | `PhotoAnswerLight.dc.html` |
