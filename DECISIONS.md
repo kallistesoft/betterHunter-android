@@ -43,12 +43,17 @@ Android: Play immediate in-app update, else the store page. The minimum is a Fir
 published from the hunt proof-of-concept repo, which is retired.
 
 **P7. Feature flags with Firebase Remote Config.** *Product.* Boolean parameters with in-app defaults (`photo_of_the_day`,
-`recognition_games`, `report_question`, all on), fetched on launch and foreground, plus real-time updates. The app
+`recognition_games`, `report_question`, `ads_enabled`, all on), fetched on launch and foreground, plus real-time updates. The app
 works without Firebase configured. *No Firebase Analytics.*
 
 **P8. Ads (AdMob) are in the first release.** *Product.* The Play Console declarations (Ads, Advertising ID, AdMob
-data types) were entered for that and stay; the `AD_ID` permission stays. Planned placement: one interstitial after a
-finished test, never during a question. Before any release, check the store declarations against what the build really
+data types) were entered for that and stay; the `AD_ID` permission stays. Placement: one interstitial after a
+finished test, never during a question. *In the app (2026-10-23):* after the last answer of an exam-training quiz
+(practice, mock exam, review, recognition game), the preloaded interstitial shows, then the results; none loaded means
+the results at once. At most one every 3 minutes (in the app and as the AdMob frequency cap). New hunters' field
+runs (P11: daily questions, skills, season check) show no ad for now. Consent with Google's UMP at launch, "Privacy
+options" in Settings where required; nothing is loaded before consent allows it. `ads_enabled` (Remote Config) turns
+ads off. Real ad IDs only in release builds; debug and qa (emulator smoke tests) use Google's test IDs. Before any release, check the store declarations against what the build really
 does (FOLLOW-UP.md, section 3). Monetization beyond that (rewarded ads, Pro unlock, two-part app) is only explored, in
 IDEAS.md.
 

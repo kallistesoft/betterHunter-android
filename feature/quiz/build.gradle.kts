@@ -7,6 +7,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:ads"))
     implementation(project(":core:flags"))
     implementation(libs.androidx.activity.compose)
 }

@@ -130,6 +130,8 @@
     <string name="contact">Contact</string>
     <string name="privacy">Politique de confidentialité</string>
     <string name="privacy_url">https://kallistesoft.ca/confidentialite/</string>
+    <string name="privacy_options">Options de confidentialité</string>
+    <string name="privacy_options_sub">Vos choix concernant les annonces</string>
     <string name="how_practice">Correction et explication après chaque question</string>
     <string name="how_exam">Chronométré, résultat à la fin, comme le vrai</string>
     <string name="disclaimer">Outil d\'étude indépendant, non affilié à la GRC, au Programme canadien des armes à feu, au gouvernement du Québec ni à la FédéCP, et non approuvé par eux. Les questions sont des questions de pratique originales, rédigées à partir des manuels officiels; ce ne sont pas les questions des examens officiels. Des erreurs sont possibles et les lois changent : vérifiez toujours dans le manuel officiel et la réglementation en vigueur. Aucune garantie de réussite.</string>

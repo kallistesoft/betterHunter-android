@@ -3,6 +3,7 @@ package ca.kallistesoft.hunt.feature.quiz
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ca.kallistesoft.hunt.core.ads.InterstitialAds
 import ca.kallistesoft.hunt.core.data.ContentRepository
 import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.data.UserDataRepository
@@ -45,6 +46,7 @@ sealed interface QuizUiState {
 /**
  * One quiz run on an exam. Practice and review answers are recorded right away; mock exam answers can change until
  * the end, so they are recorded when it finishes. The run survives configuration changes and process death.
+ * A finished run may show an interstitial (P8) before its results: after the last answer, never during a question.
  */
 @HiltViewModel(assistedFactory = QuizViewModel.Factory::class)
 class QuizViewModel @AssistedInject constructor(
@@ -55,6 +57,7 @@ class QuizViewModel @AssistedInject constructor(
     private val savedState: SavedStateHandle,
     featureFlags: FeatureFlags,
     today: Today,
+    private val ads: InterstitialAds,
 ) : ViewModel() {
     @AssistedFactory
     interface Factory {
@@ -79,6 +82,9 @@ class QuizViewModel @AssistedInject constructor(
 
     private var timer: Job? = null
 
+    /** The run is over and its interstitial is on screen (or being decided): the last question takes no more input. */
+    private var finishing = false
+
     private suspend fun load() {
         val content = contentRepository.content.first()
         val restored = restore(content)
@@ -88,7 +94,7 @@ class QuizViewModel @AssistedInject constructor(
     fun choose(choice: Int) {
         val state = _uiState.value as? QuizUiState.Running ?: return
         val session = state.session
-        if (session.mode != QuizMode.EXAM && session.currentAnswered) return
+        if (finishing || session.mode != QuizMode.EXAM && session.currentAnswered) return
         val answered = session.answer(choice)
         update(state.copy(session = answered))
         if (session.mode != QuizMode.EXAM) {
@@ -98,7 +104,7 @@ class QuizViewModel @AssistedInject constructor(
 
     fun next() {
         val state = _uiState.value as? QuizUiState.Running ?: return
-        if (!state.session.currentAnswered) return
+        if (finishing || !state.session.currentAnswered) return
         if (state.session.isLast) finish(timeUp = false) else update(state.copy(session = state.session.next()))
     }
 
@@ -127,6 +133,9 @@ class QuizViewModel @AssistedInject constructor(
 
     private fun finish(timeUp: Boolean) {
         val state = _uiState.value as? QuizUiState.Running ?: return
+        if (finishing) return
+        finishing = true
+        timer?.cancel()
         val session = state.session
         if (session.mode == QuizMode.EXAM) {
             val results = session.answers.map { (i, choice) ->
@@ -134,10 +143,16 @@ class QuizViewModel @AssistedInject constructor(
             }
             viewModelScope.launch { userData.recordAll(results) }
         }
-        show(QuizUiState.Finished(session, timeUp, secondsLeft = if (timeUp) 0 else state.secondsLeft))
+        val finished = QuizUiState.Finished(session, timeUp, secondsLeft = if (timeUp) 0 else state.secondsLeft)
+        // The interstitial, if one is ready and allowed, comes between the test and its results.
+        viewModelScope.launch {
+            ads.showBeforeResults()
+            show(finished)
+        }
     }
 
     private fun show(state: QuizUiState) {
+        finishing = false
         update(state)
         timer?.cancel()
         if (state is QuizUiState.Running && state.secondsLeft != null) {

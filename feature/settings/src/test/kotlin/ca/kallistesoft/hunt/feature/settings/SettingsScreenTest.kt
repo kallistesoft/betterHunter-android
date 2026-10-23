@@ -19,6 +19,7 @@ import ca.kallistesoft.hunt.core.model.Lang
 import ca.kallistesoft.hunt.core.model.Province
 import ca.kallistesoft.hunt.core.model.UserProgress
 import ca.kallistesoft.hunt.core.model.Weapon
+import ca.kallistesoft.hunt.core.testing.FakeAdConsent
 import ca.kallistesoft.hunt.core.testing.FakeUserDataRepository
 import ca.kallistesoft.hunt.core.testing.ScreenshotDevice
 import ca.kallistesoft.hunt.core.testing.TEST_DAY
@@ -138,7 +139,7 @@ class SettingsScreenTest {
         val userData = FakeUserDataRepository(
             UserProgress().withProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC).withSeasonStart(TEST_DAY + 30),
         )
-        val viewModel = SettingsViewModel(userData, Today { TEST_DAY })
+        val viewModel = SettingsViewModel(userData, Today { TEST_DAY }, FakeAdConsent())
         shadowOf(compose.activity.application).grantPermissions(Manifest.permission.POST_NOTIFICATIONS)
         compose.setContent {
             BetterHunterTheme {
@@ -182,7 +183,7 @@ class SettingsScreenTest {
     @Test
     fun `the screen changes the daily goal`() {
         val userData = FakeUserDataRepository(UserProgress().withProfile(HunterType.WORKING_ON_IT, setOf(Weapon.FIREARM), Province.QC))
-        val viewModel = SettingsViewModel(userData, Today { TEST_DAY })
+        val viewModel = SettingsViewModel(userData, Today { TEST_DAY }, FakeAdConsent())
         compose.setContent {
             BetterHunterTheme {
                 SettingsScreen("1.2.3", {}, {}, {}, {}, {}, {}, viewModel)
@@ -191,5 +192,24 @@ class SettingsScreenTest {
         compose.onNodeWithTag("toggle-10").performClick()
         compose.waitForIdle()
         assertEquals(10, userData.progress.value.dailyGoal)
+    }
+
+    @Test
+    fun `privacy options show only where the consent requires them, and open the consent form`() {
+        val userData = FakeUserDataRepository(UserProgress().withProfile(HunterType.WORKING_ON_IT, setOf(Weapon.FIREARM), Province.QC))
+        val consent = FakeAdConsent(privacyOptionsRequired = false)
+        val viewModel = SettingsViewModel(userData, Today { TEST_DAY }, consent)
+        compose.setContent {
+            BetterHunterTheme {
+                SettingsScreen("1.2.3", {}, {}, {}, {}, {}, {}, viewModel)
+            }
+        }
+        compose.onNodeWithTag("settings-version").assertIsDisplayed()
+        compose.onNodeWithTag("settings-privacy-options").assertDoesNotExist()
+
+        consent.privacyOptionsRequired.value = true
+        compose.onNodeWithText("Privacy options").assertIsDisplayed()
+        compose.onNodeWithTag("settings-privacy-options").performClick()
+        assertEquals(1, consent.privacyOptionsShown)
     }
 }

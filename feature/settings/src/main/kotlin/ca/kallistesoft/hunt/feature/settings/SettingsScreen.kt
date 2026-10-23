@@ -19,6 +19,7 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.PersonOutline
+import androidx.compose.material.icons.outlined.PrivacyTip
 import androidx.compose.material.icons.outlined.Place
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.MaterialTheme
@@ -120,6 +121,7 @@ fun SettingsScreen(
         onOpenNotificationSettings = openNotificationSettings,
         onContact = { links.email(CONTACT_EMAIL) },
         onPrivacy = { links.open(privacyUrl) },
+        onPrivacyOptions = viewModel::showPrivacyOptions,
     )
 }
 
@@ -139,6 +141,7 @@ internal fun SettingsContent(
     onDailyReminders: (Boolean) -> Unit = {},
     onSeasonReminders: (Boolean) -> Unit = {},
     onOpenNotificationSettings: () -> Unit = {},
+    onPrivacyOptions: () -> Unit = {},
 ) {
     Scaffold(
         topBar = { BackTopAppBar(stringResource(R.string.settings), onBack) },
@@ -168,8 +171,18 @@ internal fun SettingsContent(
             item { AppCard(state.dailyGoal, onSetLanguage, onSetDailyGoal, showDailyGoal = !state.fieldHunter) }
             item { SectionTitle(stringResource(R.string.about)) }
             item {
+                // Ads consent choices, only where the user's region requires a way back to them (UMP).
+                val privacyOptionsRow: @Composable ColumnScope.() -> Unit = {
+                    SettingRow(
+                        Icons.Outlined.PrivacyTip,
+                        stringResource(R.string.privacy_options),
+                        subtitle = stringResource(R.string.privacy_options_sub),
+                        onClick = onPrivacyOptions,
+                        modifier = Modifier.testTag("settings-privacy-options"),
+                    )
+                }
                 SettingsCard(
-                    rows = listOf(
+                    rows = listOf<@Composable ColumnScope.() -> Unit>(
                         {
                             SettingRow(
                                 Icons.Outlined.Info,
@@ -191,7 +204,7 @@ internal fun SettingsContent(
                         {
                             SettingRow(Icons.Outlined.Lock, stringResource(R.string.privacy), onClick = onPrivacy, end = RowEnd.External)
                         },
-                    ),
+                    ) + listOfNotNull(privacyOptionsRow.takeIf { state.privacyOptions }),
                 )
             }
             item {

@@ -19,6 +19,7 @@ plugins {
 dependencies {
     listOf(
         ":app",
+        ":core:ads",
         ":core:data",
         ":core:designsystem",
         ":core:flags",

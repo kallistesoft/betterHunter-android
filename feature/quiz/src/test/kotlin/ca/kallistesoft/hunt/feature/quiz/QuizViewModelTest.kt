@@ -8,10 +8,12 @@ import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.model.UserProgress
 import ca.kallistesoft.hunt.core.testing.FakeContentRepository
 import ca.kallistesoft.hunt.core.testing.FakeFeatureFlags
+import ca.kallistesoft.hunt.core.testing.FakeInterstitialAds
 import ca.kallistesoft.hunt.core.testing.FakeUserDataRepository
 import ca.kallistesoft.hunt.core.testing.MainDispatcherRule
 import ca.kallistesoft.hunt.core.testing.TEST_DAY
 import ca.kallistesoft.hunt.core.testing.TestContent
+import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceTimeBy
@@ -35,9 +37,10 @@ class QuizViewModelTest {
 
     private val userData = FakeUserDataRepository()
     private val flags = FakeFeatureFlags()
+    private val ads = FakeInterstitialAds()
 
     private fun viewModel(mode: QuizMode, saved: SavedStateHandle = SavedStateHandle()) =
-        QuizViewModel(TestContent.pal.id, mode, FakeContentRepository(), userData, saved, flags, Today { TEST_DAY })
+        QuizViewModel(TestContent.pal.id, mode, FakeContentRepository(), userData, saved, flags, Today { TEST_DAY }, ads)
 
     private val QuizUiState.running get() = this as QuizUiState.Running
 
@@ -130,7 +133,69 @@ class QuizViewModelTest {
             assertTrue(finished.timeUp)
             assertEquals(0, finished.secondsLeft)
         }
+        assertEquals("time up also goes through the interstitial", 1, ads.shown)
     }
+
+    @Test
+    fun `the interstitial comes between the last answer and the results, never during a question`() =
+        runTest(mainDispatcherRule.testDispatcher) {
+            val onScreen = CompletableDeferred<Unit>().also { ads.onScreen = it }
+            val vm = viewModel(QuizMode.EXAM)
+            vm.uiState.test {
+                skipItems(1)
+                runCurrent()
+                skipItems(1)
+                repeat(3) { i ->
+                    vm.choose(1)
+                    awaitItem()
+                    if (i < 2) {
+                        vm.next()
+                        awaitItem()
+                    }
+                }
+                assertEquals("no ad during the questions", 0, ads.shown)
+
+                vm.next()
+                runCurrent()
+                assertEquals(1, ads.shown)
+                vm.choose(0) // the ad is on screen: the last question takes no more input
+                vm.next()
+                advanceTimeBy(5_000) // nor does the clock end the exam a second time
+                expectNoEvents()
+
+                onScreen.complete(Unit)
+                val finished = awaitItem() as QuizUiState.Finished
+                assertEquals("the answers stay as they were", 1, finished.session.answers[2])
+                assertEquals(1, ads.shown)
+            }
+        }
+
+    @Test
+    fun `try again after the results is a new run that can end with an ad again`() =
+        runTest(mainDispatcherRule.testDispatcher) {
+            val vm = viewModel(QuizMode.PRACTICE)
+            vm.uiState.test {
+                skipItems(1)
+                runCurrent()
+                skipItems(1)
+                repeat(3) {
+                    vm.choose(1)
+                    vm.next()
+                }
+                runCurrent()
+                assertTrue(expectMostRecentItem() is QuizUiState.Finished)
+                vm.restart()
+                runCurrent()
+                assertTrue(expectMostRecentItem() is QuizUiState.Running)
+                repeat(3) {
+                    vm.choose(1)
+                    vm.next()
+                }
+                runCurrent()
+                assertTrue(expectMostRecentItem() is QuizUiState.Finished)
+            }
+            assertEquals(2, ads.shown)
+        }
 
     @Test
     fun `the run is drawn once, not again when the screen comes back`() = runTest(mainDispatcherRule.testDispatcher) {

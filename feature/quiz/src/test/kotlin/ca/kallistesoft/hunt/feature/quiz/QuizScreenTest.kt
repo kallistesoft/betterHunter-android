@@ -18,6 +18,7 @@ import ca.kallistesoft.hunt.core.model.PHOTO_ID_EXAM
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.testing.FakeContentRepository
 import ca.kallistesoft.hunt.core.testing.FakeFeatureFlags
+import ca.kallistesoft.hunt.core.testing.FakeInterstitialAds
 import ca.kallistesoft.hunt.core.testing.FakeUserDataRepository
 import ca.kallistesoft.hunt.core.testing.ScreenshotDevice
 import ca.kallistesoft.hunt.core.testing.TEST_DAY
@@ -51,7 +52,7 @@ class QuizScreenTest {
         mode: QuizMode = QuizMode.PRACTICE,
         content: ContentRepository = FakeContentRepository(),
     ): QuizViewModel {
-        val vm = QuizViewModel(examId, mode, content, userData, SavedStateHandle(), FakeFeatureFlags(), Today { TEST_DAY })
+        val vm = QuizViewModel(examId, mode, content, userData, SavedStateHandle(), FakeFeatureFlags(), Today { TEST_DAY }, FakeInterstitialAds())
         compose.setContent {
             BetterHunterTheme {
                 QuizScreen(examId, mode, onClose = { closed++ }, onStartPractice = { practice++ }, viewModel = vm)

@@ -13,4 +13,7 @@ enum class FeatureFlag(val key: String, val defaultValue: Boolean) {
 
     /** "Report a problem" on each question. */
     REPORT_QUESTION("report_question", true),
+
+    /** The interstitial after a finished test (AdMob, P8). Off: no ad is loaded or shown, the results come at once. */
+    ADS_ENABLED("ads_enabled", true),
 }
