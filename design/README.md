@@ -27,6 +27,8 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | Mock exam: question | `ExamQuestion.dc.html` | `ExamQuestionLight.dc.html` | built |
 | Mock exam: quit this test? (dialog) | `QuitDialog.dc.html` | `QuitDialogLight.dc.html` | built |
 | Mock exam: results | `ExamResults.dc.html` | `ExamResultsLight.dc.html` | built, restyle |
+| I passed the real exam: confirm (from Exam training) | `PassedExam.dc.html` | `PassedExamLight.dc.html` | not built |
+| Home, new hunter (after passing the real exam) | `MainNewHunter.dc.html` | `MainNewHunterLight.dc.html` | not built |
 | Can you recognise them? (recognition games) | `Recognition.dc.html` | `RecognitionLight.dc.html` | built, restyle; "Tracks" and "Calls" are ideas |
 | What is it?: question | `PhotoQuiz.dc.html` | `PhotoQuizLight.dc.html` | built |
 | What is it?: photo full screen | `PhotoZoom.dc.html` | `PhotoZoomLight.dc.html` | built |
@@ -45,6 +47,12 @@ preparing for the licence or hunter course; New hunter: licensed, a few seasons;
 saved on the device. Only "Working on it" goes on to "What are you preparing for?", the exam picker (PAL, Québec
 ICAF, Alberta; "More provinces coming"), then Home; new and experienced hunters go straight to Home. A province
 question ("Where do you hunt?") can come later, when more provinces are covered.
+
+**Passed the real exam (not built yet).** On an exam card in Exam training, "I passed the real exam" opens a
+confirmation ("Did you pass the PAL exam?", what changes, "Yes, I passed" / "Not yet"). Confirming makes the user a
+New hunter (changeable back in Settings) and lands on Home's new-hunter version: a congratulations banner, the daily
+goal played on "What is it?", and Exam training kept as a tile ("PAL passed") for refreshers. The app takes the user's
+word; nothing is verified.
 
 ## Logo concepts
 

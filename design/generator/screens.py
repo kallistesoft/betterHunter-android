@@ -64,6 +64,10 @@ ICONS = {
     "goal": '<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/>',
     "user": '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>',
     "globe": '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/>',
+    "trophy": '<path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4"/><path d="M16 6h3a3 3 0 0 1-3 4"/><path d="M12 13v4"/><path d="M8 20h8"/>',
+    "eye": '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    "school": '<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c2 1.5 4 2 6 2s4-.5 6-2v-5"/><path d="M22 9v6"/>',
+    "flame": '<path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5.5 2 1.5 2.5 2.5 2.5C11 8 11 5.5 12 3z"/>',
     "expand": '<path d="M4 9V4h5"/><path d="M20 9V4h-5"/><path d="M4 15v5h5"/><path d="M20 15v5h-5"/>',
 }
 
@@ -237,7 +241,8 @@ def exam_training(t):
       {primary(t, "Practice", href(t, "PracticeQuestion"), "; flex: 1; height: 52px", "play")}
       {secondary(t, "Mock exam", href(t, "ExamQuestion"), "; flex: 1; height: 52px", "timer")}
     </div>
-    <a href="{href(t, "PracticeQuestion")}" style="display: flex; align-items: center; gap: 8px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px">{icon("replay", 16)} Review my mistakes (7)</a>'''
+    <a href="{href(t, "PracticeQuestion")}" style="display: flex; align-items: center; gap: 8px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px">{icon("replay", 16)} Review my mistakes (7)</a>
+    <a href="{href(t, "PassedExam")}" style="display: flex; align-items: center; gap: 8px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px; border-top: 1px solid {t["border"]}; padding-top: 10px">{icon("trophy", 16)} I passed the real exam</a>'''
     others = (row(t, tile(t, "tree"), "Hunter education with firearms", "Québec · 228 questions", target=href(t, "ExamTraining"), divider=False)
               + row(t, tile(t, "mountain"), "Conservation and Hunter Education", "Alberta · 285 questions", target=href(t, "ExamTraining")))
     body = f'''{header(t, "Exam training", back=href(t, "Main"))}
@@ -414,11 +419,80 @@ def update_required(t):
     return page(t, "BetterHunter update required", body, gap=14, padding="24px 20px 24px")
 
 
+def passed_exam(t):
+    changes = "".join(
+        f'<div style="display: flex; gap: 12px; align-items: flex-start">{tile(t, ic, tone, 36, 10)}<span style="font-size: 14px; line-height: 1.4; padding-top: 2px">{text}</span></div>'
+        for ic, tone, text in [
+            ("eye", "orange", "Home focuses on identifying game: <b style=\"font-weight: 600\">What is it?</b> becomes your daily practice."),
+            ("school", "green", "Your exam practice stays in <b style=\"font-weight: 600\">Exam training</b>, to refresh the rules any time."),
+            ("user", "green", "You become a <b style=\"font-weight: 600\">New hunter</b>; you can change it back in Settings."),
+        ])
+    body = f'''{header(t, "", back=href(t, "ExamTraining"))}
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; padding: 8px 8px 0">
+    <span style="width: 96px; height: 96px; border-radius: 28px; background: {t["orange_tint"]}; color: {t["label"]}; display: flex; align-items: center; justify-content: center">{icon("trophy", 50, width=2)}</span>
+    {label(t, "Real exam")}
+    <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.05">Did you pass the PAL exam?</h1>
+    <p style="margin: 0; font-size: 15px; line-height: 1.45; color: {t["muted"]}">Congratulations if so! Here's what changes in BetterHunter:</p>
+  </div>
+  {card(t, changes, pad="16px", gap=14, radius=18)}
+  <div style="margin-top: auto; display: flex; flex-direction: column; gap: 6px">
+    {primary(t, "Yes, I passed", href(t, "MainNewHunter"), icon_name="check")}
+    <a href="{href(t, "ExamTraining")}" style="height: 48px; display: flex; align-items: center; justify-content: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none">Not yet</a>
+  </div>'''
+    return page(t, "BetterHunter passed the real exam", body, gap=16)
+
+
+def main_new_hunter(t):
+    pill = (f'<span style="display: flex; border: 1px solid {t["outline"]}; border-radius: 999px; padding: 3px; background: {t["card"] if t["name"] == "light" else "transparent"}">'
+            f'<span style="color: {t["muted"]}; font: 600 13px Barlow, sans-serif; height: 38px; min-width: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center">FR</span>'
+            f'<span style="background: {t["green_tint"] if t["name"] == "light" else t["track"]}; color: {t["text"]}; font: 600 13px Barlow, sans-serif; height: 38px; min-width: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center">EN</span></span>')
+    ring_html = ring(t, 25, 84, 8, t["orange"], f'<span style="font-family: \'Barlow Condensed\', sans-serif; font-weight: 700; font-size: 28px; line-height: 1">5</span><span style="font-size: 11px; color: {t["muted"]}">of 20</span>')
+    body = f'''<header style="display: flex; align-items: center; justify-content: space-between; height: 48px; flex-shrink: 0">
+    <div style="display: flex; align-items: center; gap: 10px">{buck(34, t["text"], t["orange"])}<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.2px">BetterHunter</span></div>
+    <div style="display: flex; align-items: center; gap: 8px">{pill}{round_link(t, href(t, "Settings"), "Settings", "gear", t["muted"])}</div>
+  </header>
+  <section style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px; background: {t["sel"]}; border: 1px solid {t["warm_border"]}">
+    {tile(t, "trophy", "orange", 40, 10)}
+    <span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">PAL passed. Welcome, new hunter!</span><span style="font-size: 13px; color: {t["muted"]}">Now sharpen your eye in the field.</span></span>
+    <a href="#" aria-label="Dismiss" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: {t["muted"]}; margin-right: -10px">{icon("close", 18)}</a>
+  </section>
+  {card(t, f'''<div style="display: flex; align-items: center; gap: 16px">{ring_html}
+      <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+        {label(t, "Today")}
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 22px; line-height: 1.15">15 animals to your daily goal</span>
+        <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: {t["muted"]}">{icon("flame", 14, t["orange"], 2.2)} 6-day streak</span>
+      </div></div>
+    {primary(t, "Play What is it?", href(t, "PhotoQuiz"), "; height: 52px", "play")}''', pad="18px", gap=16)}
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+    <a href="{href(t, "Recognition")}" style="background: {t["card"]}; border: 1px solid {t["border"]}; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">
+      {tile(t, "eye", "orange")}
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">What is it?</span>
+      <span style="font-size: 13px; color: {t["muted"]}; line-height: 1.35">Identify Canada's game animals</span>
+      {meter(t, "Readiness", "40%", 40)}
+    </a>
+    <a href="{href(t, "ExamTraining")}" style="background: {t["card"]}; border: 1px solid {t["border"]}; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">
+      {tile(t, "school")}
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">Exam training</span>
+      <span style="font-size: 13px; color: {t["muted"]}; line-height: 1.35">Refresh the rules any time</span>
+      <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: {t["green"]}; margin-top: auto">{icon("check", 14, t["green"], 2.6)} PAL passed</span>
+    </a>
+  </div>
+  <section style="position: relative; flex: 1; min-height: 0; border-radius: 22px; overflow: hidden; background: {t["track"]}">
+    <img src="/_blob/876ea656307e18bff50cd003ae123e81" alt="Photo of the day, to identify" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+    <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 36px 16px 14px; background: linear-gradient(180deg, rgba(14,22,17,0) 0%, rgba(14,22,17,0.9) 60%); display: flex; flex-direction: column; gap: 2px; color: #FFFFFF">
+      <span style="font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: #F7A06A">Photo of the day</span>
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 24px">What is it?</span>
+    </div>
+  </section>'''
+    return page(t, "BetterHunter home, new hunter", body, gap=14, padding="20px 20px 24px")
+
+
 SCREENS = {
     "Settings": settings, "About": about, "ExamTraining": exam_training, "PracticeQuestion": practice_question,
     "PracticeResults": lambda t: results(t, exam=False), "ExamResults": lambda t: results(t, exam=True),
     "QuitDialog": quit_dialog, "PhotoZoom": photo_zoom, "NothingToReview": nothing_to_review,
-    "Recognition": recognition, "UpdateRequired": update_required,
+    "Recognition": recognition, "UpdateRequired": update_required, "PassedExam": passed_exam,
+    "MainNewHunter": main_new_hunter,
 }
 
 if __name__ == "__main__":
