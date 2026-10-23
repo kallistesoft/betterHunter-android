@@ -108,6 +108,10 @@ private fun ProvinceRow(item: ProvinceItem, onToggle: (Boolean) -> Unit) {
                 onCheckedChange = null,
                 enabled = item.canToggle,
                 colors = SwitchDefaults.colors(
+                    // Off: the secondary text colour for thumb and border, so it stands out on the card in dark mode.
+                    uncheckedThumbColor = scheme.onSurfaceVariant,
+                    uncheckedBorderColor = scheme.onSurfaceVariant,
+                    uncheckedTrackColor = scheme.surfaceContainerHighest,
                     disabledCheckedTrackColor = scheme.primary.copy(alpha = 0.5f),
                     disabledCheckedThumbColor = scheme.onPrimary,
                 ),
