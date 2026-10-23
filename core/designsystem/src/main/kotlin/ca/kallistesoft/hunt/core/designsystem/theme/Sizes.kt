@@ -47,7 +47,7 @@ object Sizes {
     val toggleHeight = 38.dp
     val togglePadding = 3.dp
     val chipHeight = 32.dp
-    val logo = 30.dp
+    val logo = 34.dp
 
     // Progress bars
     val progressBar = 5.dp

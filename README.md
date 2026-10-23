@@ -148,7 +148,7 @@ Reusable pieces live in two modules:
 - `core:designsystem`, no app knowledge: theme (colours, Barlow typography, shapes), `Spacing` and `Sizes`, `BhCard`,
   `IconBadge`, `AnswerChoice` (idle, selected, correct, wrong; lettered row or two-by-two tile), `AnswerResult`,
   `ResultChip`, `NoticeCard`, `HubCard`, `LinkRow`, `ProgressRing`, `MeterBar`, `QuizProgress`, `PillToggle`,
-  `PrimaryButton` / `SecondaryButton` / `LinkButton`, `SectionTitle` / `Overline`, `BhIcons`.
+  `PrimaryButton` / `SecondaryButton` / `LinkButton`, `SectionTitle` / `Overline`, `BuckLogo`.
 - `core:ui`, built on the app's models: `ExamCard`, `ExamListItem`, `ExamAvatar`, `ReadinessRing`, `QuestionPhoto`
   (with `PhotoCaption`), `SourceLinks`, `BackTopAppBar`, plus `PreviewData` (sample exams and questions).
 

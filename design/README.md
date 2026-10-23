@@ -31,7 +31,10 @@ changed later.
 `Logos.dc.html` (one 1280×1000 board, below the light row) compares four directions for a new logo, each as the app
 icon, on dark, on light and at 48/32/20 px: A *Blaze buck* (flat buck head, orange antlers), B *Track* (deer hoof
 print), C *Tine monogram* (condensed B with an antler), D *Field patch* (today's antler mark in a round crest). None is
-chosen yet; the app still uses the current icon.
+**Concept A, Blaze buck, is chosen**: it is the app icon (`app/src/main/res/drawable/ic_launcher_foreground.xml`,
+with a monochrome version for themed icons), the splash icon and the dashboard header (`BuckLogo` in
+`core/designsystem`), drawn from the same 64-unit shapes. The app icon background is `#1F4229`. Exports in `logo/`: `buck.svg` (the mark), `app-icon.svg`
+(adaptive icon layout) and `play-store-icon.svg` / `play-store-icon-512.png` (the Play Console's 512 px icon).
 
 ## Photos
 
@@ -41,7 +44,7 @@ splash screen's deer, from this repo):
 | Blob id | Photo |
 |---|---|
 | `876ea656307e18bff50cd003ae123e81` | `white-tailed-deer.jpg` |
-| `1d7af3f152d0eb25bf4d048cbff96b7f` | the app icon's deer (`app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png`, this repo) |
+| `1d7af3f152d0eb25bf4d048cbff96b7f` | the former app icon's deer (no longer used: the screens draw the buck logo inline) |
 | `38c860d8b4e20555914ef4c9812cbd55` | `mule-deer.jpg` |
 | `ed3939a5023b68655218c7345bb481dd` | `moose.jpg` |
 

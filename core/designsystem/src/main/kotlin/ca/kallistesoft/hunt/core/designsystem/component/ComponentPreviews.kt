@@ -13,7 +13,6 @@ import androidx.compose.material.icons.outlined.School
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.rounded.WarningAmber
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -103,7 +102,7 @@ internal fun SmallComponentsPreview() = PreviewSurface {
             IconBadge(Icons.Outlined.Shield)
             IconBadge(Icons.Outlined.School, size = BadgeSize.ExtraLarge)
             ProgressRing(0.6f) { Text("60%", style = MaterialTheme.typography.labelMedium) }
-            Icon(BhIcons.Antlers, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            BuckLogo()
         }
         LinkRow(Icons.Outlined.Email, "contact@kallistesoft.ca", onClick = {})
         BottomActionBar {

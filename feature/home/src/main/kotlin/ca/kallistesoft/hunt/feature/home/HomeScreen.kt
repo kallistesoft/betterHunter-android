@@ -41,7 +41,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
-import ca.kallistesoft.hunt.core.designsystem.component.BhIcons
+import ca.kallistesoft.hunt.core.designsystem.component.BuckLogo
 import ca.kallistesoft.hunt.core.designsystem.component.HubCard
 import ca.kallistesoft.hunt.core.designsystem.component.HubTone
 import ca.kallistesoft.hunt.core.designsystem.component.LabelledMeter
@@ -104,7 +104,7 @@ internal fun HomeContent(
             TopAppBar(
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(BhIcons.Antlers, contentDescription = null, tint = scheme.primary, modifier = Modifier.size(Sizes.logo))
+                        BuckLogo()
                         Spacer(Modifier.width(Spacing.s + Spacing.xxs))
                         Text(stringResource(R.string.app_title), style = BhTextStyles.brand)
                     }

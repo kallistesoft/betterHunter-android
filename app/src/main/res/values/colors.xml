@@ -2,6 +2,8 @@
 <resources>
     <!-- Match the Compose theme so there is no flash before the first frame. -->
     <color name="window_background">#FFF5F2EA</color>
-    <!-- Middle of the icon's green gradient. -->
+    <!-- The splash shows the icon's buck on a slightly lighter green in light mode. -->
     <color name="splash_background">#FF2D5B38</color>
+    <!-- App icon background, the green of the design mockup's app icon. -->
+    <color name="ic_launcher_background">#FF1F4229</color>
 </resources>
