@@ -17,10 +17,12 @@ object Sizes {
     val badgeM = 40.dp
     val badgeL = 44.dp
     val badgeXl = 60.dp
+    val badgeHero = 84.dp
     val badgeInsetS = 6.dp
     val badgeInsetM = 8.dp
     val badgeInsetL = 10.dp
     val badgeInsetXl = 14.dp
+    val badgeInsetHero = 22.dp
 
     // Progress rings and their stroke
     val ringS = 48.dp
@@ -59,6 +61,11 @@ object Sizes {
     val cardPadding = 18.dp
     val answerRowMinHeight = 60.dp
     val answerTileMinHeight = 64.dp
+
+    /** Onboarding choices ([ca.kallistesoft.hunt.core.designsystem.component.ChoiceCard]) and their radio or check mark. */
+    val choiceMinHeight = 80.dp
+    val selectionMark = 22.dp
+    val checkboxCorner = 6.dp
     val photoThumb = 72.dp
 
     /** Start inset of a divider in a list of items led by a large badge (aligns with the text). */

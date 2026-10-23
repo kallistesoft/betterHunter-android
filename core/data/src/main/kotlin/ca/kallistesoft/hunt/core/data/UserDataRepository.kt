@@ -3,7 +3,10 @@ package ca.kallistesoft.hunt.core.data
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.Serializer
+import ca.kallistesoft.hunt.core.model.HunterType
+import ca.kallistesoft.hunt.core.model.Province
 import ca.kallistesoft.hunt.core.model.UserProgress
+import ca.kallistesoft.hunt.core.model.Weapon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
@@ -31,7 +34,16 @@ interface UserDataRepository {
     /** Records several answers at once (end of a mock exam). */
     suspend fun recordAll(results: List<Pair<String, Boolean>>)
 
-    suspend fun setMyExams(ids: List<String>)
+    /** Saves the answers to onboarding. */
+    suspend fun saveProfile(type: HunterType, weapons: Set<Weapon>, home: Province)
+
+    /** Adds or hides a province's quizzes (My provinces). */
+    suspend fun setProvince(province: Province, enabled: Boolean)
+
+    /** "I passed the real exam": the user becomes a new hunter. */
+    suspend fun markExamPassed(examId: String)
+
+    suspend fun dismissNewHunterBanner()
 
     /** Answers today's photo of the day; it also counts toward the goal, streak and weak spots. */
     suspend fun answerPhotoOfDay(questionId: String, choice: Int, correct: Boolean)
@@ -54,8 +66,20 @@ internal class DataStoreUserDataRepository @Inject constructor(
         store.updateData { p -> results.fold(p) { acc, (id, correct) -> acc.record(id, correct, day) } }
     }
 
-    override suspend fun setMyExams(ids: List<String>) {
-        store.updateData { it.copy(myExams = ids) }
+    override suspend fun saveProfile(type: HunterType, weapons: Set<Weapon>, home: Province) {
+        store.updateData { it.withProfile(type, weapons, home) }
+    }
+
+    override suspend fun setProvince(province: Province, enabled: Boolean) {
+        store.updateData { it.withProvince(province, enabled) }
+    }
+
+    override suspend fun markExamPassed(examId: String) {
+        store.updateData { it.withExamPassed(examId) }
+    }
+
+    override suspend fun dismissNewHunterBanner() {
+        store.updateData { it.copy(newHunterBanner = false) }
     }
 
     override suspend fun answerPhotoOfDay(questionId: String, choice: Int, correct: Boolean) {

@@ -1,10 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Exam picker -->
-    <string name="picker_title">Quel examen préparez-vous?</string>
-    <string name="picker_subtitle">Choisissez un ou plusieurs tests. Vous pourrez changer plus tard.</string>
+    <!-- Onboarding -->
+    <string name="onboarding_welcome">Bienvenue</string>
+    <string name="onboarding_next_question">Question suivante</string>
+    <string name="onboarding_last_question">Dernière question</string>
+    <string name="onboarding_local">Enregistré sur cet appareil seulement. Aucun compte requis.</string>
     <string name="action_continue">Continuer</string>
-    <string name="action_skip">Passer</string>
+    <string name="hunter_type_title">Quel genre de chasseur êtes-vous?</string>
+    <string name="hunter_type_sub">Nous vous proposerons les bons examens et exercices. Vous pourrez changer plus tard.</string>
+    <string name="hunter_working">En formation</string>
+    <string name="hunter_working_sub">Je prépare mon permis ou mon cours de chasseur</string>
+    <string name="hunter_new">Nouveau chasseur</string>
+    <string name="hunter_new_sub">Certifié, quelques saisons derrière moi</string>
+    <string name="hunter_experienced">Chasseur expérimenté</string>
+    <string name="hunter_experienced_sub">Plusieurs saisons sur le terrain</string>
+    <string name="hunt_with_title">Avec quoi chassez-vous?</string>
+    <string name="hunt_with_sub">Choisissez tout ce qui s\'applique. Cela détermine le cours de chasseur et les règles affichés.</string>
+    <string name="weapon_firearm">Arme à feu</string>
+    <string name="weapon_firearm_sub">Carabine, fusil ou arme à chargement par la bouche</string>
+    <string name="weapon_bow">Arc</string>
+    <string name="weapon_bow_sub">Arc à poulies, recourbé ou long</string>
+    <string name="weapon_crossbow">Arbalète</string>
+    <string name="weapon_crossbow_sub">Chasse à l\'arbalète</string>
+    <string name="hunt_where_title">Où chassez-vous?</string>
+    <string name="hunt_where_sub">Vos quiz et vos règles suivent votre province.</string>
+    <string name="hunt_where_note">Vous pourrez ajouter les quiz d\'autres provinces plus tard.</string>
+
+    <!-- Provinces -->
+    <string name="province_qc">Québec</string>
+    <string name="province_qc_sub">Cours de chasseur du Québec (ICAF; arc et arbalète bientôt)</string>
+    <string name="province_ab">Alberta</string>
+    <string name="province_ab_sub">Cours de chasseur de l\'Alberta et PPA (permis d\'armes à feu)</string>
+    <string name="province_other">Ailleurs au Canada</string>
+    <string name="province_other_sub">Le PPA (permis d\'armes à feu) pour l\'instant; d\'autres provinces à venir</string>
+    <string name="my_provinces">Mes provinces</string>
+    <string name="my_provinces_sub">Vos quiz suivent vos provinces. Ajoutez une province pour vous exercer à son cours de chasseur, ou retirez-en une pour masquer ses quiz.</string>
+    <string name="where_you_hunt">Où vous chassez</string>
+    <string name="more_provinces">D\'autres provinces à venir.</string>
+    <string name="other_provinces">Autres provinces</string>
+    <string name="all_provinces_added">Toutes les provinces sont ajoutées</string>
+    <string name="add_more">En ajouter</string>
+
+    <!-- Passed the real exam -->
+    <string name="passed_real_exam">J\'ai réussi le vrai examen</string>
+    <string name="exam_passed">%1$s réussi</string>
+    <string name="real_exam">Vrai examen</string>
+    <string name="passed_title">Avez-vous réussi votre cours de chasseur (%1$s)?</string>
+    <string name="passed_sub">Si oui, félicitations! Voici ce qui change dans BetterHunter :</string>
+    <string name="passed_change_home"><![CDATA[L\'accueil mise sur l\'identification du gibier : <b>Qu\'est-ce que c\'est?</b> devient votre exercice quotidien.]]></string>
+    <string name="passed_change_training"><![CDATA[Vos exercices d\'examen restent dans <b>Entraînement aux examens</b>, pour revoir les règles en tout temps.]]></string>
+    <string name="passed_change_profile"><![CDATA[Vous devenez <b>Nouveau chasseur</b>. BetterHunter vous croit sur parole : rien n\'est vérifié ni envoyé.]]></string>
+    <string name="passed_yes">Oui, j\'ai réussi</string>
+    <string name="passed_not_yet">Pas encore</string>
+    <string name="new_hunter_welcome">Cours de chasseur réussi. Bienvenue, nouveau chasseur!</string>
+    <string name="new_hunter_welcome_sub">Aiguisez maintenant votre œil sur le terrain.</string>
+    <string name="close">Fermer</string>
 
     <!-- Dashboard -->
     <string name="hub_exams">Entraînement aux examens</string>
@@ -28,7 +78,6 @@
     </plurals>
     <string name="my_exams">Mes examens</string>
     <string name="action_change">Modifier</string>
-    <string name="other_tests">Autres tests</string>
     <string name="today">Aujourd\'hui</string>
     <plurals name="goal_remaining">
         <item quantity="one">Encore %1$d question pour l\'objectif du jour</item>
@@ -51,6 +100,13 @@
         <item quantity="other">%1$d jours de suite</item>
     </plurals>
 
+    <plurals name="animals_remaining">
+        <item quantity="one">Encore %1$d animal pour l\'objectif du jour</item>
+        <item quantity="many">Encore %1$d animaux pour l\'objectif du jour</item>
+        <item quantity="other">Encore %1$d animaux pour l\'objectif du jour</item>
+    </plurals>
+    <string name="hub_exams_refresh">Revoir les règles en tout temps</string>
+
     <!-- About -->
     <string name="how_it_works">Comment ça marche</string>
     <string name="sources">Sources</string>
@@ -64,9 +120,6 @@
     <string name="disclaimer">Outil d\'étude indépendant, non affilié à la GRC, au Programme canadien des armes à feu, au gouvernement du Québec ni à la FédéCP, et non approuvé par eux. Les questions sont des questions de pratique originales, rédigées à partir des manuels officiels; ce ne sont pas les questions des examens officiels. Des erreurs sont possibles et les lois changent : vérifiez toujours dans le manuel officiel et la réglementation en vigueur. Aucune garantie de réussite.</string>
 
     <!-- Exams -->
-    <string name="group_firearms">Permis d\'armes à feu</string>
-    <string name="group_hunting">Éducation à la chasse</string>
-    <string name="group_id">Identification</string>
     <string name="to_pass">%1$d %% pour réussir</string>
     <string name="minutes">%1$d min</string>
     <string name="review_mistakes">Revoir mes erreurs (%1$d)</string>
@@ -96,7 +149,6 @@
     <string name="wrong">Mauvaise réponse</string>
     <string name="time_left">Temps restant %1$s</string>
     <string name="no_questions">Aucune question disponible.</string>
-    <string name="no_weak">Aucune question à revoir pour l\'instant.</string>
     <string name="source">Source :</string>
     <string name="species_page">Fiche de l\'espèce</string>
     <string name="fact_sheet">Fiche</string>
@@ -124,4 +176,22 @@
     <string name="again">Recommencer</string>
     <string name="home">Accueil</string>
     <string name="time_up">Temps écoulé</string>
+    <string name="practice_results">Résultats de la pratique</string>
+    <string name="exam_results">Résultats de l\'examen simulé</string>
+    <string name="daily_goal_reached">Objectif du jour atteint</string>
+    <plurals name="to_review_mistakes">
+        <item quantity="one">%1$d question va dans « Revoir mes erreurs »</item>
+        <item quantity="many">%1$d questions vont dans « Revoir mes erreurs »</item>
+        <item quantity="other">%1$d questions vont dans « Revoir mes erreurs »</item>
+    </plurals>
+    <plurals name="to_review">
+        <item quantity="one">%1$d question à revoir</item>
+        <item quantity="many">%1$d questions à revoir</item>
+        <item quantity="other">%1$d questions à revoir</item>
+    </plurals>
+    <string name="exam_time">Temps : %1$s sur %2$s</string>
+    <string name="review_title">Revoir mes erreurs</string>
+    <string name="nothing_to_review">Rien à revoir pour l\'instant</string>
+    <string name="nothing_to_review_body">Les questions manquées s\'ajoutent ici jusqu\'à ce que vous y répondiez correctement deux fois de suite.</string>
+    <string name="practise_exam">S\'exercer : %1$s</string>
 </resources>

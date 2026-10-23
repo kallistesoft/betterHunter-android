@@ -20,6 +20,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Flag
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Timer
+import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
@@ -51,8 +53,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ca.kallistesoft.hunt.core.designsystem.component.AnswerChoice
 import ca.kallistesoft.hunt.core.designsystem.component.AnswerResult
 import ca.kallistesoft.hunt.core.designsystem.component.AnswerState
+import ca.kallistesoft.hunt.core.designsystem.component.BadgeSize
 import ca.kallistesoft.hunt.core.designsystem.component.BhCard
 import ca.kallistesoft.hunt.core.designsystem.component.BottomActionBar
+import ca.kallistesoft.hunt.core.designsystem.component.IconBadge
 import ca.kallistesoft.hunt.core.designsystem.component.LinkButton
 import ca.kallistesoft.hunt.core.designsystem.component.Overline
 import ca.kallistesoft.hunt.core.designsystem.component.PrimaryButton
@@ -78,19 +82,23 @@ import ca.kallistesoft.hunt.core.ui.rememberLinkOpener
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
-/** A quiz on [examId]: questions, then the results ("Try again" starts a new run in place). */
+/**
+ * A quiz on [examId]: questions, then the results ("Try again" starts a new run in place). With no mistakes to
+ * review, [onStartPractice] offers a practice run instead.
+ */
 @Composable
 fun QuizScreen(
     examId: String,
     mode: QuizMode,
     onClose: () -> Unit,
+    onStartPractice: () -> Unit,
     viewModel: QuizViewModel = hiltViewModel<QuizViewModel, QuizViewModel.Factory>(
         creationCallback = { factory -> factory.create(examId, mode) },
     ),
 ) {
     when (val state = viewModel.uiState.collectAsStateWithLifecycle().value) {
         QuizUiState.Loading -> LoadingQuiz(onClose)
-        is QuizUiState.Empty -> EmptyQuiz(state.mode, onClose)
+        is QuizUiState.Empty -> EmptyQuiz(state, onClose, onStartPractice)
         is QuizUiState.Running -> QuestionContent(
             state,
             canReport = viewModel.canReport.collectAsStateWithLifecycle().value,
@@ -98,7 +106,12 @@ fun QuizScreen(
             onNext = viewModel::next,
             onClose = onClose,
         )
-        is QuizUiState.Finished -> ResultContent(state, onHome = onClose, onAgain = viewModel::restart)
+        is QuizUiState.Finished -> ResultContent(
+            state,
+            dailyGoalReached = viewModel.dailyGoalReached.collectAsStateWithLifecycle().value,
+            onHome = onClose,
+            onAgain = viewModel::restart,
+        )
     }
 }
 
@@ -111,15 +124,58 @@ private fun LoadingQuiz(onClose: () -> Unit) {
     }
 }
 
+/**
+ * Nothing to ask. In "Review my mistakes" that's good news: it says how mistakes get here and offers a practice run
+ * on the exam; otherwise the exam has no questions.
+ */
 @Composable
-private fun EmptyQuiz(mode: QuizMode, onClose: () -> Unit) {
-    Scaffold(topBar = { BackTopAppBar("", onClose) }) { padding ->
-        Box(Modifier.fillMaxSize().padding(padding).padding(Spacing.xxxl), contentAlignment = Alignment.Center) {
-            Text(
-                stringResource(if (mode == QuizMode.REVIEW) R.string.no_weak else R.string.no_questions),
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleMedium,
+internal fun EmptyQuiz(state: QuizUiState.Empty, onClose: () -> Unit, onStartPractice: () -> Unit) {
+    val review = state.mode == QuizMode.REVIEW && state.exam != null
+    Scaffold(
+        topBar = {
+            BackTopAppBar(
+                if (review) stringResource(R.string.review_title) else "",
+                onClose,
+                overline = state.exam?.let(::examLabel),
             )
+        },
+        bottomBar = {
+            if (review) {
+                BottomActionBar {
+                    PrimaryButton(
+                        stringResource(R.string.practise_exam, state.exam!!.id),
+                        onClick = onStartPractice,
+                        modifier = Modifier.weight(1f).testTag("empty-practise"),
+                        icon = Icons.Rounded.PlayArrow,
+                    )
+                }
+            }
+        },
+    ) { padding ->
+        Column(
+            Modifier.fillMaxSize().padding(padding).padding(Spacing.xxxl),
+            verticalArrangement = Arrangement.spacedBy(Spacing.m, Alignment.CenterVertically),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            if (review) {
+                IconBadge(Icons.Rounded.Check, size = BadgeSize.Hero, modifier = Modifier.padding(bottom = Spacing.s))
+                Text(
+                    stringResource(R.string.nothing_to_review),
+                    style = MaterialTheme.typography.headlineSmall,
+                    textAlign = TextAlign.Center,
+                )
+                Text(
+                    stringResource(R.string.nothing_to_review_body),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = TextAlign.Center,
+                )
+            } else {
+                Text(
+                    stringResource(R.string.no_questions),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleMedium,
+                )
+            }
         }
     }
 }

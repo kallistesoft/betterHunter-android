@@ -18,8 +18,8 @@ data class Exam(
     val isTraining: Boolean get() = group != ExamGroup.IDENTIFICATION
 }
 
-/** Sections exams are grouped in (picker, dashboard), in display order. */
-enum class ExamGroup { FIREARMS, HUNTING, IDENTIFICATION }
+/** Sections exams are grouped in, in display order: the hunter course makes the hunter, the PAL is optional. */
+enum class ExamGroup { HUNTING, FIREARMS, IDENTIFICATION }
 
 /** Where an exam belongs and which region it covers; the UI adds the icon. */
 data class ExamStyle(val region: String, val group: ExamGroup) {

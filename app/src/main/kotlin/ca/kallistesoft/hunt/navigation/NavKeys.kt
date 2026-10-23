@@ -12,8 +12,13 @@ data object Home : NavKey
 @Serializable
 data object ExamTraining : NavKey
 
+/** My provinces: which provinces' quizzes are shown. */
 @Serializable
-data object ExamPicker : NavKey
+data object Provinces : NavKey
+
+/** "Did you pass your hunter course?" for [examId]. */
+@Serializable
+data class PassedExam(val examId: String) : NavKey
 
 @Serializable
 data object Recognition : NavKey

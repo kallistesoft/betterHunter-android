@@ -2,11 +2,61 @@
 <resources>
     <string name="app_title" translatable="false">BetterHunter</string>
 
-    <!-- Exam picker -->
-    <string name="picker_title">Which exam are you preparing for?</string>
-    <string name="picker_subtitle">Pick one or more. You can change this later.</string>
+    <!-- Onboarding -->
+    <string name="onboarding_welcome">Welcome</string>
+    <string name="onboarding_next_question">Next question</string>
+    <string name="onboarding_last_question">Last question</string>
+    <string name="onboarding_local">Saved on this device only. No account needed.</string>
     <string name="action_continue">Continue</string>
-    <string name="action_skip">Skip</string>
+    <string name="hunter_type_title">What kind of hunter are you?</string>
+    <string name="hunter_type_sub">We\'ll suggest the right exams and practice for you. You can change this later.</string>
+    <string name="hunter_working">Working on it</string>
+    <string name="hunter_working_sub">Preparing for my licence or hunter course</string>
+    <string name="hunter_new">New hunter</string>
+    <string name="hunter_new_sub">Licensed, a few seasons so far</string>
+    <string name="hunter_experienced">Experienced hunter</string>
+    <string name="hunter_experienced_sub">Many seasons in the field</string>
+    <string name="hunt_with_title">What do you hunt with?</string>
+    <string name="hunt_with_sub">Pick all that apply. It decides which hunter course and rules you\'ll see.</string>
+    <string name="weapon_firearm">Firearm</string>
+    <string name="weapon_firearm_sub">Rifle, shotgun or muzzleloader</string>
+    <string name="weapon_bow">Bow</string>
+    <string name="weapon_bow_sub">Compound, recurve or longbow</string>
+    <string name="weapon_crossbow">Crossbow</string>
+    <string name="weapon_crossbow_sub">Hunting with a crossbow</string>
+    <string name="hunt_where_title">Where do you hunt?</string>
+    <string name="hunt_where_sub">Your quizzes and rules follow your province.</string>
+    <string name="hunt_where_note">You can add other provinces\' quizzes later.</string>
+
+    <!-- Provinces -->
+    <string name="province_qc">Québec</string>
+    <string name="province_qc_sub">Québec hunter course (ICAF; bow and crossbow coming soon)</string>
+    <string name="province_ab">Alberta</string>
+    <string name="province_ab_sub">Alberta hunter course and the PAL (firearms licence)</string>
+    <string name="province_other">Elsewhere in Canada</string>
+    <string name="province_other_sub">The PAL (firearms licence) for now; more provinces coming</string>
+    <string name="my_provinces">My provinces</string>
+    <string name="my_provinces_sub">Your quizzes follow your provinces. Add a province to practise its hunter course, or remove one to hide its quizzes.</string>
+    <string name="where_you_hunt">Where you hunt</string>
+    <string name="more_provinces">More provinces coming.</string>
+    <string name="other_provinces">Other provinces</string>
+    <string name="all_provinces_added">All provinces are added</string>
+    <string name="add_more">Add more</string>
+
+    <!-- Passed the real exam -->
+    <string name="passed_real_exam">I passed the real exam</string>
+    <string name="exam_passed">%1$s passed</string>
+    <string name="real_exam">Real exam</string>
+    <string name="passed_title">Did you pass your hunter course (%1$s)?</string>
+    <string name="passed_sub">Congratulations if so! Here\'s what changes in BetterHunter:</string>
+    <string name="passed_change_home"><![CDATA[Home focuses on identifying game: <b>What is it?</b> becomes your daily practice.]]></string>
+    <string name="passed_change_training"><![CDATA[Your exam practice stays in <b>Exam training</b>, to refresh the rules any time.]]></string>
+    <string name="passed_change_profile"><![CDATA[You become a <b>New hunter</b>. BetterHunter takes your word for it: nothing is checked or sent.]]></string>
+    <string name="passed_yes">Yes, I passed</string>
+    <string name="passed_not_yet">Not yet</string>
+    <string name="new_hunter_welcome">Hunter course passed. Welcome, new hunter!</string>
+    <string name="new_hunter_welcome_sub">Now sharpen your eye in the field.</string>
+    <string name="close">Close</string>
 
     <!-- Dashboard -->
     <string name="hub_exams">Exam training</string>
@@ -27,7 +77,6 @@
     </plurals>
     <string name="my_exams">My exams</string>
     <string name="action_change">Change</string>
-    <string name="other_tests">Other tests</string>
     <string name="today">Today</string>
     <plurals name="goal_remaining">
         <item quantity="one">%1$d question to your daily goal</item>
@@ -49,6 +98,12 @@
         <item quantity="other">%1$d-day streak</item>
     </plurals>
 
+    <plurals name="animals_remaining">
+        <item quantity="one">%1$d animal to your daily goal</item>
+        <item quantity="other">%1$d animals to your daily goal</item>
+    </plurals>
+    <string name="hub_exams_refresh">Refresh the rules any time</string>
+
     <!-- About -->
     <string name="how_it_works">How it works</string>
     <string name="sources">Sources</string>
@@ -62,9 +117,6 @@
     <string name="disclaimer">Independent study aid, not affiliated with or endorsed by the RCMP, the Canadian Firearms Program, the Government of Québec or FédéCP. Questions are original practice questions based on the official manuals; they are not the official exam questions. Errors are possible and laws change: always check the official manual and current regulations. No guarantee of passing.</string>
 
     <!-- Exams -->
-    <string name="group_firearms">Firearms licence</string>
-    <string name="group_hunting">Hunter education</string>
-    <string name="group_id">Identification</string>
     <string name="to_pass">%1$d%% to pass</string>
     <string name="minutes">%1$d min</string>
     <string name="review_mistakes">Review my mistakes (%1$d)</string>
@@ -93,7 +145,6 @@
     <string name="wrong">Incorrect</string>
     <string name="time_left">Time left %1$s</string>
     <string name="no_questions">No questions available.</string>
-    <string name="no_weak">Nothing to review yet.</string>
     <string name="source">Source:</string>
     <string name="species_page">Species fact sheet</string>
     <string name="fact_sheet">Fact sheet</string>
@@ -121,4 +172,20 @@
     <string name="again">Try again</string>
     <string name="home">Home</string>
     <string name="time_up">Time is up</string>
+    <string name="practice_results">Practice results</string>
+    <string name="exam_results">Mock exam results</string>
+    <string name="daily_goal_reached">Daily goal reached</string>
+    <plurals name="to_review_mistakes">
+        <item quantity="one">%1$d question goes to \"Review my mistakes\"</item>
+        <item quantity="other">%1$d questions go to \"Review my mistakes\"</item>
+    </plurals>
+    <plurals name="to_review">
+        <item quantity="one">%1$d question to review</item>
+        <item quantity="other">%1$d questions to review</item>
+    </plurals>
+    <string name="exam_time">Time: %1$s of %2$s</string>
+    <string name="review_title">Review my mistakes</string>
+    <string name="nothing_to_review">Nothing to review yet</string>
+    <string name="nothing_to_review_body">Questions you miss come here until you answer them right twice in a row.</string>
+    <string name="practise_exam">Practise the %1$s</string>
 </resources>

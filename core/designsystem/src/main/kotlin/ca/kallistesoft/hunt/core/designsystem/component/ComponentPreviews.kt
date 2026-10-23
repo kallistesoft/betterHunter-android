@@ -75,6 +75,8 @@ internal fun CardsPreview() = PreviewSurface {
             }
         }
         BhCard { Text("Card content", Modifier.padding(Spacing.l)) }
+        ChoiceCard(Icons.Outlined.School, "Working on it", "Preparing for my licence", selected = true, mode = ChoiceMode.Single, onClick = {})
+        ChoiceCard(Icons.Outlined.Shield, "Firearm", "Rifle, shotgun or muzzleloader", selected = false, mode = ChoiceMode.Multiple, onClick = {})
     }
 }
 

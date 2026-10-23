@@ -9,9 +9,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.EmojiEvents
 import androidx.compose.material.icons.outlined.Timer
+import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.Replay
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
@@ -46,7 +49,10 @@ data class ExamSummary(val exam: Exam, val questionCount: Int, val readiness: Fl
     val available: Boolean get() = !exam.comingSoon && questionCount > 0
 }
 
-/** Full card for one exam: icon, facts, readiness, Practice / Mock exam / review mistakes. */
+/**
+ * Full card for one exam: icon, facts, readiness, Practice / Mock exam / review mistakes. A hunter course also gets
+ * "I passed the real exam" ([onPassedRealExam]), or "ICAF passed" once the user said so ([passed]).
+ */
 @Composable
 fun ExamCard(
     summary: ExamSummary,
@@ -54,6 +60,8 @@ fun ExamCard(
     onExam: () -> Unit,
     onReview: () -> Unit,
     modifier: Modifier = Modifier,
+    onPassedRealExam: (() -> Unit)? = null,
+    passed: Boolean = false,
 ) {
     val exam = summary.exam
     val lang = currentLang()
@@ -111,8 +119,31 @@ fun ExamCard(
                         Text(stringResource(R.string.review_mistakes, summary.weakCount))
                     }
                 }
+                if (passed || onPassedRealExam != null) {
+                    HorizontalDivider(Modifier.padding(vertical = Spacing.xs), color = scheme.outlineVariant)
+                    if (passed) {
+                        ExamPassed(exam.id, Modifier.padding(vertical = Spacing.m))
+                    } else if (onPassedRealExam != null) {
+                        LinkButton(onClick = onPassedRealExam, modifier = Modifier.testTag("passed-${exam.id}")) {
+                            Icon(Icons.Outlined.EmojiEvents, contentDescription = null, Modifier.size(Sizes.iconM))
+                            Spacer(Modifier.width(Spacing.s))
+                            Text(stringResource(R.string.passed_real_exam))
+                        }
+                    }
+                }
             }
         }
+    }
+}
+
+/** "✓ ICAF passed", in green: the user said they passed this exam for real. */
+@Composable
+fun ExamPassed(examId: String, modifier: Modifier = Modifier) {
+    val green = MaterialTheme.colorScheme.secondary
+    Row(modifier, verticalAlignment = Alignment.CenterVertically) {
+        Icon(Icons.Rounded.Check, contentDescription = null, tint = green, modifier = Modifier.size(Sizes.iconS))
+        Spacer(Modifier.width(Spacing.xs + Spacing.xxs))
+        Text(stringResource(R.string.exam_passed, examId), style = MaterialTheme.typography.labelMedium, color = green)
     }
 }
 

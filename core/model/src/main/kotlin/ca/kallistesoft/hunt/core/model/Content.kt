@@ -9,7 +9,7 @@ data class Content(
 
     fun exam(id: String): Exam? = exams.firstOrNull { it.id == id }
 
-    /** Exams with questions, in section order (firearms, hunting, identification), then exams.json order. */
+    /** Exams with questions, in section order (hunting, firearms, identification), then exams.json order. */
     val availableExams: List<Exam> by lazy {
         exams.filter { !it.comingSoon && questionsFor(it).isNotEmpty() }.sortedBy { it.group.ordinal }
     }

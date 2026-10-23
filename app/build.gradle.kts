@@ -80,6 +80,7 @@ dependencies {
     implementation(project(":feature:about"))
     implementation(project(":feature:exams"))
     implementation(project(":feature:home"))
+    implementation(project(":feature:onboarding"))
     implementation(project(":feature:quiz"))
 
     implementation(libs.androidx.activity.compose)

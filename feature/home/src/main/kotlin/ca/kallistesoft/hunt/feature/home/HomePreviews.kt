@@ -9,9 +9,11 @@ internal val previewHomeState = HomeUiState(
     loading = false,
     answeredToday = 12,
     streak = 4,
-    mainExam = PreviewData.pal,
+    mainExam = PreviewData.icaf,
     trainingExamCount = 4,
     readiness = 0.45f,
+    photoGameId = PreviewData.photoGame.id,
+    photoReadiness = 0.4f,
     gameCount = 1,
     animalCount = 66,
     photoOfDay = PhotoOfDayState(PreviewData.photoGame.id, PreviewData.photoQuestion, choice = null),
@@ -20,7 +22,7 @@ internal val previewHomeState = HomeUiState(
 @BhPreviews
 @Composable
 internal fun HomePreview() = PreviewSurface {
-    HomeContent(previewHomeState, {}, {}, {}, {}, { _, _ -> }, {}, {})
+    HomeContent(previewHomeState, {}, {}, {}, {}, { _, _ -> }, {}, {}, {})
 }
 
 /** Goal reached, sample-content warning, photo of the day answered wrong. */
@@ -33,7 +35,17 @@ internal fun HomeAnsweredPreview() = PreviewSurface {
             answeredToday = 20,
             photoOfDay = previewHomeState.photoOfDay?.copy(choice = 0),
         ),
-        {}, {}, {}, {}, { _, _ -> }, {}, {},
+        {}, {}, {}, {}, { _, _ -> }, {}, {}, {},
+    )
+}
+
+/** A new hunter just back from "Yes, I passed": the welcome, the goal on "What is it?", ICAF passed. */
+@BhPreviews
+@Composable
+internal fun HomeNewHunterPreview() = PreviewSurface {
+    HomeContent(
+        previewHomeState.copy(hunter = true, newHunterBanner = true, answeredToday = 5, streak = 6, passedExamId = "ICAF"),
+        {}, {}, {}, {}, { _, _ -> }, {}, {}, {},
     )
 }
 

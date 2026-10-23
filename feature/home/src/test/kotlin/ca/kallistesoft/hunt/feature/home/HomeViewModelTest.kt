@@ -3,6 +3,8 @@ package ca.kallistesoft.hunt.feature.home
 import app.cash.turbine.test
 import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.flags.FeatureFlag
+import ca.kallistesoft.hunt.core.model.HunterType
+import ca.kallistesoft.hunt.core.model.Province
 import ca.kallistesoft.hunt.core.model.UserProgress
 import ca.kallistesoft.hunt.core.testing.FakeContentRepository
 import ca.kallistesoft.hunt.core.testing.FakeFeatureFlags
@@ -13,7 +15,9 @@ import ca.kallistesoft.hunt.core.testing.TestContent
 import ca.kallistesoft.hunt.core.testing.awaitItemMatching
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 
@@ -21,7 +25,7 @@ class HomeViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private val userData = FakeUserDataRepository(UserProgress(myExams = listOf("PAL")))
+    private val userData = FakeUserDataRepository(UserProgress().withProfile(HunterType.WORKING_ON_IT, emptySet(), Province.OTHER))
     private val flags = FakeFeatureFlags()
     private val viewModel by lazy { HomeViewModel(FakeContentRepository(), userData, Today { TEST_DAY }, flags) }
 
@@ -36,6 +40,25 @@ class HomeViewModelTest {
             assertEquals(3, state.animalCount)
             assertNull(assertNotNull(state.photoOfDay).choice)
             assertEquals(0, state.answeredToday)
+            assertFalse(state.hunter)
+        }
+    }
+
+    @Test
+    fun `passing the real exam turns Home into the hunter's, with a welcome until closed`() = runTest {
+        userData.setProvince(Province.QC, true)
+        viewModel.uiState.test {
+            assertFalse(awaitItemMatching { !it.loading }.hunter)
+
+            userData.markExamPassed("ICAF")
+            val hunter = awaitItem()
+            assertTrue(hunter.hunter)
+            assertTrue(hunter.newHunterBanner)
+            assertEquals("ICAF", hunter.passedExamId)
+            assertEquals(TestContent.photoGame.id, hunter.photoGameId)
+
+            viewModel.dismissNewHunterBanner()
+            assertFalse(awaitItem().newHunterBanner)
         }
     }
 

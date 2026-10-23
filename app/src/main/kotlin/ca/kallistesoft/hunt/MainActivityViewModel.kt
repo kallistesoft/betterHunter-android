@@ -18,7 +18,7 @@ sealed interface MainUiState {
     data object Loading : MainUiState
 
     data class Ready(
-        /** No exams chosen yet: the dashboard starts with the exam picker. */
+        /** Onboarding not done yet: the app starts with it instead of the dashboard. */
         val firstRun: Boolean,
         /** This build is below the minimum version: only the update screen is shown. */
         val updateRequired: Boolean,
@@ -32,7 +32,7 @@ class MainActivityViewModel @Inject constructor(
     private val featureFlags: FeatureFlags,
 ) : ViewModel() {
     val uiState: StateFlow<MainUiState> = combine(userData.progress, forceUpdate.updateRequired) { progress, required ->
-        MainUiState.Ready(firstRun = progress.myExams == null, updateRequired = required)
+        MainUiState.Ready(firstRun = !progress.onboarded, updateRequired = required)
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), MainUiState.Loading)
 
     /** Fetches the latest minimum version and feature flags; called whenever the app comes to the foreground. */

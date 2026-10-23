@@ -80,9 +80,10 @@ firearms, not a requirement to be a hunter. Onboarding asks where the user hunts
 quizzes: Québec, the Québec hunter course (no PAL); Alberta, the Alberta course and the PAL; elsewhere in Canada, the
 PAL. Settings → My provinces switches other provinces on (adding their quizzes) or off. "I passed the real exam" on a hunter
 course is what turns a user into a New hunter.
-ICAA (bow and crossbow) is shown as coming soon until it has questions. *App, not yet done:* the app still asks for exams in a
-first-run picker, lists them firearms licence first (`ExamGroup` order) and has no province or weapon; the mockup
-(design/) shows the target.
+ICAA (bow and crossbow) is shown as coming soon until it has questions. *In the app (2026-10-23):* onboarding asks the three questions (no exam picker), the profile and the
+provinces are in `UserProgress` (`myExamIds`: home province first), hunter courses come before the PAL (`ExamGroup`
+order), My provinces is reached from Exam training, and "Yes, I passed" makes a New hunter with Home's new-hunter
+version. Settings (hunter type, weapons, where you hunt) is not built yet.
 
 ## Design
 
