@@ -169,6 +169,10 @@
     <string name="report_subject">Problem with a question %1$s</string>
     <string name="report_body">Describe the problem (error, rule change, translation…):\n\n\n</string>
     <string name="report_fallback">Email us at %1$s (question %2$s)</string>
+    <!-- Keyboard shortcuts during a question (Chromebook, keyboard), listed in the Keyboard Shortcut Helper -->
+    <string name="shortcuts_quiz">During a question</string>
+    <string name="shortcut_answer">Choose answer %1$s</string>
+    <string name="shortcut_next">Next question</string>
     <string name="quit_title">Quit this test?</string>
     <string name="quit_body">Your progress in this test will be lost.</string>
     <string name="quit">Quit</string>
@@ -308,6 +312,8 @@
     <string name="reminders_season_sub">3 weeks and 1 day before %1$s</string>
     <string name="reminders_season_no_date">Set your season start first</string>
     <string name="quiet_hours">Never between 9 pm and 8 am.</string>
+    <string name="notifications_blocked">Notifications are off</string>
+    <string name="notifications_blocked_sub">Reminders can\'t reach you. Turn notifications on in settings.</string>
 
     <string name="notif_channel_daily">Daily questions</string>
     <string name="notif_channel_season">Season reminders</string>
