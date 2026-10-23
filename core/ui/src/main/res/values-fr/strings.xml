@@ -209,4 +209,121 @@
     <string name="nothing_to_review">Rien à revoir pour l\'instant</string>
     <string name="nothing_to_review_body">Les questions manquées s\'ajoutent ici jusqu\'à ce que vous y répondiez correctement deux fois de suite.</string>
     <string name="practise_exam">S\'exercer : %1$s</string>
+    <!-- Nouveau chasseur : questions du jour, compétences terrain, saison, rappels (DECISIONS.md, P11) -->
+    <string name="daily_title">Restez à jour : %1$d questions</string>
+    <string name="daily_every_day">nouvelles questions chaque jour</string>
+    <string name="daily_species">%1$d espèces</string>
+    <string name="daily_species_sub">Nommez l\'animal d\'après sa photo</string>
+    <string name="daily_general">%1$d générales</string>
+    <string name="daily_general_sub">Règles, sécurité, placement du tir</string>
+    <string name="daily_start">Commencer les questions du jour</string>
+    <string name="daily_continue_species">Continuer : encore %1$d espèce(s)</string>
+    <string name="daily_continue_general">Continuer : encore %1$d générale(s)</string>
+    <string name="daily_all_done">Terminé pour aujourd\'hui. Nouvelles questions demain.</string>
+    <string name="daily_overline">Aujourd\'hui · %1$s</string>
+    <string name="hub_skills">Compétences terrain</string>
+    <string name="hub_skills_sub">Placement du tir, pistage, sécurité</string>
+    <plurals name="season_in_weeks">
+        <item quantity="one">Votre saison commence dans %1$d semaine</item>
+        <item quantity="other">Votre saison commence dans %1$d semaines</item>
+    </plurals>
+    <plurals name="season_in_days">
+        <item quantity="one">Votre saison commence dans %1$d jour</item>
+        <item quantity="other">Votre saison commence dans %1$d jours</item>
+    </plurals>
+    <string name="season_tomorrow">Votre saison commence demain</string>
+    <string name="season_today">Votre saison commence aujourd\'hui</string>
+    <string name="season_date_sub">%1$s, la date choisie · bilan d\'avant-saison : %2$d questions</string>
+    <string name="season_coming">La saison de chasse approche</string>
+    <string name="season_coming_sub">Faites votre bilan d\'avant-saison : %1$d questions sur toutes vos compétences</string>
+    <string name="season_set_date">Indiquer le début de ma saison</string>
+
+    <string name="skills_sub">Aiguisez l\'essentiel sur le terrain, une compétence à la fois.</string>
+    <string name="skills_all_mastered_sub">Toutes les compétences maîtrisées. Gardez-les vives pour la prochaine saison.</string>
+    <string name="todays_mix">Le mélange du jour</string>
+    <string name="mix_sub">%1$d questions, surtout de vos compétences les plus faibles</string>
+    <string name="mix_sub_kept">%1$d de vos compétences les plus faibles, %2$d pour garder les acquis</string>
+    <string name="start_mix">Commencer le mélange</string>
+    <string name="keep_edge">Restez affûté</string>
+    <string name="keep_edge_sub">%1$d questions sur toutes vos compétences, les plus anciennes réponses d\'abord</string>
+    <string name="start">Commencer</string>
+    <string name="skills">Compétences</string>
+    <string name="my_mistakes_count">Mes erreurs (%1$d)</string>
+    <string name="skill_shot">Placement du tir</string>
+    <string name="skill_shot_sub">Zones vitales, angles, distance</string>
+    <string name="skill_after">Après le tir</string>
+    <string name="skill_after_sub">Pistage, récupération, enregistrement</string>
+    <string name="skill_handling">Maniement sécuritaire</string>
+    <string name="skill_handling_sub">Transport, obstacles, zones de tir</string>
+    <string name="skill_rules">Règles sur le terrain</string>
+    <string name="skill_rules_sub">Heures de chasse, coupons, transport</string>
+    <string name="skill_survival">Survie et premiers soins</string>
+    <string name="skill_survival_sub">Perdu, froid, blessé en forêt</string>
+    <string name="mastered">Maîtrisée</string>
+    <plurals name="was_mastered">
+        <item quantity="one">Était maîtrisée · %1$d réponse expirée</item>
+        <item quantity="other">Était maîtrisée · %1$d réponses expirées</item>
+    </plurals>
+    <string name="fade_note">Les bonnes réponses comptent 3 mois : une compétence revient avant chaque saison.</string>
+    <string name="field_overline">Compétences terrain · %1$s</string>
+    <string name="season_check">Bilan d\'avant-saison</string>
+    <string name="season_check_overline">Bilan d\'avant-saison · toutes les compétences</string>
+    <string name="in_the_field">Sur le terrain</string>
+    <string name="field_results">Compétences terrain · résultats</string>
+    <string name="skill_stronger">Compétence en progrès</string>
+    <string name="skill_steady">Continuez à pratiquer</string>
+    <string name="skill_mastered">Compétence maîtrisée</string>
+    <string name="skill_mastered_sub">Toutes les questions de cette compétence, réussies.</string>
+    <string name="staying_mastered">Garder la maîtrise</string>
+    <string name="staying_mastered_mix">Chaque mélange garde 1 ou 2 de ses questions, pour l\'entretenir.</string>
+    <string name="staying_mastered_miss">Une erreur la ramène en pratique jusqu\'à la bonne réponse.</string>
+    <string name="percent_change">%1$d %% → %2$d %%</string>
+    <string name="to_my_mistakes">Elles vont dans « Mes erreurs ».</string>
+    <string name="next_skill">Suivante : %1$s</string>
+    <string name="your_skills">Vos compétences</string>
+
+    <string name="done_for_today">Terminé pour aujourd\'hui</string>
+    <string name="daily_right">%1$d sur %2$d réussies</string>
+    <string name="part_right">%1$d / %2$d réussies</string>
+    <string name="nudge_title">Un rappel demain?</string>
+    <string name="nudge_body">Nous vous préviendrons quand vos 6 prochaines questions seront prêtes, une fois par jour, vers l\'heure où vous jouez d\'habitude. Jamais entre 21 h et 8 h. Aucun rappel si vous les avez déjà faites.</string>
+    <string name="turn_on_reminders">Activer les rappels</string>
+    <string name="not_now">Pas maintenant</string>
+
+    <string name="season_start">Début de saison</string>
+    <string name="season_date_title">Quand commence votre saison?</string>
+    <string name="season_date_body">Votre première journée de chasse cette année. Elle sert seulement à vous rappeler votre bilan d\'avant-saison.</string>
+    <string name="season_date_note">Les dates dépendent de votre zone, de votre arme et de l\'année. Consultez la réglementation officielle; BetterHunter ne connaît pas vos dates.</string>
+    <string name="save_date">Enregistrer : %1$s</string>
+    <string name="pick_a_date">Choisissez votre première journée de chasse</string>
+    <string name="dont_know_yet">Je ne sais pas encore</string>
+    <string name="previous_month">Mois précédent</string>
+    <string name="next_month">Mois suivant</string>
+    <string name="saved_date">Enregistré : %1$s</string>
+    <string name="remind_title">Un rappel avant ma saison?</string>
+    <string name="remind_body">Nous vous rappellerons de faire votre bilan d\'avant-saison 3 semaines avant, puis la veille. Seulement pour votre date, vers l\'heure où vous jouez d\'habitude. Jamais entre 21 h et 8 h.</string>
+    <string name="remind_me">Me le rappeler</string>
+    <string name="no_thanks">Non merci</string>
+
+    <string name="season_start_set">%1$s · la date choisie</string>
+    <string name="season_start_none">Non indiqué</string>
+    <string name="reminders">Rappels</string>
+    <string name="reminders_daily">Questions du jour</string>
+    <string name="reminders_daily_sub">Vers %1$s, quand vous jouez d\'habitude</string>
+    <string name="reminders_season">Rappels de saison</string>
+    <string name="reminders_season_sub">3 semaines et 1 jour avant le %1$s</string>
+    <string name="reminders_season_no_date">Indiquez d\'abord le début de votre saison</string>
+    <string name="quiet_hours">Jamais entre 21 h et 8 h.</string>
+
+    <string name="notif_channel_daily">Questions du jour</string>
+    <string name="notif_channel_season">Rappels de saison</string>
+    <string name="notif_daily_title">Vos 6 questions sont prêtes</string>
+    <string name="notif_daily_text">3 espèces, 3 générales.</string>
+    <plurals name="notif_daily_streak">
+        <item quantity="one">3 espèces, 3 générales. Gardez votre série de %1$d jour.</item>
+        <item quantity="other">3 espèces, 3 générales. Gardez votre série de %1$d jours.</item>
+    </plurals>
+    <string name="notif_season_text">Faites votre bilan d\'avant-saison avant le %1$s.</string>
+    <string name="quit_field_title">Arrêter ici?</string>
+    <string name="quit_field_body">Vos réponses jusqu\'ici sont enregistrées.</string>
 </resources>

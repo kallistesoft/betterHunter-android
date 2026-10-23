@@ -9,25 +9,32 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import ca.kallistesoft.hunt.core.model.Lang
+import ca.kallistesoft.hunt.core.model.FieldRun
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.feature.about.AboutScreen
 import ca.kallistesoft.hunt.feature.exams.ExamTrainingScreen
+import ca.kallistesoft.hunt.feature.exams.FieldSkillsScreen
 import ca.kallistesoft.hunt.feature.exams.PassedExamScreen
 import ca.kallistesoft.hunt.feature.exams.ProvincesScreen
 import ca.kallistesoft.hunt.feature.exams.RecognitionScreen
 import ca.kallistesoft.hunt.feature.home.HomeScreen
 import ca.kallistesoft.hunt.feature.onboarding.OnboardingScreen
+import ca.kallistesoft.hunt.feature.quiz.FieldQuizScreen
 import ca.kallistesoft.hunt.feature.quiz.QuizScreen
 import ca.kallistesoft.hunt.feature.settings.ProfileEditScreen
+import ca.kallistesoft.hunt.feature.settings.SeasonDateScreen
 import ca.kallistesoft.hunt.feature.settings.SettingsScreen
 import ca.kallistesoft.hunt.navigation.About
 import ca.kallistesoft.hunt.navigation.EditProfile
 import ca.kallistesoft.hunt.navigation.ExamTraining
+import ca.kallistesoft.hunt.navigation.FieldQuiz
+import ca.kallistesoft.hunt.navigation.FieldSkills
 import ca.kallistesoft.hunt.navigation.Home
 import ca.kallistesoft.hunt.navigation.PassedExam
 import ca.kallistesoft.hunt.navigation.Provinces
 import ca.kallistesoft.hunt.navigation.Quiz
 import ca.kallistesoft.hunt.navigation.Recognition
+import ca.kallistesoft.hunt.navigation.SeasonDate
 import ca.kallistesoft.hunt.navigation.Settings
 
 /** App navigation (Navigation 3). Each entry gets its own saved state and ViewModels. */
@@ -58,8 +65,29 @@ fun BetterHunterApp(firstRun: Boolean, versionName: String) {
                         onOpenProvinces = { backStack.add(Provinces) },
                         onStartQuiz = startQuiz,
                         onSetLanguage = ::setAppLanguage,
+                        onOpenFieldSkills = { backStack.add(FieldSkills) },
+                        onStartField = { run -> backStack.add(FieldQuiz(run)) },
+                        onOpenSeasonDate = { backStack.add(SeasonDate) },
                     )
                 }
+            }
+            entry<FieldSkills> {
+                FieldSkillsScreen(onBack = back, onStart = { run, skill -> backStack.add(FieldQuiz(run, skill)) })
+            }
+            entry<FieldQuiz> { key ->
+                FieldQuizScreen(
+                    run = key.run,
+                    skill = key.skill,
+                    onClose = back,
+                    // "Next: After the shot": the next skill's run replaces this one.
+                    onOpenSkill = { skill ->
+                        backStack.removeLastOrNull()
+                        backStack.add(FieldQuiz(FieldRun.SKILL, skill))
+                    },
+                )
+            }
+            entry<SeasonDate> {
+                SeasonDateScreen(onDone = back)
             }
             entry<ExamTraining> {
                 ExamTrainingScreen(
@@ -103,6 +131,7 @@ fun BetterHunterApp(firstRun: Boolean, versionName: String) {
                     onOpenProvinces = { backStack.add(Provinces) },
                     onOpenAbout = { backStack.add(About) },
                     onSetLanguage = ::setAppLanguage,
+                    onOpenSeasonDate = { backStack.add(SeasonDate) },
                 )
             }
             entry<EditProfile> { key ->

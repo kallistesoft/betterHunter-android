@@ -4,6 +4,8 @@
 
     <!-- Network: force-update rules and feature flags (Firebase Remote Config). -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- New hunter reminders (local notifications), asked only when the hunter turns them on. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <queries>
         <!-- Custom Tabs for sources and fact sheets, and mail apps for "Report a problem". -->

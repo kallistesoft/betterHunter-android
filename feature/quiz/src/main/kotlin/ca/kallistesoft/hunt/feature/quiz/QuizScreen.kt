@@ -187,6 +187,10 @@ internal fun QuestionContent(
     onChoose: (Int) -> Unit,
     onNext: () -> Unit,
     onClose: () -> Unit,
+    /** Above the question count; mock exams show theirs. */
+    overline: String? = null,
+    /** New hunters' runs: the explanation is "In the field" rather than "Why?". */
+    inTheField: Boolean = false,
 ) {
     val s = state.session
     val q = s.question
@@ -232,7 +236,7 @@ internal fun QuestionContent(
                 BackTopAppBar(
                     title = stringResource(R.string.question_progress, s.current + 1, s.questions.size),
                     onBack = { confirmQuit = true },
-                    overline = if (isExam) "${stringResource(R.string.exam_sim)} · ${s.exam.id}" else null,
+                    overline = overline ?: if (isExam) "${stringResource(R.string.exam_sim)} · ${s.exam.id}" else null,
                     closeIcon = isExam,
                     actions = {
                         if (canReport) IconButton(
@@ -297,7 +301,7 @@ internal fun QuestionContent(
             if (isPhoto && showFeedback) {
                 // Answered "What is it?": the animal's card replaces the choices, like a field guide page.
                 item { AnimalName(q, chosen) }
-                item { Feedback(q, chosen) }
+                item { Feedback(q, chosen, inTheField) }
                 text.confuse?.let { item { ConfuseCard(it) } }
             } else {
                 item {
@@ -322,7 +326,7 @@ internal fun QuestionContent(
                     )
                 }
                 if (showFeedback) {
-                    item { Feedback(q, chosen) }
+                    item { Feedback(q, chosen, inTheField) }
                     text.confuse?.let { item { ConfuseCard(it) } }
                 }
                 if (isExam) item { ExamInfo((s.exam.passMark * 100).roundToInt()) }
@@ -333,8 +337,9 @@ internal fun QuestionContent(
     if (confirmQuit) {
         AlertDialog(
             onDismissRequest = { confirmQuit = false },
-            title = { Text(stringResource(R.string.quit_title)) },
-            text = { Text(stringResource(R.string.quit_body)) },
+            // Field runs save each answer: leaving loses nothing.
+            title = { Text(stringResource(if (inTheField) R.string.quit_field_title else R.string.quit_title)) },
+            text = { Text(stringResource(if (inTheField) R.string.quit_field_body else R.string.quit_body)) },
             confirmButton = {
                 PrimaryButton(stringResource(R.string.quit), onClick = { confirmQuit = false; onClose() })
             },
@@ -439,14 +444,19 @@ private fun AnimalName(q: Question, chosen: Int?) {
 
 /** Right or wrong (photos show it on the photo), the explanation and, for animals, where they live. */
 @Composable
-private fun Feedback(q: Question, chosen: Int?) {
+private fun Feedback(q: Question, chosen: Int?, inTheField: Boolean) {
     val text = q.text(currentLang())
     val right = chosen == q.answerIndex
     val isPhoto = q.image != null
     BhCard(Modifier.testTag("feedback"), shape = MaterialTheme.shapes.medium) {
         Column(Modifier.padding(Spacing.l), verticalArrangement = Arrangement.spacedBy(Spacing.m)) {
             if (!isPhoto) AnswerResult(correct = right, text = stringResource(if (right) R.string.correct else R.string.wrong))
-            FeedbackSection(stringResource(if (isPhoto) R.string.how_recognise else R.string.why), text.explanation)
+            val label = when {
+                isPhoto -> R.string.how_recognise
+                inTheField -> R.string.in_the_field
+                else -> R.string.why
+            }
+            FeedbackSection(stringResource(label), text.explanation)
             text.habitat?.let {
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
                 FeedbackSection(stringResource(R.string.where_lives), it)

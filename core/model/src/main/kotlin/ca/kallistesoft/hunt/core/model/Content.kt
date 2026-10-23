@@ -7,6 +7,8 @@ data class Content(
 ) {
     fun questionsFor(exam: Exam): List<Question> = exam.scopes.flatMap { questionsByScope[it].orEmpty() }
 
+    fun questionsInScope(scope: String): List<Question> = questionsByScope[scope].orEmpty()
+
     fun exam(id: String): Exam? = exams.firstOrNull { it.id == id }
 
     /** Exams with questions, in section order (hunting, firearms, identification), then exams.json order. */

@@ -43,6 +43,7 @@ import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Exam
+import ca.kallistesoft.hunt.core.model.Question
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.ui.BackTopAppBar
 import ca.kallistesoft.hunt.core.ui.PhotoThumb
@@ -155,26 +156,26 @@ internal fun ResultContent(
             if (missed.isEmpty()) {
                 item { Text(stringResource(R.string.all_correct), Modifier.fillMaxWidth()) }
             }
-            items(missed, key = { it.first.id }) { (q, picked) ->
-                val text = q.text(lang)
-                BhCard(Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.medium) {
-                    Column(Modifier.padding(Spacing.l), verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
-                        q.image?.let { PhotoThumb(it, Modifier.padding(bottom = Spacing.xs)) }
-                        Text(text.q, style = MaterialTheme.typography.titleSmall)
-                        picked?.let {
-                            AnswerLine(Icons.Rounded.Close, stringResource(R.string.your_answer, text.choices[it]), error)
-                        }
-                        AnswerLine(
-                            Icons.Rounded.Check,
-                            stringResource(R.string.answer, text.choices[q.answerIndex]),
-                            success,
-                            bold = true,
-                        )
-                        Text(text.explanation, style = MaterialTheme.typography.bodySmall, color = muted)
-                        SourceLinks(q)
-                    }
-                }
+            items(missed, key = { it.first.id }) { (q, picked) -> MissedCard(q, picked) }
+        }
+    }
+}
+
+/** A missed question: the user's answer, the right one, why, and its source. */
+@Composable
+internal fun MissedCard(q: Question, picked: Int?) {
+    val text = q.text(currentLang())
+    val success = BetterHunterTheme.extendedColors.success
+    BhCard(Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.medium) {
+        Column(Modifier.padding(Spacing.l), verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
+            q.image?.let { PhotoThumb(it, Modifier.padding(bottom = Spacing.xs)) }
+            Text(text.q, style = MaterialTheme.typography.titleSmall)
+            picked?.let {
+                AnswerLine(Icons.Rounded.Close, stringResource(R.string.your_answer, text.choices[it]), MaterialTheme.colorScheme.error)
             }
+            AnswerLine(Icons.Rounded.Check, stringResource(R.string.answer, text.choices[q.answerIndex]), success, bold = true)
+            Text(text.explanation, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            SourceLinks(q)
         }
     }
 }
@@ -187,7 +188,7 @@ private fun clock(seconds: Int): String = "%d:%02d".format(seconds / 60, seconds
 
 /** A pill with an icon: pass or fail (outlined), or "Daily goal reached" (tinted). */
 @Composable
-private fun StatusPill(text: String, icon: ImageVector, color: Color, outlined: Boolean) {
+internal fun StatusPill(text: String, icon: ImageVector, color: Color, outlined: Boolean) {
     Surface(
         shape = CircleShape,
         color = if (outlined) Color.Transparent else MaterialTheme.colorScheme.secondaryContainer,

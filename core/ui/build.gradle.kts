@@ -11,6 +11,7 @@ android {
 dependencies {
     api(project(":core:model"))
     api(project(":core:designsystem"))
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.browser)
     implementation(libs.androidx.core.ktx)
     implementation(libs.coil.compose)

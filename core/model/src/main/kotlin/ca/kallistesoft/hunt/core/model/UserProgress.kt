@@ -31,8 +31,28 @@ data class UserProgress(
     val newHunterBanner: Boolean = false,
     /** Questions a day for the goal ring (Settings: one of [DAILY_GOALS]). */
     val dailyGoal: Int = DEFAULT_DAILY_GOAL,
+    /** Day of the last right answer per question: right answers count for [ANSWER_LIFETIME_DAYS] (P11). */
+    val correctDay: Map<String, Long> = emptyMap(),
+    /** New hunter's daily questions: the day they were drawn for and the answers given that day. */
+    val dailyDay: Long? = null,
+    val dailyResults: Map<String, Boolean> = emptyMap(),
+    /** The hunter's own first hunting day ("When does your season start?"), as a day number. */
+    val seasonStart: Long? = null,
+    /** Local reminders, opt-in: today's questions, and before the hunter's season. */
+    val dailyReminders: Boolean = false,
+    val seasonReminders: Boolean = false,
+    /** "Want a nudge tomorrow?" was answered (asked once). */
+    val dailyReminderAsked: Boolean = false,
+    /** When this hunter usually plays, in minutes after midnight (a moving average); null until they play. */
+    val playMinute: Int? = null,
 ) {
     val onboarded: Boolean get() = hunterType != null && homeProvince != null
+
+    /**
+     * A new hunter who came from onboarding (no real exam passed in the app): Home leads with today's 6 questions,
+     * Field skills replaces Exam training, and the season check and reminders apply (P11).
+     */
+    val isFieldHunter: Boolean get() = hunterType == HunterType.NEW_HUNTER && passedExams.isEmpty()
 
     /** New and experienced hunters get the Home built around "What is it?" instead of exam practice. */
     val isHunter: Boolean get() = hunterType != null && hunterType != HunterType.WORKING_ON_IT
@@ -97,6 +117,7 @@ data class UserProgress(
         }
         return copy(
             lastResult = lastResult + (questionId to correct),
+            correctDay = if (correct) correctDay + (questionId to today) else correctDay - questionId,
             weak = newWeak,
             dayCount = answeredToday(today) + 1,
             dayCountDay = today,
@@ -105,7 +126,40 @@ data class UserProgress(
         )
     }
 
+    /** A right answer from the last [ANSWER_LIFETIME_DAYS]; older ones count as unanswered again. */
+    fun isFresh(questionId: String, today: Long): Boolean =
+        lastResult[questionId] == true && correctDay[questionId].let { it == null || today - it < ANSWER_LIFETIME_DAYS }
+
+    fun skillSummary(skill: FieldSkill, pool: List<Question>, today: Long): SkillSummary {
+        val fresh = pool.count { isFresh(it.id, today) }
+        val expired = pool.count { lastResult[it.id] == true && !isFresh(it.id, today) }
+        return SkillSummary(skill, pool.size, if (pool.isEmpty()) 0f else fresh.toFloat() / pool.size, expired)
+    }
+
+    /** Answers one of today's daily questions; it counts like any answer (goal, streak, skills). */
+    fun recordDaily(questionId: String, correct: Boolean, today: Long): UserProgress {
+        val results = if (dailyDay == today) dailyResults else emptyMap()
+        return record(questionId, correct, today).copy(dailyDay = today, dailyResults = results + (questionId to correct))
+    }
+
+    /** Today's daily answers (empty on a new day). */
+    fun dailyResults(today: Long): Map<String, Boolean> = if (dailyDay == today) dailyResults else emptyMap()
+
+    /** Learns when this hunter plays: a moving average of the minutes after midnight. */
+    fun withPlayTime(minute: Int): UserProgress =
+        copy(playMinute = playMinute?.let { (it * 4 + minute) / 5 } ?: minute)
+
+    /** When reminders come: when this hunter usually plays, kept between 8 am and 9 pm (7 pm until learned). */
+    val reminderMinute: Int
+        get() = (playMinute ?: DEFAULT_PLAY_MINUTE).coerceIn(QUIET_UNTIL_MINUTE, QUIET_FROM_MINUTE - 30)
+
+    fun withSeasonStart(day: Long?): UserProgress = copy(seasonStart = day)
+
     fun weakIds(pool: List<Question>): Set<String> = pool.mapNotNullTo(mutableSetOf()) { q -> q.id.takeIf { it in weak } }
+
+    /** Share of the pool answered right in the last 3 months (0..1): Field skills' readiness. */
+    fun readinessFresh(pool: List<Question>, today: Long): Float =
+        if (pool.isEmpty()) 0f else pool.count { isFresh(it.id, today) }.toFloat() / pool.size
 
     /** Share of the pool whose last answer was correct (0..1). */
     fun readiness(pool: List<Question>): Float =
@@ -120,5 +174,13 @@ data class UserProgress(
 
         /** A missed question leaves the weak list after this many correct answers in a row. */
         const val CORRECT_TO_CLEAR = 2
+
+        /** Right answers count for about 3 months, so mastered skills come back before each season. */
+        const val ANSWER_LIFETIME_DAYS = 91
+
+        /** Reminders: 7 pm until the usual playing time is learned, never between 9 pm and 8 am. */
+        const val DEFAULT_PLAY_MINUTE = 19 * 60
+        const val QUIET_FROM_MINUTE = 21 * 60
+        const val QUIET_UNTIL_MINUTE = 8 * 60
     }
 }

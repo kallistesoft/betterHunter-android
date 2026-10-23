@@ -113,6 +113,7 @@ dependencies {
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.profileinstaller)
+    implementation(libs.androidx.work.runtime)
     implementation(libs.kotlinx.serialization.json)
 
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)

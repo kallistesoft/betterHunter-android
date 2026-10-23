@@ -203,4 +203,121 @@
     <string name="nothing_to_review">Nothing to review yet</string>
     <string name="nothing_to_review_body">Questions you miss come here until you answer them right twice in a row.</string>
     <string name="practise_exam">Practise the %1$s</string>
+    <!-- New hunter: today's questions, Field skills, season, reminders (DECISIONS.md, P11) -->
+    <string name="daily_title">Stay up to date: %1$d questions</string>
+    <string name="daily_every_day">new questions every day</string>
+    <string name="daily_species">%1$d species</string>
+    <string name="daily_species_sub">Name the animal from its photo</string>
+    <string name="daily_general">%1$d general</string>
+    <string name="daily_general_sub">Rules, safety, shot placement</string>
+    <string name="daily_start">Start today\'s questions</string>
+    <string name="daily_continue_species">Continue: %1$d species left</string>
+    <string name="daily_continue_general">Continue: %1$d general left</string>
+    <string name="daily_all_done">Done for today. New questions tomorrow.</string>
+    <string name="daily_overline">Today · %1$s</string>
+    <string name="hub_skills">Field skills</string>
+    <string name="hub_skills_sub">Shot placement, tracking, safety</string>
+    <plurals name="season_in_weeks">
+        <item quantity="one">Your season starts in %1$d week</item>
+        <item quantity="other">Your season starts in %1$d weeks</item>
+    </plurals>
+    <plurals name="season_in_days">
+        <item quantity="one">Your season starts in %1$d day</item>
+        <item quantity="other">Your season starts in %1$d days</item>
+    </plurals>
+    <string name="season_tomorrow">Your season starts tomorrow</string>
+    <string name="season_today">Your season starts today</string>
+    <string name="season_date_sub">%1$s, the date you set · season check: %2$d questions</string>
+    <string name="season_coming">Hunting season is coming</string>
+    <string name="season_coming_sub">Take your season check: %1$d questions across all your skills</string>
+    <string name="season_set_date">Set my season start date</string>
+
+    <string name="skills_sub">Sharpen what matters in the field, one skill at a time.</string>
+    <string name="skills_all_mastered_sub">Every skill mastered. Keep them sharp for the next season.</string>
+    <string name="todays_mix">Today\'s mix</string>
+    <string name="mix_sub">%1$d questions, mostly from your weakest skills</string>
+    <string name="mix_sub_kept">%1$d from your weakest skills, %2$d to keep mastered ones sharp</string>
+    <string name="start_mix">Start the mix</string>
+    <string name="keep_edge">Keep your edge</string>
+    <string name="keep_edge_sub">%1$d questions across all your skills, oldest answers first</string>
+    <string name="start">Start</string>
+    <string name="skills">Skills</string>
+    <string name="my_mistakes_count">My mistakes (%1$d)</string>
+    <string name="skill_shot">Shot placement</string>
+    <string name="skill_shot_sub">Vital zones, angles, distance</string>
+    <string name="skill_after">After the shot</string>
+    <string name="skill_after_sub">Tracking, recovery, tagging</string>
+    <string name="skill_handling">Safe firearm handling</string>
+    <string name="skill_handling_sub">Carrying, crossing, zones of fire</string>
+    <string name="skill_rules">Rules in the field</string>
+    <string name="skill_rules_sub">Hunting hours, tags, transport</string>
+    <string name="skill_survival">Survival and first aid</string>
+    <string name="skill_survival_sub">Lost, cold, hurt in the woods</string>
+    <string name="mastered">Mastered</string>
+    <plurals name="was_mastered">
+        <item quantity="one">Was mastered · %1$d answer expired</item>
+        <item quantity="other">Was mastered · %1$d answers expired</item>
+    </plurals>
+    <string name="fade_note">Right answers count for 3 months, so a skill comes back before each season.</string>
+    <string name="field_overline">Field skills · %1$s</string>
+    <string name="season_check">Season check</string>
+    <string name="season_check_overline">Season check · all skills</string>
+    <string name="in_the_field">In the field</string>
+    <string name="field_results">Field skills · results</string>
+    <string name="skill_stronger">Skill getting stronger</string>
+    <string name="skill_steady">Keep practising</string>
+    <string name="skill_mastered">Skill mastered</string>
+    <string name="skill_mastered_sub">Every question in this skill, right.</string>
+    <string name="staying_mastered">Staying mastered</string>
+    <string name="staying_mastered_mix">Each mix keeps 1 or 2 of its questions, to keep it sharp.</string>
+    <string name="staying_mastered_miss">Miss one and it\'s back in practice until you get it right.</string>
+    <string name="percent_change">%1$d%% → %2$d%%</string>
+    <string name="to_my_mistakes">They go to “My mistakes”.</string>
+    <string name="next_skill">Next: %1$s</string>
+    <string name="your_skills">Your skills</string>
+
+    <string name="done_for_today">Done for today</string>
+    <string name="daily_right">%1$d of %2$d right</string>
+    <string name="part_right">%1$d / %2$d right</string>
+    <string name="nudge_title">Want a nudge tomorrow?</string>
+    <string name="nudge_body">We\'ll tell you when your next 6 questions are ready, once a day, around the time you usually play. Never between 9 pm and 8 am. No reminder once you\'ve done them.</string>
+    <string name="turn_on_reminders">Turn on reminders</string>
+    <string name="not_now">Not now</string>
+
+    <string name="season_start">Season start</string>
+    <string name="season_date_title">When does your season start?</string>
+    <string name="season_date_body">Your first hunting day this year. We use it only to remind you to take your season check.</string>
+    <string name="season_date_note">Dates depend on your zone, your weapon and the year. Check the official regulations; BetterHunter doesn\'t know your dates.</string>
+    <string name="save_date">Save: %1$s</string>
+    <string name="pick_a_date">Pick your first hunting day</string>
+    <string name="dont_know_yet">I don\'t know yet</string>
+    <string name="previous_month">Previous month</string>
+    <string name="next_month">Next month</string>
+    <string name="saved_date">Saved: %1$s</string>
+    <string name="remind_title">Remind me before my season?</string>
+    <string name="remind_body">We\'ll remind you 3 weeks before to take your season check, and the day before. Only about your date, around the time you usually play. Never between 9 pm and 8 am.</string>
+    <string name="remind_me">Remind me</string>
+    <string name="no_thanks">No thanks</string>
+
+    <string name="season_start_set">%1$s · the date you set</string>
+    <string name="season_start_none">Not set</string>
+    <string name="reminders">Reminders</string>
+    <string name="reminders_daily">Daily questions</string>
+    <string name="reminders_daily_sub">Around %1$s, when you usually play</string>
+    <string name="reminders_season">Season reminders</string>
+    <string name="reminders_season_sub">3 weeks and 1 day before %1$s</string>
+    <string name="reminders_season_no_date">Set your season start first</string>
+    <string name="quiet_hours">Never between 9 pm and 8 am.</string>
+
+    <string name="notif_channel_daily">Daily questions</string>
+    <string name="notif_channel_season">Season reminders</string>
+    <string name="notif_daily_title">Your 6 questions are ready</string>
+    <string name="notif_daily_text">3 species, 3 general.</string>
+    <plurals name="notif_daily_streak">
+        <item quantity="one">3 species, 3 general. Keep your %1$d-day streak going.</item>
+        <item quantity="other">3 species, 3 general. Keep your %1$d-day streak going.</item>
+    </plurals>
+    <string name="notif_season_text">Take your season check before %1$s.</string>
+    <string name="quit_field_title">Stop here?</string>
+    <string name="quit_field_body">Your answers so far are saved.</string>
 </resources>

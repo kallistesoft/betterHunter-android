@@ -1,10 +1,15 @@
 package ca.kallistesoft.hunt.feature.settings
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Event
+import androidx.compose.material.icons.outlined.NotificationsActive
 import androidx.compose.material.icons.outlined.GpsFixed
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Language
@@ -14,11 +19,14 @@ import androidx.compose.material.icons.outlined.Place
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -39,8 +47,12 @@ import ca.kallistesoft.hunt.core.ui.R
 import ca.kallistesoft.hunt.core.ui.choiceOption
 import ca.kallistesoft.hunt.core.ui.currentLang
 import ca.kallistesoft.hunt.core.ui.icon
+import ca.kallistesoft.hunt.core.ui.longDate
 import ca.kallistesoft.hunt.core.ui.nameRes
 import ca.kallistesoft.hunt.core.ui.rememberLinkOpener
+import ca.kallistesoft.hunt.core.ui.rememberNotificationPermission
+import ca.kallistesoft.hunt.core.ui.shortDate
+import ca.kallistesoft.hunt.core.ui.timeOfDay
 
 /** Settings, from the gear on Home: your profile, the app (language, daily goal) and About. */
 @Composable
@@ -51,9 +63,12 @@ fun SettingsScreen(
     onOpenProvinces: () -> Unit,
     onOpenAbout: () -> Unit,
     onSetLanguage: (Lang) -> Unit,
+    onOpenSeasonDate: () -> Unit,
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val askDaily = rememberNotificationPermission(viewModel::setDailyReminders)
+    val askSeason = rememberNotificationPermission(viewModel::setSeasonReminders)
     val links = rememberLinkOpener()
     val privacyUrl = stringResource(R.string.privacy_url)
     SettingsContent(
@@ -65,6 +80,10 @@ fun SettingsScreen(
         onOpenAbout = onOpenAbout,
         onSetLanguage = onSetLanguage,
         onSetDailyGoal = viewModel::setDailyGoal,
+        onOpenSeasonDate = onOpenSeasonDate,
+        // Turning a reminder on asks for the notification permission first; off needs nothing.
+        onDailyReminders = { on -> if (on) askDaily() else viewModel.setDailyReminders(false) },
+        onSeasonReminders = { on -> if (on) askSeason() else viewModel.setSeasonReminders(false) },
         onContact = { links.email(CONTACT_EMAIL) },
         onPrivacy = { links.open(privacyUrl) },
     )
@@ -82,14 +101,29 @@ internal fun SettingsContent(
     onSetDailyGoal: (Int) -> Unit,
     onContact: () -> Unit,
     onPrivacy: () -> Unit,
+    onOpenSeasonDate: () -> Unit = {},
+    onDailyReminders: (Boolean) -> Unit = {},
+    onSeasonReminders: (Boolean) -> Unit = {},
 ) {
     Scaffold(topBar = { BackTopAppBar(stringResource(R.string.settings), onBack) }) { padding ->
         if (state.loading) return@Scaffold
         LazyColumn(contentPadding = padding.plus(), verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
             item { SectionTitle(stringResource(R.string.your_profile)) }
-            item { ProfileCard(state, onEdit, onOpenProvinces) }
+            item { ProfileCard(state, onEdit, onOpenProvinces, onOpenSeasonDate) }
+            if (state.fieldHunter) {
+                item { SectionTitle(stringResource(R.string.reminders)) }
+                item { RemindersCard(state, onDailyReminders, onSeasonReminders) }
+                item {
+                    Text(
+                        stringResource(R.string.quiet_hours),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(horizontal = Spacing.s),
+                    )
+                }
+            }
             item { SectionTitle(stringResource(R.string.settings_app)) }
-            item { AppCard(state.dailyGoal, onSetLanguage, onSetDailyGoal) }
+            item { AppCard(state.dailyGoal, onSetLanguage, onSetDailyGoal, showDailyGoal = !state.fieldHunter) }
             item { SectionTitle(stringResource(R.string.about)) }
             item {
                 SettingsCard(
@@ -133,11 +167,22 @@ internal fun SettingsContent(
 
 /** Hunter type, hunting with, where you hunt (each reopens its onboarding question), and My provinces. */
 @Composable
-private fun ProfileCard(state: SettingsUiState, onEdit: (ProfileField) -> Unit, onOpenProvinces: () -> Unit) {
+private fun ProfileCard(state: SettingsUiState, onEdit: (ProfileField) -> Unit, onOpenProvinces: () -> Unit, onOpenSeasonDate: () -> Unit) {
     val weapons = state.weapons.sortedBy { it.ordinal }.map { stringResource(it.choiceOption().title) }.joinToString(", ")
     val provinces = Province.entries.filter { it in state.provinces }.map { stringResource(it.nameRes) }.joinToString(" · ")
+    val seasonRow: @Composable ColumnScope.() -> Unit = {
+        SettingRow(
+            Icons.Outlined.Event,
+            stringResource(R.string.season_start),
+            subtitle = state.seasonStart?.let { stringResource(R.string.season_start_set, longDate(it)) }
+                ?: stringResource(R.string.season_start_none),
+            onClick = onOpenSeasonDate,
+            orange = true,
+            modifier = Modifier.testTag("settings-season"),
+        )
+    }
     SettingsCard(
-        rows = listOf(
+        rows = listOf<@Composable ColumnScope.() -> Unit>(
             {
                 SettingRow(
                     Icons.Outlined.PersonOutline,
@@ -175,16 +220,73 @@ private fun ProfileCard(state: SettingsUiState, onEdit: (ProfileField) -> Unit, 
                     modifier = Modifier.testTag("settings-provinces"),
                 )
             },
+        ) + listOfNotNull(seasonRow.takeIf { state.fieldHunter }),
+    )
+}
+
+/** Daily questions and season reminders, each with its switch (on asks for the notification permission). */
+@Composable
+private fun RemindersCard(state: SettingsUiState, onDaily: (Boolean) -> Unit, onSeason: (Boolean) -> Unit) {
+    val hasDate = state.seasonStart != null
+    SettingsCard(
+        rows = listOf(
+            {
+                SettingRow(
+                    Icons.Outlined.NotificationsActive,
+                    stringResource(R.string.reminders_daily),
+                    subtitle = stringResource(R.string.reminders_daily_sub, timeOfDay(state.reminderMinute)),
+                    modifier = Modifier.testTag("settings-daily-reminders")
+                        .toggleable(value = state.dailyReminders, role = Role.Switch, onValueChange = onDaily),
+                ) { ReminderSwitch(state.dailyReminders, enabled = true) }
+            },
+            {
+                SettingRow(
+                    Icons.Outlined.Event,
+                    stringResource(R.string.reminders_season),
+                    subtitle = state.seasonStart?.let { stringResource(R.string.reminders_season_sub, shortDate(it)) }
+                        ?: stringResource(R.string.reminders_season_no_date),
+                    modifier = Modifier.testTag("settings-season-reminders")
+                        .toggleable(value = state.seasonReminders && hasDate, enabled = hasDate, role = Role.Switch, onValueChange = onSeason),
+                ) { ReminderSwitch(state.seasonReminders && hasDate, enabled = hasDate) }
+            },
+        ),
+    )
+}
+
+@Composable
+private fun ReminderSwitch(checked: Boolean, enabled: Boolean) {
+    val scheme = MaterialTheme.colorScheme
+    Switch(
+        checked = checked,
+        onCheckedChange = null,
+        enabled = enabled,
+        colors = SwitchDefaults.colors(
+            uncheckedThumbColor = scheme.onSurfaceVariant,
+            uncheckedBorderColor = scheme.onSurfaceVariant,
+            uncheckedTrackColor = scheme.surfaceContainerHighest,
         ),
     )
 }
 
 /** Language (the same per-app language as Home's toggle) and the daily goal. */
 @Composable
-private fun AppCard(dailyGoal: Int, onSetLanguage: (Lang) -> Unit, onSetDailyGoal: (Int) -> Unit) {
+private fun AppCard(dailyGoal: Int, onSetLanguage: (Lang) -> Unit, onSetDailyGoal: (Int) -> Unit, showDailyGoal: Boolean) {
     val goals = UserProgress.DAILY_GOALS
+    val goalRow: @Composable ColumnScope.() -> Unit = {
+        SettingRow(Icons.Outlined.Schedule, stringResource(R.string.daily_goal), subtitle = stringResource(R.string.daily_goal_sub)) {
+            PillToggle(
+                options = goals.map { "$it" },
+                selected = goals.indexOf(dailyGoal),
+                onSelect = { onSetDailyGoal(goals[it]) },
+                description = stringResource(R.string.daily_goal),
+                orange = true,
+                modifier = Modifier.testTag("settings-goal"),
+            )
+        }
+    }
     SettingsCard(
-        rows = listOf(
+        // New hunters have today's 6 questions instead of a daily goal (P11).
+        rows = listOfNotNull<@Composable ColumnScope.() -> Unit>(
             {
                 SettingRow(Icons.Outlined.Language, stringResource(R.string.language)) {
                     PillToggle(
@@ -195,18 +297,7 @@ private fun AppCard(dailyGoal: Int, onSetLanguage: (Lang) -> Unit, onSetDailyGoa
                     )
                 }
             },
-            {
-                SettingRow(Icons.Outlined.Schedule, stringResource(R.string.daily_goal), subtitle = stringResource(R.string.daily_goal_sub)) {
-                    PillToggle(
-                        options = goals.map { "$it" },
-                        selected = goals.indexOf(dailyGoal),
-                        onSelect = { onSetDailyGoal(goals[it]) },
-                        description = stringResource(R.string.daily_goal),
-                        orange = true,
-                        modifier = Modifier.testTag("settings-goal"),
-                    )
-                }
-            },
+            goalRow.takeIf { showDailyGoal },
         ),
     )
 }

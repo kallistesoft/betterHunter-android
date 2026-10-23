@@ -93,7 +93,12 @@ questions from mastered skills, "Keep your edge" replaces the mix once every ski
 check before the season. The app never states legal season dates (zone, weapon, year): the hunter enters their own
 first hunting day and Home counts down to it; without a date, the season check is offered from late August.
 Reminders are local notifications, opt-in at two moments (daily questions done, season date saved), at most one a day,
-never between 9 pm and 8 am, at the hunter's usual playing time. *Mockup only (2026-10-23, `design/`, page 2); not built.*
+never between 9 pm and 8 am, at the hunter's usual playing time. *In the app (2026-10-23):* `FieldSkill` maps
+each skill to chapters of the banks (a first pass, to check against the questions; safe firearm handling only for
+firearm hunters), `FieldTraining` draws the runs, `SeasonStatus` and `Reminder` hold the season and reminder rules
+(core:model, tested on the JVM). Only a New hunter from onboarding gets this Home; one who passed the exam in the app
+keeps Exam training (as in flow 1). Reminders are one WorkManager job, rescheduled whenever the progress changes; a
+late one still shows that day, before 9 pm.
 
 ## Design
 

@@ -5,7 +5,9 @@ import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.flags.FeatureFlag
 import ca.kallistesoft.hunt.core.model.HunterType
 import ca.kallistesoft.hunt.core.model.Province
+import ca.kallistesoft.hunt.core.model.SeasonStatus
 import ca.kallistesoft.hunt.core.model.UserProgress
+import ca.kallistesoft.hunt.core.model.Weapon
 import ca.kallistesoft.hunt.core.testing.FakeContentRepository
 import ca.kallistesoft.hunt.core.testing.FakeFeatureFlags
 import ca.kallistesoft.hunt.core.testing.FakeUserDataRepository
@@ -94,4 +96,31 @@ class HomeViewModelTest {
     }
 
     private fun <T> assertNotNull(value: T?): T = value.also { org.junit.Assert.assertNotNull(it) }!!
+
+    @Test
+    fun `a new hunter from onboarding gets today's questions, Field skills and the season card`() = runTest {
+        userData.saveProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC)
+        userData.setSeasonStart(TEST_DAY + 21)
+        viewModel.uiState.test {
+            val state = awaitItemMatching { !it.loading }
+            assertTrue(state.fieldHunter)
+            assertEquals(DailyState(0, 3, 0, 3), state.daily)
+            assertEquals(SeasonStatus.Countdown(TEST_DAY + 21, 21), state.season)
+
+            userData.recordDaily("hc-l07-1", correct = true)
+            assertEquals(0.125f, awaitItemMatching { it.skillsReadiness > 0f }.skillsReadiness, 1e-6f)
+        }
+    }
+
+    @Test
+    fun `a new hunter who passed the exam in the app keeps the exam Home`() = runTest {
+        userData.setProvince(Province.QC, true)
+        userData.markExamPassed("ICAF")
+        viewModel.uiState.test {
+            val state = awaitItemMatching { !it.loading }
+            assertTrue(state.hunter)
+            assertFalse(state.fieldHunter)
+            assertNull(state.daily)
+        }
+    }
 }

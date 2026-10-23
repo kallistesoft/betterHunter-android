@@ -71,6 +71,27 @@ class FakeUserDataRepository(initial: UserProgress = UserProgress()) : UserDataR
         recorded += questionId to correct
         progress.update { it.withPhotoOfDayChoice(choice, TEST_DAY).record(questionId, correct, TEST_DAY) }
     }
+
+    override suspend fun recordDaily(questionId: String, correct: Boolean) {
+        recorded += questionId to correct
+        progress.update { it.recordDaily(questionId, correct, TEST_DAY) }
+    }
+
+    override suspend fun setSeasonStart(day: Long?) {
+        progress.update { it.withSeasonStart(day) }
+    }
+
+    override suspend fun setDailyReminders(enabled: Boolean) {
+        progress.update { it.copy(dailyReminders = enabled, dailyReminderAsked = true) }
+    }
+
+    override suspend fun setSeasonReminders(enabled: Boolean) {
+        progress.update { it.copy(seasonReminders = enabled) }
+    }
+
+    override suspend fun markDailyReminderAsked() {
+        progress.update { it.copy(dailyReminderAsked = true) }
+    }
 }
 
 /** Flags that can be flipped during a test. */

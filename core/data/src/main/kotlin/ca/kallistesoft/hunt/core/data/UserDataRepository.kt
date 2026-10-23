@@ -13,6 +13,7 @@ import kotlinx.serialization.json.Json
 import java.io.InputStream
 import java.io.OutputStream
 import java.time.LocalDate
+import java.time.LocalTime
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -56,6 +57,21 @@ interface UserDataRepository {
 
     /** Answers today's photo of the day; it also counts toward the goal, streak and weak spots. */
     suspend fun answerPhotoOfDay(questionId: String, choice: Int, correct: Boolean)
+
+    // New hunter (P11)
+
+    /** Answers one of today's 6 questions. */
+    suspend fun recordDaily(questionId: String, correct: Boolean)
+
+    /** The hunter's first hunting day (a day number), or null for "I don't know yet". */
+    suspend fun setSeasonStart(day: Long?)
+
+    suspend fun setDailyReminders(enabled: Boolean)
+
+    suspend fun setSeasonReminders(enabled: Boolean)
+
+    /** "Want a nudge tomorrow?" was answered either way: it isn't asked again. */
+    suspend fun markDailyReminderAsked()
 }
 
 @Singleton
@@ -66,7 +82,7 @@ internal class DataStoreUserDataRepository @Inject constructor(
     override val progress: Flow<UserProgress> = store.data
 
     override suspend fun record(questionId: String, correct: Boolean) {
-        store.updateData { it.record(questionId, correct, today()) }
+        store.updateData { it.record(questionId, correct, today()).withPlayTime(minuteNow()) }
     }
 
     override suspend fun recordAll(results: List<Pair<String, Boolean>>) {
@@ -109,8 +125,31 @@ internal class DataStoreUserDataRepository @Inject constructor(
 
     override suspend fun answerPhotoOfDay(questionId: String, choice: Int, correct: Boolean) {
         val day = today()
-        store.updateData { it.withPhotoOfDayChoice(choice, day).record(questionId, correct, day) }
+        store.updateData { it.withPhotoOfDayChoice(choice, day).record(questionId, correct, day).withPlayTime(minuteNow()) }
     }
+
+    override suspend fun recordDaily(questionId: String, correct: Boolean) {
+        store.updateData { it.recordDaily(questionId, correct, today()).withPlayTime(minuteNow()) }
+    }
+
+    override suspend fun setSeasonStart(day: Long?) {
+        store.updateData { it.withSeasonStart(day) }
+    }
+
+    override suspend fun setDailyReminders(enabled: Boolean) {
+        store.updateData { it.copy(dailyReminders = enabled, dailyReminderAsked = true) }
+    }
+
+    override suspend fun setSeasonReminders(enabled: Boolean) {
+        store.updateData { it.copy(seasonReminders = enabled) }
+    }
+
+    override suspend fun markDailyReminderAsked() {
+        store.updateData { it.copy(dailyReminderAsked = true) }
+    }
+
+    /** When the user plays, to time reminders (learned on the device only). */
+    private fun minuteNow(): Int = LocalTime.now().let { it.hour * 60 + it.minute }
 }
 
 internal object UserProgressSerializer : Serializer<UserProgress> {

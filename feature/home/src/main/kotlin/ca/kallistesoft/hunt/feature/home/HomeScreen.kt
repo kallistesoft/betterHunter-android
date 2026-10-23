@@ -57,6 +57,7 @@ import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.designsystem.theme.BhTextStyles
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
+import ca.kallistesoft.hunt.core.model.FieldRun
 import ca.kallistesoft.hunt.core.model.Lang
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.ui.BrandTopAppBar
@@ -74,6 +75,9 @@ fun HomeScreen(
     onOpenProvinces: () -> Unit,
     onStartQuiz: (examId: String, mode: QuizMode) -> Unit,
     onSetLanguage: (Lang) -> Unit,
+    onOpenFieldSkills: () -> Unit,
+    onStartField: (FieldRun) -> Unit,
+    onOpenSeasonDate: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -88,13 +92,17 @@ fun HomeScreen(
         onSetLanguage = onSetLanguage,
         onAnswerPhoto = viewModel::answerPhotoOfDay,
         onDismissBanner = viewModel::dismissNewHunterBanner,
+        onOpenFieldSkills = onOpenFieldSkills,
+        onStartField = onStartField,
+        onOpenSeasonDate = onOpenSeasonDate,
     )
 }
 
 /**
  * The dashboard. Working on it: the daily goal with "Practise now" on the main exam, then Exam training and
  * "What is it?". Hunters (new or experienced): the goal played on "What is it?", which comes first, and Exam training
- * kept for refreshers.
+ * kept for refreshers. A new hunter from onboarding (P11): the season card, today's 6 questions, then "What is it?"
+ * and Field skills.
  */
 @Composable
 internal fun HomeContent(
@@ -108,6 +116,9 @@ internal fun HomeContent(
     onSetLanguage: (Lang) -> Unit,
     onAnswerPhoto: (Int) -> Unit,
     onDismissBanner: () -> Unit,
+    onOpenFieldSkills: () -> Unit = {},
+    onStartField: (FieldRun) -> Unit = {},
+    onOpenSeasonDate: () -> Unit = {},
 ) {
     Scaffold(
         topBar = {
@@ -131,14 +142,24 @@ internal fun HomeContent(
             if (state.hunter && state.newHunterBanner) {
                 item { NewHunterBanner(onDismissBanner) }
             }
-            item {
-                TodayCard(
-                    state,
-                    onPlay = { exam -> onStartQuiz(exam, QuizMode.PRACTICE) },
-                    onChangeExams = onOpenProvinces,
-                )
+            if (state.fieldHunter) {
+                state.season?.let { season ->
+                    item { SeasonCard(season, onCheck = { onStartField(FieldRun.SEASON_CHECK) }, onSetDate = onOpenSeasonDate) }
+                }
+                state.daily?.let { daily ->
+                    item { DailyCard(daily, state.streak, onStart = { onStartField(FieldRun.DAILY) }) }
+                }
+                item { FieldHubs(state, onOpenRecognition, onOpenFieldSkills) }
+            } else {
+                item {
+                    TodayCard(
+                        state,
+                        onPlay = { exam -> onStartQuiz(exam, QuizMode.PRACTICE) },
+                        onChangeExams = onOpenProvinces,
+                    )
+                }
+                item { Hubs(state, onOpenExams, onOpenRecognition) }
             }
-            item { Hubs(state, onOpenExams, onOpenRecognition) }
             state.photoOfDay?.let { photo ->
                 item {
                     PhotoOfDayCard(
@@ -318,7 +339,7 @@ private fun ExamsHub(state: HomeUiState, onClick: () -> Unit, modifier: Modifier
 }
 
 @Composable
-private fun RecognitionHub(state: HomeUiState, onClick: () -> Unit, modifier: Modifier) {
+internal fun RecognitionHub(state: HomeUiState, onClick: () -> Unit, modifier: Modifier) {
     HubCard(
         icon = Icons.Outlined.Visibility,
         title = stringResource(R.string.what_is_it),
@@ -342,7 +363,7 @@ private fun RecognitionHub(state: HomeUiState, onClick: () -> Unit, modifier: Mo
 }
 
 @Composable
-private fun Readiness(value: Float) {
+internal fun Readiness(value: Float) {
     LabelledMeter(
         label = stringResource(R.string.readiness),
         value = stringResource(R.string.percent, (value * 100).roundToInt()),

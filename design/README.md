@@ -32,23 +32,23 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | I passed the real exam: confirm (from Exam training) | `PassedExam.dc.html` | `PassedExamLight.dc.html` | built |
 | Home, new hunter (after passing the real exam) | `MainNewHunter.dc.html` | `MainNewHunterLight.dc.html` | built |
 | Onboarding as a new hunter: what kind of hunter? → New hunter, then the same two questions | `HunterProfileNewHunter.dc.html`, `HuntWithNewHunter.dc.html`, `HuntWhereNewHunter.dc.html` | `…Light.dc.html` | built, except the new-hunter wording of "Where do you hunt?" |
-| Home, new hunter (from onboarding): today's 3 species + 3 general questions, Field skills instead of Exam training | `HomeNewHunter.dc.html` | `HomeNewHunterLight.dc.html` | no |
-| Today: a general question (3 a day) | `DailyQuestion.dc.html` | `DailyQuestionLight.dc.html` | no |
-| Field skills: today's mix, readiness per skill | `FieldSkills.dc.html` | `FieldSkillsLight.dc.html` | no |
-| Field skills: question (one skill, 10 questions) | `SkillQuestion.dc.html` | `SkillQuestionLight.dc.html` | no |
-| Field skills: results (the skill's progress) | `SkillResults.dc.html` | `SkillResultsLight.dc.html` | no |
-| Field skills: skill mastered (results at 100%) | `SkillMastered.dc.html` | `SkillMasteredLight.dc.html` | no |
-| Field skills: mastered skills, one faded | `FieldSkillsMastered.dc.html` | `FieldSkillsMasteredLight.dc.html` | no |
-| Field skills: all mastered, "Keep your edge" | `FieldSkillsAllMastered.dc.html` | `FieldSkillsAllMasteredLight.dc.html` | no |
-| Home, new hunter, season coming (no date set: from late August) | `HomeSeasonGeneric.dc.html` | `HomeSeasonGenericLight.dc.html` | no |
-| When does your season start? (the hunter's own date) | `SeasonDate.dc.html` | `SeasonDateLight.dc.html` | no |
-| Home, new hunter, 3 weeks before the hunter's date | `HomeSeasonCheck.dc.html` | `HomeSeasonCheckLight.dc.html` | no |
-| Season check: question (15, all skills) | `SeasonCheckQuestion.dc.html` | `SeasonCheckQuestionLight.dc.html` | no |
-| Done for today (6 / 6) → turn on reminders? | `DailyDone.dc.html` | `DailyDoneLight.dc.html` | no |
-| Notification permission (Android's dialog) | `NotifyPermission.dc.html` | `NotifyPermissionLight.dc.html` | no |
-| Season date saved → remind me before my season? | `SeasonReminderAsk.dc.html` | `SeasonReminderAskLight.dc.html` | no |
-| Settings, hunter: season start, reminders | `SettingsHunter.dc.html` | `SettingsHunterLight.dc.html` | no |
-| Notifications on the lock screen | `LockScreen.dc.html` | `LockScreenLight.dc.html` | no |
+| Home, new hunter (from onboarding): today's 3 species + 3 general questions, Field skills instead of Exam training | `HomeNewHunter.dc.html` | `HomeNewHunterLight.dc.html` | built |
+| Today: a general question (3 a day) | `DailyQuestion.dc.html` | `DailyQuestionLight.dc.html` | built |
+| Field skills: today's mix, readiness per skill | `FieldSkills.dc.html` | `FieldSkillsLight.dc.html` | built |
+| Field skills: question (one skill, 10 questions) | `SkillQuestion.dc.html` | `SkillQuestionLight.dc.html` | built |
+| Field skills: results (the skill's progress) | `SkillResults.dc.html` | `SkillResultsLight.dc.html` | built |
+| Field skills: skill mastered (results at 100%) | `SkillMastered.dc.html` | `SkillMasteredLight.dc.html` | built |
+| Field skills: mastered skills, one faded | `FieldSkillsMastered.dc.html` | `FieldSkillsMasteredLight.dc.html` | built |
+| Field skills: all mastered, "Keep your edge" | `FieldSkillsAllMastered.dc.html` | `FieldSkillsAllMasteredLight.dc.html` | built |
+| Home, new hunter, season coming (no date set: from late August) | `HomeSeasonGeneric.dc.html` | `HomeSeasonGenericLight.dc.html` | built |
+| When does your season start? (the hunter's own date) | `SeasonDate.dc.html` | `SeasonDateLight.dc.html` | built |
+| Home, new hunter, 3 weeks before the hunter's date | `HomeSeasonCheck.dc.html` | `HomeSeasonCheckLight.dc.html` | built |
+| Season check: question (15, all skills) | `SeasonCheckQuestion.dc.html` | `SeasonCheckQuestionLight.dc.html` | built |
+| Done for today (6 / 6) → turn on reminders? | `DailyDone.dc.html` | `DailyDoneLight.dc.html` | built |
+| Notification permission (Android's dialog) | `NotifyPermission.dc.html` | `NotifyPermissionLight.dc.html` | built |
+| Season date saved → remind me before my season? | `SeasonReminderAsk.dc.html` | `SeasonReminderAskLight.dc.html` | built |
+| Settings, hunter: season start, reminders | `SettingsHunter.dc.html` | `SettingsHunterLight.dc.html` | built |
+| Notifications on the lock screen | `LockScreen.dc.html` | `LockScreenLight.dc.html` | built |
 | Can you recognise them? (recognition games) | `Recognition.dc.html` | `RecognitionLight.dc.html` | built, restyle; "Tracks" and "Calls" are ideas |
 | What is it?: question | `PhotoQuiz.dc.html` | `PhotoQuizLight.dc.html` | built |
 | What is it?: photo full screen | `PhotoZoom.dc.html` | `PhotoZoomLight.dc.html` | built |
@@ -86,7 +86,7 @@ goal played on "What is it?", and Exam training kept as a tile ("ICAF passed") f
 (main exam) and the PAL (optional). The app takes the user's
 word; nothing is verified.
 
-**New hunter: first seasons (mockup, not built).** A user who picks "New hunter" at onboarding is done with exams:
+**New hunter: first seasons (built).** A user who picks "New hunter" at onboarding is done with exams:
 nothing in the flow mentions a course, a pass mark or a mock exam. The goal is to keep them up to date, so Home leads
 with **today's 6 questions**: 3 random species questions (a photo to name, as in "What is it?") and 3 random general
 questions (rules, safety, shot placement, tracking), each with its own progress and one "Continue" button; new
@@ -97,7 +97,7 @@ after. The questions can come from the hunter-course banks (grouped by chapter),
 list and its grouping of chapters are placeholders to check. Flow 1's Home as a new hunter (after passing the real
 exam) still shows Exam training, as built.
 
-**Mastery (mockup, not built).** A skill is **mastered** at 100%: its results celebrate it and its row shows a check
+**Mastery (built).** A skill is **mastered** at 100%: its results celebrate it and its row shows a check
 instead of a percentage. Right answers count for **3 months**: after that a question counts as unanswered again, so
 mastered skills fade back before the next season ("Was mastered · 2 answers expired"). Each mix keeps 1 or 2
 questions from mastered skills; a miss takes the skill below 100% until it is won back. With every skill mastered, the
@@ -108,7 +108,7 @@ Settings; it says to check the official regulations), and Home counts down to it
 Nov 14, the date you set"). Without a date, Home shows "Hunting season is coming" from late August, with "Set my season
 start date". The date is asked again each year.
 
-**Reminders (mockup, not built).** Local notifications, scheduled on the phone (nothing sent to a server). The
+**Reminders (built).** Local notifications, scheduled on the phone (nothing sent to a server). The
 permission is never asked at onboarding, only at two moments, each explaining why: when today's 6 questions are done
 ("Want a nudge tomorrow?") and right after saving a season date ("Remind me before my season?"); then Android's own
 dialog. At most one notification a day, never between 9 pm and 8 am, at the time this hunter usually plays (learned on
