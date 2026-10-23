@@ -53,14 +53,16 @@ logo boards). Edit the generator, regenerate, then publish the changed files to 
 
 **Onboarding (not built yet).** First launch, after the splash: "What kind of hunter are you?" (Working on it:
 preparing for the licence or hunter course; New hunter: licensed, a few seasons; Experienced hunter: many seasons),
-saved on the device. Only "Working on it" goes on to "What are you preparing for?", the exam picker (PAL, Québec
-ICAF, Alberta; "More provinces coming"), then Home; new and experienced hunters go straight to Home. A province
+saved on the device. Only "Working on it" goes on to "What are you preparing for?", the exam picker: hunter
+education first (Québec ICAF, Québec bow and crossbow ICAA "coming soon", Alberta; "More provinces coming"), then the
+PAL as an optional firearms licence (DECISIONS.md, P10), then Home; new and experienced hunters go straight to Home. A province
 question ("Where do you hunt?") can come later, when more provinces are covered.
 
 **Passed the real exam (not built yet).** On an exam card in Exam training, "I passed the real exam" opens a
-confirmation ("Did you pass the PAL exam?", what changes, "Yes, I passed" / "Not yet"). Confirming makes the user a
+confirmation on the hunter course ("Did you pass your hunter course (ICAF)?", what changes, "Yes, I passed" / "Not yet"). Confirming makes the user a
 New hunter (changeable back in Settings) and lands on Home's new-hunter version: a congratulations banner, the daily
-goal played on "What is it?", and Exam training kept as a tile ("PAL passed") for refreshers. The app takes the user's
+goal played on "What is it?", and Exam training kept as a tile ("ICAF passed") for refreshers. The example user is a Québec hunter preparing ICAF
+(main exam) and the PAL (optional). The app takes the user's
 word; nothing is verified.
 
 ## Logo concepts

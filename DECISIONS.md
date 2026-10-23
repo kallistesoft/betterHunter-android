@@ -73,6 +73,14 @@ secrets). CI builds an unsigned release without the secrets. `versionCode` = CI 
 hunter education. The RPAL covers restricted firearms (mainly handguns), which hunters don't need, so its exam and
 question bank are left out.
 
+**P10. The hunter course makes the hunter; the PAL is optional.** *Product.* To hunt you need your province's hunter
+education: in Québec, ICAF to hunt with firearms (without a PAL you hunt near a PAL holder) or ICAA for bow and
+crossbow; in Alberta, Conservation and Hunter Education. The PAL (CFSC) is the federal licence to own or buy
+firearms, not a requirement to be a hunter. So the app puts hunter education first and the PAL as optional
+(onboarding, Exam training), and "I passed the real exam" on a hunter course is what turns a user into a New hunter.
+ICAA (bow and crossbow) is shown as coming soon until it has questions. *App, not yet done:* exams are still listed
+firearms licence first (`ExamGroup` order) and the PAL is the preview's main exam; the mockup (design/) shows the target.
+
 ## Design
 
 **D1. Material 3 with a fixed brand palette.** *Replaced by D6.* Colour scheme generated (tonal spot) from the icon's

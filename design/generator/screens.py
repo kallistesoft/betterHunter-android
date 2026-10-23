@@ -198,7 +198,7 @@ def settings(t):
     body = f'''{header(t, "Settings", back=href(t, "Main"))}
   {label(t, "Your profile", t["muted"])}
   {card(t, row(t, tile(t, "user"), "Hunter type", "Working on it", target=href(t, "HunterProfile"), divider=False)
-        + row(t, tile(t, "shield"), "My exams", "PAL exam (CFSC, non-restricted)", target=href(t, "ExamPicker")), pad="6px 16px", gap=0)}
+        + row(t, tile(t, "shield"), "My exams", "ICAF (Québec), PAL", target=href(t, "ExamPicker")), pad="6px 16px", gap=0)}
   {label(t, "App", t["muted"])}
   {card(t, row(t, tile(t, "globe"), "Language", None, trail=pill, divider=False)
         + row(t, tile(t, "goal", "orange"), "Daily goal", "Questions a day", trail=goal), pad="6px 16px", gap=0)}
@@ -227,13 +227,13 @@ def about(t):
 
 
 def exam_training(t):
-    ring_html = ring(t, 62, 56, 6, t["green"], f'<span style="font-size: 13px; font-weight: 600; color: {t["green"]}">62%</span>')
-    pal = f'''<div style="display: flex; gap: 12px; align-items: flex-start">
-      {tile(t, "shield")}
+    ring_html = ring(t, 48, 56, 6, t["green"], f'<span style="font-size: 13px; font-weight: 600; color: {t["green"]}">48%</span>')
+    icaf = f'''<div style="display: flex; gap: 12px; align-items: flex-start">
+      {tile(t, "tree")}
       <span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0">
-        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 20px; line-height: 1.1">PAL exam (CFSC, non-restricted)</span>
-        <span style="font-size: 13px; color: {t["muted"]}">303 questions</span>
-        <span style="font-size: 13px; color: {t["muted"]}">Canada · 60 min · 80% to pass</span>
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 20px; line-height: 1.1">Hunter education with firearms (ICAF)</span>
+        <span style="font-size: 13px; color: {t["muted"]}">228 questions</span>
+        <span style="font-size: 13px; color: {t["muted"]}">Québec · 60 min · 80% to pass</span>
       </span>
       <span style="display: flex; flex-direction: column; align-items: center; gap: 4px">{ring_html}<span style="font-size: 11px; color: {t["muted"]}">Readiness</span></span>
     </div>
@@ -241,21 +241,24 @@ def exam_training(t):
       {primary(t, "Practice", href(t, "PracticeQuestion"), "; flex: 1; height: 52px", "play")}
       {secondary(t, "Mock exam", href(t, "ExamQuestion"), "; flex: 1; height: 52px", "timer")}
     </div>
-    <a href="{href(t, "PracticeQuestion")}" style="display: flex; align-items: center; gap: 8px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px">{icon("replay", 16)} Review my mistakes (7)</a>
+    <a href="{href(t, "PracticeQuestion")}" style="display: flex; align-items: center; gap: 8px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px">{icon("replay", 16)} Review my mistakes (5)</a>
     <a href="{href(t, "PassedExam")}" style="display: flex; align-items: center; gap: 8px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px; border-top: 1px solid {t["border"]}; padding-top: 10px">{icon("trophy", 16)} I passed the real exam</a>'''
-    others = (row(t, tile(t, "tree"), "Hunter education with firearms", "Québec · 228 questions", target=href(t, "ExamTraining"), divider=False)
+    pal = row(t, tile(t, "shield"), "PAL exam (CFSC, non-restricted)", "Firearms licence, optional · 303 questions · 62%",
+              target=href(t, "ExamTraining"), divider=False)
+    soon = f'<span style="font-size: 12px; font-weight: 600; color: {t["muted"]}">Coming soon</span>'
+    others = (row(t, tile(t, "target"), "Bow and crossbow hunter education (ICAA)", "Québec", trail=soon, divider=False)
               + row(t, tile(t, "mountain"), "Conservation and Hunter Education", "Alberta · 285 questions", target=href(t, "ExamTraining")))
     body = f'''{header(t, "Exam training", back=href(t, "Main"))}
   <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px">{label(t, "My exams", t["muted"])}<a href="{href(t, "ExamPicker")}" style="color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px; display: flex; align-items: center">Change</a></div>
-  {card(t, pal, pad="18px", gap=14)}
+  {card(t, icaf, pad="18px", gap=14)}
+  {card(t, pal, pad="4px 16px", gap=0)}
   {label(t, "Other exams", t["muted"], "; margin-top: 6px")}
   {card(t, others, pad="4px 16px", gap=0)}'''
     return page(t, "BetterHunter exam training", body, gap=12)
 
 
-Q = "You are aiming at an animal but are not sure what is behind it. What must you do?"
-CHOICES = ["Shoot quickly before the animal moves into cover", "Shoot with less powerful ammunition to reduce the range",
-           "Not shoot, because the shot may not be safe", "Aim slightly higher so the bullet passes over"]
+Q = "Compared with cervids, where is the aiming point in a bear's vital zone?"
+CHOICES = ["Much farther forward, at the neck", "Slightly farther back", "At the head only", "Exactly in the same spot"]
 
 
 def choice(t, letter, text, state):
@@ -285,24 +288,22 @@ def practice_question(t):
   <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 26px; line-height: 1.15">{Q}</h1>
   <div style="display: flex; flex-direction: column; gap: 8px">
     {choice(t, "A", CHOICES[0], "wrong")}
-    {choice(t, "B", CHOICES[1], "idle")}
-    {choice(t, "C", CHOICES[2], "right")}
+    {choice(t, "B", CHOICES[1], "right")}
+    {choice(t, "C", CHOICES[2], "idle")}
     {choice(t, "D", CHOICES[3], "idle")}
   </div>
   {card(t, f"""<span style="display: flex; align-items: center; gap: 8px; color: {t["red"]}; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px">{icon("x", 20, t["red"], 2.6)} Incorrect</span>
-    <span style="display: flex; flex-direction: column; gap: 4px">{label(t, "Why?", t["green"])}<span style="font-size: 14px; line-height: 1.4">You must identify your target and everything beyond it; if the shot may be unsafe, do not shoot.</span></span>
-    <span style="font-size: 13px; color: {t["muted"]}">Source: <a href="#" style="font-weight: 600; text-decoration: none">CFSC student manual (RCMP, 2014), p. 93 ↗</a></span>""", pad="14px 16px", gap=10, radius=16)}
+    <span style="display: flex; flex-direction: column; gap: 4px">{label(t, "Why?", t["green"])}<span style="font-size: 14px; line-height: 1.4">The centre of the vital zone is just behind the front legs on cervids and slightly farther back on bear.</span></span>
+    <span style="font-size: 13px; color: {t["muted"]}">Source: <a href="#" style="font-weight: 600; text-decoration: none">ICAF manual (FédéCP, 2020), p. 61 ↗</a></span>""", pad="14px 16px", gap=10, radius=16)}
   <div style="margin-top: auto">{primary(t, "Next", href(t, "PracticeResults"))}</div>'''
     return page(t, "BetterHunter practice question, answered", body, gap=14)
 
 
 MISSED = [
-    ("Why can the forward hammer position be dangerous?", "The action can no longer open until the hammer is cocked",
-     "The hammer rests on the firing pin, so a sharp blow can fire it"),
-    ("You inherit an old muzzleloading gun. What must you do before firing it?", "Fire a reduced charge to test it",
-     "Have it inspected by a competent gunsmith"),
-    ("On most modern pump actions, where is a button safety usually located?", "Under the sliding fore-end",
-     "At the front or rear of the trigger guard"),
+    ("You are still hunting for deer. Which way of moving is appropriate?", "Walk with the wind at your back so your scent stays behind you",
+     "Walk slowly and quietly with frequent pauses"),
+    ("For which migratory bird may an electronic call be used?", "Canada goose", "Snow goose"),
+    ("How many white-tailed deer may a hunter take per year, barring exceptions?", "One", "Two"),
 ]
 
 
@@ -315,14 +316,14 @@ def missed_card(t, q, yours, correct):
 def results(t, exam):
     if exam:
         color, pct, count = t["red"], 74, "37 / 50"
-        title, over = "Mock exam results", "PAL exam"
+        title, over = "Mock exam results", "ICAF · Québec"
         verdict = (f'<span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; border: 1.5px solid {t["red"]}; color: {t["red"]}; font-weight: 600; font-size: 14px">{icon("x", 16, t["red"], 2.4)} Not passed · Pass mark 80%</span>'
                    f'<span style="font-size: 13px; color: {t["muted"]}">Time: 42:18 of 60:00 · 13 questions to review</span>')
         missed = "".join(missed_card(t, *m) for m in MISSED[:2]) + f'<span style="text-align: center; font-size: 13px; color: {t["muted"]}">+ 11 more below</span>'
         again = href(t, "ExamQuestion")
     else:
         color, pct, count = t["green"], 85, "17 / 20"
-        title, over = "Practice results", "PAL exam"
+        title, over = "Practice results", "ICAF · Québec"
         verdict = (f'<span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; background: {t["green_tint"]}; color: {t["green"]}; font-weight: 600; font-size: 14px">{icon("check", 16, t["green"], 2.4)} Daily goal reached</span>'
                    f'<span style="font-size: 13px; color: {t["muted"]}">3 questions go to "Review my mistakes"</span>')
         missed = "".join(missed_card(t, *m) for m in MISSED)
@@ -341,11 +342,11 @@ def results(t, exam):
 
 
 def quit_dialog(t):
-    behind = f'''{header(t, "Question 18 / 50", back="#", close=True, overline="Mock exam · PAL")}
+    behind = f'''{header(t, "Question 18 / 50", back="#", close=True, overline="Mock exam · ICAF")}
   <div style="height: 5px; border-radius: 3px; background: {t["track"]}"><div style="width: 36%; height: 5px; border-radius: 3px; background: {t["current"]}"></div></div>
-  <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 28px; line-height: 1.15">Under the basic safety rule, how should you treat every firearm?</h1>
-  {choice(t, "A", "As if it is loaded", "idle")}
-  {choice(t, "B", "As unloaded if the safety is on", "idle")}'''
+  <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 28px; line-height: 1.15">Which level of government is responsible for managing migratory birds?</h1>
+  {choice(t, "A", "The provincial government", "idle")}
+  {choice(t, "B", "The municipalities", "idle")}'''
     dialog = f'''<div style="position: absolute; inset: 0; background: {t["dim"]}; display: flex; align-items: center; justify-content: center; padding: 24px">
     <div role="dialog" aria-labelledby="quit-title" style="width: 100%; background: {t["dialog"]}; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.35)">
       <h2 id="quit-title" style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px">Quit this test?</h2>
@@ -370,13 +371,13 @@ def photo_zoom(t):
 
 
 def nothing_to_review(t):
-    body = f'''{header(t, "Review my mistakes", back=href(t, "ExamTraining"), overline="PAL exam")}
+    body = f'''{header(t, "Review my mistakes", back=href(t, "ExamTraining"), overline="ICAF · Québec")}
   <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; padding: 0 12px">
     <span style="width: 84px; height: 84px; border-radius: 24px; background: {t["green_tint"]}; color: {t["green"]}; display: flex; align-items: center; justify-content: center">{icon("check", 44, width=2.4)}</span>
     <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 30px">Nothing to review yet</h1>
     <p style="margin: 0; font-size: 15px; line-height: 1.45; color: {t["muted"]}">Questions you miss come here until you answer them right twice in a row.</p>
   </div>
-  {primary(t, "Practise the PAL exam", href(t, "PracticeQuestion"), icon_name="play")}'''
+  {primary(t, "Practise the ICAF", href(t, "PracticeQuestion"), icon_name="play")}'''
     return page(t, "BetterHunter nothing to review", body, gap=14)
 
 
@@ -431,7 +432,7 @@ def passed_exam(t):
   <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; padding: 8px 8px 0">
     <span style="width: 96px; height: 96px; border-radius: 28px; background: {t["orange_tint"]}; color: {t["label"]}; display: flex; align-items: center; justify-content: center">{icon("trophy", 50, width=2)}</span>
     {label(t, "Real exam")}
-    <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.05">Did you pass the PAL exam?</h1>
+    <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.05">Did you pass your hunter course (ICAF)?</h1>
     <p style="margin: 0; font-size: 15px; line-height: 1.45; color: {t["muted"]}">Congratulations if so! Here's what changes in BetterHunter:</p>
   </div>
   {card(t, changes, pad="16px", gap=14, radius=18)}
@@ -453,7 +454,7 @@ def main_new_hunter(t):
   </header>
   <section style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px; background: {t["sel"]}; border: 1px solid {t["warm_border"]}">
     {tile(t, "trophy", "orange", 40, 10)}
-    <span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">PAL passed. Welcome, new hunter!</span><span style="font-size: 13px; color: {t["muted"]}">Now sharpen your eye in the field.</span></span>
+    <span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">Hunter course passed. Welcome, new hunter!</span><span style="font-size: 13px; color: {t["muted"]}">Now sharpen your eye in the field.</span></span>
     <a href="#" aria-label="Dismiss" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: {t["muted"]}; margin-right: -10px">{icon("close", 18)}</a>
   </section>
   {card(t, f'''<div style="display: flex; align-items: center; gap: 16px">{ring_html}
@@ -474,7 +475,7 @@ def main_new_hunter(t):
       {tile(t, "school")}
       <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">Exam training</span>
       <span style="font-size: 13px; color: {t["muted"]}; line-height: 1.35">Refresh the rules any time</span>
-      <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: {t["green"]}; margin-top: auto">{icon("check", 14, t["green"], 2.6)} PAL passed</span>
+      <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: {t["green"]}; margin-top: auto">{icon("check", 14, t["green"], 2.6)} ICAF passed</span>
     </a>
   </div>
   <section style="position: relative; flex: 1; min-height: 0; border-radius: 22px; overflow: hidden; background: {t["track"]}">
@@ -487,12 +488,57 @@ def main_new_hunter(t):
     return page(t, "BetterHunter home, new hunter", body, gap=14, padding="20px 20px 24px")
 
 
+def exam_picker(t):
+    def option(name, title, sub, selected=False, soon=False):
+        bg, border = (t["sel"], t["orange"]) if selected else (t["card"], t["outline"])
+        tile_html = tile(t, name, "orange" if selected else "green", 40, 10)
+        if soon:
+            mark = f'<span style="font-size: 12px; font-weight: 600; color: {t["muted"]}">Coming soon</span>'
+        elif selected:
+            mark = (f'<span style="width: 22px; height: 22px; flex-shrink: 0; border-radius: 6px; background: {t["orange"]}; color: {t["on_orange"]}; '
+                    f'display: flex; align-items: center; justify-content: center">{icon("check", 14, width=3)}</span>')
+        else:
+            mark = f'<span style="width: 22px; height: 22px; flex-shrink: 0; box-sizing: border-box; border-radius: 6px; border: 2px solid {t["box"]}"></span>'
+        dashed = "dashed" if soon else "solid"
+        return (f'<label style="display: flex; align-items: center; gap: 12px; min-height: 64px; box-sizing: border-box; padding: 10px 14px; border-radius: 16px; '
+                f'background: {bg}; border: 1.5px {dashed} {border}">'
+                f'<input type="checkbox"{" checked" if selected else ""}{" disabled" if soon else ""} style="position: absolute; opacity: 0; width: 1px; height: 1px">'
+                f'{tile_html}<span style="display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0">'
+                f'<span style="font-weight: 600; font-size: 15px; line-height: 1.25">{title}</span>'
+                f'<span style="font-size: 13px; line-height: 1.3; color: {t["muted"]}">{sub}</span></span>{mark}</label>')
+
+    def group(title, note, options):
+        legend = (f'<legend style="font-size: 12px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: {t["muted"]}; '
+                  f'padding: 0; margin-bottom: 8px">{title}</legend>')
+        return f'<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">{legend}{options}{note}</fieldset>'
+
+    more = (f'<p style="margin: 2px 0 0; font-size: 13px; color: {t["muted"]}; display: flex; align-items: center; gap: 8px">'
+            f'{icon("goal", 16)} More provinces coming.</p>')
+    body = f'''<header style="display: flex; align-items: center; height: 48px; flex-shrink: 0">{round_link(t, href(t, "HunterProfile"), "Back", "back")}</header>
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    {label(t, "One more question")}
+    <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 34px; line-height: 1.05">What are you preparing for?</h1>
+    <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Your hunter course is what makes you a hunter. Pick one or more; you can change this later.</p>
+  </div>
+  {group("Hunter education", more,
+         option("tree", "Hunter education with firearms (ICAF)", "Québec · 228 questions", selected=True)
+         + option("target", "Bow and crossbow hunter education (ICAA)", "Québec", soon=True)
+         + option("mountain", "Conservation and Hunter Education", "Alberta · 285 questions"))}
+  {group("Firearms licence (optional)", "",
+         option("shield", "PAL exam (CFSC, non-restricted)", "To own or buy firearms. Not needed to hunt with a bow or crossbow.", selected=True))}
+  <div style="margin-top: auto; display: flex; align-items: center; gap: 10px">
+    <a href="{href(t, "Main")}" style="height: 54px; padding: 0 16px; display: flex; align-items: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none">Skip</a>
+    {primary(t, "Continue", href(t, "Main"), "; flex: 1")}
+  </div>'''
+    return page(t, "BetterHunter onboarding: what are you preparing for", body, gap=14)
+
+
 SCREENS = {
     "Settings": settings, "About": about, "ExamTraining": exam_training, "PracticeQuestion": practice_question,
     "PracticeResults": lambda t: results(t, exam=False), "ExamResults": lambda t: results(t, exam=True),
     "QuitDialog": quit_dialog, "PhotoZoom": photo_zoom, "NothingToReview": nothing_to_review,
     "Recognition": recognition, "UpdateRequired": update_required, "PassedExam": passed_exam,
-    "MainNewHunter": main_new_hunter,
+    "MainNewHunter": main_new_hunter, "ExamPicker": exam_picker,
 }
 
 if __name__ == "__main__":
