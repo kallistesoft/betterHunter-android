@@ -9,6 +9,7 @@ import ca.kallistesoft.hunt.core.model.Weapon
 import ca.kallistesoft.hunt.core.testing.FakeUserDataRepository
 import ca.kallistesoft.hunt.core.testing.MainDispatcherRule
 import ca.kallistesoft.hunt.core.testing.awaitItemMatching
+import ca.kallistesoft.hunt.core.testing.collecting
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -42,6 +43,7 @@ class SettingsViewModelTest {
     @Test
     fun `an edit starts from the saved answer and is saved only on Save`() = runTest {
         val vm = ProfileEditViewModel(ProfileField.HOME_PROVINCE, userData, SavedStateHandle())
+        collecting(vm.uiState)
         assertEquals(Province.QC, vm.uiState.value.province)
         vm.chooseProvince(Province.AB)
         assertEquals(Province.QC, userData.progress.value.homeProvince)
@@ -56,6 +58,7 @@ class SettingsViewModelTest {
     @Test
     fun `weapons can't all be unticked`() = runTest {
         val vm = ProfileEditViewModel(ProfileField.WEAPONS, userData, SavedStateHandle())
+        collecting(vm.uiState)
         vm.toggleWeapon(Weapon.FIREARM)
         assertFalse(vm.uiState.value.canSave)
         vm.toggleWeapon(Weapon.BOW)
@@ -66,7 +69,12 @@ class SettingsViewModelTest {
     @Test
     fun `the selection survives process death`() = runTest {
         val saved = SavedStateHandle()
-        ProfileEditViewModel(ProfileField.HUNTER_TYPE, userData, saved).chooseHunterType(HunterType.EXPERIENCED)
-        assertEquals(HunterType.EXPERIENCED, ProfileEditViewModel(ProfileField.HUNTER_TYPE, userData, saved).uiState.value.hunterType)
+        ProfileEditViewModel(ProfileField.HUNTER_TYPE, userData, saved).apply {
+            collecting(uiState)
+            chooseHunterType(HunterType.EXPERIENCED)
+        }
+        val restored = ProfileEditViewModel(ProfileField.HUNTER_TYPE, userData, saved)
+        collecting(restored.uiState)
+        assertEquals(HunterType.EXPERIENCED, restored.uiState.value.hunterType)
     }
 }

@@ -143,6 +143,9 @@ Checked by `scripts/check-conventions.sh` (CI runs it on every push):
   force-update parameter and its Remote Config fetch interval.
 - **No dp literals outside the theme.** Gaps come from `Spacing`, component sizes from `Sizes` (both in
   `core/designsystem/.../theme`), corners from `MaterialTheme.shapes`. A new size is added there first.
+- **No `init` in a ViewModel.** State is derived with `combine` + `stateIn`, or loaded in
+  `_uiState.asStateFlow().onStart { }` + `stateIn`, so it starts when the screen collects it. See
+  [skills/viewmodel-state](skills/viewmodel-state/SKILL.md).
 
 ## UI components and screenshots
 

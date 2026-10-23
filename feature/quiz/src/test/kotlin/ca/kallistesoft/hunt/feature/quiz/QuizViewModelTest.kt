@@ -133,6 +133,23 @@ class QuizViewModelTest {
     }
 
     @Test
+    fun `the run is drawn once, not again when the screen comes back`() = runTest(mainDispatcherRule.testDispatcher) {
+        val vm = viewModel(QuizMode.PRACTICE)
+        lateinit var drawn: List<String>
+        vm.uiState.test {
+            skipItems(1)
+            runCurrent()
+            drawn = awaitItem().running.session.questions.map { it.id }
+        }
+        advanceTimeBy(10_000) // past WhileSubscribed's 5 s: the state stops being shared
+
+        vm.uiState.test {
+            runCurrent()
+            assertEquals(drawn, expectMostRecentItem().running.session.questions.map { it.id })
+        }
+    }
+
+    @Test
     fun `a run is restored after process death`() = runTest(mainDispatcherRule.testDispatcher) {
         val saved = SavedStateHandle()
         lateinit var drawn: List<String>
