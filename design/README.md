@@ -17,9 +17,10 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | Splash screen: the native Android splash, icon on the green | `Splash.dc.html` | `SplashLight.dc.html` | built |
 | Onboarding: what kind of hunter? (first launch) | `HunterProfile.dc.html` | `HunterProfileLight.dc.html` | not built |
 | Onboarding: what do you hunt with? (firearm, bow, crossbow) | `HuntWith.dc.html` | `HuntWithLight.dc.html` | not built |
-| Onboarding: what are you preparing for? (only after "Working on it") | `ExamPicker.dc.html` | `ExamPickerLight.dc.html` | built (today's first-run exam picker), restyle |
+| Onboarding: where do you hunt? (Québec, Alberta, elsewhere in Canada) | `HuntWhere.dc.html` | `HuntWhereLight.dc.html` | not built (replaces the first-run exam picker) |
 | Home | `Main.dc.html` | `MainLight.dc.html` | built; the gear (Settings) is new |
-| Settings: hunter type, my exams, language, daily goal; About inside | `Settings.dc.html` | `SettingsLight.dc.html` | not built |
+| Settings: hunter type, hunting with, where you hunt, my quizzes, language, daily goal; About inside | `Settings.dc.html` | `SettingsLight.dc.html` | not built |
+| My quizzes: quizzes by province, with switches (add other provinces, turn some off) | `QuizSettings.dc.html` | `QuizSettingsLight.dc.html` | not built (replaces "Change exams") |
 | About | `About.dc.html` | `AboutLight.dc.html` | built, restyle |
 | Exam training | `ExamTraining.dc.html` | `ExamTrainingLight.dc.html` | built, restyle |
 | Practice: question answered (text question, wrong answer) | `PracticeQuestion.dc.html` | `PracticeQuestionLight.dc.html` | built |
@@ -42,9 +43,9 @@ The canvas has one **page per flow** (dark row on top, light row below, screens 
 
 | Page | Screens |
 |---|---|
-| 1 · Working on it: exam prep (opens first) | 1 Splash → 2 What kind of hunter? → 3 What do you hunt with? → 4 What are you preparing for? → 5 Home → 6 Exam training → 7 Practice question → 8 Practice results (8b nothing to review) → 9 Mock exam question (9b quit) → 10 Mock exam results → 11 I passed the real exam → 12 Home, new hunter |
+| 1 · Working on it: exam prep (opens first) | 1 Splash → 2 What kind of hunter? → 3 What do you hunt with? → 4 Where do you hunt? → 5 Home → 6 Exam training → 7 Practice question → 8 Practice results (8b nothing to review) → 9 Mock exam question (9b quit) → 10 Mock exam results → 11 I passed the real exam → 12 Home, new hunter |
 | 2 · What is it? | 1 Recognition hub → 2 Photo question → 3 Photo full screen → 4 Answer |
-| 3 · Settings & About | 1 Settings → 2 About |
+| 3 · Settings & About | 1 Settings → 2 My quizzes → 3 About |
 | 4 · System | 1 Update required |
 | 5 · Logo | Logo concepts, buck variants |
 
@@ -52,14 +53,12 @@ The screens added for the full app are generated: `generator/screens.py` (shared
 icons; `python3 generator/screens.py <out_dir>` writes both themes), `generator/buck.py` and `generator/logos.py` (the
 logo boards). Edit the generator, regenerate, then publish the changed files to the canvas and copy them here.
 
-**Onboarding (not built yet).** First launch, after the splash: "What kind of hunter are you?" (Working on it:
-preparing for the licence or hunter course; New hunter: licensed, a few seasons; Experienced hunter: many seasons),
-saved on the device, then "What do you hunt with?" (firearm, bow, crossbow; pick all that apply; everyone answers, it
-decides the hunter course and rules shown). Only "Working on it" goes on to "What are you preparing for?", pre-ticked
-from the weapons (firearm → ICAF, bow or crossbow → ICAA), the exam picker: hunter
-education first (Québec ICAF, Québec bow and crossbow ICAA "coming soon", Alberta; "More provinces coming"), then the
-PAL as an optional firearms licence (DECISIONS.md, P10), then Home; new and experienced hunters go straight to Home. A province
-question ("Where do you hunt?") can come later, when more provinces are covered.
+**Onboarding (not built yet).** First launch, after the splash: "What kind of hunter are you?" (Working on it,
+New hunter, Experienced hunter), "What do you hunt with?" (firearm, bow, crossbow; pick all that apply) and "Where do
+you hunt?" (Québec, Alberta, elsewhere in Canada), saved on the device. The province sets the quizzes of a "Working on
+it" user: Québec, the Québec hunter course (ICAF; ICAA for bow and crossbow once it has questions); Alberta, the Alberta
+course and the PAL; elsewhere, the PAL. Settings → My quizzes adds other provinces' quizzes or turns some off. There is
+no exam list in onboarding.
 
 **Passed the real exam (not built yet).** On an exam card in Exam training, "I passed the real exam" opens a
 confirmation on the hunter course ("Did you pass your hunter course (ICAF)?", what changes, "Yes, I passed" / "Not yet"). Confirming makes the user a

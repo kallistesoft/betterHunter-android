@@ -70,6 +70,8 @@ ICONS = {
     "flame": '<path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5.5 2 1.5 2.5 2.5 2.5C11 8 11 5.5 12 3z"/>',
     "bow": '<path d="M7 3c6 3.5 6 14.5 0 18"/><path d="M7 3v18"/><path d="M3 12h17"/><path d="M17 9l3 3-3 3"/>',
     "crossbow": '<path d="M3 8c5-4 13-4 18 0"/><path d="M3 8l9 5 9-5"/><path d="M12 3v18"/><path d="M10 18h4"/>',
+    "pin": '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+    "maple": '<path d="M12 3l1.6 3.6 2.4-1-.6 4 3-1-1 3 2.6 1.4-4.2 3.2.6 2.3-3.4-.8V21h-2v-3.3l-3.4.8.6-2.3L4 13l2.6-1.4-1-3 3 1-.6-4 2.4 1z"/>',
     "expand": '<path d="M4 9V4h5"/><path d="M20 9V4h-5"/><path d="M4 15v5h5"/><path d="M20 15v5h-5"/>',
 }
 
@@ -200,16 +202,76 @@ def settings(t):
     body = f'''{header(t, "Settings", back=href(t, "Main"))}
   {label(t, "Your profile", t["muted"])}
   {card(t, row(t, tile(t, "user"), "Hunter type", "Working on it", target=href(t, "HunterProfile"), divider=False)
-        + row(t, tile(t, "shield"), "My exams", "ICAF (Québec), PAL", target=href(t, "ExamPicker")), pad="6px 16px", gap=0)}
+        + row(t, tile(t, "target"), "Hunting with", "Firearm", target=href(t, "HuntWith"))
+        + row(t, tile(t, "pin"), "Where you hunt", "Québec", target=href(t, "HuntWhere"))
+        + row(t, tile(t, "school", "orange"), "My quizzes", "Québec hunter course (ICAF) · add other provinces", target=href(t, "QuizSettings")), pad="2px 16px", gap=0)}
   {label(t, "App", t["muted"])}
   {card(t, row(t, tile(t, "globe"), "Language", None, trail=pill, divider=False)
-        + row(t, tile(t, "goal", "orange"), "Daily goal", "Questions a day", trail=goal), pad="6px 16px", gap=0)}
+        + row(t, tile(t, "goal"), "Daily goal", "Questions a day", trail=goal), pad="2px 16px", gap=0)}
   {label(t, "About", t["muted"])}
   {card(t, row(t, tile(t, "info"), "About BetterHunter", "How it works, sources, disclaimer", target=href(t, "About"), divider=False)
         + row(t, tile(t, "mail"), "Contact", "contact@kallistesoft.ca", trail="external", target="#")
-        + row(t, tile(t, "lock"), "Privacy policy", None, trail="external", target="#"), pad="6px 16px", gap=0)}
+        + row(t, tile(t, "lock"), "Privacy policy", None, trail="external", target="#"), pad="2px 16px", gap=0)}
   <p style="margin: auto 0 0; text-align: center; font-size: 12px; color: {t["faint"]}">BetterHunter · Version 1.0.0</p>'''
-    return page(t, "BetterHunter settings", body, gap=12)
+    return page(t, "BetterHunter settings", body, gap=10)
+
+
+def switch(t, on):
+    track, knob, pos = (t["orange"], t["on_orange"] if t["name"] == "dark" else "#FFFFFF", "right: 3px") if on else (t["track"], t["muted"], "left: 3px")
+    return (f'<span role="switch" aria-checked="{"true" if on else "false"}" style="position: relative; width: 48px; height: 28px; flex-shrink: 0; border-radius: 999px; background: {track}">'
+            f'<span style="position: absolute; top: 3px; {pos}; width: 22px; height: 22px; border-radius: 999px; background: {knob}"></span></span>')
+
+
+def quiz_settings(t):
+    soon = f'<span style="font-size: 12px; font-weight: 600; color: {t["muted"]}">Coming soon</span>'
+
+    def province(name, badge, rows):
+        tag = (f'<span style="font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; background: {t["green_tint"]}; color: {t["green"]}">{badge}</span>'
+               if badge else "")
+        return (f'<div style="display: flex; align-items: center; gap: 8px; margin-top: 4px">{label(t, name, t["muted"])}{tag}</div>'
+                + card(t, rows, pad="2px 16px", gap=0, radius=18))
+    body = f'''{header(t, "My quizzes", back=href(t, "Settings"))}
+  <p style="margin: 0; font-size: 14px; line-height: 1.45; color: {t["muted"]}">Your quizzes follow where you hunt. Add another province's, or turn some off.</p>
+  {province("Québec", "Where you hunt",
+            row(t, tile(t, "tree"), "Hunter education with firearms (ICAF)", "228 questions", trail=switch(t, True), divider=False)
+            + row(t, tile(t, "bow"), "Bow and crossbow (ICAA)", None, trail=soon))}
+  {province("Alberta", None,
+            row(t, tile(t, "mountain"), "Conservation and Hunter Education", "285 questions", trail=switch(t, False), divider=False))}
+  {province("Canada (federal)", None,
+            row(t, tile(t, "shield"), "PAL exam (CFSC)", "Firearms licence · 303 questions", trail=switch(t, False), divider=False))}
+  <p style="margin: 0; font-size: 13px; color: {t["muted"]}; display: flex; align-items: center; gap: 8px">{icon("goal", 16)} More provinces coming.</p>'''
+    return page(t, "BetterHunter my quizzes", body, gap=10)
+
+
+def hunt_where(t):
+    def option(name, title, sub, selected=False):
+        bg, border = (t["sel"], t["orange"]) if selected else (t["card"], t["outline"])
+        if selected:
+            mark = (f'<span style="width: 22px; height: 22px; flex-shrink: 0; border-radius: 999px; background: {t["orange"]}; color: {t["on_orange"]}; '
+                    f'display: flex; align-items: center; justify-content: center">{icon("check", 14, width=3)}</span>')
+        else:
+            mark = f'<span style="width: 22px; height: 22px; flex-shrink: 0; box-sizing: border-box; border-radius: 999px; border: 2px solid {t["box"]}"></span>'
+        return (f'<label style="display: flex; align-items: center; gap: 14px; min-height: 84px; box-sizing: border-box; padding: 14px 16px; border-radius: 18px; '
+                f'background: {bg}; border: 1.5px solid {border}">'
+                f'<input type="radio" name="province"{" checked" if selected else ""} style="position: absolute; opacity: 0; width: 1px; height: 1px">'
+                f'{tile(t, name, "orange" if selected else "green")}<span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0">'
+                f'<span style="font-family: \'Barlow Condensed\', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">{title}</span>'
+                f'<span style="font-size: 13px; line-height: 1.35; color: {t["muted"]}">{sub}</span></span>{mark}</label>')
+    body = f'''<header style="display: flex; align-items: center; height: 48px; flex-shrink: 0">{round_link(t, href(t, "HuntWith"), "Back", "back")}</header>
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    {label(t, "Last question")}
+    <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 34px; line-height: 1.05">Where do you hunt?</h1>
+    <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Your quizzes and rules follow your province.</p>
+  </div>
+  <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+    <legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Where do you hunt?</legend>
+    {option("tree", "Québec", "Québec hunter course (ICAF; bow and crossbow coming soon)", selected=True)}
+    {option("mountain", "Alberta", "Alberta hunter course and the PAL (firearms licence)")}
+    {option("maple", "Elsewhere in Canada", "The PAL (firearms licence) for now; more provinces coming")}
+  </fieldset>
+  <p style="margin: 0; font-size: 13px; line-height: 1.4; color: {t["muted"]}; display: flex; gap: 8px">{icon("info", 16)}<span>You can add other provinces' quizzes later in Settings.</span></p>
+  <div style="margin-top: auto">{primary(t, "Continue", href(t, "Main"))}</div>'''
+    return page(t, "BetterHunter onboarding: where do you hunt", body, gap=16)
 
 
 def about(t):
@@ -245,17 +307,12 @@ def exam_training(t):
     </div>
     <a href="{href(t, "PracticeQuestion")}" style="display: flex; align-items: center; gap: 8px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px">{icon("replay", 16)} Review my mistakes (5)</a>
     <a href="{href(t, "PassedExam")}" style="display: flex; align-items: center; gap: 8px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px; border-top: 1px solid {t["border"]}; padding-top: 10px">{icon("trophy", 16)} I passed the real exam</a>'''
-    pal = row(t, tile(t, "shield"), "PAL exam (CFSC, non-restricted)", "Firearms licence, optional · 303 questions · 62%",
-              target=href(t, "ExamTraining"), divider=False)
-    soon = f'<span style="font-size: 12px; font-weight: 600; color: {t["muted"]}">Coming soon</span>'
-    others = (row(t, tile(t, "target"), "Bow and crossbow hunter education (ICAA)", "Québec", trail=soon, divider=False)
-              + row(t, tile(t, "mountain"), "Conservation and Hunter Education", "Alberta · 285 questions", target=href(t, "ExamTraining")))
+    add = row(t, tile(t, "pin"), "Quizzes from other provinces", "Alberta, PAL (firearms licence)…", target=href(t, "QuizSettings"), divider=False)
     body = f'''{header(t, "Exam training", back=href(t, "Main"))}
-  <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px">{label(t, "My exams", t["muted"])}<a href="{href(t, "ExamPicker")}" style="color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px; display: flex; align-items: center">Change</a></div>
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px">{label(t, "My exams", t["muted"])}<a href="{href(t, "QuizSettings")}" style="color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px; display: flex; align-items: center">Change</a></div>
   {card(t, icaf, pad="18px", gap=14)}
-  {card(t, pal, pad="4px 16px", gap=0)}
-  {label(t, "Other exams", t["muted"], "; margin-top: 6px")}
-  {card(t, others, pad="4px 16px", gap=0)}'''
+  {label(t, "Add more", t["muted"], "; margin-top: 6px")}
+  {card(t, add, pad="4px 16px", gap=0)}'''
     return page(t, "BetterHunter exam training", body, gap=12)
 
 
@@ -490,51 +547,6 @@ def main_new_hunter(t):
     return page(t, "BetterHunter home, new hunter", body, gap=14, padding="20px 20px 24px")
 
 
-def exam_picker(t):
-    def option(name, title, sub, selected=False, soon=False):
-        bg, border = (t["sel"], t["orange"]) if selected else (t["card"], t["outline"])
-        tile_html = tile(t, name, "orange" if selected else "green", 40, 10)
-        if soon:
-            mark = f'<span style="font-size: 12px; font-weight: 600; color: {t["muted"]}">Coming soon</span>'
-        elif selected:
-            mark = (f'<span style="width: 22px; height: 22px; flex-shrink: 0; border-radius: 6px; background: {t["orange"]}; color: {t["on_orange"]}; '
-                    f'display: flex; align-items: center; justify-content: center">{icon("check", 14, width=3)}</span>')
-        else:
-            mark = f'<span style="width: 22px; height: 22px; flex-shrink: 0; box-sizing: border-box; border-radius: 6px; border: 2px solid {t["box"]}"></span>'
-        dashed = "dashed" if soon else "solid"
-        return (f'<label style="display: flex; align-items: center; gap: 12px; min-height: 64px; box-sizing: border-box; padding: 10px 14px; border-radius: 16px; '
-                f'background: {bg}; border: 1.5px {dashed} {border}">'
-                f'<input type="checkbox"{" checked" if selected else ""}{" disabled" if soon else ""} style="position: absolute; opacity: 0; width: 1px; height: 1px">'
-                f'{tile_html}<span style="display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0">'
-                f'<span style="font-weight: 600; font-size: 15px; line-height: 1.25">{title}</span>'
-                f'<span style="font-size: 13px; line-height: 1.3; color: {t["muted"]}">{sub}</span></span>{mark}</label>')
-
-    def group(title, note, options):
-        legend = (f'<legend style="font-size: 12px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: {t["muted"]}; '
-                  f'padding: 0; margin-bottom: 8px">{title}</legend>')
-        return f'<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">{legend}{options}{note}</fieldset>'
-
-    more = (f'<p style="margin: 2px 0 0; font-size: 13px; color: {t["muted"]}; display: flex; align-items: center; gap: 8px">'
-            f'{icon("goal", 16)} More provinces coming.</p>')
-    body = f'''<header style="display: flex; align-items: center; height: 48px; flex-shrink: 0">{round_link(t, href(t, "HuntWith"), "Back", "back")}</header>
-  <div style="display: flex; flex-direction: column; gap: 8px">
-    {label(t, "One more question")}
-    <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 34px; line-height: 1.05">What are you preparing for?</h1>
-    <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Your hunter course is what makes you a hunter. Pick one or more; you can change this later.</p>
-  </div>
-  {group("Hunter education", more,
-         option("tree", "Hunter education with firearms (ICAF)", "Québec · 228 questions · for firearm hunting", selected=True)
-         + option("bow", "Bow and crossbow hunter education (ICAA)", "Québec · for bow and crossbow hunting", soon=True)
-         + option("mountain", "Conservation and Hunter Education", "Alberta · 285 questions"))}
-  {group("Firearms licence (optional)", "",
-         option("shield", "PAL exam (CFSC, non-restricted)", "To own or buy firearms. Not needed to hunt with a bow or crossbow.", selected=True))}
-  <div style="margin-top: auto; display: flex; align-items: center; gap: 10px">
-    <a href="{href(t, "Main")}" style="height: 54px; padding: 0 16px; display: flex; align-items: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none">Skip</a>
-    {primary(t, "Continue", href(t, "Main"), "; flex: 1")}
-  </div>'''
-    return page(t, "BetterHunter onboarding: what are you preparing for", body, gap=14)
-
-
 def hunt_with(t):
     def option(name, title, sub, selected=False):
         bg, border = (t["sel"], t["orange"]) if selected else (t["card"], t["outline"])
@@ -561,7 +573,7 @@ def hunt_with(t):
     {option("bow", "Bow", "Compound, recurve or longbow")}
     {option("crossbow", "Crossbow", "Hunting with a crossbow")}
   </fieldset>
-  <div style="margin-top: auto">{primary(t, "Continue", href(t, "ExamPicker"))}</div>'''
+  <div style="margin-top: auto">{primary(t, "Continue", href(t, "HuntWhere"))}</div>'''
     return page(t, "BetterHunter onboarding: what do you hunt with", body, gap=16, padding="12px 20px 24px")
 
 
@@ -570,7 +582,7 @@ SCREENS = {
     "PracticeResults": lambda t: results(t, exam=False), "ExamResults": lambda t: results(t, exam=True),
     "QuitDialog": quit_dialog, "PhotoZoom": photo_zoom, "NothingToReview": nothing_to_review,
     "Recognition": recognition, "UpdateRequired": update_required, "PassedExam": passed_exam,
-    "MainNewHunter": main_new_hunter, "ExamPicker": exam_picker, "HuntWith": hunt_with,
+    "MainNewHunter": main_new_hunter, "HuntWith": hunt_with, "HuntWhere": hunt_where, "QuizSettings": quiz_settings,
 }
 
 if __name__ == "__main__":
