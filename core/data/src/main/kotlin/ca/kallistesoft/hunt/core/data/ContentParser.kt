@@ -35,8 +35,10 @@ object ContentParser {
         return Content(exams, byScope)
     }
 
+    // The JSON shapes; internal so tests can also build them in code.
+
     @Serializable
-    private class ExamDto(
+    internal class ExamDto(
         val name: Map<String, String>,
         val scopes: List<String>,
         val questionCount: Int = 50,
@@ -56,7 +58,7 @@ object ContentParser {
     }
 
     @Serializable
-    private class TextDto(
+    internal class TextDto(
         val q: String,
         val choices: List<String>,
         val explanation: String,
@@ -67,10 +69,10 @@ object ContentParser {
     }
 
     @Serializable
-    private class CreditDto(val author: String, val license: String, val page: String)
+    internal class CreditDto(val author: String, val license: String, val page: String)
 
     @Serializable
-    private class QuestionDto(
+    internal class QuestionDto(
         val id: String,
         val scope: String,
         val chapter: String,

@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmDefaultMode
+
 plugins {
     alias(libs.plugins.betterhunter.android.library)
     alias(libs.plugins.betterhunter.hilt)
@@ -5,6 +7,13 @@ plugins {
 
 android {
     namespace = "ca.kallistesoft.hunt.core.flags"
+    // Robolectric tests start Firebase, whose components are declared in the merged manifest.
+    testOptions.unitTests.isIncludeAndroidResources = true
+}
+
+kotlin {
+    // All callers are Kotlin: no DefaultImpls bridge for FeatureFlags.isEnabled (Java-only, never called).
+    compilerOptions { jvmDefault = JvmDefaultMode.NO_COMPATIBILITY }
 }
 
 dependencies {
@@ -12,4 +21,7 @@ dependencies {
     implementation(libs.firebase.config)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.play.services)
+
+    testImplementation(project(":core:testing"))
+    testImplementation(libs.mockk)
 }

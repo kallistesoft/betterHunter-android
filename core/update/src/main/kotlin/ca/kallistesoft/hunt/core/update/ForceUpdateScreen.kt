@@ -53,8 +53,14 @@ import kotlinx.coroutines.launch
 @Composable
 fun ForceUpdateScreen(storePackage: String, modifier: Modifier = Modifier) {
     val context = LocalContext.current
+    ForceUpdateScreen(storePackage, remember(context) { AppUpdateManagerFactory.create(context) }, modifier)
+}
+
+/** [manager] is Play's in-app updates; tests pass a `FakeAppUpdateManager`. */
+@Composable
+internal fun ForceUpdateScreen(storePackage: String, manager: AppUpdateManager, modifier: Modifier = Modifier) {
+    val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val manager = remember(context) { AppUpdateManagerFactory.create(context) }
     // The result doesn't matter: if the user cancels, this screen is still here.
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {}
 
