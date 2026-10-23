@@ -245,8 +245,9 @@ def provinces(t):
     return page(t, "BetterHunter my provinces", body, gap=12)
 
 
-def hunt_where(t, new_hunter=False):
-    fl = "NewHunter" if new_hunter else ""
+def hunt_where(t, fl=""):
+    # fl: "" (working on it), "NewHunter" or "Experienced"; hunters see rules instead of hunter courses.
+    new_hunter = bool(fl)
     def option(name, title, sub, selected=False):
         bg, border = (t["sel"], t["orange"]) if selected else (t["card"], t["outline"])
         if selected:
@@ -273,7 +274,7 @@ def hunt_where(t, new_hunter=False):
     {option("maple", "Elsewhere in Canada", "Canada-wide skills for now; more provinces coming" if new_hunter else "The PAL (firearms licence) for now; more provinces coming")}
   </fieldset>
   <p style="margin: 0; font-size: 13px; line-height: 1.4; color: {t["muted"]}; display: flex; gap: 8px">{icon("info", 16)}<span>{"You can add other provinces later in Settings." if new_hunter else "You can add other provinces' quizzes later in Settings."}</span></p>
-  <div style="margin-top: auto">{primary(t, "Continue", href(t, "HomeNewHunter" if new_hunter else "Main"))}</div>'''
+  <div style="margin-top: auto">{primary(t, "Continue", href(t, {"": "Main", "NewHunter": "HomeNewHunter", "Experienced": "HomeExperiencedFirst"}[fl]))}</div>'''
     return page(t, "BetterHunter onboarding: where do you hunt", body, gap=16)
 
 
@@ -592,8 +593,7 @@ def main_new_hunter(t, passed=True, season=None):
     return page(t, "BetterHunter home, new hunter" + ("" if passed else f", before the season ({'your date' if season == 'date' else 'no date'})" if season else " (from onboarding)"), body, gap=14, padding="20px 20px 24px")
 
 
-def hunt_with(t, new_hunter=False):
-    fl = "NewHunter" if new_hunter else ""
+def hunt_with(t, fl=""):
     def option(name, title, sub, selected=False):
         bg, border = (t["sel"], t["orange"]) if selected else (t["card"], t["outline"])
         if selected:
@@ -616,7 +616,7 @@ def hunt_with(t, new_hunter=False):
   <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
     <legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">What do you hunt with?</legend>
     {option("target", "Firearm", "Rifle, shotgun or muzzleloader", selected=True)}
-    {option("bow", "Bow", "Compound, recurve or longbow")}
+    {option("bow", "Bow", "Compound, recurve or longbow", selected=fl == "Experienced")}
     {option("crossbow", "Crossbow", "Hunting with a crossbow")}
   </fieldset>
   <div style="margin-top: auto">{primary(t, "Continue", href(t, "HuntWhere" + fl))}</div>'''
@@ -631,8 +631,8 @@ RACK = ('<svg width="24" height="24" viewBox="0 0 32 32" fill="none" stroke="cur
         '<path d="M12.5 17.5c0-1.5 2-2 3.5-2s3.5.5 3.5 2c0 4-1.5 8-3 10.5-.3.5-.7.5-1 0-1.5-2.5-3-6.5-3-10.5z"/></svg>')
 
 
-def hunter_profile_new(t):
-    # The onboarding's first question (hand-made in HunterProfile.dc.html) with "New hunter" picked.
+def hunter_profile_new(t, fl="NewHunter"):
+    # The onboarding's first question (hand-made in HunterProfile.dc.html) with "New hunter" or "Experienced hunter" picked.
     def option(glyph, title, sub, selected=False):
         bg, border = (t["sel"], t["orange"]) if selected else (t["card"], t["outline"])
         tbg, tfg = (t["orange_tint"], t["label"]) if selected else (t["green_tint"], t["green"])
@@ -663,14 +663,14 @@ def hunter_profile_new(t):
   <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
     <legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">What kind of hunter are you?</legend>
     {option(icon("book", 24), "Working on it", "Preparing for my licence or hunter course")}
-    {option(icon("sprout", 24), "New hunter", "Licensed, a few seasons so far", selected=True)}
-    {option(RACK, "Experienced hunter", "Many seasons in the field")}
+    {option(icon("sprout", 24), "New hunter", "Licensed, a few seasons so far", selected=fl == "NewHunter")}
+    {option(RACK, "Experienced hunter", "Many seasons in the field", selected=fl == "Experienced")}
   </fieldset>
   <div style="margin-top: auto; display: flex; flex-direction: column; gap: 10px">
-    {primary(t, "Continue", href(t, "HuntWithNewHunter"))}
+    {primary(t, "Continue", href(t, "HuntWith" + fl))}
     <p style="margin: 0; font-size: 12px; line-height: 1.4; color: {t["faint"]}; text-align: center">Saved on this device only. No account needed.</p>
   </div>'''
-    return page(t, "BetterHunter onboarding: what kind of hunter, new hunter", body, gap=18, padding="20px 20px 24px")
+    return page(t, "BetterHunter onboarding: what kind of hunter, " + ("new" if fl == "NewHunter" else "experienced") + " hunter", body, gap=18, padding="20px 20px 24px")
 
 
 SKILLS = [
@@ -738,8 +738,13 @@ def field_skills(t, state="start"):
     return page(t, "BetterHunter field skills" + {"start": "", "upkeep": ", skills mastered", "all": ", all mastered"}[state], body, gap=12)
 
 
-def skill_question(t, season=False, daily=False):
-    if daily:
+def skill_question(t, season=False, daily=False, check=False):
+    q, choices, right_at = Q, CHOICES, 1
+    why_label, why = "In the field", "Wait for a broadside bear to step its near front leg forward, then aim slightly behind the shoulder."
+    source = "ICAF manual (FédéCP, 2020), p. 61"
+    if check:
+        title, back, over, states, nxt = "Question 6 / 15", "HomeExperiencedFirst", "Skill check · all skills", "rrrrr" + "u" * 10, "SkillCheckResults"
+    elif daily:
         title, back, over, states, nxt = "Question 2 / 3", "HomeNewHunter", "Today · 3 general", "r" + "u" * 2, "DailyDone"
     elif season:
         title, back, over, states, nxt = "Question 4 / 15", "HomeSeasonCheck", "Season check · all skills", "rrwr" + "u" * 11, "FieldSkillsAllMastered"
@@ -750,18 +755,16 @@ def skill_question(t, season=False, daily=False):
 {header(t, title, back=href(t, back), right=right, overline=over, close=True)}
   {segments(t, states)}
   </div>
-  <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 26px; line-height: 1.15">{Q}</h1>
+  <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 26px; line-height: 1.15">{q}</h1>
   <div style="display: flex; flex-direction: column; gap: 8px">
-    {choice(t, "A", CHOICES[0], "idle")}
-    {choice(t, "B", CHOICES[1], "right")}
-    {choice(t, "C", CHOICES[2], "idle")}
-    {choice(t, "D", CHOICES[3], "idle")}
+    {"".join(choice(t, "ABCD"[i], c, "right" if i == right_at else "idle") for i, c in enumerate(choices))}
   </div>
   {card(t, f"""<span style="display: flex; align-items: center; gap: 8px; color: {t["green"]}; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px">{icon("check", 20, t["green"], 2.6)} Correct</span>
-    <span style="display: flex; flex-direction: column; gap: 4px">{label(t, "In the field", t["green"])}<span style="font-size: 14px; line-height: 1.4">Wait for a broadside bear to step its near front leg forward, then aim slightly behind the shoulder.</span></span>
-    <span style="font-size: 13px; color: {t["muted"]}">Source: <a href="#" style="font-weight: 600; text-decoration: none">ICAF manual (FédéCP, 2020), p. 61 ↗</a></span>""", pad="14px 16px", gap=10, radius=16)}
+    <span style="display: flex; flex-direction: column; gap: 4px">{label(t, why_label, t["green"])}<span style="font-size: 14px; line-height: 1.4">{why}</span></span>
+    <span style="font-size: 13px; color: {t["muted"]}">Source: <a href="#" style="font-weight: 600; text-decoration: none">{source} ↗</a></span>""", pad="14px 16px", gap=10, radius=16)}
   <div style="margin-top: auto">{primary(t, "Next", href(t, nxt))}</div>'''
-    return page(t, "BetterHunter " + ("daily general" if daily else "season check" if season else "field skills") + " question, answered", body, gap=14)
+    kind = "skill check" if check else "daily general" if daily else "season check" if season else "field skills"
+    return page(t, "BetterHunter " + kind + " question, answered", body, gap=14)
 
 
 def skill_results(t):
@@ -912,12 +915,13 @@ def season_reminder_ask(t):
     return page(t, "BetterHunter season reminder, ask", season_date_body(t) + "\n  " + sheet, gap=14)
 
 
-def settings_hunter(t):
-    body = f'''{header(t, "Settings", back=href(t, "HomeSeasonCheck"))}
+def settings_hunter(t, experienced=False):
+    fl = "Experienced" if experienced else "NewHunter"
+    body = f'''{header(t, "Settings", back=href(t, "HomeExperienced" if experienced else "HomeSeasonCheck"))}
   {label(t, "Your profile", t["muted"])}
-  {card(t, row(t, tile(t, "user"), "Hunter type", "New hunter", target=href(t, "HunterProfileNewHunter"), divider=False)
-        + row(t, tile(t, "target"), "Hunting with", "Firearm", target=href(t, "HuntWithNewHunter"))
-        + row(t, tile(t, "pin"), "Where you hunt", "Québec", target=href(t, "HuntWhereNewHunter"))
+  {card(t, row(t, tile(t, "user"), "Hunter type", "Experienced hunter" if experienced else "New hunter", target=href(t, "HunterProfile" + fl), divider=False)
+        + row(t, tile(t, "target"), "Hunting with", "Firearm, bow" if experienced else "Firearm", target=href(t, "HuntWith" + fl))
+        + row(t, tile(t, "pin"), "Where you hunt", "Québec", target=href(t, "HuntWhere" + fl))
         + row(t, tile(t, "calendar"), "Season start", "Saturday, November 14 · the date you set", target=href(t, "SeasonDate")), pad="2px 16px", gap=0)}
   {label(t, "Reminders", t["muted"])}
   {card(t, row(t, tile(t, "bell"), "Daily questions", "Around 7 pm, when you usually play", trail=switch(t, True), divider=False)
@@ -926,7 +930,7 @@ def settings_hunter(t):
   {label(t, "App", t["muted"])}
   {card(t, row(t, tile(t, "globe"), "Language", "English", divider=False)
         + row(t, tile(t, "info"), "About BetterHunter", "How it works, sources, disclaimer", target=href(t, "About")), pad="2px 16px", gap=0)}'''
-    return page(t, "BetterHunter settings, hunter", body, gap=10)
+    return page(t, "BetterHunter settings, " + ("experienced " if experienced else "") + "hunter", body, gap=10)
 
 
 def lock_screen(t):
@@ -952,6 +956,113 @@ def lock_screen(t):
     return page(t, "BetterHunter notifications on the lock screen", body, gap=0, padding="20px 16px 24px", extra_style=f"; background: {bg}")
 
 
+# --------------------------------------------------------------------------------- flow: experienced hunter, stay sharp
+
+def home_experienced(t, first=False):
+    """first: right after onboarding, Home offers the skill check; later, the season countdown leads."""
+    pill = (f'<span style="display: flex; border: 1px solid {t["outline"]}; border-radius: 999px; padding: 3px; background: {t["card"] if t["name"] == "light" else "transparent"}">'
+            f'<span style="color: {t["muted"]}; font: 600 13px Barlow, sans-serif; height: 38px; min-width: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center">FR</span>'
+            f'<span style="background: {t["green_tint"] if t["name"] == "light" else t["track"]}; color: {t["text"]}; font: 600 13px Barlow, sans-serif; height: 38px; min-width: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center">EN</span></span>')
+    check = card(t, f'''<div style="display: flex; gap: 12px; align-items: flex-start">{tile(t, "target", "orange", 44, 12)}
+      <span style="display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0">
+        {label(t, "Start here")}
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 22px; line-height: 1.15">Skip what you already know</span>
+        <span style="font-size: 13px; line-height: 1.4; color: {t["muted"]}">15 questions across your field skills. The ones you get right start as mastered; the rest become your practice.</span>
+      </span></div>
+    {primary(t, "Take the skill check", href(t, "SkillCheckQuestion"), "; height: 52px", "play")}''', pad="16px 18px 18px", gap=12, extra="; border-color: " + t["warm_border"])
+    dots = "".join(f'<span style="width: 8px; height: 8px; border-radius: 999px; background: {t["bar"] if n < (0 if first else 1) else t["track"]}"></span>' for n in range(3))
+    daily = card(t, f'''<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+      <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+        {label(t, "Today")}
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 22px; line-height: 1.15">Stay sharp: 3 expert questions</span>
+        <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: {t["muted"]}">{icon("flame", 14, t["orange"], 2.2) + " 12-day streak · " if not first else ""}look-alikes, field rules, edge cases</span>
+      </div>
+      <span style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px; padding-top: 4px"><span style="display: flex; gap: 4px">{dots}</span><span style="font-size: 12px; font-weight: 600; color: {t["muted"] if first else t["green"]}">{0 if first else 1} / 3</span></span>
+    </div>
+    {primary(t, "Start" if first else "Continue: 2 left", href(t, "LookalikeQuestion"), "; height: 52px", "play")}''', pad="16px 18px 18px", gap=12)
+    if first:
+        daily = (f'<a href="{href(t, "LookalikeQuestion")}" style="display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 8px 14px; border-radius: 18px; background: {t["card"]}; border: 1px solid {t["border"]}; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">'
+                 f'{tile(t, "flame", "green", 40, 11)}<span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">Today: 3 expert questions</span>'
+                 f'<span style="font-size: 13px; color: {t["muted"]}">Look-alikes, field rules, edge cases</span></span>{icon("chevron", 18, t["muted"])}</a>')
+    skills_value = (f'<span style="font-size: 12px; color: {t["muted"]}">Not checked yet</span>' if first
+                    else f'<span style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: {t["muted"]}"><span>4 of 5</span>{mastered_chip(t)}</span>')
+    tiles = f'''<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+    <a href="{href(t, "LookalikeQuestion")}" style="background: {t["card"]}; border: 1px solid {t["border"]}; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">
+      {tile(t, "eye", "orange")}
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">Look-alikes</span>
+      <span style="font-size: 13px; color: {t["muted"]}; line-height: 1.35">Species, sex and age at a glance</span>
+      {meter(t, "Readiness", "—" if first else "72%", 0 if first else 72)}
+    </a>
+    <a href="{href(t, "FieldSkillsMastered")}" style="background: {t["card"]}; border: 1px solid {t["border"]}; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">
+      {tile(t, "target")}
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">Field skills</span>
+      <span style="font-size: 13px; color: {t["muted"]}; line-height: 1.35">Keep your edge before the season</span>
+      <span style="margin-top: auto">{skills_value}</span>
+    </a>
+  </div>'''
+    season = f'''<a href="{href(t, "SeasonCheckQuestion")}" style="display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 8px 6px 8px 14px; border-radius: 18px; background: {t["card"]}; border: 1px solid {t["border"]}; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">
+    {tile(t, "flag", "green", 40, 11)}
+    <span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">Your season starts in 3 weeks</span><span style="font-size: 13px; color: {t["muted"]}">Nov 14, the date you set · season check</span></span>
+    <span style="width: 36px; display: flex; justify-content: center; color: {t["muted"]}">{icon("chevron", 18)}</span>
+  </a>'''
+    photo = f'''<section style="position: relative; flex: 1; min-height: 0; border-radius: 22px; overflow: hidden; background: {t["track"]}">
+    <img src="/_blob/876ea656307e18bff50cd003ae123e81" alt="Photo of the day, to identify" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+    <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 36px 16px 14px; background: linear-gradient(180deg, rgba(14,22,17,0) 0%, rgba(14,22,17,0.9) 60%); display: flex; flex-direction: column; gap: 2px; color: #FFFFFF">
+      <span style="font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: #F7A06A">Photo of the day</span>
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 24px">Buck or doe? How old?</span>
+    </div>
+  </section>'''
+    body = f'''<header style="display: flex; align-items: center; justify-content: space-between; height: 48px; flex-shrink: 0">
+    <div style="display: flex; align-items: center; gap: 10px">{buck(34, t["text"], t["orange"])}<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.2px">BetterHunter</span></div>
+    <div style="display: flex; align-items: center; gap: 8px">{pill}{round_link(t, href(t, "SettingsExperienced"), "Settings", "gear", t["muted"])}</div>
+  </header>
+  {check + daily + tiles + photo if first else season + daily + tiles + photo}'''
+    return page(t, "BetterHunter home, experienced hunter" + (" (from onboarding)" if first else ""), body, gap=14, padding="20px 20px 24px")
+
+
+def skill_check_results(t):
+    inner = (f'<span style="font-family: \'Barlow Condensed\', sans-serif; font-weight: 700; font-size: 40px; line-height: 1; color: {t["green"]}">13</span>'
+             f'<span style="font-size: 14px; color: {t["muted"]}">of 15 right</span>')
+    rows = [("target", "Shot placement", True, 100), ("paw", "After the shot", False, 60), ("shield", "Safe firearm handling", True, 100),
+            ("book", "Rules in the field", True, 100), ("first_aid", "Survival and first aid", True, 100)]
+    def r(i, ic, title, done, pct):
+        value = mastered_chip(t) if done else f'<span style="font-size: 12px; font-weight: 600; color: {t["label"]}">Worth a refresh · {pct}%</span>'
+        return (f'<div style="display: flex; align-items: center; gap: 12px; min-height: 52px; {"border-top: 1px solid " + t["border"] + ";" if i else ""}">'
+                f'{tile(t, ic, "green" if done else "orange", 36, 10)}<span style="flex: 1; font-weight: 600; font-size: 15px">{title}</span>{value}</div>')
+    body = f'''{header(t, "Skill check", overline="Results", back=href(t, "HomeExperienced"), close=True)}
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px">
+    {ring(t, 87, 136, 12, t["green"], inner)}
+    <span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; background: {t["green_tint"]}; color: {t["green"]}; font-weight: 600; font-size: 14px">{icon("trophy", 16, t["green"], 2.2)} 4 skills start as mastered</span>
+  </div>
+  {card(t, "".join(r(i, *x) for i, x in enumerate(rows)), pad="4px 16px", gap=0, radius=18)}
+  <p style="margin: 0; font-size: 13px; line-height: 1.4; color: {t["muted"]}; display: flex; gap: 8px">{icon("info", 16)}<span>Mastered skills still show up in your mix now and then. {FADE}</span></p>
+  <div style="margin-top: auto; display: flex; gap: 10px">{secondary(t, "Home", href(t, "HomeExperienced"), "; flex: 1")}{primary(t, "Refresh After the shot", href(t, "SkillQuestion"), "; flex: 1.6")}</div>'''
+    return page(t, "BetterHunter skill check results", body, gap=14)
+
+
+def lookalike_question(t):
+    right = round_link(t, "#", "Report a problem", "flag", t["muted"])
+    tells = "".join(f'<span style="display: flex; gap: 8px; font-size: 14px; line-height: 1.35">{icon("check", 16, t["green"], 2.4)}<span>{x}</span></span>'
+                    for x in ["Big ears, like a mule's", "Thin white tail with a black tip", "Antlers that fork, then fork again"])
+    body = f'''<div style="display: flex; flex-direction: column; gap: 10px">
+{header(t, "Question 1 / 3", back=href(t, "HomeExperienced"), right=right, overline="Today · expert", close=True)}
+  {segments(t, "ruu")}
+  </div>
+  <div style="position: relative; height: 200px; flex-shrink: 0; border-radius: 18px; overflow: hidden; background: {t["track"]}">
+    <img src="{MULE}" alt="Deer to identify" style="width: 100%; height: 100%; object-fit: cover">
+    <a href="{href(t, "PhotoZoom")}" aria-label="Full screen" style="position: absolute; right: 10px; top: 10px; width: 44px; height: 44px; border-radius: 999px; background: rgba(0,0,0,0.55); color: #FFFFFF; display: flex; align-items: center; justify-content: center">{icon("expand", 20)}</a>
+  </div>
+  <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 26px; line-height: 1.15">White-tailed deer or mule deer?</h1>
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    {choice(t, "A", "White-tailed deer", "idle")}
+    {choice(t, "B", "Mule deer", "right")}
+  </div>
+  {card(t, f"""<span style="display: flex; align-items: center; gap: 8px; color: {t["green"]}; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px">{icon("check", 20, t["green"], 2.6)} Correct</span>
+    {label(t, "The tells", t["green"])}{tells}""", pad="14px 16px", gap=8, radius=16)}
+  <div style="margin-top: auto">{primary(t, "Next", href(t, "HomeExperienced"))}</div>'''
+    return page(t, "BetterHunter look-alike question, answered", body, gap=12)
+
+
 SCREENS = {
     "Settings": settings, "About": about, "ExamTraining": exam_training, "PracticeQuestion": practice_question,
     "PracticeResults": lambda t: results(t, exam=False), "ExamResults": lambda t: results(t, exam=True),
@@ -959,8 +1070,8 @@ SCREENS = {
     "Recognition": recognition, "UpdateRequired": update_required, "PassedExam": passed_exam,
     "MainNewHunter": main_new_hunter, "HuntWith": hunt_with, "HuntWhere": hunt_where, "Provinces": provinces,
     # Flow: new hunter, first seasons
-    "HunterProfileNewHunter": hunter_profile_new, "HuntWithNewHunter": lambda t: hunt_with(t, new_hunter=True),
-    "HuntWhereNewHunter": lambda t: hunt_where(t, new_hunter=True), "HomeNewHunter": lambda t: main_new_hunter(t, passed=False),
+    "HunterProfileNewHunter": hunter_profile_new, "HuntWithNewHunter": lambda t: hunt_with(t, "NewHunter"),
+    "HuntWhereNewHunter": lambda t: hunt_where(t, "NewHunter"), "HomeNewHunter": lambda t: main_new_hunter(t, passed=False),
     "FieldSkills": field_skills, "SkillQuestion": skill_question, "SkillResults": skill_results,
     "SkillMastered": skill_mastered, "FieldSkillsMastered": lambda t: field_skills(t, "upkeep"),
     "FieldSkillsAllMastered": lambda t: field_skills(t, "all"), "HomeSeasonCheck": lambda t: main_new_hunter(t, passed=False, season="date"),
@@ -968,6 +1079,12 @@ SCREENS = {
     "DailyDone": daily_done, "NotifyPermission": notify_permission, "SeasonReminderAsk": season_reminder_ask,
     "SettingsHunter": settings_hunter, "LockScreen": lock_screen,
     "SeasonCheckQuestion": lambda t: skill_question(t, season=True), "DailyQuestion": lambda t: skill_question(t, daily=True),
+    # Flow: experienced hunter, stay sharp
+    "HunterProfileExperienced": lambda t: hunter_profile_new(t, "Experienced"), "HuntWithExperienced": lambda t: hunt_with(t, "Experienced"),
+    "HuntWhereExperienced": lambda t: hunt_where(t, "Experienced"), "HomeExperiencedFirst": lambda t: home_experienced(t, first=True),
+    "SkillCheckQuestion": lambda t: skill_question(t, check=True), "SkillCheckResults": skill_check_results,
+    "HomeExperienced": home_experienced,
+    "LookalikeQuestion": lookalike_question, "SettingsExperienced": lambda t: settings_hunter(t, experienced=True),
 }
 
 if __name__ == "__main__":

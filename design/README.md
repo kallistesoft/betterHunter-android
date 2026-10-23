@@ -49,6 +49,13 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | Season date saved → remind me before my season? | `SeasonReminderAsk.dc.html` | `SeasonReminderAskLight.dc.html` | built |
 | Settings, hunter: season start, reminders | `SettingsHunter.dc.html` | `SettingsHunterLight.dc.html` | built |
 | Notifications on the lock screen | `LockScreen.dc.html` | `LockScreenLight.dc.html` | built |
+| Onboarding as an experienced hunter: what kind of hunter? → Experienced hunter, then the same two questions | `HunterProfileExperienced.dc.html`, `HuntWithExperienced.dc.html`, `HuntWhereExperienced.dc.html` | `…Light.dc.html` | not built |
+| Home, experienced, first day: "Skip what you already know" (skill check) | `HomeExperiencedFirst.dc.html` | `HomeExperiencedFirstLight.dc.html` | not built |
+| Skill check: question (15, all skills) | `SkillCheckQuestion.dc.html` | `SkillCheckQuestionLight.dc.html` | not built |
+| Skill check: results (aced skills start as mastered) | `SkillCheckResults.dc.html` | `SkillCheckResultsLight.dc.html` | not built |
+| Home, experienced: season countdown, 3 expert questions a day, Look-alikes and Field skills | `HomeExperienced.dc.html` | `HomeExperiencedLight.dc.html` | not built |
+| Today: expert look-alike question (white-tailed or mule deer) | `LookalikeQuestion.dc.html` | `LookalikeQuestionLight.dc.html` | not built |
+| Settings, experienced | `SettingsExperienced.dc.html` | `SettingsExperiencedLight.dc.html` | not built |
 | Can you recognise them? (recognition games) | `Recognition.dc.html` | `RecognitionLight.dc.html` | built, restyle; "Tracks" and "Calls" are ideas |
 | What is it?: question | `PhotoQuiz.dc.html` | `PhotoQuizLight.dc.html` | built |
 | What is it?: photo full screen | `PhotoZoom.dc.html` | `PhotoZoomLight.dc.html` | built |
@@ -63,10 +70,11 @@ The canvas has one **page per flow** (dark row on top, light row below, screens 
 |---|---|
 | 1 · Working on it: exam prep (opens first) | 1 Splash → 2 What kind of hunter? → 3 What do you hunt with? → 4 Where do you hunt? → 5 Home → 6 Exam training → 7 Practice question → 8 Practice results (8b nothing to review) → 9 Mock exam question (9b quit) → 10 Mock exam results → 11 I passed the real exam → 12 Home, new hunter |
 | 2 · New hunter: first seasons | 1 What kind of hunter? → New hunter → 2 What do you hunt with? → 3 Where do you hunt? → 4 Home, new hunter (4b today's general question) → 5 Field skills → 6 Skill question → 7 Skill results → 8 Skill mastered → 9 Mastered and faded skills → 10 All mastered → 11 Home, season coming (no date) → 11b Season start date → 11c Home, your season in 3 weeks → 12 Season check question → 13 Done for today, reminders? → 14 Permission → 15 Season reminder ask → 16 Settings, hunter → 17 Lock screen |
-| 3 · What is it? | 1 Recognition hub → 2 Photo question → 3 Photo full screen → 4 Answer |
-| 4 · Settings & About | 1 Settings → 2 My provinces → 3 About |
-| 5 · System | 1 Update required |
-| 6 · Logo | Logo concepts, buck variants |
+| 3 · Experienced hunter: stay sharp | 1 What kind of hunter? → Experienced → 2 What do you hunt with? → 3 Where do you hunt? → 4 Home, first day (skip what you know) → 5 Skill check question → 6 Skill check results → 7 Home, experienced → 8 Expert look-alike question → 9 Settings, experienced |
+| 4 · What is it? | 1 Recognition hub → 2 Photo question → 3 Photo full screen → 4 Answer |
+| 5 · Settings & About | 1 Settings → 2 My provinces → 3 About |
+| 6 · System | 1 Update required |
+| 7 · Logo | Logo concepts, buck variants |
 
 The screens added for the full app are generated: `generator/screens.py` (shared themes, header, cards, buttons and
 icons; `python3 generator/screens.py <out_dir>` writes both themes), `generator/buck.py` and `generator/logos.py` (the
@@ -114,6 +122,13 @@ permission is never asked at onboarding, only at two moments, each explaining wh
 dialog. At most one notification a day, never between 9 pm and 8 am, at the time this hunter usually plays (learned on
 the phone; 7 pm until then). The daily reminder is skipped once the questions are done; season reminders come 3 weeks
 and 1 day before the hunter's date. Settings has a switch for each, and the season start date.
+
+**Experienced hunter: stay sharp (mockup, not built).** Many seasons in the field: no exams, no basics. The first
+Home offers a **skill check** ("Skip what you already know"): 15 questions across the field skills; the skills answered
+right start as mastered (and fade after 3 months like anyone's), the rest become practice. Afterwards Home leads with the
+season countdown (same date as flow 2), then **3 expert questions a day** (look-alikes such as white-tailed vs mule deer,
+sex and age, field-rule edge cases) and the Look-alikes and Field skills tiles. A "What's changed this season" screen
+(rule changes since last season) was mocked and dropped for now: there is no source of yearly rule changes yet.
 
 ## Logo concepts
 
