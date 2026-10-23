@@ -184,8 +184,10 @@ This repo is the source of truth for the questions (DECISIONS.md, P4). Everythin
 | `content/questions/<scope>.json` | One question bank per scope (`federal`, `hunter-common`, `QC`, `AB`, `wildlife-id`) |
 | `wildlife/` | Photos of the "What is it?" questions (Wikimedia Commons, credited per question) |
 
-Add or correct questions by editing these files in a pull request; `BundledContentTest` checks every bank (both
-languages, four choices, a valid answer, photos present with their credit). Image paths in the banks are written
+Add or correct questions by editing these files in a pull request, or with the question pipeline and photo tools in
+[content-tools/](content-tools/README.md) (manual → facts → bilingual questions → blind check → review sheet →
+bundle), which write into these folders. `BundledContentTest` checks every bank (both languages, four choices, a valid
+answer, photos present with their credit). Image paths in the banks are written
 `assets/wildlife/…`; the parser drops the `assets/` prefix.
 
 ## Not done yet

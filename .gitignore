@@ -17,3 +17,12 @@ keystore.properties
 *.keystore
 
 .DS_Store
+
+# Content tools (Python): official manuals are copyrighted, keep them local
+content-tools/sources/*
+!content-tools/sources/README.md
+content-tools/.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env

@@ -1,0 +1,1386 @@
+[
+  {
+    "objectiveId": "AB-ab-intro-001",
+    "scope": "AB",
+    "chapter": "ab-intro",
+    "statement": "The Alberta Guide to Hunting Regulations is a summary, not a legal document or a complete listing of the regulations.",
+    "sourceRef": "ab_hunting_2026.pdf p.11",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-intro-002",
+    "scope": "AB",
+    "chapter": "ab-intro",
+    "statement": "Full details of the hunting regulations can be obtained from the nearest Fish and Wildlife office.",
+    "sourceRef": "ab_hunting_2026.pdf p.11",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-intro-003",
+    "scope": "AB",
+    "chapter": "ab-intro",
+    "statement": "A resident may host two non-resident Canadians per year, and one of them must be a family member.",
+    "sourceRef": "ab_hunting_2026.pdf p.12",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-intro-004",
+    "scope": "AB",
+    "chapter": "ab-intro",
+    "statement": "A resident can still host two non-resident Canadians per year, but one must now be a family member.",
+    "sourceRef": "ab_hunting_2026.pdf p.12",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-intro-005",
+    "scope": "AB",
+    "chapter": "ab-intro",
+    "statement": "Non-resident Canadians are not eligible to hold antlered moose partner licences in 2026 because they could not apply for antlered moose draws.",
+    "sourceRef": "ab_hunting_2026.pdf p.12",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-intro-006",
+    "scope": "AB",
+    "chapter": "ab-intro",
+    "statement": "Partner licences for elk special licences were introduced in 2026.",
+    "sourceRef": "ab_hunting_2026.pdf p.12",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-intro-007",
+    "scope": "AB",
+    "chapter": "ab-intro",
+    "statement": "Mandatory harvest reporting for special licences provides data that guides wildlife management decisions.",
+    "sourceRef": "ab_hunting_2026.pdf p.10",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-intro-008",
+    "scope": "AB",
+    "chapter": "ab-intro",
+    "statement": "An unguided non-resident alien game bird hunter on a second seven-day licence in the same year cannot hunt the WMUs chosen on the first licence.",
+    "sourceRef": "ab_hunting_2026.pdf p.12",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-wmu-001",
+    "scope": "AB",
+    "chapter": "ab-wmu",
+    "statement": "It is the hunter's responsibility to know which WMU they are hunting in and the rules that apply there.",
+    "sourceRef": "ab_hunting_2026.pdf p.16",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-wmu-002",
+    "scope": "AB",
+    "chapter": "ab-wmu",
+    "statement": "The WMU map in the guide is a small-scale approximation; the legal boundaries are described in the Wildlife Regulation.",
+    "sourceRef": "ab_hunting_2026.pdf p.16",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-wmu-003",
+    "scope": "AB",
+    "chapter": "ab-wmu",
+    "statement": "County and municipal maps show land ownership, which helps hunters obtain permission for access.",
+    "sourceRef": "ab_hunting_2026.pdf p.16",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-wmu-004",
+    "scope": "AB",
+    "chapter": "ab-wmu",
+    "statement": "An antlered deer, moose or elk has an antler longer than 10.2 cm (4 in).",
+    "sourceRef": "ab_hunting_2026.pdf p.17",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-wmu-005",
+    "scope": "AB",
+    "chapter": "ab-wmu",
+    "statement": "An antlered deer, moose or elk has an antler longer than 10.2 cm (4 in); any other is antlerless.",
+    "sourceRef": "ab_hunting_2026.pdf p.17",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-wmu-006",
+    "scope": "AB",
+    "chapter": "ab-wmu",
+    "statement": "Bait means any food attractant, including minerals and any representation of a food attractant.",
+    "sourceRef": "ab_hunting_2026.pdf p.17",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-wmu-007",
+    "scope": "AB",
+    "chapter": "ab-wmu",
+    "statement": "A firearm in or on a vehicle, aircraft or boat is loaded if live ammunition is in the breech, chamber or attached magazine; cartridges may be in a detached magazine.",
+    "sourceRef": "ab_hunting_2026.pdf p.17",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-wmu-008",
+    "scope": "AB",
+    "chapter": "ab-wmu",
+    "statement": "A legal hunting firearm can have any action other than fully automatic.",
+    "sourceRef": "ab_hunting_2026.pdf p.17",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-wmu-009",
+    "scope": "AB",
+    "chapter": "ab-wmu",
+    "statement": "A resident is a person whose primary residence has been in Alberta for at least six months immediately before the relevant date (plus citizenship or 12 months in Canada).",
+    "sourceRef": "ab_hunting_2026.pdf p.17",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-wmu-010",
+    "scope": "AB",
+    "chapter": "ab-wmu",
+    "statement": "A WiN (wildlife identification number) is a permanent registration number issued to each hunter and angler.",
+    "sourceRef": "ab_hunting_2026.pdf p.17",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-wmu-011",
+    "scope": "AB",
+    "chapter": "ab-wmu",
+    "statement": "A weapon includes any device that propels a projectile by explosion, spring, air, gas, string, wire or elastic, so bows and air guns are weapons.",
+    "sourceRef": "ab_hunting_2026.pdf p.17",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-001",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "First-time hunters who completed the Alberta conservation and hunter education course must add their certificate number to their WiN profile before buying a licence.",
+    "sourceRef": "ab_hunting_2026.pdf p.18",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-002",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "Youth must be at least 10 years old to hunt under any hunting licence in Alberta or to apply for big game draws.",
+    "sourceRef": "ab_hunting_2026.pdf p.18",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-003",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "Hunters under 16 need written permission from a parent or guardian to buy hunting licences.",
+    "sourceRef": "ab_hunting_2026.pdf p.18",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-004",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "Hunters under 18 hunting with a firearm must be accompanied by a parent, guardian, or an adult 18+ with the parent's written permission.",
+    "sourceRef": "ab_hunting_2026.pdf p.18",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-005",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "Youth holding an RCMP Minors Firearm Permit that allows hunting may hunt unsupervised.",
+    "sourceRef": "ab_hunting_2026.pdf p.18",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-006",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "Youth under 10 may hunt game birds without a licence when supervised by a licensed adult, and their birds count toward the adult's bag limit.",
+    "sourceRef": "ab_hunting_2026.pdf p.18",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-007",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "A youth under 10 hunting migratory birds still needs a free federal Youth Migratory Bird Permit, and the supervising adult needs a migratory bird permit.",
+    "sourceRef": "ab_hunting_2026.pdf p.18",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-008",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "A youth who turns 18 during the hunting season may keep hunting with their valid licence.",
+    "sourceRef": "ab_hunting_2026.pdf p.18",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-009",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "Hunters must carry their licences (electronic or paper) and applicable paper tags on their person while hunting and produce them for an officer.",
+    "sourceRef": "ab_hunting_2026.pdf p.18",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-010",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "To buy a licence that requires tags online, you must already have pre-numbered tags before starting the purchase.",
+    "sourceRef": "ab_hunting_2026.pdf p.18",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-011",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "A 10-digit WiN is required to apply for draws and to buy wildlife certificates, licences and replacements.",
+    "sourceRef": "ab_hunting_2026.pdf p.18",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-012",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "To hunt big game or game birds, a hunter must hold both a valid wildlife certificate and the applicable hunting licence.",
+    "sourceRef": "ab_hunting_2026.pdf p.18",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-013",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "A hunter suspended after a conviction must complete the Alberta conservation and hunter education course, taken after the suspension begins.",
+    "sourceRef": "ab_hunting_2026.pdf p.19",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-014",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "A person who does not pay a provincial hunting or fishing fine by the due date is suspended from buying licences and applying for draws until it is paid.",
+    "sourceRef": "ab_hunting_2026.pdf p.19",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-015",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "Special licence holders must submit a mandatory harvest report (by Feb 15, or Mar 15 for licences ending after Feb 15); failing to report results in a survey fee before the next certificate or draw.",
+    "sourceRef": "ab_hunting_2026.pdf p.19",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-016",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "A hunter host may not accept any payment and must accompany hosted hunters while they hunt big game.",
+    "sourceRef": "ab_hunting_2026.pdf p.20",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-017",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "A hunter host must report all hunting by hosted non-resident aliens to Fish and Wildlife by December 31, even if nothing was harvested.",
+    "sourceRef": "ab_hunting_2026.pdf p.20",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-018",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "A non-resident alien accompanied by a hunter host may not hunt bighorn sheep, cougar or class 1 pronghorn.",
+    "sourceRef": "ab_hunting_2026.pdf p.20",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-019",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "Non-resident (Canadian) and non-resident alien hunters of big game, wolf and coyote must be accompanied by a licensed guide or hunter host, but need no outfitter or guide for game birds.",
+    "sourceRef": "ab_hunting_2026.pdf p.20",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-020",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "A designated partner must stay in direct communication (no electronic devices) with the primary special licence holder; the primary carries the tags and tags the kill.",
+    "sourceRef": "ab_hunting_2026.pdf p.20",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-021",
+    "scope": "AB",
+    "chapter": "ab-lic",
+    "statement": "The primary special licence holder may hunt without the partner, but the partner may not hunt without the primary; no tag is issued with a partner licence.",
+    "sourceRef": "ab_hunting_2026.pdf p.20",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-costs-001",
+    "scope": "AB",
+    "chapter": "ab-lic-costs",
+    "statement": "Before buying any licence, every hunter must hold a valid WiN and a wildlife certificate.",
+    "sourceRef": "ab_hunting_2026.pdf p.21",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-costs-002",
+    "scope": "AB",
+    "chapter": "ab-lic-costs",
+    "statement": "Hunting with a bow and arrow requires a bowhunting permit, but hunting with a crossbow does not.",
+    "sourceRef": "ab_hunting_2026.pdf p.21",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-costs-003",
+    "scope": "AB",
+    "chapter": "ab-lic-costs",
+    "statement": "A bowhunting permit is required, in addition to the species licence, to hunt with a bow and arrow.",
+    "sourceRef": "ab_hunting_2026.pdf p.21",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-costs-004",
+    "scope": "AB",
+    "chapter": "ab-lic-costs",
+    "statement": "A resident needs a game bird licence plus a federal migratory game bird hunting permit to hunt waterfowl and sandhill cranes.",
+    "sourceRef": "ab_hunting_2026.pdf p.26",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-costs-005",
+    "scope": "AB",
+    "chapter": "ab-lic-costs",
+    "statement": "To hunt pheasant, a hunter needs both a game bird licence and a pheasant licence.",
+    "sourceRef": "ab_hunting_2026.pdf p.26",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-costs-006",
+    "scope": "AB",
+    "chapter": "ab-lic-costs",
+    "statement": "A game bird licence alone (with WiN and wildlife certificate) covers grouse, partridge, ptarmigan and cormorants; wild turkey needs a draw-only special licence plus a game bird licence.",
+    "sourceRef": "ab_hunting_2026.pdf p.26",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-costs-007",
+    "scope": "AB",
+    "chapter": "ab-lic-costs",
+    "statement": "The resident wildlife certificate costs $35, or $12 for the resident youth/senior certificate.",
+    "sourceRef": "ab_hunting_2026.pdf p.21",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-costs-008",
+    "scope": "AB",
+    "chapter": "ab-lic-costs",
+    "statement": "Licences can be reprinted online at no charge, while a tag replacement requires bringing your licence and ID to a licence issuer.",
+    "sourceRef": "ab_hunting_2026.pdf p.23",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-costs-009",
+    "scope": "AB",
+    "chapter": "ab-lic-costs",
+    "statement": "A resident who killed a sheep (other than a legal class 2 sheep) the previous year may not buy a class 1 sheep licence this year.",
+    "sourceRef": "ab_hunting_2026.pdf p.21",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-lic-costs-010",
+    "scope": "AB",
+    "chapter": "ab-lic-costs",
+    "statement": "The unguided non-resident alien game bird licence is valid in three WMUs for seven continuous days.",
+    "sourceRef": "ab_hunting_2026.pdf p.26",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-001",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Hunters carrying licences electronically in Alberta must use the AlbertaRELM app; tags cannot be carried electronically.",
+    "sourceRef": "ab_hunting_2026.pdf p.30",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-002",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "It is unlawful to carry or use another person's licence or tag, or to let someone use yours.",
+    "sourceRef": "ab_hunting_2026.pdf p.30",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-003",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "It is unlawful to hunt from an aircraft or drone or to communicate wildlife locations seen during a flight for hunting.",
+    "sourceRef": "ab_hunting_2026.pdf p.30",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-004",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Transporting dead wildlife taken by someone else requires a bill of lading signed by the licence holder.",
+    "sourceRef": "ab_hunting_2026.pdf p.30",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-005",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Prohibited hunting devices include fully automatic firearms, silencers, explosive arrows, live wildlife as decoys, poisons and immobilizing drugs.",
+    "sourceRef": "ab_hunting_2026.pdf p.30",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-006",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Electronic calls are allowed only for snow geese sounds and for crows, magpies, coyote, red fox and wolf.",
+    "sourceRef": "ab_hunting_2026.pdf p.30",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-007",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Pistols and revolvers may not be used for hunting except by a licensed trapper dispatching a trapped animal or air guns under 500 fps.",
+    "sourceRef": "ab_hunting_2026.pdf p.30",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-008",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Hunters must not let the four quarters, loins and neck meat of big game, or game bird breasts, become unfit for consumption.",
+    "sourceRef": "ab_hunting_2026.pdf p.30",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-009",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "A loaded firearm (ammunition in breech, chamber or magazine) is prohibited in or on any vehicle, moving or stationary; a detached loaded magazine is allowed.",
+    "sourceRef": "ab_hunting_2026.pdf p.30",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-010",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "No one may discharge a weapon, or send a projectile, within 183 m (200 yards) of an occupied building, except the owner/occupant or persons they authorize.",
+    "sourceRef": "ab_hunting_2026.pdf p.30",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-011",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "It is unlawful to shoot from or across a provincial highway or a paved, oiled, graded or maintained road; without a ditch or fence the roadway extends 20 feet from the travelled portion.",
+    "sourceRef": "ab_hunting_2026.pdf p.30",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-012",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Hunting or discharging a firearm is prohibited between one-half hour after sunset and one-half hour before sunrise.",
+    "sourceRef": "ab_hunting_2026.pdf p.30",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-013",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "A hunter under 18 may hunt with a firearm only with a federal minors permit or when accompanied by a parent/guardian or an authorized adult 18 or older.",
+    "sourceRef": "ab_hunting_2026.pdf p.30",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-014",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Muzzle-loading firearms used for big game must be .44 calibre or greater.",
+    "sourceRef": "ab_hunting_2026.pdf p.31",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-015",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Rimfire ammunition, centrefire bullets under .22 calibre and non-expanding bullets are prohibited for big game.",
+    "sourceRef": "ab_hunting_2026.pdf p.31",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-016",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "For big game, an auto-loading firearm may not hold more than five cartridges in the magazine and shotguns of .410 or smaller are prohibited.",
+    "sourceRef": "ab_hunting_2026.pdf p.31",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-017",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "It is unlawful to shoot at a big game animal while it is swimming.",
+    "sourceRef": "ab_hunting_2026.pdf p.31",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-018",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "A leashed tracking dog may be used for big game only after the animal has been shot at, and must stay leashed at all times.",
+    "sourceRef": "ab_hunting_2026.pdf p.31",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-019",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Hunting a black bear under one year old or a female with such a cub, or a female cougar with a spotted kitten, is unlawful.",
+    "sourceRef": "ab_hunting_2026.pdf p.31",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-020",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "A hunter may abandon either the skin or the meat of a black bear or cougar, but not both.",
+    "sourceRef": "ab_hunting_2026.pdf p.31",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-021",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Big game may not be hunted within six hours after getting off an aircraft, except a jet or turboprop.",
+    "sourceRef": "ab_hunting_2026.pdf p.31",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-022",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Game birds must keep evidence of sex and species (one fully feathered wing or the head; head and beard for wild turkey) until home or prepared for cooking.",
+    "sourceRef": "ab_hunting_2026.pdf p.31",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-023",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Migratory game birds may not be hunted with a single bullet, toxic shot, a crossbow or a shotgun larger than 10 gauge.",
+    "sourceRef": "ab_hunting_2026.pdf p.31",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-024",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Shotguns used for game birds may hold no more than three rounds in magazine and chamber combined.",
+    "sourceRef": "ab_hunting_2026.pdf p.31",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-025",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Game birds may not be hunted within 400 m (1/4 mile) of a bait or feeding station.",
+    "sourceRef": "ab_hunting_2026.pdf p.32",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-026",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Hunters must make every effort to immediately retrieve migratory birds they kill or wound and have adequate means to do so.",
+    "sourceRef": "ab_hunting_2026.pdf p.32",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-027",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "In most cases, possessing found dead wildlife requires a permit obtained beforehand from Fish and Wildlife.",
+    "sourceRef": "ab_hunting_2026.pdf p.32",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-prohib-028",
+    "scope": "AB",
+    "chapter": "ab-prohib",
+    "statement": "Hunters may take deer, moose, elk, pronghorn, black bear, coyotes or game birds out of Alberta without an export permit if accompanying the shipment and carrying the licence.",
+    "sourceRef": "ab_hunting_2026.pdf p.32",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-001",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "Buying, selling or trading access to land for hunting is unlawful except under a game bird shooting ground licence.",
+    "sourceRef": "ab_hunting_2026.pdf p.34",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-002",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "The obligation to pursue and retrieve wounded game does not override the legal requirement to get permission to enter private land.",
+    "sourceRef": "ab_hunting_2026.pdf p.34",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-003",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "Hunters should leave gates as found, avoid damaging property or disturbing livestock, and build good relations with landholders.",
+    "sourceRef": "ab_hunting_2026.pdf p.34",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-access-004",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "Permission is always required to enter Indian reserves (band council), Métis settlements (settlement association) and leased agricultural/grazing public land (leaseholder).",
+    "sourceRef": "ab_hunting_2026.pdf p.34",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-005",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "In some PLUZs with designated OHV trail networks, hunters must stay on designated trails even when retrieving game.",
+    "sourceRef": "ab_hunting_2026.pdf p.34",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-006",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "OHV access is prohibited in most provincial parks and recreation areas and may be limited by counties, PLUZs or temporary restrictions such as fire hazard.",
+    "sourceRef": "ab_hunting_2026.pdf p.34",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-007",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "Under the Wildlife Act, a hunter needs permission to enter occupied land plus express consent to hunt or discharge a firearm there.",
+    "sourceRef": "ab_hunting_2026.pdf p.34",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-008",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "Occupied lands do not need to be posted with signs to be protected under section 38 of the Wildlife Act.",
+    "sourceRef": "ab_hunting_2026.pdf p.34",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-009",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "Under the Petty Trespass Act, entry without permission is prohibited on land that is cultivated, fenced or enclosed, even without notice.",
+    "sourceRef": "ab_hunting_2026.pdf p.34",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-010",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "Under the Criminal Code, a person in peaceable possession of property can require a trespasser to leave.",
+    "sourceRef": "ab_hunting_2026.pdf p.34",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-011",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "Hunter hosts and designated guides need the landholder's permission to guide on privately held land.",
+    "sourceRef": "ab_hunting_2026.pdf p.34",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-012",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "Owners/occupants of private land (and authorized residents) may hunt, but not trap, black bear and coyote on that land without a licence year-round.",
+    "sourceRef": "ab_hunting_2026.pdf p.34",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-013",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "For livestock predation, timber wolf may be hunted without a licence on the land and on lands within 8 km, with right of access.",
+    "sourceRef": "ab_hunting_2026.pdf p.34",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-014",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "A cougar taken by a landowner without a licence must be registered within one week with skin and skull; dogs may not be used under this authority.",
+    "sourceRef": "ab_hunting_2026.pdf p.34",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-015",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "Dogs in provincial parks, wildland parks and recreation areas must be on a leash no longer than 2 m, with limited hunting exemptions.",
+    "sourceRef": "ab_hunting_2026.pdf p.35",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-016",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "Hunting is prohibited in ecological reserves and wilderness areas.",
+    "sourceRef": "ab_hunting_2026.pdf p.35",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-017",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "Hunting is generally prohibited in provincial parks and provincial recreation areas, with listed exceptions and firearm discharge permits often required.",
+    "sourceRef": "ab_hunting_2026.pdf p.35",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-018",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "When not hunting in a park or recreation area with an open season, firearms must be unloaded, encased or dismantled.",
+    "sourceRef": "ab_hunting_2026.pdf p.35",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-019",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "Hunting is permitted in wildland provincial parks and Willmore Wilderness Park, but OHVs (and snowmobiles) are not allowed in Willmore.",
+    "sourceRef": "ab_hunting_2026.pdf p.35",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-020",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "In road corridor wildlife sanctuaries, hunting is prohibited within 365 m (400 yards) of the road centre-line and firearms must be unloaded and dismantled or encased.",
+    "sourceRef": "ab_hunting_2026.pdf p.36",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-021",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "When crossing a road corridor wildlife sanctuary on foot or horseback, the firearm must be unloaded and the person must take a direct route out.",
+    "sourceRef": "ab_hunting_2026.pdf p.36",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-022",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "Baiting of all wildlife is not permitted in provincial parks, recreation areas and wildland parks, except for some permitted trappers and guides.",
+    "sourceRef": "ab_hunting_2026.pdf p.36",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-access-023",
+    "scope": "AB",
+    "chapter": "ab-access",
+    "statement": "Unless authorized by a conservation officer, it is unlawful to dress, hang or store big game in a provincial park or recreation area.",
+    "sourceRef": "ab_hunting_2026.pdf p.36",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-areas-001",
+    "scope": "AB",
+    "chapter": "ab-areas",
+    "statement": "No one may approach within 800 m (0.5 mile) of certain island seasonal sanctuaries between April 15 and September 15.",
+    "sourceRef": "ab_hunting_2026.pdf p.38",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-areas-002",
+    "scope": "AB",
+    "chapter": "ab-areas",
+    "statement": "In general, only members of a Métis Settlement Association may hunt on a Métis settlement, unless settlement by-laws authorize others.",
+    "sourceRef": "ab_hunting_2026.pdf p.38",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-areas-003",
+    "scope": "AB",
+    "chapter": "ab-areas",
+    "statement": "It is unlawful to discharge a firearm or dress a big game animal within a forest recreation area.",
+    "sourceRef": "ab_hunting_2026.pdf p.38",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-areas-004",
+    "scope": "AB",
+    "chapter": "ab-areas",
+    "statement": "Hunting is prohibited in national parks; firearms are allowed only on through highways and in town sites, unloaded and encased.",
+    "sourceRef": "ab_hunting_2026.pdf p.39",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-areas-005",
+    "scope": "AB",
+    "chapter": "ab-areas",
+    "statement": "Hunting game birds and carrying shotguns are prohibited in game bird sanctuaries except with a special permit.",
+    "sourceRef": "ab_hunting_2026.pdf p.39",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-areas-006",
+    "scope": "AB",
+    "chapter": "ab-areas",
+    "statement": "Bison hunting is prohibited in designated bison protection areas except during the special seasons provided.",
+    "sourceRef": "ab_hunting_2026.pdf p.39",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-areas-007",
+    "scope": "AB",
+    "chapter": "ab-areas",
+    "statement": "Military bases such as CFB Wainwright, CFB Suffield and the Cold Lake Air Weapons Range are closed to hunting except for special seasons.",
+    "sourceRef": "ab_hunting_2026.pdf p.39",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-areas-008",
+    "scope": "AB",
+    "chapter": "ab-areas",
+    "statement": "In the Saskatoon Mountain Primitive Weapons Area, big game may be hunted only with shotguns, muzzleloaders and archery equipment.",
+    "sourceRef": "ab_hunting_2026.pdf p.39",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-areas-009",
+    "scope": "AB",
+    "chapter": "ab-areas",
+    "statement": "OHVs on public land must be registered, insured, display a visible licence plate and have a headlight, tail light, muffler and spark arrestor.",
+    "sourceRef": "ab_hunting_2026.pdf p.40",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-areas-010",
+    "scope": "AB",
+    "chapter": "ab-areas",
+    "statement": "It is unlawful to discharge a weapon at a pronghorn from within 46 m (50 yards) of a vehicle.",
+    "sourceRef": "ab_hunting_2026.pdf p.40",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-areas-011",
+    "scope": "AB",
+    "chapter": "ab-areas",
+    "statement": "In WMUs 400-446 during an open big game season, weapons may not be carried on an OHV from 1 hour before sunrise until noon, except travelling directly to/from an isolated campsite with weapons and ammunition in separate locked containers out of view.",
+    "sourceRef": "ab_hunting_2026.pdf p.40",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-areas-012",
+    "scope": "AB",
+    "chapter": "ab-areas",
+    "statement": "The OHV weapon restriction in WMUs 400-446 applies to all hunters, including bird game hunters.",
+    "sourceRef": "ab_hunting_2026.pdf p.40",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-areas-013",
+    "scope": "AB",
+    "chapter": "ab-areas",
+    "statement": "Recreationists are urged to avoid motorized use of trails marked 'Active Trapline', especially from November through February.",
+    "sourceRef": "ab_hunting_2026.pdf p.40",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-biggame-001",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "A deer, moose or elk is 'antlered' when it has an antler longer than 10.2 cm (4 in.).",
+    "sourceRef": "ab_hunting_2026.pdf p.42",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-biggame-002",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "A class 2 bighorn sheep is a female or a male under one year of age.",
+    "sourceRef": "ab_hunting_2026.pdf p.42",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-biggame-003",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "There is no hunting season for grizzly bear in Alberta; grizzlies have a shoulder hump and a dished face profile.",
+    "sourceRef": "ab_hunting_2026.pdf p.42",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-biggame-004",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "White-tailed deer flag their large bushy tail when running; mule deer have a black-tipped rope-like tail held down.",
+    "sourceRef": "ab_hunting_2026.pdf p.42",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-biggame-005",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "A moose calf has a short nose and face and squarish body, and is seldom alone; a cow is larger with a long face and is often alone.",
+    "sourceRef": "ab_hunting_2026.pdf p.43",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-biggame-006",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "Evidence of sex, species and class must stay attached to the carcass until it reaches a licensed meat facility or is cut and packaged at a residence.",
+    "sourceRef": "ab_hunting_2026.pdf p.43",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-biggame-007",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "Accepted evidence of sex for deer includes testicles, scrotum or udder, and for deer only, the completely haired tail, attached to the tagged part.",
+    "sourceRef": "ab_hunting_2026.pdf p.43",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-biggame-008",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "A hunter may debone in the field if the tagged portion of the leg still carries the evidence of sex, species or class.",
+    "sourceRef": "ab_hunting_2026.pdf p.43",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-biggame-009",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "Moose, elk and deer tags go through the space between bone and tendon of a hind leg just above the hock, never around the antler base.",
+    "sourceRef": "ab_hunting_2026.pdf p.43",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-biggame-010",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "The tag must be affixed and locked to a big game animal immediately after the kill.",
+    "sourceRef": "ab_hunting_2026.pdf p.43",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-biggame-011",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "Under a partner licence, the one who kills must immediately inform the other, and the primary licence holder tags the animal on arriving at the carcass.",
+    "sourceRef": "ab_hunting_2026.pdf p.43",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-biggame-012",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "An authorized bow for big game has a draw weight of at least 16 kg (35 lb) at 71 cm (28 in.).",
+    "sourceRef": "ab_hunting_2026.pdf p.44",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-biggame-013",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "Big game arrows must be at least 61 cm (24 in.) long, with a non-barbed head cutting at least 7/8 in. wide.",
+    "sourceRef": "ab_hunting_2026.pdf p.44",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-biggame-014",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "Crossbows for big game need at least 45.4 kg (100 lb) of pull; no bowhunting permit is needed, but they cannot be used in archery-only seasons.",
+    "sourceRef": "ab_hunting_2026.pdf p.44",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-biggame-015",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "A cougar must be registered at a Fish and Wildlife office within five business days, with skull and skin and evidence of sex attached.",
+    "sourceRef": "ab_hunting_2026.pdf p.46",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-biggame-016",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "Compulsory registration gives sex ratios, age structure, dates and locations used to set future harvest goals.",
+    "sourceRef": "ab_hunting_2026.pdf p.46",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-biggame-017",
+    "scope": "AB",
+    "chapter": "ab-biggame",
+    "statement": "Male sheep must be registered within 14 days after the season closes or 30 days after the kill, whichever comes first.",
+    "sourceRef": "ab_hunting_2026.pdf p.46",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-seasons-001",
+    "scope": "AB",
+    "chapter": "ab-seasons",
+    "statement": "It is unlawful to hunt wildlife or discharge a firearm from one-half hour after sunset to one-half hour before sunrise.",
+    "sourceRef": "ab_hunting_2026.pdf p.49",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-seasons-002",
+    "scope": "AB",
+    "chapter": "ab-seasons",
+    "statement": "Sunrise and sunset times apply to the specific location and specific day of the hunt.",
+    "sourceRef": "ab_hunting_2026.pdf p.49",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-seasons-003",
+    "scope": "AB",
+    "chapter": "ab-seasons",
+    "statement": "It is 7:00 p.m. and sunset was at 6:40 p.m.: firing is still legal until 7:10 p.m.",
+    "sourceRef": "ab_hunting_2026.pdf p.49",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-seasons-004",
+    "scope": "AB",
+    "chapter": "ab-seasons",
+    "statement": "Archery-only seasons allow only bow and arrow; general seasons allow a firearm, crossbow or bow.",
+    "sourceRef": "ab_hunting_2026.pdf p.50",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-seasons-005",
+    "scope": "AB",
+    "chapter": "ab-seasons",
+    "statement": "A crossbow may not be used during an archery-only season.",
+    "sourceRef": "ab_hunting_2026.pdf p.50",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-seasons-006",
+    "scope": "AB",
+    "chapter": "ab-seasons",
+    "statement": "In the season tables, a small black box beside a season means a special licence is required.",
+    "sourceRef": "ab_hunting_2026.pdf p.50",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-seasons-007",
+    "scope": "AB",
+    "chapter": "ab-seasons",
+    "statement": "Hunters, including bowhunters, need a firearms discharge permit to hunt in WMU 936 (Cooking Lake-Blackfoot).",
+    "sourceRef": "ab_hunting_2026.pdf p.51",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-seasons-008",
+    "scope": "AB",
+    "chapter": "ab-seasons",
+    "statement": "Hunters must ensure that discharging their weapon is not prohibited by county or municipal by-laws.",
+    "sourceRef": "ab_hunting_2026.pdf p.51",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-bear-001",
+    "scope": "AB",
+    "chapter": "ab-bear",
+    "statement": "Dogs are prohibited for cougar in the fall season (residents only) and allowed in the winter season.",
+    "sourceRef": "ab_hunting_2026.pdf p.57",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-bear-002",
+    "scope": "AB",
+    "chapter": "ab-bear",
+    "statement": "Before hunting cougar in winter, hunters must call the cougar hotline to confirm the WMU is still open, because quotas can close it.",
+    "sourceRef": "ab_hunting_2026.pdf p.57",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-bear-003",
+    "scope": "AB",
+    "chapter": "ab-bear",
+    "statement": "Every cougar harvest must be reported by email or text within 24 hours of the kill.",
+    "sourceRef": "ab_hunting_2026.pdf p.57",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-bear-004",
+    "scope": "AB",
+    "chapter": "ab-bear",
+    "statement": "Cougar may be hunted with mouth or hand-operated calls; electronic calls and bait are prohibited.",
+    "sourceRef": "ab_hunting_2026.pdf p.57",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-bear-005",
+    "scope": "AB",
+    "chapter": "ab-bear",
+    "statement": "It is unlawful to hunt a spotted cougar kitten or a female accompanied by one, or a black bear under one year or a female with a cub under one year.",
+    "sourceRef": "ab_hunting_2026.pdf p.58",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-bear-006",
+    "scope": "AB",
+    "chapter": "ab-bear",
+    "statement": "It is unlawful to let a black bear or cougar skin be wasted unless the edible meat is recovered.",
+    "sourceRef": "ab_hunting_2026.pdf p.58",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-bear-007",
+    "scope": "AB",
+    "chapter": "ab-bear",
+    "statement": "Bear bait is prohibited within 1.6 km (1 mi.) of an occupied dwelling unless written authorization is obtained from all dwellings within that distance.",
+    "sourceRef": "ab_hunting_2026.pdf p.58",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-bear-008",
+    "scope": "AB",
+    "chapter": "ab-bear",
+    "statement": "Each bear bait site needs a sign with the owner's name and phone or WiN, warning signs around it, is limited to the season plus two weeks before, and only meat in November.",
+    "sourceRef": "ab_hunting_2026.pdf p.58",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-bear-009",
+    "scope": "AB",
+    "chapter": "ab-bear",
+    "statement": "Bear and cougar meat should be thoroughly cooked to prevent trichinosis, a parasitic infection.",
+    "sourceRef": "ab_hunting_2026.pdf p.58",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-birds-001",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "A resident may hunt (but not trap) timber wolf without a licence from the opening of any big game season in a WMU until the end of May (or June 15 where spring bear runs that late).",
+    "sourceRef": "ab_hunting_2026.pdf p.60",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-birds-002",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "Coyotes may be hunted year-round on private land and White Area public land with right of access, by holders of a wildlife certificate.",
+    "sourceRef": "ab_hunting_2026.pdf p.60",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-birds-003",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "On public land, bait for wolves or coyotes is allowed only from December 1 to March 31 or during a black bear season where bear baiting is permitted.",
+    "sourceRef": "ab_hunting_2026.pdf p.60",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-birds-004",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "Porcupine, rabbit, hare, raccoon and woodchuck may be hunted (not trapped) without a licence throughout the province all year.",
+    "sourceRef": "ab_hunting_2026.pdf p.61",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-birds-005",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "A resident may hunt red fox without a licence all year on private land to which they have the right of access.",
+    "sourceRef": "ab_hunting_2026.pdf p.60",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-birds-006",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "Double-crested cormorants are game birds hunted in duck season with a game bird licence; flesh may be wasted but dead birds must be recovered and disposed of.",
+    "sourceRef": "ab_hunting_2026.pdf p.61",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-birds-007",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "Federal regulations prohibit lead shot and crossbows for hunting waterfowl.",
+    "sourceRef": "ab_hunting_2026.pdf p.62",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-birds-008",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "Single projectiles (.22 rimfire, centrefire rifle) are illegal for migratory game birds but legal for upland game birds and wild turkey.",
+    "sourceRef": "ab_hunting_2026.pdf p.62",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-birds-009",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "Falconers must hold the same hunting licences as firearm hunters; bowhunters of game birds need a bowhunting permit in addition.",
+    "sourceRef": "ab_hunting_2026.pdf p.62",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-birds-010",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "Whooping cranes (white body, black wing tips, 7-ft wingspan) are endangered and protected; sandhill cranes are grey or brown.",
+    "sourceRef": "ab_hunting_2026.pdf p.62",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-birds-011",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "Sage grouse are endangered and protected in Alberta.",
+    "sourceRef": "ab_hunting_2026.pdf p.62",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-birds-012",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "All birds are protected except listed species such as starlings, crows, pigeons, house sparrows, magpies and blackbirds, and birds with an open season.",
+    "sourceRef": "ab_hunting_2026.pdf p.62",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-birds-013",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "Swans, often seen in small low-flying flocks in late fall, must not be shot.",
+    "sourceRef": "ab_hunting_2026.pdf p.62",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-birds-014",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "Youth under 10 need no provincial game bird licence but must be supervised by a licensed adult, and their birds count in the adult's limit.",
+    "sourceRef": "ab_hunting_2026.pdf p.63",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-birds-015",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "Youth under 18 may get a free migratory game bird permit; an accompanying permitted adult may supervise up to two youth.",
+    "sourceRef": "ab_hunting_2026.pdf p.63",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-birds-016",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "Male wild turkeys have a beard, gobble, have bright red/blue heads, a wattle, caruncles and a snood.",
+    "sourceRef": "ab_hunting_2026.pdf p.61",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-birds-017",
+    "scope": "AB",
+    "chapter": "ab-birds",
+    "statement": "The daily limit is 8 ducks (each) and 8 Canada/white-fronted geese combined.",
+    "sourceRef": "ab_hunting_2026.pdf p.63",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-mgmt-001",
+    "scope": "AB",
+    "chapter": "ab-mgmt",
+    "statement": "Anyone who kills or finds a dead animal fitted with a tracking device must report and return the device to Fish and Wildlife Enforcement Services.",
+    "sourceRef": "ab_hunting_2026.pdf p.64",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-mgmt-002",
+    "scope": "AB",
+    "chapter": "ab-mgmt",
+    "statement": "Marked animals that may have received drugs carry a tag advising not to eat the meat before contacting Fish and Wildlife.",
+    "sourceRef": "ab_hunting_2026.pdf p.64",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-mgmt-003",
+    "scope": "AB",
+    "chapter": "ab-mgmt",
+    "statement": "Waterfowl leg bands recovered in North America can be reported by phone or on the internet (reportband.gov).",
+    "sourceRef": "ab_hunting_2026.pdf p.64",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-mgmt-004",
+    "scope": "AB",
+    "chapter": "ab-mgmt",
+    "statement": "CWD is a fatal prion disease of cervids, mainly mule deer in Alberta; not known to infect humans, but eating animals with prion disease is advised against.",
+    "sourceRef": "ab_hunting_2026.pdf p.66",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-mgmt-005",
+    "scope": "AB",
+    "chapter": "ab-mgmt",
+    "statement": "Heads of deer from designated WMUs must be submitted for CWD testing within 30 days; antlers and skull plate may be removed first.",
+    "sourceRef": "ab_hunting_2026.pdf p.66",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-mgmt-006",
+    "scope": "AB",
+    "chapter": "ab-mgmt",
+    "statement": "Leave the carcass remains at the kill site; if transported, remove usable meat then burn, bury or landfill the remains.",
+    "sourceRef": "ab_hunting_2026.pdf p.66",
+    "volatile": false
+  },
+  {
+    "objectiveId": "AB-ab-mgmt-007",
+    "scope": "AB",
+    "chapter": "ab-mgmt",
+    "statement": "A bill of lading is used when transporting wildlife taken by another hunter.",
+    "sourceRef": "ab_hunting_2026.pdf p.66",
+    "volatile": true
+  },
+  {
+    "objectiveId": "AB-ab-mgmt-008",
+    "scope": "AB",
+    "chapter": "ab-mgmt",
+    "statement": "When drawn for a special licence, draw priority resets to zero, the draw cannot be cancelled, and you may be unable to buy a general licence for that species.",
+    "sourceRef": "ab_hunting_2026.pdf p.68",
+    "volatile": true
+  }
+]

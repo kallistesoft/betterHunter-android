@@ -1,0 +1,339 @@
+{
+  "_comment": "One entry per scope. pages are 1-indexed and inclusive, counted in the PDF file (not the printed page numbers). cfsc_fr.pdf = RCMP CCSMAF/CCSMAFAR student manual, 5th ed. 2014 (fedecp.com/media/2186/...). icaf_fr.pdf = FédéCP ICAF manual, 2020 (fedecp.com/media/7535/icaf-fr-3-08-2020.pdf).",
+  "federal": {
+    "file": "sources/cfsc_fr.pdf",
+    "lang": "fr",
+    "chapters": [
+      {
+        "id": "intro",
+        "title": "Introduction : règles vitales (TPTO), PROUVER, responsabilités légales",
+        "pages": [
+          18,
+          27
+        ]
+      },
+      {
+        "id": "m01",
+        "title": "Module 1 : Introduction aux armes à feu",
+        "pages": [
+          28,
+          37
+        ]
+      },
+      {
+        "id": "m02",
+        "title": "Module 2 : Armes à feu à chargement par la bouche",
+        "pages": [
+          38,
+          48
+        ]
+      },
+      {
+        "id": "m03",
+        "title": "Module 3 : Principaux éléments d'une arme à feu moderne",
+        "pages": [
+          49,
+          58
+        ]
+      },
+      {
+        "id": "m04",
+        "title": "Module 4 : Sécurité relative aux armes à feu, consignes élémentaires",
+        "pages": [
+          59,
+          66
+        ]
+      },
+      {
+        "id": "m05",
+        "title": "Module 5 : Munitions",
+        "pages": [
+          67,
+          100
+        ]
+      },
+      {
+        "id": "m06a",
+        "title": "Module 6 : Mécanismes, sûretés, chargement et déchargement",
+        "pages": [
+          101,
+          124
+        ]
+      },
+      {
+        "id": "m06b",
+        "title": "Module 6 : Armes à répétition (verrou, levier, pompe, semi-automatique)",
+        "pages": [
+          125,
+          149
+        ]
+      },
+      {
+        "id": "m07",
+        "title": "Module 7 : Maniement et transport sécuritaires",
+        "pages": [
+          150,
+          167
+        ]
+      },
+      {
+        "id": "m08",
+        "title": "Module 8 : Techniques et méthodes de tir",
+        "pages": [
+          168,
+          185
+        ]
+      },
+      {
+        "id": "m09",
+        "title": "Module 9 : Entretien des armes à feu",
+        "pages": [
+          186,
+          194
+        ]
+      },
+      {
+        "id": "m10",
+        "title": "Module 10 : Responsabilités sociales des propriétaires et utilisateurs",
+        "pages": [
+          195,
+          202
+        ]
+      },
+      {
+        "id": "m11",
+        "title": "Module 11 : Entreposage, exposition, transport et maniement",
+        "pages": [
+          203,
+          219
+        ]
+      },
+      {
+        "id": "ann-def",
+        "title": "Annexes : achat de munitions, définitions légales",
+        "pages": [
+          341,
+          343
+        ]
+      },
+      {
+        "id": "ann-permis",
+        "title": "Annexes : permis, cession d'armes à feu sans restriction",
+        "pages": [
+          349,
+          353
+        ]
+      }
+    ]
+  },
+  "hunter-common": {
+    "file": "sources/icaf_fr.pdf",
+    "lang": "fr",
+    "chapters": [
+      {
+        "id": "l04",
+        "title": "Leçon 4 : L'éthique du chasseur",
+        "pages": [
+          26,
+          28
+        ]
+      },
+      {
+        "id": "l05",
+        "title": "Leçon 5 : Chasse avec arme à air comprimé et à chargement par la bouche",
+        "pages": [
+          29,
+          39
+        ]
+      },
+      {
+        "id": "l07",
+        "title": "Leçon 7 : Méthodes et techniques de chasse",
+        "pages": [
+          56,
+          62
+        ]
+      },
+      {
+        "id": "l08",
+        "title": "Leçon 8 : Recherche du gros gibier blessé",
+        "pages": [
+          63,
+          65
+        ]
+      },
+      {
+        "id": "l09",
+        "title": "Leçon 9 : Soins à apporter au gibier abattu",
+        "pages": [
+          66,
+          67
+        ]
+      },
+      {
+        "id": "l10",
+        "title": "Leçon 10 : Survie en forêt, prévention et premiers soins",
+        "pages": [
+          68,
+          72
+        ]
+      },
+      {
+        "id": "l11",
+        "title": "Leçon 11 : Sécurité en embarcation",
+        "pages": [
+          73,
+          74
+        ]
+      },
+      {
+        "id": "l12",
+        "title": "Leçon 12 : Un chasseur responsable",
+        "pages": [
+          75,
+          76
+        ]
+      }
+    ]
+  },
+  "QC": {
+    "file": "sources/icaf_fr.pdf",
+    "lang": "fr",
+    "chapters": [
+      {
+        "id": "l01",
+        "title": "Leçon 1 : La chasse au Québec",
+        "pages": [
+          6,
+          8
+        ]
+      },
+      {
+        "id": "l02",
+        "title": "Leçon 2 : Conservation et mise en valeur de la faune",
+        "pages": [
+          9,
+          14
+        ]
+      },
+      {
+        "id": "l03",
+        "title": "Leçon 3 : Le chasseur et la loi",
+        "pages": [
+          15,
+          25
+        ]
+      },
+      {
+        "id": "l06",
+        "title": "Leçon 6 : Écologie, gestion et principales espèces chassées au Québec",
+        "pages": [
+          40,
+          55
+        ]
+      }
+    ]
+  },
+  "AB": {
+    "file": "sources/ab_hunting_2026.pdf",
+    "lang": "en",
+    "chapters": [
+      {
+        "id": "ab-intro",
+        "title": "Hunting in Alberta, disclaimers, important changes for 2026",
+        "pages": [
+          10,
+          12
+        ]
+      },
+      {
+        "id": "ab-wmu",
+        "title": "Maps and wildlife management units (WMUs)",
+        "pages": [
+          16,
+          17
+        ]
+      },
+      {
+        "id": "ab-lic",
+        "title": "Licensing requirements, WIN card, youth and non-resident hunters",
+        "pages": [
+          18,
+          20
+        ]
+      },
+      {
+        "id": "ab-lic-costs",
+        "title": "Licence types, costs and combinations; game bird licences",
+        "pages": [
+          21,
+          26
+        ]
+      },
+      {
+        "id": "ab-prohib",
+        "title": "Enforcement and general prohibitions (weapons, hours, sale of wildlife)",
+        "pages": [
+          28,
+          32
+        ]
+      },
+      {
+        "id": "ab-access",
+        "title": "Access to land, provincial parks, restricted areas",
+        "pages": [
+          34,
+          36
+        ]
+      },
+      {
+        "id": "ab-areas",
+        "title": "Restricted areas, national parks, vehicle use",
+        "pages": [
+          38,
+          40
+        ]
+      },
+      {
+        "id": "ab-biggame",
+        "title": "Big game regulations, game processing, bowhunting, compulsory registration",
+        "pages": [
+          42,
+          46
+        ]
+      },
+      {
+        "id": "ab-seasons",
+        "title": "Big game season rules, legal hunting hours, archery-only seasons",
+        "pages": [
+          49,
+          51
+        ]
+      },
+      {
+        "id": "ab-bear",
+        "title": "Black bear and cougar, baiting",
+        "pages": [
+          57,
+          58
+        ]
+      },
+      {
+        "id": "ab-birds",
+        "title": "Other species, federal migratory bird rules, game bird seasons",
+        "pages": [
+          60,
+          63
+        ]
+      },
+      {
+        "id": "ab-mgmt",
+        "title": "Game management, chronic wasting disease, mule deer licence",
+        "pages": [
+          64,
+          68
+        ]
+      }
+    ]
+  }
+}

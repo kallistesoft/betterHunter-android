@@ -1,0 +1,17 @@
+{
+  "_comment": "Official FR ↔ EN term pairs used by the generator. Extend while reviewing.",
+  "arme à feu sans restriction": "non-restricted firearm",
+  "arme à feu à autorisation restreinte": "restricted firearm",
+  "permis de possession et d'acquisition (PPA)": "possession and acquisition licence (PAL)",
+  "chargeur": "magazine",
+  "chambre": "chamber",
+  "canon": "barrel",
+  "mécanisme": "action",
+  "cran de sûreté": "safety",
+  "munition": "ammunition",
+  "cartouche": "cartridge",
+  "zone de tir": "zone of fire",
+  "vêtement orangé fluorescent": "blaze orange clothing",
+  "décharger": "unload",
+  "verrou de pontet": "trigger lock"
+}

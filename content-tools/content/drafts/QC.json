@@ -1,0 +1,4127 @@
+[
+  {
+    "id": "QC-l01-001-q1",
+    "scope": "QC",
+    "chapter": "l01",
+    "objectiveId": "QC-l01-001",
+    "reviewYear": null,
+    "fr": {
+      "q": "Dans quel ordre la chasse au Québec a-t-elle évolué?",
+      "choices": [
+        "Récréative, commerciale, puis de subsistance",
+        "Commerciale, de subsistance, puis récréative",
+        "De subsistance, récréative, puis commerciale",
+        "De subsistance, commerciale, puis récréative"
+      ],
+      "explanation": "La chasse a d'abord servi à se nourrir, puis est devenue un commerce, avant de devenir une activité récréative."
+    },
+    "en": {
+      "q": "In what order did hunting in Québec evolve?",
+      "choices": [
+        "Recreational, commercial, then subsistence",
+        "Commercial, subsistence, then recreational",
+        "Subsistence, recreational, then commercial",
+        "Subsistence, commercial, then recreational"
+      ],
+      "explanation": "Hunting first provided food, then became a trade, before becoming a recreational activity."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.6",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l01-002-q1",
+    "scope": "QC",
+    "chapter": "l01",
+    "objectiveId": "QC-l01-002",
+    "reviewYear": null,
+    "fr": {
+      "q": "Pourquoi la chasse commerciale est-elle devenue une menace pour la conservation de la faune?",
+      "choices": [
+        "Parce que les chasseurs utilisaient surtout des pièges",
+        "Parce qu'il n'y avait aucune limite de prise",
+        "Parce qu'elle se pratiquait seulement l'hiver",
+        "Parce qu'elle visait surtout les prédateurs"
+      ],
+      "explanation": "Sans limite de prise, les chasseurs commerciaux abattaient de grandes quantités de gibier, ce qui a fait décliner plusieurs espèces."
+    },
+    "en": {
+      "q": "Why did commercial hunting become a threat to wildlife conservation?",
+      "choices": [
+        "Because hunters mainly used traps",
+        "Because there were no bag limits",
+        "Because it was practised only in winter",
+        "Because it mostly targeted predators"
+      ],
+      "explanation": "With no bag limits, commercial hunters killed large quantities of game, causing several species to decline."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.7",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l01-003-q1",
+    "scope": "QC",
+    "chapter": "l01",
+    "objectiveId": "QC-l01-003",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quelles espèces ont complètement disparu à la suite de la pression exercée par la chasse commerciale?",
+      "choices": [
+        "Le caribou forestier et le castor",
+        "Le canard du Labrador et la tourte",
+        "L'oie des neiges et le dindon sauvage",
+        "Le cerf de Virginie et l'orignal"
+      ],
+      "explanation": "Le caribou forestier, le castor et l'oie des neiges ont décliné, mais le canard du Labrador et la tourte ont totalement disparu."
+    },
+    "en": {
+      "q": "Which species disappeared completely because of commercial hunting pressure?",
+      "choices": [
+        "The woodland caribou and the beaver",
+        "The Labrador duck and the passenger pigeon",
+        "The snow goose and the wild turkey",
+        "The white-tailed deer and the moose"
+      ],
+      "explanation": "Woodland caribou, beaver and snow goose declined, but the Labrador duck and the passenger pigeon disappeared entirely."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.7",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l01-004-q1",
+    "scope": "QC",
+    "chapter": "l01",
+    "objectiveId": "QC-l01-004",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quel rôle ont joué les chasseurs récréatifs après le déclin de certaines populations fauniques?",
+      "choices": [
+        "Ils ont relancé la vente commerciale du gibier",
+        "Ils ont remplacé la chasse par l'élevage d'animaux",
+        "Ils ont incité les gouvernements à protéger la faune",
+        "Ils ont demandé l'abolition des permis de chasse"
+      ],
+      "explanation": "Inquiets du déclin des populations, ces chasseurs ont poussé les gouvernements à adopter des mesures de protection et ont fait progresser la conservation."
+    },
+    "en": {
+      "q": "What role did recreational hunters play after some wildlife populations declined?",
+      "choices": [
+        "They revived the commercial sale of game",
+        "They replaced hunting with animal farming",
+        "They urged governments to protect wildlife",
+        "They asked for hunting licences to be abolished"
+      ],
+      "explanation": "Worried about declining populations, these hunters pushed governments to adopt protective measures and advanced conservation."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.7",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l01-005-q1",
+    "scope": "QC",
+    "chapter": "l01",
+    "objectiveId": "QC-l01-005",
+    "reviewYear": null,
+    "fr": {
+      "q": "Qu'est-ce qui explique surtout la forte baisse des accidents de chasse au Québec depuis 1972?",
+      "choices": [
+        "L'interdiction de chasser le gros gibier",
+        "Les cours obligatoires d'initiation à la chasse",
+        "L'obligation de chasser en groupe de trois",
+        "La réduction du nombre de zones de chasse"
+      ],
+      "explanation": "La mise en place de cours obligatoires a permis de développer des comportements sécuritaires chez les chasseurs."
+    },
+    "en": {
+      "q": "What mainly explains the sharp drop in hunting accidents in Québec since 1972?",
+      "choices": [
+        "The ban on big game hunting",
+        "Mandatory hunter education courses",
+        "The requirement to hunt in groups of three",
+        "The reduction in the number of hunting zones"
+      ],
+      "explanation": "Introducing mandatory courses helped hunters develop safe behaviours."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.7",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l01-006-q1",
+    "scope": "QC",
+    "chapter": "l01",
+    "objectiveId": "QC-l01-006",
+    "reviewYear": null,
+    "fr": {
+      "q": "Selon le manuel, comment la chasse se compare-t-elle à des activités comme la motoneige, le soccer ou le football?",
+      "choices": [
+        "On risque davantage de se blesser à la chasse",
+        "Le risque de blessure est exactement le même",
+        "Aucune comparaison n'est possible entre elles",
+        "On risque moins de se blesser à la chasse"
+      ],
+      "explanation": "Grâce aux cours et à la réglementation, la chasse compte parmi les activités les plus sécuritaires, avec moins d'un accident par 100 000 participants."
+    },
+    "en": {
+      "q": "According to the manual, how does hunting compare with activities such as snowmobiling, soccer or football?",
+      "choices": [
+        "You are more likely to get hurt hunting",
+        "The risk of injury is exactly the same",
+        "They cannot be compared at all",
+        "You are less likely to get hurt hunting"
+      ],
+      "explanation": "Thanks to courses and regulations, hunting is among the safest activities, with fewer than one accident per 100,000 participants."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.7",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l01-007-q1",
+    "scope": "QC",
+    "chapter": "l01",
+    "objectiveId": "QC-l01-007",
+    "reviewYear": null,
+    "fr": {
+      "q": "Environ combien les chasseurs dépensent-ils chaque année au Québec, selon le manuel?",
+      "choices": [
+        "50 millions de dollars",
+        "500 millions de dollars",
+        "5 millions de dollars",
+        "5 milliards de dollars"
+      ],
+      "explanation": "Ces 500 millions de dollars dépensés annuellement soutiennent des centaines d'entreprises dans toutes les régions."
+    },
+    "en": {
+      "q": "About how much do hunters spend each year in Québec, according to the manual?",
+      "choices": [
+        "50 million dollars",
+        "500 million dollars",
+        "5 million dollars",
+        "5 billion dollars"
+      ],
+      "explanation": "The 500 million dollars spent each year support hundreds of businesses across all regions."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.8",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l01-008-q1",
+    "scope": "QC",
+    "chapter": "l01",
+    "objectiveId": "QC-l01-008",
+    "reviewYear": null,
+    "fr": {
+      "q": "Que se passerait-il, selon le manuel, si les chasseurs n'intervenaient plus?",
+      "choices": [
+        "La faune deviendrait la propriété des fermiers",
+        "Les accidents routiers diminueraient fortement",
+        "Les cultures agricoles seraient mieux protégées",
+        "Plusieurs populations animales exploseraient"
+      ],
+      "explanation": "Sans chasse, certaines populations augmenteraient fortement, causant des dommages aux cultures et des problèmes de sécurité routière coûteux à contrôler."
+    },
+    "en": {
+      "q": "According to the manual, what would happen if hunters no longer intervened?",
+      "choices": [
+        "Wildlife would become the property of farmers",
+        "Road accidents would drop sharply",
+        "Farm crops would be better protected",
+        "Many animal populations would explode"
+      ],
+      "explanation": "Without hunting, some populations would grow sharply, causing crop damage and road-safety problems that are costly to control."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.8",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-001-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-001",
+    "reviewYear": null,
+    "fr": {
+      "q": "Selon le principe de gestion de la faune au Québec, qu'est-ce qui a toujours préséance?",
+      "choices": [
+        "Le maintien de populations viables d'animaux sauvages",
+        "La récolte maximale de gibier permise chaque année par zone",
+        "Les besoins économiques des pourvoiries et des zecs",
+        "Le développement agricole et forestier des terres privées"
+      ],
+      "explanation": "La faune est un bien collectif : maintenir des populations naturelles et viables passe avant leur exploitation."
+    },
+    "en": {
+      "q": "Under Québec's wildlife management principle, what always takes precedence?",
+      "choices": [
+        "Maintaining viable wild animal populations",
+        "Harvesting the most game allowed each year per zone",
+        "The economic needs of outfitters and zecs",
+        "Agricultural and forestry development of private land"
+      ],
+      "explanation": "Wildlife is a collective resource: maintaining natural, viable populations comes before exploiting them."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.9",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-002-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-002",
+    "reviewYear": null,
+    "fr": {
+      "q": "D'un point de vue biologique, que permet la conservation de la faune?",
+      "choices": [
+        "L'interdiction totale de la chasse sur un territoire",
+        "L'exploitation de la faune sans aucune limite",
+        "L'élevage des animaux sauvages en captivité",
+        "La protection et l'exploitation durable de la faune"
+      ],
+      "explanation": "La conservation vise à protéger la faune tout en permettant de l'exploiter de façon durable."
+    },
+    "en": {
+      "q": "From a biological point of view, what does wildlife conservation allow?",
+      "choices": [
+        "A total ban on hunting in an area",
+        "Exploiting wildlife without any limit",
+        "Raising wild animals in captivity",
+        "Both protection and sustainable use of wildlife"
+      ],
+      "explanation": "Conservation aims to protect wildlife while allowing it to be used sustainably."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.10",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-003-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-003",
+    "reviewYear": null,
+    "fr": {
+      "q": "Que signifie, pour un chasseur, la formule « prélever seulement les intérêts, sans toucher au capital »?",
+      "choices": [
+        "Ne pas récolter plus d'animaux que la population en produit",
+        "Chasser seulement les mâles âgés de chaque espèce",
+        "Vendre une partie du gibier pour financer la faune",
+        "Récolter le plus d'animaux possible en début de saison"
+      ],
+      "explanation": "Le « capital » est la population reproductrice; on ne prélève que le surplus produit, ce qui équilibre exploitation et protection."
+    },
+    "en": {
+      "q": "For a hunter, what does the saying \"take only the interest, never touch the capital\" mean?",
+      "choices": [
+        "Do not harvest more animals than the population produces",
+        "Hunt only the older males of each species",
+        "Sell part of the game to fund wildlife",
+        "Harvest as many animals as possible early in the season"
+      ],
+      "explanation": "The \"capital\" is the breeding population; only the surplus it produces is harvested, balancing use and protection."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.10",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-004-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-004",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quelle est la différence entre la préservation et la conservation?",
+      "choices": [
+        "La préservation protège intégralement le milieu, sans exploitation",
+        "La préservation permet une chasse plus intensive que la conservation",
+        "La préservation ne s'applique qu'aux oiseaux migrateurs du Québec",
+        "La préservation est gérée uniquement par les associations de chasseurs"
+      ],
+      "explanation": "La préservation est une mesure extrême qui protège entièrement un milieu ou une espèce, alors que la conservation permet aussi une exploitation durable."
+    },
+    "en": {
+      "q": "What is the difference between preservation and conservation?",
+      "choices": [
+        "Preservation fully protects the area, with no harvesting",
+        "Preservation allows more intensive hunting than conservation",
+        "Preservation applies only to Québec's migratory birds",
+        "Preservation is managed only by hunters' associations"
+      ],
+      "explanation": "Preservation is an extreme measure that fully protects an area or species, whereas conservation also allows sustainable use."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.10",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-005-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-005",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quels sont les quatre éléments qu'un habitat doit fournir pour répondre aux besoins vitaux des animaux?",
+      "choices": [
+        "Nourriture, lumière, chaleur et prédateurs",
+        "Eau, sel, abris et compagnons",
+        "Espace, eau, minéraux et chasseurs",
+        "Nourriture, eau, espace et abris"
+      ],
+      "explanation": "Un habitat doit offrir assez de nourriture, d'eau, d'espace et d'abris pour que les animaux survivent et se reproduisent toute l'année."
+    },
+    "en": {
+      "q": "Which four elements must a habitat provide to meet animals' vital needs?",
+      "choices": [
+        "Food, light, heat and predators",
+        "Water, salt, shelter and mates",
+        "Space, water, minerals and hunters",
+        "Food, water, space and shelter"
+      ],
+      "explanation": "A habitat must offer enough food, water, space and shelter for animals to survive and reproduce all year."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.10",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-006-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-006",
+    "reviewYear": null,
+    "fr": {
+      "q": "Comment définit-on la capacité de support d'un habitat?",
+      "choices": [
+        "La superficie maximale d'un territoire de chasse sur les terres publiques",
+        "Le nombre de chasseurs permis dans une zone pendant une saison",
+        "La quantité de gibier qu'un chasseur peut abattre en une saison",
+        "Le nombre d'animaux qu'un habitat peut faire vivre durablement"
+      ],
+      "explanation": "La capacité de support correspond au nombre d'individus d'une espèce que l'habitat peut soutenir de façon durable."
+    },
+    "en": {
+      "q": "How is the carrying capacity of a habitat defined?",
+      "choices": [
+        "The maximum area of a hunting territory on public land",
+        "The number of hunters allowed in a zone during a season",
+        "The amount of game one hunter may kill in a season",
+        "The number of animals a habitat can sustain over time"
+      ],
+      "explanation": "Carrying capacity is the number of individuals of a species that the habitat can support sustainably."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.10",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-007-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-007",
+    "reviewYear": null,
+    "fr": {
+      "q": "Une population de cerfs n'est plus chassée sur un territoire et n'a pas d'autres facteurs de régulation. Qu'arrivera-t-il le plus probablement?",
+      "choices": [
+        "Elle restera stable au même niveau pendant des années",
+        "Elle diminuera immédiatement faute de reproduction",
+        "Elle dépassera la capacité de support et dégradera son habitat",
+        "Elle migrera automatiquement vers une autre province"
+      ],
+      "explanation": "Sans chasse, la population augmente jusqu'à dépasser la capacité de support; l'habitat se dégrade et le manque de nourriture provoque ensuite un déclin, surtout l'hiver."
+    },
+    "en": {
+      "q": "A deer population is no longer hunted in an area and has no other regulating factors. What will most likely happen?",
+      "choices": [
+        "It will stay stable at the same level for years",
+        "It will drop immediately for lack of breeding",
+        "It will exceed carrying capacity and degrade its habitat",
+        "It will automatically move to another province"
+      ],
+      "explanation": "Without hunting, the population grows beyond carrying capacity; the habitat degrades and food shortage then causes a decline, especially in winter."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.10",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-008-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-008",
+    "reviewYear": null,
+    "fr": {
+      "q": "Pourquoi considère-t-on la chasse comme un outil de gestion de la faune?",
+      "choices": [
+        "Elle remplace les inventaires de populations faits par le Ministère",
+        "Elle permet de supprimer complètement les espèces jugées indésirables",
+        "Elle maintient l'équilibre entre les populations et leurs habitats",
+        "Elle élimine le besoin de protéger les habitats fauniques fragiles"
+      ],
+      "explanation": "En présence de chasse, une population dépasse très rarement la capacité de support de son habitat."
+    },
+    "en": {
+      "q": "Why is hunting considered a wildlife management tool?",
+      "choices": [
+        "It replaces the population surveys done by the Ministry",
+        "It allows species deemed unwanted to be wiped out completely",
+        "It keeps populations in balance with their habitats",
+        "It removes the need to protect fragile wildlife habitats"
+      ],
+      "explanation": "When hunting takes place, a population very rarely exceeds the carrying capacity of its habitat."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.10",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-009-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-009",
+    "reviewYear": null,
+    "fr": {
+      "q": "Qui est le principal gestionnaire de la faune au Québec?",
+      "choices": [
+        "La Fédération québécoise des chasseurs et pêcheurs",
+        "Le gouvernement fédéral",
+        "Le gouvernement du Québec",
+        "Les municipalités régionales de comté"
+      ],
+      "explanation": "Le gouvernement du Québec gère la faune québécoise, en concertation avec divers partenaires."
+    },
+    "en": {
+      "q": "Who is the main manager of wildlife in Québec?",
+      "choices": [
+        "The Fédération québécoise des chasseurs et pêcheurs",
+        "The federal government",
+        "The Government of Québec",
+        "The regional county municipalities"
+      ],
+      "explanation": "The Government of Québec manages Québec's wildlife, in consultation with various partners."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.11",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-010-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-010",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quel est le mandat des agents de protection de la faune?",
+      "choices": [
+        "Organiser et gérer les tirages au sort pour la chasse à la grande faune",
+        "Protéger, éduquer, prévenir et faire respecter les règlements",
+        "Vendre les permis de chasse et de pêche dans les bureaux régionaux",
+        "Réaliser chaque hiver les inventaires aériens de cervidés"
+      ],
+      "explanation": "Les agents de protection de la faune protègent, éduquent et préviennent, tout en appliquant la réglementation faunique."
+    },
+    "en": {
+      "q": "What is the mandate of wildlife protection officers?",
+      "choices": [
+        "Organizing and running the draws for big game hunting",
+        "Protecting, educating, preventing and enforcing the rules",
+        "Selling hunting and fishing licences at regional offices",
+        "Conducting aerial surveys of deer and moose every winter"
+      ],
+      "explanation": "Wildlife protection officers protect, educate and prevent, while enforcing wildlife regulations."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.11",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-011-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-011",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Vous voulez participer à un tirage au sort pour chasser le gros gibier. Quel organisme gère ces tirages?",
+      "choices": [
+        "Le gouvernement fédéral",
+        "La Fédération des pourvoiries du Québec",
+        "La Sepaq",
+        "Canards Illimités Canada"
+      ],
+      "explanation": "La Sepaq administre des territoires publics, dont les réserves fauniques, et gère les tirages au sort pour la grande faune."
+    },
+    "en": {
+      "q": "You want to enter a draw to hunt big game. Which organization runs these draws?",
+      "choices": [
+        "The federal government",
+        "The Fédération des pourvoiries du Québec",
+        "The Sepaq",
+        "Ducks Unlimited Canada"
+      ],
+      "explanation": "The Sepaq administers public lands, including wildlife reserves, and runs the big game draws."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.11",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive/permis-certificat/tirage-permis",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-012-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-012",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quel palier de gouvernement est responsable de la gestion des oiseaux migrateurs?",
+      "choices": [
+        "Le gouvernement provincial",
+        "Les municipalités",
+        "Les gestionnaires de zecs",
+        "Le gouvernement fédéral"
+      ],
+      "explanation": "La protection et la gestion des oiseaux migrateurs et des espèces en péril relèvent du gouvernement fédéral."
+    },
+    "en": {
+      "q": "Which level of government is responsible for managing migratory birds?",
+      "choices": [
+        "The provincial government",
+        "The municipalities",
+        "The zec managers",
+        "The federal government"
+      ],
+      "explanation": "Protecting and managing migratory birds and species at risk is a federal responsibility."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.11",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-013-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-013",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "À quel organisme est versé l'argent des timbres de conservation achetés avec le permis fédéral de chasse aux oiseaux migrateurs?",
+      "choices": [
+        "Fondation de la faune du Québec",
+        "Habitat faunique Canada",
+        "Héritage Faune",
+        "Sepaq"
+      ],
+      "explanation": "Le fédéral verse l'argent des timbres de conservation à Habitat faunique Canada pour l'aménagement d'habitats et la relève."
+    },
+    "en": {
+      "q": "Where does the money from the conservation stamps bought with the federal migratory bird hunting permit go?",
+      "choices": [
+        "Fondation de la faune du Québec",
+        "Wildlife Habitat Canada",
+        "Héritage Faune",
+        "Sepaq"
+      ],
+      "explanation": "The federal government gives conservation stamp money to Wildlife Habitat Canada for habitat work and recruiting new hunters."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.12",
+    "sourceUrl": "https://www.canada.ca/fr/environnement-changement-climatique/services/chasse-oiseaux-migrateurs-gibier/permis.html",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-014-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-014",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Comment les chasseurs québécois contribuent-ils directement au financement de programmes fauniques?",
+      "choices": [
+        "Par une taxe sur les munitions achetées au Québec",
+        "Par des dons obligatoires aux zecs",
+        "Par l'achat d'un certificat renouvelé chaque année",
+        "Par une partie du prix de leurs permis de chasse"
+      ],
+      "explanation": "Une partie de l'argent des permis de chasse, de pêche et de piégeage finance des programmes fauniques, comme le programme Relève et mise en valeur de la faune, et soutient la Fondation de la biodiversité et de la faune du Québec."
+    },
+    "en": {
+      "q": "How do Québec hunters directly help fund wildlife programs?",
+      "choices": [
+        "Through a tax on ammunition bought in Québec",
+        "Through mandatory donations to zecs",
+        "By buying a certificate renewed every year",
+        "Through part of the price of their hunting licences"
+      ],
+      "explanation": "Part of the money from hunting, fishing and trapping licences funds wildlife programs, such as the Relève et mise en valeur de la faune program, and supports the Fondation de la biodiversité et de la faune du Québec."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.12",
+    "sourceUrl": "https://www.quebec.ca/nouvelles/actualites/details/programme-releve-et-mise-en-valeur-de-la-faune-lancement-de-lappel-de-projets-fauniques-2026-2027-69020",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-015-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-015",
+    "reviewYear": null,
+    "fr": {
+      "q": "Sur quel type de territoire la chasse se pratique-t-elle majoritairement au Québec?",
+      "choices": [
+        "Les terres privées",
+        "Les réserves nationales de faune",
+        "Les pourvoiries avec droits exclusifs",
+        "Les terres publiques libres"
+      ],
+      "explanation": "La majorité de la chasse se fait en terre publique libre, accessible à tous les chasseurs."
+    },
+    "en": {
+      "q": "On what type of land does most hunting take place in Québec?",
+      "choices": [
+        "Private land",
+        "National wildlife areas",
+        "Outfitters with exclusive rights",
+        "Free public land"
+      ],
+      "explanation": "Most hunting takes place on free public land, which is open to all hunters."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.12",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-016-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-016",
+    "reviewYear": null,
+    "fr": {
+      "q": "À qui la gestion des zecs est-elle confiée?",
+      "choices": [
+        "À la Sepaq",
+        "À des entreprises privées avec droits exclusifs",
+        "Au gouvernement fédéral",
+        "À des associations sans but lucratif"
+      ],
+      "explanation": "Les zecs sont gérées par des associations sans but lucratif en vertu d'un protocole d'entente."
+    },
+    "en": {
+      "q": "Who manages the zecs?",
+      "choices": [
+        "The Sepaq",
+        "Private businesses with exclusive rights",
+        "The federal government",
+        "Non-profit associations"
+      ],
+      "explanation": "Zecs are managed by non-profit associations under a formal agreement."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.13",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l02-017-q1",
+    "scope": "QC",
+    "chapter": "l02",
+    "objectiveId": "QC-l02-017",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Vous voulez chasser sur les territoires conventionnés du Nord-du-Québec. Que vous faut-il en plus de votre permis de chasse?",
+      "choices": [
+        "Un guide obligatoire fourni par la Sepaq pour chaque séjour",
+        "Un permis fédéral de chasse au gros gibier pour le Nord",
+        "Une autorisation des autorités autochtones concernées",
+        "Une lettre signée par un agent de protection de la faune"
+      ],
+      "explanation": "En vertu de la Convention de la Baie-James et du Nord québécois, il faut obtenir une autorisation des autorités cries, inuites ou naskapies."
+    },
+    "en": {
+      "q": "You want to hunt on the agreement lands of Northern Québec. What do you need in addition to your hunting licence?",
+      "choices": [
+        "A mandatory guide provided by the Sepaq for each stay",
+        "A federal big game hunting permit for the North",
+        "Authorization from the Indigenous authorities concerned",
+        "A letter signed by a wildlife protection officer"
+      ],
+      "explanation": "Under the James Bay and Northern Québec Agreement, you need authorization from the Cree, Inuit or Naskapi authorities."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.14",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-001-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-001",
+    "reviewYear": null,
+    "fr": {
+      "q": "Les règlements de chasse sont révisés périodiquement. Quelle est la responsabilité du chasseur avant chaque excursion?",
+      "choices": [
+        "Attendre qu'un agent de la faune lui communique les changements par la poste",
+        "Suivre les règles en vigueur l'année où il a obtenu son certificat du chasseur",
+        "Demander chaque fois une autorisation écrite à la Sepaq avant de partir",
+        "S'informer des règles propres à la période, au lieu et au type de chasse"
+      ],
+      "explanation": "Comme les règles changent selon l'état des populations, c'est au chasseur de vérifier celles qui s'appliquent à sa chasse."
+    },
+    "en": {
+      "q": "Hunting regulations are revised periodically. What is the hunter's responsibility before each trip?",
+      "choices": [
+        "Wait for a wildlife officer to mail them the changes",
+        "Follow the rules in force the year they got their hunter's certificate",
+        "Ask the Sepaq for written permission every time before leaving",
+        "Find out the rules for the period, place and type of hunting"
+      ],
+      "explanation": "Since rules change according to wildlife populations, it is up to the hunter to check those that apply to their hunt."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.16",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-002-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-002",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Au Québec, auprès de quel service doit-on immatriculer une arme à feu sans restriction?",
+      "choices": [
+        "Le poste de la Sûreté du Québec le plus proche",
+        "La Société de l'assurance automobile du Québec (SAAQ)",
+        "Le bureau municipal de votre ville de résidence",
+        "Le Service d'immatriculation des armes à feu (SIAF)"
+      ],
+      "explanation": "En règle générale, les armes à feu sans restriction doivent être immatriculées par le SIAF."
+    },
+    "en": {
+      "q": "In Québec, with which service must a non-restricted firearm be registered?",
+      "choices": [
+        "The nearest Sûreté du Québec station",
+        "The Société de l'assurance automobile du Québec (SAAQ)",
+        "The municipal office of your home town",
+        "The firearms registration service (SIAF)"
+      ],
+      "explanation": "As a rule, non-restricted firearms must be registered with the SIAF."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.16",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-003-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-003",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Vous vendez votre carabine à un ami. Quel numéro changera à la suite de ce transfert de propriété?",
+      "choices": [
+        "Le numéro de série gravé par le fabricant sur l'arme",
+        "Le numéro d'immatriculation d'arme à feu (NIAF)",
+        "Le numéro unique d'arme à feu (NUAF) attribué à l'arme",
+        "Le numéro inscrit sur votre certificat du chasseur"
+      ],
+      "explanation": "Le NIAF fait le lien entre l'arme et son propriétaire, il change donc lors d'un transfert; le NUAF, lui, identifie l'arme elle-même."
+    },
+    "en": {
+      "q": "You sell your rifle to a friend. Which number will change after this transfer of ownership?",
+      "choices": [
+        "The serial number engraved on the firearm by the maker",
+        "The firearm registration number (NIAF)",
+        "The unique firearm number (NUAF) assigned to the firearm",
+        "The number on your hunter's certificate"
+      ],
+      "explanation": "The NIAF links the firearm to its owner, so it changes on transfer; the NUAF identifies the firearm itself."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.16",
+    "sourceUrl": "https://www.quebec.ca/securite-situations-urgence/armes-a-feu/immatriculation-armes-a-feu/vendre-donner-se-departir/citoyen",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-004-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-004",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Où la possession d'une arme à feu est-elle généralement interdite par la loi provinciale?",
+      "choices": [
+        "Sur les terrains et dans les bâtiments d'une école",
+        "Dans un taxi, même si l'arme est déchargée",
+        "Dans un camp de chasse en forêt",
+        "Sur une terre privée avec la permission du propriétaire"
+      ],
+      "explanation": "Les institutions désignées comme les établissements d'enseignement et les services de garde, terrains compris, sont des lieux où la possession d'une arme est généralement interdite."
+    },
+    "en": {
+      "q": "Where is possession of a firearm generally prohibited by provincial law?",
+      "choices": [
+        "On the grounds and in the buildings of a school",
+        "In a taxi, even if the firearm is unloaded",
+        "In a hunting camp in the forest",
+        "On private land with the owner's permission"
+      ],
+      "explanation": "Designated institutions such as schools and daycare services, including their grounds, are places where possessing a firearm is generally prohibited."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.16",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive/armes-munitions-equipements/reglements-armes",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-005-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-005",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Vous n'avez pas de voiture et devez vous rendre à un club de tir avec votre arme. Quel moyen de transport est permis selon le manuel?",
+      "choices": [
+        "L'autobus de la ville",
+        "L'autobus scolaire",
+        "Le métro",
+        "Le taxi"
+      ],
+      "explanation": "Le transport en commun et scolaire est généralement interdit avec une arme à feu, mais l'utilisation d'un taxi est permise."
+    },
+    "en": {
+      "q": "You have no car and must go to a shooting club with your firearm. Which means of transport is allowed according to the manual?",
+      "choices": [
+        "The city bus",
+        "The school bus",
+        "The subway",
+        "A taxi"
+      ],
+      "explanation": "Public and school transit are generally prohibited with a firearm, but using a taxi is allowed."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.16",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive/armes-munitions-equipements/reglements-armes",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-006-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-006",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Vous prenez un traversier avec votre carabine. Comment devez-vous la transporter?",
+      "choices": [
+        "Chargée, mais avec le cran de sûreté engagé et pointée vers le sol, dans un étui souple",
+        "Déchargée, dans un étui transparent bien fermé, avec les munitions dans le même étui",
+        "Démontée en pièces dans un sac de sport, sans autre exigence pour le contenant",
+        "Déchargée, verrouillée ou sans verrou, dans un contenant opaque verrouillé, munitions à part"
+      ],
+      "explanation": "L'arme doit être déchargée, rendue inopérante par un dispositif de verrouillage ou en retirant le verrou, rangée dans un contenant opaque verrouillé difficile à forcer, avec les munitions dans un contenant séparé."
+    },
+    "en": {
+      "q": "You are taking a ferry with your rifle. How must you transport it?",
+      "choices": [
+        "Loaded, but with the safety on and pointed at the ground, in a soft case",
+        "Unloaded, in a closed clear case, with ammunition in the same case",
+        "Taken apart in a sports bag, with no other requirement for the container",
+        "Unloaded, locked or bolt removed, in a locked opaque container, ammunition separate"
+      ],
+      "explanation": "The firearm must be unloaded, made inoperable with a locking device or by removing the bolt, stored in a locked opaque container that is hard to force open, with ammunition in a separate container."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.17",
+    "sourceUrl": "https://www.publicationsduquebec.gouv.qc.ca/fileadmin/gazette/pdf_encrypte/lois_reglements/2008F/50414.pdf",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-007-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-007",
+    "reviewYear": null,
+    "fr": {
+      "q": "Vous voulez chasser sur une terre privée. Que devez-vous faire avant d'y accéder?",
+      "choices": [
+        "Aviser un agent de protection de la faune",
+        "Obtenir la permission du propriétaire",
+        "Acheter un permis spécial de terre privée",
+        "Rien, car la faune n'appartient pas au propriétaire"
+      ],
+      "explanation": "Même si le propriétaire ne possède pas la faune, il contrôle l'accès à son terrain; une permission écrite ou verbale est donc obligatoire."
+    },
+    "en": {
+      "q": "You want to hunt on private land. What must you do before entering it?",
+      "choices": [
+        "Notify a wildlife protection officer",
+        "Get the owner's permission",
+        "Buy a special private-land licence",
+        "Nothing, since the wildlife doesn't belong to the owner"
+      ],
+      "explanation": "Even though the owner does not own the wildlife, they control access to their land, so written or verbal permission is required."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.17",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-008-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-008",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Quel est le nombre maximal de cartouches que peut contenir un fusil utilisé pour chasser les oiseaux migrateurs?",
+      "choices": [
+        "Deux",
+        "Cinq",
+        "Quatre",
+        "Trois"
+      ],
+      "explanation": "Pour les oiseaux migrateurs, seuls l'arc et le fusil pouvant contenir au maximum trois cartouches sont permis."
+    },
+    "en": {
+      "q": "What is the maximum number of cartridges a shotgun used to hunt migratory birds may hold?",
+      "choices": [
+        "Two",
+        "Five",
+        "Four",
+        "Three"
+      ],
+      "explanation": "For migratory birds, only a bow or a shotgun holding no more than three cartridges is allowed."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.17",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-009-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-009",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Vous chassez le canard dans une réserve nationale de faune. Quel type de grenaille devez-vous utiliser?",
+      "choices": [
+        "De la grenaille de plomb uniquement",
+        "N'importe quel type de grenaille",
+        "De la grenaille non toxique, sans plomb",
+        "Une balle unique plutôt que de la grenaille"
+      ],
+      "explanation": "Dans les réserves nationales de faune, la grenaille non toxique est obligatoire pour la sauvagine, la tourterelle triste et le petit gibier."
+    },
+    "en": {
+      "q": "You are hunting ducks in a national wildlife area. What type of shot must you use?",
+      "choices": [
+        "Lead shot only",
+        "Any type of shot",
+        "Non-toxic shot, without lead",
+        "A single slug instead of shot"
+      ],
+      "explanation": "In national wildlife areas, non-toxic shot is mandatory for waterfowl, mourning dove and small game."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.17",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-010-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-010",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Que permet la codification « F » inscrite au certificat du chasseur?",
+      "choices": [
+        "Chasser uniquement à l'arc et à l'arbalète, pendant les saisons réservées à ces engins",
+        "Piéger les animaux à fourrure avec des pièges, des collets ou des cages",
+        "Chasser avec une carabine, un fusil, une arme à chargement par la bouche ou à air",
+        "Chasser seulement la sauvagine, avec un fusil de chasse et un permis fédéral"
+      ],
+      "explanation": "Le code « F » vise les armes à feu : carabine, fusil, arme à chargement par la bouche et arme à air comprimé."
+    },
+    "en": {
+      "q": "What does the \"F\" code on the hunter's certificate allow?",
+      "choices": [
+        "Hunting only with a bow and crossbow, during the seasons reserved for them",
+        "Trapping fur-bearing animals with traps, snares or cages",
+        "Hunting with a rifle, shotgun, muzzleloader or air gun",
+        "Hunting waterfowl only, with a shotgun and a federal permit"
+      ],
+      "explanation": "The \"F\" code covers firearms: rifle, shotgun, muzzleloader and air gun."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.18",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-011-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-011",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Vous venez d'abattre un cerf de Virginie. Que devez-vous faire avec le coupon de transport de votre permis?",
+      "choices": [
+        "Apposer sur l'animal, dès sa mort, le numéro unique du coupon de transport, de façon lisible et indélébile",
+        "Faire estampiller votre permis par un agent de protection de la faune avant de déplacer l'animal",
+        "Laisser votre permis dans votre véhicule et y noter l'heure de l'abattage",
+        "Garder le coupon sur vous et le poster au Ministère après la saison"
+      ],
+      "explanation": "Depuis 2026, avec les permis numériques, il faut apposer sur l'animal le numéro unique du coupon de transport (copie imprimée du coupon, numéro inscrit sur l'animal ou sur un autre support qui y est attaché). Avec un permis papier, on peut attacher le coupon qui y est joint. Il faut avoir son permis sur soi."
+    },
+    "en": {
+      "q": "You have just killed a white-tailed deer. What must you do with your licence's transport tag?",
+      "choices": [
+        "As soon as it dies, put the tag's unique number on the animal, legibly and indelibly",
+        "Have your licence stamped by a wildlife protection officer before moving the animal",
+        "Leave your licence in your vehicle and write the time of the kill on it",
+        "Keep the tag with you and mail it to the Ministry after the season"
+      ],
+      "explanation": "Since 2026, with digital licences, you must put the transport tag's unique number on the animal: a printed copy of the tag, or the number written on the animal or on another support attached to it. With a paper licence, you may attach the tag that comes with it. You must carry your licence."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.18",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-012-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-012",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Un jeune de 15 ans veut chasser avec une arme à feu. Qui doit l'accompagner?",
+      "choices": [
+        "N'importe quel adulte de sa famille, même sans certificat du chasseur",
+        "Un autre chasseur d'au moins 16 ans qui détient son propre permis",
+        "Une personne majeure titulaire d'un certificat du chasseur codé « F »",
+        "Un agent de protection de la faune ou un guide de pourvoirie"
+      ],
+      "explanation": "Les jeunes de 12 ans à moins de 18 ans doivent être accompagnés d'une personne majeure titulaire d'un certificat du chasseur codé « F »."
+    },
+    "en": {
+      "q": "A 15-year-old wants to hunt with a firearm. Who must accompany them?",
+      "choices": [
+        "Any adult family member, even without a hunter's certificate",
+        "Another hunter aged at least 16 who holds their own licence",
+        "An adult who holds a hunter's certificate with the \"F\" code",
+        "A wildlife protection officer or an outfitter's guide"
+      ],
+      "explanation": "Young people aged 12 to under 18 must be accompanied by an adult holding a hunter's certificate with the \"F\" code."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.19",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-013-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-013",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Un chasseur ne possède pas de permis de possession et d'acquisition (PPA) valide. Comment peut-il chasser avec une arme à feu?",
+      "choices": [
+        "Seulement en territoire privé, avec la permission écrite du propriétaire",
+        "Seulement s'il utilise une arme empruntée à un chasseur titulaire d'un PPA",
+        "Sous la supervision directe et immédiate d'un adulte titulaire d'un PPA",
+        "Seulement à l'arc, même pendant la saison réservée aux armes à feu"
+      ],
+      "explanation": "Sans PPA valide, il doit être sous la supervision directe et immédiate d'une personne majeure qui détient ce permis."
+    },
+    "en": {
+      "q": "A hunter does not hold a valid possession and acquisition licence (PAL). How can they hunt with a firearm?",
+      "choices": [
+        "Only on private land, with the owner's written permission",
+        "Only if they use a firearm borrowed from a hunter who holds a PAL",
+        "Under the direct and immediate supervision of an adult who holds a PAL",
+        "Only with a bow, even during the firearm season"
+      ],
+      "explanation": "Without a valid PAL, they must be under the direct and immediate supervision of an adult who holds one."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.19",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-014-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-014",
+    "reviewYear": null,
+    "fr": {
+      "q": "Une personne se place volontairement devant vous pour faire fuir le gibier alors que vous chassez légalement. Qu'en est-il selon la loi?",
+      "choices": [
+        "C'est interdit de faire sciemment obstacle à une chasse légale",
+        "C'est permis, car la forêt publique appartient à tous les citoyens",
+        "C'est permis si la personne est un randonneur sur un sentier balisé",
+        "C'est interdit seulement sur une terre privée dont vous êtes propriétaire"
+      ],
+      "explanation": "La loi interdit de faire sciemment obstacle à une chasse légale; par contre, la chasse n'a pas préséance sur les autres activités."
+    },
+    "en": {
+      "q": "Someone deliberately stands in front of you to scare away game while you are hunting legally. What does the law say?",
+      "choices": [
+        "Knowingly obstructing lawful hunting is prohibited",
+        "It is allowed, since public forest belongs to all citizens",
+        "It is allowed if the person is a hiker on a marked trail",
+        "It is prohibited only on private land that you own"
+      ],
+      "explanation": "The law prohibits knowingly obstructing lawful hunting; however, hunting does not take precedence over other activities."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.20",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-015-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-015",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Votre ami vous accompagne à la chasse au cerf sans chasser lui-même. Doit-il porter un vêtement orangé fluorescent?",
+      "choices": [
+        "Non, seuls ceux qui portent une arme ou un arc y sont obligés",
+        "Non, sauf s'il marche devant vous pendant les déplacements en forêt",
+        "Oui, toute personne qui accompagne un chasseur doit le porter",
+        "Seulement s'il porte un sac à dos qui cache votre propre dossard"
+      ],
+      "explanation": "Le chasseur et toute personne qui l'accompagne, même sans chasser, doivent porter un vêtement orangé fluorescent."
+    },
+    "en": {
+      "q": "Your friend comes with you deer hunting but does not hunt. Must they wear blaze orange clothing?",
+      "choices": [
+        "No, only those carrying a firearm or bow must",
+        "No, unless they walk ahead of you when moving through the woods",
+        "Yes, anyone accompanying a hunter must wear it",
+        "Only if they carry a backpack that hides your own vest"
+      ],
+      "explanation": "The hunter and anyone accompanying them, even if not hunting, must wear blaze orange clothing."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.20",
+    "sourceUrl": "https://www.quebec.ca/en/tourism-recreation-sport/sporting-and-outdoor-activities/sport-hunting/general-rules/fluorescent-orange-bib",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-016-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-016",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Pour laquelle de ces chasses le port du dossard orangé n'est-il pas obligatoire?",
+      "choices": [
+        "L'orignal",
+        "Le dindon sauvage",
+        "Le cerf de Virginie",
+        "L'ours noir"
+      ],
+      "explanation": "Le dossard n'est pas exigé pour le dindon sauvage, la corneille d'Amérique, le pigeon biset et les oiseaux migrateurs."
+    },
+    "en": {
+      "q": "For which of these hunts is wearing a blaze orange vest not mandatory?",
+      "choices": [
+        "Moose",
+        "Wild turkey",
+        "White-tailed deer",
+        "Black bear"
+      ],
+      "explanation": "Blaze orange is not required for wild turkey, American crow, rock pigeon and migratory birds."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.20",
+    "sourceUrl": "https://www.quebec.ca/en/tourism-recreation-sport/sporting-and-outdoor-activities/sport-hunting/general-rules/fluorescent-orange-bib",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-017-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-017",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Pour quel oiseau migrateur peut-on utiliser un appeau électronique?",
+      "choices": [
+        "La bernache du Canada",
+        "Le canard colvert",
+        "L'oie des neiges",
+        "La bécasse d'Amérique"
+      ],
+      "explanation": "L'appeau électronique est interdit pour tous les oiseaux migrateurs, sauf l'oie des neiges."
+    },
+    "en": {
+      "q": "For which migratory bird may an electronic call be used?",
+      "choices": [
+        "Canada goose",
+        "Mallard",
+        "Snow goose",
+        "American woodcock"
+      ],
+      "explanation": "Electronic calls are prohibited for all migratory birds except the snow goose."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.21",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-018-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-018",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Lequel de ces équipements est permis à la chasse au Québec?",
+      "choices": [
+        "Un drone pour repérer le gibier depuis les airs",
+        "Une caméra thermique pour voir les animaux",
+        "Une oreillette qui amplifie les sons",
+        "Des lunettes de vision nocturne à l'aube"
+      ],
+      "explanation": "L'oreillette amplificatrice est permise, tandis que les drones, les détecteurs en temps réel, la vision nocturne et les caméras thermiques sont interdits."
+    },
+    "en": {
+      "q": "Which of these devices is allowed for hunting in Québec?",
+      "choices": [
+        "A drone to locate game from the air",
+        "A thermal camera to see animals",
+        "An earpiece that amplifies sounds",
+        "Night vision goggles at dawn"
+      ],
+      "explanation": "A sound-amplifying earpiece is allowed, while drones, real-time detectors, night vision and thermal cameras are prohibited."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.21",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-019-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-019",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Au Québec, quelle est la période permise pour chasser?",
+      "choices": [
+        "Du lever au coucher du soleil exactement, selon l'heure officielle",
+        "30 minutes avant le lever jusqu'à 30 minutes après le coucher du soleil",
+        "Une heure avant le lever jusqu'à une heure après le coucher du soleil",
+        "De 6 h à 18 h, peu importe la saison ou la région de chasse"
+      ],
+      "explanation": "Le droit de chasser commence 30 minutes avant le lever du soleil et prend fin 30 minutes après son coucher."
+    },
+    "en": {
+      "q": "In Québec, what are the legal hunting hours?",
+      "choices": [
+        "From exactly sunrise to sunset, according to official time",
+        "30 minutes before sunrise to 30 minutes after sunset",
+        "One hour before sunrise to one hour after sunset",
+        "From 6 a.m. to 6 p.m., whatever the season or hunting region"
+      ],
+      "explanation": "Hunting is allowed from 30 minutes before sunrise until 30 minutes after sunset."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.21",
+    "sourceUrl": "https://www.quebec.ca/en/tourism-recreation-sport/sporting-and-outdoor-activities/sport-hunting/general-rules/hunting-times",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-020-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-020",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Vous revenez à pied de votre site de chasse 45 minutes après la fin de la période permise. Comment pouvez-vous porter votre arme?",
+      "choices": [
+        "Chargée, mais avec le cran de sûreté engagé en tout temps",
+        "Seulement démontée en pièces, dans un sac fermé",
+        "Déchargée, sans être obligatoirement dans un étui",
+        "Vous ne pouvez avoir aucune arme avec vous à ce moment"
+      ],
+      "explanation": "Pendant l'heure qui précède ou suit la période de chasse, on peut circuler à pied avec une arme non remisée, mais déchargée."
+    },
+    "en": {
+      "q": "You are walking back from your hunting spot 45 minutes after legal hours end. How may you carry your firearm?",
+      "choices": [
+        "Loaded, but with the safety on at all times",
+        "Only taken apart, in a closed bag",
+        "Unloaded, without necessarily being in a case",
+        "You may not have any firearm with you at that time"
+      ],
+      "explanation": "During the hour before or after legal hours, you may travel on foot with an uncased but unloaded firearm."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.21",
+    "sourceUrl": "https://www.quebec.ca/en/tourism-recreation-sport/sporting-and-outdoor-activities/sport-hunting/general-rules/hunting-times",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-021-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-021",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "La nuit, un agent trouve une personne avec un projecteur lumineux et une arme à feu dans un secteur fréquenté par le gros gibier. Comment la loi considère-t-elle cette situation?",
+      "choices": [
+        "Comme de la chasse illégale, sauf preuve contraire",
+        "Comme une activité légale si l'arme est déchargée",
+        "Comme légale si la personne se trouve sur une route",
+        "Comme une simple infraction au règlement municipal"
+      ],
+      "explanation": "Comme la chasse de nuit est interdite, cette combinaison est considérée, en l'absence de preuve contraire, comme de la chasse illégale."
+    },
+    "en": {
+      "q": "At night, an officer finds someone with a spotlight and a firearm in an area used by big game. How does the law view this?",
+      "choices": [
+        "As illegal hunting, unless proven otherwise",
+        "As a legal activity if the firearm is unloaded",
+        "As legal if the person is standing on a road",
+        "As a simple breach of a municipal bylaw"
+      ],
+      "explanation": "Since night hunting is prohibited, this combination is considered illegal hunting unless there is proof to the contrary."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.22",
+    "sourceUrl": "https://www.quebec.ca/en/tourism-recreation-sport/sporting-and-outdoor-activities/sport-hunting/general-rules/hunting-times",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-022-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-022",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Un chevreuil se trouve dans un champ à côté d'un chemin public. Vous êtes à 5 m de l'accotement. Pouvez-vous tirer?",
+      "choices": [
+        "Oui, car vous n'êtes plus sur la chaussée ni sur l'accotement du chemin",
+        "Oui, à condition de ne pas tirer en travers du chemin public",
+        "Non, sauf si le chemin est un chemin de terre peu fréquenté",
+        "Non, la bande de 10 m au-delà de l'accotement fait partie du chemin"
+      ],
+      "explanation": "Le chemin public inclut une bande de 10 mètres au-delà des accotements; il est interdit de tirer sur un animal à partir de cette zone."
+    },
+    "en": {
+      "q": "A deer is in a field next to a public road. You are 5 m from the shoulder. May you shoot?",
+      "choices": [
+        "Yes, because you are off both the pavement and the shoulder",
+        "Yes, as long as you do not shoot across the public road",
+        "No, unless it is a little-used dirt road",
+        "No, the 10 m strip beyond the shoulder is part of the road"
+      ],
+      "explanation": "A public road includes a 10-metre strip beyond the shoulders; shooting at an animal from that area is prohibited."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.22",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-023-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-023",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Vous avez blessé un cerf et voulez le retrouver avec votre chien. Que dit la loi?",
+      "choices": [
+        "C'est interdit en tout temps, même avec un chien en laisse",
+        "C'est permis, mais sans être en possession d'une arme",
+        "C'est permis seulement si vous gardez votre arme chargée",
+        "C'est permis seulement la nuit, avec une lampe de poche"
+      ],
+      "explanation": "On peut rechercher un gros gibier blessé ou mort avec un chien, à condition de ne pas avoir d'arme en sa possession."
+    },
+    "en": {
+      "q": "You wounded a deer and want to find it with your dog. What does the law say?",
+      "choices": [
+        "It is prohibited at all times, even with a leashed dog",
+        "It is allowed, but without having a weapon",
+        "It is allowed only if you keep your firearm loaded",
+        "It is allowed only at night, with a flashlight"
+      ],
+      "explanation": "You may search for wounded or dead big game with a dog, provided you are not carrying a weapon."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.22",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-024-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-024",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Quand une expédition de chasse à l'orignal prend-elle fin?",
+      "choices": [
+        "Dès qu'un membre de l'expédition quitte le camp pour aller passer la soirée ailleurs",
+        "Après trois jours de chasse consécutifs, même si aucun orignal n'a été abattu",
+        "Uniquement à la fin de la saison de chasse à l'orignal dans la zone visée",
+        "Quand un orignal est abattu ou après 24 h sans chasse à l'orignal sur ce lieu"
+      ],
+      "explanation": "L'expédition, formée de deux ou trois chasseurs, se termine lorsqu'un orignal est abattu ou si personne n'a chassé l'orignal à cet endroit pendant 24 heures."
+    },
+    "en": {
+      "q": "When does a moose hunting expedition end?",
+      "choices": [
+        "As soon as one member of the expedition leaves camp to spend the evening elsewhere",
+        "After three consecutive days of hunting, even if no moose was killed",
+        "Only at the end of the moose hunting season in that zone",
+        "When a moose is killed or after 24 h with no moose hunting at that site"
+      ],
+      "explanation": "The expedition, made up of two or three hunters, ends when a moose is killed or if no one has hunted moose at that site for 24 hours."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.22",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-025-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-025",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Quel est le seul indice qui vous certifie qu'un orignal est un mâle adulte?",
+      "choices": [
+        "Une cloche sous la gorge bien visible",
+        "Un pelage plus foncé sur le dos",
+        "Des bois d'au moins 10 cm de longueur",
+        "Une taille supérieure à celle des autres orignaux"
+      ],
+      "explanation": "Seuls des bois de 10 cm et plus certifient un mâle adulte; sans bois apparents, il pourrait s'agir d'une femelle ou d'un veau."
+    },
+    "en": {
+      "q": "What is the only sign that confirms a moose is an adult male?",
+      "choices": [
+        "A clearly visible bell under the throat",
+        "Darker hair on the back",
+        "Antlers at least 10 cm long",
+        "Being larger than other moose"
+      ],
+      "explanation": "Only antlers 10 cm or longer confirm an adult male; without visible antlers it could be a cow or a calf."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.22",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-026-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-026",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Combien de cerfs de Virginie un chasseur peut-il prélever par année, sauf exception?",
+      "choices": [
+        "Deux",
+        "Un",
+        "Trois",
+        "Cinq"
+      ],
+      "explanation": "La limite est de deux cerfs par chasseur par année (permis régulier et permis supplémentaire) ailleurs qu'à l'île d'Anticosti (zone 20), où la limite est de quatre cerfs par séjour, dont au plus deux cerfs avec bois."
+    },
+    "en": {
+      "q": "How many white-tailed deer may a hunter take per year, barring exceptions?",
+      "choices": [
+        "Two",
+        "One",
+        "Three",
+        "Five"
+      ],
+      "explanation": "The limit is two deer per hunter per year (regular and supplementary licences) outside Anticosti Island (zone 20), where the limit is four deer per stay, with at most two antlered deer."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.23",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-027-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-027",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Concernant l'ours noir, laquelle de ces affirmations est conforme au manuel?",
+      "choices": [
+        "On peut garder une vésicule biliaire séparée si l'ours a été abattu légalement",
+        "Le second ours de l'année doit être abattu au printemps",
+        "Un seul ours noir peut être abattu dans toute sa vie",
+        "La vésicule biliaire détachée de la carcasse est interdite en tout temps"
+      ],
+      "explanation": "La possession d'une vésicule biliaire d'ours détachée de la carcasse est interdite en tout temps; le second ours permis doit être prélevé à l'automne."
+    },
+    "en": {
+      "q": "Regarding black bear, which statement is consistent with the manual?",
+      "choices": [
+        "You may keep a separated gall bladder if the bear was legally killed",
+        "The second bear of the year must be taken in spring",
+        "Only one black bear may be killed in a lifetime",
+        "A gall bladder detached from the carcass is prohibited at all times"
+      ],
+      "explanation": "Possessing a bear gall bladder detached from the carcass is always prohibited; the second allowed bear must be taken in fall."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.23",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive/regles-generales/vente-achat-possession",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-028-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-028",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Vous venez d'abattre un cerf et le retrouvez au sol. Quelle est la première chose à faire selon la loi?",
+      "choices": [
+        "L'enregistrer avant de le déplacer",
+        "Appeler SOS Braconnage",
+        "Apposer le coupon de transport sur l'animal",
+        "Retirer le coupon de transport du permis et le garder sur vous"
+      ],
+      "explanation": "Le coupon de transport doit être apposé sur l'animal dès qu'il est abattu et retrouvé."
+    },
+    "en": {
+      "q": "You have just shot a deer and found it on the ground. What is the first thing the law requires?",
+      "choices": [
+        "Register it before moving it",
+        "Call SOS Braconnage",
+        "Attach the transport tag to the animal",
+        "Remove the transport tag from the licence and keep it on you"
+      ],
+      "explanation": "The transport tag must be attached to the animal as soon as it is killed and found."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.23",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive/regles-generales/transport-exportation",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-028-q2",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-028",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Dans quel délai devez-vous enregistrer un gros gibier ou un dindon sauvage abattu?",
+      "choices": [
+        "Dans les 24 heures suivant l'abattage de l'animal",
+        "Dans les sept jours suivant l'abattage de l'animal",
+        "Avant la fin de la saison de chasse dans la zone",
+        "Dans les 48 heures suivant la sortie du lieu de chasse"
+      ],
+      "explanation": "L'abatteur doit enregistrer son animal dans les 48 heures suivant sa sortie du lieu de chasse."
+    },
+    "en": {
+      "q": "Within what time must you register a big game animal or wild turkey you have killed?",
+      "choices": [
+        "Within 24 hours of killing the animal",
+        "Within seven days of killing the animal",
+        "Before the end of the hunting season in the zone",
+        "Within 48 hours of leaving the hunting area"
+      ],
+      "explanation": "The hunter must register the animal within 48 hours of leaving the hunting area."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.23",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive/regles-generales/enregistrement-gibier/comment-enregistrer-gibier",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-029-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-029",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Vous abattez par erreur un orignal femelle alors que seuls les mâles sont permis. Que devez-vous faire?",
+      "choices": [
+        "Laisser l'animal sur place, sans le toucher, et quitter rapidement le secteur",
+        "Le faire enregistrer sous le permis d'un ami qui détient un permis de femelle",
+        "Apposer votre coupon, garder la viande comestible et appeler SOS Braconnage",
+        "Garder l'animal et attendre la fin de la saison pour le déclarer à un agent"
+      ],
+      "explanation": "En cas de méprise, il faut immédiatement apposer son coupon, conserver la viande et contacter sans délai SOS Braconnage pour remettre l'animal à un agent."
+    },
+    "en": {
+      "q": "You mistakenly kill a cow moose when only bulls are allowed. What must you do?",
+      "choices": [
+        "Leave the animal untouched and quickly leave the area",
+        "Have it registered under a friend's licence that allows a cow",
+        "Attach your tag, keep the meat edible and call SOS Braconnage",
+        "Keep the animal and wait until the season ends to report it to an officer"
+      ],
+      "explanation": "In case of a mistake, immediately attach your tag, keep the meat edible and call SOS Braconnage without delay to hand the animal over to an officer."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.24",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive/regles-generales/abattage-accidentel",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-030-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-030",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Vous transportez des canards abattus. Que devez-vous conserver sur chaque oiseau?",
+      "choices": [
+        "Les deux pattes, pour l'identification",
+        "Le bec et une patte, pour l'identification",
+        "Toutes les plumes du corps, sauf celles des ailes",
+        "Une aile intacte avec toutes ses plumes (ou la tête emplumée)"
+      ],
+      "explanation": "Les oiseaux migrateurs ne s'enregistrent pas, mais au moins une aile entièrement emplumée ou la tête emplumée doit rester attachée à l'oiseau pour permettre l'identification de l'espèce."
+    },
+    "en": {
+      "q": "You are transporting ducks you have shot. What must you keep on each bird?",
+      "choices": [
+        "Both legs, for identification",
+        "The bill and one leg, for identification",
+        "All body feathers except the wing feathers",
+        "One intact wing with all its feathers (or the feathered head)"
+      ],
+      "explanation": "Migratory birds are not registered, but at least one fully feathered wing or the fully feathered head must stay attached to the bird so its species can be identified."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.24",
+    "sourceUrl": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2022-105/FullText.html",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-031-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-031",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Le certificat du chasseur d'une personne est annulé à la suite d'une infraction. Que devra-t-elle faire pour chasser de nouveau?",
+      "choices": [
+        "Payer l'amende imposée et récupérer son certificat dès le lendemain au bureau régional",
+        "Attendre la fin de la période d'annulation et reprendre toute la certification",
+        "Simplement acheter un nouveau permis de chasse pour la saison suivante",
+        "Faire signer une lettre d'engagement par un agent de protection de la faune"
+      ],
+      "explanation": "En cas d'annulation, la personne doit attendre la fin de la période (jusqu'à 24 mois) avant de suivre les cours et reprendre tout le processus de certification."
+    },
+    "en": {
+      "q": "A person's hunter's certificate is cancelled after an offence. What must they do to hunt again?",
+      "choices": [
+        "Pay the fine and get the certificate back the next day at the regional office",
+        "Wait for the cancellation period to end and redo the entire certification",
+        "Simply buy a new hunting licence for the following season",
+        "Have a wildlife protection officer sign a letter of undertaking"
+      ],
+      "explanation": "After a cancellation, the person must wait for the period to end (up to 24 months) before taking the courses and redoing the whole certification process."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.25",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive/permis-certificat/certificat-chasseur",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l03-032-q1",
+    "scope": "QC",
+    "chapter": "l03",
+    "objectiveId": "QC-l03-032",
+    "reviewYear": null,
+    "fr": {
+      "q": "Qu'est-il interdit de faire dans un ravage?",
+      "choices": [
+        "Marcher en raquettes sur un sentier balisé",
+        "Observer les animaux à distance",
+        "Couper du bois de chauffage sur sa terre",
+        "Pourchasser ou déranger le gros gibier"
+      ],
+      "explanation": "Le ravage est l'aire de confinement utilisée par le gros gibier l'hiver; nul ne peut y pourchasser ou y déranger les animaux."
+    },
+    "en": {
+      "q": "What is prohibited in a deer or moose yard?",
+      "choices": [
+        "Snowshoeing on a marked trail",
+        "Watching the animals from a distance",
+        "Cutting firewood on your own land",
+        "Chasing or disturbing big game"
+      ],
+      "explanation": "A yard is the winter area where big game gather; no one may chase or disturb the animals there."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.25",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-001-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-001",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quels domaines bioclimatiques du Québec abritent la plus grande diversité d'habitats et d'espèces fauniques?",
+      "choices": [
+        "La toundra arctique et la taïga au nord du 52e parallèle",
+        "Les pessières à mousses de la zone boréale continue",
+        "Les sapinières et les érablières de la zone tempérée nordique",
+        "Les grandes tourbières et la toundra forestière du Nord-du-Québec"
+      ],
+      "explanation": "Ce sont les sapinières et les érablières de la zone tempérée nordique qui regroupent le plus grand nombre d'espèces fauniques."
+    },
+    "en": {
+      "q": "Which bioclimatic domains in Québec hold the greatest diversity of habitats and wildlife species?",
+      "choices": [
+        "The arctic tundra and taiga north of the 52nd parallel",
+        "The spruce-moss forests of the continuous boreal zone",
+        "The fir and maple forests of the northern temperate zone",
+        "The large peat bogs and forest tundra of Northern Québec"
+      ],
+      "explanation": "The fir and maple forests of the northern temperate zone hold the largest number of wildlife species."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.41",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-002-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-002",
+    "reviewYear": null,
+    "fr": {
+      "q": "Qu'appelle-t-on l'habitat d'une espèce faunique?",
+      "choices": [
+        "L'ensemble des espèces animales et végétales d'une région",
+        "La zone de chasse où l'espèce est récoltée chaque automne",
+        "Le milieu où elle trouve de quoi survivre et se reproduire",
+        "Le territoire protégé où toute chasse de l'espèce est interdite"
+      ],
+      "explanation": "Dans un écosystème, chaque espèce occupe un milieu particulier qui répond à ses besoins de survie et de reproduction : c'est son habitat."
+    },
+    "en": {
+      "q": "What is a wildlife species' habitat?",
+      "choices": [
+        "All the animal and plant species of a region",
+        "The hunting zone where the species is harvested each fall",
+        "The area where it finds what it needs to survive and breed",
+        "The protected area where all hunting of the species is banned"
+      ],
+      "explanation": "Within an ecosystem, each species occupies a particular area that meets its survival and breeding needs: that is its habitat."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.41",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-003-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-003",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Quelle mesure de gestion a permis d'augmenter de façon significative la productivité des troupeaux d'orignaux?",
+      "choices": [
+        "La protection des femelles",
+        "L'interdiction de chasser l'orignal à l'arc",
+        "L'abattage prioritaire des femelles",
+        "Le nourrissage des orignaux l'hiver"
+      ],
+      "explanation": "En protégeant les femelles, qui assurent la reproduction, la productivité des troupeaux a augmenté et on compte aujourd'hui plus d'orignaux que jamais."
+    },
+    "en": {
+      "q": "Which management measure significantly increased the productivity of moose herds?",
+      "choices": [
+        "Protecting cows",
+        "Banning bow hunting for moose",
+        "Targeting cows first",
+        "Feeding moose in winter"
+      ],
+      "explanation": "Protecting cows, which ensure reproduction, increased herd productivity, and there are now more moose than ever."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.41",
+    "sourceUrl": "https://www.quebec.ca/nouvelles/actualites/details/tirage-sort-permis-chasse-orignal-sans-bois-69213",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-004-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-004",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Pour quelle espèce le manuel donne-t-il la chasse comme moyen de limiter une surabondance qui détruit des champs agricoles?",
+      "choices": [
+        "L'oie des neiges",
+        "Le lagopède des saules",
+        "Le tétras du Canada",
+        "La bécasse d'Amérique"
+      ],
+      "explanation": "La chasse aide à contrôler la surabondance de l'oie des neiges et limite ainsi la destruction des champs agricoles."
+    },
+    "en": {
+      "q": "For which species does the manual present hunting as a way to limit overabundance that destroys farm fields?",
+      "choices": [
+        "Snow goose",
+        "Willow ptarmigan",
+        "Spruce grouse",
+        "American woodcock"
+      ],
+      "explanation": "Hunting helps control the overabundance of snow geese and thus limits the destruction of farm fields."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.41",
+    "sourceUrl": "https://www.canada.ca/en/environment-climate-change/services/migratory-game-bird-hunting/overabundant-species-special-conservation-measures.html",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-005-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-005",
+    "reviewYear": null,
+    "fr": {
+      "q": "Comment détermine-t-on l'âge d'un orignal?",
+      "choices": [
+        "En mesurant l'envergure de son panache d'une pointe à l'autre",
+        "En comptant les couches de cément des racines des incisives",
+        "En comptant le nombre total de pointes sur ses deux bois",
+        "En pesant l'animal éviscéré et en comparant à une table"
+      ],
+      "explanation": "Il n'y a aucune corrélation entre l'âge et la dimension du panache; l'âge se détermine par les couches de cément formées chaque année sur les racines des incisives."
+    },
+    "en": {
+      "q": "How is a moose's age determined?",
+      "choices": [
+        "By measuring its antler spread from tip to tip",
+        "By counting cementum layers on the incisor roots",
+        "By counting the total number of points on both antlers",
+        "By weighing the field-dressed animal against a chart"
+      ],
+      "explanation": "There is no link between age and antler size; age is found from the cementum layers formed each year on the incisor roots."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.42",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-006-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-006",
+    "reviewYear": null,
+    "fr": {
+      "q": "Pendant le rut de l'orignal, lequel des sexes brame pour attirer l'autre?",
+      "choices": [
+        "Le mâle, pour attirer les femelles",
+        "La femelle, pour attirer les mâles",
+        "Les veaux, pour retrouver leur mère",
+        "Aucun, l'orignal est silencieux en période de rut"
+      ],
+      "explanation": "Pendant le rut, les femelles brament pour attirer les mâles, qui répondent par de brefs cris rauques."
+    },
+    "en": {
+      "q": "During the moose rut, which sex calls to attract the other?",
+      "choices": [
+        "The bull, to attract cows",
+        "The cow, to attract bulls",
+        "The calves, to find their mother",
+        "Neither, moose are silent during the rut"
+      ],
+      "explanation": "During the rut, cows call to attract bulls, which answer with short, grunting calls."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.42",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-007-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-007",
+    "reviewYear": null,
+    "fr": {
+      "q": "À quel moment l'orignal mâle perd-il ses bois?",
+      "choices": [
+        "En avril, juste avant la pousse du nouveau panache",
+        "Entre juin et juillet, pendant la croissance du velours",
+        "À la fin d'août, au moment où tombe le velours",
+        "Entre décembre et février, après la période du rut"
+      ],
+      "explanation": "Le panache commence à pousser en avril, le velours tombe fin août ou début septembre, et les bois tombent entre décembre et février."
+    },
+    "en": {
+      "q": "When does a bull moose shed its antlers?",
+      "choices": [
+        "In April, just before the new antlers start growing",
+        "Between June and July, while the velvet is growing",
+        "In late August, when the velvet comes off",
+        "Between December and February, after the rut"
+      ],
+      "explanation": "Antlers start growing in April, velvet is shed in late August or early September, and antlers drop between December and February."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.42",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-008-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-008",
+    "reviewYear": null,
+    "fr": {
+      "q": "Vers quel âge apparaissent les larges palettes caractéristiques du panache de l'orignal mâle?",
+      "choices": [
+        "Dès le premier automne",
+        "Vers 4 ou 5 ans",
+        "Vers un an",
+        "Vers 10 ans"
+      ],
+      "explanation": "Le faon n'a pas de bois à son premier automne, les premiers bois forment une simple dague vers un an, et les palettes apparaissent vers 4 ou 5 ans."
+    },
+    "en": {
+      "q": "At about what age do a bull moose's characteristic broad antler palms appear?",
+      "choices": [
+        "From its first fall",
+        "Around 4 or 5 years",
+        "Around one year",
+        "Around 10 years"
+      ],
+      "explanation": "Calves have no antlers in their first fall, first antlers are simple spikes at about one year, and palms appear around 4 or 5 years."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.42",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-009-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-009",
+    "reviewYear": null,
+    "fr": {
+      "q": "Comment appelle-t-on l'aire boisée où les orignaux se rassemblent l'hiver pour trouver abri et nourriture?",
+      "choices": [
+        "Un ravage",
+        "Une souille",
+        "Un brûlis",
+        "Une aulnaie"
+      ],
+      "explanation": "L'hiver, les orignaux se regroupent dans des aires de confinement appelées ravages, où ils trouvent abri et nourriture."
+    },
+    "en": {
+      "q": "What is the wooded area called where moose gather in winter for shelter and food?",
+      "choices": [
+        "A yard",
+        "A wallow",
+        "A burn",
+        "An alder stand"
+      ],
+      "explanation": "In winter, moose gather in confinement areas called yards, where they find shelter and food."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.43",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-010-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-010",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Quelle est la première cause de mortalité des orignaux au Québec?",
+      "choices": [
+        "La prédation par le loup et l'ours noir",
+        "Les accidents routiers sur les routes du sud",
+        "La récolte annuelle par les chasseurs",
+        "La rigueur de l'hiver et l'épaisseur de neige"
+      ],
+      "explanation": "Le loup et l'ours noir sont ses principaux prédateurs, mais la récolte annuelle par les chasseurs demeure la première cause de mortalité."
+    },
+    "en": {
+      "q": "What is the leading cause of moose mortality in Québec?",
+      "choices": [
+        "Predation by wolves and black bears",
+        "Road collisions on southern highways",
+        "Annual harvest by hunters",
+        "Harsh winters and deep snow"
+      ],
+      "explanation": "Wolves and black bears are its main predators, but the annual harvest by hunters remains the leading cause of death."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.43",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-011-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-011",
+    "reviewYear": null,
+    "fr": {
+      "q": "Où se trouvent les plus fortes densités d'orignaux au Québec?",
+      "choices": [
+        "Au sud du 50e parallèle",
+        "Au nord du 55e parallèle",
+        "Dans la toundra arctique",
+        "Uniquement sur l'île d'Anticosti"
+      ],
+      "explanation": "L'orignal vit jusqu'à la limite nord de la forêt boréale, vers le 55e parallèle, mais les plus fortes densités sont au sud du 50e."
+    },
+    "en": {
+      "q": "Where are moose densities highest in Québec?",
+      "choices": [
+        "South of the 50th parallel",
+        "North of the 55th parallel",
+        "In the arctic tundra",
+        "Only on Anticosti Island"
+      ],
+      "explanation": "Moose live up to the northern edge of the boreal forest, around the 55th parallel, but densities are highest south of the 50th."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.43",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-012-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-012",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Dans les zones où l'alternance est maintenue, lors d'une année dite restrictive pour la chasse à l'orignal, quels animaux peut-on récolter?",
+      "choices": [
+        "Les femelles seulement",
+        "Tous les orignaux, sans distinction",
+        "Les orignaux avec bois seulement",
+        "Aucun orignal"
+      ],
+      "explanation": "Les années restrictives épargnent les orignaux sans bois (femelles et faons, regroupés depuis 2026) : seuls les orignaux avec bois sont récoltés. Depuis 2026, la plupart des zones utilisent plutôt un tirage au sort de permis d'orignal sans bois."
+    },
+    "en": {
+      "q": "In zones that keep the rotation, in a so-called restrictive year for moose hunting, which animals may be harvested?",
+      "choices": [
+        "Cows only",
+        "All moose, without distinction",
+        "Antlered moose only",
+        "No moose"
+      ],
+      "explanation": "Restrictive years spare antlerless moose (cows and calves, grouped together since 2026): only antlered moose are harvested. Since 2026, most zones use a draw for antlerless moose permits instead."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.43",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive/periodes-limites/orignal",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-013-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-013",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Les orignaux d'une zone dépassent la densité visée et manquent de nourriture. Quelle mesure de chasse est alors nécessaire pour protéger l'habitat?",
+      "choices": [
+        "Fermer complètement la chasse dans la zone pour quelques années",
+        "Permettre la récolte d'orignaux sans bois (femelles et faons)",
+        "Interdire la chasse à l'arbalète et à l'arc dans la zone",
+        "Récolter seulement des mâles adultes portant un gros panache"
+      ],
+      "explanation": "La chasse vise environ 60 % de la capacité de support; au-delà, la récolte des femelles et des faons devient nécessaire pour protéger l'habitat."
+    },
+    "en": {
+      "q": "Moose in a zone exceed the target density and lack food. What hunting measure is then needed to protect the habitat?",
+      "choices": [
+        "Close hunting completely in the zone for a few years",
+        "Allow the harvest of antlerless moose (cows and calves)",
+        "Ban crossbow and bow hunting in the zone",
+        "Harvest only adult bulls with large antlers"
+      ],
+      "explanation": "Hunting aims for about 60% of carrying capacity; beyond that, harvesting cows and calves is needed to protect the habitat."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.43",
+    "sourceUrl": "https://www.quebec.ca/nouvelles/actualites/details/maintien-des-modalites-de-chasse-a-lorignal-pour-la-saison-2025-dans-la-zone-2-61929",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-014-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-014",
+    "reviewYear": null,
+    "fr": {
+      "q": "Chez le cerf de Virginie, à quoi la dimension du panache est-elle directement liée?",
+      "choices": [
+        "À l'âge exact de l'animal",
+        "À la corpulence de l'animal",
+        "À la couleur du pelage",
+        "Au nombre de faons produits"
+      ],
+      "explanation": "Contrairement à l'orignal, le panache du cerf est en lien direct avec sa corpulence; il atteint sa taille maximale entre 5 et 7 ans."
+    },
+    "en": {
+      "q": "In white-tailed deer, what is antler size directly linked to?",
+      "choices": [
+        "The animal's exact age",
+        "The animal's body size",
+        "The colour of its coat",
+        "The number of fawns it produces"
+      ],
+      "explanation": "Unlike moose, deer antler size is directly linked to body size; antlers reach maximum size between 5 and 7 years."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.44",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-015-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-015",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quelle est l'étendue du champ de vision du cerf de Virginie sans bouger la tête?",
+      "choices": [
+        "180 degrés",
+        "270 degrés",
+        "360 degrés",
+        "310 degrés"
+      ],
+      "explanation": "Le cerf de Virginie possède un large champ de vision de 310 degrés, ce qui lui permet de déceler le moindre mouvement."
+    },
+    "en": {
+      "q": "How wide is a white-tailed deer's field of vision without moving its head?",
+      "choices": [
+        "180 degrees",
+        "270 degrees",
+        "360 degrees",
+        "310 degrees"
+      ],
+      "explanation": "White-tailed deer have a wide 310-degree field of vision, letting them detect the slightest movement."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.44",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-015-q2",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-015",
+    "reviewYear": null,
+    "fr": {
+      "q": "Laquelle de ces affirmations sur les sens du cerf de Virginie est exacte?",
+      "choices": [
+        "Il ne voit qu'en noir et blanc, sans distinguer aucune couleur",
+        "Son odorat est nettement moins développé que celui du chien",
+        "Ses sabots ont des coussins qui détectent les vibrations du sol",
+        "Il ne voit bien que de jour et devient presque aveugle la nuit"
+      ],
+      "explanation": "Les sabots du cerf possèdent des coussins sensibles aux vibrations; il distingue les couleurs, voit de jour comme de nuit et son odorat surpasse celui du chien."
+    },
+    "en": {
+      "q": "Which statement about the white-tailed deer's senses is correct?",
+      "choices": [
+        "It sees only in black and white, with no colour at all",
+        "Its sense of smell is much weaker than a dog's",
+        "Its hooves have pads that detect ground vibrations",
+        "It sees well only by day and is nearly blind at night"
+      ],
+      "explanation": "Deer hooves have pads sensitive to vibrations; deer see colours, see day and night, and smell better than dogs."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.44",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-016-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-016",
+    "reviewYear": null,
+    "fr": {
+      "q": "Qu'est-ce qui limite l'expansion du cerf de Virginie vers le nord du Québec?",
+      "choices": [
+        "Le fleuve Saint-Laurent, que les cerfs ne traversent pas",
+        "La présence de l'orignal, qui lui fait concurrence",
+        "La longueur de l'hiver et l'épaisseur de la neige",
+        "Le manque de terres agricoles pour se nourrir l'été"
+      ],
+      "explanation": "Sa répartition est limitée au nord par la forêt boréale, en raison de la longueur de l'hiver et de l'épaisseur de neige, et non par le fleuve."
+    },
+    "en": {
+      "q": "What limits the northward spread of white-tailed deer in Québec?",
+      "choices": [
+        "The St. Lawrence River, which deer do not cross",
+        "The presence of moose, which compete with it",
+        "The length of winter and snow depth",
+        "The lack of farmland to feed on in summer"
+      ],
+      "explanation": "Its range is limited to the north by the boreal forest, because of winter length and snow depth, not by the river."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.45",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-017-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-017",
+    "reviewYear": null,
+    "fr": {
+      "q": "Pourquoi y a-t-il une forte concentration de cerfs sur l'île d'Anticosti malgré des hivers rigoureux?",
+      "choices": [
+        "Les cerfs y sont nourris tout l'hiver par les pourvoiries",
+        "Il n'y a pas de prédateurs et peu de pression de chasse",
+        "La chasse au cerf y est interdite toute l'année",
+        "L'île est située au sud du fleuve, où le climat est doux"
+      ],
+      "explanation": "La population d'Anticosti, la plus nordique du Québec, se maintient grâce à l'absence de prédateurs et à une faible pression de chasse."
+    },
+    "en": {
+      "q": "Why is there a high concentration of deer on Anticosti Island despite harsh winters?",
+      "choices": [
+        "Outfitters feed the deer there all winter",
+        "There are no predators and little hunting pressure",
+        "Deer hunting is banned there year-round",
+        "The island lies south of the river, where the climate is mild"
+      ],
+      "explanation": "The Anticosti population, the northernmost in Québec, persists thanks to the absence of predators and low hunting pressure."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.45",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-018-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-018",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quel est le principal facteur de mortalité du cerf de Virginie au Québec?",
+      "choices": [
+        "La prédation par le coyote",
+        "Les collisions routières",
+        "La rigueur de l'hiver",
+        "Les maladies"
+      ],
+      "explanation": "Lors d'hivers très rigoureux, la mortalité peut dépasser 40 %; c'est pourquoi la protection des ravages est essentielle."
+    },
+    "en": {
+      "q": "What is the main cause of white-tailed deer mortality in Québec?",
+      "choices": [
+        "Coyote predation",
+        "Road collisions",
+        "Harsh winters",
+        "Disease"
+      ],
+      "explanation": "In very harsh winters, mortality can exceed 40%, which is why protecting deer yards is essential."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.45",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-018-q2",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-018",
+    "reviewYear": null,
+    "fr": {
+      "q": "Selon le manuel, qu'est-ce qui constitue la clé du maintien du cerf de Virginie au Québec?",
+      "choices": [
+        "L'interdiction de chasser les mâles dans le sud du Québec",
+        "La protection des boisés servant de ravages l'hiver",
+        "L'élimination systématique des coyotes et des loups",
+        "L'appâtage des cerfs toute l'année près des routes"
+      ],
+      "explanation": "Les ravages comblent les besoins des cerfs en abri et en nourriture l'hiver; leur protection, en terres publiques ou privées, est essentielle."
+    },
+    "en": {
+      "q": "According to the manual, what is the key to maintaining white-tailed deer in Québec?",
+      "choices": [
+        "Banning the hunting of bucks in southern Québec",
+        "Protecting the woodlots used as winter yards",
+        "Systematically eliminating coyotes and wolves",
+        "Baiting deer all year near roads"
+      ],
+      "explanation": "Yards meet deer's winter needs for shelter and food; protecting them, on public or private land, is essential."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.45",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-019-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-019",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Quel est le principal moyen de gestion utilisé pour contrôler les populations de cerfs de Virginie?",
+      "choices": [
+        "La récolte d'un nombre fixé de cerfs sans bois",
+        "L'interdiction complète de la chasse dans les ravages",
+        "Le déplacement des cerfs vers le nord par camion",
+        "La chasse exclusive des mâles à gros panache"
+      ],
+      "explanation": "On fixe un nombre de permis de cerfs sans bois à émettre selon les indicateurs de population de chaque zone."
+    },
+    "en": {
+      "q": "What is the main management tool used to control white-tailed deer populations?",
+      "choices": [
+        "Harvesting a set number of antlerless deer",
+        "A complete ban on hunting in deer yards",
+        "Trucking deer northward to new ranges",
+        "Hunting only bucks with large antlers"
+      ],
+      "explanation": "A number of antlerless deer permits is set for each zone based on population indicators."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.45",
+    "sourceUrl": "https://www.quebec.ca/nouvelles/actualites/details/permis-de-chasse-speciaux-debut-de-la-periode-dinscription-au-tirage-au-sort-70724",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-020-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-020",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Quelles données l'inventaire aérien hivernal des cervidés permet-il surtout d'estimer?",
+      "choices": [
+        "Le poids moyen, l'âge et l'état de santé des animaux",
+        "La densité, le rapport des sexes et les jeunes par femelle",
+        "Le nombre de permis vendus et de chasseurs par zone",
+        "Le nombre d'animaux tués sur les routes durant l'hiver"
+      ],
+      "explanation": "L'inventaire aérien, réalisé l'hiver environ tous les 10 ans, sert à estimer la densité, le rapport des sexes et le nombre de jeunes par femelle."
+    },
+    "en": {
+      "q": "What does the winter aerial survey of deer and moose mainly estimate?",
+      "choices": [
+        "The animals' average weight, age and health",
+        "Density, sex ratio and young per female",
+        "The number of licences sold and hunters per zone",
+        "The number of animals killed on roads in winter"
+      ],
+      "explanation": "The aerial survey, done in winter about every 10 years, estimates density, sex ratio and number of young per female."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.45",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-021-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-021",
+    "reviewYear": null,
+    "fr": {
+      "q": "Pourquoi dit-on que l'ours noir n'hiberne pas à proprement parler?",
+      "choices": [
+        "Parce qu'il sort de sa tanière pour se nourrir tout l'hiver",
+        "Parce qu'il migre vers le sud du Québec pendant l'hiver",
+        "Parce que sa température reste élevée et qu'il peut se réveiller",
+        "Parce qu'il ne passe que quelques jours par mois dans sa tanière"
+      ],
+      "explanation": "L'ours cesse de s'alimenter dans sa tanière, mais sa température corporelle reste au-dessus de la température ambiante et il peut se réveiller à tout moment."
+    },
+    "en": {
+      "q": "Why is the black bear said not to truly hibernate?",
+      "choices": [
+        "Because it leaves its den to feed all winter",
+        "Because it migrates to southern Québec in winter",
+        "Because its temperature stays high and it can wake up",
+        "Because it spends only a few days a month in its den"
+      ],
+      "explanation": "The bear stops eating in its den, but its body temperature stays above the surrounding temperature and it can wake at any time."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.46",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-022-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-022",
+    "reviewYear": null,
+    "fr": {
+      "q": "Vous campez en territoire d'ours noir. Quelle précaution découle directement du manuel?",
+      "choices": [
+        "Laisser les restes de repas loin de la tente, au sol",
+        "Courir s'il s'approche, car il est lent",
+        "Garder la nourriture et les ordures hors de sa portée",
+        "Monter dans un arbre, car il ne grimpe pas"
+      ],
+      "explanation": "L'odeur des ordures attire l'ours là où la nourriture et les déchets ne sont pas gardés hors de sa portée; il grimpe aussi aux arbres et peut courir près de 55 km/h."
+    },
+    "en": {
+      "q": "You are camping in black bear country. Which precaution follows directly from the manual?",
+      "choices": [
+        "Leave meal scraps on the ground away from the tent",
+        "Run if it approaches, since it is slow",
+        "Keep food and garbage out of its reach",
+        "Climb a tree, since bears cannot climb"
+      ],
+      "explanation": "The smell of garbage draws bears where food and waste are not kept out of reach; bears also climb trees and can run about 55 km/h."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.46",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-023-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-023",
+    "reviewYear": null,
+    "fr": {
+      "q": "Dans quelle situation un ours noir risque-t-il le plus de s'attaquer à un humain selon le manuel?",
+      "choices": [
+        "Quand il sort de sa tanière au printemps",
+        "Quand une ourse sent ses oursons menacés",
+        "Quand il se nourrit de petits fruits",
+        "Quand il traverse un cours d'eau"
+      ],
+      "explanation": "L'ours noir est généralement timide, mais une ourse qui sent sa progéniture menacée pourrait attaquer un humain."
+    },
+    "en": {
+      "q": "In which situation is a black bear most likely to attack a human, according to the manual?",
+      "choices": [
+        "When it leaves its den in spring",
+        "When a sow feels her cubs are threatened",
+        "When it is feeding on berries",
+        "When it is crossing a stream"
+      ],
+      "explanation": "Black bears are generally shy, but a sow that feels her cubs are threatened may attack a human."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.46",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-024-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-024",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Pourquoi la gestion de l'ours noir repose-t-elle surtout sur les données d'enregistrement des captures?",
+      "choices": [
+        "L'ours vit seulement au nord du 57e parallèle, hors des zones survolées",
+        "Les chasseurs n'ont pas à enregistrer leurs ours, ce qui simplifie le suivi",
+        "L'ours est dans sa tanière l'hiver, ce qui empêche l'inventaire aérien",
+        "L'ours se déplace trop vite pour être compté du haut des airs en été"
+      ],
+      "explanation": "Comme l'ours est en tanière l'hiver, les inventaires aériens des cervidés ne s'appliquent pas; on utilise les données de chasse et de piégeage."
+    },
+    "en": {
+      "q": "Why does black bear management rely mainly on harvest registration data?",
+      "choices": [
+        "Bears live only north of the 57th parallel, outside surveyed areas",
+        "Hunters don't have to register bears, which makes tracking simpler",
+        "The bear is in its den in winter, ruling out aerial surveys",
+        "Bears move too fast to be counted from the air in summer"
+      ],
+      "explanation": "Since bears are denned in winter, the aerial surveys used for deer and moose don't apply; hunting and trapping data are used instead."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.47",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-025-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-025",
+    "reviewYear": null,
+    "fr": {
+      "q": "Comment reconnaître un dindon sauvage mâle d'une femelle?",
+      "choices": [
+        "Le mâle a la tête bleue, blanche et rouge et souvent une barbe",
+        "Le mâle est plus petit que la femelle et a un plumage brunâtre",
+        "La femelle a la tête rouge vif et porte une longue barbe noire",
+        "Le mâle et la femelle sont identiques, même pendant la parade"
+      ],
+      "explanation": "Le mâle a la tête bleue, blanche et rouge et une barbe pouvant atteindre 13 cm; la femelle est plus petite, au plumage plus terne et à la tête bleu gris."
+    },
+    "en": {
+      "q": "How can you tell a male wild turkey from a female?",
+      "choices": [
+        "The male has a blue, white and red head and often a beard",
+        "The male is smaller than the female, with brownish plumage",
+        "The female has a bright red head and a long black beard",
+        "Males and females look identical, even during courtship"
+      ],
+      "explanation": "The male has a blue, white and red head and a beard up to 13 cm; the female is smaller, duller and has a blue-grey head."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.48",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-026-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-026",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quelle est l'étendue de la vision panoramique du dindon sauvage sans tourner la tête?",
+      "choices": [
+        "180 degrés",
+        "250 degrés",
+        "360 degrés",
+        "300 degrés"
+      ],
+      "explanation": "Grâce à ses yeux placés de chaque côté de la tête, le dindon jouit d'une vision panoramique de 300 degrés."
+    },
+    "en": {
+      "q": "How wide is the wild turkey's panoramic vision without turning its head?",
+      "choices": [
+        "180 degrees",
+        "250 degrees",
+        "360 degrees",
+        "300 degrees"
+      ],
+      "explanation": "With eyes on each side of its head, the turkey has 300-degree panoramic vision."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.48",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-027-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-027",
+    "reviewYear": null,
+    "fr": {
+      "q": "Pourquoi les deux premières semaines de vie des poussins du dindon sauvage sont-elles les plus critiques?",
+      "choices": [
+        "Ils ne peuvent ni voler ni se percher pour fuir les prédateurs",
+        "Ils n'ont pas encore de plumes pour se protéger du froid la nuit",
+        "Ils dépendent entièrement du lait de leur mère pour se nourrir",
+        "Ils sont chassés au printemps en même temps que les mâles barbus"
+      ],
+      "explanation": "Incapables de voler et de se percher, les jeunes sont des proies faciles; plus de la moitié meurent par prédation."
+    },
+    "en": {
+      "q": "Why are the first two weeks of a wild turkey poult's life the most critical?",
+      "choices": [
+        "They can neither fly nor roost to escape predators",
+        "They have no feathers yet to protect them from the night cold",
+        "They depend entirely on their mother's milk for food",
+        "They are hunted in spring along with the bearded males"
+      ],
+      "explanation": "Unable to fly or roost, poults are easy prey; more than half die from predation."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.49",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-028-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-028",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Quel est le rôle de la chasse automnale au dindon sauvage, qui vise le mâle, la femelle et le juvénile?",
+      "choices": [
+        "Favoriser la croissance des populations dans les nouvelles zones",
+        "Protéger les femelles pendant la période de ponte et de couvaison",
+        "Limiter les populations dans les zones très peuplées",
+        "Recenser les dindons à barbe présents dans chaque zone de chasse"
+      ],
+      "explanation": "La chasse printanière aux dindons à barbe favorise la croissance des populations, tandis que la chasse d'automne limite les populations là où elles sont abondantes."
+    },
+    "en": {
+      "q": "What is the purpose of the fall wild turkey hunt, which targets males, females and juveniles?",
+      "choices": [
+        "To help populations grow in newly settled zones",
+        "To protect hens during the laying and nesting period",
+        "To limit populations in densely populated zones",
+        "To count the bearded turkeys present in each hunting zone"
+      ],
+      "explanation": "The spring hunt for bearded turkeys helps populations grow, while the fall hunt limits populations where they are abundant."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.49",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-029-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-029",
+    "reviewYear": null,
+    "fr": {
+      "q": "Laquelle de ces espèces fait partie des quatre qui dominent la récolte annuelle de petit gibier au Québec?",
+      "choices": [
+        "La perdrix grise",
+        "Le lapin à queue blanche",
+        "Le tétras du Canada",
+        "La marmotte commune"
+      ],
+      "explanation": "Le lièvre d'Amérique, la gélinotte huppée, le tétras du Canada et le lagopède des saules dominent la récolte de petit gibier."
+    },
+    "en": {
+      "q": "Which of these species is one of the four that dominate Québec's annual small game harvest?",
+      "choices": [
+        "Grey partridge",
+        "Cottontail rabbit",
+        "Spruce grouse",
+        "Groundhog"
+      ],
+      "explanation": "Snowshoe hare, ruffed grouse, spruce grouse and willow ptarmigan dominate the small game harvest."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.49",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-030-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-030",
+    "reviewYear": null,
+    "fr": {
+      "q": "Comment varie l'abondance du lièvre d'Amérique au fil des ans?",
+      "choices": [
+        "Elle reste stable d'une année à l'autre",
+        "Elle augmente sans cesse depuis 50 ans",
+        "Elle dépend uniquement de la chasse",
+        "Elle suit des cycles d'environ dix ans"
+      ],
+      "explanation": "Malgré une reproduction rapide, la forte prédation fait fluctuer spectaculairement les populations selon des cycles d'environ dix ans."
+    },
+    "en": {
+      "q": "How does snowshoe hare abundance vary over the years?",
+      "choices": [
+        "It stays stable from year to year",
+        "It has risen steadily for 50 years",
+        "It depends only on hunting",
+        "It follows cycles of about ten years"
+      ],
+      "explanation": "Despite fast breeding, heavy predation makes populations swing dramatically in cycles of about ten years."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.50",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-031-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-031",
+    "reviewYear": null,
+    "fr": {
+      "q": "Pourquoi le lièvre d'Amérique est-il moins présent dans l'habitat du cerf de Virginie?",
+      "choices": [
+        "Le cerf est un prédateur du lièvre, surtout des levrauts au printemps",
+        "Le lièvre fuit l'odeur du cerf et quitte les secteurs qu'il fréquente",
+        "Le cerf broute trop les arbustes qui abritent et nourrissent le lièvre",
+        "Le lièvre et le cerf se disputent les mêmes terriers pendant l'hiver"
+      ],
+      "explanation": "Le cerf broute à l'excès la strate arbustive qui protège et nourrit le lièvre."
+    },
+    "en": {
+      "q": "Why is the snowshoe hare less common in white-tailed deer habitat?",
+      "choices": [
+        "Deer prey on hares, especially young leverets in spring",
+        "Hares avoid the smell of deer and leave the areas it uses",
+        "Deer overbrowse the shrubs that shelter and feed hares",
+        "Hares and deer compete for the same burrows in winter"
+      ],
+      "explanation": "Deer overbrowse the shrub layer that protects and feeds hares."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.50",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-032-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-032",
+    "reviewYear": null,
+    "fr": {
+      "q": "Comment distinguer une gélinotte huppée mâle d'une femelle?",
+      "choices": [
+        "Le mâle a une caroncule rouge vif au-dessus de chaque œil",
+        "La femelle a la queue entièrement noire pendant l'hiver",
+        "La bande sombre de la queue est continue chez le mâle",
+        "Le mâle devient entièrement blanc pendant l'hiver"
+      ],
+      "explanation": "Le mâle et la femelle se ressemblent, mais la large bande sombre de la queue est continue chez le mâle et discontinue chez la femelle."
+    },
+    "en": {
+      "q": "How can you tell a male ruffed grouse from a female?",
+      "choices": [
+        "The male has a bright red comb above each eye",
+        "The female has an all-black tail in winter",
+        "The dark tail band is unbroken in the male",
+        "The male turns all white in winter"
+      ],
+      "explanation": "Males and females look alike, but the wide dark tail band is unbroken in the male and broken in the female."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.51",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-033-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-033",
+    "reviewYear": null,
+    "fr": {
+      "q": "Qu'est-ce que le tambourinage de la gélinotte huppée?",
+      "choices": [
+        "Le bruit sourd que fait son envol soudain à l'automne",
+        "Le battement d'ailes du mâle pour attirer les femelles",
+        "Le cri d'alarme de la femelle qui protège ses petits au nid",
+        "Le bruit qu'elle fait en grattant la neige pour se nourrir l'hiver"
+      ],
+      "explanation": "Au printemps, les mâles battent des ailes sur leur poitrine pour attirer les femelles : c'est le tambourinage."
+    },
+    "en": {
+      "q": "What is ruffed grouse drumming?",
+      "choices": [
+        "The thudding sound of its sudden takeoff in fall",
+        "The male beating its wings to attract females",
+        "The female's alarm call protecting her young at the nest",
+        "The noise it makes scratching the snow to feed in winter"
+      ],
+      "explanation": "In spring, males beat their wings against their chest to attract females: this is drumming."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.51",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-034-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-034",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quel effet la chasse a-t-elle sur les populations globales de gélinottes huppées au Québec?",
+      "choices": [
+        "Elle a peu d'incidence",
+        "Elle est la principale cause de leur déclin",
+        "Elle les a fait disparaître du sud du Québec",
+        "Elle empêche leurs cycles d'abondance"
+      ],
+      "explanation": "Les hivers avec verglas, la prédation et les maladies déciment davantage les gélinottes; la chasse a donc peu d'incidence sur leurs populations."
+    },
+    "en": {
+      "q": "What effect does hunting have on overall ruffed grouse populations in Québec?",
+      "choices": [
+        "It has little impact",
+        "It is the main cause of their decline",
+        "It has wiped them out in southern Québec",
+        "It prevents their abundance cycles"
+      ],
+      "explanation": "Winters with freezing rain, predation and disease take a heavier toll; hunting therefore has little impact on populations."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.51",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-035-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-035",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quel trait distingue le tétras du Canada mâle?",
+      "choices": [
+        "Une huppe de plumes hérissées sur la tête",
+        "Une caroncule rouge au-dessus de l'œil",
+        "Une queue entièrement blanche",
+        "Une barbe sur la poitrine"
+      ],
+      "explanation": "Le mâle tétras est plus foncé et porte une caroncule rouge au-dessus de l'œil."
+    },
+    "en": {
+      "q": "Which feature identifies the male spruce grouse?",
+      "choices": [
+        "A crest of raised feathers on the head",
+        "A red comb above the eye",
+        "An all-white tail",
+        "A beard on the chest"
+      ],
+      "explanation": "The male spruce grouse is darker and has a red comb above the eye."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.52",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-036-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-036",
+    "reviewYear": null,
+    "fr": {
+      "q": "Pourquoi le tétras du Canada est-il particulièrement vulnérable à la chasse?",
+      "choices": [
+        "Il vole en grands groupes bruyants faciles à repérer",
+        "Il se laisse facilement approcher en restant immobile",
+        "Il fréquente surtout les champs agricoles ouverts",
+        "Il est actif uniquement la nuit, quand on peut l'éclairer"
+      ],
+      "explanation": "Contrairement à la gélinotte, le tétras reste immobile au sol ou sur une branche face au danger, ce qui le rend facile à approcher."
+    },
+    "en": {
+      "q": "Why is the spruce grouse particularly vulnerable to hunting?",
+      "choices": [
+        "It flies in large noisy flocks that are easy to spot",
+        "It lets people approach by staying still",
+        "It mostly uses open farm fields",
+        "It is active only at night, when it can be spotlighted"
+      ],
+      "explanation": "Unlike the ruffed grouse, the spruce grouse stays still on the ground or on a branch when threatened, making it easy to approach."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.52",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-037-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-037",
+    "reviewYear": null,
+    "fr": {
+      "q": "Comment est le plumage du lagopède des saules en hiver?",
+      "choices": [
+        "Brun tacheté de noir",
+        "Blanc, sauf la queue qui reste noire",
+        "Gris avec une bande sombre à la queue",
+        "Entièrement noir"
+      ],
+      "explanation": "En hiver, le lagopède des saules devient blanc, à l'exception de la queue qui demeure noire."
+    },
+    "en": {
+      "q": "What does a willow ptarmigan's plumage look like in winter?",
+      "choices": [
+        "Brown spotted with black",
+        "White, except for the tail, which stays black",
+        "Grey with a dark tail band",
+        "All black"
+      ],
+      "explanation": "In winter, the willow ptarmigan turns white, except for its tail, which stays black."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.52",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-038-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-038",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Vous voulez chasser la bécasse d'Amérique. Quels permis vous faut-il?",
+      "choices": [
+        "Seulement le permis fédéral de chasse aux oiseaux migrateurs",
+        "Seulement le permis provincial de chasse au petit gibier",
+        "Le permis provincial de petit gibier et le permis fédéral",
+        "Un permis de gros gibier et une attestation spéciale du Ministère"
+      ],
+      "explanation": "Oiseau migrateur de juridiction fédérale, la bécasse exige à la fois le permis provincial de petit gibier et le permis fédéral de chasse aux oiseaux migrateurs."
+    },
+    "en": {
+      "q": "You want to hunt American woodcock. Which licences do you need?",
+      "choices": [
+        "Only the federal migratory bird hunting permit",
+        "Only the provincial small game hunting licence",
+        "The provincial small game licence and the federal permit",
+        "A big game licence and a special certificate from the Ministry"
+      ],
+      "explanation": "As a federally managed migratory bird, woodcock requires both the provincial small game licence and the federal migratory bird hunting permit."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.53",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive/gibier/petit-gibier",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-039-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-039",
+    "reviewYear": null,
+    "fr": {
+      "q": "Vous voyez un canard courir à la surface de l'eau avant de prendre son envol. De quel type de canard s'agit-il probablement?",
+      "choices": [
+        "Un canard barboteur",
+        "Une bernache",
+        "Une sarcelle d'hiver",
+        "Un canard plongeur"
+      ],
+      "explanation": "Les petites ailes des canards plongeurs facilitent la nage sous l'eau, mais les obligent à courir à la surface avant de s'envoler."
+    },
+    "en": {
+      "q": "You see a duck running along the water's surface before taking off. What type of duck is it probably?",
+      "choices": [
+        "A dabbling duck",
+        "A goose",
+        "A green-winged teal",
+        "A diving duck"
+      ],
+      "explanation": "Diving ducks' small wings help them swim underwater but force them to run along the surface before taking off."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.54",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-039-q2",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-039",
+    "reviewYear": null,
+    "fr": {
+      "q": "Lequel de ces canards est un canard barboteur?",
+      "choices": [
+        "Le garrot à œil d'or",
+        "Le canard colvert",
+        "L'eider à duvet",
+        "La macreuse noire"
+      ],
+      "explanation": "Le canard colvert est un barboteur, comme le canard branchu, le canard noir et la sarcelle d'hiver; les garrots, eiders et macreuses sont des plongeurs."
+    },
+    "en": {
+      "q": "Which of these ducks is a dabbling duck?",
+      "choices": [
+        "Common goldeneye",
+        "Mallard",
+        "Common eider",
+        "Black scoter"
+      ],
+      "explanation": "The mallard is a dabbler, like the wood duck, black duck and green-winged teal; goldeneyes, eiders and scoters are divers."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.54",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-040-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-040",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Laquelle de ces espèces de canards est protégée et exige une identification attentive avant de tirer?",
+      "choices": [
+        "Le canard noir",
+        "Le canard colvert",
+        "Le canard branchu",
+        "L'arlequin plongeur"
+      ],
+      "explanation": "L'arlequin plongeur, espèce préoccupante, ne fait l'objet d'aucune saison de chasse; d'autres espèces, comme le garrot d'Islande, sont soumises à des limites très strictes (1 par jour). Il faut savoir les reconnaître avant de tirer."
+    },
+    "en": {
+      "q": "Which of these duck species is protected and requires careful identification before shooting?",
+      "choices": [
+        "American black duck",
+        "Mallard",
+        "Wood duck",
+        "Harlequin duck"
+      ],
+      "explanation": "The Harlequin Duck, a species of special concern, has no hunting season; other species, such as Barrow's Goldeneye, have very strict limits (1 per day). You must be able to recognize them before shooting."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.54",
+    "sourceUrl": "https://www.canada.ca/fr/environnement-changement-climatique/services/chasse-oiseaux-migrateurs-gibier/reglementation-resumes-provinciaux-territoriaux/quebec.html",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-041-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-041",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Quel est le seul oiseau migrateur que l'on peut chasser avec de la grenaille de plomb?",
+      "choices": [
+        "La bécasse d'Amérique",
+        "La bernache du Canada",
+        "La tourterelle triste",
+        "Le canard noir"
+      ],
+      "explanation": "La bécasse est le seul oiseau migrateur chassable avec de la grenaille de plomb, mais la grenaille non toxique est recommandée pour éviter de contaminer la viande."
+    },
+    "en": {
+      "q": "What is the only migratory bird that may be hunted with lead shot?",
+      "choices": [
+        "American woodcock",
+        "Canada goose",
+        "Mourning dove",
+        "American black duck"
+      ],
+      "explanation": "Woodcock is the only migratory bird that may be hunted with lead shot, though non-toxic shot is recommended to avoid contaminating the meat."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.55",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive/armes-munitions-equipements",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-042-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-042",
+    "reviewYear": null,
+    "fr": {
+      "q": "Qu'appelle-t-on la « croule » chez la bécasse d'Amérique?",
+      "choices": [
+        "La parade nuptiale du mâle au printemps",
+        "Le nid que la femelle creuse au sol",
+        "La migration d'automne vers le sud",
+        "Le cri d'alarme de la femelle"
+      ],
+      "explanation": "La croule est la parade spectaculaire du mâle, au lever et au coucher du soleil au printemps; on compte les mâles entendus pour évaluer les populations."
+    },
+    "en": {
+      "q": "What is the woodcock's \"croule\"?",
+      "choices": [
+        "The male's spring courtship display",
+        "The nest the female digs in the ground",
+        "The fall migration south",
+        "The female's alarm call"
+      ],
+      "explanation": "The croule is the male's spectacular display at dawn and dusk in spring; males heard are counted to assess populations."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.55",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "QC-l06-043-q1",
+    "scope": "QC",
+    "chapter": "l06",
+    "objectiveId": "QC-l06-043",
+    "reviewYear": null,
+    "fr": {
+      "q": "Pourquoi l'automne est-il la saison privilégiée pour la chasse au Québec?",
+      "choices": [
+        "Parce que la plupart des animaux sont alors en pleine reproduction",
+        "Parce que la chasse est interdite par la loi le reste de l'année",
+        "Parce que les populations sont à leur maximum et les jeunes autonomes",
+        "Parce que les jeunes de l'année ne sont pas encore nés à ce moment"
+      ],
+      "explanation": "À l'automne, les jeunes sont autonomes et les populations atteignent leur abondance maximale; récolter les surplus évite des habitats d'hiver surpeuplés."
+    },
+    "en": {
+      "q": "Why is fall the preferred hunting season in Québec?",
+      "choices": [
+        "Because most animals are in the middle of breeding then",
+        "Because the law bans hunting the rest of the year",
+        "Because populations peak and young are independent",
+        "Because the year's young are not yet born at that time"
+      ],
+      "explanation": "In fall, the young are independent and populations peak; harvesting the surplus prevents overcrowded winter habitats."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.55",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l04-002-q1",
+    "scope": "QC",
+    "chapter": "l04",
+    "objectiveId": "hunter-common-l04-002",
+    "reviewYear": null,
+    "fr": {
+      "q": "Vous blessez un cerf hors de la zone vitale. Pendant sa fuite, un autre chasseur l'atteint dans la zone vitale. Qui a priorité sur le gibier?",
+      "choices": [
+        "Vous, car vous avez tiré en premier",
+        "Le propriétaire du terrain où l'animal tombe",
+        "L'autre chasseur, car il a atteint la zone vitale",
+        "Le premier des deux qui trouve l'animal"
+      ],
+      "explanation": "Si vous ne faites que blesser l'animal et qu'un deuxième chasseur atteint la zone vitale, vous perdez votre droit de priorité."
+    },
+    "en": {
+      "q": "You wound a deer outside the vital zone. As it flees, another hunter hits it in the vital zone. Who has priority on the game?",
+      "choices": [
+        "You, because you fired first",
+        "The owner of the land where the animal falls",
+        "The other hunter, because he hit the vital zone",
+        "Whichever of the two finds the animal first"
+      ],
+      "explanation": "If you only wound the animal and a second hunter hits the vital zone, you lose your priority."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.27",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l04-002-q2",
+    "scope": "QC",
+    "chapter": "l04",
+    "objectiveId": "hunter-common-l04-002",
+    "reviewYear": null,
+    "fr": {
+      "q": "Vous atteignez un orignal dans la zone vitale. L'animal parcourt une distance et un autre chasseur le touche aussi pendant sa fuite. Qui a priorité?",
+      "choices": [
+        "L'autre chasseur, car il a tiré en dernier",
+        "Les deux chasseurs, à parts égales",
+        "Vous, car votre tir a atteint la zone vitale",
+        "Celui qui détient le permis le plus ancien"
+      ],
+      "explanation": "Le chasseur qui a d'abord atteint la zone vitale garde la priorité sur le gibier, même si un deuxième chasseur l'atteint pendant sa fuite."
+    },
+    "en": {
+      "q": "You hit a moose in the vital zone. It travels some distance and another hunter also hits it as it flees. Who has priority?",
+      "choices": [
+        "The other hunter, because he fired last",
+        "Both hunters, equally",
+        "You, because your shot hit the vital zone",
+        "Whoever has held a licence the longest"
+      ],
+      "explanation": "The hunter who first hit the vital zone keeps priority on the game, even if a second hunter hits it while it flees."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.27",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l04-004-q1",
+    "scope": "QC",
+    "chapter": "l04",
+    "objectiveId": "hunter-common-l04-004",
+    "reviewYear": null,
+    "fr": {
+      "q": "Vous êtes arrivé le premier dans un secteur de chasse en territoire public. Un autre chasseur arrive. Que dit le manuel?",
+      "choices": [
+        "Vous pouvez lui interdire l'accès au secteur puisque vous y étiez arrivé avant lui",
+        "Vous pouvez l'expulser du secteur si vous avez posé des affiches à votre nom",
+        "Il est interdit de vous approprier le territoire et d'en bloquer l'accès",
+        "Il doit vous verser un droit d'accès ou s'installer à plus d'un kilomètre"
+      ],
+      "explanation": "En territoire public, le libre accès est garanti par la loi; il est interdit de s'approprier un territoire, même si on l'occupait en premier."
+    },
+    "en": {
+      "q": "You were the first to arrive at a hunting spot on public land. Another hunter shows up. What does the manual say?",
+      "choices": [
+        "You may deny him access to the area since you got there before him",
+        "You may send him out of the area if you have posted signs with your name",
+        "You may not claim the territory or block access to it",
+        "He must pay you an access fee or set up more than a kilometre away"
+      ],
+      "explanation": "On public land, free access is guaranteed by law; you may not claim a territory, even if you were there first."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.28",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l04-005-q1",
+    "scope": "QC",
+    "chapter": "l04",
+    "objectiveId": "hunter-common-l04-005",
+    "reviewYear": null,
+    "fr": {
+      "q": "Vous chassez à l'affût en territoire public et posez des affiches aux entrées du secteur. Dans quel rayon autour de votre poste devriez-vous raisonnablement limiter cet affichage?",
+      "choices": [
+        "100 mètres",
+        "1 kilomètre",
+        "300 mètres",
+        "5 kilomètres"
+      ],
+      "explanation": "Par respect pour les autres chasseurs, l'affichage devrait se limiter à un rayon d'environ 300 mètres autour du poste d'affût."
+    },
+    "en": {
+      "q": "You are hunting from a stand on public land and post signs at the entrances to the area. Within what radius of your stand should you reasonably limit these signs?",
+      "choices": [
+        "100 metres",
+        "1 kilometre",
+        "300 metres",
+        "5 kilometres"
+      ],
+      "explanation": "Out of respect for other hunters, signs should be limited to a radius of about 300 metres around the stand."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.28",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l04-005-q2",
+    "scope": "QC",
+    "chapter": "l04",
+    "objectiveId": "hunter-common-l04-005",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quelle pratique est correcte concernant les affiches signalant un chasseur à l'affût en territoire public?",
+      "choices": [
+        "Indiquer la période visée et un moyen de vous joindre",
+        "Les laisser en place jusqu'à la saison suivante",
+        "Y écrire que le secteur vous appartient",
+        "Les poser seulement sur les terres privées"
+      ],
+      "explanation": "L'affiche doit mentionner la période pour laquelle vous demandez le respect des autres et un moyen de vous contacter; on la retire dès la fin de l'affût."
+    },
+    "en": {
+      "q": "Which practice is correct for signs warning that a hunter is at a stand on public land?",
+      "choices": [
+        "State the period covered and a way to reach you",
+        "Leave them up until the next season",
+        "Write on them that the area belongs to you",
+        "Post them only on private land"
+      ],
+      "explanation": "The sign must state the period for which you ask others for respect and a way to contact you; remove it as soon as your hunt ends."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.28",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l04-007-q1",
+    "scope": "QC",
+    "chapter": "l04",
+    "objectiveId": "hunter-common-l04-007",
+    "reviewYear": null,
+    "fr": {
+      "q": "Avant de tirer sur un gibier, que devez-vous vous assurer de faire, selon la loi?",
+      "choices": [
+        "Bien l'identifier et pouvoir le récupérer",
+        "Attendre qu'il soit en mouvement",
+        "Tirer avant qu'il entre dans le dégagé",
+        "Viser la tête peu importe la distance"
+      ],
+      "explanation": "Avant de tirer sur un gibier immobile et bien placé dans un endroit dégagé, il faut bien l'identifier et s'assurer de pouvoir le récupérer."
+    },
+    "en": {
+      "q": "Before shooting at game, what must you make sure of, according to the law?",
+      "choices": [
+        "That you have identified it and can recover it",
+        "That it is moving",
+        "That you shoot before it reaches the open",
+        "That you aim at the head at any distance"
+      ],
+      "explanation": "Before shooting at game that is still, well placed and in the open, you must identify it clearly and be sure you can recover it."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.27",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l05-003-q1",
+    "scope": "QC",
+    "chapter": "l05",
+    "objectiveId": "hunter-common-l05-003",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quel type d'arme à air comprimé est le plus fréquemment utilisé pour la chasse au Québec?",
+      "choices": [
+        "L'arme à CO2",
+        "L'arme à levier-pompe",
+        "L'arme à piston",
+        "L'arme à réservoir d'air rechargeable"
+      ],
+      "explanation": "Le manuel indique que l'arme à piston est la plus utilisée pour la chasse au Québec; il la prend donc comme référence."
+    },
+    "en": {
+      "q": "Which type of air gun is most often used for hunting in Québec?",
+      "choices": [
+        "The CO2 gun",
+        "The pump-lever gun",
+        "The piston gun",
+        "The refillable air reservoir gun"
+      ],
+      "explanation": "The manual states that the piston gun is the one most used for hunting in Québec, so it uses it as the reference."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.30",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l05-004-q1",
+    "scope": "QC",
+    "chapter": "l05",
+    "objectiveId": "hunter-common-l05-004",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Selon la loi québécoise sur la faune, quelles carabines à air comprimé sont permises pour chasser le petit gibier?",
+      "choices": [
+        "Calibre .177 ou plus et vélocité d'au moins 152,4 m/s",
+        "Tout calibre, peu importe la vélocité",
+        "Calibre .22 seulement et vélocité d'au moins 300 m/s",
+        "Calibre inférieur à .177 et vélocité de moins de 152,4 m/s"
+      ],
+      "explanation": "La loi permet, pour le petit gibier, les carabines à air comprimé de calibre .177 ou plus qui atteignent au moins 152,4 m/s."
+    },
+    "en": {
+      "q": "Under Québec wildlife law, which air rifles are allowed for hunting small game?",
+      "choices": [
+        ".177 calibre or more and at least 152.4 m/s velocity",
+        "Any calibre at any velocity",
+        ".22 calibre only and at least 300 m/s velocity",
+        "Under .177 calibre and under 152.4 m/s velocity"
+      ],
+      "explanation": "For small game, the law allows air rifles of .177 calibre or more that reach at least 152.4 m/s."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.30",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive/armes-munitions-equipements",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l05-013-q1",
+    "scope": "QC",
+    "chapter": "l05",
+    "objectiveId": "hunter-common-l05-013",
+    "reviewYear": null,
+    "fr": {
+      "q": "Votre arme à air comprimé est peu puissante. Où devriez-vous viser un petit gibier?",
+      "choices": [
+        "À l'arrière-train, pour ne pas abîmer la viande",
+        "Au milieu de l'abdomen, la cible la plus large",
+        "Aux pattes avant, pour l'empêcher de fuir",
+        "À la tête, entre l'œil et l'oreille"
+      ],
+      "explanation": "Avec une arme moins puissante, on vise la tête entre l'œil et l'oreille, la partie la plus fragile du crâne."
+    },
+    "en": {
+      "q": "Your air gun is not very powerful. Where should you aim on small game?",
+      "choices": [
+        "At the hindquarters, to avoid spoiling the meat",
+        "In the middle of the abdomen, the largest target",
+        "At the front legs, to stop it from running",
+        "At the head, between the eye and the ear"
+      ],
+      "explanation": "With a less powerful gun, aim at the head between the eye and the ear, the most fragile part of the skull."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.32",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l05-014-q1",
+    "scope": "QC",
+    "chapter": "l05",
+    "objectiveId": "hunter-common-l05-014",
+    "reviewYear": null,
+    "fr": {
+      "q": "Vous choisissez des projectiles pour chasser le petit gibier à l'arme à air comprimé. Que recommande le manuel?",
+      "choices": [
+        "Le projectile le plus léger, en .177",
+        "Changer de projectile à chaque sortie",
+        "Des projectiles différents pour l'entraînement et la chasse",
+        "Le projectile de plus grande masse, en .22"
+      ],
+      "explanation": "Pour la chasse, on conseille le projectile de plus grande masse (.22) et de s'entraîner à différentes distances avec les mêmes munitions."
+    },
+    "en": {
+      "q": "You are choosing pellets for hunting small game with an air gun. What does the manual recommend?",
+      "choices": [
+        "The lightest pellet, in .177",
+        "A different pellet at each outing",
+        "Different pellets for practice and for hunting",
+        "The heaviest pellet, in .22"
+      ],
+      "explanation": "For hunting, choose the heaviest pellet (.22) and practise at various distances with the same ammunition."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.32",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l05-015-q1",
+    "scope": "QC",
+    "chapter": "l05",
+    "objectiveId": "hunter-common-l05-015",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quelle est la portée maximale efficace pour un tir mortel rapide sur un petit gibier avec une arme à air comprimé?",
+      "choices": [
+        "10 mètres",
+        "100 mètres",
+        "30 mètres",
+        "640 mètres"
+      ],
+      "explanation": "La portée maximale efficace pour un tir mortel rapide sur un petit gibier est de 30 mètres, soit environ 100 pieds."
+    },
+    "en": {
+      "q": "What is the maximum effective range for a quick kill on small game with an air gun?",
+      "choices": [
+        "10 metres",
+        "100 metres",
+        "30 metres",
+        "640 metres"
+      ],
+      "explanation": "The maximum effective range for a quick kill on small game is 30 metres, about 100 feet."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.32",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l05-019-q1",
+    "scope": "QC",
+    "chapter": "l05",
+    "objectiveId": "hunter-common-l05-019",
+    "reviewYear": null,
+    "fr": {
+      "q": "Parmi les armes à chargement par la bouche à percussion alignée, quel modèle est le plus utilisé pour la chasse au Québec?",
+      "choices": [
+        "L'arme à charnière (bascule)",
+        "L'arme à verrou, comme une carabine",
+        "L'arme à culasse mobile coulissante",
+        "L'arme à platine à silex traditionnelle"
+      ],
+      "explanation": "Des trois modèles à percussion alignée (verrou, culasse mobile, charnière), l'arme à charnière est la plus utilisée au Québec."
+    },
+    "en": {
+      "q": "Among in-line muzzleloaders, which model is most used for hunting in Québec?",
+      "choices": [
+        "The hinged (break-action)",
+        "The bolt action, like a rifle",
+        "The sliding-breech action",
+        "The traditional flintlock"
+      ],
+      "explanation": "Of the three in-line models (bolt, sliding breech, hinged), the hinged break-action is most used in Québec."
+    },
+    "answerIndex": 0,
+    "sourceRef": "icaf_fr.pdf p.34",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l05-020-q1",
+    "scope": "QC",
+    "chapter": "l05",
+    "objectiveId": "hunter-common-l05-020",
+    "reviewYear": null,
+    "fr": {
+      "q": "Au Québec, combien de coups une arme à chargement par la bouche autorisée pour la chasse peut-elle tirer avant d'être rechargée?",
+      "choices": [
+        "Deux",
+        "Un seul",
+        "Trois",
+        "Autant que le chargeur en contient"
+      ],
+      "explanation": "Les armes autorisées ne peuvent tirer qu'un seul coup avant d'être rechargées par la bouche du canon."
+    },
+    "en": {
+      "q": "In Québec, how many shots can a muzzleloader allowed for hunting fire before it must be reloaded?",
+      "choices": [
+        "Two",
+        "Only one",
+        "Three",
+        "As many as the magazine holds"
+      ],
+      "explanation": "Allowed muzzleloaders can fire only one shot before being reloaded through the muzzle."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.34",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l07-012-q1",
+    "scope": "QC",
+    "chapter": "l07",
+    "objectiveId": "hunter-common-l07-012",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Pour lequel de ces gibiers la chasse avec chiens est-elle permise?",
+      "choices": [
+        "Le cerf de Virginie (chevreuil)",
+        "Les oiseaux migrateurs",
+        "L'orignal, adulte ou veau",
+        "L'ours noir au printemps"
+      ],
+      "explanation": "La chasse avec chiens est permise pour le petit gibier et les oiseaux migrateurs, mais interdite pour le cerf, l'orignal et l'ours."
+    },
+    "en": {
+      "q": "For which of these game animals is hunting with dogs allowed?",
+      "choices": [
+        "White-tailed deer (whitetail)",
+        "Migratory birds",
+        "Moose, adult or calf",
+        "Black bear in spring"
+      ],
+      "explanation": "Hunting with dogs is allowed for small game and migratory birds, but prohibited for deer, moose and bear."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.58",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive/regles-generales/chasse-aide-animaux",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l07-014-q1",
+    "scope": "QC",
+    "chapter": "l07",
+    "objectiveId": "hunter-common-l07-014",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Pour quelle espèce est-il interdit d'utiliser un appeau électronique?",
+      "choices": [
+        "Le coyote",
+        "La corneille",
+        "La bernache",
+        "Le renard roux"
+      ],
+      "explanation": "Il est interdit d'utiliser des appeaux électroniques pour chasser le canard, la bernache et la bécasse."
+    },
+    "en": {
+      "q": "For which species is the use of an electronic call prohibited?",
+      "choices": [
+        "Coyote",
+        "Crow",
+        "Goose",
+        "Red fox"
+      ],
+      "explanation": "Electronic calls are prohibited for hunting ducks, geese and woodcock."
+    },
+    "answerIndex": 2,
+    "sourceRef": "icaf_fr.pdf p.59",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive/armes-munitions-equipements",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l07-016-q1",
+    "scope": "QC",
+    "chapter": "l07",
+    "objectiveId": "hunter-common-l07-016",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Pourquoi est-il interdit d'utiliser des leurres olfactifs à base d'urine naturelle de cerf?",
+      "choices": [
+        "Parce qu'ils attirent les ours noirs près des postes d'affût",
+        "Parce qu'ils sont inefficaces pendant la période du rut des cervidés",
+        "Pour protéger les chiens de chasse qui pourraient s'en intoxiquer",
+        "Pour éviter la propagation de la maladie débilitante chronique"
+      ],
+      "explanation": "L'urine naturelle de cervidés (sauf celle d'orignal) et les autres leurres olfactifs naturels de cervidés, comme les glandes tarsiennes, sont interdits pour éviter la propagation de la maladie débilitante chronique."
+    },
+    "en": {
+      "q": "Why are scent lures made from natural deer urine prohibited?",
+      "choices": [
+        "Because they attract black bears to hunting stands",
+        "Because they do not work during the deer rutting period",
+        "To protect hunting dogs that could be poisoned by them",
+        "To prevent the spread of chronic wasting disease"
+      ],
+      "explanation": "Natural cervid urine (except moose urine) and other natural cervid scent lures, such as tarsal glands, are prohibited to prevent the spread of chronic wasting disease."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.59",
+    "sourceUrl": "https://www.quebec.ca/tourisme-loisirs-sport/activites-sportives-et-de-plein-air/chasse-sportive/armes-munitions-equipements",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l07-017-q1",
+    "scope": "QC",
+    "chapter": "l07",
+    "objectiveId": "hunter-common-l07-017",
+    "reviewYear": 2026,
+    "fr": {
+      "q": "Pour lequel de ces gibiers est-il interdit d'utiliser des appâts pendant toute la période de chasse?",
+      "choices": [
+        "L'ours noir",
+        "La corneille",
+        "Le cerf de Virginie",
+        "Le dindon sauvage"
+      ],
+      "explanation": "Il est interdit d'appâter la sauvagine et le dindon sauvage durant toute la période de chasse."
+    },
+    "en": {
+      "q": "For which of these game animals is baiting prohibited during the entire hunting period?",
+      "choices": [
+        "Black bear",
+        "Crow",
+        "White-tailed deer",
+        "Wild turkey"
+      ],
+      "explanation": "Baiting waterfowl and wild turkey is prohibited during the entire hunting period."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.60",
+    "sourceUrl": "https://cdn-contenu.quebec.ca/cdn-contenu/chasse/Documents/nouveautes-chasseurs-dindon-sauvage-2024.pdf",
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l07-018-q1",
+    "scope": "QC",
+    "chapter": "l07",
+    "objectiveId": "hunter-common-l07-018",
+    "reviewYear": null,
+    "fr": {
+      "q": "Quel est le seul indice certifiant qu'un orignal est un mâle adulte?",
+      "choices": [
+        "Une tache blanche sous la queue",
+        "Un museau protubérant et renflé",
+        "Une tête de forme triangulaire",
+        "Des bois de 10 centimètres et plus"
+      ],
+      "explanation": "Les bois de 10 cm et plus sont le seul indice qui certifie un mâle adulte; sans bois apparents, ce peut être un jeune mâle, une femelle ou un veau."
+    },
+    "en": {
+      "q": "What is the only sign that confirms a moose is an adult male?",
+      "choices": [
+        "A white patch under the tail",
+        "A protruding, swollen muzzle",
+        "A triangular head shape",
+        "Antlers 10 centimetres or longer"
+      ],
+      "explanation": "Antlers of 10 cm or more are the only sign confirming an adult male; without visible antlers it may be a young male, a female or a calf."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.60",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l10-013-q1",
+    "scope": "QC",
+    "chapter": "l10",
+    "objectiveId": "hunter-common-l10-013",
+    "reviewYear": null,
+    "fr": {
+      "q": "Un raton laveur vous mord à la main. Que devez-vous faire?",
+      "choices": [
+        "Simplement mettre un pansement propre et continuer votre journée de chasse",
+        "Laver immédiatement la plaie et téléphoner à Info-Santé 811",
+        "Attendre quelques jours pour voir si de la fièvre ou des symptômes apparaissent",
+        "Brûler la plaie avec une lame chauffée pour la désinfecter"
+      ],
+      "explanation": "Après une morsure, on lave immédiatement la plaie, on téléphone à Info-Santé 811 et on suit leurs directives, car l'animal pourrait porter la rage."
+    },
+    "en": {
+      "q": "A raccoon bites your hand. What should you do?",
+      "choices": [
+        "Just put on a clean bandage and carry on with your hunting day",
+        "Wash the wound right away and call Info-Santé 811",
+        "Wait a few days to see whether fever or symptoms appear",
+        "Burn the wound with a heated blade to disinfect it"
+      ],
+      "explanation": "After a bite, wash the wound right away, call Info-Santé 811 and follow their instructions, since the animal could carry rabies."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.72",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l12-001-q1",
+    "scope": "QC",
+    "chapter": "l12",
+    "objectiveId": "hunter-common-l12-001",
+    "reviewYear": null,
+    "fr": {
+      "q": "Selon le manuel, comment la faune est-elle considérée au Québec?",
+      "choices": [
+        "Comme la propriété des chasseurs qui la récoltent",
+        "Comme un bien collectif à gérer judicieusement",
+        "Comme la propriété des propriétaires fonciers",
+        "Comme une ressource illimitée"
+      ],
+      "explanation": "La faune est un bien collectif, et chaque génération doit gérer judicieusement cette richesse pour en assurer la pérennité ainsi que celle de la chasse."
+    },
+    "en": {
+      "q": "According to the manual, how is wildlife regarded in Québec?",
+      "choices": [
+        "As the property of the hunters who harvest it",
+        "As a collective good to be managed wisely",
+        "As the property of landowners",
+        "As an unlimited resource"
+      ],
+      "explanation": "Wildlife is a collective good, and each generation must manage it wisely to ensure its survival and that of hunting."
+    },
+    "answerIndex": 1,
+    "sourceRef": "icaf_fr.pdf p.75",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  },
+  {
+    "id": "hunter-common-l12-004-q1",
+    "scope": "QC",
+    "chapter": "l12",
+    "objectiveId": "hunter-common-l12-004",
+    "reviewYear": null,
+    "fr": {
+      "q": "Selon le manuel, quel avantage offre l'adhésion à la Fédération québécoise des chasseurs et pêcheurs?",
+      "choices": [
+        "Un permis de chasse gratuit",
+        "L'accès exclusif aux terres publiques",
+        "Une exemption des règlements de chasse",
+        "Une assurance en cas d'accidents"
+      ],
+      "explanation": "Les membres de la FédéCP profitent notamment d'une assurance en cas d'accidents et d'avantages exclusifs."
+    },
+    "en": {
+      "q": "According to the manual, what benefit does membership in the Fédération québécoise des chasseurs et pêcheurs offer?",
+      "choices": [
+        "A free hunting licence",
+        "Exclusive access to public land",
+        "An exemption from hunting regulations",
+        "Accident insurance"
+      ],
+      "explanation": "FédéCP members benefit from accident insurance among other exclusive advantages."
+    },
+    "answerIndex": 3,
+    "sourceRef": "icaf_fr.pdf p.76",
+    "sourceUrl": null,
+    "flags": [
+      "blind-ok"
+    ]
+  }
+]

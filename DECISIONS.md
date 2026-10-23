@@ -23,7 +23,9 @@ sharing with an instructor or group.
 
 **P4. Questions ship inside the app, and this repo owns them.** *Product.* The exam recipes, question banks and photos
 live in this repo (`core/data/src/main/assets/`) and are edited and reviewed here, by pull request; the app takes no
-content from another repo. *Replaced:* copying approved questions from the hunt repo with a sync script (removed).
+content from another repo. The tools behind them (question pipeline, review sheet, species cards and photos) are in
+`content-tools/` and write straight into the app's assets. *Replaced:* copying approved questions from the hunt repo
+(a proof of concept, retired) with a sync script.
 *Next step, not started:* a static API on the GoDaddy site (versioned content packs + manifest, synced and cached on
 the device), see FOLLOW-UP.md section 4. *Rejected for now:* a database and backend (GoDaddy PHP/MySQL or Firestore):
 only worth it for an admin page, accounts or server-side features.

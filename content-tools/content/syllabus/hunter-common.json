@@ -1,0 +1,746 @@
+[
+  {
+    "objectiveId": "hunter-common-l04-001",
+    "scope": "hunter-common",
+    "chapter": "l04",
+    "statement": "To identify people, animals or objects at a distance, a hunter must use binoculars, never a rifle scope.",
+    "sourceRef": "icaf_fr.pdf p.27",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l04-003",
+    "scope": "hunter-common",
+    "chapter": "l04",
+    "statement": "In Québec, a hunter must get the owner's permission before hunting on private land, even unfenced, and must ask again at each visit.",
+    "sourceRef": "icaf_fr.pdf p.28",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l04-006",
+    "scope": "hunter-common",
+    "chapter": "l04",
+    "statement": "If a hunting companion breaks the rules, insist politely but firmly that he comply; hunters must report any poaching.",
+    "sourceRef": "icaf_fr.pdf p.28",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-001",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Air guns propel a projectile by the decompression of a gas, while firearms use the combustion of an explosive charge such as powder.",
+    "sourceRef": "icaf_fr.pdf p.29",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-002",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "There are four groups of commercial air guns: refillable air reservoir, pump-lever, piston, and CO2.",
+    "sourceRef": "icaf_fr.pdf p.30",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-005",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Under the federal Firearms Act, air guns with a velocity of at least 152.4 m/s and muzzle energy of 5.7 joules are treated as firearms.",
+    "sourceRef": "icaf_fr.pdf p.30",
+    "volatile": true
+  },
+  {
+    "objectiveId": "hunter-common-l05-006",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "In a spring-piston air gun, compression is done by hand with a cocking lever, which in most cases is the barrel itself.",
+    "sourceRef": "icaf_fr.pdf p.30",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-007",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "To load a break-barrel spring air gun: point it safely, tap the barrel down, rest the butt on the hip and fold the barrel fully open, insert the pellet, close the barrel and engage the safety.",
+    "sourceRef": "icaf_fr.pdf p.31",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-008",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Never dry-fire a spring-piston air gun, and never keep the spring compressed more than 30 minutes, to avoid damaging the mechanism.",
+    "sourceRef": "icaf_fr.pdf p.33",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-009",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Because spring-piston guns recoil, rest the forend lightly on the supporting hand for accuracy; a fixed, rigid rest is strongly discouraged.",
+    "sourceRef": "icaf_fr.pdf p.31",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-010",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Air guns use skirted pellets (diabolo); when fired, the skirt expands into the rifling, sealing the bore and giving a spin that stabilizes the pellet.",
+    "sourceRef": "icaf_fr.pdf p.31",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-011",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Hollow-point pellets are designed to flatten on the target rather than pass through it.",
+    "sourceRef": "icaf_fr.pdf p.31",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-012",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Projectile mass is measured in grains; 15.43 grains equal one gram.",
+    "sourceRef": "icaf_fr.pdf p.32",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-015",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "The maximum effective range for a quick kill of small game with an air gun is 30 metres (about 100 feet), but its dangerous range is about 640 metres.",
+    "sourceRef": "icaf_fr.pdf p.32",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-016",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "A scope is strongly recommended on an air gun, but it must be built to withstand air-gun recoil; a reticle graduated for distance helps account for the trajectory.",
+    "sourceRef": "icaf_fr.pdf p.32",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-017",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Air guns must be lubricated with a non-detergent oil designed for them to avoid damaging the seals; do not oil the inside of the barrel except for storage of several months.",
+    "sourceRef": "icaf_fr.pdf p.33",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-018",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "With a break-barrel spring gun, always complete the cocking movement fully, because the barrel can snap back and injure your face or damage the gun.",
+    "sourceRef": "icaf_fr.pdf p.33",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-021",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "In an in-line muzzleloader, the primer sits in a cavity at the end of the breech plug; a small hole called the flash hole carries the primer's flame to the powder charge when the hammer strikes the firing pin.",
+    "sourceRef": "icaf_fr.pdf p.35",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-022",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Never use smokeless powder in a muzzleloader designed for black powder or its substitutes: the barrel could burst.",
+    "sourceRef": "icaf_fr.pdf p.35",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-023",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Black powder substitutes are less corrosive, more stable and produce less smoke than black powder; 30- and 50-grain powder pellets are popular because they are easy to use.",
+    "sourceRef": "icaf_fr.pdf p.35",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-024",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Basic muzzleloader accessories: a short starter eases inserting the bullet, a ramrod seats the charge, a bullet puller removes the projectile, and a breech-plug grease prevents the plug from seizing.",
+    "sourceRef": "icaf_fr.pdf p.35",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-025",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "To load or unload a muzzleloader, set the butt on the ground secured between your feet and keep your face and hands from ever being over the muzzle; never have a primer in the breech plug while doing so.",
+    "sourceRef": "icaf_fr.pdf p.36",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-026",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Mark the ramrod: a first mark at the muzzle with the barrel empty shows 'unloaded', a second mark with charge and bullet seated shows 'loaded'.",
+    "sourceRef": "icaf_fr.pdf p.37",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-027",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Install the primer only at the hunting site or when ready to fire at the range; without a safety, cock the hammer only at the last moment before firing.",
+    "sourceRef": "icaf_fr.pdf p.37",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-028",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "After a misfire or hangfire with a muzzleloader, keep it pointed in a safe direction and wait 60 seconds in case of a delayed discharge before taking any other step.",
+    "sourceRef": "icaf_fr.pdf p.37",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-029",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "A hangfire (raté d'allumage) is when the primer fires but the powder does not ignite; causes include a defective primer, damp powder or a blocked nipple.",
+    "sourceRef": "icaf_fr.pdf p.38",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-030",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "To unload a muzzleloader, first point it in a safe direction and remove the primer, then remove the powder charge and the projectile.",
+    "sourceRef": "icaf_fr.pdf p.37",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-031",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Muzzleloader safety: never load indoors, never smoke or allow smoking near black powder, never fire if you suspect a double charge, and always remove the ramrod before firing.",
+    "sourceRef": "icaf_fr.pdf p.38",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-032",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "After firing at game with a muzzleloader, wait at least 30 minutes, ideally one hour, before starting to search for it.",
+    "sourceRef": "icaf_fr.pdf p.38",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-033",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Black powder and substitutes leave corrosive residue: clean the bore with warm, slightly soapy water, then rinse with very hot water so it dries quickly, then wipe and lubricate.",
+    "sourceRef": "icaf_fr.pdf p.39",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l05-034",
+    "scope": "hunter-common",
+    "chapter": "l05",
+    "statement": "Store primers and powder separately, ideally locked, in containers used only for ammunition that are not airtight, away from flammable materials and ignition sources.",
+    "sourceRef": "icaf_fr.pdf p.39",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-001",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "Good hunting clothing is comfortable, suited to the weather, blends into the surroundings, is silent, does not interfere with shooting and is odourless.",
+    "sourceRef": "icaf_fr.pdf p.57",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-002",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "When carrying a backpack, always wear the blaze orange vest over the backpack.",
+    "sourceRef": "icaf_fr.pdf p.57",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-003",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "Avoid washing hunting clothes with popular scented detergents; special detergents remove odours and UV reflections, which some game such as white-tailed deer can detect.",
+    "sourceRef": "icaf_fr.pdf p.57",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-004",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "Signs of regular game passage include crushed vegetation beds, wallows, browsing (frayed twigs, stripped branches, torn bark), rubs on trees and droppings.",
+    "sourceRef": "icaf_fr.pdf p.57",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-005",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "Hunt facing into the wind so game cannot smell you; in Québec prevailing winds come mostly from the west.",
+    "sourceRef": "icaf_fr.pdf p.58",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-006",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "A new ground-blind tent should be set up and aired before placing it at the hunting site to remove synthetic odours.",
+    "sourceRef": "icaf_fr.pdf p.58",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-007",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "A ground blind is very effective for moose, white-tailed deer, waterfowl and wild turkey, but is not recommended for bear; the tree stand is recommended especially for black bear.",
+    "sourceRef": "icaf_fr.pdf p.58",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-008",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "A tree stand gives a better view and a safer shot directed toward the ground, but brings a risk of serious injury or death from a fall and exposes the hunter to weather.",
+    "sourceRef": "icaf_fr.pdf p.58",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-009",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "Still hunting means walking slowly and quietly through game habitat, ideally into the wind, with frequent pauses to listen and watch; it needs little equipment and is ideal for beginners.",
+    "sourceRef": "icaf_fr.pdf p.58",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-010",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "Still hunting needs little equipment and preparation, making it the ideal technique for beginners.",
+    "sourceRef": "icaf_fr.pdf p.58",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-011",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "For small game, still hunting in a group of two or three is most effective; for safety, walk side by side and never lose sight of your companions.",
+    "sourceRef": "icaf_fr.pdf p.58",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-013",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "Calling is effective for almost all game but is not used for small game, except the crow and predators such as coyote and red fox.",
+    "sourceRef": "icaf_fr.pdf p.59",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-015",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "Rattling consists of clashing cervid antlers to imitate a fight between rivals during the rut, in order to attract a dominant male.",
+    "sourceRef": "icaf_fr.pdf p.59",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-019",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "An adult female moose generally has a white, triangular vulvar patch from the base of the tail to the vulva, a long head and a protruding, swollen muzzle.",
+    "sourceRef": "icaf_fr.pdf p.60",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-020",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "Seen from the front, a moose calf's head is triangular with a fairly pointed muzzle, while the adult female's head is rather rectangular; the calf rarely travels alone, so beware of a double kill.",
+    "sourceRef": "icaf_fr.pdf p.61",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-021",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "For big game, aim at the centre of the heart-lung vital zone, just behind the front legs for cervids and slightly farther back for bear.",
+    "sourceRef": "icaf_fr.pdf p.61",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-022",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "Shoot only when the game is still and ideally broadside (perpendicular to the line of fire), with no obstacles in the way.",
+    "sourceRef": "icaf_fr.pdf p.62",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-023",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "A cervid hit in the heart or lungs usually jumps and runs off with its head down before collapsing a bit farther; one hit outside the vital zone may wait, stop to look and call out in distress.",
+    "sourceRef": "icaf_fr.pdf p.62",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-024",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "If an animal looks abnormal or behaves unusually it may be sick, and it is strongly advised not to harvest it.",
+    "sourceRef": "icaf_fr.pdf p.62",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l07-025",
+    "scope": "hunter-common",
+    "chapter": "l07",
+    "statement": "After the shot, stay calm, secure your firearm, note the time and your position, and tell your hunting partners to avoid a double kill and get help.",
+    "sourceRef": "icaf_fr.pdf p.62",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l08-001",
+    "scope": "hunter-common",
+    "chapter": "l08",
+    "statement": "After the shot and once the animal is out of sight, wait at least one hour before starting the search, even if you think you hit the heart or lungs.",
+    "sourceRef": "icaf_fr.pdf p.63",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l08-002",
+    "scope": "hunter-common",
+    "chapter": "l08",
+    "statement": "At the impact site, move in slowly and quietly without disturbing signs, mark the spot with biodegradable tape or toilet paper, and take a compass bearing of the animal's escape point.",
+    "sourceRef": "icaf_fr.pdf p.63",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l08-003",
+    "scope": "hunter-common",
+    "chapter": "l08",
+    "statement": "Deeper-than-usual tracks at the impact site generally indicate the animal was hit, as a hit cervid jumps and a hit bear digs its claws into the ground.",
+    "sourceRef": "icaf_fr.pdf p.63",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l08-004",
+    "scope": "hunter-common",
+    "chapter": "l08",
+    "statement": "Heart blood is bright red and may contain large air bubbles; lung blood is lighter, pinkish and frothy, possibly with bits of lung.",
+    "sourceRef": "icaf_fr.pdf p.64",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l08-005",
+    "scope": "hunter-common",
+    "chapter": "l08",
+    "statement": "Liver blood is brownish red, dense and forms granular spots; wait ideally four hours before searching.",
+    "sourceRef": "icaf_fr.pdf p.64",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l08-006",
+    "scope": "hunter-common",
+    "chapter": "l08",
+    "statement": "A hit in the stomach or intestines gives greenish blood in fine droplets, possibly mixed with stomach or fecal matter; bleeding is light, so wait at least four hours.",
+    "sourceRef": "icaf_fr.pdf p.64",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l08-007",
+    "scope": "hunter-common",
+    "chapter": "l08",
+    "statement": "When the vital zone is hit, there is usually little blood at the impact site but the amount tends to increase along the trail; outside the vital zone, there is more blood at first, then less and less.",
+    "sourceRef": "icaf_fr.pdf p.64",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l08-008",
+    "scope": "hunter-common",
+    "chapter": "l08",
+    "statement": "A spray of hydrogen peroxide helps spot blood on reddish autumn leaves because it reacts with blood and produces visible bubbles.",
+    "sourceRef": "icaf_fr.pdf p.64",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l08-009",
+    "scope": "hunter-common",
+    "chapter": "l08",
+    "statement": "When tracking, mark each sign with tape without ever losing sight of the previous ribbon; if the trail is lost, return to the last ribbon and widen the search radius.",
+    "sourceRef": "icaf_fr.pdf p.65",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l08-010",
+    "scope": "hunter-common",
+    "chapter": "l08",
+    "statement": "If the animal is not found within 200 m of the impact point and there is no more blood, wait at least four hours before resuming or call a blood-tracking dog handler.",
+    "sourceRef": "icaf_fr.pdf p.65",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l08-011",
+    "scope": "hunter-common",
+    "chapter": "l08",
+    "statement": "When you find a bed (couche) where a wounded animal lay down, place two ribbons and wait at least four hours; each time the animal flees again, wait another four hours.",
+    "sourceRef": "icaf_fr.pdf p.65",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l08-012",
+    "scope": "hunter-common",
+    "chapter": "l08",
+    "statement": "Never give up the search before exhausting every possibility; mortally wounding and losing an animal then harvesting another wastes the wildlife resource.",
+    "sourceRef": "icaf_fr.pdf p.65",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l09-001",
+    "scope": "hunter-common",
+    "chapter": "l09",
+    "statement": "Field dress game as soon as possible after the kill to cool the carcass and stop bacteria from multiplying and spoiling the meat.",
+    "sourceRef": "icaf_fr.pdf p.66",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l09-002",
+    "scope": "hunter-common",
+    "chapter": "l09",
+    "statement": "Wear nitrile gloves when field dressing to avoid diseases transmissible to humans; moisten the animal with water and wear a mask to avoid inhaling airborne hair.",
+    "sourceRef": "icaf_fr.pdf p.66",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l09-003",
+    "scope": "hunter-common",
+    "chapter": "l09",
+    "statement": "To cool small game and waterfowl faster, avoid piling the carcasses against one another.",
+    "sourceRef": "icaf_fr.pdf p.66",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l09-004",
+    "scope": "hunter-common",
+    "chapter": "l09",
+    "statement": "A hare acting unusually may have tularemia, shown by white spots on the internal organs; the disease can cause high fever in humans.",
+    "sourceRef": "icaf_fr.pdf p.67",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l09-005",
+    "scope": "hunter-common",
+    "chapter": "l09",
+    "statement": "A carcass with tularemia must be wrapped in a bag and put in household garbage, then all equipment and hands disinfected.",
+    "sourceRef": "icaf_fr.pdf p.67",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l09-006",
+    "scope": "hunter-common",
+    "chapter": "l09",
+    "statement": "For game birds, remove the skin, feathers and all internal organs, and do not forget to remove the tail gland (croupion); then keep the meat cool.",
+    "sourceRef": "icaf_fr.pdf p.67",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l09-007",
+    "scope": "hunter-common",
+    "chapter": "l09",
+    "statement": "To freeze game meat, wrap it in plastic film before putting it in a freezer bag and removing the air; freeze small game within 24 hours unless eaten soon.",
+    "sourceRef": "icaf_fr.pdf p.67",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-001",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "Before hunting, tell a trusted person your itinerary, where you plan to hunt, and the day and time you will return, so they can coordinate help if you do not come back.",
+    "sourceRef": "icaf_fr.pdf p.68",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-002",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "In remote areas cell coverage is limited and group radios may be out of range, so carry a satellite phone or a distress beacon to alert rescuers.",
+    "sourceRef": "icaf_fr.pdf p.69",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-003",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "Carry a map and compass even if you have a GPS, since its battery may die or it may fail; batteries lose much efficiency in great cold, so keep devices close to your body.",
+    "sourceRef": "icaf_fr.pdf p.69",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-004",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "When lost in the woods, the main challenges are cold and thirst; do not count on rescuers arriving quickly.",
+    "sourceRef": "icaf_fr.pdf p.69",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-005",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "Essential survival items include map and compass, first aid kit, water and purification tablets, high-protein food, two fire sources, multi-tool knife, flashlight, whistle, string, toilet paper, brass wire, and an orange plastic bag and reflective emergency blankets.",
+    "sourceRef": "icaf_fr.pdf p.69",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-006",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "If lost, stay calm; first decide whether to stay and wait for help or try to find your way. In daylight, take a bearing toward an identifiable point; if night is coming or you are injured, give first aid and prepare for the night.",
+    "sourceRef": "icaf_fr.pdf p.70",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-007",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "Build a shelter considering that prevailing winds come mostly from the west, ideally near water; purify or boil water; eating snow makes you lose much body heat.",
+    "sourceRef": "icaf_fr.pdf p.70",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-008",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "Stay dry: if you are soaked, you lose body heat five times faster; insulate yourself from the ground with conifer boughs.",
+    "sourceRef": "icaf_fr.pdf p.70",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-009",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "Signal regularly with a whistle, which can be heard more than two kilometres away, and feed the fire with conifer boughs and green leaves to make thick smoke visible for kilometres.",
+    "sourceRef": "icaf_fr.pdf p.70",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-010",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "Lyme disease is transmitted by the black-legged tick carrying Borrelia burgdorferi; wear long clothing and a DEET- or icaridin-based repellent, and check your whole body after outings.",
+    "sourceRef": "icaf_fr.pdf p.70",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-011",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "To remove a tick, do not crush it and never put oil or liquid soap on it; grasp it as close to the skin as possible with fine tweezers or a tick remover, pull gently, then disinfect.",
+    "sourceRef": "icaf_fr.pdf p.71",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-012",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "See a doctor quickly if a growing skin redness, muscle pain, headache or fever appears in the days after a tick bite.",
+    "sourceRef": "icaf_fr.pdf p.71",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-014",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "For bleeding, apply a dressing and light pressure and raise the limb; if the dressing soaks through, do not remove it but add another on top and keep pressing.",
+    "sourceRef": "icaf_fr.pdf p.72",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-015",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "For a dislocation, never try to put the bone back yourself; immobilize the limb with a splint without cutting off circulation, and leave the boot on if the injury is to the foot.",
+    "sourceRef": "icaf_fr.pdf p.72",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-016",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "For a burn, put the area in cold water for a few minutes, then clean it and apply a moist sterile compress; never pop blisters, as the burn could become infected.",
+    "sourceRef": "icaf_fr.pdf p.72",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l10-017",
+    "scope": "hunter-common",
+    "chapter": "l10",
+    "statement": "In case of internal bleeding, get the injured person to hospital as fast as possible, keep them conscious and give them nothing to eat or drink.",
+    "sourceRef": "icaf_fr.pdf p.72",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l11-001",
+    "scope": "hunter-common",
+    "chapter": "l11",
+    "statement": "To operate any motorized boat, regardless of length, motor type or power, you must take a boating safety course leading to a competency card (Pleasure Craft Operator Card).",
+    "sourceRef": "icaf_fr.pdf p.73",
+    "volatile": true
+  },
+  {
+    "objectiveId": "hunter-common-l11-002",
+    "scope": "hunter-common",
+    "chapter": "l11",
+    "statement": "Required on board: oars or paddles, anchor, bailer, sound-signalling device, waterproof flashlight and a buoyant heaving line to rescue someone in the water.",
+    "sourceRef": "icaf_fr.pdf p.74",
+    "volatile": true
+  },
+  {
+    "objectiveId": "hunter-common-l11-003",
+    "scope": "hunter-common",
+    "chapter": "l11",
+    "statement": "In a boat, never carry your firearm slung over your shoulder, since it could pull you to the bottom if you fall in; tie your gear to the boat to make recovery easier if you capsize.",
+    "sourceRef": "icaf_fr.pdf p.74",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l11-004",
+    "scope": "hunter-common",
+    "chapter": "l11",
+    "statement": "When wearing chest waders, tighten the belt so water cannot get in if you fall; if they fill, raise your legs quickly so trapped air in the boot feet helps you float.",
+    "sourceRef": "icaf_fr.pdf p.74",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l11-005",
+    "scope": "hunter-common",
+    "chapter": "l11",
+    "statement": "In a boat, never overload it, never shoot standing up, and always wear a life jacket or PFD that fits your size.",
+    "sourceRef": "icaf_fr.pdf p.74",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l12-002",
+    "scope": "hunter-common",
+    "chapter": "l12",
+    "statement": "Before each hunting season, consult the regulations to know the rules for the type of hunting you practise.",
+    "sourceRef": "icaf_fr.pdf p.75",
+    "volatile": false
+  },
+  {
+    "objectiveId": "hunter-common-l12-003",
+    "scope": "hunter-common",
+    "chapter": "l12",
+    "statement": "New hunters are advised to hunt with experienced hunters to improve their techniques, and all hunters should practise regularly to improve shooting accuracy.",
+    "sourceRef": "icaf_fr.pdf p.75",
+    "volatile": false
+  }
+]
