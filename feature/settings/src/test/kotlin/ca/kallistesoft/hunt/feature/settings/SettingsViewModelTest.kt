@@ -99,6 +99,35 @@ class SettingsViewModelTest {
     }
 
     @Test
+    fun `reminders show off while notifications are turned off in system settings`() = runTest {
+        val hunter = FakeUserDataRepository(
+            UserProgress().withProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC).withSeasonStart(TEST_DAY + 30),
+        )
+        hunter.setDailyReminders(true)
+        val vm = SettingsViewModel(hunter, Today { TEST_DAY })
+        collecting(vm.uiState)
+        assertTrue(vm.uiState.value.dailyReminders)
+        assertFalse(vm.uiState.value.notificationsBlocked)
+
+        vm.setNotificationsAllowed(false)
+        assertFalse(vm.uiState.value.dailyReminders)
+        assertTrue(vm.uiState.value.notificationsBlocked)
+        // The choice is kept: turning notifications back on brings the reminder back.
+        assertTrue(hunter.progress.value.dailyReminders)
+        vm.setNotificationsAllowed(true)
+        assertTrue(vm.uiState.value.dailyReminders)
+        assertFalse(vm.uiState.value.notificationsBlocked)
+    }
+
+    @Test
+    fun `notifications off with no reminder on isn't shown as blocked`() = runTest {
+        val vm = SettingsViewModel(userData, Today { TEST_DAY })
+        collecting(vm.uiState)
+        vm.setNotificationsAllowed(false)
+        assertFalse(vm.uiState.value.notificationsBlocked)
+    }
+
+    @Test
     fun `saving a season date asks for season reminders`() = runTest {
         val vm = SeasonDateViewModel(userData, Today { TEST_DAY })
         collecting(vm.uiState)
