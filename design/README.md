@@ -19,8 +19,8 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | Onboarding: what do you hunt with? (firearm, bow, crossbow) | `HuntWith.dc.html` | `HuntWithLight.dc.html` | not built |
 | Onboarding: where do you hunt? (Québec, Alberta, elsewhere in Canada) | `HuntWhere.dc.html` | `HuntWhereLight.dc.html` | not built (replaces the first-run exam picker) |
 | Home | `Main.dc.html` | `MainLight.dc.html` | built; the gear (Settings) is new |
-| Settings: hunter type, hunting with, where you hunt, my quizzes, language, daily goal; About inside | `Settings.dc.html` | `SettingsLight.dc.html` | not built |
-| My quizzes: quizzes by province, with switches (add other provinces, turn some off) | `QuizSettings.dc.html` | `QuizSettingsLight.dc.html` | not built (replaces "Change exams") |
+| Settings: hunter type, hunting with, where you hunt, my provinces, language, daily goal; About inside | `Settings.dc.html` | `SettingsLight.dc.html` | not built |
+| My provinces: one switch per province (Québec; Alberta; elsewhere in Canada, the PAL) adds or hides its quizzes | `Provinces.dc.html` | `ProvincesLight.dc.html` | not built (replaces "Change exams") |
 | About | `About.dc.html` | `AboutLight.dc.html` | built, restyle |
 | Exam training | `ExamTraining.dc.html` | `ExamTrainingLight.dc.html` | built, restyle |
 | Practice: question answered (text question, wrong answer) | `PracticeQuestion.dc.html` | `PracticeQuestionLight.dc.html` | built |
@@ -45,7 +45,7 @@ The canvas has one **page per flow** (dark row on top, light row below, screens 
 |---|---|
 | 1 · Working on it: exam prep (opens first) | 1 Splash → 2 What kind of hunter? → 3 What do you hunt with? → 4 Where do you hunt? → 5 Home → 6 Exam training → 7 Practice question → 8 Practice results (8b nothing to review) → 9 Mock exam question (9b quit) → 10 Mock exam results → 11 I passed the real exam → 12 Home, new hunter |
 | 2 · What is it? | 1 Recognition hub → 2 Photo question → 3 Photo full screen → 4 Answer |
-| 3 · Settings & About | 1 Settings → 2 My quizzes → 3 About |
+| 3 · Settings & About | 1 Settings → 2 My provinces → 3 About |
 | 4 · System | 1 Update required |
 | 5 · Logo | Logo concepts, buck variants |
 
@@ -57,7 +57,7 @@ logo boards). Edit the generator, regenerate, then publish the changed files to 
 New hunter, Experienced hunter), "What do you hunt with?" (firearm, bow, crossbow; pick all that apply) and "Where do
 you hunt?" (Québec, Alberta, elsewhere in Canada), saved on the device. The province sets the quizzes of a "Working on
 it" user: Québec, the Québec hunter course (ICAF; ICAA for bow and crossbow once it has questions); Alberta, the Alberta
-course and the PAL; elsewhere, the PAL. Settings → My quizzes adds other provinces' quizzes or turns some off. There is
+course and the PAL; elsewhere, the PAL. Settings → My provinces switches other provinces on (adding their quizzes) or off. There is
 no exam list in onboarding.
 
 **Passed the real exam (not built yet).** On an exam card in Exam training, "I passed the real exam" opens a

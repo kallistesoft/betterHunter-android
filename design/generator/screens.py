@@ -204,7 +204,7 @@ def settings(t):
   {card(t, row(t, tile(t, "user"), "Hunter type", "Working on it", target=href(t, "HunterProfile"), divider=False)
         + row(t, tile(t, "target"), "Hunting with", "Firearm", target=href(t, "HuntWith"))
         + row(t, tile(t, "pin"), "Where you hunt", "Québec", target=href(t, "HuntWhere"))
-        + row(t, tile(t, "school", "orange"), "My quizzes", "Québec hunter course (ICAF) · add other provinces", target=href(t, "QuizSettings")), pad="2px 16px", gap=0)}
+        + row(t, tile(t, "maple", "orange"), "My provinces", "Québec · add other provinces\' quizzes", target=href(t, "Provinces")), pad="2px 16px", gap=0)}
   {label(t, "App", t["muted"])}
   {card(t, row(t, tile(t, "globe"), "Language", None, trail=pill, divider=False)
         + row(t, tile(t, "goal"), "Daily goal", "Questions a day", trail=goal), pad="2px 16px", gap=0)}
@@ -222,25 +222,22 @@ def switch(t, on):
             f'<span style="position: absolute; top: 3px; {pos}; width: 22px; height: 22px; border-radius: 999px; background: {knob}"></span></span>')
 
 
-def quiz_settings(t):
-    soon = f'<span style="font-size: 12px; font-weight: 600; color: {t["muted"]}">Coming soon</span>'
+def provinces(t):
+    badge = (f'<span style="font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; background: {t["green_tint"]}; '
+             f'color: {t["green"]}; align-self: flex-start">Where you hunt</span>')
 
-    def province(name, badge, rows):
-        tag = (f'<span style="font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; background: {t["green_tint"]}; color: {t["green"]}">{badge}</span>'
-               if badge else "")
-        return (f'<div style="display: flex; align-items: center; gap: 8px; margin-top: 4px">{label(t, name, t["muted"])}{tag}</div>'
-                + card(t, rows, pad="2px 16px", gap=0, radius=18))
-    body = f'''{header(t, "My quizzes", back=href(t, "Settings"))}
-  <p style="margin: 0; font-size: 14px; line-height: 1.45; color: {t["muted"]}">Your quizzes follow where you hunt. Add another province's, or turn some off.</p>
-  {province("Québec", "Where you hunt",
-            row(t, tile(t, "tree"), "Hunter education with firearms (ICAF)", "228 questions", trail=switch(t, True), divider=False)
-            + row(t, tile(t, "bow"), "Bow and crossbow (ICAA)", None, trail=soon))}
-  {province("Alberta", None,
-            row(t, tile(t, "mountain"), "Conservation and Hunter Education", "285 questions", trail=switch(t, False), divider=False))}
-  {province("Canada (federal)", None,
-            row(t, tile(t, "shield"), "PAL exam (CFSC)", "Firearms licence · 303 questions", trail=switch(t, False), divider=False))}
+    def province(name, title, quizzes, on, where=False):
+        return (f'<div style="display: flex; align-items: center; gap: 12px; padding: 14px 0; {"" if where else "border-top: 1px solid " + t["border"] + ";"}">'
+                f'{tile(t, name)}<span style="display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0">'
+                f'<span style="font-family: \'Barlow Condensed\', sans-serif; font-weight: 600; font-size: 20px; line-height: 1.1">{title}</span>'
+                f'<span style="font-size: 13px; line-height: 1.35; color: {t["muted"]}">{quizzes}</span>{badge if where else ""}</span>{switch(t, on)}</div>')
+    body = f'''{header(t, "My provinces", back=href(t, "Settings"))}
+  <p style="margin: 0; font-size: 14px; line-height: 1.45; color: {t["muted"]}">Your quizzes follow your provinces. Add a province to practise its hunter course, or remove one to hide its quizzes.</p>
+  {card(t, province("tree", "Québec", "Hunter course with firearms (ICAF) · bow and crossbow coming soon", True, where=True)
+        + province("mountain", "Alberta", "Conservation and Hunter Education · PAL (firearms licence)", False)
+        + province("maple", "Elsewhere in Canada", "PAL (firearms licence)", False), pad="0 16px", gap=0)}
   <p style="margin: 0; font-size: 13px; color: {t["muted"]}; display: flex; align-items: center; gap: 8px">{icon("goal", 16)} More provinces coming.</p>'''
-    return page(t, "BetterHunter my quizzes", body, gap=10)
+    return page(t, "BetterHunter my provinces", body, gap=12)
 
 
 def hunt_where(t):
@@ -307,9 +304,9 @@ def exam_training(t):
     </div>
     <a href="{href(t, "PracticeQuestion")}" style="display: flex; align-items: center; gap: 8px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px">{icon("replay", 16)} Review my mistakes (5)</a>
     <a href="{href(t, "PassedExam")}" style="display: flex; align-items: center; gap: 8px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px; border-top: 1px solid {t["border"]}; padding-top: 10px">{icon("trophy", 16)} I passed the real exam</a>'''
-    add = row(t, tile(t, "pin"), "Quizzes from other provinces", "Alberta, PAL (firearms licence)…", target=href(t, "QuizSettings"), divider=False)
+    add = row(t, tile(t, "pin"), "Other provinces", "Alberta, elsewhere in Canada (PAL)", target=href(t, "Provinces"), divider=False)
     body = f'''{header(t, "Exam training", back=href(t, "Main"))}
-  <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px">{label(t, "My exams", t["muted"])}<a href="{href(t, "QuizSettings")}" style="color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px; display: flex; align-items: center">Change</a></div>
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px">{label(t, "My exams", t["muted"])}<a href="{href(t, "Provinces")}" style="color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px; display: flex; align-items: center">Change</a></div>
   {card(t, icaf, pad="18px", gap=14)}
   {label(t, "Add more", t["muted"], "; margin-top: 6px")}
   {card(t, add, pad="4px 16px", gap=0)}'''
@@ -582,7 +579,7 @@ SCREENS = {
     "PracticeResults": lambda t: results(t, exam=False), "ExamResults": lambda t: results(t, exam=True),
     "QuitDialog": quit_dialog, "PhotoZoom": photo_zoom, "NothingToReview": nothing_to_review,
     "Recognition": recognition, "UpdateRequired": update_required, "PassedExam": passed_exam,
-    "MainNewHunter": main_new_hunter, "HuntWith": hunt_with, "HuntWhere": hunt_where, "QuizSettings": quiz_settings,
+    "MainNewHunter": main_new_hunter, "HuntWith": hunt_with, "HuntWhere": hunt_where, "Provinces": provinces,
 }
 
 if __name__ == "__main__":
