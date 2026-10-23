@@ -32,7 +32,8 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | I passed the real exam: confirm (from Exam training) | `PassedExam.dc.html` | `PassedExamLight.dc.html` | built |
 | Home, new hunter (after passing the real exam) | `MainNewHunter.dc.html` | `MainNewHunterLight.dc.html` | built |
 | Onboarding as a new hunter: what kind of hunter? → New hunter, then the same two questions | `HunterProfileNewHunter.dc.html`, `HuntWithNewHunter.dc.html`, `HuntWhereNewHunter.dc.html` | `…Light.dc.html` | built, except the new-hunter wording of "Where do you hunt?" |
-| Home, new hunter (from onboarding: no congratulations banner, Field skills instead of Exam training) | `HomeNewHunter.dc.html` | `HomeNewHunterLight.dc.html` | no |
+| Home, new hunter (from onboarding): today's 5 species + 5 general questions, Field skills instead of Exam training | `HomeNewHunter.dc.html` | `HomeNewHunterLight.dc.html` | no |
+| Today: a general question (5 a day) | `DailyQuestion.dc.html` | `DailyQuestionLight.dc.html` | no |
 | Field skills: today's mix, readiness per skill | `FieldSkills.dc.html` | `FieldSkillsLight.dc.html` | no |
 | Field skills: question (one skill, 10 questions) | `SkillQuestion.dc.html` | `SkillQuestionLight.dc.html` | no |
 | Field skills: results (the skill's progress) | `SkillResults.dc.html` | `SkillResultsLight.dc.html` | no |
@@ -54,7 +55,7 @@ The canvas has one **page per flow** (dark row on top, light row below, screens 
 | Page | Screens |
 |---|---|
 | 1 · Working on it: exam prep (opens first) | 1 Splash → 2 What kind of hunter? → 3 What do you hunt with? → 4 Where do you hunt? → 5 Home → 6 Exam training → 7 Practice question → 8 Practice results (8b nothing to review) → 9 Mock exam question (9b quit) → 10 Mock exam results → 11 I passed the real exam → 12 Home, new hunter |
-| 2 · New hunter: first seasons | 1 What kind of hunter? → New hunter → 2 What do you hunt with? → 3 Where do you hunt? → 4 Home, new hunter → 5 Field skills → 6 Skill question → 7 Skill results → 8 Skill mastered → 9 Mastered and faded skills → 10 All mastered → 11 Home before the season → 12 Season check question |
+| 2 · New hunter: first seasons | 1 What kind of hunter? → New hunter → 2 What do you hunt with? → 3 Where do you hunt? → 4 Home, new hunter (4b today's general question) → 5 Field skills → 6 Skill question → 7 Skill results → 8 Skill mastered → 9 Mastered and faded skills → 10 All mastered → 11 Home before the season → 12 Season check question |
 | 3 · What is it? | 1 Recognition hub → 2 Photo question → 3 Photo full screen → 4 Answer |
 | 4 · Settings & About | 1 Settings → 2 My provinces → 3 About |
 | 5 · System | 1 Update required |
@@ -79,8 +80,10 @@ goal played on "What is it?", and Exam training kept as a tile ("ICAF passed") f
 word; nothing is verified.
 
 **New hunter: first seasons (mockup, not built).** A user who picks "New hunter" at onboarding is done with exams:
-nothing in the flow mentions a course, a pass mark or a mock exam. Home (daily goal on "What is it?") swaps the Exam
-training tile for **Field skills**, which practises hunting know-how one skill at a time: shot placement, after the
+nothing in the flow mentions a course, a pass mark or a mock exam. The goal is to keep them up to date, so Home leads
+with **today's 10 questions**: 5 random species questions (a photo to name, as in "What is it?") and 5 random general
+questions (rules, safety, shot placement, tracking), each with its own progress and one "Continue" button; new
+questions every day, and they keep the streak. Below them, Home swaps the Exam training tile for **Field skills**, which practises hunting know-how one skill at a time: shot placement, after the
 shot (tracking, recovery, tagging), safe firearm handling, rules in the field (hours, tags, transport), survival and
 first aid. "Today's mix" draws 10 questions from the weakest skills; a skill's results show its readiness before and
 after. The questions can come from the hunter-course banks (grouped by chapter), still citing their source. The skill

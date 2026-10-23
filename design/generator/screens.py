@@ -528,19 +528,39 @@ def main_new_hunter(t, passed=True, season=False):
       <span style="font-size: 13px; color: {t["muted"]}; line-height: 1.35">Shot placement, tracking, safety</span>
       {meter(t, "Readiness", "88%" if season else "64%", 88 if season else 64)}
     </a>'''
+    def daily_row(target, ic, tone, title, sub, done, divider):
+        dots = "".join(f'<span style="width: 8px; height: 8px; border-radius: 999px; background: {t["bar"] if n < done else t["track"]}"></span>' for n in range(5))
+        return (f'<a href="{href(t, target)}" style="display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 6px 0; '
+                f'{"border-top: 1px solid " + t["border"] + ";" if divider else ""} color: {t["text"]}; text-decoration: none">{tile(t, ic, tone, 40, 11)}'
+                f'<span style="display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0"><span style="font-weight: 600; font-size: 15px">{title}</span>'
+                f'<span style="font-size: 12px; color: {t["muted"]}">{sub}</span></span>'
+                f'<span style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px"><span style="display: flex; gap: 4px">{dots}</span>'
+                f'<span style="font-size: 12px; font-weight: 600; color: {t["green"] if done else t["muted"]}">{done} / 5</span></span></a>')
+    daily_card = card(t, f'''<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+      <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+        {label(t, "Today")}
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 22px; line-height: 1.15">Stay up to date: 10 questions</span>
+        <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: {t["muted"]}">{icon("flame", 14, t["orange"], 2.2)} 6-day streak · new questions every day</span>
+      </div></div>
+    <div style="display: flex; flex-direction: column">
+      {daily_row("PhotoQuiz", "eye", "orange", "5 species", "Name the animal from its photo", 2, False)}
+      {daily_row("DailyQuestion", "book", "green", "5 general", "Rules, safety, shot placement", 0, True)}
+    </div>
+    {primary(t, "Continue: 3 species left", href(t, "PhotoQuiz"), "; height: 52px", "play")}''', pad="16px 18px 18px", gap=10)
     ring_html = ring(t, 25, 84, 8, t["orange"], f'<span style="font-family: \'Barlow Condensed\', sans-serif; font-weight: 700; font-size: 28px; line-height: 1">5</span><span style="font-size: 11px; color: {t["muted"]}">of 20</span>')
-    body = f'''<header style="display: flex; align-items: center; justify-content: space-between; height: 48px; flex-shrink: 0">
-    <div style="display: flex; align-items: center; gap: 10px">{buck(34, t["text"], t["orange"])}<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.2px">BetterHunter</span></div>
-    <div style="display: flex; align-items: center; gap: 8px">{pill}{round_link(t, href(t, "Settings"), "Settings", "gear", t["muted"])}</div>
-  </header>
-  {banner if passed else season_card if season else ""}
-  {card(t, f'''<div style="display: flex; align-items: center; gap: 16px">{ring_html}
+    goal_card = card(t, f'''<div style="display: flex; align-items: center; gap: 16px">{ring_html}
       <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
         {label(t, "Today")}
         <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 22px; line-height: 1.15">15 animals to your daily goal</span>
         <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: {t["muted"]}">{icon("flame", 14, t["orange"], 2.2)} 6-day streak</span>
       </div></div>
-    {primary(t, "Play What is it?", href(t, "PhotoQuiz"), "; height: 52px", "play")}''', pad="18px", gap=16)}
+    {primary(t, "Play What is it?", href(t, "PhotoQuiz"), "; height: 52px", "play")}''', pad="18px", gap=16)
+    body = f'''<header style="display: flex; align-items: center; justify-content: space-between; height: 48px; flex-shrink: 0">
+    <div style="display: flex; align-items: center; gap: 10px">{buck(34, t["text"], t["orange"])}<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.2px">BetterHunter</span></div>
+    <div style="display: flex; align-items: center; gap: 8px">{pill}{round_link(t, href(t, "Settings"), "Settings", "gear", t["muted"])}</div>
+  </header>
+  {banner if passed else season_card if season else ""}
+  {goal_card if passed else daily_card}
   <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
     <a href="{href(t, "Recognition")}" style="background: {t["card"]}; border: 1px solid {t["border"]}; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">
       {tile(t, "eye", "orange")}
@@ -706,12 +726,17 @@ def field_skills(t, state="start"):
     return page(t, "BetterHunter field skills" + {"start": "", "upkeep": ", skills mastered", "all": ", all mastered"}[state], body, gap=12)
 
 
-def skill_question(t, season=False):
+def skill_question(t, season=False, daily=False):
+    if daily:
+        title, back, over, states, nxt = "Question 2 / 5", "HomeNewHunter", "Today · 5 general", "r" + "u" * 4, "HomeNewHunter"
+    elif season:
+        title, back, over, states, nxt = "Question 4 / 15", "HomeSeasonCheck", "Season check · all skills", "rrwr" + "u" * 11, "FieldSkillsAllMastered"
+    else:
+        title, back, over, states, nxt = "Question 4 / 10", "FieldSkills", "Field skills · Shot placement", "rrwr" + "u" * 6, "SkillResults"
     right = round_link(t, "#", "Report a problem", "flag", t["muted"])
     body = f'''<div style="display: flex; flex-direction: column; gap: 10px">
-{header(t, "Question 4 / 15" if season else "Question 4 / 10", back=href(t, "HomeSeasonCheck" if season else "FieldSkills"), right=right,
-         overline="Season check · all skills" if season else "Field skills · Shot placement", close=True)}
-  {segments(t, "rrwr" + "u" * (11 if season else 6))}
+{header(t, title, back=href(t, back), right=right, overline=over, close=True)}
+  {segments(t, states)}
   </div>
   <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 26px; line-height: 1.15">{Q}</h1>
   <div style="display: flex; flex-direction: column; gap: 8px">
@@ -723,8 +748,8 @@ def skill_question(t, season=False):
   {card(t, f"""<span style="display: flex; align-items: center; gap: 8px; color: {t["green"]}; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px">{icon("check", 20, t["green"], 2.6)} Correct</span>
     <span style="display: flex; flex-direction: column; gap: 4px">{label(t, "In the field", t["green"])}<span style="font-size: 14px; line-height: 1.4">Wait for a broadside bear to step its near front leg forward, then aim slightly behind the shoulder.</span></span>
     <span style="font-size: 13px; color: {t["muted"]}">Source: <a href="#" style="font-weight: 600; text-decoration: none">ICAF manual (FédéCP, 2020), p. 61 ↗</a></span>""", pad="14px 16px", gap=10, radius=16)}
-  <div style="margin-top: auto">{primary(t, "Next", href(t, "FieldSkillsAllMastered" if season else "SkillResults"))}</div>'''
-    return page(t, "BetterHunter " + ("season check" if season else "field skills") + " question, answered", body, gap=14)
+  <div style="margin-top: auto">{primary(t, "Next", href(t, nxt))}</div>'''
+    return page(t, "BetterHunter " + ("daily general" if daily else "season check" if season else "field skills") + " question, answered", body, gap=14)
 
 
 def skill_results(t):
@@ -782,7 +807,7 @@ SCREENS = {
     "FieldSkills": field_skills, "SkillQuestion": skill_question, "SkillResults": skill_results,
     "SkillMastered": skill_mastered, "FieldSkillsMastered": lambda t: field_skills(t, "upkeep"),
     "FieldSkillsAllMastered": lambda t: field_skills(t, "all"), "HomeSeasonCheck": lambda t: main_new_hunter(t, passed=False, season=True),
-    "SeasonCheckQuestion": lambda t: skill_question(t, season=True),
+    "SeasonCheckQuestion": lambda t: skill_question(t, season=True), "DailyQuestion": lambda t: skill_question(t, daily=True),
 }
 
 if __name__ == "__main__":
