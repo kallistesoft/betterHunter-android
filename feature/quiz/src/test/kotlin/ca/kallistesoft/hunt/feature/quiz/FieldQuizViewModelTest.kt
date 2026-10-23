@@ -114,7 +114,24 @@ class FieldQuizViewModelTest {
     }
 
     @Test
-    fun `no mistakes, nothing to review`() = runTest(mainDispatcherRule.testDispatcher) {
+    fun `a run survives process death, answers included`() = runTest(mainDispatcherRule.testDispatcher) {
+        val saved = SavedStateHandle()
+        fun vm() = FieldQuizViewModel(
+            FieldRun.SKILL, FieldSkill.SHOT_PLACEMENT, FakeContentRepository(), userData, saved, Today { TEST_DAY }, FakeFeatureFlags(),
+        ).also { collecting(it.uiState) }
+        val first = vm()
+        runCurrent()
+        first.choose(0)
+        runCurrent()
+        val session = (first.uiState.value as FieldQuizUiState.Running).session
+
+        val restored = (vm().also { runCurrent() }.uiState.value as FieldQuizUiState.Running).session
+        assertEquals(session.questions, restored.questions)
+        assertEquals(0, restored.currentAnswer)
+    }
+
+    @Test
+    fun `no mistakes, nothing to review`()= runTest(mainDispatcherRule.testDispatcher) {
         val vm = viewModel(FieldRun.MISTAKES)
         runCurrent()
         assertEquals(FieldQuizUiState.Empty(FieldRun.MISTAKES), vm.uiState.value)
