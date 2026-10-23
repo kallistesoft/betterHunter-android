@@ -173,6 +173,9 @@
     <string name="report_subject">Erreur dans une question %1$s</string>
     <string name="report_body">Décrivez le problème (erreur, règle changée, traduction…) :\n\n\n</string>
     <string name="report_fallback">Écrivez-nous à %1$s (question %2$s)</string>
+    <string name="shortcuts_quiz">Pendant une question</string>
+    <string name="shortcut_answer">Choisir la réponse %1$s</string>
+    <string name="shortcut_next">Question suivante</string>
     <string name="quit_title">Quitter le test?</string>
     <string name="quit_body">Votre progression dans ce test sera perdue.</string>
     <string name="quit">Quitter</string>
@@ -314,6 +317,8 @@
     <string name="reminders_season_sub">3 semaines et 1 jour avant le %1$s</string>
     <string name="reminders_season_no_date">Indiquez d\'abord le début de votre saison</string>
     <string name="quiet_hours">Jamais entre 21 h et 8 h.</string>
+    <string name="notifications_blocked">Notifications désactivées</string>
+    <string name="notifications_blocked_sub">Les rappels ne peuvent pas vous joindre. Activez les notifications dans les paramètres.</string>
 
     <string name="notif_channel_daily">Questions du jour</string>
     <string name="notif_channel_season">Rappels de saison</string>

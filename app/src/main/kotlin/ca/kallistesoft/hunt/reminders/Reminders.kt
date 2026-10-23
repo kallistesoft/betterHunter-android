@@ -5,7 +5,6 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
@@ -16,12 +15,12 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
-import ca.kallistesoft.hunt.MainActivity
 import ca.kallistesoft.hunt.R
 import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.data.UserDataRepository
 import ca.kallistesoft.hunt.core.model.Reminder
 import ca.kallistesoft.hunt.core.model.UserProgress
+import ca.kallistesoft.hunt.navigation.ReminderLink
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
@@ -89,10 +88,11 @@ object Reminders {
                 Triple(CHANNEL_SEASON, title, res.getString(UiR.string.notif_season_text, date))
             }
         }
+        // One requestCode per kind: each notification keeps its own intent (and its own screen, ReminderLink).
         val open = PendingIntent.getActivity(
             context,
-            0,
-            Intent(context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP),
+            reminder.kind.ordinal,
+            ReminderLink.intent(context, reminder.kind),
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
         )
         val notification = NotificationCompat.Builder(context, channel)

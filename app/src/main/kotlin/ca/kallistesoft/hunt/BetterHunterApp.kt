@@ -3,8 +3,11 @@ package ca.kallistesoft.hunt
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
+import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
@@ -40,10 +43,28 @@ import ca.kallistesoft.hunt.navigation.SeasonDate
 import ca.kallistesoft.hunt.navigation.Settings
 import ca.kallistesoft.hunt.navigation.push
 
-/** App navigation (Navigation 3). Each entry gets its own saved state and ViewModels. */
+/**
+ * App navigation (Navigation 3). Each entry gets its own saved state and ViewModels. [deepLink] (a reminder's
+ * notification) replaces the back stack, then [onDeepLinkOpened] clears it.
+ */
 @Composable
-fun BetterHunterApp(firstRun: Boolean, versionName: String) {
+fun BetterHunterApp(
+    firstRun: Boolean,
+    versionName: String,
+    deepLink: List<NavKey>? = null,
+    onDeepLinkOpened: () -> Unit = {},
+) {
     val backStack = rememberNavBackStack(if (firstRun) Onboarding else Home)
+    val currentFirstRun by rememberUpdatedState(firstRun)
+    LaunchedEffect(deepLink) {
+        val keys = deepLink ?: return@LaunchedEffect
+        // Reminders are for new hunters past onboarding; while onboarding shows, the link is dropped.
+        if (!currentFirstRun) {
+            backStack.clear()
+            backStack.addAll(keys)
+        }
+        onDeepLinkOpened()
+    }
     val back: () -> Unit = { backStack.removeLastOrNull() }
     val startQuiz: (String, QuizMode) -> Unit = { examId, mode -> backStack.push(Quiz(examId, mode)) }
 

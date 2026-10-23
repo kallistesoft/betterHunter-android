@@ -3,12 +3,17 @@ package ca.kallistesoft.hunt.core.ui
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +28,25 @@ import ca.kallistesoft.hunt.core.model.Lang
 /** Top bar of the top-level screens (Home, onboarding): the logo and name, the FR/EN toggle, then [actions]. */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BrandTopAppBar(onSetLanguage: (Lang) -> Unit, actions: @Composable RowScope.() -> Unit = {}) {
+fun BrandTopAppBar(onSetLanguage: (Lang) -> Unit, actions: @Composable RowScope.() -> Unit = {}) =
+    BrandTopAppBarImpl(onSetLanguage, scrollBehavior = null, actions)
+
+/** [BrandTopAppBar] that hides as the list scrolls (see the scrolling [BackTopAppBar]). */
+@ExperimentalMaterial3Api
+@Composable
+fun BrandTopAppBar(
+    onSetLanguage: (Lang) -> Unit,
+    scrollBehavior: TopAppBarScrollBehavior,
+    actions: @Composable RowScope.() -> Unit = {},
+) = BrandTopAppBarImpl(onSetLanguage, scrollBehavior, actions)
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun BrandTopAppBarImpl(
+    onSetLanguage: (Lang) -> Unit,
+    scrollBehavior: TopAppBarScrollBehavior?,
+    actions: @Composable RowScope.() -> Unit,
+) {
     val scheme = MaterialTheme.colorScheme
     TopAppBar(
         title = {
@@ -37,11 +60,14 @@ fun BrandTopAppBar(onSetLanguage: (Lang) -> Unit, actions: @Composable RowScope.
             LanguageToggle(currentLang(), onSetLanguage)
             actions()
         },
+        // Clear of a display cutout too (landscape), not only the status bar.
+        windowInsets = WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top),
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = scheme.background,
             scrolledContainerColor = scheme.background,
             actionIconContentColor = scheme.onSurfaceVariant,
         ),
+        scrollBehavior = scrollBehavior,
     )
 }
 

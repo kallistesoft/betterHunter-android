@@ -1,6 +1,10 @@
 package ca.kallistesoft.hunt.core.ui
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
+import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
@@ -11,6 +15,8 @@ import androidx.compose.material.icons.outlined.HealthAndSafety
 import androidx.compose.material.icons.outlined.Pets
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.core.app.NotificationManagerCompat
 import androidx.compose.ui.graphics.vector.ImageVector
 import ca.kallistesoft.hunt.core.model.FieldSkill
 import java.time.LocalDate
@@ -87,5 +93,22 @@ fun rememberNotificationPermission(onResult: (granted: Boolean) -> Unit): () -> 
         } else {
             onResult(true)
         }
+    }
+}
+
+/** Whether the app may post notifications now: permission granted (Android 13+) and not turned off in system settings. */
+fun notificationsEnabled(context: Context): Boolean = NotificationManagerCompat.from(context).areNotificationsEnabled()
+
+/** Opens the system settings for this app's notifications (where the hunter turned them off). */
+@Composable
+fun rememberNotificationSettingsOpener(): () -> Unit {
+    val context = LocalContext.current
+    return {
+        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+        } else {
+            Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", context.packageName, null))
+        }
+        context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
     }
 }
