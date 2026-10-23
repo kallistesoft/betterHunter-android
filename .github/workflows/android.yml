@@ -95,3 +95,48 @@ jobs:
             **/build/reports/
             **/build/test-results/
             **/build/outputs/roborazzi/
+
+  # Flow tests (app/src/androidTest) and the release smoke test (:smoketest) on an emulator. No google-services.json
+  # here: Firebase stays off, so feature flags keep their defaults and no forced update can block the app.
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      # Built before the emulator starts, so its boot time isn't spent compiling.
+      - name: Build the apps and tests
+        run: ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :app:assembleQa :smoketest:assembleQa
+
+      - name: Flow tests and release smoke test
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          target: google_apis
+          profile: pixel_6
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          script: ./gradlew :app:connectedDebugAndroidTest :smoketest:connectedQaAndroidTest
+
+      - name: Test reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-test-reports
+          path: |
+            app/build/reports/androidTests
+            smoketest/build/reports/androidTests
