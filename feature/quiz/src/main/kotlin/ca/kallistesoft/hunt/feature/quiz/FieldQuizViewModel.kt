@@ -266,7 +266,7 @@ class FieldQuizViewModel @AssistedInject constructor(
 
     private companion object {
         /** Field runs aren't exams: a stand-in with no pass mark shown. */
-        val FIELD_EXAM = Exam(id = "FIELD", names = emptyMap(), scopes = emptyList())
+        private val FIELD_EXAM = Exam(id = "FIELD", names = emptyMap(), scopes = emptyList())
 
         const val KEY_IDS = "ids"
         const val KEY_ANSWERS = "answers"
