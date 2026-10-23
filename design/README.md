@@ -15,8 +15,14 @@ implements it in `core/designsystem` (theme, components) and the feature screens
 | What is it? (question) | `PhotoQuiz.dc.html` | `PhotoQuizLight.dc.html` |
 | What is it? (answer) | `PhotoAnswer.dc.html` | `PhotoAnswerLight.dc.html` |
 | Mock exam (question) | `ExamQuestion.dc.html` | `ExamQuestionLight.dc.html` |
+| Onboarding: what kind of hunter? (first launch, after the splash screen) | `HunterProfile.dc.html` | `HunterProfileLight.dc.html` |
 
 Phone frames are 390×844. Dark screens are the top row of the canvas, light screens the row below.
+
+**Onboarding (not built yet).** Step 1 of 2 on first launch, before the exam picker: "What kind of hunter are you?"
+with three choices (Working on it: preparing for the licence or hunter course; New hunter: licensed, a few seasons;
+Experienced hunter: many seasons), the selection in orange, Continue. The answer is saved on the device and can be
+changed later.
 
 ## Photos
 
