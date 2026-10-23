@@ -36,6 +36,10 @@ with a monochrome version for themed icons), the splash icon and the dashboard h
 `core/designsystem`), drawn from the same 64-unit shapes. The app icon background is `#1F4229`. Exports in `logo/`: `buck.svg` (the mark), `app-icon.svg`
 (adaptive icon layout) and `play-store-icon.svg` / `play-store-icon-512.png` (the Play Console's 512 px icon).
 
+`BuckVariants.dc.html` (beside it) tries three signature details to make the buck more distinctive: *Blaze
+patch* (orange triangle on the forehead), *Uneven rack* (3 points one side, 4 the other) and *First light* (orange sun
+between the antlers). Not chosen yet.
+
 ## Photos
 
 The screens reference photos uploaded to the canvas (`/_blob/<id>` URLs), copied from `content/wildlife-id/photos/` in the [hunt](https://github.com/kallistesoft/hunt) repo (and the
