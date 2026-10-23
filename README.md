@@ -7,7 +7,8 @@ recognising Canada's game animals. Bilingual French/English, everything stays on
 The questions, exam recipes and photos live in this repo (`core/data/src/main/assets/`) and ship inside the app.
 They are edited here; the app takes no content from another repo.
 
-Console setup still to do (Firebase, AdMob, Play): see [FOLLOW-UP.md](FOLLOW-UP.md). Product ideas (two parts,
+Console setup still to do (Firebase, AdMob, Play): see [FOLLOW-UP.md](FOLLOW-UP.md). Play Store listing texts, images and
+console declarations: [store/](store/). Product ideas (two parts,
 monetization): [IDEAS.md](IDEAS.md). Decisions and why: [DECISIONS.md](DECISIONS.md).
 
 > Independent study aid: not affiliated with or endorsed by the RCMP, the Canadian Firearms Program, the Government

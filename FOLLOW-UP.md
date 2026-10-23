@@ -151,7 +151,8 @@ the Flutter prototype, is one **interstitial between a finished test and its res
 ## 3. Play Console
 
 The app **BetterHunter: Species & Rules** (`ca.kallistesoft.hunt`) already has its listing, content rating and
-declarations (see `store/play-console.md` in the hunt repo). Left to do:
+declarations (see [store/play-console.md](store/play-console.md); listing texts and images in [store/](store/)).
+Left to do:
 
 1. **Upload key:** create the keystore (`keytool -genkeypair -v -keystore release.jks -alias upload -keyalg RSA
    -keysize 4096 -validity 10000`), keep it and its passwords safe (password manager plus an offline copy), then set
@@ -162,6 +163,8 @@ declarations (see `store/play-console.md` in the hunt repo). Left to do:
 3. **Force update file:** publish `https://hunt.kallistesoft.ca/android/update.json` with `{"minVersionCode": 0}`
    (and the same for `update-debug.json`) so the URL exists before the first release.
 4. **Before releasing:** check the Play Console declarations against what the release really does (below).
+5. **Refresh the listing:** new icon (`store/icon-512.png`), screenshots of this app instead of the Flutter
+   prototype, feature graphics with the new logo, and descriptions without the RPAL exam (`store/listing.md`).
 
 ### Before releasing: Play Console vs. the app
 
@@ -181,8 +184,8 @@ compare them with what that build really does, and fix whichever side is wrong.
    - **Target audience**, **Content rating**, **App access**: still true for this version.
 3. **Privacy policy** (FR and EN on kallistesoft.ca) describes the same things: data kept on the device, the servers
    contacted and why, ads and consent if present, contact address.
-4. **Fix and record:** update the declarations or the app, save, and note the answers given (date and version) in the
-   hunt repo's `store/play-console.md` so the next release starts from them.
+4. **Fix and record:** update the declarations or the app, save, and note the answers given (date and version) in
+   `store/play-console.md` so the next release starts from them.
 
 ---
 
