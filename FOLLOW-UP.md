@@ -16,6 +16,16 @@ Steps to do outside the code, in the Firebase, AdMob and Play consoles. They use
 The app reads its feature flags and its force-update minimum from Firebase Remote Config. Until these steps are done
 it runs with every flag at its default (on) and can't force an update.
 
+**Done 2026-10-23** (steps 1–15): project **BetterHunter**, ID `betterhunter-12e8e` (number 27363509675), in the
+KallisteSoft account (contact@kallistesoft.ca, organization kallistesoft.ca). Both Android apps are registered
+(`ca.kallistesoft.hunt`, `ca.kallistesoft.hunt.debug`). This repo is public, so `app/google-services.json` is
+gitignored: CI writes it from the `GOOGLE_SERVICES_JSON` secret (set), and a local build needs a copy of the file
+(Project settings → Your apps → google-services.json). Remote Config template version 1 is published with the five
+parameters below. Left: step 16, the check on a device.
+
+Remote Config moves to pay-as-you-go beyond the free tier on 2026-09-01; Firebase asks projects to switch to the Blaze
+plan by 2026-11-15 to keep scaling past the free limits. At this app's size the free tier should be enough.
+
 ### Create the project
 
 1. Open the [Firebase console](https://console.firebase.google.com/) with the KallisteSoft Google account
@@ -40,7 +50,7 @@ it runs with every flag at its default (on) and can't force an update.
 ### Give the file to the build
 
 10. Put the file at `app/google-services.json`. It holds identifiers, not secrets (access is restricted to the
-    registered package names), so it can be committed to this private repo. Commit it, or keep it local and rely on
+    registered package names), but this repo is public: keep it local (it is gitignored) and rely on
     the CI secret below.
 11. For CI: on GitHub, **kallistesoft/betterHunter-android** → **Settings** → **Secrets and variables** → **Actions**
     → **New repository secret**. Name `GOOGLE_SERVICES_JSON`, value: the whole content of the file.
