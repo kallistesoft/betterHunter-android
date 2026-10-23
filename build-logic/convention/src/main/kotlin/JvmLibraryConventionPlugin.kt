@@ -11,6 +11,7 @@ class JvmLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             pluginManager.apply("org.jetbrains.kotlin.jvm")
+            pluginManager.apply("betterhunter.kover")
             extensions.configure<JavaPluginExtension> {
                 sourceCompatibility = JAVA_VERSION
                 targetCompatibility = JAVA_VERSION

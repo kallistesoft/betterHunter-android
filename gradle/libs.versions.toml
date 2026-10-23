@@ -34,6 +34,7 @@ uiautomator = "2.4.0"
 espresso = "3.7.0"
 junit = "4.13.2"
 robolectric = "4.17"
+kover = "0.9.11"
 roborazzi = "1.77.0"
 turbine = "1.2.1"
 
@@ -88,6 +89,7 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 # Build logic (convention plugins)
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+kover-gradle-plugin = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version.ref = "kover" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -98,6 +100,7 @@ google-services = { id = "com.google.gms.google-services", version.ref = "google
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "roborazzi" }
 
@@ -109,3 +112,4 @@ betterhunter-android-feature = { id = "betterhunter.android.feature" }
 betterhunter-android-screenshot = { id = "betterhunter.android.screenshot" }
 betterhunter-hilt = { id = "betterhunter.hilt" }
 betterhunter-jvm-library = { id = "betterhunter.jvm.library" }
+betterhunter-kover = { id = "betterhunter.kover" }
