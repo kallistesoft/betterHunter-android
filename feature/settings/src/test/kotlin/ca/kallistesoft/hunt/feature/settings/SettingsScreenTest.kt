@@ -4,7 +4,7 @@ import android.Manifest
 import android.content.Intent
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -120,11 +120,11 @@ class SettingsScreenTest {
     }
 
     @Test
-    fun `season reminders wait for a season date`() {
+    fun `without a season date, season reminders come in late August`() {
         setSettings(workingOnIt.copy(fieldHunter = true))
         compose.onNodeWithText("Not set").assertIsDisplayed()
-        compose.onNodeWithText("Set your season start first").assertIsDisplayed()
-        compose.onNodeWithTag("settings-season-reminders").assertIsNotEnabled()
+        compose.onNodeWithText("Late August, until you set a date").assertIsDisplayed()
+        compose.onNodeWithTag("settings-season-reminders").assertIsEnabled().assertIsOff()
     }
 
     @Test

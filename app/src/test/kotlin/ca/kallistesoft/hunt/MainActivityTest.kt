@@ -1,6 +1,7 @@
 package ca.kallistesoft.hunt
 
 import android.view.KeyboardShortcutGroup
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import ca.kallistesoft.hunt.core.data.UserDataRepository
 import ca.kallistesoft.hunt.core.model.HunterType
@@ -31,12 +32,15 @@ class MainActivityTest {
     fun tearDown() = app.close()
 
     @Test
-    fun `a season reminder opens the season date over Home`() {
+    fun `a season reminder opens the season check over Home`() {
         app.launch(ReminderLink.intent(app.app, Reminder.Kind.SEASON), newHunter)
-        app.waitForTag("calendar")
+        app.waitFor(seasonCheck)
         app.clickBackArrow()
+        app.clickText(app.str(R.string.quit))
         app.waitForTag("daily-card")
     }
+
+    private val seasonCheck get() = hasText(app.str(R.string.season_check_overline), ignoreCase = true)
 
     @Test
     fun `a reminder is dropped while onboarding shows`() {
@@ -50,7 +54,7 @@ class MainActivityTest {
         val controller = Robolectric.buildActivity(MainActivity::class.java).setup()
         app.waitForTag("daily-card")
         controller.newIntent(ReminderLink.intent(app.app, Reminder.Kind.SEASON))
-        app.waitForTag("calendar")
+        app.waitFor(seasonCheck)
         controller.pause().stop().destroy()
     }
 

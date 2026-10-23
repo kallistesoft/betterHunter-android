@@ -310,7 +310,7 @@
     <string name="reminders_daily_sub">Around %1$s, when you usually play</string>
     <string name="reminders_season">Season reminders</string>
     <string name="reminders_season_sub">3 weeks and 1 day before %1$s</string>
-    <string name="reminders_season_no_date">Set your season start first</string>
+    <string name="reminders_season_no_date">Late August, until you set a date</string>
     <string name="quiet_hours">Never between 9 pm and 8 am.</string>
     <string name="notifications_blocked">Notifications are off</string>
     <string name="notifications_blocked_sub">Reminders can\'t reach you. Turn notifications on in settings.</string>

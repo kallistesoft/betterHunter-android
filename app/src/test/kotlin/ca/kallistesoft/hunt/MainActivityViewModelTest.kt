@@ -69,7 +69,7 @@ class MainActivityViewModelTest {
         viewModel.uiState.test {
             assertEquals(MainUiState.Ready(firstRun = false, updateRequired = false), awaitItemMatching { it != MainUiState.Loading })
 
-            viewModel.refreshRemoteConfig()
+            viewModel.onForeground()
             assertEquals(MainUiState.Ready(firstRun = false, updateRequired = true), awaitItem())
             assertEquals(1, flags.refreshes)
         }
@@ -80,10 +80,19 @@ class MainActivityViewModelTest {
         val viewModel = viewModel()
         viewModel.uiState.test {
             awaitItemMatching { it != MainUiState.Loading }
-            viewModel.refreshRemoteConfig()
+            viewModel.onForeground()
             expectNoEvents()
             assertEquals(1, flags.refreshes)
         }
+    }
+
+    @Test
+    fun `opening the app brings ignored reminders back to every day`() = runTest {
+        userData.progress.value = UserProgress(ignoredReminders = 4)
+
+        viewModel().onForeground()
+
+        assertEquals(0, userData.progress.value.ignoredReminders)
     }
 
     private class CountingFeatureFlags : FeatureFlags {

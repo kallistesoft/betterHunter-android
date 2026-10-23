@@ -8,7 +8,7 @@ import ca.kallistesoft.hunt.core.model.FieldRun
 import ca.kallistesoft.hunt.core.model.Reminder
 
 /**
- * A reminder's notification opens its screen over Home: today's questions for the daily reminder, the season date
+ * A reminder's notification opens its screen over Home: today's questions for the daily reminder, the season check
  * for the season one. The intent names the reminder's kind in one extra; [MainActivity] is exported, so the extra is
  * checked against the known kinds and anything else opens the app as usual.
  */
@@ -35,7 +35,7 @@ object ReminderLink {
     internal fun backStack(kind: String?): List<NavKey>? =
         when (Reminder.Kind.entries.firstOrNull { it.name == kind }) {
             Reminder.Kind.DAILY -> listOf(Home, FieldQuiz(FieldRun.DAILY))
-            Reminder.Kind.SEASON -> listOf(Home, SeasonDate)
+            Reminder.Kind.SEASON -> listOf(Home, FieldQuiz(FieldRun.SEASON_CHECK))
             null -> null
         }
 }

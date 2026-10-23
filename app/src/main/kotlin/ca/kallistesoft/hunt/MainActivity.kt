@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             val state by viewModel.uiState.collectAsStateWithLifecycle()
-            LifecycleEventEffect(Lifecycle.Event.ON_START) { viewModel.refreshRemoteConfig() }
+            LifecycleEventEffect(Lifecycle.Event.ON_START) { viewModel.onForeground() }
             BetterHunterTheme {
                 when (val ready = state) {
                     MainUiState.Loading -> Unit

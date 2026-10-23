@@ -76,9 +76,16 @@ fun SettingsScreen(
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
-    val askDaily = rememberNotificationPermission(viewModel::setDailyReminders)
-    val askSeason = rememberNotificationPermission(viewModel::setSeasonReminders)
     val openNotificationSettings = rememberNotificationSettingsOpener()
+    // Refused (Android stops asking after two refusals): the choice is kept, and the system settings can allow it.
+    val askDaily = rememberNotificationPermission { granted ->
+        viewModel.setDailyReminders(true)
+        if (!granted) openNotificationSettings()
+    }
+    val askSeason = rememberNotificationPermission { granted ->
+        viewModel.setSeasonReminders(true)
+        if (!granted) openNotificationSettings()
+    }
     val context = LocalContext.current
     // Notifications can be turned off in system settings while the app is away: check on each return.
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { viewModel.setNotificationsAllowed(notificationsEnabled(context)) }
@@ -270,7 +277,6 @@ private fun RemindersCard(
     onSeason: (Boolean) -> Unit,
     onOpenNotificationSettings: () -> Unit,
 ) {
-    val hasDate = state.seasonStart != null
     // Reminders are on but notifications were turned off in system settings: say so, with the way back.
     val blockedRow: @Composable ColumnScope.() -> Unit = {
         SettingRow(
@@ -292,7 +298,7 @@ private fun RemindersCard(
                     subtitle = stringResource(R.string.reminders_daily_sub, timeOfDay(state.reminderMinute)),
                     modifier = Modifier.testTag("settings-daily-reminders")
                         .toggleable(value = state.dailyReminders, role = Role.Switch, onValueChange = onDaily),
-                ) { ReminderSwitch(state.dailyReminders, enabled = true) }
+                ) { ReminderSwitch(state.dailyReminders) }
             },
             {
                 SettingRow(
@@ -301,20 +307,19 @@ private fun RemindersCard(
                     subtitle = state.seasonStart?.let { stringResource(R.string.reminders_season_sub, shortDate(it)) }
                         ?: stringResource(R.string.reminders_season_no_date),
                     modifier = Modifier.testTag("settings-season-reminders")
-                        .toggleable(value = state.seasonReminders && hasDate, enabled = hasDate, role = Role.Switch, onValueChange = onSeason),
-                ) { ReminderSwitch(state.seasonReminders && hasDate, enabled = hasDate) }
+                        .toggleable(value = state.seasonReminders, role = Role.Switch, onValueChange = onSeason),
+                ) { ReminderSwitch(state.seasonReminders) }
             },
         ),
     )
 }
 
 @Composable
-private fun ReminderSwitch(checked: Boolean, enabled: Boolean) {
+private fun ReminderSwitch(checked: Boolean) {
     val scheme = MaterialTheme.colorScheme
     Switch(
         checked = checked,
         onCheckedChange = null,
-        enabled = enabled,
         colors = SwitchDefaults.colors(
             uncheckedThumbColor = scheme.onSurfaceVariant,
             uncheckedBorderColor = scheme.onSurfaceVariant,

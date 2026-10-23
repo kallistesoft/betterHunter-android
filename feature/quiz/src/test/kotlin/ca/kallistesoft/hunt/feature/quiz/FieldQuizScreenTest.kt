@@ -127,7 +127,7 @@ class FieldQuizScreenTest {
 
         compose.onNodeWithTag("nudge-not-now").performClick()
         compose.onNodeWithTag("nudge").assertDoesNotExist()
-        assertTrue(userData.progress.value.dailyReminderAsked)
+        assertEquals(TEST_DAY, userData.progress.value.dailyReminderNotNowDay)
         assertFalse(userData.progress.value.dailyReminders)
         compose.onNodeWithTag("daily-home").performClick()
         assertEquals(1, closed)

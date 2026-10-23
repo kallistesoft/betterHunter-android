@@ -10,7 +10,7 @@ class ReminderLinkTest {
     @Test
     fun `each reminder opens its screen over Home`() {
         assertEquals(listOf(Home, FieldQuiz(FieldRun.DAILY)), ReminderLink.backStack(Reminder.Kind.DAILY.name))
-        assertEquals(listOf(Home, SeasonDate), ReminderLink.backStack(Reminder.Kind.SEASON.name))
+        assertEquals(listOf(Home, FieldQuiz(FieldRun.SEASON_CHECK)), ReminderLink.backStack(Reminder.Kind.SEASON.name))
     }
 
     @Test
