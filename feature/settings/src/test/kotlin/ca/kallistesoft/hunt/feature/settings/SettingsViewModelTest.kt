@@ -50,9 +50,8 @@ class SettingsViewModelTest {
         vm.chooseProvince(Province.AB)
         assertEquals(Province.QC, userData.progress.value.homeProvince)
 
-        var done = false
-        vm.save { done = true }
-        assertTrue(done)
+        vm.save()
+        assertTrue(vm.uiState.value.saved)
         assertEquals(Province.AB, userData.progress.value.homeProvince)
         assertEquals(listOf("ABHE", "PAL", "ICAF"), userData.progress.value.myExamIds)
     }
@@ -64,7 +63,7 @@ class SettingsViewModelTest {
         vm.toggleWeapon(Weapon.FIREARM)
         assertFalse(vm.uiState.value.canSave)
         vm.toggleWeapon(Weapon.BOW)
-        vm.save {}
+        vm.save()
         assertEquals(setOf(Weapon.BOW), userData.progress.value.weapons)
     }
 
@@ -100,7 +99,7 @@ class SettingsViewModelTest {
 
     @Test
     fun `saving a season date asks for season reminders`() = runTest {
-        val vm = SeasonDateViewModel(userData, Today { TEST_DAY })
+        val vm = SeasonDateViewModel(userData, Today { TEST_DAY }, SavedStateHandle())
         collecting(vm.uiState)
         assertEquals(null, vm.uiState.value.picked)
         vm.pick(TEST_DAY - 1) // the past can't be picked
@@ -115,9 +114,23 @@ class SettingsViewModelTest {
     }
 
     @Test
+    fun `a picked season date survives process death`() = runTest {
+        userData.setSeasonStart(TEST_DAY + 5)
+        val saved = SavedStateHandle()
+        SeasonDateViewModel(userData, Today { TEST_DAY }, saved).apply {
+            collecting(uiState)
+            pick(TEST_DAY + 20)
+        }
+        val restored = SeasonDateViewModel(userData, Today { TEST_DAY }, saved)
+        collecting(restored.uiState)
+        assertEquals(TEST_DAY + 20, restored.uiState.value.picked)
+        assertEquals(TEST_DAY + 5, userData.progress.value.seasonStart) // not saved until "Save"
+    }
+
+    @Test
     fun `I don't know yet clears the date`() = runTest {
         userData.setSeasonStart(TEST_DAY + 5)
-        val vm = SeasonDateViewModel(userData, Today { TEST_DAY })
+        val vm = SeasonDateViewModel(userData, Today { TEST_DAY }, SavedStateHandle())
         collecting(vm.uiState)
         assertEquals(TEST_DAY + 5, vm.uiState.value.picked)
         vm.dontKnow()
