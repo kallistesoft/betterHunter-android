@@ -26,6 +26,13 @@ with three choices (Working on it: preparing for the licence or hunter course; N
 Experienced hunter: many seasons), the selection in orange, Continue. The answer is saved on the device and can be
 changed later.
 
+## Logo concepts
+
+`Logos.dc.html` (one 1280×1000 board, below the light row) compares four directions for a new logo, each as the app
+icon, on dark, on light and at 48/32/20 px: A *Blaze buck* (flat buck head, orange antlers), B *Track* (deer hoof
+print), C *Tine monogram* (condensed B with an antler), D *Field patch* (today's antler mark in a round crest). None is
+chosen yet; the app still uses the current icon.
+
 ## Photos
 
 The screens reference photos uploaded to the canvas (`/_blob/<id>` URLs), copied from `content/wildlife-id/photos/` in the [hunt](https://github.com/kallistesoft/hunt) repo (and the
