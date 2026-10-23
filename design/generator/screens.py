@@ -74,6 +74,9 @@ ICONS = {
     "maple": '<path d="M12 3l1.6 3.6 2.4-1-.6 4 3-1-1 3 2.6 1.4-4.2 3.2.6 2.3-3.4-.8V21h-2v-3.3l-3.4.8.6-2.3L4 13l2.6-1.4-1-3 3 1-.6-4 2.4 1z"/>',
     "sprout": '<path d="M12 21v-9"/><path d="M12 12c0-4 2.5-7 7-7 0 4.5-3 7-7 7z"/><path d="M12 14c0-3-2-5.5-6-5.5 0 3.5 2.5 5.5 6 5.5z"/>',
     "first_aid": '<rect x="3" y="6" width="18" height="14" rx="2"/><path d="M9 6V4h6v2"/><path d="M12 10v6"/><path d="M9 13h6"/>',
+    "bell": '<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/>',
+    "calendar": '<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17"/><path d="M8 3v4"/><path d="M16 3v4"/>',
+    "moon": '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
     "expand": '<path d="M4 9V4h5"/><path d="M20 9V4h-5"/><path d="M4 15v5h5"/><path d="M20 15v5h-5"/>',
 }
 
@@ -566,7 +569,7 @@ def main_new_hunter(t, passed=True, season=None):
     {primary(t, "Play What is it?", href(t, "PhotoQuiz"), "; height: 52px", "play")}''', pad="18px", gap=16)
     body = f'''<header style="display: flex; align-items: center; justify-content: space-between; height: 48px; flex-shrink: 0">
     <div style="display: flex; align-items: center; gap: 10px">{buck(34, t["text"], t["orange"])}<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.2px">BetterHunter</span></div>
-    <div style="display: flex; align-items: center; gap: 8px">{pill}{round_link(t, href(t, "Settings"), "Settings", "gear", t["muted"])}</div>
+    <div style="display: flex; align-items: center; gap: 8px">{pill}{round_link(t, href(t, "Settings" if passed else "SettingsHunter"), "Settings", "gear", t["muted"])}</div>
   </header>
   {banner if passed else season_card if season else ""}
   {goal_card if passed else daily_card}
@@ -737,7 +740,7 @@ def field_skills(t, state="start"):
 
 def skill_question(t, season=False, daily=False):
     if daily:
-        title, back, over, states, nxt = "Question 2 / 3", "HomeNewHunter", "Today · 3 general", "r" + "u" * 2, "HomeNewHunter"
+        title, back, over, states, nxt = "Question 2 / 3", "HomeNewHunter", "Today · 3 general", "r" + "u" * 2, "DailyDone"
     elif season:
         title, back, over, states, nxt = "Question 4 / 15", "HomeSeasonCheck", "Season check · all skills", "rrwr" + "u" * 11, "FieldSkillsAllMastered"
     else:
@@ -805,7 +808,7 @@ def skill_mastered(t):
 
 
 
-def season_date(t):
+def season_date_body(t):
     # November 2026 starts on a Sunday; weeks start on Sunday (Canada).
     def day(n):
         if n == 14:
@@ -833,10 +836,120 @@ def season_date(t):
     <p style="margin: 0; font-size: 13px; line-height: 1.45">Dates depend on your zone, your weapon and the year. Check the official regulations; BetterHunter doesn't know your dates.</p>
   </section>
   <div style="margin-top: auto; display: flex; flex-direction: column; gap: 4px">
-    {primary(t, "Save: Saturday, November 14", href(t, "HomeSeasonCheck"))}
+    {primary(t, "Save: Saturday, November 14", href(t, "SeasonReminderAsk"))}
     <a href="{href(t, "HomeSeasonGeneric")}" style="height: 44px; display: flex; align-items: center; justify-content: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none">I don't know yet</a>
   </div>'''
-    return page(t, "BetterHunter season start date", body, gap=14)
+    return body
+
+
+def season_date(t):
+    return page(t, "BetterHunter season start date", season_date_body(t), gap=14)
+
+
+# ------------------------------------------------------------------------------------------ new hunter: reminders
+
+QUIET = "Never between 9 pm and 8 am."
+
+
+def daily_done_body(t):
+    rows = "".join(
+        f'<div style="display: flex; align-items: center; gap: 12px; {"border-top: 1px solid " + t["border"] + "; padding-top: 10px" if i else ""}">'
+        f'{tile(t, ic, tone, 36, 10)}<span style="flex: 1; font-weight: 600; font-size: 15px">{title}</span>'
+        f'<span style="font-size: 13px; font-weight: 600; color: {t["green"]}">{score}</span></div>'
+        for i, (ic, tone, title, score) in enumerate([("eye", "orange", "3 species", "3 / 3 right"), ("book", "green", "3 general", "2 / 3 right")]))
+    ask = f'''<div style="display: flex; gap: 12px; align-items: flex-start">{tile(t, "bell", "orange", 40, 11)}
+      <span style="display: flex; flex-direction: column; gap: 4px; flex: 1">
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">Want a nudge tomorrow?</span>
+        <span style="font-size: 14px; line-height: 1.4; color: {t["muted"]}">We'll tell you when your next 6 questions are ready, once a day, around the time you usually play. {QUIET} No reminder once you've done them.</span>
+      </span></div>
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      {primary(t, "Turn on reminders", href(t, "NotifyPermission"), "; height: 52px", "bell")}
+      <a href="{href(t, "HomeNewHunter")}" style="height: 44px; display: flex; align-items: center; justify-content: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none">Not now</a>
+    </div>'''
+    return f'''{header(t, "Today", back=href(t, "HomeNewHunter"), close=True)}
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+    <span style="width: 84px; height: 84px; border-radius: 24px; background: {t["green_tint"]}; color: {t["green"]}; display: flex; align-items: center; justify-content: center">{icon("check", 44, width=2.4)}</span>
+    <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.05">Done for today</h1>
+    <span style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: {t["muted"]}">{icon("flame", 15, t["orange"], 2.2)} 7-day streak · 5 of 6 right</span>
+  </div>
+  {card(t, rows, pad="14px 16px", gap=10, radius=18)}
+  {card(t, ask, pad="16px 16px 8px", gap=12, radius=18, extra="; margin-top: auto; border-color: " + t["warm_border"])}'''
+
+
+def daily_done(t):
+    return page(t, "BetterHunter done for today, reminders", daily_done_body(t), gap=14)
+
+
+def notify_permission(t):
+    # Android's own notification permission dialog (Android 13+), over the screen that asked for it.
+    dialog = f'''<div style="position: absolute; inset: 0; background: {t["dim"]}; display: flex; align-items: center; justify-content: center; padding: 28px">
+    <div role="dialog" aria-labelledby="perm-title" style="width: 100%; background: {t["dialog"]}; border-radius: 28px; padding: 24px 24px 16px; display: flex; flex-direction: column; align-items: center; gap: 14px; box-shadow: 0 12px 40px rgba(0,0,0,0.35)">
+      <span style="color: {t["green"]}">{icon("bell", 26)}</span>
+      <h2 id="perm-title" style="margin: 0; font-family: Barlow, sans-serif; font-weight: 500; font-size: 20px; line-height: 1.3; text-align: center">Allow <b style="font-weight: 600">BetterHunter</b> to send you notifications?</h2>
+      <div style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 6px">
+        <a href="{href(t, "HomeNewHunter")}" style="height: 48px; border-radius: 999px; background: {t["green_tint"]}; color: {t["text"]}; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center; text-decoration: none">Allow</a>
+        <a href="{href(t, "HomeNewHunter")}" style="height: 48px; border-radius: 999px; background: {t["green_tint"]}; color: {t["text"]}; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center; text-decoration: none">Don't allow</a>
+      </div>
+    </div>
+  </div>'''
+    return page(t, "BetterHunter notification permission (system)", daily_done_body(t) + "\n  " + dialog, gap=14)
+
+
+def season_reminder_ask(t):
+    sheet = f'''<div style="position: absolute; inset: 0; background: {t["dim"]}; display: flex; flex-direction: column; justify-content: flex-end">
+    <div role="dialog" aria-labelledby="season-ask" style="background: {t["dialog"]}; border-radius: 28px 28px 0 0; padding: 12px 20px 24px; display: flex; flex-direction: column; gap: 14px">
+      <span style="width: 36px; height: 4px; border-radius: 2px; background: {t["outline"]}; align-self: center"></span>
+      <div style="display: flex; gap: 12px; align-items: flex-start">{tile(t, "bell", "orange", 44, 12)}
+        <span style="display: flex; flex-direction: column; gap: 6px; flex: 1">
+          <span style="font-size: 13px; font-weight: 600; color: {t["green"]}; display: flex; align-items: center; gap: 6px">{icon("check", 14, t["green"], 2.6)} Saved: Saturday, November 14</span>
+          <h2 id="season-ask" style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; line-height: 1.1">Remind me before my season?</h2>
+        </span></div>
+      <p style="margin: 0; font-size: 15px; line-height: 1.45; color: {t["muted"]}">We'll remind you <b style="font-weight: 600; color: {t["text"]}">3 weeks before</b> to take your season check, and <b style="font-weight: 600; color: {t["text"]}">the day before</b>. Only about your date, around the time you usually play. {QUIET}</p>
+      {primary(t, "Remind me", href(t, "NotifyPermission"), "; height: 52px", "bell")}
+      <a href="{href(t, "HomeSeasonCheck")}" style="height: 44px; display: flex; align-items: center; justify-content: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none; margin-top: -6px">No thanks</a>
+    </div>
+  </div>'''
+    return page(t, "BetterHunter season reminder, ask", season_date_body(t) + "\n  " + sheet, gap=14)
+
+
+def settings_hunter(t):
+    body = f'''{header(t, "Settings", back=href(t, "HomeSeasonCheck"))}
+  {label(t, "Your profile", t["muted"])}
+  {card(t, row(t, tile(t, "user"), "Hunter type", "New hunter", target=href(t, "HunterProfileNewHunter"), divider=False)
+        + row(t, tile(t, "target"), "Hunting with", "Firearm", target=href(t, "HuntWithNewHunter"))
+        + row(t, tile(t, "pin"), "Where you hunt", "Québec", target=href(t, "HuntWhereNewHunter"))
+        + row(t, tile(t, "calendar"), "Season start", "Saturday, November 14 · the date you set", target=href(t, "SeasonDate")), pad="2px 16px", gap=0)}
+  {label(t, "Reminders", t["muted"])}
+  {card(t, row(t, tile(t, "bell"), "Daily questions", "Around 7 pm, when you usually play", trail=switch(t, True), divider=False)
+        + row(t, tile(t, "flag"), "Season reminders", "3 weeks and 1 day before Nov 14", trail=switch(t, True))
+        + f'<p style="margin: 0; padding: 10px 0 12px; border-top: 1px solid {t["border"]}; font-size: 13px; color: {t["muted"]}; display: flex; align-items: center; gap: 8px">{icon("moon", 16)} {QUIET}</p>', pad="2px 16px", gap=0)}
+  {label(t, "App", t["muted"])}
+  {card(t, row(t, tile(t, "globe"), "Language", "English", divider=False)
+        + row(t, tile(t, "info"), "About BetterHunter", "How it works, sources, disclaimer", target=href(t, "About")), pad="2px 16px", gap=0)}'''
+    return page(t, "BetterHunter settings, hunter", body, gap=10)
+
+
+def lock_screen(t):
+    dark = t["name"] == "dark"
+    bg, fg, sub, note = ("#0B120D", "#EEF1EA", "#A9B5AB", "rgba(36,53,42,0.92)") if dark else ("#DCE3D6", "#17201A", "#4A5548", "rgba(255,255,255,0.92)")
+    app_icon = (f'<span style="width: 28px; height: 28px; border-radius: 8px; background: #1F4229; display: flex; align-items: center; justify-content: center; flex-shrink: 0">'
+                f'{buck(22, "#F5F2EA", "#F27B2B")}</span>')
+
+    def notif(when, title, text, target):
+        return (f'<a href="{href(t, target)}" style="display: flex; gap: 12px; padding: 14px 16px; border-radius: 24px; background: {note}; color: {fg}; text-decoration: none">'
+                f'{app_icon}<span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0">'
+                f'<span style="font-size: 12px; color: {sub}">BetterHunter · {when}</span>'
+                f'<span style="font-weight: 600; font-size: 15px">{title}</span>'
+                f'<span style="font-size: 14px; line-height: 1.35; color: {sub}">{text}</span></span></a>')
+    body = f'''<div style="display: flex; flex-direction: column; align-items: center; gap: 2px; margin-top: 72px; color: {fg}">
+    <span style="font-size: 15px; color: {sub}">Friday, October 23</span>
+    <span style="font-family: Barlow, sans-serif; font-weight: 400; font-size: 88px; line-height: 1; letter-spacing: -2px">7:02</span>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 40px">
+    {notif("now", "Your 6 questions are ready", "3 species, 3 general. Keep your 7-day streak going.", "HomeNewHunter")}
+    {notif("yesterday", "Your season starts in 3 weeks", "Take your season check before November 14.", "SeasonCheckQuestion")}
+  </div>'''
+    return page(t, "BetterHunter notifications on the lock screen", body, gap=0, padding="20px 16px 24px", extra_style=f"; background: {bg}")
 
 
 SCREENS = {
@@ -852,6 +965,8 @@ SCREENS = {
     "SkillMastered": skill_mastered, "FieldSkillsMastered": lambda t: field_skills(t, "upkeep"),
     "FieldSkillsAllMastered": lambda t: field_skills(t, "all"), "HomeSeasonCheck": lambda t: main_new_hunter(t, passed=False, season="date"),
     "HomeSeasonGeneric": lambda t: main_new_hunter(t, passed=False, season="generic"), "SeasonDate": season_date,
+    "DailyDone": daily_done, "NotifyPermission": notify_permission, "SeasonReminderAsk": season_reminder_ask,
+    "SettingsHunter": settings_hunter, "LockScreen": lock_screen,
     "SeasonCheckQuestion": lambda t: skill_question(t, season=True), "DailyQuestion": lambda t: skill_question(t, daily=True),
 }
 
