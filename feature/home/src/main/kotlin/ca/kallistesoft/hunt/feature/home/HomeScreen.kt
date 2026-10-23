@@ -243,7 +243,7 @@ private fun TodayCard(state: HomeUiState, onPlay: (examId: String) -> Unit, onCh
             if (playsPhotos) {
                 PrimaryButton(
                     stringResource(R.string.play_id),
-                    onClick = { onPlay(state.photoGameId!!) },
+                    onClick = { onPlay(state.photoGameId) },
                     modifier = Modifier.fillMaxWidth().testTag("today-play-id"),
                     icon = Icons.Rounded.PlayArrow,
                 )

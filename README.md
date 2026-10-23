@@ -62,6 +62,9 @@ Design mockup (visual reference for new screens, dark and light): [design/](desi
 | Force update parameter | `min_version_code_debug` | `min_version_code` |
 | Signing | debug key | release key if configured, unsigned otherwise |
 
+A third build type, `qa`, is the release build signed with the debug key, only for the release smoke test (see
+"Integration tests"); it is never uploaded.
+
 ```sh
 ./gradlew assembleDebug          # app/build/outputs/apk/debug/
 ./gradlew bundleRelease          # app/build/outputs/bundle/release/ (upload to Play Console)
@@ -173,6 +176,29 @@ in `*ScreenshotTest.kt` of its module. Reference images live in `src/test/screen
 CI verifies on every push. After an intended UI change, run the **Record screenshots** workflow (Actions tab): it
 records on CI's machine and commits the new references, so they match what CI renders.
 
+## Integration tests
+
+Two suites run on a device or emulator (CI runs both on an API 35 emulator, in the `integration` job):
+
+| Suite | Where | What |
+|---|---|---|
+| Flow tests | `app/src/androidTest` | The real app (Hilt, DataStore, bundled questions), driven with Compose test APIs: onboarding, practice to the results, review, leaving a mock exam, other provinces, "I passed the real exam", Settings |
+| Release smoke test | `:smoketest` | The `qa` build (the release build: R8, shrinking, release code, signed with the debug key) driven from outside with UiAutomator: first launch to a question, then a restart that must open Home |
+
+```sh
+./gradlew :app:connectedDebugAndroidTest       # flow tests
+./gradlew :smoketest:connectedQaAndroidTest    # release smoke test
+```
+
+Every flow test starts from a fresh install: the Android Test Orchestrator runs each test in its own process with
+the app's data cleared (`clearPackageData`). They clear the app's data on the device, so with a phone plugged in,
+pick the emulator with `ANDROID_SERIAL=emulator-5554`. Tests find screens by test tag and by the app's own strings,
+so they follow the device language; the smoke test sets English for its app. Run them without `google-services.json`
+(as CI does) so Firebase can't change flags or force an update during a test.
+
+Add a flow test for each new flow: a class per area in `app/src/androidTest`, using `AppRobot` (`onboard()`,
+`clickTag()`, `waitForText()`...).
+
 ## Content
 
 This repo is the source of truth for the questions (DECISIONS.md, P4). Everything is in `core/data/src/main/assets/`:
@@ -193,5 +219,3 @@ answer, photos present with their credit). Image paths in the banks are written
 
 - AdMob: declared in Play Console, not integrated yet. The account and ad unit setup is in [FOLLOW-UP.md](FOLLOW-UP.md).
 - Baseline profile (`profileinstaller` is in place; add a `:baselineprofile` module with a device in CI).
-- Instrumented UI tests (the Compose test dependencies are set up; current tests are JVM unit tests: model rules,
-  bundled content, force update, and every ViewModel's state stream with Turbine).

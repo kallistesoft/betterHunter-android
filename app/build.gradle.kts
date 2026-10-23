@@ -29,6 +29,8 @@ android {
         versionCode = (findProperty("versionCode") as String?)?.toInt() ?: 1
         versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        // Flow tests: each test in its own process with the app's data cleared, so every test starts at first launch.
+        testInstrumentationRunnerArguments["clearPackageData"] = "true"
 
         // Play listing opened when in-app updates aren't available (also used by the debug build).
         buildConfigField("String", "STORE_PACKAGE", "\"ca.kallistesoft.hunt\"")
@@ -60,6 +62,23 @@ android {
             // Unsigned when no keystore is configured (e.g. pull requests); Play App Signing re-signs uploads.
             signingConfig = signingConfigs.findByName("release")
         }
+        // The release build (R8, shrinking, release code) signed with the debug key, so the release smoke test
+        // (:smoketest) can install it on an emulator. Never uploaded.
+        create("qa") {
+            initWith(getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks += "release"
+        }
+    }
+
+    // qa is the release build: it uses the release code (src/release).
+    sourceSets.named("qa") {
+        kotlin.directories += "src/release/kotlin"
+    }
+
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+        animationsDisabled = true
     }
 
     buildFeatures {
@@ -99,5 +118,9 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestUtil(libs.androidx.test.orchestrator)
+    androidTestUtil(libs.androidx.test.services)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
