@@ -161,7 +161,7 @@ jobs:
           force-avd-creation: false
           disable-animations: true
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          script: ./gradlew :app:connectedDebugAndroidTest :smoketest:connectedQaAndroidTest
+          script: scripts/ci-flow-tests.sh
 
       - name: Test reports
         if: failure()
@@ -171,3 +171,4 @@ jobs:
           path: |
             app/build/reports/androidTests
             smoketest/build/reports/androidTests
+            build/ci-diagnostics
