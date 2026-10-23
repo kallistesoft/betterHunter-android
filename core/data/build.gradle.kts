@@ -6,6 +6,8 @@ plugins {
 
 android {
     namespace = "ca.kallistesoft.hunt.core.data"
+    // Robolectric tests read the bundled assets.
+    testOptions.unitTests.isIncludeAndroidResources = true
 }
 
 dependencies {
@@ -13,4 +15,6 @@ dependencies {
     implementation(libs.androidx.datastore)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.serialization.json)
+
+    testImplementation(project(":core:testing"))
 }
