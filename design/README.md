@@ -17,14 +17,16 @@ implements it in `core/designsystem` (theme, components) and the feature screens
 | What is it? (answer) | `PhotoAnswer.dc.html` | `PhotoAnswerLight.dc.html` |
 | Mock exam (question) | `ExamQuestion.dc.html` | `ExamQuestionLight.dc.html` |
 | Onboarding: what kind of hunter? (first launch, after the splash screen) | `HunterProfile.dc.html` | `HunterProfileLight.dc.html` |
+| Onboarding: what are you preparing for? (only after "Working on it") | `ExamPicker.dc.html` | `ExamPickerLight.dc.html` |
 
 Phone frames are 390×844. Dark screens are the top row of the canvas, light screens the row below, in the order of
 the flow: splash, onboarding, home, then the quizzes. Screens link to each other (click through them on the canvas).
 
-**Onboarding (not built yet).** Step 1 of 2 on first launch, before the exam picker: "What kind of hunter are you?"
-with three choices (Working on it: preparing for the licence or hunter course; New hunter: licensed, a few seasons;
-Experienced hunter: many seasons), the selection in orange, Continue. The answer is saved on the device and can be
-changed later.
+**Onboarding (not built yet).** First launch, after the splash: "What kind of hunter are you?" (Working on it:
+preparing for the licence or hunter course; New hunter: licensed, a few seasons; Experienced hunter: many seasons),
+saved on the device. Only "Working on it" goes on to "What are you preparing for?", the exam picker (PAL, RPAL, Québec
+ICAF, Alberta; "More provinces coming"), then Home; new and experienced hunters go straight to Home. A province
+question ("Where do you hunt?") can come later, when more provinces are covered.
 
 ## Logo concepts
 
