@@ -10,8 +10,8 @@ implementation choice (iOS picks its own equivalent).
 ## Product
 
 **P1. Native apps, Android first, then the same app on iOS.** *Product.* The Flutter prototype (hunt repo) proved the
-concept; the store apps are native (Kotlin/Compose here, Swift/SwiftUI on iOS). The hunt repo stays the content source
-and the web demo. *Why:* best platform fit and tooling. *Rejected:* shipping the Flutter app.
+concept; the store apps are native (Kotlin/Compose here, Swift/SwiftUI on iOS). The app's questions live in this repo
+(P4). *Why:* best platform fit and tooling. *Rejected:* shipping the Flutter app.
 
 **P2. Bilingual FR/EN.** *Product.* French for any `fr` locale, English otherwise; the FR/EN toggle sets a per-app
 language (shown in system settings), not an app preference. Questions carry both languages.
@@ -21,11 +21,12 @@ progress stays on the device and follows the user through the OS backup. *Why:* 
 no account-deletion obligations. *Revisit only for:* live sync across devices, purchases shared across platforms,
 sharing with an instructor or group.
 
-**P4. Questions ship inside the app for now.** *Product.* The hunt repo is the source of truth; only questions approved
-in its review workflow are bundled (`scripts/sync-content.sh`). *Next step, not started:* a static API on the GoDaddy
-site (versioned content packs + manifest, synced and cached on the device), see FOLLOW-UP.md section 4. *Rejected for
-now:* a database and backend (GoDaddy PHP/MySQL or Firestore): only worth it for an admin page, accounts or
-server-side features.
+**P4. Questions ship inside the app, and this repo owns them.** *Product.* The exam recipes, question banks and photos
+live in this repo (`core/data/src/main/assets/`) and are edited and reviewed here, by pull request; the app takes no
+content from another repo. *Replaced:* copying approved questions from the hunt repo with a sync script (removed).
+*Next step, not started:* a static API on the GoDaddy site (versioned content packs + manifest, synced and cached on
+the device), see FOLLOW-UP.md section 4. *Rejected for now:* a database and backend (GoDaddy PHP/MySQL or Firestore):
+only worth it for an admin page, accounts or server-side features.
 
 **P5. Quiz rules.** *Product.* Practice and review: 20 questions, answer final, explanation at once, recorded right
 away. Mock exam: the exam's question count, timer and pass mark from `exams.json`; answers can change and are recorded
@@ -68,7 +69,7 @@ secrets). CI builds an unsigned release without the secrets. `versionCode` = CI 
 
 **P9. No RPAL (CRFSC) exam.** *Product.* The app prepares for hunting: the PAL (non-restricted firearms) and provincial
 hunter education. The RPAL covers restricted firearms (mainly handguns), which hunters don't need, so its exam and
-question bank are left out; `scripts/sync-content.sh` drops them when copying content from the hunt repo.
+question bank are left out.
 
 ## Design
 

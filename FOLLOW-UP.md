@@ -193,9 +193,9 @@ a release. Serving them online lets the app update its content by itself.
 
 ### Recommended: a static API on the GoDaddy site
 
-The hunt repo already deploys `hunt.kallistesoft.ca` to GoDaddy on every push. The same deploy can publish the
-approved questions as files, which the app reads like an API. No database, no server code, nothing to secure or back
-up, and the review workflow stays (only approved questions are published).
+Publish this repo's questions as files on `hunt.kallistesoft.ca` (GoDaddy), which the app reads like an API. No
+database, no server code, nothing to secure or back up, and the review stays the same (questions change by pull
+request in this repo).
 
 ```
 https://hunt.kallistesoft.ca/api/v1/manifest.json      {"version": 12, "format": 1, "minAppVersion": 3, "sha256": "…"}
@@ -203,12 +203,12 @@ https://hunt.kallistesoft.ca/api/v1/content-12.json    exam recipes and question
 https://hunt.kallistesoft.ca/api/v1/wildlife/<id>.jpg  photos
 ```
 
-**Hunt repo (publishing):**
+**This repo (publishing):**
 
-1. `python -m qgen bundle` also writes the content pack (exams and approved questions) and the manifest: content
-   version, format version, oldest app versionCode that can read it, SHA-256 of the pack.
-2. The GoDaddy deploy workflow copies `api/v1/` with the web app. Packs are never overwritten: a change is a new
-   version, so an app never reads a half-uploaded file.
+1. A workflow builds the content pack from `core/data/src/main/assets/` (exams and questions) and the manifest:
+   content version, format version, oldest app versionCode that can read it, SHA-256 of the pack.
+2. It uploads `api/v1/` to the GoDaddy site. Packs are never overwritten: a change is a new version, so an app never
+   reads a half-uploaded file.
 
 **App (reading):**
 

@@ -44,8 +44,8 @@ between the antlers), plus *Blaze + uneven rack*, the mix of the first two (high
 
 ## Photos
 
-The screens reference photos uploaded to the canvas (`/_blob/<id>` URLs), copied from `content/wildlife-id/photos/` in the [hunt](https://github.com/kallistesoft/hunt) repo (and the
-splash screen's deer, from this repo):
+The screens reference photos uploaded to the canvas (`/_blob/<id>` URLs), the same Wikimedia Commons photos the app bundles in `core/data/src/main/assets/wildlife/` (and the former app
+icon's deer):
 
 | Blob id | Photo |
 |---|---|

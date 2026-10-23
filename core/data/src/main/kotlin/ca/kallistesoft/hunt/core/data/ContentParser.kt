@@ -11,7 +11,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromJsonElement
 import kotlinx.serialization.json.jsonObject
 
-/** Reads the bundled JSON (same format as the hunt repo's `content/`), independent of Android for tests. */
+/** Reads the bundled JSON (`assets/content/`), independent of Android for tests. */
 object ContentParser {
     private val json = Json { ignoreUnknownKeys = true }
 

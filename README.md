@@ -4,8 +4,8 @@
 (PAL/CFSC) and hunter education exams (Québec ICAF, Alberta), plus "What is it?", a photo game for
 recognising Canada's game animals. Bilingual French/English, everything stays on the device.
 
-The questions, exam recipes and photos come from the [hunt](https://github.com/kallistesoft/hunt) repo (the
-Flutter proof of concept and the question pipeline); this app ships a copy of them.
+The questions, exam recipes and photos live in this repo (`core/data/src/main/assets/`) and ship inside the app.
+They are edited here; the app takes no content from another repo.
 
 Console setup still to do (Firebase, AdMob, Play): see [FOLLOW-UP.md](FOLLOW-UP.md). Product ideas (two parts,
 monetization): [IDEAS.md](IDEAS.md). Decisions and why: [DECISIONS.md](DECISIONS.md).
@@ -175,17 +175,17 @@ records on CI's machine and commits the new references, so they match what CI re
 
 ## Content
 
-Questions and photos live in `core/data/src/main/assets/` and are checked by `BundledContentTest`. To update them
-from the hunt repo:
+This repo is the source of truth for the questions (DECISIONS.md, P4). Everything is in `core/data/src/main/assets/`:
 
-```sh
-scripts/sync-content.sh ../hunt
-```
+| Path | Holds |
+|---|---|
+| `content/exams.json` | Exam recipes: name (FR/EN), the question banks (scopes) they draw from, question count, minutes, pass mark |
+| `content/questions/<scope>.json` | One question bank per scope (`federal`, `hunter-common`, `QC`, `AB`, `wildlife-id`) |
+| `wildlife/` | Photos of the "What is it?" questions (Wikimedia Commons, credited per question) |
 
-The script leaves out the RPAL exam (CRFSC, restricted firearms) and its bank: hunters don't need it (DECISIONS.md, P9).
-
-Image paths in the question banks keep the Flutter form (`assets/wildlife/…`); the parser drops the `assets/`
-prefix.
+Add or correct questions by editing these files in a pull request; `BundledContentTest` checks every bank (both
+languages, four choices, a valid answer, photos present with their credit). Image paths in the banks are written
+`assets/wildlife/…`; the parser drops the `assets/` prefix.
 
 ## Not done yet
 

@@ -13,7 +13,7 @@ import java.io.FileNotFoundException
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/** Exam recipes and question banks bundled as assets (see scripts/sync-content.sh). */
+/** Exam recipes and question banks bundled as assets (see README, "Content"). */
 interface ContentRepository {
     val content: Flow<Content>
 }
