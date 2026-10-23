@@ -66,6 +66,10 @@ iOS chooses its bundle ID when its App Store Connect app is created.
 **S2. Release signing.** Play App Signing; the developer keeps only an upload key (keystore.properties locally, CI
 secrets). CI builds an unsigned release without the secrets. `versionCode` = CI run number.
 
+**P9. No RPAL (CRFSC) exam.** *Product.* The app prepares for hunting: the PAL (non-restricted firearms) and provincial
+hunter education. The RPAL covers restricted firearms (mainly handguns), which hunters don't need, so its exam and
+question bank are left out; `scripts/sync-content.sh` drops them when copying content from the hunt repo.
+
 ## Design
 
 **D1. Material 3 with a fixed brand palette.** *Replaced by D6.* Colour scheme generated (tonal spot) from the icon's

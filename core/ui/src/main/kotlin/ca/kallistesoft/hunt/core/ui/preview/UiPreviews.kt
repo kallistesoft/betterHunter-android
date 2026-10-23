@@ -35,7 +35,7 @@ internal fun ExamListItemPreview() = PreviewSurface {
     Column {
         BackTopAppBar("Exam training", onBack = {})
         BhCard(Modifier.padding(Spacing.l)) {
-            ExamListItem(PreviewData.crfsc, questionCount = 187)
+            ExamListItem(PreviewData.abhe, questionCount = 285)
             ExamListItem(PreviewData.icaf, questionCount = 241, trailing = { Icon(Icons.Rounded.CheckCircle, null) })
         }
     }

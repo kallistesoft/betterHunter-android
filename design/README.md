@@ -24,7 +24,7 @@ the flow: splash, onboarding, home, then the quizzes. Screens link to each other
 
 **Onboarding (not built yet).** First launch, after the splash: "What kind of hunter are you?" (Working on it:
 preparing for the licence or hunter course; New hunter: licensed, a few seasons; Experienced hunter: many seasons),
-saved on the device. Only "Working on it" goes on to "What are you preparing for?", the exam picker (PAL, RPAL, Québec
+saved on the device. Only "Working on it" goes on to "What are you preparing for?", the exam picker (PAL, Québec
 ICAF, Alberta; "More provinces coming"), then Home; new and experienced hunters go straight to Home. A province
 question ("Where do you hunt?") can come later, when more provinces are covered.
 

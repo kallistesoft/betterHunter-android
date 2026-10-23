@@ -7,7 +7,7 @@ import ca.kallistesoft.hunt.core.ui.preview.PreviewData
 
 internal val previewExamsState = ExamsUiState(
     mine = listOf(PreviewData.palSummary, PreviewData.icafSummary),
-    others = listOf(PreviewData.crfscSummary),
+    others = listOf(PreviewData.abheSummary),
     games = listOf(PreviewData.photoGameSummary),
     loading = false,
 )
@@ -25,8 +25,8 @@ internal fun ExamPickerPreview() = PreviewSurface {
         state = ExamPickerUiState(
             exams = listOf(
                 PickerExam(PreviewData.pal, 303),
-                PickerExam(PreviewData.crfsc, 187),
-                PickerExam(PreviewData.icaf, 241),
+                PickerExam(PreviewData.icaf, 228),
+                PickerExam(PreviewData.abhe, 285),
             ),
             chosen = setOf("PAL"),
         ),

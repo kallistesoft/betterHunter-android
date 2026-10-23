@@ -22,10 +22,13 @@ object PreviewData {
         ),
         scopes = listOf("hunter-common", "QC"),
     )
-    val crfsc = Exam(
-        id = "CRFSC",
-        names = mapOf(Lang.FR to "Examen CCSMAFAR (armes à autorisation restreinte)", Lang.EN to "CRFSC exam (restricted)"),
-        scopes = listOf("federal-restricted"),
+    val abhe = Exam(
+        id = "ABHE",
+        names = mapOf(
+            Lang.FR to "Éducation à la chasse et à la conservation (Alberta)",
+            Lang.EN to "Alberta Conservation and Hunter Education",
+        ),
+        scopes = listOf("hunter-common", "AB"),
     )
     val photoGame = Exam(
         id = "ID",
@@ -37,7 +40,7 @@ object PreviewData {
 
     val palSummary = ExamSummary(pal, questionCount = 303, readiness = 0.62f, weakCount = 7)
     val icafSummary = ExamSummary(icaf, questionCount = 241, readiness = 0.18f, weakCount = 0)
-    val crfscSummary = ExamSummary(crfsc, questionCount = 187, readiness = 0f, weakCount = 0)
+    val abheSummary = ExamSummary(abhe, questionCount = 285, readiness = 0f, weakCount = 0)
     val photoGameSummary = ExamSummary(photoGame, questionCount = 66, readiness = 0.4f, weakCount = 3)
 
     val question = Question(

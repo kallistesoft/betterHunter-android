@@ -26,7 +26,6 @@ data class ExamStyle(val region: String, val group: ExamGroup) {
     companion object {
         private val styles = mapOf(
             "PAL" to ExamStyle("Canada", ExamGroup.FIREARMS),
-            "CRFSC" to ExamStyle("Canada", ExamGroup.FIREARMS),
             "ICAF" to ExamStyle("Québec", ExamGroup.HUNTING),
             "ABHE" to ExamStyle("Alberta", ExamGroup.HUNTING),
             "ID" to ExamStyle("Canada", ExamGroup.IDENTIFICATION),

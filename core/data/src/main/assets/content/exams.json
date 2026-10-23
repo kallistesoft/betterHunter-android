@@ -23,11 +23,5 @@
     "scopes": ["wildlife-id"],
     "questionCount": 20, "minutes": 15, "passMark": 0.8,
     "verified": true
-  },
-  "CRFSC": {
-    "name": {"fr": "Examen CCSMAFAR (armes à autorisation restreinte)", "en": "CRFSC exam (restricted)"},
-    "scopes": ["federal-restricted"],
-    "questionCount": 50, "minutes": 60, "passMark": 0.8,
-    "verified": false
   }
 }

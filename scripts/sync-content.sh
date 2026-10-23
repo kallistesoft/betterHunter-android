@@ -15,4 +15,16 @@ mkdir -p "$DEST/content/questions" "$DEST/wildlife"
 cp "$HUNT/app/assets/content/exams.json" "$DEST/content/"
 cp "$HUNT/app/assets/content/questions/"*.json "$DEST/content/questions/"
 cp "$HUNT/app/assets/wildlife/"* "$DEST/wildlife/"
+
+# Not in this app: the RPAL exam (CRFSC, restricted firearms), which hunters don't need (DECISIONS.md, P9).
+rm -f "$DEST/content/questions/federal-restricted.json"
+python3 - "$DEST/content/exams.json" <<'PY'
+import json, sys
+path = sys.argv[1]
+exams = json.load(open(path, encoding="utf-8"))
+exams.pop("CRFSC", None)
+with open(path, "w", encoding="utf-8") as f:
+    json.dump(exams, f, ensure_ascii=False, indent=2)
+    f.write("\n")
+PY
 echo "Synced $(ls "$DEST/content/questions" | wc -l) question banks and $(ls "$DEST/wildlife" | wc -l) photos."

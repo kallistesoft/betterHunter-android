@@ -4,7 +4,7 @@ Thinking out loud, not a plan: nothing here is decided or scheduled. Written 202
 
 ## The idea: two parts in one app
 
-1. **Prep:** exam preparation (what the app does today: PAL/CRFSC, provincial hunter education, photo ID).
+1. **Prep:** exam preparation (what the app does today: PAL, provincial hunter education, photo ID).
 2. **In the field:** tools for the season, once the licence is in hand.
 
 Why it helps: an exam-prep app is used for a few weeks and then deleted once the exam is passed. A field part gives a

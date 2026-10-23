@@ -1,7 +1,7 @@
 # BetterHunter for Android
 
 *Chassez mieux. / Hunt better.* Native Android version of BetterHunter: practice for the Canadian firearms licence
-(PAL/CFSC, CRFSC) and hunter education exams (Québec ICAF, Alberta), plus "What is it?", a photo game for
+(PAL/CFSC) and hunter education exams (Québec ICAF, Alberta), plus "What is it?", a photo game for
 recognising Canada's game animals. Bilingual French/English, everything stays on the device.
 
 The questions, exam recipes and photos come from the [hunt](https://github.com/kallistesoft/hunt) repo (the
@@ -181,6 +181,8 @@ from the hunt repo:
 ```sh
 scripts/sync-content.sh ../hunt
 ```
+
+The script leaves out the RPAL exam (CRFSC, restricted firearms) and its bank: hunters don't need it (DECISIONS.md, P9).
 
 Image paths in the question banks keep the Flutter form (`assets/wildlife/…`); the parser drops the `assets/`
 prefix.
