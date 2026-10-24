@@ -31,7 +31,7 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | Mock exam: results | `ExamResults.dc.html` | `ExamResultsLight.dc.html` | built |
 | I passed the real exam: confirm (from Exam training) | `PassedExam.dc.html` | `PassedExamLight.dc.html` | built |
 | Home, hunter (after passing the real exam): the Hunter home with a congratulations banner and an "Exam training · ICAF passed" row | `HomeHunterPassed.dc.html` | `HomeHunterPassedLight.dc.html` | built |
-| Onboarding as a hunter: what kind of hunter? → Hunter, then the same two questions (rules and field skills instead of courses) | `HunterProfileHunter.dc.html`, `HuntWithHunter.dc.html`, `HuntWhereHunter.dc.html` | `…Light.dc.html` | built, except the hunter wording of "What do you hunt with?" and "Where do you hunt?" |
+| Onboarding as a hunter: what kind of hunter? → Hunter, then the same two questions | `HunterProfileHunter.dc.html`, `HuntWithHunter.dc.html`, `HuntWhereHunter.dc.html` | `…Light.dc.html` | built |
 | Home, hunter, first day: "Already hunt? Skip what you know" (skill check card, dismissible) above today's 6 questions | `HomeHunterFirst.dc.html` | `HomeHunterFirstLight.dc.html` | not built (the skill check card) |
 | Skill check: question (15, all skills) | `SkillCheckQuestion.dc.html` | `SkillCheckQuestionLight.dc.html` | not built |
 | Skill check: results (aced skills start as mastered) | `SkillCheckResults.dc.html` | `SkillCheckResultsLight.dc.html` | not built |
@@ -78,7 +78,8 @@ logo boards). Edit the generator, regenerate, then publish the changed files to 
 
 **Onboarding (built).** First launch, after the splash: "What kind of hunter are you?" (Working on it,
 or Hunter: licensed, whatever the number of seasons), "What do you hunt with?" (firearm, bow, crossbow; pick all that apply) and "Where do
-you hunt?" (Québec, Alberta, elsewhere in Canada), saved on the device. The province sets the quizzes of a "Working on
+you hunt?" (Québec, Alberta, elsewhere in Canada), saved on the device. Neither question names an exam, for either
+profile (no ICAF, PAL, hunter course or quizzes: "Québec hunting rules and game"). Behind the scenes the province sets the quizzes of a "Working on
 it" user: Québec, the Québec hunter course (ICAF; ICAA for bow and crossbow once it has questions); Alberta, the Alberta
 course and the PAL; elsewhere, the PAL. Settings → My provinces switches other provinces on (adding their quizzes) or off. There is
 no exam list in onboarding.

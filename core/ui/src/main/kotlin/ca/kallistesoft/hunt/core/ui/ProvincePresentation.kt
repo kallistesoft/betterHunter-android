@@ -24,6 +24,15 @@ val Province.quizzesRes: Int
         Province.OTHER -> R.string.province_other_sub
     }
 
+/** "Where do you hunt?": what the province brings, without naming exams (both profiles). */
+@get:StringRes
+val Province.whereRes: Int
+    get() = when (this) {
+        Province.QC -> R.string.province_qc_where
+        Province.AB -> R.string.province_ab_where
+        Province.OTHER -> R.string.province_other_where
+    }
+
 /** Same icons as the province's hunter course ([examIcon]). */
 val Province.icon: ImageVector
     get() = when (this) {

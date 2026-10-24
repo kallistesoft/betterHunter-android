@@ -83,7 +83,8 @@ education: in Québec, ICAF to hunt with firearms (without a PAL you hunt near a
 crossbow; in Alberta, Conservation and Hunter Education. The PAL (CFSC) is the federal licence to own or buy
 firearms, not a requirement to be a hunter. Onboarding asks where the user hunts and the province sets the
 quizzes: Québec, the Québec hunter course (no PAL); Alberta, the Alberta course and the PAL; elsewhere in Canada, the
-PAL. Settings → My provinces switches other provinces on (adding their quizzes) or off. "I passed the real exam" on a hunter
+PAL. The question itself names no exam ("Québec hunting rules and game", 2026-10-24); the quizzes show in Exam
+training and My provinces. Settings → My provinces switches other provinces on (adding their quizzes) or off. "I passed the real exam" on a hunter
 course is what turns a user into a Hunter (P12).
 ICAA (bow and crossbow) is shown as coming soon until it has questions. *In the app (2026-10-23):* onboarding asks the three questions (no exam picker), the profile and the
 provinces are in `UserProgress` (`myExamIds`: home province first), hunter courses come before the PAL (`ExamGroup`
