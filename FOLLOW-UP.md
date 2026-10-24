@@ -339,5 +339,5 @@ but not in the app yet:
 
 ## 6. Store screenshots: retake the exam ones
 
-The Play screenshots `store/screens/*-4-exams.png` still show the old exam card ("Hunter education with firearms
+The Play screenshots `store/screens/*-4-exams.png` (and `*-1-dashboard.png`, whose Today card names the exam) still show the old exam card ("Hunter education with firearms
 (Québec)"). Retake them from the current build: the app no longer names provincial courses (DECISIONS.md, P13).

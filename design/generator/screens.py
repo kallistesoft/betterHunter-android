@@ -237,9 +237,9 @@ def provinces(t):
                 f'<span style="font-family: \'Barlow Condensed\', sans-serif; font-weight: 600; font-size: 20px; line-height: 1.1">{title}</span>'
                 f'<span style="font-size: 13px; line-height: 1.35; color: {t["muted"]}">{quizzes}</span>{badge if where else ""}</span>{switch(t, on)}</div>')
     body = f'''{header(t, "My provinces", back=href(t, "Settings"))}
-  <p style="margin: 0; font-size: 14px; line-height: 1.45; color: {t["muted"]}">Your quizzes follow your provinces. Add a province to practise its hunter course, or remove one to hide its quizzes.</p>
-  {card(t, province("tree", "Québec", "Hunter course with firearms (ICAF) · bow and crossbow coming soon", True, where=True)
-        + province("mountain", "Alberta", "Conservation and Hunter Education · PAL (firearms licence)", False)
+  <p style="margin: 0; font-size: 14px; line-height: 1.45; color: {t["muted"]}">Your quizzes follow your provinces. Add a province to practise its hunting exam, or remove one to hide its quizzes.</p>
+  {card(t, province("tree", "Québec", "Hunting exam questions · bow and crossbow coming soon", True, where=True)
+        + province("mountain", "Alberta", "Hunting exam questions · PAL (firearms licence)", False)
         + province("maple", "Elsewhere in Canada", "PAL (firearms licence)", False), pad="0 16px", gap=0)}
   <p style="margin: 0; font-size: 13px; color: {t["muted"]}; display: flex; align-items: center; gap: 8px">{icon("goal", 16)} More provinces coming.</p>'''
     return page(t, "BetterHunter my provinces", body, gap=12)
@@ -283,7 +283,7 @@ def about(t):
     body = f'''{header(t, "About", back=href(t, "Settings"))}
   <section style="background: {t["green_tint"]}; border: 1px solid {t["border"]}; border-radius: 16px; padding: 14px 16px; display: flex; gap: 12px">
     <span style="color: {t["green"]}; flex-shrink: 0; padding-top: 2px">{icon("info", 20)}</span>
-    <p style="margin: 0; font-size: 13px; line-height: 1.45">Independent study aid, not affiliated with or endorsed by the RCMP, the Canadian Firearms Program, the Government of Québec or FédéCP. Questions are original practice questions based on the official manuals; they are not the official exam questions. Errors are possible and laws change: always check the official manual and current regulations.</p>
+    <p style="margin: 0; font-size: 13px; line-height: 1.45">Independent study aid, not affiliated with or endorsed by any government, police force or hunting organization. Questions are original practice questions based on the official manuals; they are not the official exam questions. Errors are possible and laws change: always check the official manual and current regulations.</p>
   </section>
   {label(t, "How it works", t["muted"])}
   {card(t, f'<p style="margin: 0; font-size: 14px; line-height: 1.45"><b style="font-weight: 600">Practice:</b> answer and explanation after every question</p><p style="margin: 0; font-size: 14px; line-height: 1.45; border-top: 1px solid {t["border"]}; padding-top: 10px"><b style="font-weight: 600">Mock exam:</b> timed, results at the end, like the real one</p>', pad="14px 16px", gap=10, radius=18)}
@@ -298,9 +298,9 @@ def exam_training(t):
     icaf = f'''<div style="display: flex; gap: 12px; align-items: flex-start">
       {tile(t, "tree")}
       <span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0">
-        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 20px; line-height: 1.1">Hunter education with firearms (ICAF)</span>
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 20px; line-height: 1.1">Hunting exam · Québec</span>
         <span style="font-size: 13px; color: {t["muted"]}">228 questions</span>
-        <span style="font-size: 13px; color: {t["muted"]}">Québec · 60 min · 80% to pass</span>
+        <span style="font-size: 13px; color: {t["muted"]}">60 min · 80% to pass</span>
       </span>
       <span style="display: flex; flex-direction: column; align-items: center; gap: 4px">{ring_html}<span style="font-size: 11px; color: {t["muted"]}">Readiness</span></span>
     </div>
@@ -378,14 +378,14 @@ def missed_card(t, q, yours, correct):
 def results(t, exam):
     if exam:
         color, pct, count = t["red"], 74, "37 / 50"
-        title, over = "Mock exam results", "ICAF · Québec"
+        title, over = "Mock exam results", "Hunting exam · Québec"
         verdict = (f'<span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; border: 1.5px solid {t["red"]}; color: {t["red"]}; font-weight: 600; font-size: 14px">{icon("x", 16, t["red"], 2.4)} Not passed · Pass mark 80%</span>'
                    f'<span style="font-size: 13px; color: {t["muted"]}">Time: 42:18 of 60:00 · 13 questions to review</span>')
         missed = "".join(missed_card(t, *m) for m in MISSED[:2]) + f'<span style="text-align: center; font-size: 13px; color: {t["muted"]}">+ 11 more below</span>'
         again = href(t, "ExamQuestion")
     else:
         color, pct, count = t["green"], 85, "17 / 20"
-        title, over = "Practice results", "ICAF · Québec"
+        title, over = "Practice results", "Hunting exam · Québec"
         verdict = (f'<span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; background: {t["green_tint"]}; color: {t["green"]}; font-weight: 600; font-size: 14px">{icon("check", 16, t["green"], 2.4)} Daily goal reached</span>'
                    f'<span style="font-size: 13px; color: {t["muted"]}">3 questions go to "Review my mistakes"</span>')
         missed = "".join(missed_card(t, *m) for m in MISSED)
@@ -404,7 +404,7 @@ def results(t, exam):
 
 
 def quit_dialog(t):
-    behind = f'''{header(t, "Question 18 / 50", back="#", close=True, overline="Mock exam · ICAF")}
+    behind = f'''{header(t, "Question 18 / 50", back="#", close=True, overline="Mock exam · Hunting exam")}
   <div style="height: 5px; border-radius: 3px; background: {t["track"]}"><div style="width: 36%; height: 5px; border-radius: 3px; background: {t["current"]}"></div></div>
   <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 28px; line-height: 1.15">Which level of government is responsible for managing migratory birds?</h1>
   {choice(t, "A", "The provincial government", "idle")}
@@ -433,13 +433,13 @@ def photo_zoom(t):
 
 
 def nothing_to_review(t):
-    body = f'''{header(t, "Review my mistakes", back=href(t, "ExamTraining"), overline="ICAF · Québec")}
+    body = f'''{header(t, "Review my mistakes", back=href(t, "ExamTraining"), overline="Hunting exam · Québec")}
   <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; padding: 0 12px">
     <span style="width: 84px; height: 84px; border-radius: 24px; background: {t["green_tint"]}; color: {t["green"]}; display: flex; align-items: center; justify-content: center">{icon("check", 44, width=2.4)}</span>
     <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 30px">Nothing to review yet</h1>
     <p style="margin: 0; font-size: 15px; line-height: 1.45; color: {t["muted"]}">Questions you miss come here until you answer them right twice in a row.</p>
   </div>
-  {primary(t, "Practise the ICAF", href(t, "PracticeQuestion"), icon_name="play")}'''
+  {primary(t, "Practise: Hunting exam", href(t, "PracticeQuestion"), icon_name="play")}'''
     return page(t, "BetterHunter nothing to review", body, gap=14)
 
 
@@ -494,7 +494,7 @@ def passed_exam(t):
   <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; padding: 8px 8px 0">
     <span style="width: 96px; height: 96px; border-radius: 28px; background: {t["orange_tint"]}; color: {t["label"]}; display: flex; align-items: center; justify-content: center">{icon("trophy", 50, width=2)}</span>
     {label(t, "Real exam")}
-    <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.05">Did you pass your hunter course (ICAF)?</h1>
+    <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.05">Did you pass your hunting exam?</h1>
     <p style="margin: 0; font-size: 15px; line-height: 1.45; color: {t["muted"]}">Congratulations if so! Here's what changes in BetterHunter:</p>
   </div>
   {card(t, changes, pad="16px", gap=14, radius=18)}
@@ -550,7 +550,7 @@ def home_hunter(t, passed=False, season=None, first=False):
     exam_row = f'''<a href="{href(t, "ExamTraining")}" style="display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 8px 6px 8px 14px; border-radius: 18px; background: {t["card"]}; border: 1px solid {t["border"]}; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}; flex-shrink: 0">
     {tile(t, "school", "green", 40, 11)}
     <span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">Exam training</span><span style="font-size: 13px; color: {t["muted"]}">Refresh the rules any time</span></span>
-    <span style="display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: {t["green"]}">{icon("check", 14, t["green"], 2.6)} ICAF passed</span>
+    <span style="display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: {t["green"]}">{icon("check", 14, t["green"], 2.6)} Hunting exam passed</span>
     <span style="width: 30px; display: flex; justify-content: center; color: {t["muted"]}">{icon("chevron", 18)}</span>
   </a>'''
     def daily_row(target, ic, tone, title, sub, done, divider):
@@ -671,7 +671,7 @@ def hunter_profile_hunter(t):
   </div>
   <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
     <legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">What kind of hunter are you?</legend>
-    {option(icon("book", 24), "Working on it", "Preparing for my licence or hunter course")}
+    {option(icon("book", 24), "Working on it", "Preparing for my hunting exam or PAL")}
     {option(RACK, "Hunter", "Licensed, I already hunt", selected=True)}
   </fieldset>
   <div style="margin-top: auto; display: flex; flex-direction: column; gap: 10px">
