@@ -246,7 +246,7 @@ def provinces(t):
 
 
 def hunt_where(t, fl=""):
-    # fl: "" (working on it), "NewHunter" or "Experienced"; hunters see rules instead of hunter courses.
+    # fl: "" (working on it) or "Hunter"; hunters see rules instead of hunter courses.
     new_hunter = bool(fl)
     def option(name, title, sub, selected=False):
         bg, border = (t["sel"], t["orange"]) if selected else (t["card"], t["outline"])
@@ -274,7 +274,7 @@ def hunt_where(t, fl=""):
     {option("maple", "Elsewhere in Canada", "Canada-wide skills for now; more provinces coming" if new_hunter else "The PAL (firearms licence) for now; more provinces coming")}
   </fieldset>
   <p style="margin: 0; font-size: 13px; line-height: 1.4; color: {t["muted"]}; display: flex; gap: 8px">{icon("info", 16)}<span>{"You can add other provinces later in Settings." if new_hunter else "You can add other provinces' quizzes later in Settings."}</span></p>
-  <div style="margin-top: auto">{primary(t, "Continue", href(t, {"": "Main", "NewHunter": "HomeNewHunter", "Experienced": "HomeExperiencedFirst"}[fl]))}</div>'''
+  <div style="margin-top: auto">{primary(t, "Continue", href(t, {"": "Main", "Hunter": "HomeHunterFirst"}[fl]))}</div>'''
     return page(t, "BetterHunter onboarding: where do you hunt", body, gap=16)
 
 
@@ -487,9 +487,9 @@ def passed_exam(t):
     changes = "".join(
         f'<div style="display: flex; gap: 12px; align-items: flex-start">{tile(t, ic, tone, 36, 10)}<span style="font-size: 14px; line-height: 1.4; padding-top: 2px">{text}</span></div>'
         for ic, tone, text in [
-            ("eye", "orange", "Home focuses on identifying game: <b style=\"font-weight: 600\">What is it?</b> becomes your daily practice."),
+            ("eye", "orange", "Home leads with <b style=\"font-weight: 600\">today's 6 questions</b>: species to name and field know-how."),
             ("school", "green", "Your exam practice stays in <b style=\"font-weight: 600\">Exam training</b>, to refresh the rules any time."),
-            ("user", "green", "You become a <b style=\"font-weight: 600\">New hunter</b>; you can change it back in Settings."),
+            ("user", "green", "You become a <b style=\"font-weight: 600\">Hunter</b>; you can change it back in Settings."),
         ])
     body = f'''{header(t, "", back=href(t, "ExamTraining"))}
   <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; padding: 8px 8px 0">
@@ -500,22 +500,32 @@ def passed_exam(t):
   </div>
   {card(t, changes, pad="16px", gap=14, radius=18)}
   <div style="margin-top: auto; display: flex; flex-direction: column; gap: 6px">
-    {primary(t, "Yes, I passed", href(t, "MainNewHunter"), icon_name="check")}
+    {primary(t, "Yes, I passed", href(t, "HomeHunterPassed"), icon_name="check")}
     <a href="{href(t, "ExamTraining")}" style="height: 48px; display: flex; align-items: center; justify-content: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none">Not yet</a>
   </div>'''
     return page(t, "BetterHunter passed the real exam", body, gap=16)
 
 
-def main_new_hunter(t, passed=True, season=None):
+def home_hunter(t, passed=False, season=None, first=False):
+    """The Hunter's home. passed: just passed the real exam (banner, Exam training row); season: None, "date" (the hunter
+    set their opening date) or "generic" (no date: shown from late August); first: right after onboarding (skill check)."""
     pill = (f'<span style="display: flex; border: 1px solid {t["outline"]}; border-radius: 999px; padding: 3px; background: {t["card"] if t["name"] == "light" else "transparent"}">'
             f'<span style="color: {t["muted"]}; font: 600 13px Barlow, sans-serif; height: 38px; min-width: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center">FR</span>'
             f'<span style="background: {t["green_tint"] if t["name"] == "light" else t["track"]}; color: {t["text"]}; font: 600 13px Barlow, sans-serif; height: 38px; min-width: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center">EN</span></span>')
-    banner = f'''<section style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px; background: {t["sel"]}; border: 1px solid {t["warm_border"]}">
+    dismiss = f'<a href="#" aria-label="Dismiss" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: {t["muted"]}; margin: -10px -10px 0 0; flex-shrink: 0">{icon("close", 18)}</a>'
+    banner = f'''<section style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px; background: {t["sel"]}; border: 1px solid {t["warm_border"]}; flex-shrink: 0">
     {tile(t, "trophy", "orange", 40, 10)}
-    <span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">Hunter course passed. Welcome, new hunter!</span><span style="font-size: 13px; color: {t["muted"]}">Now sharpen your eye in the field.</span></span>
+    <span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">Hunter course passed. Welcome, hunter!</span><span style="font-size: 13px; color: {t["muted"]}">Now sharpen your eye in the field.</span></span>
     <a href="#" aria-label="Dismiss" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: {t["muted"]}; margin-right: -10px">{icon("close", 18)}</a>
   </section>'''
-    # season: None, "date" (the hunter set their opening date) or "generic" (no date: shown from late August)
+    check = f'''<section style="display: flex; flex-direction: column; gap: 10px; padding: 14px 14px 14px; border-radius: 16px; background: {t["sel"]}; border: 1px solid {t["warm_border"]}; flex-shrink: 0">
+    <div style="display: flex; gap: 12px; align-items: flex-start">{tile(t, "target", "orange", 40, 10)}
+      <span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0">
+        <span style="font-weight: 600; font-size: 15px">Already hunt? Skip what you know</span>
+        <span style="font-size: 13px; line-height: 1.35; color: {t["muted"]}">15 questions across your field skills. The ones you get right start as mastered.</span>
+      </span>{dismiss}</div>
+    <a href="{href(t, "SkillCheckQuestion")}" style="display: flex; align-items: center; gap: 8px; min-height: 40px; padding-left: 52px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none">{icon("play", 16)} Take the skill check</a>
+  </section>'''
     if season == "date":
         season_title, season_sub = "Your season starts in 3 weeks", "Nov 14, the date you set · season check: 15 questions"
     else:
@@ -529,18 +539,21 @@ def main_new_hunter(t, passed=True, season=None):
                 f'color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none">{icon("goal", 16)} Set my season start date</a>') if season == "generic" else ""
     season_card = (f'<section style="display: flex; flex-direction: column; border-radius: 16px; background: {t["sel"]}; border: 1px solid {t["warm_border"]}; flex-shrink: 0">'
                    f'{season_main}{set_date}</section>')
-    exam_tile = f'''<a href="{href(t, "ExamTraining")}" style="background: {t["card"]}; border: 1px solid {t["border"]}; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">
-      {tile(t, "school")}
-      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">Exam training</span>
-      <span style="font-size: 13px; color: {t["muted"]}; line-height: 1.35">Refresh the rules any time</span>
-      <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: {t["green"]}; margin-top: auto">{icon("check", 14, t["green"], 2.6)} ICAF passed</span>
-    </a>'''
+    top = banner if passed else check if first else season_card if season else ""
+    skills_meter = (f'<span style="font-size: 12px; color: {t["muted"]}; margin-top: auto">Not checked yet</span>' if first
+                    else meter(t, "Readiness", "88%" if season else "64%", 88 if season else 64))
     skills_tile = f'''<a href="{href(t, "FieldSkills")}" style="background: {t["card"]}; border: 1px solid {t["border"]}; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">
       {tile(t, "target")}
       <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">Field skills</span>
       <span style="font-size: 13px; color: {t["muted"]}; line-height: 1.35">Shot placement, tracking, safety</span>
-      {meter(t, "Readiness", "88%" if season else "64%", 88 if season else 64)}
+      {skills_meter}
     </a>'''
+    exam_row = f'''<a href="{href(t, "ExamTraining")}" style="display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 8px 6px 8px 14px; border-radius: 18px; background: {t["card"]}; border: 1px solid {t["border"]}; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}; flex-shrink: 0">
+    {tile(t, "school", "green", 40, 11)}
+    <span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">Exam training</span><span style="font-size: 13px; color: {t["muted"]}">Refresh the rules any time</span></span>
+    <span style="display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: {t["green"]}">{icon("check", 14, t["green"], 2.6)} ICAF passed</span>
+    <span style="width: 30px; display: flex; justify-content: center; color: {t["muted"]}">{icon("chevron", 18)}</span>
+  </a>'''
     def daily_row(target, ic, tone, title, sub, done, divider):
         dots = "".join(f'<span style="width: 8px; height: 8px; border-radius: 999px; background: {t["bar"] if n < done else t["track"]}"></span>' for n in range(3))
         return (f'<a href="{href(t, target)}" style="display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 6px 0; '
@@ -549,48 +562,45 @@ def main_new_hunter(t, passed=True, season=None):
                 f'<span style="font-size: 12px; color: {t["muted"]}">{sub}</span></span>'
                 f'<span style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px"><span style="display: flex; gap: 4px">{dots}</span>'
                 f'<span style="font-size: 12px; font-weight: 600; color: {t["green"] if done else t["muted"]}">{done} / 3</span></span></a>')
+    fresh = first or passed
+    species_done = 0 if fresh else 1
     daily_card = card(t, f'''<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
       <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
         {label(t, "Today")}
         <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 22px; line-height: 1.15">Stay up to date: 6 questions</span>
-        <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: {t["muted"]}">{icon("flame", 14, t["orange"], 2.2)} 6-day streak · new questions every day</span>
+        <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: {t["muted"]}">{"" if fresh else icon("flame", 14, t["orange"], 2.2) + " 6-day streak · "}{"N" if fresh else "n"}ew questions every day</span>
       </div></div>
     <div style="display: flex; flex-direction: column">
-      {daily_row("PhotoQuiz", "eye", "orange", "3 species", "Name the animal from its photo", 2, False)}
+      {daily_row("LookalikeQuestion", "eye", "orange", "3 species", "Name the animal, spot the look-alikes", species_done, False)}
       {daily_row("DailyQuestion", "book", "green", "3 general", "Rules, safety, shot placement", 0, True)}
     </div>
-    {primary(t, "Continue: 1 species left", href(t, "PhotoQuiz"), "; height: 52px", "play")}''', pad="16px 18px 18px", gap=10)
-    ring_html = ring(t, 25, 84, 8, t["orange"], f'<span style="font-family: \'Barlow Condensed\', sans-serif; font-weight: 700; font-size: 28px; line-height: 1">5</span><span style="font-size: 11px; color: {t["muted"]}">of 20</span>')
-    goal_card = card(t, f'''<div style="display: flex; align-items: center; gap: 16px">{ring_html}
-      <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
-        {label(t, "Today")}
-        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 22px; line-height: 1.15">15 animals to your daily goal</span>
-        <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: {t["muted"]}">{icon("flame", 14, t["orange"], 2.2)} 6-day streak</span>
-      </div></div>
-    {primary(t, "Play What is it?", href(t, "PhotoQuiz"), "; height: 52px", "play")}''', pad="18px", gap=16)
-    body = f'''<header style="display: flex; align-items: center; justify-content: space-between; height: 48px; flex-shrink: 0">
-    <div style="display: flex; align-items: center; gap: 10px">{buck(34, t["text"], t["orange"])}<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.2px">BetterHunter</span></div>
-    <div style="display: flex; align-items: center; gap: 8px">{pill}{round_link(t, href(t, "Settings" if passed else "SettingsHunter"), "Settings", "gear", t["muted"])}</div>
-  </header>
-  {banner if passed else season_card if season else ""}
-  {goal_card if passed else daily_card}
-  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
-    <a href="{href(t, "Recognition")}" style="background: {t["card"]}; border: 1px solid {t["border"]}; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">
-      {tile(t, "eye", "orange")}
-      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">What is it?</span>
-      <span style="font-size: 13px; color: {t["muted"]}; line-height: 1.35">Identify Canada's game animals</span>
-      {meter(t, "Readiness", "40%", 40)}
-    </a>
-    {exam_tile if passed else skills_tile}
-  </div>
-  <section style="position: relative; flex: 1; min-height: {"150px; flex-shrink: 0" if season else "0"}; border-radius: 22px; overflow: hidden; background: {t["track"]}">
+    {primary(t, "Start today's questions" if fresh else "Continue: 2 species left", href(t, "LookalikeQuestion"), "; height: 52px", "play")}''', pad="16px 18px 18px", gap=10)
+    photo = f'''<section style="position: relative; flex: 1; min-height: {"150px; flex-shrink: 0" if season else "0"}; border-radius: 22px; overflow: hidden; background: {t["track"]}">
     <img src="/_blob/876ea656307e18bff50cd003ae123e81" alt="Photo of the day, to identify" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
     <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 36px 16px 14px; background: linear-gradient(180deg, rgba(14,22,17,0) 0%, rgba(14,22,17,0.9) 60%); display: flex; flex-direction: column; gap: 2px; color: #FFFFFF">
       <span style="font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: #F7A06A">Photo of the day</span>
       <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 24px">What is it?</span>
     </div>
   </section>'''
-    return page(t, "BetterHunter home, new hunter" + ("" if passed else f", before the season ({'your date' if season == 'date' else 'no date'})" if season else " (from onboarding)"), body, gap=14, padding="20px 20px 24px")
+    body = f'''<header style="display: flex; align-items: center; justify-content: space-between; height: 48px; flex-shrink: 0">
+    <div style="display: flex; align-items: center; gap: 10px">{buck(34, t["text"], t["orange"])}<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.2px">BetterHunter</span></div>
+    <div style="display: flex; align-items: center; gap: 8px">{pill}{round_link(t, href(t, "SettingsHunter"), "Settings", "gear", t["muted"])}</div>
+  </header>
+  {top}
+  {daily_card}
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; flex-shrink: 0">
+    <a href="{href(t, "Recognition")}" style="background: {t["card"]}; border: 1px solid {t["border"]}; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">
+      {tile(t, "eye", "orange")}
+      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">What is it?</span>
+      <span style="font-size: 13px; color: {t["muted"]}; line-height: 1.35">Identify Canada's game animals</span>
+      {meter(t, "Readiness", "40%", 40)}
+    </a>
+    {skills_tile}
+  </div>
+  {exam_row if passed else "" if first else photo}'''
+    kind = (" (exam passed)" if passed else " (first day: skill check)" if first
+            else f", before the season ({'your date' if season == 'date' else 'no date'})" if season else "")
+    return page(t, "BetterHunter home, hunter" + kind, body, gap=14, padding="20px 20px 24px")
 
 
 def hunt_with(t, fl=""):
@@ -611,19 +621,19 @@ def hunt_with(t, fl=""):
   <div style="display: flex; flex-direction: column; gap: 8px">
     {label(t, "Next question")}
     <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 34px; line-height: 1.05">What do you hunt with?</h1>
-    <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Pick all that apply. It decides which hunter course and rules you'll see.</p>
+    <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Pick all that apply. {"It decides which rules and field skills you'll see." if fl else "It decides which hunter course and rules you'll see."}</p>
   </div>
   <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
     <legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">What do you hunt with?</legend>
     {option("target", "Firearm", "Rifle, shotgun or muzzleloader", selected=True)}
-    {option("bow", "Bow", "Compound, recurve or longbow", selected=fl == "Experienced")}
+    {option("bow", "Bow", "Compound, recurve or longbow")}
     {option("crossbow", "Crossbow", "Hunting with a crossbow")}
   </fieldset>
   <div style="margin-top: auto">{primary(t, "Continue", href(t, "HuntWhere" + fl))}</div>'''
     return page(t, "BetterHunter onboarding: what do you hunt with", body, gap=16, padding="12px 20px 24px")
 
 
-# ------------------------------------------------------------------------------------- flow: new hunter, first seasons
+# ------------------------------------------------------------------------------------------------------ flow: hunter
 
 RACK = ('<svg width="24" height="24" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" '
         'stroke-linejoin="round" aria-hidden="true"><path d="M13 17c-3-1.5-6-3.5-7.5-7.5"/><path d="M9.5 13.5c-.5-2.5 0-4.5 1.5-6.5"/>'
@@ -631,8 +641,8 @@ RACK = ('<svg width="24" height="24" viewBox="0 0 32 32" fill="none" stroke="cur
         '<path d="M12.5 17.5c0-1.5 2-2 3.5-2s3.5.5 3.5 2c0 4-1.5 8-3 10.5-.3.5-.7.5-1 0-1.5-2.5-3-6.5-3-10.5z"/></svg>')
 
 
-def hunter_profile_new(t, fl="NewHunter"):
-    # The onboarding's first question (hand-made in HunterProfile.dc.html) with "New hunter" or "Experienced hunter" picked.
+def hunter_profile_hunter(t):
+    # The onboarding's first question (hand-made in HunterProfile.dc.html) with "Hunter" picked.
     def option(glyph, title, sub, selected=False):
         bg, border = (t["sel"], t["orange"]) if selected else (t["card"], t["outline"])
         tbg, tfg = (t["orange_tint"], t["label"]) if selected else (t["green_tint"], t["green"])
@@ -658,19 +668,18 @@ def hunter_profile_new(t, fl="NewHunter"):
   <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px">
     {label(t, "Welcome")}
     <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 34px; line-height: 1.05">What kind of hunter are you?</h1>
-    <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">We'll suggest the right exams and practice for you. You can change this later.</p>
+    <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">We'll suggest the right practice for you. You can change this later.</p>
   </div>
   <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
     <legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">What kind of hunter are you?</legend>
     {option(icon("book", 24), "Working on it", "Preparing for my licence or hunter course")}
-    {option(icon("sprout", 24), "New hunter", "Licensed, a few seasons so far", selected=fl == "NewHunter")}
-    {option(RACK, "Experienced hunter", "Many seasons in the field", selected=fl == "Experienced")}
+    {option(RACK, "Hunter", "Licensed, I already hunt", selected=True)}
   </fieldset>
   <div style="margin-top: auto; display: flex; flex-direction: column; gap: 10px">
-    {primary(t, "Continue", href(t, "HuntWith" + fl))}
+    {primary(t, "Continue", href(t, "HuntWithHunter"))}
     <p style="margin: 0; font-size: 12px; line-height: 1.4; color: {t["faint"]}; text-align: center">Saved on this device only. No account needed.</p>
   </div>'''
-    return page(t, "BetterHunter onboarding: what kind of hunter, " + ("new" if fl == "NewHunter" else "experienced") + " hunter", body, gap=18, padding="20px 20px 24px")
+    return page(t, "BetterHunter onboarding: what kind of hunter, hunter", body, gap=18, padding="20px 20px 24px")
 
 
 SKILLS = [
@@ -728,7 +737,7 @@ def field_skills(t, state="start"):
              else "Sharpen what matters in the field, one skill at a time.")
     note = (f'<p style="margin: 0; font-size: 13px; line-height: 1.4; color: {t["muted"]}; display: flex; gap: 8px">{icon("info", 16)}<span>{FADE}</span></p>'
             if state != "start" else "")
-    back = {"start": "HomeNewHunter", "upkeep": "HomeNewHunter", "all": "HomeSeasonCheck"}[state]
+    back = {"start": "HomeHunter", "upkeep": "HomeHunter", "all": "HomeSeasonCheck"}[state]
     body = f'''{header(t, "Field skills", back=href(t, back))}
   <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">{intro}</p>
   {card(t, mix, pad="18px", gap=14)}
@@ -743,9 +752,9 @@ def skill_question(t, season=False, daily=False, check=False):
     why_label, why = "In the field", "Wait for a broadside bear to step its near front leg forward, then aim slightly behind the shoulder."
     source = "ICAF manual (FédéCP, 2020), p. 61"
     if check:
-        title, back, over, states, nxt = "Question 6 / 15", "HomeExperiencedFirst", "Skill check · all skills", "rrrrr" + "u" * 10, "SkillCheckResults"
+        title, back, over, states, nxt = "Question 6 / 15", "HomeHunterFirst", "Skill check · all skills", "rrrrr" + "u" * 10, "SkillCheckResults"
     elif daily:
-        title, back, over, states, nxt = "Question 2 / 3", "HomeNewHunter", "Today · 3 general", "r" + "u" * 2, "DailyDone"
+        title, back, over, states, nxt = "Question 2 / 3", "HomeHunter", "Today · 3 general", "r" + "u" * 2, "DailyDone"
     elif season:
         title, back, over, states, nxt = "Question 4 / 15", "HomeSeasonCheck", "Season check · all skills", "rrwr" + "u" * 11, "FieldSkillsAllMastered"
     else:
@@ -849,7 +858,7 @@ def season_date(t):
     return page(t, "BetterHunter season start date", season_date_body(t), gap=14)
 
 
-# ------------------------------------------------------------------------------------------ new hunter: reminders
+# ---------------------------------------------------------------------------------------------- hunter: reminders
 
 QUIET = "Never between 9 pm and 8 am."
 
@@ -867,9 +876,9 @@ def daily_done_body(t):
       </span></div>
     <div style="display: flex; flex-direction: column; gap: 4px">
       {primary(t, "Turn on reminders", href(t, "NotifyPermission"), "; height: 52px", "bell")}
-      <a href="{href(t, "HomeNewHunter")}" style="height: 44px; display: flex; align-items: center; justify-content: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none">Not now</a>
+      <a href="{href(t, "HomeHunter")}" style="height: 44px; display: flex; align-items: center; justify-content: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none">Not now</a>
     </div>'''
-    return f'''{header(t, "Today", back=href(t, "HomeNewHunter"), close=True)}
+    return f'''{header(t, "Today", back=href(t, "HomeHunter"), close=True)}
   <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
     <span style="width: 84px; height: 84px; border-radius: 24px; background: {t["green_tint"]}; color: {t["green"]}; display: flex; align-items: center; justify-content: center">{icon("check", 44, width=2.4)}</span>
     <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.05">Done for today</h1>
@@ -890,8 +899,8 @@ def notify_permission(t):
       <span style="color: {t["green"]}">{icon("bell", 26)}</span>
       <h2 id="perm-title" style="margin: 0; font-family: Barlow, sans-serif; font-weight: 500; font-size: 20px; line-height: 1.3; text-align: center">Allow <b style="font-weight: 600">BetterHunter</b> to send you notifications?</h2>
       <div style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 6px">
-        <a href="{href(t, "HomeNewHunter")}" style="height: 48px; border-radius: 999px; background: {t["green_tint"]}; color: {t["text"]}; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center; text-decoration: none">Allow</a>
-        <a href="{href(t, "HomeNewHunter")}" style="height: 48px; border-radius: 999px; background: {t["green_tint"]}; color: {t["text"]}; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center; text-decoration: none">Don't allow</a>
+        <a href="{href(t, "HomeHunter")}" style="height: 48px; border-radius: 999px; background: {t["green_tint"]}; color: {t["text"]}; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center; text-decoration: none">Allow</a>
+        <a href="{href(t, "HomeHunter")}" style="height: 48px; border-radius: 999px; background: {t["green_tint"]}; color: {t["text"]}; font-weight: 600; font-size: 15px; display: flex; align-items: center; justify-content: center; text-decoration: none">Don't allow</a>
       </div>
     </div>
   </div>'''
@@ -915,12 +924,12 @@ def season_reminder_ask(t):
     return page(t, "BetterHunter season reminder, ask", season_date_body(t) + "\n  " + sheet, gap=14)
 
 
-def settings_hunter(t, experienced=False):
-    fl = "Experienced" if experienced else "NewHunter"
-    body = f'''{header(t, "Settings", back=href(t, "HomeExperienced" if experienced else "HomeSeasonCheck"))}
+def settings_hunter(t):
+    fl = "Hunter"
+    body = f'''{header(t, "Settings", back=href(t, "HomeSeasonCheck"))}
   {label(t, "Your profile", t["muted"])}
-  {card(t, row(t, tile(t, "user"), "Hunter type", "Experienced hunter" if experienced else "New hunter", target=href(t, "HunterProfile" + fl), divider=False)
-        + row(t, tile(t, "target"), "Hunting with", "Firearm, bow" if experienced else "Firearm", target=href(t, "HuntWith" + fl))
+  {card(t, row(t, tile(t, "user"), "Hunter type", "Hunter", target=href(t, "HunterProfile" + fl), divider=False)
+        + row(t, tile(t, "target"), "Hunting with", "Firearm", target=href(t, "HuntWith" + fl))
         + row(t, tile(t, "pin"), "Where you hunt", "Québec", target=href(t, "HuntWhere" + fl))
         + row(t, tile(t, "calendar"), "Season start", "Saturday, November 14 · the date you set", target=href(t, "SeasonDate")), pad="2px 16px", gap=0)}
   {label(t, "Reminders", t["muted"])}
@@ -930,7 +939,7 @@ def settings_hunter(t, experienced=False):
   {label(t, "App", t["muted"])}
   {card(t, row(t, tile(t, "globe"), "Language", "English", divider=False)
         + row(t, tile(t, "info"), "About BetterHunter", "How it works, sources, disclaimer", target=href(t, "About")), pad="2px 16px", gap=0)}'''
-    return page(t, "BetterHunter settings, " + ("experienced " if experienced else "") + "hunter", body, gap=10)
+    return page(t, "BetterHunter settings, hunter", body, gap=10)
 
 
 def lock_screen(t):
@@ -950,74 +959,10 @@ def lock_screen(t):
     <span style="font-family: Barlow, sans-serif; font-weight: 400; font-size: 88px; line-height: 1; letter-spacing: -2px">7:02</span>
   </div>
   <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 40px">
-    {notif("now", "Your 6 questions are ready", "3 species, 3 general. Keep your 7-day streak going.", "HomeNewHunter")}
+    {notif("now", "Your 6 questions are ready", "3 species, 3 general. Keep your 7-day streak going.", "HomeHunter")}
     {notif("yesterday", "Your season starts in 3 weeks", "Take your season check before November 14.", "SeasonCheckQuestion")}
   </div>'''
     return page(t, "BetterHunter notifications on the lock screen", body, gap=0, padding="20px 16px 24px", extra_style=f"; background: {bg}")
-
-
-# --------------------------------------------------------------------------------- flow: experienced hunter, stay sharp
-
-def home_experienced(t, first=False):
-    """first: right after onboarding, Home offers the skill check; later, the season countdown leads."""
-    pill = (f'<span style="display: flex; border: 1px solid {t["outline"]}; border-radius: 999px; padding: 3px; background: {t["card"] if t["name"] == "light" else "transparent"}">'
-            f'<span style="color: {t["muted"]}; font: 600 13px Barlow, sans-serif; height: 38px; min-width: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center">FR</span>'
-            f'<span style="background: {t["green_tint"] if t["name"] == "light" else t["track"]}; color: {t["text"]}; font: 600 13px Barlow, sans-serif; height: 38px; min-width: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center">EN</span></span>')
-    check = card(t, f'''<div style="display: flex; gap: 12px; align-items: flex-start">{tile(t, "target", "orange", 44, 12)}
-      <span style="display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0">
-        {label(t, "Start here")}
-        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 22px; line-height: 1.15">Skip what you already know</span>
-        <span style="font-size: 13px; line-height: 1.4; color: {t["muted"]}">15 questions across your field skills. The ones you get right start as mastered; the rest become your practice.</span>
-      </span></div>
-    {primary(t, "Take the skill check", href(t, "SkillCheckQuestion"), "; height: 52px", "play")}''', pad="16px 18px 18px", gap=12, extra="; border-color: " + t["warm_border"])
-    dots = "".join(f'<span style="width: 8px; height: 8px; border-radius: 999px; background: {t["bar"] if n < (0 if first else 1) else t["track"]}"></span>' for n in range(3))
-    daily = card(t, f'''<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
-      <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
-        {label(t, "Today")}
-        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 22px; line-height: 1.15">Stay sharp: 3 expert questions</span>
-        <span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: {t["muted"]}">{icon("flame", 14, t["orange"], 2.2) + " 12-day streak · " if not first else ""}look-alikes, field rules, edge cases</span>
-      </div>
-      <span style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px; padding-top: 4px"><span style="display: flex; gap: 4px">{dots}</span><span style="font-size: 12px; font-weight: 600; color: {t["muted"] if first else t["green"]}">{0 if first else 1} / 3</span></span>
-    </div>
-    {primary(t, "Start" if first else "Continue: 2 left", href(t, "LookalikeQuestion"), "; height: 52px", "play")}''', pad="16px 18px 18px", gap=12)
-    if first:
-        daily = (f'<a href="{href(t, "LookalikeQuestion")}" style="display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 8px 14px; border-radius: 18px; background: {t["card"]}; border: 1px solid {t["border"]}; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">'
-                 f'{tile(t, "flame", "green", 40, 11)}<span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">Today: 3 expert questions</span>'
-                 f'<span style="font-size: 13px; color: {t["muted"]}">Look-alikes, field rules, edge cases</span></span>{icon("chevron", 18, t["muted"])}</a>')
-    skills_value = (f'<span style="font-size: 12px; color: {t["muted"]}">Not checked yet</span>' if first
-                    else f'<span style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: {t["muted"]}"><span>4 of 5</span>{mastered_chip(t)}</span>')
-    tiles = f'''<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
-    <a href="{href(t, "LookalikeQuestion")}" style="background: {t["card"]}; border: 1px solid {t["border"]}; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">
-      {tile(t, "eye", "orange")}
-      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">Look-alikes</span>
-      <span style="font-size: 13px; color: {t["muted"]}; line-height: 1.35">Species, sex and age at a glance</span>
-      {meter(t, "Readiness", "—" if first else "72%", 0 if first else 72)}
-    </a>
-    <a href="{href(t, "FieldSkillsMastered")}" style="background: {t["card"]}; border: 1px solid {t["border"]}; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">
-      {tile(t, "target")}
-      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px; line-height: 1.1">Field skills</span>
-      <span style="font-size: 13px; color: {t["muted"]}; line-height: 1.35">Keep your edge before the season</span>
-      <span style="margin-top: auto">{skills_value}</span>
-    </a>
-  </div>'''
-    season = f'''<a href="{href(t, "SeasonCheckQuestion")}" style="display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 8px 6px 8px 14px; border-radius: 18px; background: {t["card"]}; border: 1px solid {t["border"]}; color: {t["text"]}; text-decoration: none; box-shadow: {t["shadow"]}">
-    {tile(t, "flag", "green", 40, 11)}
-    <span style="display: flex; flex-direction: column; gap: 1px; flex: 1"><span style="font-weight: 600; font-size: 15px">Your season starts in 3 weeks</span><span style="font-size: 13px; color: {t["muted"]}">Nov 14, the date you set · season check</span></span>
-    <span style="width: 36px; display: flex; justify-content: center; color: {t["muted"]}">{icon("chevron", 18)}</span>
-  </a>'''
-    photo = f'''<section style="position: relative; flex: 1; min-height: 0; border-radius: 22px; overflow: hidden; background: {t["track"]}">
-    <img src="/_blob/876ea656307e18bff50cd003ae123e81" alt="Photo of the day, to identify" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
-    <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 36px 16px 14px; background: linear-gradient(180deg, rgba(14,22,17,0) 0%, rgba(14,22,17,0.9) 60%); display: flex; flex-direction: column; gap: 2px; color: #FFFFFF">
-      <span style="font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: #F7A06A">Photo of the day</span>
-      <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 24px">Buck or doe? How old?</span>
-    </div>
-  </section>'''
-    body = f'''<header style="display: flex; align-items: center; justify-content: space-between; height: 48px; flex-shrink: 0">
-    <div style="display: flex; align-items: center; gap: 10px">{buck(34, t["text"], t["orange"])}<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.2px">BetterHunter</span></div>
-    <div style="display: flex; align-items: center; gap: 8px">{pill}{round_link(t, href(t, "SettingsExperienced"), "Settings", "gear", t["muted"])}</div>
-  </header>
-  {check + daily + tiles + photo if first else season + daily + tiles + photo}'''
-    return page(t, "BetterHunter home, experienced hunter" + (" (from onboarding)" if first else ""), body, gap=14, padding="20px 20px 24px")
 
 
 def skill_check_results(t):
@@ -1029,14 +974,14 @@ def skill_check_results(t):
         value = mastered_chip(t) if done else f'<span style="font-size: 12px; font-weight: 600; color: {t["label"]}">Worth a refresh · {pct}%</span>'
         return (f'<div style="display: flex; align-items: center; gap: 12px; min-height: 52px; {"border-top: 1px solid " + t["border"] + ";" if i else ""}">'
                 f'{tile(t, ic, "green" if done else "orange", 36, 10)}<span style="flex: 1; font-weight: 600; font-size: 15px">{title}</span>{value}</div>')
-    body = f'''{header(t, "Skill check", overline="Results", back=href(t, "HomeExperienced"), close=True)}
+    body = f'''{header(t, "Skill check", overline="Results", back=href(t, "HomeHunter"), close=True)}
   <div style="display: flex; flex-direction: column; align-items: center; gap: 10px">
     {ring(t, 87, 136, 12, t["green"], inner)}
     <span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; background: {t["green_tint"]}; color: {t["green"]}; font-weight: 600; font-size: 14px">{icon("trophy", 16, t["green"], 2.2)} 4 skills start as mastered</span>
   </div>
   {card(t, "".join(r(i, *x) for i, x in enumerate(rows)), pad="4px 16px", gap=0, radius=18)}
   <p style="margin: 0; font-size: 13px; line-height: 1.4; color: {t["muted"]}; display: flex; gap: 8px">{icon("info", 16)}<span>Mastered skills still show up in your mix now and then. {FADE}</span></p>
-  <div style="margin-top: auto; display: flex; gap: 10px">{secondary(t, "Home", href(t, "HomeExperienced"), "; flex: 1")}{primary(t, "Refresh After the shot", href(t, "SkillQuestion"), "; flex: 1.6")}</div>'''
+  <div style="margin-top: auto; display: flex; gap: 10px">{secondary(t, "Home", href(t, "HomeHunter"), "; flex: 1")}{primary(t, "Refresh After the shot", href(t, "SkillQuestion"), "; flex: 1.6")}</div>'''
     return page(t, "BetterHunter skill check results", body, gap=14)
 
 
@@ -1045,8 +990,8 @@ def lookalike_question(t):
     tells = "".join(f'<span style="display: flex; gap: 8px; font-size: 14px; line-height: 1.35">{icon("check", 16, t["green"], 2.4)}<span>{x}</span></span>'
                     for x in ["Big ears, like a mule's", "Thin white tail with a black tip", "Antlers that fork, then fork again"])
     body = f'''<div style="display: flex; flex-direction: column; gap: 10px">
-{header(t, "Question 1 / 3", back=href(t, "HomeExperienced"), right=right, overline="Today · expert", close=True)}
-  {segments(t, "ruu")}
+{header(t, "Question 2 / 3", back=href(t, "HomeHunter"), right=right, overline="Today · 3 species", close=True)}
+  {segments(t, "rru")}
   </div>
   <div style="position: relative; height: 200px; flex-shrink: 0; border-radius: 18px; overflow: hidden; background: {t["track"]}">
     <img src="{MULE}" alt="Deer to identify" style="width: 100%; height: 100%; object-fit: cover">
@@ -1058,9 +1003,10 @@ def lookalike_question(t):
     {choice(t, "B", "Mule deer", "right")}
   </div>
   {card(t, f"""<span style="display: flex; align-items: center; gap: 8px; color: {t["green"]}; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px">{icon("check", 20, t["green"], 2.6)} Correct</span>
-    {label(t, "The tells", t["green"])}{tells}""", pad="14px 16px", gap=8, radius=16)}
-  <div style="margin-top: auto">{primary(t, "Next", href(t, "HomeExperienced"))}</div>'''
-    return page(t, "BetterHunter look-alike question, answered", body, gap=12)
+    {label(t, "The tells", t["green"])}{tells}
+    <span style="font-size: 13px; color: {t["muted"]}">Source: <a href="#" style="font-weight: 600; text-decoration: none">Mule deer fact sheet ↗</a></span>""", pad="14px 16px", gap=8, radius=16)}
+  <div style="margin-top: auto">{primary(t, "Next", href(t, "DailyQuestion"))}</div>'''
+    return page(t, "BetterHunter daily species question (look-alike), answered", body, gap=12)
 
 
 SCREENS = {
@@ -1068,23 +1014,19 @@ SCREENS = {
     "PracticeResults": lambda t: results(t, exam=False), "ExamResults": lambda t: results(t, exam=True),
     "QuitDialog": quit_dialog, "PhotoZoom": photo_zoom, "NothingToReview": nothing_to_review,
     "Recognition": recognition, "UpdateRequired": update_required, "PassedExam": passed_exam,
-    "MainNewHunter": main_new_hunter, "HuntWith": hunt_with, "HuntWhere": hunt_where, "Provinces": provinces,
-    # Flow: new hunter, first seasons
-    "HunterProfileNewHunter": hunter_profile_new, "HuntWithNewHunter": lambda t: hunt_with(t, "NewHunter"),
-    "HuntWhereNewHunter": lambda t: hunt_where(t, "NewHunter"), "HomeNewHunter": lambda t: main_new_hunter(t, passed=False),
+    "HomeHunterPassed": lambda t: home_hunter(t, passed=True), "HuntWith": hunt_with, "HuntWhere": hunt_where, "Provinces": provinces,
+    # Flow: hunter
+    "HunterProfileHunter": hunter_profile_hunter, "HuntWithHunter": lambda t: hunt_with(t, "Hunter"),
+    "HuntWhereHunter": lambda t: hunt_where(t, "Hunter"), "HomeHunterFirst": lambda t: home_hunter(t, first=True),
+    "SkillCheckQuestion": lambda t: skill_question(t, check=True), "SkillCheckResults": skill_check_results,
+    "HomeHunter": home_hunter, "LookalikeQuestion": lookalike_question,
     "FieldSkills": field_skills, "SkillQuestion": skill_question, "SkillResults": skill_results,
     "SkillMastered": skill_mastered, "FieldSkillsMastered": lambda t: field_skills(t, "upkeep"),
-    "FieldSkillsAllMastered": lambda t: field_skills(t, "all"), "HomeSeasonCheck": lambda t: main_new_hunter(t, passed=False, season="date"),
-    "HomeSeasonGeneric": lambda t: main_new_hunter(t, passed=False, season="generic"), "SeasonDate": season_date,
+    "FieldSkillsAllMastered": lambda t: field_skills(t, "all"), "HomeSeasonCheck": lambda t: home_hunter(t, season="date"),
+    "HomeSeasonGeneric": lambda t: home_hunter(t, season="generic"), "SeasonDate": season_date,
     "DailyDone": daily_done, "NotifyPermission": notify_permission, "SeasonReminderAsk": season_reminder_ask,
     "SettingsHunter": settings_hunter, "LockScreen": lock_screen,
     "SeasonCheckQuestion": lambda t: skill_question(t, season=True), "DailyQuestion": lambda t: skill_question(t, daily=True),
-    # Flow: experienced hunter, stay sharp
-    "HunterProfileExperienced": lambda t: hunter_profile_new(t, "Experienced"), "HuntWithExperienced": lambda t: hunt_with(t, "Experienced"),
-    "HuntWhereExperienced": lambda t: hunt_where(t, "Experienced"), "HomeExperiencedFirst": lambda t: home_experienced(t, first=True),
-    "SkillCheckQuestion": lambda t: skill_question(t, check=True), "SkillCheckResults": skill_check_results,
-    "HomeExperienced": home_experienced,
-    "LookalikeQuestion": lookalike_question, "SettingsExperienced": lambda t: settings_hunter(t, experienced=True),
 }
 
 if __name__ == "__main__":
