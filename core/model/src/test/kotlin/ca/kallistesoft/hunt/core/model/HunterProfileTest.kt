@@ -27,8 +27,8 @@ class HunterProfileTest {
     }
 
     @Test
-    fun `the province sets the quizzes, hunter course first`() {
-        assertEquals(listOf("ICAF"), quebecer.myExamIds)
+    fun `the province sets the quizzes, hunter course first, then the PAL`() {
+        assertEquals(listOf("ICAF", "PAL"), quebecer.myExamIds)
         assertEquals(listOf("ABHE", "PAL"), quebecer.withProfile(HunterType.WORKING_ON_IT, emptySet(), Province.AB).myExamIds)
         assertEquals(listOf("PAL"), quebecer.withProfile(HunterType.WORKING_ON_IT, emptySet(), Province.OTHER).myExamIds)
     }
@@ -36,7 +36,7 @@ class HunterProfileTest {
     @Test
     fun `other provinces add their quizzes after the home province's, each once`() {
         val p = quebecer.withProvince(Province.OTHER, true).withProvince(Province.AB, true)
-        assertEquals(listOf("ICAF", "ABHE", "PAL"), p.myExamIds)
+        assertEquals(listOf("ICAF", "PAL", "ABHE"), p.myExamIds)
         assertEquals(listOf("ICAF", "PAL"), p.withProvince(Province.AB, false).myExamIds)
     }
 
@@ -54,7 +54,7 @@ class HunterProfileTest {
         assertEquals(setOf("ICAF"), p.passedExams)
         assertTrue(p.newHunterBanner)
         assertTrue(p.isHunter)
-        assertEquals(listOf("ICAF"), p.myExamIds) // the exam stays available for refreshers
+        assertEquals(listOf("ICAF", "PAL"), p.myExamIds) // the exam stays available for refreshers
     }
 
     @Test

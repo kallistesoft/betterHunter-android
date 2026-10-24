@@ -38,7 +38,7 @@ enum class Province(
     /** Exams this province adds, its hunter course first; the PAL is optional, so it comes last. */
     val examIds: List<String>,
 ) {
-    QC(listOf("ICAF")),
+    QC(listOf("ICAF", "PAL")),
     AB(listOf("ABHE", "PAL")),
 
     /** Elsewhere in Canada: the PAL until more provinces have their course. */

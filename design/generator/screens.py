@@ -238,7 +238,7 @@ def provinces(t):
                 f'<span style="font-size: 13px; line-height: 1.35; color: {t["muted"]}">{quizzes}</span>{badge if where else ""}</span>{switch(t, on)}</div>')
     body = f'''{header(t, "My provinces", back=href(t, "Settings"))}
   <p style="margin: 0; font-size: 14px; line-height: 1.45; color: {t["muted"]}">Your quizzes follow your provinces. Add a province to practise its hunting exam, or remove one to hide its quizzes.</p>
-  {card(t, province("tree", "Québec", "Hunting exam questions · bow and crossbow coming soon", True, where=True)
+  {card(t, province("tree", "Québec", "Hunting exam questions · PAL · bow and crossbow coming soon", True, where=True)
         + province("mountain", "Alberta", "Hunting exam questions · PAL (firearms licence)", False)
         + province("maple", "Elsewhere in Canada", "PAL (firearms licence)", False), pad="0 16px", gap=0)}
   <p style="margin: 0; font-size: 13px; color: {t["muted"]}; display: flex; align-items: center; gap: 8px">{icon("goal", 16)} More provinces coming.</p>'''
@@ -310,10 +310,24 @@ def exam_training(t):
     </div>
     <a href="{href(t, "PracticeQuestion")}" style="display: flex; align-items: center; gap: 8px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px">{icon("replay", 16)} Review my mistakes (5)</a>
     <a href="{href(t, "PassedExam")}" style="display: flex; align-items: center; gap: 8px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px; border-top: 1px solid {t["border"]}; padding-top: 10px">{icon("trophy", 16)} I passed the real exam</a>'''
-    add = row(t, tile(t, "pin"), "Other provinces", "Alberta, elsewhere in Canada (PAL)", target=href(t, "Provinces"), divider=False)
+    pal = f'''<div style="display: flex; gap: 12px; align-items: flex-start">
+      {tile(t, "shield")}
+      <span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0">
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 20px; line-height: 1.1">PAL exam (CFSC, non-restricted)</span>
+        <span style="font-size: 13px; color: {t["muted"]}">Canada · 303 questions</span>
+        <span style="font-size: 13px; color: {t["muted"]}">60 min · 80% to pass</span>
+      </span>
+      <span style="display: flex; flex-direction: column; align-items: center; gap: 4px">{ring(t, 0, 56, 6, t["green"], f'<span style="font-size: 13px; font-weight: 600; color: {t["muted"]}">0%</span>')}<span style="font-size: 11px; color: {t["muted"]}">Readiness</span></span>
+    </div>
+    <div style="display: flex; gap: 10px">
+      {primary(t, "Practice", href(t, "PracticeQuestion"), "; flex: 1; height: 52px", "play")}
+      {secondary(t, "Mock exam", href(t, "ExamQuestion"), "; flex: 1; height: 52px", "timer")}
+    </div>'''
+    add = row(t, tile(t, "pin"), "Other provinces", "Alberta, elsewhere in Canada", target=href(t, "Provinces"), divider=False)
     body = f'''{header(t, "Exam training", back=href(t, "Main"))}
   <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px">{label(t, "My exams", t["muted"])}<a href="{href(t, "Provinces")}" style="color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px; display: flex; align-items: center">Change</a></div>
   {card(t, icaf, pad="18px", gap=14)}
+  {card(t, pal, pad="18px", gap=14)}
   {label(t, "Add more", t["muted"], "; margin-top: 6px")}
   {card(t, add, pad="4px 16px", gap=0)}'''
     return page(t, "BetterHunter exam training", body, gap=12)
