@@ -53,7 +53,7 @@ fun Weapon.choiceOption(): ChoiceOption = when (this) {
     Weapon.CROSSBOW -> ChoiceOption(HuntIcons.Crossbow, R.string.weapon_crossbow, R.string.weapon_crossbow_sub)
 }
 
-fun Province.choiceOption(): ChoiceOption = ChoiceOption(icon, nameRes, quizzesRes)
+fun Province.choiceOption(): ChoiceOption = ChoiceOption(icon, nameRes, whereRes)
 
 /**
  * One profile question (onboarding, and its edit from Settings): an optional [overline], the question, a hint, the

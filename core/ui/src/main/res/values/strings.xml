@@ -15,7 +15,7 @@
     <string name="hunter_hunter">Hunter</string>
     <string name="hunter_hunter_sub">Licensed, I already hunt</string>
     <string name="hunt_with_title">What do you hunt with?</string>
-    <string name="hunt_with_sub">Pick all that apply. It decides which hunter course and rules you\'ll see.</string>
+    <string name="hunt_with_sub">Pick all that apply. It decides which rules you\'ll see.</string>
     <string name="weapon_firearm">Firearm</string>
     <string name="weapon_firearm_sub">Rifle, shotgun or muzzleloader</string>
     <string name="weapon_bow">Bow</string>
@@ -23,8 +23,8 @@
     <string name="weapon_crossbow">Crossbow</string>
     <string name="weapon_crossbow_sub">Hunting with a crossbow</string>
     <string name="hunt_where_title">Where do you hunt?</string>
-    <string name="hunt_where_sub">Your quizzes and rules follow your province.</string>
-    <string name="hunt_where_note">You can add other provinces\' quizzes later.</string>
+    <string name="hunt_where_sub">Your rules and game follow your province.</string>
+    <string name="hunt_where_note">You can add other provinces later.</string>
 
     <!-- Provinces -->
     <string name="province_qc">Québec</string>
@@ -33,6 +33,9 @@
     <string name="province_ab_sub">Alberta hunter course and the PAL (firearms licence)</string>
     <string name="province_other">Elsewhere in Canada</string>
     <string name="province_other_sub">The PAL (firearms licence) for now; more provinces coming</string>
+    <string name="province_qc_where">Québec hunting rules and game</string>
+    <string name="province_ab_where">Alberta hunting rules and game</string>
+    <string name="province_other_where">Canada-wide for now; more provinces coming</string>
     <string name="my_provinces">My provinces</string>
     <string name="my_provinces_sub">Your quizzes follow your provinces. Add a province to practise its hunter course, or remove one to hide its quizzes.</string>
     <string name="where_you_hunt">Where you hunt</string>

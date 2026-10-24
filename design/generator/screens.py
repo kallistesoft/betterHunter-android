@@ -246,8 +246,7 @@ def provinces(t):
 
 
 def hunt_where(t, fl=""):
-    # fl: "" (working on it) or "Hunter"; hunters see rules instead of hunter courses.
-    new_hunter = bool(fl)
+    # fl: "" (working on it) or "Hunter"; the question names no exam for either (the province sets the quizzes).
     def option(name, title, sub, selected=False):
         bg, border = (t["sel"], t["orange"]) if selected else (t["card"], t["outline"])
         if selected:
@@ -265,15 +264,15 @@ def hunt_where(t, fl=""):
   <div style="display: flex; flex-direction: column; gap: 8px">
     {label(t, "Last question")}
     <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 34px; line-height: 1.05">Where do you hunt?</h1>
-    <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">{"Your rules and field skills follow your province." if new_hunter else "Your quizzes and rules follow your province."}</p>
+    <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Your rules and game follow your province.</p>
   </div>
   <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
     <legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Where do you hunt?</legend>
-    {option("tree", "Québec", "Québec hunting rules and game" if new_hunter else "Québec hunter course (ICAF; bow and crossbow coming soon)", selected=True)}
-    {option("mountain", "Alberta", "Alberta hunting rules and game" if new_hunter else "Alberta hunter course and the PAL (firearms licence)")}
-    {option("maple", "Elsewhere in Canada", "Canada-wide skills for now; more provinces coming" if new_hunter else "The PAL (firearms licence) for now; more provinces coming")}
+    {option("tree", "Québec", "Québec hunting rules and game", selected=True)}
+    {option("mountain", "Alberta", "Alberta hunting rules and game")}
+    {option("maple", "Elsewhere in Canada", "Canada-wide for now; more provinces coming")}
   </fieldset>
-  <p style="margin: 0; font-size: 13px; line-height: 1.4; color: {t["muted"]}; display: flex; gap: 8px">{icon("info", 16)}<span>{"You can add other provinces later in Settings." if new_hunter else "You can add other provinces' quizzes later in Settings."}</span></p>
+  <p style="margin: 0; font-size: 13px; line-height: 1.4; color: {t["muted"]}; display: flex; gap: 8px">{icon("info", 16)}<span>You can add other provinces later in Settings.</span></p>
   <div style="margin-top: auto">{primary(t, "Continue", href(t, {"": "Main", "Hunter": "HomeHunterFirst"}[fl]))}</div>'''
     return page(t, "BetterHunter onboarding: where do you hunt", body, gap=16)
 
@@ -621,7 +620,7 @@ def hunt_with(t, fl=""):
   <div style="display: flex; flex-direction: column; gap: 8px">
     {label(t, "Next question")}
     <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 34px; line-height: 1.05">What do you hunt with?</h1>
-    <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Pick all that apply. {"It decides which rules and field skills you'll see." if fl else "It decides which hunter course and rules you'll see."}</p>
+    <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Pick all that apply. It decides which rules you'll see.</p>
   </div>
   <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
     <legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">What do you hunt with?</legend>

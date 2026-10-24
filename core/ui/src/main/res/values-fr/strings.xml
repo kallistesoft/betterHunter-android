@@ -13,7 +13,7 @@
     <string name="hunter_hunter">Chasseur</string>
     <string name="hunter_hunter_sub">Certifié, je chasse déjà</string>
     <string name="hunt_with_title">Avec quoi chassez-vous?</string>
-    <string name="hunt_with_sub">Choisissez tout ce qui s\'applique. Cela détermine le cours de chasseur et les règles affichés.</string>
+    <string name="hunt_with_sub">Choisissez tout ce qui s\'applique. Cela détermine les règles affichées.</string>
     <string name="weapon_firearm">Arme à feu</string>
     <string name="weapon_firearm_sub">Carabine, fusil ou arme à chargement par la bouche</string>
     <string name="weapon_bow">Arc</string>
@@ -21,8 +21,8 @@
     <string name="weapon_crossbow">Arbalète</string>
     <string name="weapon_crossbow_sub">Chasse à l\'arbalète</string>
     <string name="hunt_where_title">Où chassez-vous?</string>
-    <string name="hunt_where_sub">Vos quiz et vos règles suivent votre province.</string>
-    <string name="hunt_where_note">Vous pourrez ajouter les quiz d\'autres provinces plus tard.</string>
+    <string name="hunt_where_sub">Vos règles et votre gibier suivent votre province.</string>
+    <string name="hunt_where_note">Vous pourrez ajouter d\'autres provinces plus tard.</string>
 
     <!-- Provinces -->
     <string name="province_qc">Québec</string>
@@ -31,6 +31,9 @@
     <string name="province_ab_sub">Cours de chasseur de l\'Alberta et PPA (permis d\'armes à feu)</string>
     <string name="province_other">Ailleurs au Canada</string>
     <string name="province_other_sub">Le PPA (permis d\'armes à feu) pour l\'instant; d\'autres provinces à venir</string>
+    <string name="province_qc_where">Règles de chasse et gibier du Québec</string>
+    <string name="province_ab_where">Règles de chasse et gibier de l\'Alberta</string>
+    <string name="province_other_where">Pour tout le Canada pour l\'instant; d\'autres provinces à venir</string>
     <string name="my_provinces">Mes provinces</string>
     <string name="my_provinces_sub">Vos quiz suivent vos provinces. Ajoutez une province pour vous exercer à son cours de chasseur, ou retirez-en une pour masquer ses quiz.</string>
     <string name="where_you_hunt">Où vous chassez</string>
