@@ -49,7 +49,7 @@ class RemindersTest {
 
     @Test
     fun aFieldHunterWithRemindersOnGetsTheJobPlanned() {
-        Reminders.schedule(context, fieldHunter.copy(dailyReminders = true))
+        Reminders.schedule(context, hunter.copy(dailyReminders = true))
 
         val work = reminderWork()
         assertEquals(WorkInfo.State.ENQUEUED, work.state)
@@ -59,8 +59,8 @@ class RemindersTest {
 
     @Test
     fun turningRemindersOffCancelsTheJob() {
-        Reminders.schedule(context, fieldHunter.copy(dailyReminders = true))
-        Reminders.schedule(context, fieldHunter)
+        Reminders.schedule(context, hunter.copy(dailyReminders = true))
+        Reminders.schedule(context, hunter)
 
         assertEquals(WorkInfo.State.CANCELLED, reminderWork().state)
     }
@@ -134,7 +134,7 @@ class RemindersTest {
     fun theJobWaitsUntilTheReminderInLocalTime() {
         val now = LocalDate.ofEpochDay(DAY).atTime(9, 0)
 
-        Reminders.schedule(context, fieldHunter.copy(dailyReminders = true), now)
+        Reminders.schedule(context, hunter.copy(dailyReminders = true), now)
 
         assertEquals(TimeUnit.HOURS.toMillis(10), reminderWork().initialDelayMillis)
     }
@@ -156,6 +156,6 @@ class RemindersTest {
     private companion object {
         const val DAY = 20_000L
         const val MINUTE = 19 * 60
-        val fieldHunter = UserProgress().withProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC)
+        val hunter = UserProgress().withProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC)
     }
 }

@@ -9,11 +9,11 @@ import java.time.LocalDate
 
 class RemindersTest {
     private val today = 20_000L
-    private val hunter = UserProgress().withProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC)
+    private val hunter = UserProgress().withProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC)
     private val evening = 19 * 60
 
     @Test
-    fun `no reminder unless one is on, and only for new hunters`() {
+    fun `no reminder unless one is on, and only for hunters`() {
         assertNull(Reminder.next(hunter, today, 0))
         assertNull(Reminder.next(hunter.copy(dailyReminders = true, hunterType = HunterType.WORKING_ON_IT), today, 0))
     }

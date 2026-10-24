@@ -44,11 +44,11 @@ data object Settings : NavKey
 @Serializable
 data class EditProfile(val field: ProfileField) : NavKey
 
-/** New hunters (P11): today's mix and each skill. */
+/** Hunters (P11): today's mix and each skill. */
 @Serializable
 data object FieldSkills : NavKey
 
-/** A new hunter's run: one [skill], today's mix, the season check, today's questions or "My mistakes". */
+/** A hunter's run: one [skill], today's mix, the season check, today's questions or "My mistakes". */
 @Serializable
 data class FieldQuiz(val run: FieldRun, val skill: FieldSkill? = null) : NavKey
 

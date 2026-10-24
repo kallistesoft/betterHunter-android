@@ -86,22 +86,22 @@ class SettingsViewModelTest {
         val saved = SavedStateHandle()
         ProfileEditViewModel(ProfileField.HUNTER_TYPE, userData, saved).apply {
             collecting(uiState)
-            chooseHunterType(HunterType.EXPERIENCED)
+            chooseHunterType(HunterType.HUNTER)
         }
         val restored = ProfileEditViewModel(ProfileField.HUNTER_TYPE, userData, saved)
         collecting(restored.uiState)
-        assertEquals(HunterType.EXPERIENCED, restored.uiState.value.hunterType)
+        assertEquals(HunterType.HUNTER, restored.uiState.value.hunterType)
     }
 
     @Test
-    fun `a new hunter sees the season start and the reminders`() = runTest {
+    fun `a hunter sees the season start and the reminders`() = runTest {
         val hunter = FakeUserDataRepository(
-            UserProgress().withProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC).withSeasonStart(TEST_DAY + 30),
+            UserProgress().withProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC).withSeasonStart(TEST_DAY + 30),
         )
         val vm = SettingsViewModel(hunter, Today { TEST_DAY }, FakeAdConsent())
         vm.uiState.test {
             val state = awaitItemMatching { !it.loading }
-            assertTrue(state.fieldHunter)
+            assertTrue(state.hunter)
             assertEquals(TEST_DAY + 30, state.seasonStart)
             assertFalse(state.dailyReminders)
             assertEquals(UserProgress.DEFAULT_PLAY_MINUTE, state.reminderMinute)
@@ -114,7 +114,7 @@ class SettingsViewModelTest {
     @Test
     fun `reminders show off while notifications are turned off in system settings`() = runTest {
         val hunter = FakeUserDataRepository(
-            UserProgress().withProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC).withSeasonStart(TEST_DAY + 30),
+            UserProgress().withProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC).withSeasonStart(TEST_DAY + 30),
         )
         hunter.setDailyReminders(true)
         val vm = SettingsViewModel(hunter, Today { TEST_DAY }, FakeAdConsent())

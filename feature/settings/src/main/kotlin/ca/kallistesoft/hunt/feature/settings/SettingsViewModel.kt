@@ -25,8 +25,8 @@ data class SettingsUiState(
     val provinces: Set<Province> = emptySet(),
     val dailyGoal: Int = UserProgress.DEFAULT_DAILY_GOAL,
     val loading: Boolean = true,
-    /** New hunter from onboarding (P11): season start and reminders. */
-    val fieldHunter: Boolean = false,
+    /** A hunter (P11): season start and reminders. */
+    val hunter: Boolean = false,
     val seasonStart: Long? = null,
     /** Each switch is on only while notifications can come (the saved choice and [notificationsBlocked]). */
     val dailyReminders: Boolean = false,
@@ -60,7 +60,7 @@ class SettingsViewModel @Inject constructor(
         SettingsUiState(
             p.hunterType, p.weapons, p.homeProvince, p.provinces, p.dailyGoal,
             loading = false,
-            fieldHunter = p.isFieldHunter,
+            hunter = p.isHunter,
             seasonStart = p.seasonStart?.takeIf { it >= today() },
             dailyReminders = p.dailyReminders && allowed,
             seasonReminders = p.seasonReminders && allowed,

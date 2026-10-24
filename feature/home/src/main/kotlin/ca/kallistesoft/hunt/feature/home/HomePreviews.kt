@@ -39,12 +39,19 @@ internal fun HomeAnsweredPreview() = PreviewSurface {
     )
 }
 
-/** A new hunter just back from "Yes, I passed": the welcome, the goal on "What is it?", ICAF passed. */
+/** A hunter just back from "Yes, I passed": the welcome, today's questions, Field skills and ICAF passed. */
 @BhPreviews
 @Composable
-internal fun HomeNewHunterPreview() = PreviewSurface {
+internal fun HomeHunterPassedPreview() = PreviewSurface {
     HomeContent(
-        previewHomeState.copy(hunter = true, newHunterBanner = true, answeredToday = 5, streak = 6, passedExamId = "ICAF"),
+        previewHomeState.copy(
+            hunter = true,
+            newHunterBanner = true,
+            streak = 6,
+            passedExamId = "ICAF",
+            daily = DailyState(0, 3, 0, 3),
+            skillsReadiness = 0.64f,
+        ),
         {}, {}, {}, {}, {}, { _, _ -> }, {}, {}, {},
     )
 }

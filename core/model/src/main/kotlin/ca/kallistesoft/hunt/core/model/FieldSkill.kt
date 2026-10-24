@@ -3,7 +3,7 @@ package ca.kallistesoft.hunt.core.model
 import kotlinx.serialization.Serializable
 
 /**
- * What a new hunter practises instead of exams (DECISIONS.md, P11): each skill draws on chapters of the hunter-course
+ * What a hunter practises instead of exams (DECISIONS.md, P11): each skill draws on chapters of the hunter-course
  * and PAL banks, written `scope:chapter`. The grouping is a first pass, to check against the questions.
  */
 @Serializable

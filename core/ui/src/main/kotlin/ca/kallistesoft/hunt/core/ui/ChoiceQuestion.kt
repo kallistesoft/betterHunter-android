@@ -16,7 +16,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.MenuBook
-import androidx.compose.material.icons.outlined.Eco
 import androidx.compose.material.icons.outlined.GpsFixed
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Icon
@@ -45,8 +44,7 @@ data class ChoiceOption(val icon: ImageVector, @StringRes val title: Int, @Strin
 
 fun HunterType.choiceOption(): ChoiceOption = when (this) {
     HunterType.WORKING_ON_IT -> ChoiceOption(Icons.AutoMirrored.Outlined.MenuBook, R.string.hunter_working, R.string.hunter_working_sub)
-    HunterType.NEW_HUNTER -> ChoiceOption(Icons.Outlined.Eco, R.string.hunter_new, R.string.hunter_new_sub)
-    HunterType.EXPERIENCED -> ChoiceOption(HuntIcons.Antlers, R.string.hunter_experienced, R.string.hunter_experienced_sub)
+    HunterType.HUNTER -> ChoiceOption(HuntIcons.Antlers, R.string.hunter_hunter, R.string.hunter_hunter_sub)
 }
 
 fun Weapon.choiceOption(): ChoiceOption = when (this) {

@@ -38,11 +38,11 @@ class HomeScreenshotTest {
 
     @Test
     @Config(qualifiers = LIGHT_EN)
-    fun homeNewHunterLightEn() = compose.captureScreenshot("home_new_hunter_light_en") { HomeNewHunterPreview() }
+    fun homeHunterPassedLightEn() = compose.captureScreenshot("home_hunter_passed_light_en") { HomeHunterPassedPreview() }
 
     @Test
     @Config(qualifiers = DARK_FR)
-    fun homeNewHunterDarkFr() = compose.captureScreenshot("home_new_hunter_dark_fr") { HomeNewHunterPreview() }
+    fun homeHunterPassedDarkFr() = compose.captureScreenshot("home_hunter_passed_dark_fr") { HomeHunterPassedPreview() }
 
     @Test
     @Config(qualifiers = LIGHT_EN)

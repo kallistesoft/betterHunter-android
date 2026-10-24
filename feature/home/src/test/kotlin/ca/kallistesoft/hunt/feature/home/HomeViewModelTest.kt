@@ -98,12 +98,12 @@ class HomeViewModelTest {
     private fun <T> assertNotNull(value: T?): T = value.also { org.junit.Assert.assertNotNull(it) }!!
 
     @Test
-    fun `a new hunter from onboarding gets today's questions, Field skills and the season card`() = runTest {
-        userData.saveProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC)
+    fun `a hunter from onboarding gets today's questions, Field skills and the season card`() = runTest {
+        userData.saveProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC)
         userData.setSeasonStart(TEST_DAY + 21)
         viewModel.uiState.test {
             val state = awaitItemMatching { !it.loading }
-            assertTrue(state.fieldHunter)
+            assertTrue(state.hunter)
             assertEquals(DailyState(0, 3, 0, 3), state.daily)
             assertEquals(SeasonStatus.Countdown(TEST_DAY + 21, 21), state.season)
 
@@ -113,14 +113,15 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `a new hunter who passed the exam in the app keeps the exam Home`() = runTest {
+    fun `a hunter who passed the exam in the app gets today's questions and keeps the passed exam`() = runTest {
         userData.setProvince(Province.QC, true)
         userData.markExamPassed("ICAF")
         viewModel.uiState.test {
             val state = awaitItemMatching { !it.loading }
             assertTrue(state.hunter)
-            assertFalse(state.fieldHunter)
-            assertNull(state.daily)
+            assertTrue(state.newHunterBanner)
+            assertEquals("ICAF", state.passedExamId)
+            assertNotNull(state.daily)
         }
     }
 }

@@ -21,12 +21,12 @@ class SettingsFlowTest {
         app.onboard()
         app.clickTag("settings")
         app.clickTag("settings-hunter-type")
-        app.clickTag("choice-NEW_HUNTER")
+        app.clickTag("choice-HUNTER")
         app.clickTag("profile-save")
-        app.waitForText(app.str(R.string.hunter_new))
+        app.waitForText(app.str(R.string.hunter_hunter))
         app.back()
 
-        // A new hunter without a passed exam gets the field Home (P11): Field skills instead of Exam training.
+        // A hunter without a passed exam gets the field Home (P11): Field skills instead of Exam training.
         app.waitForTag("hub-skills")
         rule.onNode(hasTestTag("hub-exams")).assertDoesNotExist()
     }

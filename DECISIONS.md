@@ -50,7 +50,7 @@ works without Firebase configured. *No Firebase Analytics.*
 data types) were entered for that and stay; the `AD_ID` permission stays. Placement: one interstitial after a
 finished test, never during a question. *In the app (2026-10-23):* after the last answer of an exam-training quiz
 (practice, mock exam, review, recognition game), the preloaded interstitial shows, then the results; none loaded means
-the results at once. At most one every 3 minutes (in the app and as the AdMob frequency cap). New hunters' field
+the results at once. At most one every 3 minutes (in the app and as the AdMob frequency cap). Hunters' field
 runs (P11: daily questions, skills, season check) show no ad for now. Consent with Google's UMP at launch, "Privacy
 options" in Settings where required; nothing is loaded before consent allows it. `ads_enabled` (Remote Config) turns
 ads off. Real ad IDs only in release builds; debug and qa (emulator smoke tests) use Google's test IDs. Before any release, check the store declarations against what the build really
@@ -84,13 +84,13 @@ crossbow; in Alberta, Conservation and Hunter Education. The PAL (CFSC) is the f
 firearms, not a requirement to be a hunter. Onboarding asks where the user hunts and the province sets the
 quizzes: Québec, the Québec hunter course (no PAL); Alberta, the Alberta course and the PAL; elsewhere in Canada, the
 PAL. Settings → My provinces switches other provinces on (adding their quizzes) or off. "I passed the real exam" on a hunter
-course is what turns a user into a New hunter.
+course is what turns a user into a Hunter (P12).
 ICAA (bow and crossbow) is shown as coming soon until it has questions. *In the app (2026-10-23):* onboarding asks the three questions (no exam picker), the profile and the
 provinces are in `UserProgress` (`myExamIds`: home province first), hunter courses come before the PAL (`ExamGroup`
-order), My provinces is reached from Exam training, and "Yes, I passed" makes a New hunter with Home's new-hunter
+order), My provinces is reached from Exam training, and "Yes, I passed" makes a Hunter with Home's hunter
 version. Settings changes each answer (hunter type, weapons, where you hunt), My provinces and the daily goal.
 
-**P11. New hunters practise field skills, not exams.** *Product.* A New hunter is done with exams: their Home and
+**P11. Hunters practise field skills, not exams.** *Product.* A Hunter (P12) is done with exams: their Home and
 Field skills never show a course, a pass mark or a mock exam. To keep them up to date, Home asks 6 questions a day: 3
 random species questions and 3 random general questions. Skills are practised by topic; a skill at 100% is
 mastered, right answers count for 3 months (then the question counts as unanswered again), each mix keeps 1 or 2
@@ -101,13 +101,24 @@ Reminders are local notifications, opt-in at two moments (daily questions done, 
 never between 9 pm and 8 am, at the hunter's usual playing time. *In the app (2026-10-23):* `FieldSkill` maps
 each skill to chapters of the banks (a first pass, to check against the questions; safe firearm handling only for
 firearm hunters), `FieldTraining` draws the runs, `SeasonStatus` and `Reminder` hold the season and reminder rules
-(core:model, tested on the JVM). Only a New hunter from onboarding gets this Home; one who passed the exam in the app
-keeps Exam training (as in flow 1). Reminders are one WorkManager job, rescheduled whenever the progress changes and
+(core:model, tested on the JVM). Every Hunter gets this Home; one who passed the exam in the app also keeps Exam
+training, as a row below the tiles (2026-10-24). Reminders are one WorkManager job, rescheduled whenever the progress changes and
 when the time zone or the time changes or the phone restarts; a late one still shows that day, before 9 pm (#8). The
 usual time is the median time of the first answer on the last 14 days played (7 pm until 5 days). "Not now" asks again a
 week later; a refused system dialog stops asking. After 3 daily reminders ignored in a row they come every other day,
 until the app is opened. Without a date for the coming season, one "Hunting season is coming" on August 25. A season
 reminder opens the season check.
+
+**P12. Two profiles: Working on it and Hunter.** *Product.* "What kind of hunter are you?" has two answers: Working on
+it (preparing for the licence or the hunter course) and Hunter (licensed, whatever the number of seasons). A
+first-season hunter and a thirty-season one can do the same things, so the app doesn't split them. "Yes, I passed"
+makes a Hunter, on the same Home as one from onboarding (P11), with a welcome banner and Exam training kept as a row.
+For hunters who already know the basics, the first Home will offer an optional skill check ("Already hunt? Skip what
+you know": the skills answered right start as mastered), and today's species questions will include look-alikes
+(white-tailed or mule deer, sex and age); both are in the mockup, not built yet (FOLLOW-UP.md, section 5).
+*Replaced (2026-10-24):* three profiles, New hunter and Experienced hunter, mocked as two flows. *In the app:*
+`HunterType` is `WORKING_ON_IT` or `HUNTER`; progress saved as `NEW_HUNTER` or `EXPERIENCED` reads back as `HUNTER`
+(`@JsonNames`), so nothing is lost on update.
 
 ## Design
 

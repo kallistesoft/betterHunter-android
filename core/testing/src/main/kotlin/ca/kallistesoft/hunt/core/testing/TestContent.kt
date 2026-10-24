@@ -30,7 +30,7 @@ object TestContent {
         questionsByScope = mapOf(
             "federal" to (1..3).map { question("federal-$it", "federal") },
             "QC" to (1..3).map { question("qc-$it", "QC") },
-            // Field skills (new hunters): two questions per skill, except safe firearm handling.
+            // Field skills (hunters): two questions per skill, except safe firearm handling.
             "hunter-common" to listOf("l07", "l08", "l04", "l10").flatMap { ch ->
                 (1..2).map { question("hc-$ch-$it", "hunter-common", chapter = ch) }
             },

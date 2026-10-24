@@ -72,7 +72,7 @@ sealed interface FieldQuizUiState {
 }
 
 /**
- * A new hunter's run (P11): one skill, today's mix ("Keep your edge" once all are mastered), the season check, "My
+ * A hunter's run (P11): one skill, today's mix ("Keep your edge" once all are mastered), the season check, "My
  * mistakes", or today's 6 questions (resumed where the hunter left off). Answers are recorded right away.
  */
 @HiltViewModel(assistedFactory = FieldQuizViewModel.Factory::class)

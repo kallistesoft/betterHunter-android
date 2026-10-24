@@ -155,7 +155,7 @@ internal fun SettingsContent(
         ) {
             item { SectionTitle(stringResource(R.string.your_profile)) }
             item { ProfileCard(state, onEdit, onOpenProvinces, onOpenSeasonDate) }
-            if (state.fieldHunter) {
+            if (state.hunter) {
                 item { SectionTitle(stringResource(R.string.reminders)) }
                 item { RemindersCard(state, onDailyReminders, onSeasonReminders, onOpenNotificationSettings) }
                 item {
@@ -168,7 +168,7 @@ internal fun SettingsContent(
                 }
             }
             item { SectionTitle(stringResource(R.string.settings_app)) }
-            item { AppCard(state.dailyGoal, onSetLanguage, onSetDailyGoal, showDailyGoal = !state.fieldHunter) }
+            item { AppCard(state.dailyGoal, onSetLanguage, onSetDailyGoal, showDailyGoal = !state.hunter) }
             item { SectionTitle(stringResource(R.string.about)) }
             item {
                 // Ads consent choices, only where the user's region requires a way back to them (UMP).
@@ -275,7 +275,7 @@ private fun ProfileCard(state: SettingsUiState, onEdit: (ProfileField) -> Unit, 
                     modifier = Modifier.testTag("settings-provinces"),
                 )
             },
-        ) + listOfNotNull(seasonRow.takeIf { state.fieldHunter }),
+        ) + listOfNotNull(seasonRow.takeIf { state.hunter }),
     )
 }
 
@@ -358,7 +358,7 @@ private fun AppCard(dailyGoal: Int, onSetLanguage: (Lang) -> Unit, onSetDailyGoa
         }
     }
     SettingsCard(
-        // New hunters have today's 6 questions instead of a daily goal (P11).
+        // Hunters have today's 6 questions instead of a daily goal (P11).
         rows = listOfNotNull<@Composable ColumnScope.() -> Unit>(
             {
                 SettingRow(Icons.Outlined.Language, stringResource(R.string.language)) {

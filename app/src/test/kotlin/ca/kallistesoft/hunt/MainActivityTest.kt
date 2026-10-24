@@ -33,7 +33,7 @@ class MainActivityTest {
 
     @Test
     fun `a season reminder opens the season check over Home`() {
-        app.launch(ReminderLink.intent(app.app, Reminder.Kind.SEASON), newHunter)
+        app.launch(ReminderLink.intent(app.app, Reminder.Kind.SEASON), asHunter)
         app.waitFor(seasonCheck)
         app.clickBackArrow()
         app.clickText(app.str(R.string.quit))
@@ -50,7 +50,7 @@ class MainActivityTest {
 
     @Test
     fun `a reminder tapped while the app runs opens its screen`() {
-        runBlocking { app.app.userData.newHunter() }
+        runBlocking { app.app.userData.asHunter() }
         val controller = Robolectric.buildActivity(MainActivity::class.java).setup()
         app.waitForTag("daily-card")
         controller.newIntent(ReminderLink.intent(app.app, Reminder.Kind.SEASON))
@@ -60,7 +60,7 @@ class MainActivityTest {
 
     @Test
     fun `the quiz shortcuts are listed in the system's shortcut helper`() {
-        app.launch(newHunter)
+        app.launch(asHunter)
         app.scenario.onActivity { activity ->
             val groups = mutableListOf<KeyboardShortcutGroup>()
             activity.onProvideKeyboardShortcuts(groups, null, 0)
@@ -69,8 +69,8 @@ class MainActivityTest {
     }
 
     private companion object {
-        val newHunter: suspend UserDataRepository.() -> Unit = {
-            saveProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC)
+        val asHunter: suspend UserDataRepository.() -> Unit = {
+            saveProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC)
         }
     }
 }

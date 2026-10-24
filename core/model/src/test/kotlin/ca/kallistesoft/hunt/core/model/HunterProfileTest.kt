@@ -2,11 +2,21 @@ package ca.kallistesoft.hunt.core.model
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class HunterProfileTest {
     private val quebecer = UserProgress().withProfile(HunterType.WORKING_ON_IT, setOf(Weapon.FIREARM), Province.QC)
+
+    @Test
+    fun `saved type names read back, the old new and experienced hunters as hunters`() {
+        assertEquals(HunterType.WORKING_ON_IT, HunterType.fromName("WORKING_ON_IT"))
+        assertEquals(HunterType.HUNTER, HunterType.fromName("HUNTER"))
+        assertEquals(HunterType.HUNTER, HunterType.fromName("NEW_HUNTER"))
+        assertEquals(HunterType.HUNTER, HunterType.fromName("EXPERIENCED"))
+        assertNull(HunterType.fromName("SOMETHING_ELSE"))
+    }
 
     @Test
     fun `onboarding is done once the profile is saved`() {
@@ -38,9 +48,9 @@ class HunterProfileTest {
     }
 
     @Test
-    fun `passing the real exam makes a new hunter and shows the welcome`() {
+    fun `passing the real exam makes a hunter and shows the welcome`() {
         val p = quebecer.withExamPassed("ICAF")
-        assertEquals(HunterType.NEW_HUNTER, p.hunterType)
+        assertEquals(HunterType.HUNTER, p.hunterType)
         assertEquals(setOf("ICAF"), p.passedExams)
         assertTrue(p.newHunterBanner)
         assertTrue(p.isHunter)
@@ -57,9 +67,9 @@ class HunterProfileTest {
     }
 
     @Test
-    fun `going back to working on it drops the new-hunter welcome`() {
+    fun `going back to working on it drops the hunter welcome`() {
         val hunter = quebecer.withExamPassed("ICAF")
-        assertTrue(hunter.withHunterType(HunterType.NEW_HUNTER).newHunterBanner)
+        assertTrue(hunter.withHunterType(HunterType.HUNTER).newHunterBanner)
         val back = hunter.withHunterType(HunterType.WORKING_ON_IT)
         assertFalse(back.isHunter)
         assertFalse(back.newHunterBanner)

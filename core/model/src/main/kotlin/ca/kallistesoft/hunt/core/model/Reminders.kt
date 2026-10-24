@@ -28,7 +28,7 @@ data class Reminder(val kind: Kind, val day: Long, val minute: Int, val seasonSt
          * between 9 pm and 8 am), and no daily reminder once today's questions are done. Null when none is on.
          */
         fun next(progress: UserProgress, today: Long, nowMinute: Int): Reminder? {
-            if (!progress.isFieldHunter) return null
+            if (!progress.isHunter) return null
             val minute = progress.reminderMinute
             // One a day: nothing more today once its time has passed or once one was shown.
             val firstDay = if (nowMinute < minute && progress.reminderDay != today) today else today + 1

@@ -5,7 +5,7 @@ import java.time.LocalDate
 import java.time.MonthDay
 import kotlin.random.Random
 
-/** The new hunter's runs (P11): one skill, today's mix, the season check, or today's questions. */
+/** The hunter's runs (P11): one skill, today's mix, the season check, or today's questions. */
 @Serializable
 enum class FieldRun(val size: Int) {
     SKILL(10),
@@ -21,7 +21,7 @@ enum class FieldRun(val size: Int) {
     MISTAKES(20),
 }
 
-/** Draws the questions of the new hunter's runs. Pure, so the rules are tested on the JVM. */
+/** Draws the questions of the hunter's runs. Pure, so the rules are tested on the JVM. */
 object FieldTraining {
     /** Questions from mastered skills kept in each mix, so they stay sharp. */
     const val KEEP_SHARP = 2

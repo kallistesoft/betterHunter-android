@@ -49,8 +49,8 @@ class AppRobot(private val rule: AppRule) {
         clickTag("onboarding-continue") // firearm is ticked by default
         clickTag("choice-$province")
         clickTag("onboarding-continue")
-        // A new hunter's Home leads with today's questions (P11); the others' with exam training.
-        waitForTag(if (hunterType == "NEW_HUNTER") "daily-card" else "hub-exams")
+        // A hunter's Home leads with today's questions (P11); the others' with exam training.
+        waitForTag(if (hunterType == "HUNTER") "daily-card" else "hub-exams")
     }
 
     /** Answers every question of the run on screen with the first choice, up to its results. */

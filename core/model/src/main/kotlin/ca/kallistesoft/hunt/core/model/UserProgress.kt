@@ -27,13 +27,13 @@ data class UserProgress(
     val provinces: Set<Province> = emptySet(),
     /** Exams the user says they passed for real ("I passed the real exam"); nothing is verified. */
     val passedExams: Set<String> = emptySet(),
-    /** The "Welcome, new hunter" banner on Home, shown after passing a real exam until it is closed. */
+    /** The "Welcome, hunter" banner on Home, shown after passing a real exam until it is closed. */
     val newHunterBanner: Boolean = false,
     /** Questions a day for the goal ring (Settings: one of [DAILY_GOALS]). */
     val dailyGoal: Int = DEFAULT_DAILY_GOAL,
     /** Day of the last right answer per question: right answers count for [ANSWER_LIFETIME_DAYS] (P11). */
     val correctDay: Map<String, Long> = emptyMap(),
-    /** New hunter's daily questions: the day they were drawn for and the answers given that day. */
+    /** A hunter's daily questions: the day they were drawn for and the answers given that day. */
     val dailyDay: Long? = null,
     val dailyResults: Map<String, Boolean> = emptyMap(),
     /** The hunter's own first hunting day ("When does your season start?"), as a day number. */
@@ -55,13 +55,10 @@ data class UserProgress(
     val onboarded: Boolean get() = hunterType != null && homeProvince != null
 
     /**
-     * A new hunter who came from onboarding (no real exam passed in the app): Home leads with today's 6 questions,
-     * Field skills replaces Exam training, and the season check and reminders apply (P11).
+     * A hunter, from onboarding or after passing a real exam: Home leads with today's 6 questions, Field skills replaces
+     * Exam training, and the season check and reminders apply (P11).
      */
-    val isFieldHunter: Boolean get() = hunterType == HunterType.NEW_HUNTER && passedExams.isEmpty()
-
-    /** New and experienced hunters get the Home built around "What is it?" instead of exam practice. */
-    val isHunter: Boolean get() = hunterType != null && hunterType != HunterType.WORKING_ON_IT
+    val isHunter: Boolean get() = hunterType == HunterType.HUNTER
 
     /** The user's exams: the home province's first (unless switched off), then the other provinces', each once. */
     val myExamIds: List<String>
@@ -80,9 +77,9 @@ data class UserProgress(
         else -> copy(provinces = provinces - province)
     }
 
-    /** Settings → Hunter type. Going back to "Working on it" also drops the new-hunter welcome. */
+    /** Settings → Hunter type. Going back to "Working on it" also drops the hunter welcome. */
     fun withHunterType(type: HunterType): UserProgress =
-        copy(hunterType = type, newHunterBanner = newHunterBanner && type == HunterType.NEW_HUNTER)
+        copy(hunterType = type, newHunterBanner = newHunterBanner && type == HunterType.HUNTER)
 
     /** Settings → Hunting with; at least one weapon. */
     fun withWeapons(weapons: Set<Weapon>): UserProgress = if (weapons.isEmpty()) this else copy(weapons = weapons)
@@ -92,9 +89,9 @@ data class UserProgress(
 
     fun withDailyGoal(goal: Int): UserProgress = if (goal in DAILY_GOALS) copy(dailyGoal = goal) else this
 
-    /** "Yes, I passed": the user becomes a new hunter, welcomed by a banner on Home. */
+    /** "Yes, I passed": the user becomes a hunter, welcomed by a banner on Home. */
     fun withExamPassed(examId: String): UserProgress =
-        copy(passedExams = passedExams + examId, hunterType = HunterType.NEW_HUNTER, newHunterBanner = true)
+        copy(passedExams = passedExams + examId, hunterType = HunterType.HUNTER, newHunterBanner = true)
 
     /** Questions answered today (any exam), for the daily goal. */
     fun answeredToday(today: Long): Int = if (dayCountDay == today) dayCount else 0

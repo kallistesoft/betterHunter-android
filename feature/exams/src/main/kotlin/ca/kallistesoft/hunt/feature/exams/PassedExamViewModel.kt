@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-/** "Yes, I passed" on [examId]: the user becomes a new hunter. */
+/** "Yes, I passed" on [examId]: the user becomes a hunter. */
 @HiltViewModel(assistedFactory = PassedExamViewModel.Factory::class)
 class PassedExamViewModel @AssistedInject constructor(
     @Assisted private val examId: String,

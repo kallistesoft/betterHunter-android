@@ -99,7 +99,7 @@ class ReminderWorkerTest {
     @Test
     fun nothingIsShownOrPlannedWithRemindersOff() {
         allowNotifications()
-        progress { saveProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC) }
+        progress { saveProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC) }
 
         assertEquals(ListenableWorker.Result.success(), runWorker(at = LocalTime.of(19, 30)))
 
@@ -132,7 +132,7 @@ class ReminderWorkerTest {
     private fun progress(block: suspend UserDataRepository.() -> Unit) = runBlocking { app.userData.block() }
 
     private suspend fun UserDataRepository.dailyReminders() {
-        saveProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC)
+        saveProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC)
         setDailyReminders(true)
     }
 

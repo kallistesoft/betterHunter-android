@@ -21,6 +21,7 @@ import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.Event
 import androidx.compose.material.icons.outlined.GpsFixed
+import androidx.compose.material.icons.outlined.School
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.LocalFireDepartment
@@ -48,6 +49,7 @@ import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.FieldRun
 import ca.kallistesoft.hunt.core.model.SeasonStatus
+import ca.kallistesoft.hunt.core.ui.ExamPassed
 import ca.kallistesoft.hunt.core.ui.R
 import ca.kallistesoft.hunt.core.ui.shortDate
 
@@ -205,7 +207,7 @@ private fun DailyRow(
     }
 }
 
-/** New hunters: "What is it?" and Field skills side by side, each with its readiness. */
+/** Hunters: "What is it?" and Field skills side by side, each with its readiness. */
 @Composable
 internal fun FieldHubs(state: HomeUiState, onOpenRecognition: () -> Unit, onOpenFieldSkills: () -> Unit) {
     Row(Modifier.height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(Spacing.m)) {
@@ -224,3 +226,23 @@ internal fun FieldHubs(state: HomeUiState, onOpenRecognition: () -> Unit, onOpen
     }
 }
 
+/** After passing a real exam: Exam training kept as a row, to refresh the rules ("ICAF passed"). */
+@Composable
+internal fun ExamsRow(passedExamId: String, onClick: () -> Unit) {
+    val scheme = MaterialTheme.colorScheme
+    BhCard(Modifier.testTag("hub-exams"), shape = MaterialTheme.shapes.medium, onClick = onClick) {
+        Row(
+            Modifier.fillMaxWidth().padding(start = Spacing.l, top = Spacing.m, bottom = Spacing.m, end = Spacing.s),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            IconBadge(Icons.Outlined.School, containerColor = scheme.secondaryContainer, contentColor = scheme.secondary)
+            Spacer(Modifier.width(Spacing.m))
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(Spacing.xxs)) {
+                Text(stringResource(R.string.hub_exams), style = MaterialTheme.typography.titleSmall)
+                Text(stringResource(R.string.hub_exams_refresh), style = MaterialTheme.typography.bodySmall, color = scheme.onSurfaceVariant)
+            }
+            ExamPassed(passedExamId)
+            Icon(Icons.AutoMirrored.Rounded.KeyboardArrowRight, contentDescription = null, tint = scheme.onSurfaceVariant)
+        }
+    }
+}

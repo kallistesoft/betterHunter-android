@@ -73,7 +73,7 @@ import ca.kallistesoft.hunt.core.ui.rememberNotificationPermission
 import kotlin.math.roundToInt
 
 /**
- * A new hunter's run ([FieldRun]): questions, then the results. [onOpenSkill] starts the next skill after a skill
+ * A hunter's run ([FieldRun]): questions, then the results. [onOpenSkill] starts the next skill after a skill
  * run; [onClose] goes back (to Field skills or Home).
  */
 @Composable

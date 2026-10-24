@@ -85,25 +85,34 @@ class HomeScreenTest {
     }
 
     @Test
-    fun `a new hunter plays What is it, sees the passed exam and closes the welcome`() {
+    fun `a hunter who passed the exam gets today's questions, keeps Exam training and closes the welcome`() {
         setHome(
             previewHomeState.copy(
                 hunter = true,
                 newHunterBanner = true,
                 passedExamId = "ICAF",
+                daily = DailyState(0, 3, 0, 3),
                 photoOfDay = previewHomeState.photoOfDay?.copy(choice = 0),
             ),
         )
-        compose.onNodeWithText("Hunter course passed. Welcome, new hunter!").assertIsDisplayed()
+        compose.onNodeWithText("Hunter course passed. Welcome, hunter!").assertIsDisplayed()
+        compose.onNodeWithText("Start today's questions").assertIsDisplayed()
         compose.onNodeWithText("ICAF passed").assertIsDisplayed()
-        compose.onNodeWithText("Reddish-brown deer", substring = true).assertIsDisplayed()
+        compose.onNodeWithText("Refresh the rules any time").assertIsDisplayed()
+        compose.onNodeWithTag("today-practice").assertDoesNotExist()
 
-        compose.onNodeWithTag("today-play-id").performClick()
         compose.onNodeWithTag("banner-close").performClick()
+        compose.onNodeWithTag("hub-exams").performClick()
         compose.onNodeWithTag("pod-play").performClick()
 
-        val play = "quiz:${PreviewData.photoGame.id}:${QuizMode.PRACTICE}"
-        assertEquals(listOf(play, "dismiss", play), events)
+        assertEquals(listOf("dismiss", "exams", "quiz:${PreviewData.photoGame.id}:${QuizMode.PRACTICE}"), events)
+    }
+
+    @Test
+    fun `a hunter who passed no exam has no Exam training row`() {
+        setHome(previewHomeState.copy(hunter = true, daily = DailyState(0, 3, 0, 3)))
+        compose.onNodeWithTag("hub-exams").assertDoesNotExist()
+        compose.onNodeWithTag("new-hunter-banner").assertDoesNotExist()
     }
 
     @Test
@@ -117,7 +126,7 @@ class HomeScreenTest {
     fun `a field hunter starts the season check, today's questions and Field skills`() {
         setHome(
             previewHomeState.copy(
-                fieldHunter = true,
+                hunter = true,
                 season = SeasonStatus.Countdown(TEST_DAY + 21, 21),
                 daily = DailyState(0, 3, 0, 3),
                 skillsReadiness = 0.25f,
@@ -146,7 +155,7 @@ class HomeScreenTest {
     fun `without a season date, the card offers to set one`() {
         setHome(
             previewHomeState.copy(
-                fieldHunter = true,
+                hunter = true,
                 season = SeasonStatus.Coming,
                 daily = DailyState(3, 3, 1, 3),
                 streak = 2,
@@ -163,7 +172,7 @@ class HomeScreenTest {
 
     @Test
     fun `today's questions continue with the species, then are done for the day`() {
-        setHome(previewHomeState.copy(fieldHunter = true, daily = DailyState(1, 3, 0, 3)))
+        setHome(previewHomeState.copy(hunter = true, daily = DailyState(1, 3, 0, 3)))
         compose.onNodeWithText("Continue: 2 species left").assertIsDisplayed()
     }
 
@@ -171,7 +180,7 @@ class HomeScreenTest {
     fun `all of today's questions answered`() {
         assertTrue(DailyState(3, 3, 3, 3).allDone)
         assertFalse(DailyState(3, 3, 2, 3).allDone)
-        setHome(previewHomeState.copy(fieldHunter = true, daily = DailyState(3, 3, 3, 3)))
+        setHome(previewHomeState.copy(hunter = true, daily = DailyState(3, 3, 3, 3)))
         compose.onNodeWithTag("daily-all-done").assertIsDisplayed()
         compose.onNodeWithTag("daily-continue").assertDoesNotExist()
     }

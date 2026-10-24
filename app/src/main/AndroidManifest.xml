@@ -4,7 +4,7 @@
 
     <!-- Network: force-update rules, feature flags (Firebase Remote Config) and ads (AdMob). -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- New hunter reminders (local notifications), asked only when the hunter turns them on. -->
+    <!-- Hunter reminders (local notifications), asked only when the hunter turns them on. -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- Reminders are planned again after a reboot. -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />

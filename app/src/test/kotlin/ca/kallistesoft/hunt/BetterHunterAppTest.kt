@@ -94,7 +94,7 @@ class BetterHunterAppTest {
         app.clickTag("passed-ICAF")
         app.clickTag("passed-yes")
 
-        // Exam training and the question are gone: Home, now the new hunter's.
+        // Exam training and the question are gone: Home, now the hunter's.
         app.waitForTag("new-hunter-banner")
         assertFalse(app.exists(hasTestTag("exam-card-ICAF")))
     }
@@ -140,9 +140,9 @@ class BetterHunterAppTest {
         app.launch(student)
         app.clickTag("settings")
         app.clickTag("settings-hunter-type")
-        app.clickTag("choice-NEW_HUNTER")
+        app.clickTag("choice-HUNTER")
         app.clickTag("profile-save")
-        app.waitFor(hasTextOf(R.string.hunter_new))
+        app.waitFor(hasTextOf(R.string.hunter_hunter))
 
         app.clickTag("settings-provinces")
         app.waitForTag("province-AB")
@@ -170,8 +170,8 @@ class BetterHunterAppTest {
     }
 
     @Test
-    fun aNewHunterMovesFromOneSkillToTheNext() {
-        app.launch(newHunter)
+    fun aHunterMovesFromOneSkillToTheNext() {
+        app.launch(asHunter)
         app.clickTag("hub-skills")
         app.clickTag("skill-SHOT_PLACEMENT")
         app.answerAll(10)
@@ -187,8 +187,8 @@ class BetterHunterAppTest {
     }
 
     @Test
-    fun aNewHunterStartsTodaysQuestionsFromHome() {
-        app.launch(newHunter)
+    fun aHunterStartsTodaysQuestionsFromHome() {
+        app.launch(asHunter)
         app.clickTag("daily-continue")
         app.waitForTag("choice-0")
         app.pressBack()
@@ -217,8 +217,8 @@ class BetterHunterAppTest {
         val student: suspend UserDataRepository.() -> Unit = {
             saveProfile(HunterType.WORKING_ON_IT, setOf(Weapon.FIREARM), Province.QC)
         }
-        val newHunter: suspend UserDataRepository.() -> Unit = {
-            saveProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC)
+        val asHunter: suspend UserDataRepository.() -> Unit = {
+            saveProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC)
         }
     }
 }
