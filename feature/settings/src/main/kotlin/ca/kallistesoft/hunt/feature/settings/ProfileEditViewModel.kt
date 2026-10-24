@@ -59,7 +59,7 @@ class ProfileEditViewModel @AssistedInject constructor(
 
     private val draft = MutableStateFlow(
         Draft(
-            hunterType = savedState.get<String>(KEY_TYPE)?.let(HunterType::valueOf),
+            hunterType = savedState.get<String>(KEY_TYPE)?.let(HunterType::fromName),
             weapons = savedState.get<ArrayList<String>>(KEY_WEAPONS)?.map(Weapon::valueOf)?.toSet(),
             province = savedState.get<String>(KEY_PROVINCE)?.let(Province::valueOf),
         ),

@@ -8,16 +8,16 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.time.LocalDate
 
-/** A new hunter from onboarding (P11): today's 6 questions, a field skill, and the season start date. */
+/** A hunter from onboarding (P11): today's 6 questions, a field skill, and the season start date. */
 @RunWith(AndroidJUnit4::class)
-class NewHunterFlowTest {
+class HunterDailyFlowTest {
     @get:Rule
     val rule = createAndroidComposeRule<MainActivity>()
     private val app = rule.robot()
 
     @Test
     fun todaysQuestionsEndOnDoneForToday() {
-        app.onboard(hunterType = "NEW_HUNTER")
+        app.onboard(hunterType = "HUNTER")
         rule.onNode(hasTestTag("hub-exams")).assertDoesNotExist()
         app.clickTag("daily-continue")
         app.answerAll(6)
@@ -32,7 +32,7 @@ class NewHunterFlowTest {
 
     @Test
     fun aSkillRunShowsTheSkillsProgress() {
-        app.onboard(hunterType = "NEW_HUNTER")
+        app.onboard(hunterType = "HUNTER")
         app.clickTag("hub-skills")
         app.clickTag("skill-SHOT_PLACEMENT")
         app.answerAll(10)
@@ -45,7 +45,7 @@ class NewHunterFlowTest {
 
     @Test
     fun theSeasonStartDateIsSavedAndShownOnHome() {
-        app.onboard(hunterType = "NEW_HUNTER")
+        app.onboard(hunterType = "HUNTER")
         app.clickTag("settings")
         app.clickTag("settings-season")
         app.clickTag("day-${LocalDate.now().toEpochDay()}")

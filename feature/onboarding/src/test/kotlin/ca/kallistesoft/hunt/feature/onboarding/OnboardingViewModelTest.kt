@@ -66,24 +66,24 @@ class OnboardingViewModelTest {
         val vm = viewModel()
         collecting(vm.uiState)
         assertFalse(vm.back())
-        vm.chooseHunterType(HunterType.NEW_HUNTER)
+        vm.chooseHunterType(HunterType.HUNTER)
         vm.next()
         assertTrue(vm.back())
         assertEquals(OnboardingStep.HUNTER_TYPE, vm.uiState.value.step)
-        assertEquals(HunterType.NEW_HUNTER, vm.uiState.value.hunterType)
+        assertEquals(HunterType.HUNTER, vm.uiState.value.hunterType)
     }
 
     @Test
     fun `the answers survive process death`() = runTest {
         viewModel().apply {
-            chooseHunterType(HunterType.EXPERIENCED)
+            chooseHunterType(HunterType.HUNTER)
             next()
             toggleWeapon(Weapon.BOW)
         }
         // Restored before the screen collects: the first frame already shows the restored question.
         val restored = viewModel().uiState.value
         assertEquals(OnboardingStep.WEAPONS, restored.step)
-        assertEquals(HunterType.EXPERIENCED, restored.hunterType)
+        assertEquals(HunterType.HUNTER, restored.hunterType)
         assertEquals(setOf(Weapon.FIREARM, Weapon.BOW), restored.weapons)
     }
 }

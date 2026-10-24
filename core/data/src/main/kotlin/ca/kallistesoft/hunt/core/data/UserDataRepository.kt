@@ -42,7 +42,7 @@ interface UserDataRepository {
     /** Adds or hides a province's quizzes (My provinces). */
     suspend fun setProvince(province: Province, enabled: Boolean)
 
-    /** "I passed the real exam": the user becomes a new hunter. */
+    /** "I passed the real exam": the user becomes a hunter. */
     suspend fun markExamPassed(examId: String)
 
     suspend fun dismissNewHunterBanner()
@@ -59,7 +59,7 @@ interface UserDataRepository {
     /** Answers today's photo of the day; it also counts toward the goal, streak and weak spots. */
     suspend fun answerPhotoOfDay(questionId: String, choice: Int, correct: Boolean)
 
-    // New hunter (P11)
+    // Hunter (P11)
 
     /** Answers one of today's 6 questions. */
     suspend fun recordDaily(questionId: String, correct: Boolean)

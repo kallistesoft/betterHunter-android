@@ -53,12 +53,12 @@ class UserDataRepositoryTest {
         val repo = repository()
         repo.saveProfile(HunterType.WORKING_ON_IT, setOf(Weapon.BOW), Province.QC)
         repo.setProvince(Province.AB, enabled = true)
-        repo.setHunterType(HunterType.EXPERIENCED)
+        repo.setHunterType(HunterType.HUNTER)
         repo.setWeapons(setOf(Weapon.FIREARM, Weapon.CROSSBOW))
         repo.setHomeProvince(Province.OTHER)
         repo.setDailyGoal(30)
         val p = repo.progress.first()
-        assertEquals(HunterType.EXPERIENCED, p.hunterType)
+        assertEquals(HunterType.HUNTER, p.hunterType)
         assertEquals(setOf(Weapon.FIREARM, Weapon.CROSSBOW), p.weapons)
         assertEquals(Province.OTHER, p.homeProvince)
         assertEquals(setOf(Province.QC, Province.AB, Province.OTHER), p.provinces)
@@ -66,11 +66,11 @@ class UserDataRepositoryTest {
     }
 
     @Test
-    fun `passing the real exam welcomes a new hunter until the banner is closed`() = runTest {
+    fun `passing the real exam welcomes a hunter until the banner is closed`() = runTest {
         val repo = repository()
         repo.markExamPassed("ICAF")
         assertTrue(repo.progress.first().newHunterBanner)
-        assertEquals(HunterType.NEW_HUNTER, repo.progress.first().hunterType)
+        assertEquals(HunterType.HUNTER, repo.progress.first().hunterType)
         repo.dismissNewHunterBanner()
         assertFalse(repo.progress.first().newHunterBanner)
         assertEquals(setOf("ICAF"), repo.progress.first().passedExams)
@@ -88,7 +88,7 @@ class UserDataRepositoryTest {
     }
 
     @Test
-    fun `new hunter answers, season and reminders are saved`() = runTest {
+    fun `hunter answers, season and reminders are saved`() = runTest {
         val repo = repository()
         repo.recordDaily("hc-1", correct = true)
         repo.setSeasonStart(day + 30)
@@ -125,6 +125,18 @@ class UserDataRepositoryTest {
         assertTrue(out.toString().contains("\"q1\""))
         assertEquals(progress, UserProgressSerializer.readFrom(ByteArrayInputStream(out.toByteArray())))
         assertEquals(UserProgress(), UserProgressSerializer.defaultValue)
+    }
+
+    @Test
+    fun `progress saved as a new or experienced hunter reads back as a hunter, answers kept`() = runTest {
+        for (old in listOf("NEW_HUNTER", "EXPERIENCED")) {
+            val saved = """{"lastResult":{"q1":true},"hunterType":"$old","homeProvince":"QC","newHunterBanner":true}"""
+            val p = UserProgressSerializer.readFrom(ByteArrayInputStream(saved.toByteArray()))
+            assertEquals(HunterType.HUNTER, p.hunterType)
+            assertEquals(mapOf("q1" to true), p.lastResult)
+            assertTrue(p.isHunter)
+            assertTrue(p.newHunterBanner)
+        }
     }
 
     @Test(expected = CorruptionException::class)

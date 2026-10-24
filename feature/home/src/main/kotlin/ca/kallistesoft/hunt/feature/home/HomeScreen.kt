@@ -67,7 +67,6 @@ import ca.kallistesoft.hunt.core.model.FieldRun
 import ca.kallistesoft.hunt.core.model.Lang
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.ui.BrandTopAppBar
-import ca.kallistesoft.hunt.core.ui.ExamPassed
 import ca.kallistesoft.hunt.core.ui.R
 import ca.kallistesoft.hunt.core.ui.currentLang
 import kotlin.math.roundToInt
@@ -106,9 +105,8 @@ fun HomeScreen(
 
 /**
  * The dashboard. Working on it: the daily goal with "Practise now" on the main exam, then Exam training and
- * "What is it?". Hunters (new or experienced): the goal played on "What is it?", which comes first, and Exam training
- * kept for refreshers. A new hunter from onboarding (P11): the season card, today's 6 questions, then "What is it?"
- * and Field skills.
+ * "What is it?". A hunter (P11): the welcome after passing a real exam, the season card, today's 6 questions, then
+ * "What is it?" and Field skills, and Exam training kept as a row for refreshers once a real exam is passed.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -153,10 +151,10 @@ internal fun HomeContent(
                     NoticeCard(stringResource(R.string.sample_banner), NoticeTone.Warning, icon = Icons.Rounded.WarningAmber)
                 }
             }
-            if (state.hunter && state.newHunterBanner) {
-                item { NewHunterBanner(onDismissBanner) }
-            }
-            if (state.fieldHunter) {
+            if (state.hunter) {
+                if (state.newHunterBanner) {
+                    item { HunterBanner(onDismissBanner) }
+                }
                 state.season?.let { season ->
                     item { SeasonCard(season, onCheck = { onStartField(FieldRun.SEASON_CHECK) }, onSetDate = onOpenSeasonDate) }
                 }
@@ -164,6 +162,9 @@ internal fun HomeContent(
                     item { DailyCard(daily, state.streak, onStart = { onStartField(FieldRun.DAILY) }) }
                 }
                 item { FieldHubs(state, onOpenRecognition, onOpenFieldSkills) }
+                state.passedExamId?.let { passed ->
+                    item { ExamsRow(passed, onOpenExams) }
+                }
             } else {
                 item {
                     TodayCard(
@@ -188,9 +189,9 @@ internal fun HomeContent(
     }
 }
 
-/** "Welcome, new hunter!" after "Yes, I passed", until closed. */
+/** "Welcome, hunter!" after "Yes, I passed", until closed. */
 @Composable
-private fun NewHunterBanner(onDismiss: () -> Unit) {
+private fun HunterBanner(onDismiss: () -> Unit) {
     val scheme = MaterialTheme.colorScheme
     BhCard(
         Modifier.testTag("new-hunter-banner"),
@@ -202,8 +203,8 @@ private fun NewHunterBanner(onDismiss: () -> Unit) {
             IconBadge(Icons.Outlined.EmojiEvents, containerColor = scheme.tertiaryContainer, contentColor = scheme.tertiary)
             Spacer(Modifier.width(Spacing.m))
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(Spacing.xxs)) {
-                Text(stringResource(R.string.new_hunter_welcome), style = MaterialTheme.typography.titleSmall)
-                Text(stringResource(R.string.new_hunter_welcome_sub), style = MaterialTheme.typography.bodySmall, color = scheme.onSurfaceVariant)
+                Text(stringResource(R.string.hunter_welcome), style = MaterialTheme.typography.titleSmall)
+                Text(stringResource(R.string.hunter_welcome_sub), style = MaterialTheme.typography.bodySmall, color = scheme.onSurfaceVariant)
             }
             TooltipIconButton(
                 Icons.Rounded.Close,
@@ -217,8 +218,8 @@ private fun NewHunterBanner(onDismiss: () -> Unit) {
 }
 
 /**
- * Daily goal ring and streak, then one tap to reach the goal: "Practise now" on the main exam (with a link to change
- * the exams), or for hunters, "Play What is it?".
+ * Daily goal ring and streak, then one tap to reach the goal: "Practise now" on the main exam, with a link to change
+ * the exams.
  */
 @Composable
 private fun TodayCard(state: HomeUiState, onPlay: (examId: String) -> Unit, onChangeExams: () -> Unit) {
@@ -226,7 +227,6 @@ private fun TodayCard(state: HomeUiState, onPlay: (examId: String) -> Unit, onCh
     val done = state.answeredToday
     val goal = state.dailyGoal
     val reached = done >= goal
-    val playsPhotos = state.hunter && state.photoGameId != null
     BhCard {
         Column(Modifier.padding(Sizes.cardPadding), verticalArrangement = Arrangement.spacedBy(Spacing.l)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -255,7 +255,6 @@ private fun TodayCard(state: HomeUiState, onPlay: (examId: String) -> Unit, onCh
                     Text(
                         when {
                             reached -> stringResource(R.string.goal_done)
-                            playsPhotos -> pluralStringResource(R.plurals.animals_remaining, goal - done, goal - done)
                             else -> pluralStringResource(R.plurals.goal_remaining, goal - done, goal - done)
                         },
                         style = MaterialTheme.typography.titleLarge,
@@ -279,14 +278,7 @@ private fun TodayCard(state: HomeUiState, onPlay: (examId: String) -> Unit, onCh
                     }
                 }
             }
-            if (playsPhotos) {
-                PrimaryButton(
-                    stringResource(R.string.play_id),
-                    onClick = { onPlay(state.photoGameId) },
-                    modifier = Modifier.fillMaxWidth().testTag("today-play-id"),
-                    icon = Icons.Rounded.PlayArrow,
-                )
-            } else state.mainExam?.let { exam ->
+            state.mainExam?.let { exam ->
                 Column {
                     HorizontalDivider(color = scheme.outlineVariant)
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -314,22 +306,13 @@ private fun TodayCard(state: HomeUiState, onPlay: (examId: String) -> Unit, onCh
     }
 }
 
-/**
- * The two sections side by side: Exam training (with readiness) then "What is it?"; for hunters, "What is it?" first
- * (with readiness) and Exam training for refreshers.
- */
+/** The two sections side by side: Exam training (with readiness) then "What is it?". */
 @Composable
 private fun Hubs(state: HomeUiState, onOpenExams: () -> Unit, onOpenRecognition: () -> Unit) {
-    val showGames = state.gameCount > 0
     Row(Modifier.height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(Spacing.m)) {
         val tile = Modifier.weight(1f).fillMaxHeight()
-        if (state.hunter) {
-            if (showGames) RecognitionHub(state, onOpenRecognition, tile)
-            ExamsHub(state, onOpenExams, tile)
-        } else {
-            ExamsHub(state, onOpenExams, tile)
-            if (showGames) RecognitionHub(state, onOpenRecognition, tile)
-        }
+        ExamsHub(state, onOpenExams, tile)
+        if (state.gameCount > 0) RecognitionHub(state, onOpenRecognition, tile)
     }
 }
 
@@ -338,15 +321,13 @@ private fun ExamsHub(state: HomeUiState, onClick: () -> Unit, modifier: Modifier
     HubCard(
         icon = Icons.Outlined.School,
         title = stringResource(R.string.hub_exams),
-        subtitle = stringResource(if (state.hunter) R.string.hub_exams_refresh else R.string.hub_exams_sub),
+        subtitle = stringResource(R.string.hub_exams_sub),
         tone = HubTone.Green,
         onClick = onClick,
         modifier = modifier.testTag("hub-exams"),
     ) {
         val readiness = state.readiness
-        val passed = state.passedExamId
         when {
-            state.hunter && passed != null -> ExamPassed(passed)
             readiness != null -> Readiness(readiness)
             else -> Facts(
                 pluralStringResource(R.plurals.exams_count, state.trainingExamCount, state.trainingExamCount),

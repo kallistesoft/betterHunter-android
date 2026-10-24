@@ -31,7 +31,7 @@ class FieldQuizViewModelTest {
     val mainDispatcherRule = MainDispatcherRule(StandardTestDispatcher())
 
     private val userData = FakeUserDataRepository(
-        UserProgress().withProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC),
+        UserProgress().withProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC),
     )
 
     /** A run on screen: its state is collected, which draws (or restores) the questions. */

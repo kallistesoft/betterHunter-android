@@ -54,7 +54,7 @@ class OnboardingScreenTest {
         assertEquals(listOf(Lang.FR), languages)
 
         compose.onNodeWithTag("onboarding-continue").assertIsNotEnabled()
-        compose.onNodeWithTag("choice-${HunterType.NEW_HUNTER.name}").performClick().assertIsSelected()
+        compose.onNodeWithTag("choice-${HunterType.HUNTER.name}").performClick().assertIsSelected()
         compose.onNodeWithTag("onboarding-continue").assertIsEnabled().performClick()
 
         compose.onNodeWithTag("choice-${Weapon.FIREARM.name}").assertIsOn()
@@ -68,7 +68,7 @@ class OnboardingScreenTest {
 
         assertEquals(OnboardingStep.PROVINCE, viewModel.uiState.value.step)
         val saved = userData.progress.value
-        assertEquals(HunterType.NEW_HUNTER, saved.hunterType)
+        assertEquals(HunterType.HUNTER, saved.hunterType)
         assertEquals(setOf(Weapon.FIREARM, Weapon.BOW), saved.weapons)
         assertEquals(Province.QC, saved.homeProvince)
     }

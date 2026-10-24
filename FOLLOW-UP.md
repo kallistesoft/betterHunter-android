@@ -8,6 +8,7 @@ Steps to do outside the code, in the Firebase, AdMob and Play consoles. They use
 - [2. AdMob (ads)](#2-admob-ads)
 - [3. Play Console](#3-play-console)
 - [4. Possible next step: questions from an online API](#4-possible-next-step-questions-from-an-online-api)
+- [5. Hunter: skill check and look-alikes (mockup, not built)](#5-hunter-skill-check-and-look-alikes-mockup-not-built)
 
 ---
 
@@ -322,3 +323,15 @@ pack from a database, and the app won't need to change.
 - Accounts or server-side reports: declare the collected data (email, user IDs, app activity) in data safety and in
   the privacy policy before releasing.
 
+## 5. Hunter: skill check and look-alikes (mockup, not built)
+
+Two parts of the Hunter flow (DECISIONS.md, P12) are designed on the mockup canvas (page "2 · Hunter", screens 4–7b)
+but not in the app yet:
+
+- [ ] **Skill check on the first Home.** An optional, dismissible card above today's questions: "Already hunt? Skip
+  what you know". 15 questions across the field skills; the skills answered right start as mastered (and fade after 3
+  months like any other), the rest become practice. Screens: `HomeHunterFirst`, `SkillCheckQuestion`,
+  `SkillCheckResults`.
+- [ ] **Look-alikes in today's species questions.** Questions such as white-tailed or mule deer, sex and age, with the
+  tells and a source (species fact sheet). Needs look-alike questions in the photo bank first. Screen:
+  `LookalikeQuestion`.

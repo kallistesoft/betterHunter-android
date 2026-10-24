@@ -44,7 +44,7 @@ class FieldSkillsScreenTest {
     @Test
     fun `the mix, my mistakes and each skill start their run`() {
         val userData = FakeUserDataRepository(
-            UserProgress().withProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC)
+            UserProgress().withProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC)
                 .record("hc-l07-1", correct = false, TEST_DAY),
         )
         var back = false

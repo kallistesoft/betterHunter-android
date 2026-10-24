@@ -56,14 +56,14 @@ class MainActivityViewModelTest {
         viewModel.uiState.test {
             assertEquals(MainUiState.Ready(firstRun = true, updateRequired = false), awaitItemMatching { it != MainUiState.Loading })
 
-            userData.saveProfile(HunterType.NEW_HUNTER, setOf(Weapon.BOW), Province.QC)
+            userData.saveProfile(HunterType.HUNTER, setOf(Weapon.BOW), Province.QC)
             assertEquals(MainUiState.Ready(firstRun = false, updateRequired = false), awaitItem())
         }
     }
 
     @Test
     fun `a build below the fetched minimum must update, and flags are refreshed too`() = runTest {
-        userData.progress.value = UserProgress().withProfile(HunterType.NEW_HUNTER, setOf(Weapon.BOW), Province.QC)
+        userData.progress.value = UserProgress().withProfile(HunterType.HUNTER, setOf(Weapon.BOW), Province.QC)
         minVersionCode = 2
         val viewModel = viewModel()
         viewModel.uiState.test {

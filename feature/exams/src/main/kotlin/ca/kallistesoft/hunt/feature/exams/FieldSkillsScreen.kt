@@ -54,7 +54,7 @@ import ca.kallistesoft.hunt.core.ui.subRes
 import kotlin.math.roundToInt
 
 /**
- * "Field skills" (new hunters, P11): today's mix ("Keep your edge" once every skill is mastered), then one row per
+ * "Field skills" (hunters, P11): today's mix ("Keep your edge" once every skill is mastered), then one row per
  * skill with its readiness, "Mastered", or "Was mastered · 2 answers expired".
  */
 @Composable

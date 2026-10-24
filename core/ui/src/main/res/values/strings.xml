@@ -9,13 +9,11 @@
     <string name="onboarding_local">Saved on this device only. No account needed.</string>
     <string name="action_continue">Continue</string>
     <string name="hunter_type_title">What kind of hunter are you?</string>
-    <string name="hunter_type_sub">We\'ll suggest the right exams and practice for you. You can change this later.</string>
+    <string name="hunter_type_sub">We\'ll suggest the right practice for you. You can change this later.</string>
     <string name="hunter_working">Working on it</string>
     <string name="hunter_working_sub">Preparing for my licence or hunter course</string>
-    <string name="hunter_new">New hunter</string>
-    <string name="hunter_new_sub">Licensed, a few seasons so far</string>
-    <string name="hunter_experienced">Experienced hunter</string>
-    <string name="hunter_experienced_sub">Many seasons in the field</string>
+    <string name="hunter_hunter">Hunter</string>
+    <string name="hunter_hunter_sub">Licensed, I already hunt</string>
     <string name="hunt_with_title">What do you hunt with?</string>
     <string name="hunt_with_sub">Pick all that apply. It decides which hunter course and rules you\'ll see.</string>
     <string name="weapon_firearm">Firearm</string>
@@ -49,13 +47,13 @@
     <string name="real_exam">Real exam</string>
     <string name="passed_title">Did you pass your hunter course (%1$s)?</string>
     <string name="passed_sub">Congratulations if so! Here\'s what changes in BetterHunter:</string>
-    <string name="passed_change_home"><![CDATA[Home focuses on identifying game: <b>What is it?</b> becomes your daily practice.]]></string>
+    <string name="passed_change_home"><![CDATA[Home leads with <b>today\'s 6 questions</b>: species to name and field know-how.]]></string>
     <string name="passed_change_training"><![CDATA[Your exam practice stays in <b>Exam training</b>, to refresh the rules any time.]]></string>
-    <string name="passed_change_profile"><![CDATA[You become a <b>New hunter</b>. BetterHunter takes your word for it: nothing is checked or sent.]]></string>
+    <string name="passed_change_profile"><![CDATA[You become a <b>Hunter</b>. BetterHunter takes your word for it: nothing is checked or sent.]]></string>
     <string name="passed_yes">Yes, I passed</string>
     <string name="passed_not_yet">Not yet</string>
-    <string name="new_hunter_welcome">Hunter course passed. Welcome, new hunter!</string>
-    <string name="new_hunter_welcome_sub">Now sharpen your eye in the field.</string>
+    <string name="hunter_welcome">Hunter course passed. Welcome, hunter!</string>
+    <string name="hunter_welcome_sub">Now sharpen your eye in the field.</string>
     <string name="close">Close</string>
 
     <!-- Dashboard -->
@@ -98,10 +96,6 @@
         <item quantity="other">%1$d-day streak</item>
     </plurals>
 
-    <plurals name="animals_remaining">
-        <item quantity="one">%1$d animal to your daily goal</item>
-        <item quantity="other">%1$d animals to your daily goal</item>
-    </plurals>
     <string name="hub_exams_refresh">Refresh the rules any time</string>
 
     <!-- Settings -->
@@ -209,7 +203,7 @@
     <string name="nothing_to_review">Nothing to review yet</string>
     <string name="nothing_to_review_body">Questions you miss come here until you answer them right twice in a row.</string>
     <string name="practise_exam">Practise the %1$s</string>
-    <!-- New hunter: today's questions, Field skills, season, reminders (DECISIONS.md, P11) -->
+    <!-- Hunter: today's questions, Field skills, season, reminders (DECISIONS.md, P11) -->
     <string name="daily_title">Stay up to date: %1$d questions</string>
     <string name="daily_every_day">new questions every day</string>
     <string name="daily_species">%1$d species</string>

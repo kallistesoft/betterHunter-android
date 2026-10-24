@@ -58,7 +58,7 @@ fun BetterHunterApp(
     val currentFirstRun by rememberUpdatedState(firstRun)
     LaunchedEffect(deepLink) {
         val keys = deepLink ?: return@LaunchedEffect
-        // Reminders are for new hunters past onboarding; while onboarding shows, the link is dropped.
+        // Reminders are for hunters past onboarding; while onboarding shows, the link is dropped.
         if (!currentFirstRun) {
             backStack.clear()
             backStack.addAll(keys)
@@ -133,7 +133,7 @@ fun BetterHunterApp(
             entry<PassedExam> { key ->
                 PassedExamScreen(
                     examId = key.examId,
-                    // The user is now a new hunter: straight back to Home, in its new-hunter version.
+                    // The user is now a hunter: straight back to Home, in its hunter version.
                     onConfirmed = { backStack.retainAll { it == Home } },
                     onBack = back,
                 )

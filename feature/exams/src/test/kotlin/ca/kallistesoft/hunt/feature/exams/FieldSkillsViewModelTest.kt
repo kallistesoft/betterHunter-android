@@ -24,7 +24,7 @@ class FieldSkillsViewModelTest {
     val mainDispatcherRule = MainDispatcherRule()
 
     private val userData = FakeUserDataRepository(
-        UserProgress().withProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC),
+        UserProgress().withProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC),
     )
 
     @Test

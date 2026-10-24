@@ -45,12 +45,12 @@ class ProfileEditScreenTest {
     fun `hunter type`() {
         setScreen(ProfileField.HUNTER_TYPE)
         compose.onNodeWithTag("choice-${HunterType.WORKING_ON_IT.name}").assertIsSelected()
-        compose.onNodeWithTag("choice-${HunterType.EXPERIENCED.name}").performClick().assertIsSelected()
+        compose.onNodeWithTag("choice-${HunterType.HUNTER.name}").performClick().assertIsSelected()
         assertEquals(HunterType.WORKING_ON_IT, userData.progress.value.hunterType)
 
         compose.onNodeWithTag("profile-save").performClick()
         compose.waitForIdle()
-        assertEquals(HunterType.EXPERIENCED, userData.progress.value.hunterType)
+        assertEquals(HunterType.HUNTER, userData.progress.value.hunterType)
         assertEquals(1, done)
     }
 
@@ -86,7 +86,7 @@ class ProfileEditScreenTest {
         compose.setContent {
             BetterHunterTheme { ProfileEditContent(ProfileEditUiState(ProfileField.HUNTER_TYPE), {}, {}, {}, {}, {}) }
         }
-        compose.onNodeWithTag("choice-${HunterType.EXPERIENCED.name}").assertDoesNotExist()
+        compose.onNodeWithTag("choice-${HunterType.HUNTER.name}").assertDoesNotExist()
         compose.onNodeWithTag("profile-save").assertIsNotEnabled()
     }
 }

@@ -39,7 +39,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 
-/** A new hunter's runs, driven by a real [FieldQuizViewModel] on the test content (two questions per skill, answer B). */
+/** A hunter's runs, driven by a real [FieldQuizViewModel] on the test content (two questions per skill, answer B). */
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [ScreenshotDevice.SDK], qualifiers = ScreenshotDevice.LIGHT_EN)
 class FieldQuizScreenTest {
@@ -47,7 +47,7 @@ class FieldQuizScreenTest {
     val compose = createComposeRule()
 
     private val userData = FakeUserDataRepository(
-        UserProgress().withProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC),
+        UserProgress().withProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC),
     )
     private var closed = 0
     private val opened = mutableListOf<FieldSkill>()

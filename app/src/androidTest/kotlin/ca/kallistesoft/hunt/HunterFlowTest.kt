@@ -7,7 +7,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/** Adding a province's quizzes, and "I passed the real exam" turning Home into the new hunter's. */
+/** Adding a province's quizzes, and "I passed the real exam" turning Home into the hunter's. */
 @RunWith(AndroidJUnit4::class)
 class HunterFlowTest {
     @get:Rule
@@ -27,15 +27,16 @@ class HunterFlowTest {
     }
 
     @Test
-    fun passingTheRealExamMakesANewHunter() {
+    fun passingTheRealExamMakesAHunter() {
         app.onboard()
         app.clickTag("hub-exams")
         app.clickTag("passed-ICAF")
         app.clickTag("passed-yes")
 
-        // Straight back to Home, the new hunter's version.
+        // Straight back to Home, the hunter's version: today's questions, Exam training kept as a row.
         app.waitForTag("new-hunter-banner")
-        app.waitForTag("today-play-id")
+        app.waitForTag("daily-card")
+        app.waitForTag("hub-exams")
         rule.onNode(hasTestTag("today-practice")).assertDoesNotExist()
 
         app.clickTag("banner-close")

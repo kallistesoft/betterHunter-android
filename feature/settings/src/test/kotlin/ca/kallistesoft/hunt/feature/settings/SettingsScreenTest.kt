@@ -99,11 +99,11 @@ class SettingsScreenTest {
     }
 
     @Test
-    fun `a new hunter sets the season start and the reminders instead of a daily goal`() {
+    fun `a hunter sets the season start and the reminders instead of a daily goal`() {
         setSettings(
             workingOnIt.copy(
-                hunterType = HunterType.NEW_HUNTER,
-                fieldHunter = true,
+                hunterType = HunterType.HUNTER,
+                hunter = true,
                 seasonStart = TEST_DAY + 30,
                 dailyReminders = true,
                 provinces = Province.entries.toSet(),
@@ -122,7 +122,7 @@ class SettingsScreenTest {
 
     @Test
     fun `without a season date, season reminders come in late August`() {
-        setSettings(workingOnIt.copy(fieldHunter = true))
+        setSettings(workingOnIt.copy(hunter = true))
         compose.onNodeWithText("Not set").assertIsDisplayed()
         compose.onNodeWithText("Late August, until you set a date").assertIsDisplayed()
         compose.onNodeWithTag("settings-season-reminders").assertIsEnabled().assertIsOff()
@@ -137,7 +137,7 @@ class SettingsScreenTest {
     @Test
     fun `the screen turns reminders on and off, changes the goal and opens contact and privacy`() {
         val userData = FakeUserDataRepository(
-            UserProgress().withProfile(HunterType.NEW_HUNTER, setOf(Weapon.FIREARM), Province.QC).withSeasonStart(TEST_DAY + 30),
+            UserProgress().withProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC).withSeasonStart(TEST_DAY + 30),
         )
         val viewModel = SettingsViewModel(userData, Today { TEST_DAY }, FakeAdConsent())
         shadowOf(compose.activity.application).grantPermissions(Manifest.permission.POST_NOTIFICATIONS)

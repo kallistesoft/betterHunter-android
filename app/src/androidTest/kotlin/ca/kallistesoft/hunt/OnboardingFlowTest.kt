@@ -42,14 +42,14 @@ class OnboardingFlowTest {
 
     @Test
     fun backReturnsToThePreviousQuestionKeepingTheAnswer() {
-        app.clickTag("choice-NEW_HUNTER")
+        app.clickTag("choice-HUNTER")
         app.clickTag("onboarding-continue")
         app.waitForText(app.str(R.string.hunt_with_title))
 
         app.back()
 
         app.waitForText(app.str(R.string.hunter_type_title))
-        rule.onNode(hasTestTag("choice-NEW_HUNTER")).assertIsSelected()
+        rule.onNode(hasTestTag("choice-HUNTER")).assertIsSelected()
         rule.onNode(hasTestTag("onboarding-continue")).assertIsEnabled()
     }
 

@@ -191,7 +191,7 @@ internal fun QuestionContent(
     onClose: () -> Unit,
     /** Above the question count; mock exams show theirs. */
     overline: String? = null,
-    /** New hunters' runs: the explanation is "In the field" rather than "Why?". */
+    /** Hunters' runs: the explanation is "In the field" rather than "Why?". */
     inTheField: Boolean = false,
 ) {
     val s = state.session

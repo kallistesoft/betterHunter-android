@@ -7,13 +7,11 @@
     <string name="onboarding_local">Enregistré sur cet appareil seulement. Aucun compte requis.</string>
     <string name="action_continue">Continuer</string>
     <string name="hunter_type_title">Quel genre de chasseur êtes-vous?</string>
-    <string name="hunter_type_sub">Nous vous proposerons les bons examens et exercices. Vous pourrez changer plus tard.</string>
+    <string name="hunter_type_sub">Nous vous proposerons les bons exercices. Vous pourrez changer plus tard.</string>
     <string name="hunter_working">En formation</string>
     <string name="hunter_working_sub">Je prépare mon permis ou mon cours de chasseur</string>
-    <string name="hunter_new">Nouveau chasseur</string>
-    <string name="hunter_new_sub">Certifié, quelques saisons derrière moi</string>
-    <string name="hunter_experienced">Chasseur expérimenté</string>
-    <string name="hunter_experienced_sub">Plusieurs saisons sur le terrain</string>
+    <string name="hunter_hunter">Chasseur</string>
+    <string name="hunter_hunter_sub">Certifié, je chasse déjà</string>
     <string name="hunt_with_title">Avec quoi chassez-vous?</string>
     <string name="hunt_with_sub">Choisissez tout ce qui s\'applique. Cela détermine le cours de chasseur et les règles affichés.</string>
     <string name="weapon_firearm">Arme à feu</string>
@@ -47,13 +45,13 @@
     <string name="real_exam">Vrai examen</string>
     <string name="passed_title">Avez-vous réussi votre cours de chasseur (%1$s)?</string>
     <string name="passed_sub">Si oui, félicitations! Voici ce qui change dans BetterHunter :</string>
-    <string name="passed_change_home"><![CDATA[L\'accueil mise sur l\'identification du gibier : <b>Qu\'est-ce que c\'est?</b> devient votre exercice quotidien.]]></string>
+    <string name="passed_change_home"><![CDATA[L\'accueil commence par vos <b>6 questions du jour</b> : des espèces à nommer et du savoir-faire de terrain.]]></string>
     <string name="passed_change_training"><![CDATA[Vos exercices d\'examen restent dans <b>Entraînement aux examens</b>, pour revoir les règles en tout temps.]]></string>
-    <string name="passed_change_profile"><![CDATA[Vous devenez <b>Nouveau chasseur</b>. BetterHunter vous croit sur parole : rien n\'est vérifié ni envoyé.]]></string>
+    <string name="passed_change_profile"><![CDATA[Vous devenez <b>Chasseur</b>. BetterHunter vous croit sur parole : rien n\'est vérifié ni envoyé.]]></string>
     <string name="passed_yes">Oui, j\'ai réussi</string>
     <string name="passed_not_yet">Pas encore</string>
-    <string name="new_hunter_welcome">Cours de chasseur réussi. Bienvenue, nouveau chasseur!</string>
-    <string name="new_hunter_welcome_sub">Aiguisez maintenant votre œil sur le terrain.</string>
+    <string name="hunter_welcome">Cours de chasseur réussi. Bienvenue, chasseur!</string>
+    <string name="hunter_welcome_sub">Aiguisez maintenant votre œil sur le terrain.</string>
     <string name="close">Fermer</string>
 
     <!-- Dashboard -->
@@ -100,11 +98,6 @@
         <item quantity="other">%1$d jours de suite</item>
     </plurals>
 
-    <plurals name="animals_remaining">
-        <item quantity="one">Encore %1$d animal pour l\'objectif du jour</item>
-        <item quantity="many">Encore %1$d animaux pour l\'objectif du jour</item>
-        <item quantity="other">Encore %1$d animaux pour l\'objectif du jour</item>
-    </plurals>
     <string name="hub_exams_refresh">Revoir les règles en tout temps</string>
 
     <!-- Settings -->
