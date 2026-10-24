@@ -12,7 +12,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/** First launch: the three onboarding questions, then Home built around the province's hunter course. */
+/** First launch: the three onboarding questions, then Home built around the province's hunting exam. */
 @RunWith(AndroidJUnit4::class)
 class OnboardingFlowTest {
     @get:Rule

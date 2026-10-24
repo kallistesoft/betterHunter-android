@@ -9,6 +9,7 @@ Steps to do outside the code, in the Firebase, AdMob and Play consoles. They use
 - [3. Play Console](#3-play-console)
 - [4. Possible next step: questions from an online API](#4-possible-next-step-questions-from-an-online-api)
 - [5. Hunter: skill check and look-alikes (mockup, not built)](#5-hunter-skill-check-and-look-alikes-mockup-not-built)
+- [6. Store screenshots: retake the exam ones](#6-store-screenshots-retake-the-exam-ones)
 
 ---
 
@@ -335,3 +336,8 @@ but not in the app yet:
 - [ ] **Look-alikes in today's species questions.** Questions such as white-tailed or mule deer, sex and age, with the
   tells and a source (species fact sheet). Needs look-alike questions in the photo bank first. Screen:
   `LookalikeQuestion`.
+
+## 6. Store screenshots: retake the exam ones
+
+The Play screenshots `store/screens/*-4-exams.png` still show the old exam card ("Hunter education with firearms
+(Québec)"). Retake them from the current build: the app no longer names provincial courses (DECISIONS.md, P13).

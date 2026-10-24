@@ -66,7 +66,7 @@ class HomeScreenTest {
     fun `working on it - practise the main exam, change exams, open the hubs and answer the photo`() {
         setHome(previewHomeState.copy(hasSampleContent = true, readiness = null, streak = 0))
         compose.onNodeWithTag("goal-text").assertIsDisplayed()
-        compose.onNodeWithText("Hunter education with firearms (Québec)").assertIsDisplayed()
+        compose.onNodeWithText("Hunting exam · Québec").assertIsDisplayed()
         compose.onNodeWithText("4 exams", substring = true).assertIsDisplayed()
 
         compose.onNodeWithTag("today-practice").performClick()
@@ -90,14 +90,14 @@ class HomeScreenTest {
             previewHomeState.copy(
                 hunter = true,
                 newHunterBanner = true,
-                passedExamId = "ICAF",
+                passedExam = PreviewData.icaf,
                 daily = DailyState(0, 3, 0, 3),
                 photoOfDay = previewHomeState.photoOfDay?.copy(choice = 0),
             ),
         )
-        compose.onNodeWithText("Hunter course passed. Welcome, hunter!").assertIsDisplayed()
+        compose.onNodeWithText("Hunting exam passed. Welcome, hunter!").assertIsDisplayed()
         compose.onNodeWithText("Start today's questions").assertIsDisplayed()
-        compose.onNodeWithText("ICAF passed").assertIsDisplayed()
+        compose.onNodeWithText("Hunting exam passed").assertIsDisplayed()
         compose.onNodeWithText("Refresh the rules any time").assertIsDisplayed()
         compose.onNodeWithTag("today-practice").assertDoesNotExist()
 

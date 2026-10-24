@@ -24,7 +24,7 @@ data object ExamTraining : NavKey
 @Serializable
 data object Provinces : NavKey
 
-/** "Did you pass your hunter course?" for [examId]. */
+/** "Did you pass your hunting exam?" for [examId]. */
 @Serializable
 data class PassedExam(val examId: String) : NavKey
 

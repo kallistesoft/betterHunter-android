@@ -8,11 +8,18 @@ data class Exam(
     val minutes: Int = 60,
     val passMark: Double = 0.8,
     val comingSoon: Boolean = false,
+    /** A few words for overlines and "… passed" ("PAL", "Hunting exam"); never a provincial course's name (P13). */
+    val shortNames: Map<Lang, String> = emptyMap(),
 ) {
     fun name(lang: Lang): String = names[lang] ?: names[Lang.FR] ?: id
 
+    fun shortName(lang: Lang): String = shortNames[lang] ?: shortNames[Lang.FR] ?: name(lang)
+
     val group: ExamGroup get() = ExamStyle.of(id).group
     val region: String get() = ExamStyle.of(id).region
+
+    /** "Hunting exam · Québec", "PAL · Canada": the short name and the region, above a quiz or its results. */
+    fun label(lang: Lang): String = listOf(shortName(lang), region).filter { it.isNotEmpty() }.joinToString(" · ")
 
     /** Real exams (licence, hunter education), as opposed to recognition games. */
     val isTraining: Boolean get() = group != ExamGroup.IDENTIFICATION

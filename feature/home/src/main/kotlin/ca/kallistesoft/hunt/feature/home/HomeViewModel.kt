@@ -50,8 +50,8 @@ data class HomeUiState(
     val trainingExamCount: Int = 0,
     /** Average readiness over the user's exams; null when they have none. */
     val readiness: Float? = null,
-    /** A real exam the user passed ("ICAF passed" on the hunter's Exam training row). */
-    val passedExamId: String? = null,
+    /** A real exam the user passed ("Hunting exam passed" on the hunter's Exam training row). */
+    val passedExam: Exam? = null,
     /** The photo game and the user's readiness on it; null when hidden. */
     val photoGameId: String? = null,
     val photoReadiness: Float = 0f,
@@ -100,7 +100,7 @@ class HomeViewModel @Inject constructor(
                 trainingExamCount = content.trainingExams.size,
                 readiness = mine.takeIf { it.isNotEmpty() }
                     ?.map { progress.readiness(content.questionsFor(it)) }?.average()?.toFloat(),
-                passedExamId = mine.firstOrNull { it.id in progress.passedExams }?.id,
+                passedExam = mine.firstOrNull { it.id in progress.passedExams },
                 photoGameId = photoExam?.id?.takeIf { photoExam in games },
                 photoReadiness = progress.readiness(photos),
                 gameCount = games.size,

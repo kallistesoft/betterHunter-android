@@ -45,6 +45,7 @@ object ContentParser {
         val minutes: Int = 60,
         val passMark: Double = 0.8,
         val comingSoon: Boolean = false,
+        val short: Map<String, String> = emptyMap(),
     ) {
         fun toModel(id: String) = Exam(
             id = id,
@@ -54,6 +55,7 @@ object ContentParser {
             minutes = minutes,
             passMark = passMark,
             comingSoon = comingSoon,
+            shortNames = short.mapKeysToLang(),
         )
     }
 

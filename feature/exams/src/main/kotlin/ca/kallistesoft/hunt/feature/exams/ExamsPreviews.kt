@@ -56,7 +56,7 @@ internal fun ProvincesPreview() = PreviewSurface {
 @BhPreviews
 @Composable
 internal fun PassedExamPreview() = PreviewSurface {
-    PassedExamContent("ICAF", onConfirm = {}, onBack = {})
+    PassedExamContent(onConfirm = {}, onBack = {})
 }
 
 @BhPreviews

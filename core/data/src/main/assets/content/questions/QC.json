@@ -488,7 +488,7 @@
     "fr": {
       "q": "Qui est le principal gestionnaire de la faune au Québec?",
       "choices": [
-        "La Fédération québécoise des chasseurs et pêcheurs",
+        "Une association de chasseurs",
         "Le gouvernement fédéral",
         "Le gouvernement du Québec",
         "Les municipalités régionales de comté"
@@ -498,7 +498,7 @@
     "en": {
       "q": "Who is the main manager of wildlife in Québec?",
       "choices": [
-        "The Fédération québécoise des chasseurs et pêcheurs",
+        "A hunters' association",
         "The federal government",
         "The Government of Québec",
         "The regional county municipalities"
@@ -3597,36 +3597,6 @@
     },
     "answerIndex": 1,
     "sourceRef": "icaf_fr.pdf p.75",
-    "sourceUrl": null
-  },
-  {
-    "id": "hunter-common-l12-004-q1",
-    "scope": "QC",
-    "chapter": "l12",
-    "objectiveId": "hunter-common-l12-004",
-    "reviewYear": null,
-    "fr": {
-      "q": "Selon le manuel, quel avantage offre l'adhésion à la Fédération québécoise des chasseurs et pêcheurs?",
-      "choices": [
-        "Un permis de chasse gratuit",
-        "L'accès exclusif aux terres publiques",
-        "Une exemption des règlements de chasse",
-        "Une assurance en cas d'accidents"
-      ],
-      "explanation": "Les membres de la FédéCP profitent notamment d'une assurance en cas d'accidents et d'avantages exclusifs."
-    },
-    "en": {
-      "q": "According to the manual, what benefit does membership in the Fédération québécoise des chasseurs et pêcheurs offer?",
-      "choices": [
-        "A free hunting licence",
-        "Exclusive access to public land",
-        "An exemption from hunting regulations",
-        "Accident insurance"
-      ],
-      "explanation": "FédéCP members benefit from accident insurance among other exclusive advantages."
-    },
-    "answerIndex": 3,
-    "sourceRef": "icaf_fr.pdf p.76",
     "sourceUrl": null
   }
 ]

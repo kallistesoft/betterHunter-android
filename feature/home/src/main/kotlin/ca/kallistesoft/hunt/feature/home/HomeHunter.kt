@@ -47,10 +47,12 @@ import ca.kallistesoft.hunt.core.designsystem.component.PrimaryButton
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
+import ca.kallistesoft.hunt.core.model.Exam
 import ca.kallistesoft.hunt.core.model.FieldRun
 import ca.kallistesoft.hunt.core.model.SeasonStatus
 import ca.kallistesoft.hunt.core.ui.ExamPassed
 import ca.kallistesoft.hunt.core.ui.R
+import ca.kallistesoft.hunt.core.ui.currentLang
 import ca.kallistesoft.hunt.core.ui.shortDate
 
 /**
@@ -226,9 +228,9 @@ internal fun FieldHubs(state: HomeUiState, onOpenRecognition: () -> Unit, onOpen
     }
 }
 
-/** After passing a real exam: Exam training kept as a row, to refresh the rules ("ICAF passed"). */
+/** After passing a real exam: Exam training kept as a row, to refresh the rules ("Hunting exam passed"). */
 @Composable
-internal fun ExamsRow(passedExamId: String, onClick: () -> Unit) {
+internal fun ExamsRow(passedExam: Exam, onClick: () -> Unit) {
     val scheme = MaterialTheme.colorScheme
     BhCard(Modifier.testTag("hub-exams"), shape = MaterialTheme.shapes.medium, onClick = onClick) {
         Row(
@@ -241,7 +243,7 @@ internal fun ExamsRow(passedExamId: String, onClick: () -> Unit) {
                 Text(stringResource(R.string.hub_exams), style = MaterialTheme.typography.titleSmall)
                 Text(stringResource(R.string.hub_exams_refresh), style = MaterialTheme.typography.bodySmall, color = scheme.onSurfaceVariant)
             }
-            ExamPassed(passedExamId)
+            ExamPassed(passedExam.shortName(currentLang()))
             Icon(Icons.AutoMirrored.Rounded.KeyboardArrowRight, contentDescription = null, tint = scheme.onSurfaceVariant)
         }
     }

@@ -29,7 +29,7 @@ enum class BadgeSize(val size: Dp, val iconInset: Dp) {
     /** Big icon at the top of a screen. */
     ExtraLarge(Sizes.badgeXl, Sizes.badgeInsetXl),
 
-    /** The one icon of a confirmation screen ("Did you pass your hunter course?"). */
+    /** The one icon of a confirmation screen ("Did you pass your hunting exam?"). */
     Hero(Sizes.badgeHero, Sizes.badgeInsetHero),
 }
 

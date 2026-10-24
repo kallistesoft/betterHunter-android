@@ -11,7 +11,7 @@
     <string name="hunter_type_title">What kind of hunter are you?</string>
     <string name="hunter_type_sub">We\'ll suggest the right practice for you. You can change this later.</string>
     <string name="hunter_working">Working on it</string>
-    <string name="hunter_working_sub">Preparing for my licence or hunter course</string>
+    <string name="hunter_working_sub">Preparing for my hunting exam or PAL</string>
     <string name="hunter_hunter">Hunter</string>
     <string name="hunter_hunter_sub">Licensed, I already hunt</string>
     <string name="hunt_with_title">What do you hunt with?</string>
@@ -28,16 +28,16 @@
 
     <!-- Provinces -->
     <string name="province_qc">Québec</string>
-    <string name="province_qc_sub">Québec hunter course (ICAF; bow and crossbow coming soon)</string>
+    <string name="province_qc_sub">Hunting exam questions (bow and crossbow coming soon)</string>
     <string name="province_ab">Alberta</string>
-    <string name="province_ab_sub">Alberta hunter course and the PAL (firearms licence)</string>
+    <string name="province_ab_sub">Hunting exam questions and the PAL (firearms licence)</string>
     <string name="province_other">Elsewhere in Canada</string>
     <string name="province_other_sub">The PAL (firearms licence) for now; more provinces coming</string>
     <string name="province_qc_where">Québec hunting rules and game</string>
     <string name="province_ab_where">Alberta hunting rules and game</string>
     <string name="province_other_where">Canada-wide for now; more provinces coming</string>
     <string name="my_provinces">My provinces</string>
-    <string name="my_provinces_sub">Your quizzes follow your provinces. Add a province to practise its hunter course, or remove one to hide its quizzes.</string>
+    <string name="my_provinces_sub">Your quizzes follow your provinces. Add a province to practise its hunting exam, or remove one to hide its quizzes.</string>
     <string name="where_you_hunt">Where you hunt</string>
     <string name="more_provinces">More provinces coming.</string>
     <string name="other_provinces">Other provinces</string>
@@ -48,14 +48,14 @@
     <string name="passed_real_exam">I passed the real exam</string>
     <string name="exam_passed">%1$s passed</string>
     <string name="real_exam">Real exam</string>
-    <string name="passed_title">Did you pass your hunter course (%1$s)?</string>
+    <string name="passed_title">Did you pass your hunting exam?</string>
     <string name="passed_sub">Congratulations if so! Here\'s what changes in BetterHunter:</string>
     <string name="passed_change_home"><![CDATA[Home leads with <b>today\'s 6 questions</b>: species to name and field know-how.]]></string>
     <string name="passed_change_training"><![CDATA[Your exam practice stays in <b>Exam training</b>, to refresh the rules any time.]]></string>
     <string name="passed_change_profile"><![CDATA[You become a <b>Hunter</b>. BetterHunter takes your word for it: nothing is checked or sent.]]></string>
     <string name="passed_yes">Yes, I passed</string>
     <string name="passed_not_yet">Not yet</string>
-    <string name="hunter_welcome">Hunter course passed. Welcome, hunter!</string>
+    <string name="hunter_welcome">Hunting exam passed. Welcome, hunter!</string>
     <string name="hunter_welcome_sub">Now sharpen your eye in the field.</string>
     <string name="close">Close</string>
 
@@ -128,7 +128,7 @@
     <string name="privacy_options_sub">Your choices about ads</string>
     <string name="how_practice">Answer and explanation after every question</string>
     <string name="how_exam">Timed, results at the end, like the real one</string>
-    <string name="disclaimer">Independent study aid, not affiliated with or endorsed by the RCMP, the Canadian Firearms Program, the Government of Québec or FédéCP. Questions are original practice questions based on the official manuals; they are not the official exam questions. Errors are possible and laws change: always check the official manual and current regulations. No guarantee of passing.</string>
+    <string name="disclaimer">Independent study aid, not affiliated with or endorsed by any government, police force or hunting organization. Questions are original practice questions based on the official manuals; they are not the official exam questions. Errors are possible and laws change: always check the official manual and current regulations. No guarantee of passing.</string>
 
     <!-- Exams -->
     <string name="to_pass">%1$d%% to pass</string>
@@ -205,7 +205,7 @@
     <string name="review_title">Review my mistakes</string>
     <string name="nothing_to_review">Nothing to review yet</string>
     <string name="nothing_to_review_body">Questions you miss come here until you answer them right twice in a row.</string>
-    <string name="practise_exam">Practise the %1$s</string>
+    <string name="practise_exam">Practise: %1$s</string>
     <!-- Hunter: today's questions, Field skills, season, reminders (DECISIONS.md, P11) -->
     <string name="daily_title">Stay up to date: %1$d questions</string>
     <string name="daily_every_day">new questions every day</string>

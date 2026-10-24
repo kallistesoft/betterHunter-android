@@ -1,19 +1,22 @@
 {
-  "_comment": "Exam recipes: which scopes feed each exam. questionCount / minutes / passMark must be checked against the official format before launch (verified=false until then).",
+  "_comment": "Exam recipes: which scopes feed each exam. questionCount / minutes / passMark must be checked against the official format before launch (verified=false until then). Names never name a provincial course or its publisher (DECISIONS.md, P13); short is the label used in overlines and 'X passed'.",
   "PAL": {
     "name": {"fr": "Examen PPA (CCSMAF, armes sans restriction)", "en": "PAL exam (CFSC, non-restricted)"},
+    "short": {"fr": "PPA", "en": "PAL"},
     "scopes": ["federal"],
     "questionCount": 50, "minutes": 60, "passMark": 0.8,
     "verified": false
   },
   "ICAF": {
-    "name": {"fr": "Initiation à la chasse avec arme à feu (Québec)", "en": "Hunter education with firearms (Québec)"},
+    "name": {"fr": "Examen de chasse · Québec", "en": "Hunting exam · Québec"},
+    "short": {"fr": "Examen de chasse", "en": "Hunting exam"},
     "scopes": ["hunter-common", "QC"],
     "questionCount": 50, "minutes": 60, "passMark": 0.8,
     "verified": false
   },
   "ABHE": {
-    "name": {"fr": "Éducation à la chasse et à la conservation (Alberta)", "en": "Alberta Conservation and Hunter Education"},
+    "name": {"fr": "Examen de chasse · Alberta", "en": "Hunting exam · Alberta"},
+    "short": {"fr": "Examen de chasse", "en": "Hunting exam"},
     "scopes": ["hunter-common", "AB"],
     "questionCount": 50, "minutes": 60, "passMark": 0.8,
     "verified": false

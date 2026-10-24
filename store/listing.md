@@ -22,7 +22,7 @@ WHAT IS IT? – PHOTO ID QUIZ
 
 EXAM TRAINING
 • PAL (CFSC, non-restricted) firearms licence practice
-• Québec hunter education with firearms (ICAF) and Alberta Conservation & Hunter Education
+• Hunting exam practice for Québec and Alberta
 • Practice mode with an explanation after every answer, and timed mock exams
 • Every explanation links to its source: the official manual page or the current regulation
 • Review your mistakes until you get them right
@@ -33,7 +33,7 @@ BUILT TO HELP YOU LEARN
 • English and French (switch in the app)
 • Report a problem on any question in one tap
 
-Independent study tool, not affiliated with or endorsed by the RCMP, the Canadian Firearms Program, the Government of Québec, FédéCP or the Government of Alberta. Questions are original practice questions written from the official manuals; they are not the official exam questions. Errors are possible and rules change: always check the official manual and current regulations.
+Independent study tool, not affiliated with or endorsed by any government, police force or hunting organization. Questions are original practice questions written from the official manuals; they are not the official exam questions. Errors are possible and rules change: always check the official manual and current regulations.
 
 ## fr-CA
 
@@ -53,7 +53,7 @@ QU'EST-CE QUE C'EST? – QUIZ PHOTO
 
 ENTRAÎNEMENT AUX EXAMENS
 • Pratique pour le permis d'armes à feu : PPA (CCSMAF, armes sans restriction)
-• Initiation à la chasse avec arme à feu (ICAF, Québec) et Conservation and Hunter Education (Alberta)
+• Pratique de l'examen de chasse pour le Québec et l'Alberta
 • Mode pratique avec explication après chaque réponse, et examens simulés chronométrés
 • Chaque explication renvoie à sa source : la page du manuel officiel ou le règlement en vigueur
 • Revoyez vos erreurs jusqu'à les maîtriser
@@ -64,4 +64,4 @@ CONÇU POUR APPRENDRE
 • En français et en anglais (au choix dans l'appli)
 • Signalez un problème sur n'importe quelle question en un geste
 
-Outil d'étude indépendant, non affilié à la GRC, au Programme canadien des armes à feu, au gouvernement du Québec, à la FédéCP ni au gouvernement de l'Alberta, et non approuvé par eux. Les questions sont des questions de pratique originales, rédigées à partir des manuels officiels; ce ne sont pas les questions des examens officiels. Des erreurs sont possibles et les règles changent : vérifiez toujours dans le manuel officiel et la réglementation en vigueur.
+Outil d'étude indépendant, non affilié à aucun gouvernement, corps policier ni organisme de chasse, et non approuvé par eux. Les questions sont des questions de pratique originales, rédigées à partir des manuels officiels; ce ne sont pas les questions des examens officiels. Des erreurs sont possibles et les règles changent : vérifiez toujours dans le manuel officiel et la réglementation en vigueur.

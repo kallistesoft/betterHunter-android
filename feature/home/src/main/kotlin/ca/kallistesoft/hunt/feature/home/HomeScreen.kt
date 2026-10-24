@@ -162,7 +162,7 @@ internal fun HomeContent(
                     item { DailyCard(daily, state.streak, onStart = { onStartField(FieldRun.DAILY) }) }
                 }
                 item { FieldHubs(state, onOpenRecognition, onOpenFieldSkills) }
-                state.passedExamId?.let { passed ->
+                state.passedExam?.let { passed ->
                     item { ExamsRow(passed, onOpenExams) }
                 }
             } else {

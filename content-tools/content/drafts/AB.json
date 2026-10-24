@@ -633,7 +633,7 @@
     "objectiveId": "AB-ab-lic-001",
     "reviewYear": 2026,
     "fr": {
-      "q": "Vous venez de réussir le cours albertain de conservation et d'éducation des chasseurs. Que devez-vous faire avant d'acheter votre premier permis?",
+      "q": "Vous venez de réussir votre cours de chasseur. Que devez-vous faire avant d'acheter votre premier permis?",
       "choices": [
         "Faire valider votre certificat par un agent de la faune",
         "Ajouter votre numéro de certificat à votre profil WiN",
@@ -643,7 +643,7 @@
       "explanation": "Les nouveaux chasseurs ayant terminé le cours doivent ajouter leur numéro de certificat à leur profil WiN pour pouvoir acheter un permis."
     },
     "en": {
-      "q": "You just passed the Alberta conservation and hunter education course. What must you do before buying your first licence?",
+      "q": "You just passed your hunter education course. What must you do before buying your first licence?",
       "choices": [
         "Have your certificate validated by a wildlife officer",
         "Add your certificate number to your WiN profile",
@@ -767,7 +767,7 @@
     "fr": {
       "q": "Quel jeune de moins de 18 ans peut chasser avec une arme à feu sans être accompagné?",
       "choices": [
-        "Celui qui a réussi le cours de conservation et d'éducation des chasseurs",
+        "Celui qui a réussi le cours de chasseur",
         "Celui qui chasse uniquement sur la terre agricole de ses parents",
         "Celui qui détient un permis de mineur de la GRC autorisant la chasse",
         "Celui qui a plus de 16 ans et détient un certificat faunique"
@@ -777,7 +777,7 @@
     "en": {
       "q": "Which youth under 18 may hunt with a firearm without being accompanied?",
       "choices": [
-        "One who passed the conservation and hunter education course",
+        "One who passed the hunter education course",
         "One who hunts only on his parents' farmland",
         "One holding an RCMP minors permit that allows hunting",
         "One who is over 16 and holds a wildlife certificate"
@@ -1036,7 +1036,7 @@
         "Réussir le cours d'éducation des chasseurs après le début de la suspension",
         "Chasser accompagné d'un guide désigné pendant la première année"
       ],
-      "explanation": "Une personne suspendue à la suite d'une condamnation doit réussir le cours albertain de conservation et d'éducation des chasseurs, suivi après le début de la suspension."
+      "explanation": "Une personne suspendue à la suite d'une condamnation doit réussir le cours de chasseur, suivi après le début de la suspension."
     },
     "en": {
       "q": "Your right to hold a hunting licence was suspended after a conviction. What must you do?",
@@ -1046,7 +1046,7 @@
         "Pass the hunter education course after the suspension begins",
         "Hunt with a designated guide during the first year"
       ],
-      "explanation": "A person suspended because of a conviction must complete the Alberta conservation and hunter education course, taken after the suspension period begins."
+      "explanation": "A person suspended because of a conviction must complete the hunter education course, taken after the suspension period begins."
     },
     "answerIndex": 2,
     "sourceRef": "ab_hunting_2026.pdf p.19",

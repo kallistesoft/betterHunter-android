@@ -121,6 +121,17 @@ you know": the skills answered right start as mastered), and today's species que
 `HunterType` is `WORKING_ON_IT` or `HUNTER`; progress saved as `NEW_HUNTER` or `EXPERIENCED` reads back as `HUNTER`
 (`@JsonNames`), so nothing is lost on update.
 
+**P13. No provincial course names in the app.** *Product.* To stay clear of any issue with governments and course
+publishers, the app never names a provincial hunter course or its publisher (ICAF, ICAA, Alberta Conservation and
+Hunter Education, FédéCP…). A Working-on-it user sees the PAL (PPA in French), which is named, and a "Hunting exam"
+whose questions come from their province's bank ("Hunting exam · Québec", "Hunting exam · Alberta"; the province name
+stays). "I passed the real exam" asks "Did you pass your hunting exam?". The disclaimer names no one ("not affiliated
+with … any government, police force or hunting organization"), in the app and on the Play listing. *Exception:* source
+citations keep the manual's title and link ("ICAF manual (FédéCP, 2020), p. 61", About → Sources). *In the app
+(2026-10-24):* exam ids (`ICAF`, `ABHE`) are internal only; `exams.json` gives each exam a `name` and a `short` name;
+`BundledContentTest` and `core/ui` `NoCourseNamesTest` fail on any course or publisher name in strings, exam names or
+question text.
+
 ## Design
 
 **D1. Material 3 with a fixed brand palette.** *Replaced by D6.* Colour scheme generated (tonal spot) from the icon's

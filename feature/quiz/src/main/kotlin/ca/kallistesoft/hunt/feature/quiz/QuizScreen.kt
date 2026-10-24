@@ -141,14 +141,14 @@ internal fun EmptyQuiz(state: QuizUiState.Empty, onClose: () -> Unit, onStartPra
             BackTopAppBar(
                 if (review) stringResource(R.string.review_title) else "",
                 onClose,
-                overline = state.exam?.let(::examLabel),
+                overline = state.exam?.let { examLabel(it) },
             )
         },
         bottomBar = {
             if (review) {
                 BottomActionBar {
                     PrimaryButton(
-                        stringResource(R.string.practise_exam, state.exam.id),
+                        stringResource(R.string.practise_exam, state.exam.shortName(currentLang())),
                         onClick = onStartPractice,
                         modifier = Modifier.weight(1f).testTag("empty-practise"),
                         icon = Icons.Rounded.PlayArrow,
@@ -248,7 +248,7 @@ internal fun QuestionContent(
                 BackTopAppBar(
                     title = stringResource(R.string.question_progress, s.current + 1, s.questions.size),
                     onBack = { confirmQuit = true },
-                    overline = overline ?: if (isExam) "${stringResource(R.string.exam_sim)} · ${s.exam.id}" else null,
+                    overline = overline ?: if (isExam) "${stringResource(R.string.exam_sim)} · ${s.exam.shortName(currentLang())}" else null,
                     closeIcon = isExam,
                     actions = {
                         if (canReport) {
