@@ -13,22 +13,19 @@ object PreviewData {
         id = "PAL",
         names = mapOf(Lang.FR to "Examen PPA (CCSMAF, armes sans restriction)", Lang.EN to "PAL exam (CFSC, non-restricted)"),
         scopes = listOf("federal"),
+        shortNames = mapOf(Lang.FR to "PPA", Lang.EN to "PAL"),
     )
     val icaf = Exam(
         id = "ICAF",
-        names = mapOf(
-            Lang.FR to "Initiation à la chasse avec arme à feu (Québec)",
-            Lang.EN to "Hunter education with firearms (Québec)",
-        ),
+        names = mapOf(Lang.FR to "Examen de chasse · Québec", Lang.EN to "Hunting exam · Québec"),
         scopes = listOf("hunter-common", "QC"),
+        shortNames = mapOf(Lang.FR to "Examen de chasse", Lang.EN to "Hunting exam"),
     )
     val abhe = Exam(
         id = "ABHE",
-        names = mapOf(
-            Lang.FR to "Éducation à la chasse et à la conservation (Alberta)",
-            Lang.EN to "Alberta Conservation and Hunter Education",
-        ),
+        names = mapOf(Lang.FR to "Examen de chasse · Alberta", Lang.EN to "Hunting exam · Alberta"),
         scopes = listOf("hunter-common", "AB"),
+        shortNames = mapOf(Lang.FR to "Examen de chasse", Lang.EN to "Hunting exam"),
     )
     val photoGame = Exam(
         id = "ID",

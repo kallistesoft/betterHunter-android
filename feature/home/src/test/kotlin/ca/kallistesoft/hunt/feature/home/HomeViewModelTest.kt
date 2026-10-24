@@ -56,7 +56,7 @@ class HomeViewModelTest {
             val hunter = awaitItem()
             assertTrue(hunter.hunter)
             assertTrue(hunter.newHunterBanner)
-            assertEquals("ICAF", hunter.passedExamId)
+            assertEquals("ICAF", hunter.passedExam?.id)
             assertEquals(TestContent.photoGame.id, hunter.photoGameId)
 
             viewModel.dismissNewHunterBanner()
@@ -120,7 +120,7 @@ class HomeViewModelTest {
             val state = awaitItemMatching { !it.loading }
             assertTrue(state.hunter)
             assertTrue(state.newHunterBanner)
-            assertEquals("ICAF", state.passedExamId)
+            assertEquals("ICAF", state.passedExam?.id)
             assertNotNull(state.daily)
         }
     }

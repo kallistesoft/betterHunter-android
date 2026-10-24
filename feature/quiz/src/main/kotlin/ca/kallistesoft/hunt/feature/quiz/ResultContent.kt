@@ -203,8 +203,9 @@ internal fun MissedCard(q: Question, picked: Int?, lang: Lang, links: LinkOpener
     }
 }
 
-/** "ICAF · QUÉBEC" above the title: which exam this is about. */
-internal fun examLabel(exam: Exam): String = listOf(exam.id, exam.region).filter { it.isNotEmpty() }.joinToString(" · ")
+/** "HUNTING EXAM · QUÉBEC" above the title: which exam this is about. */
+@Composable
+internal fun examLabel(exam: Exam): String = exam.label(currentLang())
 
 /** Minutes and seconds, "42:18". */
 private fun clock(seconds: Int): String = "%d:%02d".format(seconds / 60, seconds % 60)

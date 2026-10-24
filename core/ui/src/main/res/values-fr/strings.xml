@@ -9,7 +9,7 @@
     <string name="hunter_type_title">Quel genre de chasseur êtes-vous?</string>
     <string name="hunter_type_sub">Nous vous proposerons les bons exercices. Vous pourrez changer plus tard.</string>
     <string name="hunter_working">En formation</string>
-    <string name="hunter_working_sub">Je prépare mon permis ou mon cours de chasseur</string>
+    <string name="hunter_working_sub">Je prépare mon examen de chasse ou mon PPA</string>
     <string name="hunter_hunter">Chasseur</string>
     <string name="hunter_hunter_sub">Certifié, je chasse déjà</string>
     <string name="hunt_with_title">Avec quoi chassez-vous?</string>
@@ -26,16 +26,16 @@
 
     <!-- Provinces -->
     <string name="province_qc">Québec</string>
-    <string name="province_qc_sub">Cours de chasseur du Québec (ICAF; arc et arbalète bientôt)</string>
+    <string name="province_qc_sub">Questions d\'examen de chasse (arc et arbalète bientôt)</string>
     <string name="province_ab">Alberta</string>
-    <string name="province_ab_sub">Cours de chasseur de l\'Alberta et PPA (permis d\'armes à feu)</string>
+    <string name="province_ab_sub">Questions d\'examen de chasse et PPA (permis d\'armes à feu)</string>
     <string name="province_other">Ailleurs au Canada</string>
     <string name="province_other_sub">Le PPA (permis d\'armes à feu) pour l\'instant; d\'autres provinces à venir</string>
     <string name="province_qc_where">Règles de chasse et gibier du Québec</string>
     <string name="province_ab_where">Règles de chasse et gibier de l\'Alberta</string>
     <string name="province_other_where">Pour tout le Canada pour l\'instant; d\'autres provinces à venir</string>
     <string name="my_provinces">Mes provinces</string>
-    <string name="my_provinces_sub">Vos quiz suivent vos provinces. Ajoutez une province pour vous exercer à son cours de chasseur, ou retirez-en une pour masquer ses quiz.</string>
+    <string name="my_provinces_sub">Vos quiz suivent vos provinces. Ajoutez une province pour vous exercer à son examen de chasse, ou retirez-en une pour masquer ses quiz.</string>
     <string name="where_you_hunt">Où vous chassez</string>
     <string name="more_provinces">D\'autres provinces à venir.</string>
     <string name="other_provinces">Autres provinces</string>
@@ -46,14 +46,14 @@
     <string name="passed_real_exam">J\'ai réussi le vrai examen</string>
     <string name="exam_passed">%1$s réussi</string>
     <string name="real_exam">Vrai examen</string>
-    <string name="passed_title">Avez-vous réussi votre cours de chasseur (%1$s)?</string>
+    <string name="passed_title">Avez-vous réussi votre examen de chasse?</string>
     <string name="passed_sub">Si oui, félicitations! Voici ce qui change dans BetterHunter :</string>
     <string name="passed_change_home"><![CDATA[L\'accueil commence par vos <b>6 questions du jour</b> : des espèces à nommer et du savoir-faire de terrain.]]></string>
     <string name="passed_change_training"><![CDATA[Vos exercices d\'examen restent dans <b>Entraînement aux examens</b>, pour revoir les règles en tout temps.]]></string>
     <string name="passed_change_profile"><![CDATA[Vous devenez <b>Chasseur</b>. BetterHunter vous croit sur parole : rien n\'est vérifié ni envoyé.]]></string>
     <string name="passed_yes">Oui, j\'ai réussi</string>
     <string name="passed_not_yet">Pas encore</string>
-    <string name="hunter_welcome">Cours de chasseur réussi. Bienvenue, chasseur!</string>
+    <string name="hunter_welcome">Examen de chasse réussi. Bienvenue, chasseur!</string>
     <string name="hunter_welcome_sub">Aiguisez maintenant votre œil sur le terrain.</string>
     <string name="close">Fermer</string>
 
@@ -130,7 +130,7 @@
     <string name="privacy_options_sub">Vos choix concernant les annonces</string>
     <string name="how_practice">Correction et explication après chaque question</string>
     <string name="how_exam">Chronométré, résultat à la fin, comme le vrai</string>
-    <string name="disclaimer">Outil d\'étude indépendant, non affilié à la GRC, au Programme canadien des armes à feu, au gouvernement du Québec ni à la FédéCP, et non approuvé par eux. Les questions sont des questions de pratique originales, rédigées à partir des manuels officiels; ce ne sont pas les questions des examens officiels. Des erreurs sont possibles et les lois changent : vérifiez toujours dans le manuel officiel et la réglementation en vigueur. Aucune garantie de réussite.</string>
+    <string name="disclaimer">Outil d\'étude indépendant, non affilié à aucun gouvernement, corps policier ni organisme de chasse, et non approuvé par eux. Les questions sont des questions de pratique originales, rédigées à partir des manuels officiels; ce ne sont pas les questions des examens officiels. Des erreurs sont possibles et les lois changent : vérifiez toujours dans le manuel officiel et la réglementation en vigueur. Aucune garantie de réussite.</string>
 
     <!-- Exams -->
     <string name="to_pass">%1$d %% pour réussir</string>

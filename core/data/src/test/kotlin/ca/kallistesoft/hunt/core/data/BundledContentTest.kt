@@ -52,7 +52,26 @@ class BundledContentTest {
     }
 
     @Test
+    fun `exam names and questions never name a provincial course or its publisher`() {
+        for (exam in content.exams) {
+            for (lang in Lang.entries) assertNoCourseName("exam ${exam.id}", exam.name(lang) + " " + exam.shortName(lang))
+        }
+        for (exam in content.availableExams) {
+            for (q in content.questionsFor(exam)) {
+                for (text in q.texts.values) assertNoCourseName(q.id, (listOf(text.q, text.explanation) + text.choices).joinToString(" "))
+            }
+        }
+    }
+
+    @Test
     fun `comment keys are not exams`() {
         assertTrue(content.exams.none { it.id.startsWith("_") })
     }
+}
+
+/** Names the app must never show (DECISIONS.md, P13); source citations are allowed to name their manual. */
+internal val COURSE_NAMES = listOf("ICAF", "ICAA", "ABHE", "AHEIA", "FédéCP", "FedeCP", "Fédération québécoise", "Conservation and Hunter Education")
+
+internal fun assertNoCourseName(where: String, text: String) {
+    COURSE_NAMES.forEach { assertFalse("$where names \"$it\": $text", text.contains(it, ignoreCase = true)) }
 }

@@ -9,8 +9,14 @@ import ca.kallistesoft.hunt.core.model.QuestionText
 
 /** Small content set: two training exams and the photo game, three questions each, and field skill questions; answer B. */
 object TestContent {
-    val pal = Exam("PAL", mapOf(Lang.FR to "Examen PPA", Lang.EN to "PAL exam"), listOf("federal"), questionCount = 3, minutes = 1)
-    val icaf = Exam("ICAF", mapOf(Lang.FR to "ICAF", Lang.EN to "ICAF"), listOf("QC"), questionCount = 3)
+    val pal = Exam(
+        "PAL", mapOf(Lang.FR to "Examen PPA", Lang.EN to "PAL exam"), listOf("federal"), questionCount = 3, minutes = 1,
+        shortNames = mapOf(Lang.FR to "PPA", Lang.EN to "PAL"),
+    )
+    val icaf = Exam(
+        "ICAF", mapOf(Lang.FR to "Examen de chasse · Québec", Lang.EN to "Hunting exam · Québec"), listOf("QC"), questionCount = 3,
+        shortNames = mapOf(Lang.FR to "Examen de chasse", Lang.EN to "Hunting exam"),
+    )
     val photoGame = Exam(PHOTO_ID_EXAM, mapOf(Lang.FR to "Qu'est-ce que c'est?", Lang.EN to "What is it?"), listOf("wildlife-id"))
 
     fun question(id: String, scope: String, image: String? = null, chapter: String = "c") = Question(

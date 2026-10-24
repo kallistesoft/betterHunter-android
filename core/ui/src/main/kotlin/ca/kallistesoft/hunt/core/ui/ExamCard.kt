@@ -41,6 +41,7 @@ import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Content
 import ca.kallistesoft.hunt.core.model.Exam
+import ca.kallistesoft.hunt.core.model.ExamGroup
 import ca.kallistesoft.hunt.core.model.UserProgress
 import kotlin.math.roundToInt
 
@@ -51,7 +52,7 @@ data class ExamSummary(val exam: Exam, val questionCount: Int, val readiness: Fl
 
 /**
  * Full card for one exam: icon, facts, readiness, Practice / Mock exam / review mistakes. A hunter course also gets
- * "I passed the real exam" ([onPassedRealExam]), or "ICAF passed" once the user said so ([passed]).
+ * "I passed the real exam" ([onPassedRealExam]), or "Hunting exam passed" once the user said so ([passed]).
  */
 @Composable
 fun ExamCard(
@@ -67,7 +68,8 @@ fun ExamCard(
     val lang = currentLang()
     val scheme = MaterialTheme.colorScheme
     val meta = buildList {
-        if (exam.region.isNotEmpty()) add(exam.region)
+        // A hunting exam's name already says its province ("Hunting exam · Québec").
+        if (exam.region.isNotEmpty() && exam.group != ExamGroup.HUNTING) add(exam.region)
         if (summary.available) {
             add(stringResource(R.string.minutes, exam.minutes))
             add(stringResource(R.string.to_pass, (exam.passMark * 100).roundToInt()))
@@ -122,7 +124,7 @@ fun ExamCard(
                 if (passed || onPassedRealExam != null) {
                     HorizontalDivider(Modifier.padding(vertical = Spacing.xs), color = scheme.outlineVariant)
                     if (passed) {
-                        ExamPassed(exam.id, Modifier.padding(vertical = Spacing.m))
+                        ExamPassed(exam.shortName(lang), Modifier.padding(vertical = Spacing.m))
                     } else if (onPassedRealExam != null) {
                         LinkButton(onClick = onPassedRealExam, modifier = Modifier.testTag("passed-${exam.id}")) {
                             Icon(Icons.Outlined.EmojiEvents, contentDescription = null, Modifier.size(Sizes.iconM))
@@ -136,14 +138,14 @@ fun ExamCard(
     }
 }
 
-/** "✓ ICAF passed", in green: the user said they passed this exam for real. */
+/** "✓ Hunting exam passed", in green: the user said they passed this exam for real; [name] is its short name. */
 @Composable
-fun ExamPassed(examId: String, modifier: Modifier = Modifier) {
+fun ExamPassed(name: String, modifier: Modifier = Modifier) {
     val green = MaterialTheme.colorScheme.secondary
     Row(modifier, verticalAlignment = Alignment.CenterVertically) {
         Icon(Icons.Rounded.Check, contentDescription = null, tint = green, modifier = Modifier.size(Sizes.iconS))
         Spacer(Modifier.width(Spacing.xs + Spacing.xxs))
-        Text(stringResource(R.string.exam_passed, examId), style = MaterialTheme.typography.labelMedium, color = green)
+        Text(stringResource(R.string.exam_passed, name), style = MaterialTheme.typography.labelMedium, color = green)
     }
 }
 
@@ -171,7 +173,8 @@ fun ExamListItem(
     ListItem(
         headlineContent = { Text(exam.name(currentLang()), fontWeight = FontWeight.SemiBold) },
         supportingContent = {
-            Text("${exam.region} · " + pluralStringResource(R.plurals.questions_count, questionCount, questionCount))
+            val count = pluralStringResource(R.plurals.questions_count, questionCount, questionCount)
+            Text(if (exam.region.isEmpty() || exam.group == ExamGroup.HUNTING) count else "${exam.region} · $count")
         },
         leadingContent = leading,
         trailingContent = trailing,

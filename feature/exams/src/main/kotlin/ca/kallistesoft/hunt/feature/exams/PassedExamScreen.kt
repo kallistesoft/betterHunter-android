@@ -48,7 +48,7 @@ import ca.kallistesoft.hunt.core.ui.BackTopAppBar
 import ca.kallistesoft.hunt.core.ui.R
 
 /**
- * "Did you pass your hunter course?", from an exam card in Exam training: what changes, then "Yes, I passed"
+ * "Did you pass your hunting exam?", from an exam card in Exam training: what changes, then "Yes, I passed"
  * ([onConfirmed] once saved) or "Not yet". The app takes the user's word; nothing is verified.
  */
 @Composable
@@ -62,11 +62,11 @@ fun PassedExamScreen(
 ) {
     val saved by viewModel.saved.collectAsStateWithLifecycle()
     if (saved) LaunchedEffect(Unit) { onConfirmed() }
-    PassedExamContent(examId, onConfirm = viewModel::confirm, onBack = onBack)
+    PassedExamContent(onConfirm = viewModel::confirm, onBack = onBack)
 }
 
 @Composable
-internal fun PassedExamContent(examId: String, onConfirm: () -> Unit, onBack: () -> Unit) {
+internal fun PassedExamContent(onConfirm: () -> Unit, onBack: () -> Unit) {
     val scheme = MaterialTheme.colorScheme
     Scaffold(
         topBar = { BackTopAppBar("", onBack) },
@@ -109,7 +109,7 @@ internal fun PassedExamContent(examId: String, onConfirm: () -> Unit, onBack: ()
                 ) {
                     Overline(stringResource(R.string.real_exam))
                     Text(
-                        stringResource(R.string.passed_title, examId),
+                        stringResource(R.string.passed_title),
                         style = MaterialTheme.typography.headlineMedium,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.semantics { heading() },

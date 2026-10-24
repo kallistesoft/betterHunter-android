@@ -30,7 +30,7 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | Mock exam: quit this test? (dialog) | `QuitDialog.dc.html` | `QuitDialogLight.dc.html` | built |
 | Mock exam: results | `ExamResults.dc.html` | `ExamResultsLight.dc.html` | built |
 | I passed the real exam: confirm (from Exam training) | `PassedExam.dc.html` | `PassedExamLight.dc.html` | built |
-| Home, hunter (after passing the real exam): the Hunter home with a congratulations banner and an "Exam training · ICAF passed" row | `HomeHunterPassed.dc.html` | `HomeHunterPassedLight.dc.html` | built |
+| Home, hunter (after passing the real exam): the Hunter home with a congratulations banner and an "Exam training · Hunting exam passed" row | `HomeHunterPassed.dc.html` | `HomeHunterPassedLight.dc.html` | built |
 | Onboarding as a hunter: what kind of hunter? → Hunter, then the same two questions | `HunterProfileHunter.dc.html`, `HuntWithHunter.dc.html`, `HuntWhereHunter.dc.html` | `…Light.dc.html` | built |
 | Home, hunter, first day: "Already hunt? Skip what you know" (skill check card, dismissible) above today's 6 questions | `HomeHunterFirst.dc.html` | `HomeHunterFirstLight.dc.html` | not built (the skill check card) |
 | Skill check: question (15, all skills) | `SkillCheckQuestion.dc.html` | `SkillCheckQuestionLight.dc.html` | not built |
@@ -82,12 +82,14 @@ you hunt?" (Québec, Alberta, elsewhere in Canada), saved on the device. Neither
 profile (no ICAF, PAL, hunter course or quizzes: "Québec hunting rules and game"). Behind the scenes the province sets the quizzes of a "Working on
 it" user: Québec, the Québec hunter course (ICAF; ICAA for bow and crossbow once it has questions); Alberta, the Alberta
 course and the PAL; elsewhere, the PAL. Settings → My provinces switches other provinces on (adding their quizzes) or off. There is
-no exam list in onboarding.
+no exam list in onboarding. The screens never name a provincial course or its publisher: the course is shown as "Hunting
+exam · Québec" ("Hunting exam passed"), only the PAL is named, and source citations keep the manual title
+(DECISIONS.md, P13).
 
 **Passed the real exam (built).** On an exam card in Exam training, "I passed the real exam" opens a
-confirmation on the hunter course ("Did you pass your hunter course (ICAF)?", what changes, "Yes, I passed" / "Not yet").
+confirmation on the hunter course ("Did you pass your hunting exam?", what changes, "Yes, I passed" / "Not yet").
 Confirming makes the user a Hunter (changeable back in Settings) and lands on the same Hunter home as flow 2, with a
-congratulations banner and Exam training kept as a row ("ICAF passed") for refreshers. The example user is a Québec
+congratulations banner and Exam training kept as a row ("Hunting exam passed") for refreshers. The example user is a Québec
 hunter preparing ICAF (main exam) and the PAL (optional). The app takes the user's word; nothing is verified.
 
 **Hunter (built, except the skill check and look-alikes).** Two profiles only: *Working on it* (exam prep) and
