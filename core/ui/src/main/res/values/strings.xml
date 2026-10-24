@@ -28,7 +28,7 @@
 
     <!-- Provinces -->
     <string name="province_qc">Québec</string>
-    <string name="province_qc_sub">Hunting exam questions (bow and crossbow coming soon)</string>
+    <string name="province_qc_sub">Hunting exam questions and the PAL (bow and crossbow coming soon)</string>
     <string name="province_ab">Alberta</string>
     <string name="province_ab_sub">Hunting exam questions and the PAL (firearms licence)</string>
     <string name="province_other">Elsewhere in Canada</string>

@@ -80,8 +80,8 @@ logo boards). Edit the generator, regenerate, then publish the changed files to 
 or Hunter: licensed, whatever the number of seasons), "What do you hunt with?" (firearm, bow, crossbow; pick all that apply) and "Where do
 you hunt?" (Québec, Alberta, elsewhere in Canada), saved on the device. Neither question names an exam, for either
 profile (no ICAF, PAL, hunter course or quizzes: "Québec hunting rules and game"). Behind the scenes the province sets the quizzes of a "Working on
-it" user: Québec, the Québec hunter course (ICAF; ICAA for bow and crossbow once it has questions); Alberta, the Alberta
-course and the PAL; elsewhere, the PAL. Settings → My provinces switches other provinces on (adding their quizzes) or off. There is
+it" user: Québec, the Québec hunter course (ICAF; ICAA for bow and crossbow once it has questions) and the PAL; Alberta,
+the Alberta course and the PAL; elsewhere, the PAL. Exam training shows a Québec user both cards, hunter course first. Settings → My provinces switches other provinces on (adding their quizzes) or off. There is
 no exam list in onboarding. The screens never name a provincial course or its publisher: the course is shown as "Hunting
 exam · Québec" ("Hunting exam passed"), only the PAL is named, and source citations keep the manual title
 (DECISIONS.md, P13).
