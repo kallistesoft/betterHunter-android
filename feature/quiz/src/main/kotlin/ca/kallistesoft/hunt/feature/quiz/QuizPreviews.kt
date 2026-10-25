@@ -47,14 +47,26 @@ internal fun QuizExamPreview() = PreviewSurface {
 internal fun QuizResultFailedPreview() = PreviewSurface {
     val session = QuizSession(PreviewData.pal, QuizMode.EXAM, listOf(PreviewData.question, PreviewData.photoQuestion))
         .answer(1).next().answer(3)
-    ResultContent(QuizUiState.Finished(session, timeUp = true, secondsLeft = 0), dailyGoalReached = false, onHome = {}, onAgain = {})
+    ResultContent(
+        QuizUiState.Finished(session, timeUp = true, secondsLeft = 0),
+        dailyGoalReached = false,
+        onHome = {},
+        onAgain = {},
+        mockButtons = MockButtons(onAllMocks = {}, onNext = null),
+    )
 }
 
 @BhPreviews
 @Composable
 internal fun QuizResultPassedPreview() = PreviewSurface {
     val session = QuizSession(PreviewData.pal, QuizMode.EXAM, listOf(PreviewData.question)).answer(1)
-    ResultContent(QuizUiState.Finished(session, timeUp = false, secondsLeft = 17 * 60 + 42), dailyGoalReached = false, onHome = {}, onAgain = {})
+    ResultContent(
+        QuizUiState.Finished(session, timeUp = false, secondsLeft = 17 * 60 + 42),
+        dailyGoalReached = false,
+        onHome = {},
+        onAgain = {},
+        mockButtons = MockButtons(onAllMocks = {}, onNext = {}),
+    )
 }
 
 /** Practice on a hunter course: the daily goal reached, one mistake. */

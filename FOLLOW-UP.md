@@ -132,6 +132,11 @@ To do:
       ads even from release builds with the real IDs, so testing a release build on it is safe. Register any other
       phone the same way before testing a release build on it.
 - [ ] **`ads_enabled`** parameter in Firebase Remote Config (step 21).
+- [ ] **Rewarded ad unit "Mock retake" (before release, P14):** AdMob → **Apps** → **BetterHunter** → **Ad units** →
+      **Add ad unit** → **Rewarded**, name `Mock retake`, reward `1` × `retake`, no frequency cap (the user chooses to
+      watch). Put its ID (`ca-app-pub-7557144664039757/…`) in `app/build.gradle.kts`, `admobRelease["rewarded"]`.
+      Until then a release build has no rewarded ad, so mock exam retakes and "Reset all" are free. Debug and qa use
+      Google's rewarded test unit.
 - [ ] **iOS:** add the iOS app and its interstitial ad unit in AdMob once the iOS app exists (and its app-ads.txt
       line stays the same publisher).
 

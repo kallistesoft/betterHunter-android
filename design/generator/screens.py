@@ -45,6 +45,8 @@ ICONS = {
     "flag": '<path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/>',
     "play": '<path d="M7 4.5v15l12-7.5z"/>',
     "timer": '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M10 2h4"/>',
+    "video": '<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M10 8l5 2.5-5 2.5z"/><path d="M8 21h8"/>',
+    "wifi_off": '<path d="M2 8.8a15 15 0 0 1 4.2-2.6"/><path d="M9.5 5.2A15 15 0 0 1 22 8.8"/><path d="M5 12.5a10 10 0 0 1 3.5-2"/><path d="M15.5 10.7A10 10 0 0 1 19 12.5"/><path d="M8.5 16a5 5 0 0 1 7 0"/><path d="M12 20h.01"/><path d="M3 3l18 18"/>',
     "replay": '<path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v4.5h4.5"/>',
     "shield": '<path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/>',
     "tree": '<path d="M12 3l5 7h-3l4 6h-5v5h-2v-5H6l4-6H7z"/>',
@@ -301,12 +303,13 @@ def exam_training(t):
         <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 20px; line-height: 1.1">Hunting exam · Québec</span>
         <span style="font-size: 13px; color: {t["muted"]}">228 questions</span>
         <span style="font-size: 13px; color: {t["muted"]}">60 min · 80% to pass</span>
+        <span style="font-size: 13px; color: {t["green"]}">Mock exams: 3 of 10 passed</span>
       </span>
       <span style="display: flex; flex-direction: column; align-items: center; gap: 4px">{ring_html}<span style="font-size: 11px; color: {t["muted"]}">Readiness</span></span>
     </div>
     <div style="display: flex; gap: 10px">
       {primary(t, "Practice", href(t, "PracticeQuestion"), "; flex: 1; height: 52px", "play")}
-      {secondary(t, "Mock exam", href(t, "ExamQuestion"), "; flex: 1; height: 52px", "timer")}
+      {secondary(t, "Mock exams", href(t, "MockExams"), "; flex: 1; height: 52px", "timer")}
     </div>
     <a href="{href(t, "PracticeQuestion")}" style="display: flex; align-items: center; gap: 8px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px">{icon("replay", 16)} Review my mistakes (5)</a>
     <a href="{href(t, "PassedExam")}" style="display: flex; align-items: center; gap: 8px; color: {t["link"]}; font-weight: 600; font-size: 14px; text-decoration: none; min-height: 32px; border-top: 1px solid {t["border"]}; padding-top: 10px">{icon("trophy", 16)} I passed the real exam</a>'''
@@ -321,7 +324,7 @@ def exam_training(t):
     </div>
     <div style="display: flex; gap: 10px">
       {primary(t, "Practice", href(t, "PracticeQuestion"), "; flex: 1; height: 52px", "play")}
-      {secondary(t, "Mock exam", href(t, "ExamQuestion"), "; flex: 1; height: 52px", "timer")}
+      {secondary(t, "Mock exams", href(t, "MockExams"), "; flex: 1; height: 52px", "timer")}
     </div>'''
     add = row(t, tile(t, "pin"), "Other provinces", "Alberta, elsewhere in Canada", target=href(t, "Provinces"), divider=False)
     body = f'''{header(t, "Exam training", back=href(t, "Main"))}
@@ -396,7 +399,7 @@ def results(t, exam):
         verdict = (f'<span style="display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 999px; border: 1.5px solid {t["red"]}; color: {t["red"]}; font-weight: 600; font-size: 14px">{icon("x", 16, t["red"], 2.4)} Not passed · Pass mark 80%</span>'
                    f'<span style="font-size: 13px; color: {t["muted"]}">Time: 42:18 of 60:00 · 13 questions to review</span>')
         missed = "".join(missed_card(t, *m) for m in MISSED[:2]) + f'<span style="text-align: center; font-size: 13px; color: {t["muted"]}">+ 11 more below</span>'
-        again = href(t, "ExamQuestion")
+        again = None
     else:
         color, pct, count = t["green"], 85, "17 / 20"
         title, over = "Practice results", "Hunting exam · Québec"
@@ -404,6 +407,9 @@ def results(t, exam):
                    f'<span style="font-size: 13px; color: {t["muted"]}">3 questions go to "Review my mistakes"</span>')
         missed = "".join(missed_card(t, *m) for m in MISSED)
         again = href(t, "PracticeQuestion")
+    # A mock exam: back to the ten, or on to the next one not taken (a retake needs an ad, from the list).
+    buttons = (secondary(t, "All mocks", href(t, "MockExams"), "; flex: 1") + primary(t, "Next mock", href(t, "ExamQuestion"), "; flex: 1")
+               if exam else secondary(t, "Home", href(t, "Main"), "; flex: 1") + primary(t, "Try again", again, "; flex: 1"))
     inner = (f'<span style="font-family: \'Barlow Condensed\', sans-serif; font-weight: 700; font-size: 44px; line-height: 1; color: {color}">{pct}%</span>'
              f'<span style="font-size: 15px; color: {t["muted"]}">{count}</span>')
     body = f'''{header(t, title, overline=over)}
@@ -413,12 +419,12 @@ def results(t, exam):
   </div>
   {label(t, "Questions to review", t["muted"], "; margin-top: 4px")}
   <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; min-height: 0; overflow: hidden">{missed}</div>
-  <div style="display: flex; gap: 10px">{secondary(t, "Home", href(t, "Main"), "; flex: 1")}{primary(t, "Try again", again, "; flex: 1")}</div>'''
+  <div style="display: flex; gap: 10px">{buttons}</div>'''
     return page(t, f"BetterHunter {title.lower()}", body, gap=12)
 
 
 def quit_dialog(t):
-    behind = f'''{header(t, "Question 18 / 50", back="#", close=True, overline="Mock exam · Hunting exam")}
+    behind = f'''{header(t, "Question 18 / 50", back="#", close=True, overline="Mock 4 · Hunting exam")}
   <div style="height: 5px; border-radius: 3px; background: {t["track"]}"><div style="width: 36%; height: 5px; border-radius: 3px; background: {t["current"]}"></div></div>
   <h1 style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 28px; line-height: 1.15">Which level of government is responsible for managing migratory birds?</h1>
   {choice(t, "A", "The provincial government", "idle")}
@@ -429,7 +435,7 @@ def quit_dialog(t):
       <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Your progress in this test will be lost.</p>
       <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-top: 8px">
         <a href="{href(t, "ExamQuestion")}" style="height: 48px; padding: 0 16px; display: flex; align-items: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none">Cancel</a>
-        {primary(t, "Quit", href(t, "ExamTraining"), "; height: 48px; padding: 0 24px")}
+        {primary(t, "Quit", href(t, "MockExams"), "; height: 48px; padding: 0 24px")}
       </div>
     </div>
   </div>'''
@@ -1019,10 +1025,86 @@ def lookalike_question(t):
     return page(t, "BetterHunter daily species question (look-alike), answered", body, gap=12)
 
 
+MOCKS = [(1, 88, 80), (2, 72, 72), (3, 84, 76), (4, None, None), (5, None, None), (6, None, None)]
+
+
+def mock_row(t, n, best, last, next_one=False, all_done=False):
+    """One of the ten mock exams: not taken (Start; the next one in orange) or passed / failed (Retake, behind an ad)."""
+    if best is None:
+        status, color, scores = "Not taken", t["muted"], ""
+        button = (primary if next_one else secondary)(t, "Start", href(t, "ExamQuestion"), "; height: 44px; padding: 0 16px; font-size: 15px", "play")
+    else:
+        passed = best >= 80
+        status, color = ("Passed", t["green"]) if passed else ("Failed", t["red"])
+        scores = f'<span style="font-size: 13px; color: {t["muted"]}">Best {best}% · last {last}%</span>'
+        button = secondary(t, "Retake", href(t, "MockExamsAllDone" if all_done else "RetakeAd"), "; height: 44px; padding: 0 14px", "video")
+    return card(t, f'''<div style="display: flex; align-items: center; gap: 12px">
+      <span style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0">
+        <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 20px; line-height: 1.1">Mock {n}</span>
+        <span style="font-size: 13px; font-weight: 600; color: {color}">{status}</span>{scores}
+      </span>{button}
+    </div>''', pad="12px 16px", gap=0, radius=18)
+
+
+def mock_exams(t, all_done=False):
+    rows = [(n, 70 + n * 2, 68 + n * 2) for n in range(1, 11)] if all_done else MOCKS
+    passed = sum(1 for _, best, _ in rows if best and best >= 80)
+    reset = (f'''<div style="display: flex; flex-direction: column; gap: 8px">
+    <span style="font-size: 14px; font-weight: 600; line-height: 1.4">All 10 mock exams done. Reset them all to start over.</span>
+    {primary(t, "Reset all", href(t, "RetakeAd"), "; height: 48px", "video")}
+  </div>''' if all_done else "")
+    first_free = next((n for n, best, _ in rows if best is None), None)
+    body = f'''{header(t, "Mock exams", back=href(t, "ExamTraining"), overline="Hunting exam · Québec")}
+  <div style="display: flex; flex-direction: column; gap: 4px; margin-top: 4px">
+    <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 26px; line-height: 1.1">{passed} of 10 passed</span>
+    <span style="font-size: 14px; line-height: 1.4; color: {t["muted"]}">Timed like the real exam. Each one is a new draw: new questions, in a random order, with the answers shuffled.</span>
+  </div>
+  {reset}
+  {"".join(mock_row(t, n, best, last, next_one=n == first_free, all_done=all_done) for n, best, last in rows)}'''
+    return page(t, "BetterHunter mock exams" + (", all done" if all_done else ""), body, gap=10)
+
+
+def retake_ad(t):
+    rows = "".join(mock_row(t, n, best, last) for n, best, last in MOCKS[:4])
+    under = f'''{header(t, "Mock exams", back="#", overline="Hunting exam · Québec")}
+  <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 26px; line-height: 1.1">2 of 10 passed</span>
+  {rows}'''
+    dialog = f'''<div style="position: absolute; inset: 0; background: {t["dim"]}; display: flex; align-items: center; justify-content: center; padding: 24px">
+    <div role="dialog" aria-labelledby="retake-title" style="width: 100%; background: {t["dialog"]}; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.35)">
+      <span style="color: {t["green"]}">{icon("video", 28)}</span>
+      <h2 id="retake-title" style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px">Retake Mock 2?</h2>
+      <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Watch a short ad to take a new Mock 2: new questions, in a new order. Your best score is kept.</p>
+      <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-top: 8px; align-self: stretch">
+        <a href="{href(t, "MockExams")}" style="height: 48px; padding: 0 16px; display: flex; align-items: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none">Cancel</a>
+        {primary(t, "Watch ad", href(t, "ExamQuestion"), "; height: 48px; padding: 0 24px")}
+      </div>
+      <a href="{href(t, "AdOffline")}" style="font-size: 12px; color: {t["muted"]}">Offline? →</a>
+    </div>
+  </div>'''
+    return page(t, "BetterHunter retake behind a rewarded ad", under + "\n  " + dialog, gap=10)
+
+
+def ad_offline(t):
+    rows = "".join(mock_row(t, n, best, last) for n, best, last in MOCKS[:4])
+    under = f'''{header(t, "Mock exams", back="#", overline="Hunting exam · Québec")}
+  <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 26px; line-height: 1.1">2 of 10 passed</span>
+  {rows}'''
+    dialog = f'''<div style="position: absolute; inset: 0; background: {t["dim"]}; display: flex; align-items: center; justify-content: center; padding: 24px">
+    <div role="dialog" aria-labelledby="offline-title" style="width: 100%; background: {t["dialog"]}; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.35)">
+      <span style="color: {t["green"]}">{icon("wifi_off", 28)}</span>
+      <h2 id="offline-title" style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px">You're offline</h2>
+      <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Retakes need a short ad. Connect to the internet and try again.</p>
+      <div style="display: flex; justify-content: flex-end; margin-top: 8px; align-self: stretch">{primary(t, "OK", href(t, "MockExams"), "; height: 48px; padding: 0 28px")}</div>
+    </div>
+  </div>'''
+    return page(t, "BetterHunter retake offline", under + "\n  " + dialog, gap=10)
+
+
 SCREENS = {
     "Settings": settings, "About": about, "ExamTraining": exam_training, "PracticeQuestion": practice_question,
     "PracticeResults": lambda t: results(t, exam=False), "ExamResults": lambda t: results(t, exam=True),
-    "QuitDialog": quit_dialog, "PhotoZoom": photo_zoom, "NothingToReview": nothing_to_review,
+    "QuitDialog": quit_dialog, "PhotoZoom": photo_zoom,
+    "MockExams": mock_exams, "MockExamsAllDone": lambda t: mock_exams(t, all_done=True), "RetakeAd": retake_ad, "AdOffline": ad_offline, "NothingToReview": nothing_to_review,
     "Recognition": recognition, "UpdateRequired": update_required, "PassedExam": passed_exam,
     "HomeHunterPassed": lambda t: home_hunter(t, passed=True), "HuntWith": hunt_with, "HuntWhere": hunt_where, "Provinces": provinces,
     # Flow: hunter

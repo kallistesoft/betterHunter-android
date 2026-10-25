@@ -9,6 +9,8 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.google.android.ump.ConsentInformation
 import com.google.android.ump.ConsentInformation.PrivacyOptionsRequirementStatus
 import com.google.android.ump.ConsentRequestParameters
@@ -37,11 +39,19 @@ internal interface AdsSdk {
 
     /** A loaded interstitial, or null when none could be loaded (no fill, offline). */
     suspend fun loadInterstitial(unitId: String): Interstitial?
+
+    /** A loaded rewarded ad, or null when none could be loaded (no fill, offline). */
+    suspend fun loadRewarded(unitId: String): Rewarded?
 }
 
 internal fun interface Interstitial {
     /** Shows the ad full screen and returns when it's closed, or at once if it can't be shown. */
     suspend fun show(activity: Activity)
+}
+
+internal fun interface Rewarded {
+    /** Shows the ad full screen and returns when it's closed: true if the reward was earned. False if it can't show. */
+    suspend fun show(activity: Activity): Boolean
 }
 
 /** Google's User Messaging Platform. */
@@ -85,6 +95,31 @@ internal class GoogleAdsSdk(
                 override fun onAdFailedToLoad(error: LoadAdError) = done.resume(null)
             },
         )
+    }
+
+    override suspend fun loadRewarded(unitId: String): Rewarded? = suspendCancellableCoroutine { done ->
+        RewardedAd.load(
+            context,
+            unitId,
+            AdRequest.Builder().build(),
+            object : RewardedAdLoadCallback() {
+                override fun onAdLoaded(ad: RewardedAd) = done.resume(GoogleRewarded(ad))
+
+                override fun onAdFailedToLoad(error: LoadAdError) = done.resume(null)
+            },
+        )
+    }
+}
+
+internal class GoogleRewarded(private val ad: RewardedAd) : Rewarded {
+    override suspend fun show(activity: Activity): Boolean = suspendCancellableCoroutine { done ->
+        var earned = false
+        ad.fullScreenContentCallback = object : FullScreenContentCallback() {
+            override fun onAdDismissedFullScreenContent() = done.resume(earned)
+
+            override fun onAdFailedToShowFullScreenContent(error: AdError) = done.resume(false)
+        }
+        ad.show(activity) { earned = true }
     }
 }
 

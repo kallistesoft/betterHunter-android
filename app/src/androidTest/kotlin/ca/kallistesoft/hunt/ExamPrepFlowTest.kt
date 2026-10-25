@@ -47,6 +47,7 @@ class ExamPrepFlowTest {
         app.onboard()
         app.clickTag("hub-exams")
         app.clickTag("exam-ICAF")
+        app.clickTag("mock-start-1")
         app.waitForTag("choice-0")
 
         app.back()
@@ -56,6 +57,8 @@ class ExamPrepFlowTest {
 
         app.back()
         app.clickText(app.str(R.string.quit))
+        app.waitForTag("mock-start-1") // back on the mock exams, Mock 1 still to take
+        app.back()
         app.waitForTag("exam-card-ICAF")
     }
 

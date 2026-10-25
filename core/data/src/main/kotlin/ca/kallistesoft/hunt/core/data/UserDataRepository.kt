@@ -45,6 +45,12 @@ interface UserDataRepository {
     /** "I passed the real exam": the user becomes a hunter. */
     suspend fun markExamPassed(examId: String)
 
+    /** Mock [mock] of [examId] finished with [percent] right (P14). */
+    suspend fun recordMockResult(examId: String, mock: Int, percent: Int)
+
+    /** "Reset all" on [examId]'s mock exams. */
+    suspend fun resetMocks(examId: String)
+
     suspend fun dismissNewHunterBanner()
 
     // Settings
@@ -112,6 +118,14 @@ internal class DataStoreUserDataRepository @Inject constructor(
 
     override suspend fun markExamPassed(examId: String) {
         store.updateData { it.withExamPassed(examId) }
+    }
+
+    override suspend fun recordMockResult(examId: String, mock: Int, percent: Int) {
+        store.updateData { it.withMockResult(examId, mock, percent) }
+    }
+
+    override suspend fun resetMocks(examId: String) {
+        store.updateData { it.withMocksReset(examId) }
     }
 
     override suspend fun dismissNewHunterBanner() {

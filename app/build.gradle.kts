@@ -25,16 +25,21 @@ fun signingValue(key: String, env: String): String? = keystoreProperties.getProp
 val admobRelease = mapOf(
     "appId" to "ca-app-pub-7557144664039757~4450187296", // AdMob app "BetterHunter"
     "interstitial" to "ca-app-pub-7557144664039757/7902432864", // Ad unit "Quiz finished" (cap: 1 per 3 minutes)
+    // Ad unit "Mock retake" (rewarded, P14): to create in AdMob before release (FOLLOW-UP.md, section 2). Blank: no
+    // rewarded ad, so retakes and "Reset all" are free.
+    "rewarded" to "",
 )
 val admobTest = mapOf(
     "appId" to "ca-app-pub-3940256099942544~3347511713",
     "interstitial" to "ca-app-pub-3940256099942544/1033173712",
+    "rewarded" to "ca-app-pub-3940256099942544/5224354917",
 )
 
-/** The AdMob App ID goes in the manifest (`${admobAppId}`), the interstitial's ad unit in BuildConfig. */
+/** The AdMob App ID goes in the manifest (`${admobAppId}`), the ad units in BuildConfig. */
 fun com.android.build.api.dsl.ApplicationBuildType.admob(ids: Map<String, String>) {
     manifestPlaceholders["admobAppId"] = ids.getValue("appId")
     buildConfigField("String", "ADMOB_INTERSTITIAL_ID", "\"${ids.getValue("interstitial")}\"")
+    buildConfigField("String", "ADMOB_REWARDED_ID", "\"${ids.getValue("rewarded")}\"")
 }
 
 android {

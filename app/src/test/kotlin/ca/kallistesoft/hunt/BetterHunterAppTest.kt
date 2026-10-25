@@ -67,7 +67,7 @@ class BetterHunterAppTest {
     }
 
     @Test
-    fun examTrainingLeadsToProvincesAMockExamAndBack() {
+    fun examTrainingLeadsToProvincesTheMockExamsAndBack() {
         app.launch(student)
         app.clickTag("hub-exams")
         app.clickTag("change-exams")
@@ -75,9 +75,12 @@ class BetterHunterAppTest {
         app.clickBackArrow()
 
         app.clickTag("exam-ICAF")
+        app.clickTag("mock-start-1")
         app.waitForTag("choice-0")
         app.pressBack()
         app.clickText(app.str(R.string.quit))
+        app.waitForTag("mock-start-1") // quit: Mock 1 is still to take, free
+        app.clickBackArrow()
         app.waitForTag("exam-card-ICAF")
 
         app.clickBackArrow()

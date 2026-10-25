@@ -51,6 +51,8 @@ data class UserProgress(
     val reminderDay: Long? = null,
     /** Daily reminders shown since the app was last opened: they back off after [Reminder.BACK_OFF_AFTER]. */
     val ignoredReminders: Int = 0,
+    /** Finished mock exams: exam id → mock number (1 to [MOCK_COUNT]) → its scores (P14). */
+    val mockResults: Map<String, Map<Int, MockResult>> = emptyMap(),
 ) {
     val onboarded: Boolean get() = hunterType != null && homeProvince != null
 
@@ -92,6 +94,19 @@ data class UserProgress(
     /** "Yes, I passed": the user becomes a hunter, welcomed by a banner on Home. */
     fun withExamPassed(examId: String): UserProgress =
         copy(passedExams = passedExams + examId, hunterType = HunterType.HUNTER, newHunterBanner = true)
+
+    /** The finished mocks of [examId], by mock number. */
+    fun mockResults(examId: String): Map<Int, MockResult> = mockResults[examId].orEmpty()
+
+    /** Mock [mock] of [examId] finished with [percent]: the last score, and the best one if it's higher. */
+    fun withMockResult(examId: String, mock: Int, percent: Int): UserProgress {
+        val mocks = mockResults(examId)
+        val result = MockResult(best = maxOf(percent, mocks[mock]?.best ?: 0), last = percent)
+        return copy(mockResults = mockResults + (examId to mocks + (mock to result)))
+    }
+
+    /** "Reset all": every mock of [examId] is new again. */
+    fun withMocksReset(examId: String): UserProgress = copy(mockResults = mockResults - examId)
 
     /** Questions answered today (any exam), for the daily goal. */
     fun answeredToday(today: Long): Int = if (dayCountDay == today) dayCount else 0

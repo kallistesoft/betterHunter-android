@@ -4,6 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.flags.FeatureFlag
+import ca.kallistesoft.hunt.core.model.MockResult
+import ca.kallistesoft.hunt.core.model.Question
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.model.UserProgress
 import ca.kallistesoft.hunt.core.testing.FakeContentRepository
@@ -16,6 +18,7 @@ import ca.kallistesoft.hunt.core.testing.TestContent
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
@@ -39,8 +42,8 @@ class QuizViewModelTest {
     private val flags = FakeFeatureFlags()
     private val ads = FakeInterstitialAds()
 
-    private fun viewModel(mode: QuizMode, saved: SavedStateHandle = SavedStateHandle()) =
-        QuizViewModel(TestContent.pal.id, mode, FakeContentRepository(), userData, saved, flags, Today { TEST_DAY }, ads)
+    private fun viewModel(mode: QuizMode, saved: SavedStateHandle = SavedStateHandle(), mock: Int? = null, rewarded: Boolean = false) =
+        QuizViewModel(TestContent.pal.id, mode, mock, rewarded, FakeContentRepository(), userData, saved, flags, Today { TEST_DAY }, ads)
 
     private val QuizUiState.running get() = this as QuizUiState.Running
 
@@ -56,8 +59,9 @@ class QuizViewModelTest {
                 assertNull("no timer in practice", start.secondsLeft)
 
                 for (i in 0..2) {
-                    vm.choose(1)
-                    assertEquals(1, awaitItem().running.session.currentAnswer)
+                    val right = vm.session.right
+                    vm.choose(right)
+                    assertEquals(right, awaitItem().running.session.currentAnswer)
                     runCurrent()
                     assertEquals(i + 1, userData.recorded.size) // recorded before moving on
                     vm.next()
@@ -78,9 +82,9 @@ class QuizViewModelTest {
             skipItems(1)
             runCurrent()
             skipItems(1)
-            vm.choose(0)
-            assertEquals(0, awaitItem().running.session.currentAnswer)
-            vm.choose(1) // ignored: no new state
+            vm.choose(vm.session.wrong)
+            assertEquals(vm.session.wrong, awaitItem().running.session.currentAnswer)
+            vm.choose(vm.session.right) // ignored: no new state
             expectNoEvents()
         }
     }
@@ -93,20 +97,20 @@ class QuizViewModelTest {
             runCurrent()
             assertEquals(60, awaitItem().running.secondsLeft)
 
-            vm.choose(0)
-            assertEquals(0, awaitItem().running.session.currentAnswer)
-            vm.choose(1) // changed
-            assertEquals(1, awaitItem().running.session.currentAnswer)
+            vm.choose(vm.session.wrong)
+            assertEquals(vm.session.wrong, awaitItem().running.session.currentAnswer)
+            vm.choose(vm.session.right) // changed
+            assertEquals(vm.session.right, awaitItem().running.session.currentAnswer)
             vm.next()
             awaitItem()
             runCurrent()
             assertTrue("nothing recorded mid-exam", userData.recorded.isEmpty())
 
-            vm.choose(0)
+            vm.choose(vm.session.wrong)
             awaitItem()
             vm.next()
             awaitItem()
-            vm.choose(1)
+            vm.choose(vm.session.right)
             awaitItem()
             vm.next()
 
@@ -146,7 +150,7 @@ class QuizViewModelTest {
                 runCurrent()
                 skipItems(1)
                 repeat(3) { i ->
-                    vm.choose(1)
+                    vm.choose(vm.session.right)
                     awaitItem()
                     if (i < 2) {
                         vm.next()
@@ -154,18 +158,19 @@ class QuizViewModelTest {
                     }
                 }
                 assertEquals("no ad during the questions", 0, ads.shown)
+                val lastRight = vm.session.right
 
                 vm.next()
                 runCurrent()
                 assertEquals(1, ads.shown)
-                vm.choose(0) // the ad is on screen: the last question takes no more input
+                vm.choose(vm.session.wrong) // the ad is on screen: the last question takes no more input
                 vm.next()
                 advanceTimeBy(5_000) // nor does the clock end the exam a second time
                 expectNoEvents()
 
                 onScreen.complete(Unit)
                 val finished = awaitItem() as QuizUiState.Finished
-                assertEquals("the answers stay as they were", 1, finished.session.answers[2])
+                assertEquals("the answers stay as they were", lastRight, finished.session.answers[2])
                 assertEquals(1, ads.shown)
             }
         }
@@ -179,7 +184,7 @@ class QuizViewModelTest {
                 runCurrent()
                 skipItems(1)
                 repeat(3) {
-                    vm.choose(1)
+                    vm.choose(vm.session.right)
                     vm.next()
                 }
                 runCurrent()
@@ -188,7 +193,7 @@ class QuizViewModelTest {
                 runCurrent()
                 assertTrue(expectMostRecentItem() is QuizUiState.Running)
                 repeat(3) {
-                    vm.choose(1)
+                    vm.choose(vm.session.right)
                     vm.next()
                 }
                 runCurrent()
@@ -218,15 +223,19 @@ class QuizViewModelTest {
     fun `a run is restored after process death`() = runTest(mainDispatcherRule.testDispatcher) {
         val saved = SavedStateHandle()
         lateinit var drawn: List<String>
+        lateinit var shown: List<Question>
+        var answered = -1
         viewModel(QuizMode.PRACTICE, saved).let { vm ->
             vm.uiState.test {
                 skipItems(1)
                 runCurrent()
                 skipItems(1)
-                vm.choose(1)
+                answered = vm.session.right
+                vm.choose(answered)
                 awaitItem()
                 vm.next()
-                drawn = awaitItem().running.session.questions.map { it.id }
+                shown = awaitItem().running.session.questions
+                drawn = shown.map { it.id }
             }
         }
 
@@ -236,7 +245,8 @@ class QuizViewModelTest {
             val restored = awaitItem().running.session
             assertEquals(drawn, restored.questions.map { it.id })
             assertEquals(1, restored.current)
-            assertEquals(mapOf(0 to 1), restored.answers)
+            assertEquals(mapOf(0 to answered), restored.answers)
+            assertEquals("the choices in the order shown", shown, restored.questions)
         }
     }
 
@@ -276,5 +286,72 @@ class QuizViewModelTest {
             runCurrent()
             assertFalse(awaitItem())
         }
+    }
+
+    /** Answers the 3 questions of the run on screen: [rightCount] right, the rest wrong. */
+    private fun TestScope.finishRun(vm: QuizViewModel, rightCount: Int) {
+        repeat(3) { i ->
+            vm.choose(if (i < rightCount) vm.session.right else vm.session.wrong)
+            vm.next()
+            runCurrent()
+        }
+    }
+
+    @Test
+    fun `a mock exam keeps its score, offers the next one, and ends with the interstitial`() =
+        runTest(mainDispatcherRule.testDispatcher) {
+            userData.progress.value = userData.progress.value.withMockResult(TestContent.pal.id, 1, 90)
+            val vm = viewModel(QuizMode.EXAM, mock = 2)
+            vm.uiState.test {
+                runCurrent()
+                finishRun(vm, rightCount = 2)
+                val finished = expectMostRecentItem() as QuizUiState.Finished
+                assertEquals("mocks 1 and 2 done", 3, finished.nextMock)
+            }
+            assertEquals(MockResult(best = 67, last = 67), userData.progress.value.mockResults(TestContent.pal.id)[2])
+            assertEquals(1, ads.shown)
+        }
+
+    @Test
+    fun `a retake unlocked by a rewarded ad shows no interstitial, and the last mock offers no next one`() =
+        runTest(mainDispatcherRule.testDispatcher) {
+            var p = userData.progress.value
+            for (n in 1..10) p = p.withMockResult(TestContent.pal.id, n, 100)
+            userData.progress.value = p
+            val vm = viewModel(QuizMode.EXAM, mock = 4, rewarded = true)
+            vm.uiState.test {
+                runCurrent()
+                finishRun(vm, rightCount = 1)
+                assertNull((expectMostRecentItem() as QuizUiState.Finished).nextMock)
+            }
+            assertEquals("one ad per run", 0, ads.shown)
+            assertEquals(MockResult(best = 100, last = 33), userData.progress.value.mockResults(TestContent.pal.id)[4])
+        }
+
+    @Test
+    fun `a finished mock exam restored after process death still offers the next one`() =
+        runTest(mainDispatcherRule.testDispatcher) {
+            val saved = SavedStateHandle()
+            val vm = viewModel(QuizMode.EXAM, saved, mock = 1)
+            vm.uiState.test {
+                runCurrent()
+                finishRun(vm, rightCount = 3)
+                cancelAndIgnoreRemainingEvents()
+            }
+            viewModel(QuizMode.EXAM, saved, mock = 1).uiState.test {
+                runCurrent()
+                assertEquals(2, (expectMostRecentItem() as QuizUiState.Finished).nextMock)
+            }
+        }
+
+    @Test
+    fun `practice keeps no mock score`() = runTest(mainDispatcherRule.testDispatcher) {
+        val vm = viewModel(QuizMode.PRACTICE)
+        vm.uiState.test {
+            runCurrent()
+            finishRun(vm, rightCount = 3)
+            assertNull((expectMostRecentItem() as QuizUiState.Finished).nextMock)
+        }
+        assertTrue(userData.progress.value.mockResults.isEmpty())
     }
 }

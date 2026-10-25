@@ -117,9 +117,11 @@ without affecting users. Setup: [FOLLOW-UP.md](FOLLOW-UP.md), section 1.
 ## Ads (AdMob)
 
 One interstitial after a finished test (practice, mock exam, review, recognition game), before its results, never
-during a question (DECISIONS.md, P8). `:core:ads` holds the rules (`AdsManager`) behind two interfaces:
-`InterstitialAds` (the quiz calls `showBeforeResults()` after the last answer) and `AdConsent` (consent at launch,
-"Privacy options" in Settings). Tests use `FakeInterstitialAds` and `FakeAdConsent` from `:core:testing`.
+during a question (DECISIONS.md, P8), and a rewarded ad the user chooses to unlock a mock exam retake or "Reset all"
+(P14). `:core:ads` holds the rules (`AdsManager`) behind three interfaces: `InterstitialAds` (the quiz calls
+`showBeforeResults()` after the last answer, except on a rewarded run), `RewardedAds` (Mock exams calls `preload()`
+when it opens and `showForReward()` on "Watch ad") and `AdConsent` (consent at launch, "Privacy options" in
+Settings). Tests use `FakeInterstitialAds`, `FakeRewardedAds` and `FakeAdConsent` from `:core:testing`.
 
 - **Consent first.** At each launch `MainActivity` asks Google's User Messaging Platform (UMP) for the consent
   information and shows its form where required (EEA, UK, Switzerland, some US states). Mobile Ads is initialised and
@@ -128,12 +130,17 @@ during a question (DECISIONS.md, P8). `:core:ads` holds the rules (`AdsManager`)
 - **Preloaded.** The interstitial is loaded in advance; if none is ready (no fill, offline, still loading) the results
   show at once and the next one loads. A loaded ad older than an hour is dropped.
 - **Capped.** At most one every 3 minutes in the app (the AdMob ad unit has the same frequency cap).
-- **Switch.** `ads_enabled` (Remote Config) turns ads off without a release.
+- **Rewarded: no network, no reward.** `showForReward()` returns `OFFLINE` without a validated network (the retake
+  doesn't start), `NOT_EARNED` when the ad is closed early, `EARNED` when watched, and `NO_ADS` (the retake starts)
+  only when the user can't cause it: ads off, no rewarded unit, no consent possible, or no ad while online. It waits
+  up to 8 s for an ad still loading.
+- **Switch.** `ads_enabled` (Remote Config) turns ads off without a release (retakes are then free).
 - **Not in instrumented tests.** Under the flow tests and the release smoke test (AndroidX Test loaded in the app's
   process) ads are off, consent request included: an interstitial would cover the screens they drive.
 
 **IDs.** In `app/build.gradle.kts` (`admobRelease`, `admobTest`): the AdMob App ID goes in the manifest through the
-`admobAppId` placeholder, the ad unit in `BuildConfig.ADMOB_INTERSTITIAL_ID`. Only `release` uses the real IDs;
+`admobAppId` placeholder, the ad units in `BuildConfig.ADMOB_INTERSTITIAL_ID` and `ADMOB_REWARDED_ID` (release's
+rewarded unit is blank until it's created in AdMob, FOLLOW-UP.md, section 2). Only `release` uses the real IDs;
 `debug` and `qa` (emulators, smoke tests) always use Google's sample IDs, which only serve test ads. Never tap a real
 ad in the app.
 

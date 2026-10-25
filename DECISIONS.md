@@ -49,7 +49,8 @@ works without Firebase configured. *No Firebase Analytics.*
 
 **P8. Ads (AdMob) are in the first release.** *Product.* The Play Console declarations (Ads, Advertising ID, AdMob
 data types) were entered for that and stay; the `AD_ID` permission stays. Placement: one interstitial after a
-finished test, never during a question. *In the app (2026-10-23):* after the last answer of an exam-training quiz
+finished test, never during a question; since P14, also a rewarded ad the user chooses for a mock exam retake.
+*In the app (2026-10-23):* after the last answer of an exam-training quiz
 (practice, mock exam, review, recognition game), the preloaded interstitial shows, then the results; none loaded means
 the results at once. At most one every 3 minutes (in the app and as the AdMob frequency cap). Hunters' field
 runs (P11: daily questions, skills, season check) show no ad for now. Consent with Google's UMP at launch, "Privacy
@@ -132,6 +133,21 @@ citations keep the manual's title and link ("ICAF manual (FédéCP, 2020), p. 61
 (2026-10-24):* exam ids (`ICAF`, `ABHE`) are internal only; `exams.json` gives each exam a `name` and a `short` name;
 `BundledContentTest` and `core/ui` `NoCourseNamesTest` fail on any course or publisher name in strings, exam names or
 question text.
+
+**P14. Ten mock exams per exam; retakes behind a rewarded ad.** *Product.* "Mock exams" on an exam card opens Mock 1
+to 10, each with its best and last score (passed or failed by the best), so progress shows ("6 of 10 passed"). A mock
+never taken is free and ends with the interstitial before its results (P8). Retaking a finished one, and "Reset all"
+once all ten are done, need a rewarded ad watched to the end; that run then shows no interstitial (one ad per run).
+**No ad, no retake:** offline, the app says retakes need a short ad and to connect (letting offline users through would
+teach them to switch the network off, and they'd never pay to remove ads). The reward is given without an ad only when
+the user can't cause it: ads turned off by us (`ads_enabled`, a build without ads) or Google having no ad while online.
+A mock quit before the end keeps no score and stays free. Every run, in every quiz, is a new draw: each question at
+most once, in a random order, with its choices shuffled (no choice in the banks depends on its position, such as "all
+of the above"). Practice, review and the photo of the day stay free and unlimited. *In the app (2026-10-25):*
+`UserProgress.mockResults` (exam → mock → best, last); `RewardedAds` in `:core:ads` (`RewardOutcome`: EARNED,
+NOT_EARNED, OFFLINE, NO_ADS; "online" means a validated network); `MockExamsScreen` in `:feature:exams`; the quiz key
+carries the mock number and whether it was rewarded. Release needs the AdMob rewarded unit (FOLLOW-UP.md, section 2);
+blank, retakes are free.
 
 ## Design
 

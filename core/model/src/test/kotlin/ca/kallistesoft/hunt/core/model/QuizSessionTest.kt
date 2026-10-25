@@ -28,13 +28,14 @@ class QuizSessionTest {
 
     @Test
     fun `scoring, pass mark and missed questions`() {
-        val s = QuizSession.start(testExam, testPool, QuizMode.EXAM, Random(2))
-            .answer(1).next()
-            .answer(0).next()
-            .answer(1)
+        val drawn = QuizSession.start(testExam, testPool, QuizMode.EXAM, Random(2))
+        val right = drawn.questions.map { it.answerIndex }
+        val wrong = (right[1] + 1) % 4
+        val s = drawn.answer(right[0]).next().answer(wrong).next().answer(right[2])
         assertEquals(2, s.correctCount)
         assertTrue(s.passed) // 2/3 >= 0.6
-        assertEquals(listOf(s.questions[1] to 0), s.missed)
+        assertEquals(listOf(s.questions[1] to wrong), s.missed)
+        assertEquals(67, s.percent)
     }
 
     @Test
@@ -58,5 +59,34 @@ class QuizSessionTest {
         val s = QuizSession.start(testExam, testPool, QuizMode.EXAM).next().next().next()
         assertEquals(2, s.current)
         assertTrue(s.isLast)
+    }
+
+    @Test
+    fun `each run draws a question once, in a random order, with its choices shuffled`() {
+        val withCopies = testPool + testPool.take(2)
+        val runs = (1..20).map { QuizSession.start(testExam.copy(questionCount = 5), withCopies, QuizMode.EXAM, Random(it)) }
+        runs.forEach { run ->
+            assertEquals("no question twice", 5, run.questions.map { it.id }.toSet().size)
+            run.questions.forEach { q ->
+                // The right choice follows the shuffle, the same in both languages.
+                assertEquals("Deux", q.text(Lang.FR).choices[q.answerIndex])
+                assertEquals("Two", q.text(Lang.EN).choices[q.answerIndex])
+            }
+        }
+        assertTrue("questions in different orders", runs.map { r -> r.questions.map { it.id } }.toSet().size > 1)
+        assertTrue("choices in different orders", runs.map { it.questions.first().choiceOrder }.toSet().size > 1)
+    }
+
+    @Test
+    fun `a choice order is kept, reapplied and undone`() {
+        val q = testQuestion("q1")
+        val shown = q.withChoiceOrder(listOf(2, 0, 3, 1))
+        assertEquals(listOf("Three", "One", "Four", "Two"), shown.text(Lang.EN).choices)
+        assertEquals(3, shown.answerIndex)
+        assertEquals(listOf(2, 0, 3, 1), shown.choiceOrder)
+        assertEquals(q, shown.inBankOrder())
+        assertEquals("reordering starts from the bank", shown, shown.withChoiceOrder(listOf(1, 0, 2, 3)).withChoiceOrder(listOf(2, 0, 3, 1)))
+        assertEquals("an order that doesn't fit is ignored", q, q.withChoiceOrder(listOf(0, 1)))
+        assertEquals(q, q.inBankOrder())
     }
 }

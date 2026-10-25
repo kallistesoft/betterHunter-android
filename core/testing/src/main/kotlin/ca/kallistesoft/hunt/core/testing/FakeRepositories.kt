@@ -48,6 +48,14 @@ class FakeUserDataRepository(initial: UserProgress = UserProgress()) : UserDataR
         progress.update { it.withExamPassed(examId) }
     }
 
+    override suspend fun recordMockResult(examId: String, mock: Int, percent: Int) {
+        progress.update { it.withMockResult(examId, mock, percent) }
+    }
+
+    override suspend fun resetMocks(examId: String) {
+        progress.update { it.withMocksReset(examId) }
+    }
+
     override suspend fun dismissNewHunterBanner() {
         progress.update { it.copy(newHunterBanner = false) }
     }

@@ -1,6 +1,7 @@
 package ca.kallistesoft.hunt.core.model
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -65,5 +66,23 @@ class UserProgressTest {
         assertEquals(photoOfDay(testPool, today), photoOfDay(testPool, today))
         assertEquals(testPool[(today % 5).toInt()], photoOfDay(testPool, today))
         assertNull(photoOfDay(emptyList(), today))
+    }
+
+    @Test
+    fun `mock exams keep their best and last score, and reset all clears one exam's`() {
+        val p = UserProgress()
+            .withMockResult("ICAF", 1, 72)
+            .withMockResult("ICAF", 1, 88)
+            .withMockResult("ICAF", 1, 76)
+            .withMockResult("ICAF", 2, 60)
+            .withMockResult("PAL", 1, 90)
+        assertEquals(MockResult(best = 88, last = 76), p.mockResults("ICAF")[1])
+        assertEquals(setOf(1, 2), p.mockResults("ICAF").keys)
+        assertTrue(p.mockResults("ICAF").getValue(1).passed(testExam.copy(passMark = 0.8)))
+        assertFalse(p.mockResults("ICAF").getValue(2).passed(testExam.copy(passMark = 0.8)))
+
+        val reset = p.withMocksReset("ICAF")
+        assertTrue(reset.mockResults("ICAF").isEmpty())
+        assertEquals("other exams keep theirs", p.mockResults("PAL"), reset.mockResults("PAL"))
     }
 }

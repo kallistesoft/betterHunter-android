@@ -59,4 +59,20 @@ class ExamsScreenshotTest {
     @Test
     @Config(qualifiers = DARK_FR)
     fun recognitionDarkFr() = compose.captureScreenshot("recognition_dark_fr") { RecognitionPreview() }
+
+    @Test
+    @Config(qualifiers = LIGHT_EN)
+    fun mockExamsLightEn() = compose.captureScreenshot("mock_exams_light_en") { MockExamsPreview() }
+
+    @Test
+    @Config(qualifiers = DARK_FR)
+    fun mockExamsDarkFr() = compose.captureScreenshot("mock_exams_dark_fr") { MockExamsPreview() }
+
+    @Test
+    @Config(qualifiers = LIGHT_EN)
+    fun mockExamsAllDoneLightEn() = compose.captureScreenshot("mock_exams_all_done_light_en") { MockExamsAllDonePreview() }
+
+    @Test
+    @Config(qualifiers = DARK_FR)
+    fun mockExamsAllDoneDarkFr() = compose.captureScreenshot("mock_exams_all_done_dark_fr") { MockExamsAllDonePreview() }
 }

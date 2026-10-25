@@ -5,3 +5,7 @@ plugins {
 android {
     namespace = "ca.kallistesoft.hunt.feature.exams"
 }
+
+dependencies {
+    implementation(project(":core:ads"))
+}

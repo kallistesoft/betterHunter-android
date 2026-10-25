@@ -50,11 +50,12 @@ fun ExamTrainingScreen(
     onBack: () -> Unit,
     onOpenProvinces: () -> Unit,
     onStartQuiz: (examId: String, mode: QuizMode) -> Unit,
+    onOpenMocks: (examId: String) -> Unit,
     onPassedRealExam: (examId: String) -> Unit,
     viewModel: ExamsViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
-    ExamTrainingContent(state, onBack, onOpenProvinces, onStartQuiz, onPassedRealExam)
+    ExamTrainingContent(state, onBack, onOpenProvinces, onStartQuiz, onOpenMocks, onPassedRealExam)
 }
 
 @Composable
@@ -63,6 +64,7 @@ internal fun ExamTrainingContent(
     onBack: () -> Unit,
     onOpenProvinces: () -> Unit,
     onStartQuiz: (examId: String, mode: QuizMode) -> Unit,
+    onOpenMocks: (examId: String) -> Unit,
     onPassedRealExam: (examId: String) -> Unit,
 ) {
     Scaffold(
@@ -84,7 +86,7 @@ internal fun ExamTrainingContent(
                 ExamCard(
                     summary,
                     onPractice = { onStartQuiz(id, QuizMode.PRACTICE) },
-                    onExam = { onStartQuiz(id, QuizMode.EXAM) },
+                    onExam = { onOpenMocks(id) },
                     onReview = { onStartQuiz(id, QuizMode.REVIEW) },
                     modifier = Modifier.padding(bottom = Spacing.m),
                     onPassedRealExam = { onPassedRealExam(id) }.takeIf { state.canMarkPassed(summary) },

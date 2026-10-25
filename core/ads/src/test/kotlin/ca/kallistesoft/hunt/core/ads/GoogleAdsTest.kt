@@ -2,13 +2,18 @@ package ca.kallistesoft.hunt.core.ads
 
 import android.app.Activity
 import android.content.Context
+import ca.kallistesoft.hunt.core.testing.ScreenshotDevice
 import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.OnUserEarnedRewardListener
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.google.android.ump.ConsentForm
 import com.google.android.ump.ConsentInformation
 import com.google.android.ump.ConsentInformation.OnConsentInfoUpdateFailureListener
@@ -35,7 +40,6 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
-import ca.kallistesoft.hunt.core.testing.ScreenshotDevice
 
 /** The SDK adapters: each SDK callback ends the matching suspend call. The SDKs themselves are mocked. */
 @RunWith(RobolectricTestRunner::class)
@@ -140,5 +144,50 @@ class GoogleAdsTest {
         runCurrent()
         callback.captured.onAdFailedToShowFullScreenContent(mockk<AdError>())
         failed.await()
+    }
+
+    @Test
+    fun `a rewarded ad loads or doesn't`() = runTest {
+        mockkStatic(RewardedAd::class)
+        val loaded = slot<RewardedAdLoadCallback>()
+        every { RewardedAd.load(context, "rewarded-1", any<AdRequest>(), capture(loaded)) } returns Unit
+        val sdk = GoogleAdsSdk(context, StandardTestDispatcher(testScheduler))
+
+        val filled = async { sdk.loadRewarded("rewarded-1") }
+        runCurrent()
+        loaded.captured.onAdLoaded(mockk())
+        assertNotNull(filled.await())
+
+        val noFill = async { sdk.loadRewarded("rewarded-1") }
+        runCurrent()
+        loaded.captured.onAdFailedToLoad(mockk<LoadAdError>())
+        assertNull(noFill.await())
+    }
+
+    @Test
+    fun `a rewarded ad says whether it was watched to the end`() = runTest {
+        val callback = slot<FullScreenContentCallback>()
+        val earned = slot<OnUserEarnedRewardListener>()
+        val ad = mockk<RewardedAd> {
+            every { fullScreenContentCallback = capture(callback) } returns Unit
+            every { show(activity, capture(earned)) } returns Unit
+        }
+        val rewarded = GoogleRewarded(ad)
+
+        val watched = async { rewarded.show(activity) }
+        runCurrent()
+        earned.captured.onUserEarnedReward(mockk())
+        callback.captured.onAdDismissedFullScreenContent()
+        assertTrue(watched.await())
+
+        val closedEarly = async { rewarded.show(activity) }
+        runCurrent()
+        callback.captured.onAdDismissedFullScreenContent()
+        assertFalse(closedEarly.await())
+
+        val failed = async { rewarded.show(activity) }
+        runCurrent()
+        callback.captured.onAdFailedToShowFullScreenContent(mockk<AdError>())
+        assertFalse(failed.await())
     }
 }

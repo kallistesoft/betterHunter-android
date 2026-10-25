@@ -14,6 +14,7 @@ import ca.kallistesoft.hunt.core.data.ContentRepository
 import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.model.Content
+import ca.kallistesoft.hunt.core.model.Lang
 import ca.kallistesoft.hunt.core.model.PHOTO_ID_EXAM
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.testing.FakeContentRepository
@@ -46,16 +47,26 @@ class QuizScreenTest {
     private val userData = FakeUserDataRepository()
     private var closed = 0
     private var practice = 0
+    private val mocks = mutableListOf<Int>()
 
     private fun show(
         examId: String = TestContent.pal.id,
         mode: QuizMode = QuizMode.PRACTICE,
         content: ContentRepository = FakeContentRepository(),
+        mock: Int? = null,
     ): QuizViewModel {
-        val vm = QuizViewModel(examId, mode, content, userData, SavedStateHandle(), FakeFeatureFlags(), Today { TEST_DAY }, FakeInterstitialAds())
+        val vm = QuizViewModel(examId, mode, mock, false, content, userData, SavedStateHandle(), FakeFeatureFlags(), Today { TEST_DAY }, FakeInterstitialAds())
         compose.setContent {
             BetterHunterTheme {
-                QuizScreen(examId, mode, onClose = { closed++ }, onStartPractice = { practice++ }, viewModel = vm)
+                QuizScreen(
+                    examId,
+                    mode,
+                    onClose = { closed++ },
+                    onStartPractice = { practice++ },
+                    mock = mock,
+                    onStartMock = { mocks += it },
+                    viewModel = vm,
+                )
             }
         }
         return vm
@@ -70,22 +81,22 @@ class QuizScreenTest {
 
     @Test
     fun `practice shows right or wrong after each answer, then the score, and Try again starts over`() {
-        show()
+        val vm = show()
         compose.onNodeWithText(string(R.string.question_progress, 1, 3)).assertIsDisplayed()
 
-        compose.onNodeWithTag("choice-0").performClick()
+        compose.onNodeWithTag("choice-${vm.session.wrong}").performClick()
         compose.onNodeWithTag("feedback").assertIsDisplayed()
         compose.onAllNodesWithText(string(R.string.wrong)).onFirst().assertIsDisplayed()
         compose.onNodeWithText(string(R.string.why), ignoreCase = true).assertIsDisplayed()
         compose.onNodeWithTag("next").performClick()
 
-        compose.onNodeWithTag("choice-1").performClick()
+        compose.onNodeWithTag("choice-${vm.session.right}").performClick()
         compose.onAllNodesWithText(string(R.string.correct)).onFirst().assertIsDisplayed()
         compose.onNodeWithTag("next").performClick()
 
         compose.onNodeWithText(string(R.string.next)).assertDoesNotExist()
         compose.onNodeWithText(string(R.string.finish)).assertIsDisplayed()
-        answer(1)
+        answer(vm.session.right)
 
         compose.onNodeWithTag("score").assertIsDisplayed()
         compose.onNodeWithText(string(R.string.percent, 67)).assertIsDisplayed()
@@ -100,8 +111,10 @@ class QuizScreenTest {
     fun `a photo question shows the answer's card, with the user's wrong pick`() {
         val vm = show(examId = PHOTO_ID_EXAM)
         compose.onNodeWithTag("choice-3").assertIsDisplayed()
-        compose.onNodeWithTag("choice-0").performClick()
-        compose.onNodeWithText(string(R.string.your_answer, "A")).assertIsDisplayed()
+        val wrong = vm.session.wrong
+        val picked = vm.session.question.text(Lang.EN).choices[wrong]
+        compose.onNodeWithTag("choice-$wrong").performClick()
+        compose.onNodeWithText(string(R.string.your_answer, picked)).assertIsDisplayed()
         compose.onNodeWithText(string(R.string.how_recognise), ignoreCase = true).assertIsDisplayed()
         compose.onNodeWithTag("choice-0").assertDoesNotExist() // the choices make way for the animal's card
         assertEquals(PHOTO_ID_EXAM, (vm.uiState.value as QuizUiState.Running).session.exam.id)
@@ -162,5 +175,30 @@ class QuizScreenTest {
         compose.onNodeWithText(string(R.string.nothing_to_review)).assertIsDisplayed()
         compose.onNodeWithTag("empty-practise").performClick()
         assertEquals(1, practice)
+    }
+
+    @Test
+    fun `a mock exam says which one it is, and ends on the next mock or the list`() {
+        val vm = show(mode = QuizMode.EXAM, mock = 1)
+        compose.onNodeWithText("${string(R.string.mock_n, 1)} · PAL", ignoreCase = true).assertIsDisplayed()
+        repeat(3) { answer(vm.session.right) }
+
+        compose.onNodeWithTag("again").assertDoesNotExist() // a retake needs an ad: from the list only
+        compose.onNodeWithTag("next-mock").performClick()
+        compose.onNodeWithTag("all-mocks").performClick()
+        assertEquals(listOf(2), mocks)
+        assertEquals(1, closed)
+    }
+
+    @Test
+    fun `the last mock not taken ends on the list only`() {
+        var p = userData.progress.value
+        for (n in 2..10) p = p.withMockResult(TestContent.pal.id, n, 50)
+        userData.progress.value = p
+        val vm = show(mode = QuizMode.EXAM, mock = 1)
+        repeat(3) { answer(vm.session.wrong) }
+        compose.onNodeWithTag("next-mock").assertDoesNotExist()
+        compose.onNodeWithTag("all-mocks").performClick()
+        assertEquals(1, closed)
     }
 }
