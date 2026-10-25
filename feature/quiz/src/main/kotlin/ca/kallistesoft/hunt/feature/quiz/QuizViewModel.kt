@@ -11,8 +11,10 @@ import ca.kallistesoft.hunt.core.flags.FeatureFlag
 import ca.kallistesoft.hunt.core.flags.FeatureFlags
 import ca.kallistesoft.hunt.core.model.Content
 import ca.kallistesoft.hunt.core.model.Exam
+import ca.kallistesoft.hunt.core.model.MOCK_COUNT
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.model.QuizSession
+import ca.kallistesoft.hunt.core.model.percent
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -39,19 +41,31 @@ sealed interface QuizUiState {
     /** [secondsLeft] counts down in mock exams; null otherwise. */
     data class Running(val session: QuizSession, val secondsLeft: Int?) : QuizUiState
 
-    /** [secondsLeft]: what was left on a mock exam's clock when it ended (0 when time ran out). */
-    data class Finished(val session: QuizSession, val timeUp: Boolean, val secondsLeft: Int? = null) : QuizUiState
+    /**
+     * [secondsLeft]: what was left on a mock exam's clock when it ended (0 when time ran out). [nextMock]: after one of
+     * the ten mock exams, the next one not taken yet (P14), if any.
+     */
+    data class Finished(
+        val session: QuizSession,
+        val timeUp: Boolean,
+        val secondsLeft: Int? = null,
+        val nextMock: Int? = null,
+    ) : QuizUiState
 }
 
 /**
  * One quiz run on an exam. Practice and review answers are recorded right away; mock exam answers can change until
  * the end, so they are recorded when it finishes. The run survives configuration changes and process death.
  * A finished run may show an interstitial (P8) before its results: after the last answer, never during a question.
+ * [mock] is one of the exam's ten mock exams (P14): its score is kept. A [rewarded] run (a retake unlocked by a
+ * rewarded ad) shows no interstitial: one ad per run.
  */
 @HiltViewModel(assistedFactory = QuizViewModel.Factory::class)
 class QuizViewModel @AssistedInject constructor(
     @Assisted private val examId: String,
     @Assisted private val mode: QuizMode,
+    @Assisted private val mock: Int?,
+    @Assisted private val rewarded: Boolean,
     private val contentRepository: ContentRepository,
     private val userData: UserDataRepository,
     private val savedState: SavedStateHandle,
@@ -61,7 +75,7 @@ class QuizViewModel @AssistedInject constructor(
 ) : ViewModel() {
     @AssistedFactory
     interface Factory {
-        fun create(examId: String, mode: QuizMode): QuizViewModel
+        fun create(examId: String, mode: QuizMode, mock: Int?, rewarded: Boolean): QuizViewModel
     }
 
     private val _uiState = MutableStateFlow<QuizUiState>(QuizUiState.Loading)
@@ -88,7 +102,13 @@ class QuizViewModel @AssistedInject constructor(
     private suspend fun load() {
         val content = contentRepository.content.first()
         val restored = restore(content)
-        if (restored != null) show(restored) else start(content)
+        if (restored is QuizUiState.Finished) {
+            show(restored.copy(nextMock = nextMock()))
+        } else if (restored != null) {
+            show(restored)
+        } else {
+            start(content)
+        }
     }
 
     fun choose(choice: Int) {
@@ -143,12 +163,26 @@ class QuizViewModel @AssistedInject constructor(
             }
             viewModelScope.launch { userData.recordAll(results) }
         }
-        val finished = QuizUiState.Finished(session, timeUp, secondsLeft = if (timeUp) 0 else state.secondsLeft)
-        // The interstitial, if one is ready and allowed, comes between the test and its results.
         viewModelScope.launch {
-            ads.showBeforeResults()
+            if (mock != null) userData.recordMockResult(examId, mock, session.percent)
+            val finished = QuizUiState.Finished(
+                session,
+                timeUp,
+                secondsLeft = if (timeUp) 0 else state.secondsLeft,
+                nextMock = nextMock(),
+            )
+            // The interstitial, if one is ready and allowed, comes between the test and its results; a retake already
+            // had its rewarded ad.
+            if (!rewarded) ads.showBeforeResults()
             show(finished)
         }
+    }
+
+    /** After a mock exam: the first of the ten not taken yet. */
+    private suspend fun nextMock(): Int? {
+        if (mock == null) return null
+        val done = userData.progress.first().mockResults(examId).keys
+        return (1..MOCK_COUNT).firstOrNull { it !in done }
     }
 
     private fun show(state: QuizUiState) {
@@ -185,6 +219,7 @@ class QuizViewModel @AssistedInject constructor(
             else -> null
         }
         savedState[KEY_IDS] = session?.questions?.map { it.id }?.let { ArrayList(it) }
+        savedState[KEY_ORDERS] = session?.questions?.savedChoiceOrders()
         savedState[KEY_ANSWERS] = session?.let { s -> IntArray(s.questions.size) { s.answers[it] ?: -1 } }
         savedState[KEY_CURRENT] = session?.current
         savedState[KEY_SECONDS] = when (state) {
@@ -200,7 +235,7 @@ class QuizViewModel @AssistedInject constructor(
         val ids = savedState.get<ArrayList<String>>(KEY_IDS) ?: return null
         val exam = content.exam(examId) ?: return null
         val byId = content.questionsFor(exam).associateBy { it.id }
-        val questions = ids.map { byId[it] ?: return null }
+        val questions = ids.map { byId[it] ?: return null }.withSavedChoiceOrders(savedState[KEY_ORDERS])
         val answers = savedState.get<IntArray>(KEY_ANSWERS)
             ?.withIndex()?.filter { it.value >= 0 }?.associate { it.index to it.value }.orEmpty()
         val session = QuizSession(exam, mode, questions, answers, savedState.get<Int>(KEY_CURRENT) ?: 0)
@@ -213,6 +248,7 @@ class QuizViewModel @AssistedInject constructor(
 
     private companion object {
         const val KEY_IDS = "ids"
+        const val KEY_ORDERS = "choiceOrders"
         const val KEY_ANSWERS = "answers"
         const val KEY_CURRENT = "current"
         const val KEY_SECONDS = "secondsLeft"

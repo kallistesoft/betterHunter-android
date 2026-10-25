@@ -34,8 +34,13 @@ data object Recognition : NavKey
 @Serializable
 data object About : NavKey
 
+/** A quiz run; [mock] is one of the exam's ten mock exams, [rewarded] a retake unlocked by a rewarded ad (P14). */
 @Serializable
-data class Quiz(val examId: String, val mode: QuizMode) : NavKey
+data class Quiz(val examId: String, val mode: QuizMode, val mock: Int? = null, val rewarded: Boolean = false) : NavKey
+
+/** The ten mock exams of [examId] (P14). */
+@Serializable
+data class MockExams(val examId: String) : NavKey
 
 @Serializable
 data object Settings : NavKey

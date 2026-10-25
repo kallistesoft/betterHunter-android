@@ -2,6 +2,8 @@ package ca.kallistesoft.hunt.core.ads.di
 
 import android.app.Application
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.SystemClock
 import ca.kallistesoft.hunt.core.ads.AdConsent
 import ca.kallistesoft.hunt.core.ads.AdsConfig
@@ -9,6 +11,7 @@ import ca.kallistesoft.hunt.core.ads.AdsManager
 import ca.kallistesoft.hunt.core.ads.GoogleAdsSdk
 import ca.kallistesoft.hunt.core.ads.InterstitialAds
 import ca.kallistesoft.hunt.core.ads.ResumedActivity
+import ca.kallistesoft.hunt.core.ads.RewardedAds
 import ca.kallistesoft.hunt.core.ads.UmpConsent
 import ca.kallistesoft.hunt.core.flags.FeatureFlags
 import com.google.android.ump.UserMessagingPlatform
@@ -22,7 +25,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
-/** AdMob behind [InterstitialAds] and [AdConsent]; the app provides [AdsConfig] (the ad unit of its build type). */
+/** AdMob behind [InterstitialAds], [RewardedAds] and [AdConsent]; the app provides [AdsConfig] (the ad unit of its build type). */
 @Module
 @InstallIn(SingletonComponent::class)
 internal object AdsModule {
@@ -40,11 +43,22 @@ internal object AdsModule {
             config = config,
             scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate),
             clock = SystemClock::elapsedRealtime,
+            isOnline = { online(context) },
         )
+    }
+
+    /** A network that reaches the internet (validated), as far as Android knows. */
+    fun online(context: Context): Boolean {
+        val connectivity = context.getSystemService(ConnectivityManager::class.java) ?: return false
+        val capabilities = connectivity.getNetworkCapabilities(connectivity.activeNetwork) ?: return false
+        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
     }
 
     @Provides
     fun interstitialAds(manager: AdsManager): InterstitialAds = manager
+
+    @Provides
+    fun rewardedAds(manager: AdsManager): RewardedAds = manager
 
     @Provides
     fun adConsent(manager: AdsManager): AdConsent = manager

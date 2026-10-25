@@ -183,7 +183,7 @@ class FieldQuizViewModel @AssistedInject constructor(
                 dailyQuestions(content, day).filter { it.id !in done }
             }
         }
-        val session = QuizSession(FIELD_EXAM, QuizMode.PRACTICE, questions)
+        val session = QuizSession(FIELD_EXAM, QuizMode.PRACTICE, questions.map { it.withShuffledChoices(random) })
         when {
             !session.isEmpty -> show(FieldQuizUiState.Running(run, skill, session))
             // Today's questions all answered: straight to "Done for today".
@@ -205,7 +205,7 @@ class FieldQuizViewModel @AssistedInject constructor(
         val touched = when (run) {
             FieldRun.SKILL -> listOfNotNull(skill)
             FieldRun.DAILY -> emptyList()
-            else -> pools.keys.filter { s -> session?.questions?.any { q -> q in pools.getValue(s) } == true }
+            else -> pools.keys.filter { s -> session?.questions?.any { q -> pools.getValue(s).any { it.id == q.id } } == true }
         }
         val changes = touched.map { s ->
             SkillChange(s, before[s] ?: 0f, after[s] ?: 0f, progress.skillSummary(s, pools.getValue(s), day).mastered)
@@ -248,6 +248,7 @@ class FieldQuizViewModel @AssistedInject constructor(
             else -> null
         }
         savedState[KEY_IDS] = session?.questions?.map { it.id }?.let { ArrayList(it) }
+        savedState[KEY_ORDERS] = session?.questions?.savedChoiceOrders()
         savedState[KEY_ANSWERS] = session?.let { s -> IntArray(s.questions.size) { s.answers[it] ?: -1 } }
         savedState[KEY_CURRENT] = session?.current
         savedState[KEY_FINISHED] = state is FieldQuizUiState.Finished
@@ -258,7 +259,7 @@ class FieldQuizViewModel @AssistedInject constructor(
         val ids = savedState.get<ArrayList<String>>(KEY_IDS) ?: return null
         val byId = (pools.values.flatten() + content.exam(PHOTO_ID_EXAM)?.let(content::questionsFor).orEmpty())
             .associateBy { it.id }
-        val questions = ids.map { byId[it] ?: return null }
+        val questions = ids.map { byId[it] ?: return null }.withSavedChoiceOrders(savedState[KEY_ORDERS])
         val answers = savedState.get<IntArray>(KEY_ANSWERS)
             ?.withIndex()?.filter { it.value >= 0 }?.associate { it.index to it.value }.orEmpty()
         return QuizSession(FIELD_EXAM, QuizMode.PRACTICE, questions, answers, savedState.get<Int>(KEY_CURRENT) ?: 0)
@@ -269,6 +270,7 @@ class FieldQuizViewModel @AssistedInject constructor(
         private val FIELD_EXAM = Exam(id = "FIELD", names = emptyMap(), scopes = emptyList())
 
         const val KEY_IDS = "ids"
+        const val KEY_ORDERS = "choiceOrders"
         const val KEY_ANSWERS = "answers"
         const val KEY_CURRENT = "current"
         const val KEY_FINISHED = "finished"

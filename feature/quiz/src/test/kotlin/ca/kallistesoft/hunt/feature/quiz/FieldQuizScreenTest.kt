@@ -52,8 +52,10 @@ class FieldQuizScreenTest {
     private var closed = 0
     private val opened = mutableListOf<FieldSkill>()
 
+    private lateinit var vm: FieldQuizViewModel
+
     private fun show(run: FieldRun, skill: FieldSkill? = null, content: ContentRepository = FakeContentRepository()) {
-        val vm = FieldQuizViewModel(run, skill, content, userData, SavedStateHandle(), Today { TEST_DAY }, FakeFeatureFlags())
+        vm = FieldQuizViewModel(run, skill, content, userData, SavedStateHandle(), Today { TEST_DAY }, FakeFeatureFlags())
         compose.setContent {
             BetterHunterTheme {
                 FieldQuizScreen(run, skill, onClose = { closed++ }, onOpenSkill = { opened += it }, viewModel = vm)
@@ -61,11 +63,14 @@ class FieldQuizScreenTest {
         }
     }
 
-    /** Answers the questions left, [wrong] ones with A and the others with B, the right answer. */
+    /** The right choice of the question on screen (choices are shuffled, P14). */
+    private val right get() = "choice-${vm.session.right}"
+
+    /** Answers the questions left, [wrong] ones wrong and the others right. */
     private fun answerAll(wrong: Set<Int> = emptySet()) {
         var i = 0
         while (compose.onAllNodesWithTag("next").fetchSemanticsNodes().isNotEmpty()) {
-            compose.onNodeWithTag(if (i in wrong) "choice-0" else "choice-1").performClick()
+            compose.onNodeWithTag(if (i in wrong) "choice-${vm.session.wrong}" else right).performClick()
             compose.onNodeWithTag("next").performClick()
             i++
         }
@@ -77,7 +82,7 @@ class FieldQuizScreenTest {
     fun `a skill run, all right, masters the skill and offers the next one`() {
         show(FieldRun.SKILL, FieldSkill.SHOT_PLACEMENT)
         compose.onNodeWithText(string(R.string.field_overline, shotPlacement), ignoreCase = true).assertIsDisplayed()
-        compose.onNodeWithTag("choice-1").performClick()
+        compose.onNodeWithTag(right).performClick()
         compose.onNodeWithText(string(R.string.in_the_field), ignoreCase = true).assertIsDisplayed()
         compose.onNodeWithTag("next").performClick()
         answerAll()
@@ -137,7 +142,7 @@ class FieldQuizScreenTest {
     fun `after the species, today's general questions say so above them`() {
         show(FieldRun.DAILY)
         repeat(FieldTraining.DAILY_SPECIES) {
-            compose.onNodeWithTag("choice-1").performClick()
+            compose.onNodeWithTag(right).performClick()
             compose.onNodeWithTag("next").performClick()
         }
         val general = string(R.string.daily_general, FieldTraining.DAILY_GENERAL)

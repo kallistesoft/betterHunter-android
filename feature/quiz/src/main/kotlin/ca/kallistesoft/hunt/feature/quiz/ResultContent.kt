@@ -62,6 +62,9 @@ import ca.kallistesoft.hunt.core.ui.currentLang
 import ca.kallistesoft.hunt.core.ui.rememberLinkOpener
 import kotlin.math.roundToInt
 
+/** A mock exam's results (P14): back to the list, and on to the next mock not taken yet ([onNext], if any). */
+internal data class MockButtons(val onAllMocks: () -> Unit, val onNext: (() -> Unit)?)
+
 /**
  * Results of a run: the score ring, then for practice the daily goal and how many questions go to "Review my
  * mistakes", for a mock exam pass or fail and the time used; then every missed question with the right answer, why,
@@ -74,6 +77,7 @@ internal fun ResultContent(
     dailyGoalReached: Boolean,
     onHome: () -> Unit,
     onAgain: () -> Unit,
+    mockButtons: MockButtons? = null,
 ) {
     val s = state.session
     val lang = currentLang()
@@ -103,8 +107,29 @@ internal fun ResultContent(
         },
         bottomBar = {
             BottomActionBar {
-                SecondaryButton(stringResource(R.string.home), onClick = onHome, modifier = Modifier.weight(1f))
-                PrimaryButton(stringResource(R.string.again), onClick = onAgain, modifier = Modifier.weight(1f).testTag("again"))
+                when {
+                    mockButtons == null -> {
+                        SecondaryButton(stringResource(R.string.home), onClick = onHome, modifier = Modifier.weight(1f))
+                        PrimaryButton(stringResource(R.string.again), onClick = onAgain, modifier = Modifier.weight(1f).testTag("again"))
+                    }
+                    mockButtons.onNext != null -> {
+                        SecondaryButton(
+                            stringResource(R.string.all_mocks),
+                            onClick = mockButtons.onAllMocks,
+                            modifier = Modifier.weight(1f).testTag("all-mocks"),
+                        )
+                        PrimaryButton(
+                            stringResource(R.string.next_mock),
+                            onClick = mockButtons.onNext,
+                            modifier = Modifier.weight(1f).testTag("next-mock"),
+                        )
+                    }
+                    else -> PrimaryButton(
+                        stringResource(R.string.all_mocks),
+                        onClick = mockButtons.onAllMocks,
+                        modifier = Modifier.weight(1f).testTag("all-mocks"),
+                    )
+                }
             }
         },
         contentWindowInsets = WindowInsets.safeDrawing,

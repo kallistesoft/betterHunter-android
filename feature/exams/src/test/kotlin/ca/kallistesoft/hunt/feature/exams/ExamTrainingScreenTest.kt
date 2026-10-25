@@ -44,6 +44,7 @@ class ExamTrainingScreenTest {
                     onBack = { events += "back" },
                     onOpenProvinces = { events += "provinces" },
                     onStartQuiz = { id, mode -> events += "$id $mode" },
+                    onOpenMocks = { events += "mocks $it" },
                     onPassedRealExam = { events += "passed $it" },
                     viewModel = ExamsViewModel(FakeContentRepository(), userData),
                 )
@@ -62,7 +63,7 @@ class ExamTrainingScreenTest {
         assertEquals(
             listOf(
                 "ICAF ${QuizMode.PRACTICE}",
-                "ICAF ${QuizMode.EXAM}",
+                "mocks ICAF",
                 "ICAF ${QuizMode.REVIEW}",
                 "passed ICAF",
                 "provinces",
@@ -82,6 +83,7 @@ class ExamTrainingScreenTest {
                     onBack = {},
                     onOpenProvinces = {},
                     onStartQuiz = { _, _ -> },
+                    onOpenMocks = {},
                     onPassedRealExam = {},
                 )
             }

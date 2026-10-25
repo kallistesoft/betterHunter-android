@@ -24,7 +24,7 @@ object AppModule {
         FeatureFlagSettings(minimumFetchIntervalSeconds = config.featureFlagFetchIntervalSeconds)
 
     /**
-     * The interstitial's ad unit: Google's test unit except in release builds (app/build.gradle.kts). Ads are off when
+     * The ad units: Google's test units except in release builds (app/build.gradle.kts). Ads are off when
      * the app runs under instrumented tests (flow tests, release smoke test): they test the app, and an interstitial
      * or the consent form would cover the screens they drive.
      */
@@ -32,6 +32,7 @@ object AppModule {
     fun adsConfig() = AdsConfig(
         interstitialUnitId = BuildConfig.ADMOB_INTERSTITIAL_ID,
         enabled = !underInstrumentation(),
+        rewardedUnitId = BuildConfig.ADMOB_REWARDED_ID,
     )
 
     /** AndroidX Test is loaded into the app's process only when a test APK instruments it. */

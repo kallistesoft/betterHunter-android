@@ -16,6 +16,30 @@ fun interface InterstitialAds {
     suspend fun showBeforeResults()
 }
 
+/** What came of asking for a rewarded ad (P14). */
+enum class RewardOutcome {
+    /** The ad was watched to the end: give the reward. */
+    EARNED,
+
+    /** The ad was closed before the end: no reward. */
+    NOT_EARNED,
+
+    /** No network, so no ad: no reward either (letting it through would teach users to go offline). */
+    OFFLINE,
+
+    /** No ad to watch through no fault of the user (ads turned off by us, or none available online): give the reward. */
+    NO_ADS,
+}
+
+/** A rewarded ad the user chooses to watch for something: a mock exam retake, or resetting all of them (P14). */
+interface RewardedAds {
+    /** Starts loading one ahead of time (the mock exams screen opens), so it shows without waiting. */
+    fun preload()
+
+    /** Shows a rewarded ad and returns once it's closed, waiting a few seconds for one still loading. */
+    suspend fun showForReward(): RewardOutcome
+}
+
 /** The consent to ads (Google's User Messaging Platform), asked at launch and changed from Settings. */
 interface AdConsent {
     /** The user's region requires a way back to their consent choices: Settings shows "Privacy options" while true. */
@@ -32,7 +56,8 @@ interface AdConsent {
 }
 
 /**
- * The ad unit of the interstitial; the build type chooses it (Google's test unit in debug, see app/build.gradle.kts).
- * [enabled] false turns ads off entirely, consent request included (the app's instrumented tests).
+ * The ad units of the interstitial and the rewarded ad; the build type chooses them (Google's test units in debug, see
+ * app/build.gradle.kts). [enabled] false turns ads off entirely, consent request included (the app's instrumented
+ * tests).
  */
-data class AdsConfig(val interstitialUnitId: String, val enabled: Boolean = true)
+data class AdsConfig(val interstitialUnitId: String, val enabled: Boolean = true, val rewardedUnitId: String = "")

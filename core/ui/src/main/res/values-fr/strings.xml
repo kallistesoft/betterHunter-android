@@ -329,4 +329,28 @@
     <string name="notif_season_text">Faites votre bilan d\'avant-saison avant le %1$s.</string>
     <string name="quit_field_title">Arrêter ici?</string>
     <string name="quit_field_body">Vos réponses jusqu\'ici sont enregistrées.</string>
+    <!-- Examens simulés (P14) -->
+    <string name="mock_exams">Examens simulés</string>
+    <string name="mock_n">Examen %1$d</string>
+    <string name="mocks_summary">%1$d sur %2$d réussis</string>
+    <string name="mocks_card">Examens simulés : %1$d sur %2$d réussis</string>
+    <string name="mocks_intro">Chronométrés comme le vrai examen. Chacun est un nouveau tirage : nouvelles questions, dans un ordre au hasard, avec les réponses mélangées.</string>
+    <string name="mock_not_taken">Pas encore fait</string>
+    <string name="mock_passed">Réussi</string>
+    <string name="mock_failed">Échoué</string>
+    <string name="mock_scores">Meilleur %1$d %% · dernier %2$d %%</string>
+    <string name="mock_start">Commencer</string>
+    <string name="mock_retake">Refaire</string>
+    <string name="mocks_all_done">Les %1$d examens simulés sont faits. Recommencez-les tous pour repartir à zéro.</string>
+    <string name="mocks_reset_all">Tout recommencer</string>
+    <string name="retake_title">Refaire l\'examen %1$d?</string>
+    <string name="retake_body">Regardez une courte pub pour faire un nouvel examen %1$d : nouvelles questions, dans un nouvel ordre. Votre meilleur résultat est gardé.</string>
+    <string name="reset_title">Recommencer tous les examens simulés?</string>
+    <string name="reset_body">Regardez une courte pub pour recommencer les %1$d examens simulés. Leurs résultats sont effacés.</string>
+    <string name="watch_ad">Regarder la pub</string>
+    <string name="ad_offline_title">Vous êtes hors ligne</string>
+    <string name="ad_offline_body">Refaire un examen demande une courte pub. Connectez-vous à Internet et réessayez.</string>
+    <string name="ok">OK</string>
+    <string name="next_mock">Examen suivant</string>
+    <string name="all_mocks">Tous les examens</string>
 </resources>

@@ -15,6 +15,9 @@ its own feature module, and feature flags can switch features on, off or behind 
 
 ## Prep: one assessment a day, a rewarded ad for more
 
+*Superseded by DECISIONS.md, P14 (2026-10-25): ten mock exams per exam, retakes and "Reset all" behind a rewarded ad,
+and no retake offline.*
+
 One free assessment a day; watching a rewarded ad unlocks another one, with no limit.
 
 **For it:**

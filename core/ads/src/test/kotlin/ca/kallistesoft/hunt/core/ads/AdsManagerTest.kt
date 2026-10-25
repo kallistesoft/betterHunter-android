@@ -8,6 +8,7 @@ import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -24,9 +25,10 @@ class AdsManagerTest {
     private val sdk = FakeSdk()
     private var now = 0L
     private var onScreen: Activity? = activity
+    private var online = true
 
-    private fun TestScope.manager(config: AdsConfig = AdsConfig("unit-1")) = AdsManager(
-        consent, sdk, flags, { onScreen }, config, backgroundScope, { now },
+    private fun TestScope.manager(config: AdsConfig = AdsConfig("unit-1", rewardedUnitId = "rewarded-1")) = AdsManager(
+        consent, sdk, flags, { onScreen }, config, backgroundScope, { now }, { online },
     )
 
     /** Consent gathered at launch, ads allowed: the SDK starts and an ad is preloaded. */
@@ -236,6 +238,108 @@ class AdsManagerTest {
         assertTrue(consent.privacyShownOn.isEmpty())
     }
 
+    // Rewarded ads (P14): no network, no reward; given without an ad only when the user can't cause it.
+
+    @Test
+    fun `a rewarded ad watched to the end earns the reward, closed early it doesn't`() = runTest {
+        val ads = started()
+        ads.preload()
+        runCurrent()
+        assertEquals(1, sdk.rewardedLoads)
+        assertEquals(RewardOutcome.EARNED, ads.showForReward())
+        assertEquals(listOf(activity), sdk.rewardedShownOn)
+        runCurrent()
+        assertEquals("the next one preloads", 2, sdk.rewardedLoads)
+
+        sdk.earn = false
+        assertEquals(RewardOutcome.NOT_EARNED, ads.showForReward())
+        assertEquals(listOf("rewarded-1"), sdk.rewardedUnitIds.distinct())
+    }
+
+    @Test
+    fun `offline there is no reward, even if an ad was loaded`() = runTest {
+        val ads = started()
+        ads.preload()
+        runCurrent()
+        online = false
+        assertEquals(RewardOutcome.OFFLINE, ads.showForReward())
+        assertTrue(sdk.rewardedShownOn.isEmpty())
+    }
+
+    @Test
+    fun `the network lost while loading means offline, no ad online means it's given`() = runTest {
+        val ads = started()
+        sdk.fill = false
+        sdk.onRewardedLoad = { online = false }
+        assertEquals(RewardOutcome.OFFLINE, ads.showForReward())
+        online = true
+        sdk.onRewardedLoad = {}
+        assertEquals(RewardOutcome.NO_ADS, ads.showForReward())
+    }
+
+    @Test
+    fun `an ad still loading is waited for a few seconds, then given up on, and kept for next time`() = runTest {
+        val ads = started()
+        sdk.waitOnLoad = CompletableDeferred()
+        var outcome: RewardOutcome? = null
+        backgroundScope.launch { outcome = ads.showForReward() }
+        advanceTimeBy(REWARDED_WAIT_MILLIS - 1)
+        assertEquals("still waiting", null, outcome)
+        advanceTimeBy(2)
+        assertEquals("online but nothing came: given", RewardOutcome.NO_ADS, outcome)
+
+        sdk.waitOnLoad?.complete(Unit) // the late ad arrives
+        runCurrent()
+        assertEquals("no new load", RewardOutcome.EARNED, ads.showForReward())
+        assertEquals(1, sdk.rewardedLoads)
+    }
+
+    @Test
+    fun `ads turned off by us give the reward without an ad`() = runTest {
+        flags.set(FeatureFlag.ADS_ENABLED, false)
+        assertEquals(RewardOutcome.NO_ADS, started().showForReward())
+        flags.set(FeatureFlag.ADS_ENABLED, true)
+        assertEquals(RewardOutcome.NO_ADS, manager(AdsConfig("unit-1", enabled = false, rewardedUnitId = "r")).showForReward())
+        assertEquals("no rewarded unit", RewardOutcome.NO_ADS, manager(AdsConfig("unit-1")).showForReward())
+        online = false
+        assertEquals("even offline", RewardOutcome.NO_ADS, manager(AdsConfig("unit-1")).showForReward())
+        assertEquals(0, sdk.rewardedLoads)
+    }
+
+    @Test
+    fun `consent not settled is asked for before the ad`() = runTest {
+        consent.canRequest = false
+        val ads = manager()
+        consent.onUpdate = { consent.canRequest = true }
+        assertEquals(RewardOutcome.EARNED, ads.showForReward())
+        assertEquals(1, consent.updates)
+
+        consent.canRequest = false
+        consent.onUpdate = {}
+        assertEquals("still no consent: given", RewardOutcome.NO_ADS, ads.showForReward())
+    }
+
+    @Test
+    fun `no screen to show on means no reward`() = runTest {
+        val ads = started()
+        onScreen = null
+        assertEquals(RewardOutcome.NOT_EARNED, ads.showForReward())
+    }
+
+    @Test
+    fun `a rewarded ad loaded over an hour ago is loaded again`() = runTest {
+        val ads = started()
+        ads.preload()
+        runCurrent()
+        now += 60 * 60_000
+        ads.preload()
+        runCurrent()
+        assertEquals(2, sdk.rewardedLoads)
+        ads.preload()
+        runCurrent()
+        assertEquals("a fresh one is kept", 2, sdk.rewardedLoads)
+    }
+
     private class FakeConsent : ConsentGateway {
         var canRequest = true
         var privacyRequired = false
@@ -273,6 +377,27 @@ class AdsManagerTest {
 
         override suspend fun initialize() {
             initialized++
+        }
+
+        var rewardedLoads = 0
+        val rewardedUnitIds = mutableListOf<String>()
+        val rewardedShownOn = mutableListOf<Activity>()
+        var earn = true
+        var onRewardedLoad: () -> Unit = {}
+
+        override suspend fun loadRewarded(unitId: String): Rewarded? {
+            rewardedLoads++
+            rewardedUnitIds += unitId
+            waitOnLoad?.await()
+            onRewardedLoad()
+            return if (fill) {
+                Rewarded { activity ->
+                    rewardedShownOn += activity
+                    earn
+                }
+            } else {
+                null
+            }
         }
 
         override suspend fun loadInterstitial(unitId: String): Interstitial? {

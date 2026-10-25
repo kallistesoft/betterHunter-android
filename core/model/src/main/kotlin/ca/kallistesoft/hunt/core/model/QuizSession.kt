@@ -43,7 +43,10 @@ data class QuizSession(
     companion object {
         const val PRACTICE_SIZE = 20
 
-        /** [onlyIds] restricts the pool (weak-spot review). */
+        /**
+         * A new random run: each question at most once, in a random order, its choices shuffled (P14). [onlyIds]
+         * restricts the pool (weak-spot review).
+         */
         fun start(
             exam: Exam,
             pool: List<Question>,
@@ -51,9 +54,9 @@ data class QuizSession(
             random: Random = Random.Default,
             onlyIds: Set<String>? = null,
         ): QuizSession {
-            val candidates = pool.filter { onlyIds == null || it.id in onlyIds }.shuffled(random)
+            val candidates = pool.filter { onlyIds == null || it.id in onlyIds }.distinctBy { it.id }.shuffled(random)
             val size = if (mode == QuizMode.EXAM) exam.questionCount else PRACTICE_SIZE
-            return QuizSession(exam, mode, candidates.take(size))
+            return QuizSession(exam, mode, candidates.take(size).map { it.withShuffledChoices(random) })
         }
     }
 }

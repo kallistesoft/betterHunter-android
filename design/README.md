@@ -26,9 +26,13 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | Practice: question answered (text question, wrong answer) | `PracticeQuestion.dc.html` | `PracticeQuestionLight.dc.html` | built |
 | Practice: results | `PracticeResults.dc.html` | `PracticeResultsLight.dc.html` | built |
 | Review my mistakes: nothing to review | `NothingToReview.dc.html` | `NothingToReviewLight.dc.html` | built |
+| Mock exams: ten per exam, best and last score, the next one to take in orange (P14) | `MockExams.dc.html` | `MockExamsLight.dc.html` | built |
 | Mock exam: question | `ExamQuestion.dc.html` | `ExamQuestionLight.dc.html` | built |
 | Mock exam: quit this test? (dialog) | `QuitDialog.dc.html` | `QuitDialogLight.dc.html` | built |
-| Mock exam: results | `ExamResults.dc.html` | `ExamResultsLight.dc.html` | built |
+| Mock exam: results ("All mocks" / "Next mock") | `ExamResults.dc.html` | `ExamResultsLight.dc.html` | built |
+| Retake a finished mock: watch a rewarded ad (dialog) | `RetakeAd.dc.html` | `RetakeAdLight.dc.html` | built |
+| Retake offline: no ad, no retake (dialog) | `AdOffline.dc.html` | `AdOfflineLight.dc.html` | built |
+| Mock exams, all ten done: "Reset all" behind a rewarded ad | `MockExamsAllDone.dc.html` | `MockExamsAllDoneLight.dc.html` | built |
 | I passed the real exam: confirm (from Exam training) | `PassedExam.dc.html` | `PassedExamLight.dc.html` | built |
 | Home, hunter (after passing the real exam): the Hunter home with a congratulations banner and an "Exam training · Hunting exam passed" row | `HomeHunterPassed.dc.html` | `HomeHunterPassedLight.dc.html` | built |
 | Onboarding as a hunter: what kind of hunter? → Hunter, then the same two questions | `HunterProfileHunter.dc.html`, `HuntWithHunter.dc.html`, `HuntWhereHunter.dc.html` | `…Light.dc.html` | built |
@@ -65,7 +69,7 @@ The canvas has one **page per flow** (dark row on top, light row below, screens 
 
 | Page | Screens |
 |---|---|
-| 1 · Working on it: exam prep (opens first) | 1 Splash → 2 What kind of hunter? → 3 What do you hunt with? → 4 Where do you hunt? → 5 Home → 6 Exam training → 7 Practice question → 8 Practice results (8b nothing to review) → 9 Mock exam question (9b quit) → 10 Mock exam results → 11 I passed the real exam → 12 Home, hunter (exam passed) |
+| 1 · Working on it: exam prep (opens first) | 1 Splash → 2 What kind of hunter? → 3 What do you hunt with? → 4 Where do you hunt? → 5 Home → 6 Exam training → 7 Practice question → 8 Practice results (8b nothing to review) → 9 Mock exams (ten) → 10 Mock exam question (10b quit) → 11 Mock exam results → 12 Retake: rewarded ad → 13 Offline: no retake → 14 All ten done: Reset all → 15 I passed the real exam → 16 Home, hunter (exam passed) |
 | 2 · Hunter | 1 What kind of hunter? → Hunter → 2 What do you hunt with? → 3 Where do you hunt? → 4 Home, first day (skip what you know) → 5 Skill check question → 6 Skill check results → 7 Home, hunter (7b today's species question, a look-alike; 7c today's general question) → 8 Done for today, reminders? → 9 Permission → 10 Field skills → 11 Skill question → 12 Skill results → 13 Skill mastered → 14 Mastered and faded skills → 15 All mastered → 16 Home, season coming (no date) → 16b Season start date → 16c Season reminder ask → 17 Home, your season in 3 weeks → 18 Season check question → 19 Settings, hunter → 20 Lock screen |
 | 3 · What is it? | 1 Recognition hub → 2 Photo question → 3 Photo full screen → 4 Answer |
 | 4 · Settings & About | 1 Settings → 2 My provinces → 3 About |

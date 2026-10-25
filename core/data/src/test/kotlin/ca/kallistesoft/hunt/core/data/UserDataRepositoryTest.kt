@@ -3,6 +3,7 @@ package ca.kallistesoft.hunt.core.data
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.DataStoreFactory
 import ca.kallistesoft.hunt.core.model.HunterType
+import ca.kallistesoft.hunt.core.model.MockResult
 import ca.kallistesoft.hunt.core.model.Province
 import ca.kallistesoft.hunt.core.model.Reminder
 import ca.kallistesoft.hunt.core.model.UserProgress
@@ -74,6 +75,21 @@ class UserDataRepositoryTest {
         repo.dismissNewHunterBanner()
         assertFalse(repo.progress.first().newHunterBanner)
         assertEquals(setOf("ICAF"), repo.progress.first().passedExams)
+    }
+
+    @Test
+    fun `mock exam scores are saved, read back from JSON, and reset`() = runTest {
+        val repo = repository()
+        repo.recordMockResult("ICAF", 3, 84)
+        repo.recordMockResult("ICAF", 3, 70)
+        val saved = repo.progress.first()
+        assertEquals(MockResult(best = 84, last = 70), saved.mockResults("ICAF")[3])
+        val out = ByteArrayOutputStream()
+        UserProgressSerializer.writeTo(saved, out)
+        assertEquals(saved, UserProgressSerializer.readFrom(ByteArrayInputStream(out.toByteArray())))
+
+        repo.resetMocks("ICAF")
+        assertTrue(repo.progress.first().mockResults("ICAF").isEmpty())
     }
 
     @Test

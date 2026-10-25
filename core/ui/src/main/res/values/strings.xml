@@ -325,4 +325,28 @@
     <string name="notif_season_text">Take your season check before %1$s.</string>
     <string name="quit_field_title">Stop here?</string>
     <string name="quit_field_body">Your answers so far are saved.</string>
+    <!-- Mock exams (P14) -->
+    <string name="mock_exams">Mock exams</string>
+    <string name="mock_n">Mock %1$d</string>
+    <string name="mocks_summary">%1$d of %2$d passed</string>
+    <string name="mocks_card">Mock exams: %1$d of %2$d passed</string>
+    <string name="mocks_intro">Timed like the real exam. Each one is a new draw: new questions, in a random order, with the answers shuffled.</string>
+    <string name="mock_not_taken">Not taken</string>
+    <string name="mock_passed">Passed</string>
+    <string name="mock_failed">Failed</string>
+    <string name="mock_scores">Best %1$d%% · last %2$d%%</string>
+    <string name="mock_start">Start</string>
+    <string name="mock_retake">Retake</string>
+    <string name="mocks_all_done">All %1$d mock exams done. Reset them all to start over.</string>
+    <string name="mocks_reset_all">Reset all</string>
+    <string name="retake_title">Retake Mock %1$d?</string>
+    <string name="retake_body">Watch a short ad to take a new Mock %1$d: new questions, in a new order. Your best score is kept.</string>
+    <string name="reset_title">Reset all mock exams?</string>
+    <string name="reset_body">Watch a short ad to start the %1$d mock exams over. Their scores are cleared.</string>
+    <string name="watch_ad">Watch ad</string>
+    <string name="ad_offline_title">You\'re offline</string>
+    <string name="ad_offline_body">Retakes need a short ad. Connect to the internet and try again.</string>
+    <string name="ok">OK</string>
+    <string name="next_mock">Next mock</string>
+    <string name="all_mocks">All mocks</string>
 </resources>

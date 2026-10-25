@@ -18,6 +18,7 @@ import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.feature.about.AboutScreen
 import ca.kallistesoft.hunt.feature.exams.ExamTrainingScreen
 import ca.kallistesoft.hunt.feature.exams.FieldSkillsScreen
+import ca.kallistesoft.hunt.feature.exams.MockExamsScreen
 import ca.kallistesoft.hunt.feature.exams.PassedExamScreen
 import ca.kallistesoft.hunt.feature.exams.ProvincesScreen
 import ca.kallistesoft.hunt.feature.exams.RecognitionScreen
@@ -34,6 +35,7 @@ import ca.kallistesoft.hunt.navigation.ExamTraining
 import ca.kallistesoft.hunt.navigation.FieldQuiz
 import ca.kallistesoft.hunt.navigation.FieldSkills
 import ca.kallistesoft.hunt.navigation.Home
+import ca.kallistesoft.hunt.navigation.MockExams
 import ca.kallistesoft.hunt.navigation.Onboarding
 import ca.kallistesoft.hunt.navigation.PassedExam
 import ca.kallistesoft.hunt.navigation.Provinces
@@ -123,7 +125,15 @@ fun BetterHunterApp(
                     onBack = back,
                     onOpenProvinces = { backStack.push(Provinces) },
                     onStartQuiz = startQuiz,
+                    onOpenMocks = { examId -> backStack.push(MockExams(examId)) },
                     onPassedRealExam = { examId -> backStack.push(PassedExam(examId)) },
+                )
+            }
+            entry<MockExams> { key ->
+                MockExamsScreen(
+                    examId = key.examId,
+                    onBack = back,
+                    onStartMock = { mock, rewarded -> backStack.push(Quiz(key.examId, QuizMode.EXAM, mock, rewarded)) },
                 )
             }
             entry<Provinces> {
@@ -144,7 +154,14 @@ fun BetterHunterApp(
                 QuizScreen(
                     examId = key.examId,
                     mode = key.mode,
+                    mock = key.mock,
+                    rewarded = key.rewarded,
                     onClose = back,
+                    // "Next mock": the next one replaces this run, so back returns to the mock list.
+                    onStartMock = { next ->
+                        backStack.removeLastOrNull()
+                        backStack.add(Quiz(key.examId, QuizMode.EXAM, next))
+                    },
                     // Nothing left to review: practise the same exam instead, in place of the review.
                     onStartPractice = {
                         backStack.removeLastOrNull()

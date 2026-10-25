@@ -89,7 +89,8 @@ import kotlin.math.roundToInt
 
 /**
  * A quiz on [examId]: questions, then the results ("Try again" starts a new run in place). With no mistakes to
- * review, [onStartPractice] offers a practice run instead.
+ * review, [onStartPractice] offers a practice run instead. [mock] (one of the ten mock exams, P14) ends on "All
+ * mocks" ([onClose]) and "Next mock" ([onStartMock]) instead of "Try again", since a retake needs a rewarded ad.
  */
 @Composable
 fun QuizScreen(
@@ -97,8 +98,11 @@ fun QuizScreen(
     mode: QuizMode,
     onClose: () -> Unit,
     onStartPractice: () -> Unit,
+    mock: Int? = null,
+    rewarded: Boolean = false,
+    onStartMock: (Int) -> Unit = {},
     viewModel: QuizViewModel = hiltViewModel<QuizViewModel, QuizViewModel.Factory>(
-        creationCallback = { factory -> factory.create(examId, mode) },
+        creationCallback = { factory -> factory.create(examId, mode, mock, rewarded) },
     ),
 ) {
     when (val state = viewModel.uiState.collectAsStateWithLifecycle().value) {
@@ -106,6 +110,7 @@ fun QuizScreen(
         is QuizUiState.Empty -> EmptyQuiz(state, onClose, onStartPractice)
         is QuizUiState.Running -> QuestionContent(
             state,
+            overline = mock?.let { "${stringResource(R.string.mock_n, it)} · ${state.session.exam.shortName(currentLang())}" },
             canReport = viewModel.canReport.collectAsStateWithLifecycle().value,
             onChoose = viewModel::choose,
             onNext = viewModel::next,
@@ -116,6 +121,7 @@ fun QuizScreen(
             dailyGoalReached = viewModel.dailyGoalReached.collectAsStateWithLifecycle().value,
             onHome = onClose,
             onAgain = viewModel::restart,
+            mockButtons = mock?.let { MockButtons(onAllMocks = onClose, onNext = state.nextMock?.let { next -> { onStartMock(next) } }) },
         )
     }
 }

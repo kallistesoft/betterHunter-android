@@ -42,11 +42,19 @@ import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Content
 import ca.kallistesoft.hunt.core.model.Exam
 import ca.kallistesoft.hunt.core.model.ExamGroup
+import ca.kallistesoft.hunt.core.model.MOCK_COUNT
 import ca.kallistesoft.hunt.core.model.UserProgress
 import kotlin.math.roundToInt
 
-/** What a card needs to show one exam: its pool size, the user's readiness and weak spots. */
-data class ExamSummary(val exam: Exam, val questionCount: Int, val readiness: Float, val weakCount: Int) {
+/** What a card needs to show one exam: its pool size, the user's readiness and weak spots, mock exams passed. */
+data class ExamSummary(
+    val exam: Exam,
+    val questionCount: Int,
+    val readiness: Float,
+    val weakCount: Int,
+    val mocksPassed: Int = 0,
+    val mocksDone: Int = 0,
+) {
     val available: Boolean get() = !exam.comingSoon && questionCount > 0
 }
 
@@ -95,6 +103,14 @@ fun ExamCard(
                         color = scheme.onSurfaceVariant,
                     )
                     if (meta.isNotEmpty()) Text(meta, style = muted, color = scheme.onSurfaceVariant)
+                    if (summary.mocksDone > 0) {
+                        Text(
+                            stringResource(R.string.mocks_card, summary.mocksPassed, MOCK_COUNT),
+                            style = muted,
+                            color = scheme.secondary,
+                            modifier = Modifier.testTag("mocks-passed-${exam.id}"),
+                        )
+                    }
                 }
                 if (summary.available) ReadinessRing(summary.readiness)
             }
@@ -108,7 +124,7 @@ fun ExamCard(
                         icon = Icons.Rounded.PlayArrow,
                     )
                     SecondaryButton(
-                        stringResource(R.string.exam_sim),
+                        stringResource(if (exam.group == ExamGroup.IDENTIFICATION) R.string.exam_sim else R.string.mock_exams),
                         onClick = onExam,
                         modifier = Modifier.weight(1f).testTag("exam-${exam.id}"),
                         icon = Icons.Outlined.Timer,
@@ -203,5 +219,13 @@ fun ReadinessRing(value: Float, modifier: Modifier = Modifier) {
 /** Summary of [exam] from the bundled content and the user's progress. */
 fun examSummary(content: Content, progress: UserProgress, exam: Exam): ExamSummary {
     val pool = content.questionsFor(exam)
-    return ExamSummary(exam, pool.size, progress.readiness(pool), progress.weakIds(pool).size)
+    val mocks = progress.mockResults(exam.id).values
+    return ExamSummary(
+        exam,
+        pool.size,
+        progress.readiness(pool),
+        progress.weakIds(pool).size,
+        mocksPassed = mocks.count { it.passed(exam) },
+        mocksDone = mocks.size,
+    )
 }

@@ -39,10 +39,10 @@ class FieldQuizViewModelTest {
         run, skill, FakeContentRepository(), userData, SavedStateHandle(), Today { TEST_DAY }, FakeFeatureFlags(),
     ).also { collecting(it.uiState) }
 
-    /** Answers every question right (answer B in the test content). */
+    /** Answers every question right (choices are shuffled, P14). */
     private fun TestScope.answerAll(vm: FieldQuizViewModel) {
         while (vm.uiState.value is FieldQuizUiState.Running) {
-            vm.choose(1)
+            vm.choose(vm.session.right)
             runCurrent()
             vm.next()
             runCurrent()
@@ -113,7 +113,7 @@ class FieldQuizViewModelTest {
     fun `today's questions resume where the hunter left off`() = runTest(mainDispatcherRule.testDispatcher) {
         val vm = viewModel(FieldRun.DAILY)
         runCurrent()
-        vm.choose(0) // wrong, still counts as answered
+        vm.choose(vm.session.wrong) // wrong, still counts as answered
         runCurrent()
         val resumed = viewModel(FieldRun.DAILY)
         runCurrent()
@@ -144,7 +144,7 @@ class FieldQuizViewModelTest {
         val session = (first.uiState.value as FieldQuizUiState.Running).session
 
         val restored = (vm().also { runCurrent() }.uiState.value as FieldQuizUiState.Running).session
-        assertEquals(session.questions, restored.questions)
+        assertEquals("the same questions, choices in the same order", session.questions, restored.questions)
         assertEquals(0, restored.currentAnswer)
     }
 
