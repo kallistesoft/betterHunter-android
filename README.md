@@ -207,10 +207,10 @@ in `*ScreenshotTest.kt` of its module. Reference images live in `src/test/screen
 ./gradlew verifyRoborazziDebug   # compare; diffs go to build/outputs/roborazzi
 ```
 
-CI verifies on every push. After an intended UI change, run the **Record screenshots** workflow (Actions tab): it
-records on CI's machine and commits the new references, so they match what CI renders. Android CI then runs on that commit
-by itself (started by the workflow, no approval needed); the `pull_request` run GitHub also creates for the bot's push
-waits for an approval and can be ignored.
+CI verifies on every push. After an intended UI change, push the branch and run `scripts/record-screenshots.sh`: it
+starts the **Record screenshots** workflow, which records the references on CI's machine (so they match what CI
+renders) and uploads them, then downloads them, commits them as you and pushes. The workflow never commits itself: a
+push by the Actions bot would leave the PR's CI waiting for an approval.
 
 ## Integration tests
 

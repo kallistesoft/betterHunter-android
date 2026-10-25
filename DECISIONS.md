@@ -187,7 +187,8 @@ once. *Switch to Room when:* answer history is kept, or questions are downloaded
 `app/src/release` (`BuildTypeModule`), checked in CI.
 
 **A5. Tests.** Pure logic tested on the JVM; every ViewModel tested with Turbine on fakes from `core:testing`; Roborazzi
-screenshot tests verified in CI, references recorded by the "Record screenshots" workflow. Integration tests on an
+screenshot tests verified in CI, references recorded on CI by the "Record screenshots" workflow and committed by the developer
+(`scripts/record-screenshots.sh`; a bot commit would hold the PR's CI for an approval). Integration tests on an
 emulator in CI: flow tests on the real app (no fakes; the Test Orchestrator clears the app's data before each test)
 and a UiAutomator smoke test of the release build (`qa` build type: release, debug-signed), so R8 problems show up
 before a Play upload. *Rejected:* Hilt test modules replacing storage or Firebase in flow tests (a fresh process and
