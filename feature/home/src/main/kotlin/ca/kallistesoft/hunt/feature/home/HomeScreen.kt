@@ -64,7 +64,6 @@ import ca.kallistesoft.hunt.core.designsystem.theme.BhTextStyles
 import ca.kallistesoft.hunt.core.designsystem.theme.Sizes
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.FieldRun
-import ca.kallistesoft.hunt.core.model.Lang
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.ui.BrandTopAppBar
 import ca.kallistesoft.hunt.core.ui.R
@@ -79,7 +78,6 @@ fun HomeScreen(
     onOpenSettings: () -> Unit,
     onOpenProvinces: () -> Unit,
     onStartQuiz: (examId: String, mode: QuizMode) -> Unit,
-    onSetLanguage: (Lang) -> Unit,
     onOpenFieldSkills: () -> Unit,
     onStartField: (FieldRun) -> Unit,
     onOpenSeasonDate: () -> Unit,
@@ -94,7 +92,6 @@ fun HomeScreen(
         onOpenSettings = onOpenSettings,
         onOpenProvinces = onOpenProvinces,
         onStartQuiz = onStartQuiz,
-        onSetLanguage = onSetLanguage,
         onAnswerPhoto = viewModel::answerPhotoOfDay,
         onDismissBanner = viewModel::dismissNewHunterBanner,
         onOpenFieldSkills = onOpenFieldSkills,
@@ -118,7 +115,6 @@ internal fun HomeContent(
     onOpenSettings: () -> Unit,
     onOpenProvinces: () -> Unit,
     onStartQuiz: (examId: String, mode: QuizMode) -> Unit,
-    onSetLanguage: (Lang) -> Unit,
     onAnswerPhoto: (Int) -> Unit,
     onDismissBanner: () -> Unit,
     onOpenFieldSkills: () -> Unit = {},
@@ -129,7 +125,7 @@ internal fun HomeContent(
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            BrandTopAppBar(onSetLanguage, scrollBehavior) {
+            BrandTopAppBar(scrollBehavior) {
                 TooltipIconButton(
                     Icons.Outlined.Settings,
                     label = stringResource(R.string.settings),

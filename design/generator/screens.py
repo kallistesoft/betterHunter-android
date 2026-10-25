@@ -522,9 +522,6 @@ def passed_exam(t):
 def home_hunter(t, passed=False, season=None, first=False):
     """The Hunter's home. passed: just passed the real exam (banner, Exam training row); season: None, "date" (the hunter
     set their opening date) or "generic" (no date: shown from late August); first: right after onboarding (skill check)."""
-    pill = (f'<span style="display: flex; border: 1px solid {t["outline"]}; border-radius: 999px; padding: 3px; background: {t["card"] if t["name"] == "light" else "transparent"}">'
-            f'<span style="color: {t["muted"]}; font: 600 13px Barlow, sans-serif; height: 38px; min-width: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center">FR</span>'
-            f'<span style="background: {t["green_tint"] if t["name"] == "light" else t["track"]}; color: {t["text"]}; font: 600 13px Barlow, sans-serif; height: 38px; min-width: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center">EN</span></span>')
     dismiss = f'<a href="#" aria-label="Dismiss" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: {t["muted"]}; margin: -10px -10px 0 0; flex-shrink: 0">{icon("close", 18)}</a>'
     banner = f'''<section style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px; background: {t["sel"]}; border: 1px solid {t["warm_border"]}; flex-shrink: 0">
     {tile(t, "trophy", "orange", 40, 10)}
@@ -597,7 +594,7 @@ def home_hunter(t, passed=False, season=None, first=False):
   </section>'''
     body = f'''<header style="display: flex; align-items: center; justify-content: space-between; height: 48px; flex-shrink: 0">
     <div style="display: flex; align-items: center; gap: 10px">{buck(34, t["text"], t["orange"])}<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.2px">BetterHunter</span></div>
-    <div style="display: flex; align-items: center; gap: 8px">{pill}{round_link(t, href(t, "SettingsHunter"), "Settings", "gear", t["muted"])}</div>
+    <div style="display: flex; align-items: center; gap: 8px">{round_link(t, href(t, "SettingsHunter"), "Settings", "gear", t["muted"])}</div>
   </header>
   {top}
   {daily_card}

@@ -95,7 +95,6 @@ fun BetterHunterApp(
                     onOpenSettings = { backStack.push(Settings) },
                     onOpenProvinces = { backStack.push(Provinces) },
                     onStartQuiz = startQuiz,
-                    onSetLanguage = ::setAppLanguage,
                     onOpenFieldSkills = { backStack.push(FieldSkills) },
                     onStartField = { run -> backStack.push(FieldQuiz(run)) },
                     onOpenSeasonDate = { backStack.push(SeasonDate) },

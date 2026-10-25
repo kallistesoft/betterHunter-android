@@ -25,25 +25,24 @@ import ca.kallistesoft.hunt.core.designsystem.theme.BhTextStyles
 import ca.kallistesoft.hunt.core.designsystem.theme.Spacing
 import ca.kallistesoft.hunt.core.model.Lang
 
-/** Top bar of the top-level screens (Home, onboarding): the logo and name, the FR/EN toggle, then [actions]. */
+/** Top bar of onboarding's first screen: the logo and name, the FR/EN toggle (Settings isn't reachable yet), then [actions]. */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BrandTopAppBar(onSetLanguage: (Lang) -> Unit, actions: @Composable RowScope.() -> Unit = {}) =
     BrandTopAppBarImpl(onSetLanguage, scrollBehavior = null, actions)
 
-/** [BrandTopAppBar] that hides as the list scrolls (see the scrolling [BackTopAppBar]). */
+/** Home's top bar: the logo and name, then [actions], hiding as the list scrolls; the language is in Settings. */
 @ExperimentalMaterial3Api
 @Composable
 fun BrandTopAppBar(
-    onSetLanguage: (Lang) -> Unit,
     scrollBehavior: TopAppBarScrollBehavior,
     actions: @Composable RowScope.() -> Unit = {},
-) = BrandTopAppBarImpl(onSetLanguage, scrollBehavior, actions)
+) = BrandTopAppBarImpl(onSetLanguage = null, scrollBehavior, actions)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BrandTopAppBarImpl(
-    onSetLanguage: (Lang) -> Unit,
+    onSetLanguage: ((Lang) -> Unit)?,
     scrollBehavior: TopAppBarScrollBehavior?,
     actions: @Composable RowScope.() -> Unit,
 ) {
@@ -57,7 +56,7 @@ private fun BrandTopAppBarImpl(
             }
         },
         actions = {
-            LanguageToggle(currentLang(), onSetLanguage)
+            if (onSetLanguage != null) LanguageToggle(currentLang(), onSetLanguage)
             actions()
         },
         // Clear of a display cutout too (landscape), not only the status bar.
