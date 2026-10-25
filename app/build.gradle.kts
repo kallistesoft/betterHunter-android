@@ -25,9 +25,7 @@ fun signingValue(key: String, env: String): String? = keystoreProperties.getProp
 val admobRelease = mapOf(
     "appId" to "ca-app-pub-7557144664039757~4450187296", // AdMob app "BetterHunter"
     "interstitial" to "ca-app-pub-7557144664039757/7902432864", // Ad unit "Quiz finished" (cap: 1 per 3 minutes)
-    // Ad unit "Mock retake" (rewarded, P14): to create in AdMob before release (FOLLOW-UP.md, section 2). Blank: no
-    // rewarded ad, so retakes and "Reset all" are free.
-    "rewarded" to "",
+    "rewarded" to "ca-app-pub-7557144664039757/8107883780", // Ad unit "Mock retake" (rewarded, P14; no frequency cap)
 )
 val admobTest = mapOf(
     "appId" to "ca-app-pub-3940256099942544~3347511713",

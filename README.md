@@ -139,8 +139,7 @@ Settings). Tests use `FakeInterstitialAds`, `FakeRewardedAds` and `FakeAdConsent
   process) ads are off, consent request included: an interstitial would cover the screens they drive.
 
 **IDs.** In `app/build.gradle.kts` (`admobRelease`, `admobTest`): the AdMob App ID goes in the manifest through the
-`admobAppId` placeholder, the ad units in `BuildConfig.ADMOB_INTERSTITIAL_ID` and `ADMOB_REWARDED_ID` (release's
-rewarded unit is blank until it's created in AdMob, FOLLOW-UP.md, section 2). Only `release` uses the real IDs;
+`admobAppId` placeholder, the ad units in `BuildConfig.ADMOB_INTERSTITIAL_ID` and `ADMOB_REWARDED_ID`. Only `release` uses the real IDs;
 `debug` and `qa` (emulators, smoke tests) always use Google's sample IDs, which only serve test ads. Never tap a real
 ad in the app.
 
