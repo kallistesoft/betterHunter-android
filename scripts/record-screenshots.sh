@@ -18,7 +18,7 @@ if [ "$head" != "$(git rev-parse "origin/$branch")" ]; then
 fi
 
 gh workflow run screenshots.yml --ref "$branch"
-echo "Waiting for the Record screenshots run on $head…"
+echo "Waiting for the Record screenshots run on $head..."
 run=""
 while [ -z "$run" ]; do
   sleep 5
