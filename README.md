@@ -208,7 +208,9 @@ in `*ScreenshotTest.kt` of its module. Reference images live in `src/test/screen
 ```
 
 CI verifies on every push. After an intended UI change, run the **Record screenshots** workflow (Actions tab): it
-records on CI's machine and commits the new references, so they match what CI renders.
+records on CI's machine and commits the new references, so they match what CI renders. Android CI then runs on that commit
+by itself (started by the workflow, no approval needed); the `pull_request` run GitHub also creates for the bot's push
+waits for an approval and can be ignored.
 
 ## Integration tests
 
