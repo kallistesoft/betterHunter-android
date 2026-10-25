@@ -3,6 +3,7 @@ package ca.kallistesoft.hunt.feature.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ca.kallistesoft.hunt.core.ads.AdConsent
+import ca.kallistesoft.hunt.core.data.Now
 import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.data.UserDataRepository
 import ca.kallistesoft.hunt.core.model.HunterType
@@ -37,6 +38,9 @@ data class SettingsUiState(
     val reminderMinute: Int = UserProgress.DEFAULT_PLAY_MINUTE,
     /** The ads consent can be changed (the user's region requires it): "Privacy options" shows. */
     val privacyOptions: Boolean = false,
+    /** Remove ads (P15): bought forever, or the last day of a running 7-day pass. */
+    val adFreeForever: Boolean = false,
+    val adFreeUntilDay: Long? = null,
 ) {
     /** Some provinces aren't added yet: My provinces invites to add their quizzes. */
     val canAddProvinces: Boolean get() = provinces.size < Province.entries.size
@@ -48,6 +52,7 @@ class SettingsViewModel @Inject constructor(
     private val userData: UserDataRepository,
     private val today: Today,
     private val adConsent: AdConsent,
+    private val now: Now,
 ) : ViewModel() {
     /** Whether notifications can come, checked by the screen each time it resumes (they can be turned off outside). */
     private val notificationsAllowed = MutableStateFlow(true)
@@ -67,6 +72,8 @@ class SettingsViewModel @Inject constructor(
             notificationsBlocked = !allowed && (p.dailyReminders || p.seasonReminders),
             reminderMinute = p.reminderMinute,
             privacyOptions = privacyOptions,
+            adFreeForever = p.adFreeForever,
+            adFreeUntilDay = p.adFreeUntil?.takeIf { it > now() }?.let(::epochDay),
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), SettingsUiState())
 

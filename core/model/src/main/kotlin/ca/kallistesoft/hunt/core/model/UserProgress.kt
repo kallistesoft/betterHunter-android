@@ -53,6 +53,12 @@ data class UserProgress(
     val ignoredReminders: Int = 0,
     /** Finished mock exams: exam id → mock number (1 to [MOCK_COUNT]) → its scores (P14). */
     val mockResults: Map<String, Map<Int, MockResult>> = emptyMap(),
+    /** "Remove ads forever" is owned, as Google Play last said (P15). */
+    val adFreeForever: Boolean = false,
+    /** End of the 7-day passes bought (epoch ms). Kept on this device only: Play doesn't restore them (P15). */
+    val adFreeUntil: Long? = null,
+    /** The week passes already counted, by purchase token, so one is never counted twice. */
+    val weekPassTokens: Set<String> = emptySet(),
 ) {
     val onboarded: Boolean get() = hunterType != null && homeProvince != null
 
@@ -94,6 +100,22 @@ data class UserProgress(
     /** "Yes, I passed": the user becomes a hunter, welcomed by a banner on Home. */
     fun withExamPassed(examId: String): UserProgress =
         copy(passedExams = passedExams + examId, hunterType = HunterType.HUNTER, newHunterBanner = true)
+
+    /** No ads at [nowMillis]: "Remove ads forever", or a 7-day pass not yet over (P15). */
+    fun isAdFree(nowMillis: Long): Boolean = adFreeForever || (adFreeUntil ?: 0) > nowMillis
+
+    /**
+     * A 7-day pass ([token], from Play) counted at [nowMillis]: 7 days from now, or 7 more days after a pass still
+     * running. The same token is counted once.
+     */
+    fun withWeekPass(token: String, nowMillis: Long): UserProgress {
+        if (token in weekPassTokens) return this
+        val start = maxOf(nowMillis, adFreeUntil ?: 0)
+        return copy(adFreeUntil = start + WEEK_PASS_MILLIS, weekPassTokens = weekPassTokens + token)
+    }
+
+    /** "Remove ads forever" owned or not, as Play says (a refund takes it back). */
+    fun withAdFreeForever(owned: Boolean): UserProgress = if (owned == adFreeForever) this else copy(adFreeForever = owned)
 
     /** The finished mocks of [examId], by mock number. */
     fun mockResults(examId: String): Map<Int, MockResult> = mockResults[examId].orEmpty()
@@ -209,6 +231,9 @@ data class UserProgress(
         if (pool.isEmpty()) 0f else pool.count { lastResult[it.id] == true }.toFloat() / pool.size
 
     companion object {
+        /** A week pass lasts 7 days. */
+        const val WEEK_PASS_MILLIS = 7 * 24 * 60 * 60 * 1_000L
+
         /** Questions a day for the dashboard's goal ring, until changed in Settings. */
         const val DEFAULT_DAILY_GOAL = 20
 

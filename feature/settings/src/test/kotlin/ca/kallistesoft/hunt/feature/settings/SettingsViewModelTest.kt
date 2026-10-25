@@ -2,15 +2,17 @@ package ca.kallistesoft.hunt.feature.settings
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
+import ca.kallistesoft.hunt.core.data.Now
+import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.model.HunterType
 import ca.kallistesoft.hunt.core.model.Province
 import ca.kallistesoft.hunt.core.model.UserProgress
 import ca.kallistesoft.hunt.core.model.Weapon
-import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.testing.FakeAdConsent
 import ca.kallistesoft.hunt.core.testing.FakeUserDataRepository
 import ca.kallistesoft.hunt.core.testing.MainDispatcherRule
 import ca.kallistesoft.hunt.core.testing.TEST_DAY
+import ca.kallistesoft.hunt.core.testing.TEST_NOW
 import ca.kallistesoft.hunt.core.testing.awaitItemMatching
 import ca.kallistesoft.hunt.core.testing.collecting
 import kotlinx.coroutines.test.runTest
@@ -30,7 +32,7 @@ class SettingsViewModelTest {
 
     @Test
     fun `settings show the profile and change the daily goal`() = runTest {
-        val vm = SettingsViewModel(userData, Today { TEST_DAY }, FakeAdConsent())
+        val vm = SettingsViewModel(userData, Today { TEST_DAY }, FakeAdConsent(), Now { TEST_NOW })
         vm.uiState.test {
             val state = awaitItemMatching { !it.loading }
             assertEquals(HunterType.WORKING_ON_IT, state.hunterType)
@@ -46,7 +48,7 @@ class SettingsViewModelTest {
     @Test
     fun `privacy options follow the consent requirement`() = runTest {
         val consent = FakeAdConsent()
-        val vm = SettingsViewModel(userData, Today { TEST_DAY }, consent)
+        val vm = SettingsViewModel(userData, Today { TEST_DAY }, consent, Now { TEST_NOW })
         vm.uiState.test {
             assertFalse(awaitItemMatching { !it.loading }.privacyOptions)
             consent.privacyOptionsRequired.value = true
@@ -98,7 +100,7 @@ class SettingsViewModelTest {
         val hunter = FakeUserDataRepository(
             UserProgress().withProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC).withSeasonStart(TEST_DAY + 30),
         )
-        val vm = SettingsViewModel(hunter, Today { TEST_DAY }, FakeAdConsent())
+        val vm = SettingsViewModel(hunter, Today { TEST_DAY }, FakeAdConsent(), Now { TEST_NOW })
         vm.uiState.test {
             val state = awaitItemMatching { !it.loading }
             assertTrue(state.hunter)
@@ -117,7 +119,7 @@ class SettingsViewModelTest {
             UserProgress().withProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC).withSeasonStart(TEST_DAY + 30),
         )
         hunter.setDailyReminders(true)
-        val vm = SettingsViewModel(hunter, Today { TEST_DAY }, FakeAdConsent())
+        val vm = SettingsViewModel(hunter, Today { TEST_DAY }, FakeAdConsent(), Now { TEST_NOW })
         collecting(vm.uiState)
         assertTrue(vm.uiState.value.dailyReminders)
         assertFalse(vm.uiState.value.notificationsBlocked)
@@ -134,7 +136,7 @@ class SettingsViewModelTest {
 
     @Test
     fun `notifications off with no reminder on isn't shown as blocked`() = runTest {
-        val vm = SettingsViewModel(userData, Today { TEST_DAY }, FakeAdConsent())
+        val vm = SettingsViewModel(userData, Today { TEST_DAY }, FakeAdConsent(), Now { TEST_NOW })
         collecting(vm.uiState)
         vm.setNotificationsAllowed(false)
         assertFalse(vm.uiState.value.notificationsBlocked)

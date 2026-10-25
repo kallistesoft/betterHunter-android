@@ -8,4 +8,8 @@ android {
 
 dependencies {
     implementation(project(":core:ads"))
+    implementation(project(":core:billing"))
+    implementation(libs.androidx.activity.compose)
+
+    testImplementation(libs.mockk)
 }

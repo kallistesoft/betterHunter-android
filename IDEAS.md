@@ -58,6 +58,10 @@ and wind, harvest and tag log, gear checklists, species ID (exists), offline map
 
 ### One purchase for both parts
 
+*Since P15 (2026-10-25):* "Remove ads forever" is sold at CA$14.99, so a Pro at about CA$9.99/year stays the better
+deal. People who bought it keep it forever; Pro could offer them a lower first-year price (Play subscription offers
+can be shown to chosen users).
+
 A single **BetterHunter Pro** purchase (no ads, unlimited mock exams, all field features) is easier to understand and
 to sell than two unlocks, and someone who paid during prep is already a customer when the season starts. A cheaper
 prep-only unlock can come later if exam students won't pay for field features. Keep both free parts genuinely useful:

@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.SystemClock
 import ca.kallistesoft.hunt.core.ads.AdConsent
+import ca.kallistesoft.hunt.core.ads.AdFree
 import ca.kallistesoft.hunt.core.ads.AdsConfig
 import ca.kallistesoft.hunt.core.ads.AdsManager
 import ca.kallistesoft.hunt.core.ads.GoogleAdsSdk
@@ -25,13 +26,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
-/** AdMob behind [InterstitialAds], [RewardedAds] and [AdConsent]; the app provides [AdsConfig] (the ad unit of its build type). */
+/**
+ * AdMob behind [InterstitialAds], [RewardedAds] and [AdConsent]; the app provides [AdsConfig] (the ad units of its build
+ * type) and `:core:billing` provides [AdFree].
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 internal object AdsModule {
     @Provides
     @Singleton
-    fun adsManager(@ApplicationContext context: Context, flags: FeatureFlags, config: AdsConfig): AdsManager {
+    fun adsManager(@ApplicationContext context: Context, flags: FeatureFlags, config: AdsConfig, adFree: AdFree): AdsManager {
         // Created when the activity is injected, before it resumes: the first resumed activity is seen.
         val resumed = ResumedActivity()
         (context.applicationContext as Application).registerActivityLifecycleCallbacks(resumed)
@@ -44,6 +48,7 @@ internal object AdsModule {
             scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate),
             clock = SystemClock::elapsedRealtime,
             isOnline = { online(context) },
+            adFree = adFree,
         )
     }
 

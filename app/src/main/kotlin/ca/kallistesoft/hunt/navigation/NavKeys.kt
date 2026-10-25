@@ -45,6 +45,10 @@ data class MockExams(val examId: String) : NavKey
 @Serializable
 data object Settings : NavKey
 
+/** Remove ads (P15): 7 days or forever, from Settings or the mock exam retake dialog. */
+@Serializable
+data object RemoveAds : NavKey
+
 /** Settings: change one onboarding answer. */
 @Serializable
 data class EditProfile(val field: ProfileField) : NavKey

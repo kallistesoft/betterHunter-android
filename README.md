@@ -143,6 +143,17 @@ Settings). Tests use `FakeInterstitialAds`, `FakeRewardedAds` and `FakeAdConsent
 `debug` and `qa` (emulators, smoke tests) always use Google's sample IDs, which only serve test ads. Never tap a real
 ad in the app.
 
+## Remove ads (Google Play Billing)
+
+Two one-time products remove the ads (DECISIONS.md, P15): `remove_ads_week` (CA$1.99, 7 days, kept on the device,
+consumed) and `remove_ads_forever` (CA$14.99, restored by Play). `:core:billing` holds them behind `Purchases`
+(`prices`, `refresh()` at launch, `buy()`, `restore()`); the app checks the `NO_ADS` entitlement, which `AdsManager`
+reads through `AdFree`. `PlayPurchases` applies Play's answers (forever acknowledged and dropped on a refund, each week
+counted once by its token then consumed, pending payments once paid) on `GoogleBillingGateway`, a thin layer over the
+`BillingClient`. **Debug builds use `TestPurchases`:** "Buy" gives the entitlement at once, nothing charged (the debug
+application id has no products in Play). Release and qa use Play. Tests use `FakePurchases` from `:core:testing`.
+Play Console setup: FOLLOW-UP.md, section 7.
+
 ## Feature flags (Firebase Remote Config)
 
 Flags are Boolean Remote Config parameters, declared in `core/flags/.../FeatureFlag.kt` with their in-app default:

@@ -28,6 +28,7 @@ import ca.kallistesoft.hunt.feature.quiz.FieldQuizScreen
 import ca.kallistesoft.hunt.feature.quiz.QuizScreen
 import ca.kallistesoft.hunt.feature.settings.ProfileEditScreen
 import ca.kallistesoft.hunt.feature.settings.SeasonDateScreen
+import ca.kallistesoft.hunt.feature.settings.RemoveAdsScreen
 import ca.kallistesoft.hunt.feature.settings.SettingsScreen
 import ca.kallistesoft.hunt.navigation.About
 import ca.kallistesoft.hunt.navigation.EditProfile
@@ -41,6 +42,7 @@ import ca.kallistesoft.hunt.navigation.PassedExam
 import ca.kallistesoft.hunt.navigation.Provinces
 import ca.kallistesoft.hunt.navigation.Quiz
 import ca.kallistesoft.hunt.navigation.Recognition
+import ca.kallistesoft.hunt.navigation.RemoveAds
 import ca.kallistesoft.hunt.navigation.SeasonDate
 import ca.kallistesoft.hunt.navigation.Settings
 import ca.kallistesoft.hunt.navigation.push
@@ -134,6 +136,7 @@ fun BetterHunterApp(
                     examId = key.examId,
                     onBack = back,
                     onStartMock = { mock, rewarded -> backStack.push(Quiz(key.examId, QuizMode.EXAM, mock, rewarded)) },
+                    onOpenRemoveAds = { backStack.push(RemoveAds) },
                 )
             }
             entry<Provinces> {
@@ -178,7 +181,11 @@ fun BetterHunterApp(
                     onOpenAbout = { backStack.push(About) },
                     onSetLanguage = ::setAppLanguage,
                     onOpenSeasonDate = { backStack.push(SeasonDate) },
+                    onOpenRemoveAds = { backStack.push(RemoveAds) },
                 )
+            }
+            entry<RemoveAds> {
+                RemoveAdsScreen(onBack = back)
             }
             entry<EditProfile> { key ->
                 ProfileEditScreen(field = key.field, onDone = back)

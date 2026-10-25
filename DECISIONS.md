@@ -17,7 +17,8 @@ concept; the store apps are native (Kotlin/Compose here, Swift/SwiftUI on iOS). 
 language (shown in system settings), not an app preference. The toggle is in Settings, and on onboarding's first
 screen (Settings isn't reachable yet); Home has none since 2026-10-25. Questions carry both languages.
 
-**P3. No user accounts.** *Product.* Purchases are tied to the store account (Play or App Store restore them);
+**P3. No user accounts.** *Product.* Purchases are tied to the store account (Play or App Store restore them; the
+7-day Remove ads pass is the exception, kept on the device, P15);
 progress stays on the device and follows the user through the OS backup. *Why:* no sign-in friction, no personal data,
 no account-deletion obligations. *Revisit only for:* live sync across devices, purchases shared across platforms,
 sharing with an instructor or group.
@@ -49,7 +50,8 @@ works without Firebase configured. *No Firebase Analytics.*
 
 **P8. Ads (AdMob) are in the first release.** *Product.* The Play Console declarations (Ads, Advertising ID, AdMob
 data types) were entered for that and stay; the `AD_ID` permission stays. Placement: one interstitial after a
-finished test, never during a question; since P14, also a rewarded ad the user chooses for a mock exam retake.
+finished test, never during a question; since P14, also a rewarded ad the user chooses for a mock exam retake;
+since P15, none at all for users who paid to remove them.
 *In the app (2026-10-23):* after the last answer of an exam-training quiz
 (practice, mock exam, review, recognition game), the preloaded interstitial shows, then the results; none loaded means
 the results at once. At most one every 3 minutes (in the app and as the AdMob frequency cap). Hunters' field
@@ -133,6 +135,20 @@ citations keep the manual's title and link ("ICAF manual (FédéCP, 2020), p. 61
 (2026-10-24):* exam ids (`ICAF`, `ABHE`) are internal only; `exams.json` gives each exam a `name` and a `short` name;
 `BundledContentTest` and `core/ui` `NoCourseNamesTest` fail on any course or publisher name in strings, exam names or
 question text.
+
+**P15. Remove ads: 7 days for CA$1.99, forever for CA$14.99.** *Product.* Settings → Remove ads, and a link in the
+mock exam retake dialog, sell two Google Play one-time products. **7 days** (`remove_ads_week`, consumed so it can be
+bought again; bought again before it ends, 7 more days) is **kept on this phone only**: deleting the app or changing
+phones loses the days left, and Play doesn't restore it. That is said under the offer, again in a confirmation before
+Play's sheet, while it runs, and in the Play product description. **Forever** (`remove_ads_forever`, acknowledged)
+is restored by Play and follows what Play says the account owns (a refund takes it back). Without ads there are no
+ads at all: no interstitial, nothing preloaded, and mock exam retakes and "Reset all" start at once. *Why CA$14.99 and
+not CA$9.99:* a later Pro (features and no ads, about CA$9.99/year) must stay the better deal and not be undercut by a
+cheap forever option. The app checks **entitlements, never products** (`Entitlement.NO_ADS`), so Pro can add one
+without touching what was sold; "Remove ads forever" is named exactly that, never "Premium", and stays honoured
+whatever comes later. *In the app (2026-10-25):* `:core:billing` (Play Billing 8.3: `Purchases`, `PlayPurchases` on
+`GoogleBillingGateway`, `TestPurchases` in debug builds), `UserProgress.adFreeForever` / `adFreeUntil` /
+`weekPassTokens`, `AdFree` read by `AdsManager`. Play Console setup: FOLLOW-UP.md, section 7.
 
 **P14. Ten mock exams per exam; retakes behind a rewarded ad.** *Product.* "Mock exams" on an exam card opens Mock 1
 to 10, each with its best and last score (passed or failed by the best), so progress shows ("6 of 10 passed"). A mock

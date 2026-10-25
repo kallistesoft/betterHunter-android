@@ -55,6 +55,20 @@ class BetterHunterAppTest {
     }
 
     @Test
+    fun removeAdsFromSettingsWithTheDebugStore() {
+        app.launch(student)
+        app.clickTag("settings")
+        app.clickTag("settings-remove-ads")
+        // Debug builds buy without Play: the week is given at once, after the warning that it stays on this phone.
+        app.clickTag("remove-ads-week-buy")
+        app.clickTag("remove-ads-week-continue")
+        app.waitForTag("remove-ads-week-running")
+        assertTrue(runBlocking { app.app.userData.progress.first().adFreeUntil } != null)
+        app.clickTag("remove-ads-forever-buy")
+        app.waitForTag("remove-ads-forever-owned")
+    }
+
+    @Test
     fun settingsLanguageSetsThePerAppLanguage() {
         app.launch(student)
         app.clickTag("settings")

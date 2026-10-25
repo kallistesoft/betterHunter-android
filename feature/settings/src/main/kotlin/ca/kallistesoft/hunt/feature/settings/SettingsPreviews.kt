@@ -1,6 +1,7 @@
 package ca.kallistesoft.hunt.feature.settings
 
 import androidx.compose.runtime.Composable
+import ca.kallistesoft.hunt.core.billing.AdFreeProduct
 import ca.kallistesoft.hunt.core.designsystem.component.BhPreviews
 import ca.kallistesoft.hunt.core.designsystem.component.PreviewSurface
 import ca.kallistesoft.hunt.core.model.HunterType
@@ -65,3 +66,38 @@ internal fun ProfileEditPreview() = PreviewSurface {
         {}, {}, {}, {}, {},
     )
 }
+
+/** Remove ads (P15): both offers with Play's prices. */
+@BhPreviews
+@Composable
+internal fun RemoveAdsPreview() = PreviewSurface {
+    RemoveAdsContent(
+        RemoveAdsUiState(prices = mapOf(AdFreeProduct.WEEK to "CA$1.99", AdFreeProduct.FOREVER to "CA$14.99"), loading = false),
+        onBack = {}, onBuy = {}, onRestore = {}, onDismissMessage = {},
+    )
+}
+
+/** A 7-day pass running, and a pending payment for forever. */
+@BhPreviews
+@Composable
+internal fun RemoveAdsWeekPreview() = PreviewSurface {
+    RemoveAdsContent(
+        RemoveAdsUiState(
+            prices = mapOf(AdFreeProduct.WEEK to "CA$1.99", AdFreeProduct.FOREVER to "CA$14.99"),
+            untilDay = PREVIEW_DAY,
+            message = RemoveAdsMessage.PENDING,
+            loading = false,
+        ),
+        onBack = {}, onBuy = {}, onRestore = {}, onDismissMessage = {},
+    )
+}
+
+/** Forever bought: thanks, and nothing more to sell. */
+@BhPreviews
+@Composable
+internal fun RemoveAdsForeverPreview() = PreviewSurface {
+    RemoveAdsContent(RemoveAdsUiState(forever = true, loading = false), onBack = {}, onBuy = {}, onRestore = {}, onDismissMessage = {})
+}
+
+/** November 1st, 2026: a fixed day so the screenshots don't change. */
+private const val PREVIEW_DAY = 20_758L

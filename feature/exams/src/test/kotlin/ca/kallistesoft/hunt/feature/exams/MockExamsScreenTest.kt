@@ -9,6 +9,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToNode
+import ca.kallistesoft.hunt.core.data.Now
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.model.MOCK_COUNT
 import ca.kallistesoft.hunt.core.model.MockResult
@@ -17,6 +18,7 @@ import ca.kallistesoft.hunt.core.testing.FakeContentRepository
 import ca.kallistesoft.hunt.core.testing.FakeRewardedAds
 import ca.kallistesoft.hunt.core.testing.FakeUserDataRepository
 import ca.kallistesoft.hunt.core.testing.ScreenshotDevice
+import ca.kallistesoft.hunt.core.testing.TEST_NOW
 import ca.kallistesoft.hunt.core.testing.TestContent
 import ca.kallistesoft.hunt.core.ui.R
 import org.junit.Assert.assertEquals
@@ -96,11 +98,11 @@ class MockExamsScreenTest {
     @Test
     fun `an unlocked retake opens as a rewarded run`() {
         val userData = FakeUserDataRepository(UserProgress().withMockResult(TestContent.pal.id, 1, 70))
-        val vm = MockExamsViewModel(TestContent.pal.id, FakeContentRepository(), userData, FakeRewardedAds())
+        val vm = MockExamsViewModel(TestContent.pal.id, FakeContentRepository(), userData, FakeRewardedAds(), Now { TEST_NOW })
         val started = mutableListOf<Pair<Int, Boolean>>()
         compose.setContent {
             BetterHunterTheme {
-                MockExamsScreen(TestContent.pal.id, onBack = {}, onStartMock = { n, rewarded -> started += n to rewarded }, viewModel = vm)
+                MockExamsScreen(TestContent.pal.id, onBack = {}, onStartMock = { n, rewarded -> started += n to rewarded }, onOpenRemoveAds = {}, viewModel = vm)
             }
         }
         compose.onNodeWithTag("mock-retake-1").performClick()
@@ -108,5 +110,48 @@ class MockExamsScreenTest {
         compose.onNodeWithTag("mock-start-2").performClick()
         compose.waitForIdle()
         assertEquals(listOf(1 to true, 2 to false), started)
+    }
+
+    @Test
+    fun `the retake dialog offers to remove ads`() {
+        val opened = mutableListOf<String>()
+        compose.setContent {
+            BetterHunterTheme {
+                MockExamsContent(
+                    previewMocksState,
+                    onBack = {},
+                    onStart = {},
+                    onUnlock = { events += "unlock $it" },
+                    onDismissOffline = {},
+                    onOpenRemoveAds = { opened += "remove-ads" },
+                )
+            }
+        }
+        compose.onNodeWithTag("mock-retake-1").performClick()
+        compose.onNodeWithTag("retake-remove-ads").performClick()
+        assertEquals(listOf("remove-ads"), opened)
+        assertEquals("nothing unlocked", emptyList<String>(), events)
+    }
+
+    @Test
+    fun `without ads, a retake and Reset all go through at once`() {
+        show(previewMocksState.copy(adFree = true, mocks = (1..MOCK_COUNT).map { MockRow(it, MockResult(90, 90), passed = true) }))
+        compose.onNodeWithTag("mock-retake-1").performClick()
+        compose.onNodeWithTag("watch-ad").assertDoesNotExist()
+        compose.onNodeWithTag("mocks-reset").performClick()
+        assertEquals(listOf("unlock ${MockUnlock.Retake(1)}", "unlock ${MockUnlock.ResetAll}"), events)
+    }
+
+    @Test
+    fun `the list knows when ads are removed`() {
+        val userData = FakeUserDataRepository(UserProgress().withAdFreeForever(true))
+        val vm = MockExamsViewModel(TestContent.pal.id, FakeContentRepository(), userData, FakeRewardedAds(), Now { TEST_NOW })
+        compose.setContent {
+            BetterHunterTheme {
+                MockExamsScreen(TestContent.pal.id, onBack = {}, onStartMock = { _, _ -> }, onOpenRemoveAds = {}, viewModel = vm)
+            }
+        }
+        compose.waitUntil { vm.uiState.value.adFree }
+        compose.onNodeWithTag("mock-start-1").assertIsDisplayed()
     }
 }

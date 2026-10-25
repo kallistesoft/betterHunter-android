@@ -24,7 +24,7 @@ class AdsModuleTest {
 
     @Test
     fun `one manager serves the quiz and the consent, and nothing is asked before launch`() {
-        val manager = AdsModule.adsManager(context, FakeFeatureFlags(), AdsConfig("unit-1"))
+        val manager = AdsModule.adsManager(context, FakeFeatureFlags(), AdsConfig("unit-1")) { false }
         assertSame(manager, AdsModule.interstitialAds(manager))
         assertSame(manager, AdsModule.adConsent(manager))
         assertSame(manager, AdsModule.rewardedAds(manager))

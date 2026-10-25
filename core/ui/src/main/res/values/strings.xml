@@ -349,4 +349,29 @@
     <string name="ok">OK</string>
     <string name="next_mock">Next mock</string>
     <string name="all_mocks">All mocks</string>
+
+    <!-- Remove ads (P15) -->
+    <string name="remove_ads">Remove ads</string>
+    <string name="remove_ads_sub">7 days or forever</string>
+    <string name="remove_ads_until">No ads until %1$s</string>
+    <string name="remove_ads_forever_on">No ads, forever</string>
+    <string name="remove_ads_intro">No ad after a test, and mock exam retakes start at once.</string>
+    <string name="remove_ads_week_title">7 days without ads</string>
+    <string name="remove_ads_week_lost">Kept on this phone only: if you delete the app or change phones, the days left are lost. Not restored by Play.</string>
+    <string name="remove_ads_week_more">Bought again before it ends: 7 more days.</string>
+    <string name="remove_ads_forever_title">No ads, forever</string>
+    <string name="remove_ads_forever_kept">Restored by Play on your other devices with the same Google account.</string>
+    <string name="remove_ads_buy">Buy · %1$s</string>
+    <string name="remove_ads_price_unknown">Price shown by Google Play</string>
+    <string name="remove_ads_thanks">No ads, forever. Thank you!</string>
+    <string name="remove_ads_week_running">No ads until %1$s. Kept on this phone only.</string>
+    <string name="remove_ads_restore">Restore purchases</string>
+    <string name="remove_ads_restored">Purchases restored.</string>
+    <string name="remove_ads_restore_failed">Google Play can\'t be reached. Check your connection and try again.</string>
+    <string name="remove_ads_pending">Payment pending: the ads stop once it\'s paid.</string>
+    <string name="remove_ads_unavailable">Google Play can\'t sell this right now. Check your connection and that you\'re signed in to the Play Store.</string>
+    <string name="remove_ads_failed">The purchase didn\'t go through. Nothing was charged.</string>
+    <string name="remove_ads_week_confirm_title">Buy 7 days without ads?</string>
+    <string name="remove_ads_continue">Continue to Google Play</string>
+    <string name="remove_ads_link">Remove ads</string>
 </resources>

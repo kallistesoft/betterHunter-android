@@ -27,6 +27,15 @@ fun interface Today {
     }
 }
 
+/** The time now (epoch ms); swapped out in tests. */
+fun interface Now {
+    operator fun invoke(): Long
+
+    companion object {
+        val System = Now { java.lang.System.currentTimeMillis() }
+    }
+}
+
 /** The user's local progress. Nothing leaves the device. */
 interface UserDataRepository {
     val progress: Flow<UserProgress>
@@ -44,6 +53,12 @@ interface UserDataRepository {
 
     /** "I passed the real exam": the user becomes a hunter. */
     suspend fun markExamPassed(examId: String)
+
+    /** A 7-day pass bought ([token] from Play), counted at [nowMillis] (P15). */
+    suspend fun addWeekPass(token: String, nowMillis: Long)
+
+    /** "Remove ads forever" owned or not, as Play says (P15). */
+    suspend fun setAdFreeForever(owned: Boolean)
 
     /** Mock [mock] of [examId] finished with [percent] right (P14). */
     suspend fun recordMockResult(examId: String, mock: Int, percent: Int)
@@ -118,6 +133,14 @@ internal class DataStoreUserDataRepository @Inject constructor(
 
     override suspend fun markExamPassed(examId: String) {
         store.updateData { it.withExamPassed(examId) }
+    }
+
+    override suspend fun addWeekPass(token: String, nowMillis: Long) {
+        store.updateData { it.withWeekPass(token, nowMillis) }
+    }
+
+    override suspend fun setAdFreeForever(owned: Boolean) {
+        store.updateData { it.withAdFreeForever(owned) }
     }
 
     override suspend fun recordMockResult(examId: String, mock: Int, percent: Int) {

@@ -26,9 +26,10 @@ class AdsManagerTest {
     private var now = 0L
     private var onScreen: Activity? = activity
     private var online = true
+    private var adFree = false
 
     private fun TestScope.manager(config: AdsConfig = AdsConfig("unit-1", rewardedUnitId = "rewarded-1")) = AdsManager(
-        consent, sdk, flags, { onScreen }, config, backgroundScope, { now }, { online },
+        consent, sdk, flags, { onScreen }, config, backgroundScope, { now }, { online }, { adFree },
     )
 
     /** Consent gathered at launch, ads allowed: the SDK starts and an ad is preloaded. */
@@ -338,6 +339,26 @@ class AdsManagerTest {
         ads.preload()
         runCurrent()
         assertEquals("a fresh one is kept", 2, sdk.rewardedLoads)
+    }
+
+    @Test
+    fun `while ads are removed nothing loads or shows, and rewards are given at once`() = runTest {
+        adFree = true
+        val ads = started()
+        ads.preload()
+        runCurrent()
+        assertEquals(0, sdk.initialized)
+        ads.showBeforeResults()
+        assertEquals(0, sdk.shown)
+        online = false
+        assertEquals("even offline", RewardOutcome.NO_ADS, ads.showForReward())
+        assertEquals(0, sdk.rewardedLoads)
+
+        adFree = false // the week is over: ads come back
+        online = true
+        ads.showBeforeResults()
+        runCurrent()
+        assertEquals(1, sdk.loads)
     }
 
     private class FakeConsent : ConsentGateway {

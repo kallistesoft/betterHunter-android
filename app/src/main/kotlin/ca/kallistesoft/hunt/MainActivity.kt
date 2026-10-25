@@ -17,6 +17,7 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.NavKey
 import ca.kallistesoft.hunt.core.ads.AdConsent
+import ca.kallistesoft.hunt.core.billing.Purchases
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.update.ForceUpdateScreen
 import ca.kallistesoft.hunt.feature.quiz.quizShortcutGroup
@@ -31,6 +32,8 @@ class MainActivity : AppCompatActivity() {
 
     @Inject lateinit var adConsent: AdConsent
 
+    @Inject lateinit var purchases: Purchases
+
     /** The back stack a reminder's notification asks for, until the app has opened it. */
     private var deepLink by mutableStateOf<List<NavKey>?>(null)
 
@@ -43,6 +46,8 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         // Ads consent (UMP) on each launch: the form shows only where it's required; ads start once allowed.
         adConsent.gatherConsent(this)
+        // Remove ads (P15): prices, and purchases made or refunded while the app was closed.
+        purchases.refresh()
 
         setContent {
             val state by viewModel.uiState.collectAsStateWithLifecycle()

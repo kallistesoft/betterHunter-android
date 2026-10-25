@@ -353,4 +353,29 @@
     <string name="ok">OK</string>
     <string name="next_mock">Examen suivant</string>
     <string name="all_mocks">Tous les examens</string>
+
+    <!-- Retirer les pubs (P15) -->
+    <string name="remove_ads">Retirer les pubs</string>
+    <string name="remove_ads_sub">7 jours ou pour toujours</string>
+    <string name="remove_ads_until">Sans pub jusqu\'au %1$s</string>
+    <string name="remove_ads_forever_on">Sans pub, pour toujours</string>
+    <string name="remove_ads_intro">Plus de pub après un test, et refaire un examen simulé commence tout de suite.</string>
+    <string name="remove_ads_week_title">7 jours sans pub</string>
+    <string name="remove_ads_week_lost">Gardé sur ce téléphone seulement : si vous supprimez l\'appli ou changez de téléphone, les jours qui restent sont perdus. Play ne le restaure pas.</string>
+    <string name="remove_ads_week_more">Racheté avant la fin : 7 jours de plus.</string>
+    <string name="remove_ads_forever_title">Sans pub, pour toujours</string>
+    <string name="remove_ads_forever_kept">Restauré par Play sur vos autres appareils avec le même compte Google.</string>
+    <string name="remove_ads_buy">Acheter · %1$s</string>
+    <string name="remove_ads_price_unknown">Prix affiché par Google Play</string>
+    <string name="remove_ads_thanks">Sans pub, pour toujours. Merci!</string>
+    <string name="remove_ads_week_running">Sans pub jusqu\'au %1$s. Gardé sur ce téléphone seulement.</string>
+    <string name="remove_ads_restore">Restaurer les achats</string>
+    <string name="remove_ads_restored">Achats restaurés.</string>
+    <string name="remove_ads_restore_failed">Google Play est injoignable. Vérifiez votre connexion et réessayez.</string>
+    <string name="remove_ads_pending">Paiement en attente : les pubs s\'arrêtent dès qu\'il est réglé.</string>
+    <string name="remove_ads_unavailable">Google Play ne peut pas vendre cet achat pour l\'instant. Vérifiez votre connexion et que vous êtes connecté au Play Store.</string>
+    <string name="remove_ads_failed">L\'achat n\'a pas abouti. Rien n\'a été facturé.</string>
+    <string name="remove_ads_week_confirm_title">Acheter 7 jours sans pub?</string>
+    <string name="remove_ads_continue">Continuer vers Google Play</string>
+    <string name="remove_ads_link">Retirer les pubs</string>
 </resources>

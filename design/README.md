@@ -20,6 +20,10 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | Onboarding: where do you hunt? (Québec, Alberta, elsewhere in Canada) | `HuntWhere.dc.html` | `HuntWhereLight.dc.html` | built |
 | Home | `Main.dc.html` | `MainLight.dc.html` | built |
 | Settings: hunter type, hunting with, where you hunt, my provinces, language, daily goal; About inside | `Settings.dc.html` | `SettingsLight.dc.html` | built (each profile row reopens its onboarding question with Save) |
+| Remove ads (P15): 7 days for CA$1.99, kept on this phone only, or forever for CA$14.99, restored by Play | `RemoveAds.dc.html` | `RemoveAdsLight.dc.html` | built |
+| Remove ads: the week's limit again before Play's sheet (dialog) | `RemoveAdsConfirm.dc.html` | `RemoveAdsConfirmLight.dc.html` | built |
+| Remove ads: a 7-day pass running | `RemoveAdsWeek.dc.html` | `RemoveAdsWeekLight.dc.html` | built |
+| Remove ads: forever bought | `RemoveAdsForever.dc.html` | `RemoveAdsForeverLight.dc.html` | built |
 | My provinces: one switch per province (Québec; Alberta; elsewhere in Canada, the PAL) adds or hides its quizzes | `Provinces.dc.html` | `ProvincesLight.dc.html` | built (from Settings and Exam training) |
 | About | `About.dc.html` | `AboutLight.dc.html` | built |
 | Exam training | `ExamTraining.dc.html` | `ExamTrainingLight.dc.html` | built |
@@ -30,7 +34,7 @@ the screen exists in the app; "restyle" means its layout in the app still differ
 | Mock exam: question | `ExamQuestion.dc.html` | `ExamQuestionLight.dc.html` | built |
 | Mock exam: quit this test? (dialog) | `QuitDialog.dc.html` | `QuitDialogLight.dc.html` | built |
 | Mock exam: results ("All mocks" / "Next mock") | `ExamResults.dc.html` | `ExamResultsLight.dc.html` | built |
-| Retake a finished mock: watch a rewarded ad (dialog) | `RetakeAd.dc.html` | `RetakeAdLight.dc.html` | built |
+| Retake a finished mock: watch a rewarded ad, or Remove ads (dialog) | `RetakeAd.dc.html` | `RetakeAdLight.dc.html` | built |
 | Retake offline: no ad, no retake (dialog) | `AdOffline.dc.html` | `AdOfflineLight.dc.html` | built |
 | Mock exams, all ten done: "Reset all" behind a rewarded ad | `MockExamsAllDone.dc.html` | `MockExamsAllDoneLight.dc.html` | built |
 | I passed the real exam: confirm (from Exam training) | `PassedExam.dc.html` | `PassedExamLight.dc.html` | built |
