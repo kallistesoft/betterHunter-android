@@ -146,8 +146,8 @@ most once, in a random order, with its choices shuffled (no choice in the banks 
 of the above"). Practice, review and the photo of the day stay free and unlimited. *In the app (2026-10-25):*
 `UserProgress.mockResults` (exam → mock → best, last); `RewardedAds` in `:core:ads` (`RewardOutcome`: EARNED,
 NOT_EARNED, OFFLINE, NO_ADS; "online" means a validated network); `MockExamsScreen` in `:feature:exams`; the quiz key
-carries the mock number and whether it was rewarded. Release needs the AdMob rewarded unit (FOLLOW-UP.md, section 2);
-blank, retakes are free.
+carries the mock number and whether it was rewarded. Release uses the AdMob rewarded unit "Mock retake"
+(FOLLOW-UP.md, section 2).
 
 ## Design
 
