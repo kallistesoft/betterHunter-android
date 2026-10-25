@@ -10,7 +10,6 @@ import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.model.FieldRun
 import ca.kallistesoft.hunt.core.model.HunterType
-import ca.kallistesoft.hunt.core.model.Lang
 import ca.kallistesoft.hunt.core.model.Province
 import ca.kallistesoft.hunt.core.model.QuizMode
 import ca.kallistesoft.hunt.core.model.SeasonStatus
@@ -52,7 +51,6 @@ class HomeScreenTest {
                 onOpenSettings = { events += "settings" },
                 onOpenProvinces = { events += "provinces" },
                 onStartQuiz = { exam, mode -> events += "quiz:$exam:$mode" },
-                onSetLanguage = { events += "lang:$it" },
                 onAnswerPhoto = { events += "photo:$it" },
                 onDismissBanner = { events += "dismiss" },
                 onOpenFieldSkills = { events += "skills" },
@@ -76,10 +74,10 @@ class HomeScreenTest {
         compose.onNodeWithTag("settings").performClick()
         compose.onNodeWithTag("pod-choice-2").performClick()
         compose.onNodeWithText("Learn more").performClick()
-        compose.onNodeWithTag("toggle-FR").performClick()
+        compose.onNodeWithTag("lang-toggle").assertDoesNotExist() // in Settings
 
         assertEquals(
-            listOf("quiz:ICAF:${QuizMode.PRACTICE}", "provinces", "exams", "recognition", "settings", "photo:2", "about", "lang:${Lang.FR}"),
+            listOf("quiz:ICAF:${QuizMode.PRACTICE}", "provinces", "exams", "recognition", "settings", "photo:2", "about"),
             events,
         )
     }
@@ -216,7 +214,7 @@ class HomeScreenTest {
             BetterHunterTheme {
                 HomeScreen(
                     onOpenExams = {}, onOpenRecognition = {}, onOpenAbout = {}, onOpenSettings = {}, onOpenProvinces = {},
-                    onStartQuiz = { _, _ -> }, onSetLanguage = {}, onOpenFieldSkills = {}, onStartField = {}, onOpenSeasonDate = {},
+                    onStartQuiz = { _, _ -> }, onOpenFieldSkills = {}, onStartField = {}, onOpenSeasonDate = {},
                     viewModel = viewModel,
                 )
             }

@@ -14,7 +14,8 @@ concept; the store apps are native (Kotlin/Compose here, Swift/SwiftUI on iOS). 
 (P4). *Why:* best platform fit and tooling. *Rejected:* shipping the Flutter app.
 
 **P2. Bilingual FR/EN.** *Product.* French for any `fr` locale, English otherwise; the FR/EN toggle sets a per-app
-language (shown in system settings), not an app preference. Questions carry both languages.
+language (shown in system settings), not an app preference. The toggle is in Settings, and on onboarding's first
+screen (Settings isn't reachable yet); Home has none since 2026-10-25. Questions carry both languages.
 
 **P3. No user accounts.** *Product.* Purchases are tied to the store account (Play or App Store restore them);
 progress stays on the device and follows the user through the OS backup. *Why:* no sign-in friction, no personal data,

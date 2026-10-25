@@ -55,8 +55,9 @@ class BetterHunterAppTest {
     }
 
     @Test
-    fun theLanguageToggleSetsThePerAppLanguage() {
+    fun settingsLanguageSetsThePerAppLanguage() {
         app.launch(student)
+        app.clickTag("settings")
 
         app.clickTag("toggle-FR")
         assertEquals("fr-CA", AppCompatDelegate.getApplicationLocales().toLanguageTags())
