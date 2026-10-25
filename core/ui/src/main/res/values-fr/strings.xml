@@ -26,7 +26,7 @@
 
     <!-- Provinces -->
     <string name="province_qc">Québec</string>
-    <string name="province_qc_sub">Questions d\'examen de chasse (arc et arbalète bientôt)</string>
+    <string name="province_qc_sub">Questions d\'examen de chasse et PPA (arc et arbalète bientôt)</string>
     <string name="province_ab">Alberta</string>
     <string name="province_ab_sub">Questions d\'examen de chasse et PPA (permis d\'armes à feu)</string>
     <string name="province_other">Ailleurs au Canada</string>

@@ -26,13 +26,13 @@ class ExamsViewModelTest {
     fun `the user's provinces set their exams, the other provinces are offered`() = runTest {
         ExamsViewModel(FakeContentRepository(), userData).uiState.test {
             val state = awaitItemMatching { !it.loading }
-            assertEquals(listOf("ICAF"), state.mine.map { it.exam.id })
+            assertEquals(listOf("ICAF", "PAL"), state.mine.map { it.exam.id })
             assertEquals(listOf(Province.AB, Province.OTHER), state.otherProvinces)
             assertEquals(listOf("ID"), state.games.map { it.exam.id })
 
             userData.setProvince(Province.OTHER, true)
             val more = awaitItem()
-            assertEquals(listOf("ICAF", "PAL"), more.mine.map { it.exam.id })
+            assertEquals(listOf("ICAF", "PAL"), more.mine.map { it.exam.id }) // the PAL once
             assertEquals(listOf(Province.AB), more.otherProvinces)
         }
     }
@@ -61,7 +61,7 @@ class ExamsViewModelTest {
             userData.progress.value = userData.progress.value
                 .record("qc-1", correct = true, TEST_DAY)
                 .record("qc-2", correct = false, TEST_DAY)
-            val icaf = awaitItem().mine.single()
+            val icaf = awaitItem().mine.first { it.exam.id == "ICAF" }
             assertEquals(1f / 3, icaf.readiness, 1e-6f)
             assertEquals(1, icaf.weakCount)
         }

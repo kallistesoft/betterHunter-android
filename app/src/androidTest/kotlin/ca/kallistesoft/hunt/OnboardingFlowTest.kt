@@ -29,7 +29,7 @@ class OnboardingFlowTest {
         app.waitForTag("today-practice")
         app.clickTag("hub-exams")
         app.waitForTag("exam-card-ICAF")
-        rule.onNode(hasTestTag("exam-card-PAL")).assertDoesNotExist()
+        app.waitForTag("exam-card-PAL")
     }
 
     @Test

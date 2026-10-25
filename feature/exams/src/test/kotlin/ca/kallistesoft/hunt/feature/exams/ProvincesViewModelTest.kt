@@ -36,7 +36,7 @@ class ProvincesViewModelTest {
             vm.setEnabled(Province.AB, false)
             val quebecOnly = awaitItem().provinces
             assertEquals(listOf(true, false, false), quebecOnly.map { it.enabled })
-            assertEquals(listOf("ICAF"), userData.progress.value.myExamIds)
+            assertEquals(listOf("ICAF", "PAL"), userData.progress.value.myExamIds)
         }
     }
 }
