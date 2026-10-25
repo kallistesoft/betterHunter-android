@@ -10,6 +10,7 @@ import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Block
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Event
 import androidx.compose.material.icons.outlined.NotificationsActive
@@ -74,6 +75,7 @@ fun SettingsScreen(
     onOpenAbout: () -> Unit,
     onSetLanguage: (Lang) -> Unit,
     onOpenSeasonDate: () -> Unit,
+    onOpenRemoveAds: () -> Unit,
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -102,6 +104,7 @@ fun SettingsScreen(
         onSetLanguage = onSetLanguage,
         onSetDailyGoal = viewModel::setDailyGoal,
         onOpenSeasonDate = onOpenSeasonDate,
+        onOpenRemoveAds = onOpenRemoveAds,
         // Turning a reminder on asks for the notification permission first (or, if notifications were turned off
         // in system settings, opens them: asking again would be refused at once); off needs nothing.
         onDailyReminders = { on ->
@@ -142,6 +145,7 @@ internal fun SettingsContent(
     onSeasonReminders: (Boolean) -> Unit = {},
     onOpenNotificationSettings: () -> Unit = {},
     onPrivacyOptions: () -> Unit = {},
+    onOpenRemoveAds: () -> Unit = {},
 ) {
     Scaffold(
         topBar = { BackTopAppBar(stringResource(R.string.settings), onBack) },
@@ -169,6 +173,26 @@ internal fun SettingsContent(
             }
             item { SectionTitle(stringResource(R.string.settings_app)) }
             item { AppCard(state.dailyGoal, onSetLanguage, onSetDailyGoal, showDailyGoal = !state.hunter) }
+            item {
+                SettingsCard(
+                    rows = listOf<@Composable ColumnScope.() -> Unit>(
+                        {
+                            SettingRow(
+                                Icons.Outlined.Block,
+                                stringResource(R.string.remove_ads),
+                                subtitle = when {
+                                    state.adFreeForever -> stringResource(R.string.remove_ads_forever_on)
+                                    state.adFreeUntilDay != null -> stringResource(R.string.remove_ads_until, shortDate(state.adFreeUntilDay))
+                                    else -> stringResource(R.string.remove_ads_sub)
+                                },
+                                onClick = onOpenRemoveAds,
+                                orange = !state.adFreeForever && state.adFreeUntilDay == null,
+                                modifier = Modifier.testTag("settings-remove-ads"),
+                            )
+                        },
+                    ),
+                )
+            }
             item { SectionTitle(stringResource(R.string.about)) }
             item {
                 // Ads consent choices, only where the user's region requires a way back to them (UMP).

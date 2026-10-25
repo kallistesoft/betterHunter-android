@@ -12,6 +12,8 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
+import ca.kallistesoft.hunt.core.data.Now
 import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.designsystem.theme.BetterHunterTheme
 import ca.kallistesoft.hunt.core.model.HunterType
@@ -23,6 +25,7 @@ import ca.kallistesoft.hunt.core.testing.FakeAdConsent
 import ca.kallistesoft.hunt.core.testing.FakeUserDataRepository
 import ca.kallistesoft.hunt.core.testing.ScreenshotDevice
 import ca.kallistesoft.hunt.core.testing.TEST_DAY
+import ca.kallistesoft.hunt.core.testing.TEST_NOW
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -139,7 +142,7 @@ class SettingsScreenTest {
         val userData = FakeUserDataRepository(
             UserProgress().withProfile(HunterType.HUNTER, setOf(Weapon.FIREARM), Province.QC).withSeasonStart(TEST_DAY + 30),
         )
-        val viewModel = SettingsViewModel(userData, Today { TEST_DAY }, FakeAdConsent())
+        val viewModel = SettingsViewModel(userData, Today { TEST_DAY }, FakeAdConsent(), Now { TEST_NOW })
         shadowOf(compose.activity.application).grantPermissions(Manifest.permission.POST_NOTIFICATIONS)
         compose.setContent {
             BetterHunterTheme {
@@ -147,6 +150,7 @@ class SettingsScreenTest {
                     versionName = "1.2.3",
                     onBack = {}, onEdit = {}, onOpenProvinces = {}, onOpenAbout = {}, onSetLanguage = {},
                     onOpenSeasonDate = { events += "season-date" },
+                    onOpenRemoveAds = { events += "remove-ads" },
                     viewModel = viewModel,
                 )
             }
@@ -166,7 +170,8 @@ class SettingsScreenTest {
         assertFalse(userData.progress.value.seasonReminders)
 
         compose.onNodeWithTag("settings-season").performClick()
-        assertEquals(listOf("season-date"), events)
+        compose.onNodeWithTag("settings-remove-ads").performScrollTo().performClick()
+        assertEquals(listOf("season-date", "remove-ads"), events)
 
         val activity = shadowOf(compose.activity)
         compose.onNodeWithText("Contact").performClick()
@@ -183,10 +188,10 @@ class SettingsScreenTest {
     @Test
     fun `the screen changes the daily goal`() {
         val userData = FakeUserDataRepository(UserProgress().withProfile(HunterType.WORKING_ON_IT, setOf(Weapon.FIREARM), Province.QC))
-        val viewModel = SettingsViewModel(userData, Today { TEST_DAY }, FakeAdConsent())
+        val viewModel = SettingsViewModel(userData, Today { TEST_DAY }, FakeAdConsent(), Now { TEST_NOW })
         compose.setContent {
             BetterHunterTheme {
-                SettingsScreen("1.2.3", {}, {}, {}, {}, {}, {}, viewModel)
+                SettingsScreen("1.2.3", {}, {}, {}, {}, {}, {}, {}, viewModel)
             }
         }
         compose.onNodeWithTag("toggle-10").performClick()
@@ -198,10 +203,10 @@ class SettingsScreenTest {
     fun `privacy options show only where the consent requires them, and open the consent form`() {
         val userData = FakeUserDataRepository(UserProgress().withProfile(HunterType.WORKING_ON_IT, setOf(Weapon.FIREARM), Province.QC))
         val consent = FakeAdConsent(privacyOptionsRequired = false)
-        val viewModel = SettingsViewModel(userData, Today { TEST_DAY }, consent)
+        val viewModel = SettingsViewModel(userData, Today { TEST_DAY }, consent, Now { TEST_NOW })
         compose.setContent {
             BetterHunterTheme {
-                SettingsScreen("1.2.3", {}, {}, {}, {}, {}, {}, viewModel)
+                SettingsScreen("1.2.3", {}, {}, {}, {}, {}, {}, {}, viewModel)
             }
         }
         compose.onNodeWithTag("settings-version").assertIsDisplayed()

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import ca.kallistesoft.hunt.core.ads.RewardOutcome
 import ca.kallistesoft.hunt.core.ads.RewardedAds
 import ca.kallistesoft.hunt.core.data.ContentRepository
+import ca.kallistesoft.hunt.core.data.Now
 import ca.kallistesoft.hunt.core.data.UserDataRepository
 import ca.kallistesoft.hunt.core.model.Exam
 import ca.kallistesoft.hunt.core.model.MOCK_COUNT
@@ -41,6 +42,8 @@ data class MockExamsUiState(
     val offline: Boolean = false,
     /** A retake was unlocked: the screen starts this mock, then calls [MockExamsViewModel.started]. */
     val start: Int? = null,
+    /** The user paid to remove ads (P15): retakes and "Reset all" start at once, without asking for an ad. */
+    val adFree: Boolean = false,
     val loading: Boolean = true,
 ) {
     val passedCount: Int get() = mocks.count { it.passed }
@@ -57,6 +60,7 @@ class MockExamsViewModel @AssistedInject constructor(
     contentRepository: ContentRepository,
     private val userData: UserDataRepository,
     private val ads: RewardedAds,
+    private val now: Now,
 ) : ViewModel() {
     @AssistedFactory
     interface Factory {
@@ -80,6 +84,7 @@ class MockExamsViewModel @AssistedInject constructor(
                 watchingAd = ad.watching,
                 offline = ad.offline,
                 start = ad.start,
+                adFree = progress.isAdFree(now()),
                 loading = false,
             )
         }

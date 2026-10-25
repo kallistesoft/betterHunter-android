@@ -16,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.OndemandVideo
 import androidx.compose.material.icons.outlined.WifiOff
 import androidx.compose.material.icons.rounded.PlayArrow
+import androidx.compose.material.icons.rounded.Replay
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
@@ -56,6 +57,7 @@ fun MockExamsScreen(
     examId: String,
     onBack: () -> Unit,
     onStartMock: (mock: Int, rewarded: Boolean) -> Unit,
+    onOpenRemoveAds: () -> Unit,
     viewModel: MockExamsViewModel = hiltViewModel<MockExamsViewModel, MockExamsViewModel.Factory>(
         creationCallback = { factory -> factory.create(examId) },
     ),
@@ -73,6 +75,7 @@ fun MockExamsScreen(
         onStart = { onStartMock(it, false) },
         onUnlock = viewModel::unlock,
         onDismissOffline = viewModel::dismissOffline,
+        onOpenRemoveAds = onOpenRemoveAds,
     )
 }
 
@@ -83,9 +86,18 @@ internal fun MockExamsContent(
     onStart: (mock: Int) -> Unit,
     onUnlock: (MockUnlock) -> Unit,
     onDismissOffline: () -> Unit,
+    onOpenRemoveAds: () -> Unit = {},
 ) {
     // The retake or reset waiting for "Watch ad": 1..10 a retake, 0 "Reset all", null none.
     var confirm by rememberSaveable { mutableStateOf<Int?>(null) }
+    // No ads (P15): no "watch an ad" question, the retake or reset goes through at once.
+    val ask: (Int) -> Unit = { which ->
+        if (state.adFree) {
+            onUnlock(if (which == 0) MockUnlock.ResetAll else MockUnlock.Retake(which))
+        } else {
+            confirm = which
+        }
+    }
     val lang = currentLang()
     Scaffold(
         topBar = { BackTopAppBar(stringResource(R.string.mock_exams), onBack, overline = state.exam?.label(lang)) },
@@ -121,9 +133,9 @@ internal fun MockExamsContent(
                         )
                         PrimaryButton(
                             stringResource(R.string.mocks_reset_all),
-                            onClick = { confirm = 0 },
+                            onClick = { ask(0) },
                             enabled = !state.watchingAd,
-                            icon = Icons.Outlined.OndemandVideo,
+                            icon = if (state.adFree) Icons.Rounded.Replay else Icons.Outlined.OndemandVideo,
                             modifier = Modifier.fillMaxWidth().testTag("mocks-reset"),
                         )
                     }
@@ -138,7 +150,8 @@ internal fun MockExamsContent(
                     next = row.number == next,
                     busy = state.watchingAd,
                     onStart = { onStart(row.number) },
-                    onRetake = { confirm = row.number },
+                    adFree = state.adFree,
+                    onRetake = { ask(row.number) },
                 )
             }
         }
@@ -161,7 +174,19 @@ internal fun MockExamsContent(
                     modifier = Modifier.testTag("watch-ad"),
                 )
             },
-            dismissButton = { LinkButton(onClick = { confirm = null }) { Text(stringResource(R.string.cancel)) } },
+            dismissButton = {
+                Row {
+                    // Or pay to never see these ads (P15).
+                    LinkButton(
+                        onClick = {
+                            confirm = null
+                            onOpenRemoveAds()
+                        },
+                        modifier = Modifier.testTag("retake-remove-ads"),
+                    ) { Text(stringResource(R.string.remove_ads_link)) }
+                    LinkButton(onClick = { confirm = null }) { Text(stringResource(R.string.cancel)) }
+                }
+            },
         )
     }
 
@@ -183,7 +208,7 @@ internal fun MockExamsContent(
  * behind an ad).
  */
 @Composable
-private fun MockRowCard(row: MockRow, next: Boolean, busy: Boolean, onStart: () -> Unit, onRetake: () -> Unit) {
+private fun MockRowCard(row: MockRow, next: Boolean, busy: Boolean, adFree: Boolean, onStart: () -> Unit, onRetake: () -> Unit) {
     val scheme = MaterialTheme.colorScheme
     val result = row.result
     val status = when {
@@ -237,7 +262,7 @@ private fun MockRowCard(row: MockRow, next: Boolean, busy: Boolean, onStart: () 
                     stringResource(R.string.mock_retake),
                     onClick = onRetake,
                     enabled = !busy,
-                    icon = Icons.Outlined.OndemandVideo,
+                    icon = if (adFree) Icons.Rounded.Replay else Icons.Outlined.OndemandVideo,
                     modifier = Modifier.testTag("mock-retake-${row.number}"),
                 )
             }

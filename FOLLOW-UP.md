@@ -10,6 +10,7 @@ Steps to do outside the code, in the Firebase, AdMob and Play consoles. They use
 - [4. Possible next step: questions from an online API](#4-possible-next-step-questions-from-an-online-api)
 - [5. Hunter: skill check and look-alikes (mockup, not built)](#5-hunter-skill-check-and-look-alikes-mockup-not-built)
 - [6. Store screenshots: retake the exam ones](#6-store-screenshots-retake-the-exam-ones)
+- [7. Remove ads: products in Play (P15)](#7-remove-ads-products-in-play-p15)
 
 ---
 
@@ -346,3 +347,34 @@ but not in the app yet:
 
 The Play screenshots `store/screens/*-4-exams.png` (and `*-1-dashboard.png`, whose Today card names the exam) still show the old exam card ("Hunter education with firearms
 (Québec)"). Retake them from the current build: the app no longer names provincial courses (DECISIONS.md, P13).
+
+## 7. Remove ads: products in Play (P15)
+
+The app sells two one-time products through Google Play Billing (`:core:billing`). Debug builds don't use Play (their
+application id has no products): "Buy" gives the entitlement at once, nothing is charged. Real purchases need a
+release build on a Play testing track.
+
+1. **Upload a build with billing** to internal testing (the BILLING permission comes with the library): Play Console
+   only lets you create products once such a build exists.
+2. **Create the products:** Play Console → **BetterHunter** → **Monetize with Play** → **Products** → **One-time
+   products** → **Create one-time product**. Prices in **CAD**; Play converts for other countries.
+   - `remove_ads_forever` · name **No ads, forever** / **Sans pub, pour toujours** · **CA$14.99** · description:
+     "No ads in BetterHunter, forever. Restored by Google Play on your other devices with the same account." /
+     « Plus aucune pub dans BetterHunter, pour toujours. Restauré par Google Play sur vos autres appareils avec le même
+     compte. »
+   - `remove_ads_week` · name **7 days without ads** / **7 jours sans pub** · **CA$1.99** · description (the limit must
+     be clear here too): "7 days without ads in BetterHunter. Kept on this phone only: if you delete the app or change
+     phones, the days left are lost. Not restored by Google Play." / « 7 jours sans pub dans BetterHunter. Gardé sur ce
+     téléphone seulement : si vous supprimez l'appli ou changez de téléphone, les jours qui restent sont perdus. Google
+     Play ne le restaure pas. » The app consumes it after counting it, so it can be bought again.
+   - Activate both.
+3. **License testers:** **Settings** (Play Console home) → **License testing** → add the Google accounts that test
+   (yours): they buy with test cards and are never charged. Install the build from the internal testing link.
+4. **Test on the phone:** Settings → Remove ads → buy the week (the warning, then Play's sheet), then forever; delete
+   and reinstall the app: forever comes back (Restore purchases, or at launch), the week doesn't.
+5. **Declarations:** the listing shows "In-app purchases" by itself once products exist. **Data safety:** add
+   "Purchase history" (collected by Google Play, used for app functionality), and check the answers. **Privacy policy**
+   (kallistesoft.ca): purchases are made through Google Play; the app keeps on the device which products were bought
+   and when a 7-day pass ends.
+6. **Pro later:** a future Pro (features, about CA$9.99/year) also gives `Entitlement.NO_ADS`; "Remove ads forever" stays
+   honoured as sold (DECISIONS.md, P15).

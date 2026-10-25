@@ -16,6 +16,11 @@ fun interface InterstitialAds {
     suspend fun showBeforeResults()
 }
 
+/** The user paid to remove ads (P15): no ad loads or shows, and what a rewarded ad unlocks is given at once. */
+fun interface AdFree {
+    suspend fun isAdFree(): Boolean
+}
+
 /** What came of asking for a rewarded ad (P14). */
 enum class RewardOutcome {
     /** The ad was watched to the end: give the reward. */

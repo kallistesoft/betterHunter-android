@@ -8,6 +8,7 @@ import androidx.datastore.dataStoreFile
 import ca.kallistesoft.hunt.core.data.AssetContentRepository
 import ca.kallistesoft.hunt.core.data.ContentRepository
 import ca.kallistesoft.hunt.core.data.DataStoreUserDataRepository
+import ca.kallistesoft.hunt.core.data.Now
 import ca.kallistesoft.hunt.core.data.Today
 import ca.kallistesoft.hunt.core.data.UserDataRepository
 import ca.kallistesoft.hunt.core.data.UserProgressSerializer
@@ -40,5 +41,8 @@ internal abstract class DataModule {
 
         @Provides
         fun today(): Today = Today.System
+
+        @Provides
+        fun now(): Now = Now.System
     }
 }

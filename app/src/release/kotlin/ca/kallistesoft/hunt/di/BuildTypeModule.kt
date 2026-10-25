@@ -1,5 +1,7 @@
 package ca.kallistesoft.hunt.di
 
+import ca.kallistesoft.hunt.core.billing.Purchases
+import ca.kallistesoft.hunt.core.billing.di.PlayStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,4 +16,8 @@ object BuildTypeModule {
         minVersionParameter = "min_version_code",
         featureFlagFetchIntervalSeconds = 3_600,
     )
+
+    /** Release: Remove ads is bought in Google Play. */
+    @Provides
+    fun purchases(@PlayStore purchases: Purchases): Purchases = purchases
 }

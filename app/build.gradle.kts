@@ -120,6 +120,7 @@ android {
 
 dependencies {
     implementation(project(":core:ads"))
+    implementation(project(":core:billing"))
     implementation(project(":core:data"))
     implementation(project(":core:designsystem"))
     implementation(project(":core:flags"))

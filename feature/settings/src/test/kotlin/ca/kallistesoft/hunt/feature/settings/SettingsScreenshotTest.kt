@@ -45,4 +45,28 @@ class SettingsScreenshotTest {
     @Test
     @Config(qualifiers = DARK_FR)
     fun profileEditDarkFr() = compose.captureScreenshot("profile_edit_dark_fr") { ProfileEditPreview() }
+
+    @Test
+    @Config(qualifiers = LIGHT_EN)
+    fun removeAdsLightEn() = compose.captureScreenshot("remove_ads_light_en") { RemoveAdsPreview() }
+
+    @Test
+    @Config(qualifiers = DARK_FR)
+    fun removeAdsDarkFr() = compose.captureScreenshot("remove_ads_dark_fr") { RemoveAdsPreview() }
+
+    @Test
+    @Config(qualifiers = LIGHT_EN)
+    fun removeAdsWeekLightEn() = compose.captureScreenshot("remove_ads_week_light_en") { RemoveAdsWeekPreview() }
+
+    @Test
+    @Config(qualifiers = DARK_FR)
+    fun removeAdsWeekDarkFr() = compose.captureScreenshot("remove_ads_week_dark_fr") { RemoveAdsWeekPreview() }
+
+    @Test
+    @Config(qualifiers = LIGHT_EN)
+    fun removeAdsForeverLightEn() = compose.captureScreenshot("remove_ads_forever_light_en") { RemoveAdsForeverPreview() }
+
+    @Test
+    @Config(qualifiers = DARK_FR)
+    fun removeAdsForeverDarkFr() = compose.captureScreenshot("remove_ads_forever_dark_fr") { RemoveAdsForeverPreview() }
 }

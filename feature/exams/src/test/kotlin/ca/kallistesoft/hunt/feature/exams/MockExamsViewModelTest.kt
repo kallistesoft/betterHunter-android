@@ -2,6 +2,7 @@ package ca.kallistesoft.hunt.feature.exams
 
 import app.cash.turbine.test
 import ca.kallistesoft.hunt.core.ads.RewardOutcome
+import ca.kallistesoft.hunt.core.data.Now
 import ca.kallistesoft.hunt.core.model.MOCK_COUNT
 import ca.kallistesoft.hunt.core.model.MockResult
 import ca.kallistesoft.hunt.core.model.UserProgress
@@ -9,6 +10,7 @@ import ca.kallistesoft.hunt.core.testing.FakeContentRepository
 import ca.kallistesoft.hunt.core.testing.FakeRewardedAds
 import ca.kallistesoft.hunt.core.testing.FakeUserDataRepository
 import ca.kallistesoft.hunt.core.testing.MainDispatcherRule
+import ca.kallistesoft.hunt.core.testing.TEST_NOW
 import ca.kallistesoft.hunt.core.testing.TestContent
 import ca.kallistesoft.hunt.core.testing.awaitItemMatching
 import kotlinx.coroutines.CompletableDeferred
@@ -31,7 +33,7 @@ class MockExamsViewModelTest {
         (1..done).fold(UserProgress()) { p, n -> p.withMockResult(exam.id, n, if (n % 2 == 0) 90 else 60) },
     )
 
-    private fun viewModel(userData: FakeUserDataRepository) = MockExamsViewModel(exam.id, FakeContentRepository(), userData, ads)
+    private fun viewModel(userData: FakeUserDataRepository) = MockExamsViewModel(exam.id, FakeContentRepository(), userData, ads, Now { TEST_NOW })
 
     @Test
     fun `ten mocks with their scores, and the rewarded ad loads as the list opens`() = runTest {

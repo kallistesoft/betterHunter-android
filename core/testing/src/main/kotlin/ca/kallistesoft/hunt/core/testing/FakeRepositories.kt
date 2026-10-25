@@ -18,6 +18,9 @@ import kotlinx.coroutines.flow.update
 /** Day number used by the fakes and tests. */
 const val TEST_DAY = 20_000L
 
+/** A time on [TEST_DAY] (epoch ms), for tests that need the time now. */
+const val TEST_NOW = TEST_DAY * 24 * 60 * 60 * 1_000L + 12 * 60 * 60 * 1_000L
+
 class FakeContentRepository(content: Content = TestContent.content) : ContentRepository {
     override val content: Flow<Content> = flowOf(content)
 }
@@ -46,6 +49,14 @@ class FakeUserDataRepository(initial: UserProgress = UserProgress()) : UserDataR
 
     override suspend fun markExamPassed(examId: String) {
         progress.update { it.withExamPassed(examId) }
+    }
+
+    override suspend fun addWeekPass(token: String, nowMillis: Long) {
+        progress.update { it.withWeekPass(token, nowMillis) }
+    }
+
+    override suspend fun setAdFreeForever(owned: Boolean) {
+        progress.update { it.withAdFreeForever(owned) }
     }
 
     override suspend fun recordMockResult(examId: String, mock: Int, percent: Int) {

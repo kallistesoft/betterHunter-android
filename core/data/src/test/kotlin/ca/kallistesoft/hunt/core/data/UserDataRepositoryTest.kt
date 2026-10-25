@@ -93,6 +93,22 @@ class UserDataRepositoryTest {
     }
 
     @Test
+    fun `remove ads purchases are saved and read back`() = runTest {
+        val repo = repository()
+        repo.addWeekPass("token", 1_000L)
+        repo.setAdFreeForever(true)
+        val saved = repo.progress.first()
+        assertEquals(1_000L + UserProgress.WEEK_PASS_MILLIS, saved.adFreeUntil)
+        assertEquals(setOf("token"), saved.weekPassTokens)
+        assertTrue(saved.adFreeForever)
+        val out = ByteArrayOutputStream()
+        UserProgressSerializer.writeTo(saved, out)
+        assertEquals(saved, UserProgressSerializer.readFrom(ByteArrayInputStream(out.toByteArray())))
+        assertEquals(1_000L, Now { 1_000L }())
+        assertTrue(Now.System() > 0)
+    }
+
+    @Test
     fun `the photo of the day is answered for today and counts as an answer`() = runTest {
         val repo = repository()
         repo.answerPhotoOfDay("id-1", choice = 2, correct = true)

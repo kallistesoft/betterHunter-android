@@ -85,4 +85,30 @@ class UserProgressTest {
         assertTrue(reset.mockResults("ICAF").isEmpty())
         assertEquals("other exams keep theirs", p.mockResults("PAL"), reset.mockResults("PAL"))
     }
+
+    @Test
+    fun `a week pass lasts 7 days, adds up when bought again, and counts each purchase once`() {
+        val now = 1_000_000L
+        val week = UserProgress.WEEK_PASS_MILLIS
+        assertFalse(UserProgress().isAdFree(now))
+
+        val one = UserProgress().withWeekPass("a", now)
+        assertEquals(now + week, one.adFreeUntil)
+        assertTrue(one.isAdFree(now + week - 1))
+        assertFalse("over after 7 days", one.isAdFree(now + week))
+        assertEquals("the same purchase twice counts once", one, one.withWeekPass("a", now + 10))
+
+        val two = one.withWeekPass("b", now + 1_000)
+        assertEquals("7 more days after the running pass", now + 2 * week, two.adFreeUntil)
+        val later = two.withWeekPass("c", now + 3 * week)
+        assertEquals("after a pass ended: 7 days from now", now + 4 * week, later.adFreeUntil)
+    }
+
+    @Test
+    fun `forever follows what Play says, a refund takes it back`() {
+        val owned = UserProgress().withAdFreeForever(true)
+        assertTrue(owned.isAdFree(Long.MAX_VALUE))
+        assertEquals(owned, owned.withAdFreeForever(true))
+        assertFalse(owned.withAdFreeForever(false).isAdFree(0))
+    }
 }

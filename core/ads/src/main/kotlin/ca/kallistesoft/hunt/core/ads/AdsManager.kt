@@ -22,7 +22,8 @@ import kotlinx.coroutines.withTimeoutOrNull
  * - at most one interstitial every [CAP_MILLIS] (AdMob's frequency cap is set to the same);
  * - a loaded ad older than [AD_LIFETIME_MILLIS] is dropped (AdMob doesn't serve stale ones) and loaded again;
  * - a rewarded ad is never skipped by going offline: no network means no reward. It's given without an ad only when
- *   the user can't cause it: ads turned off by us (config, `ads_enabled`), or no ad available while online (P14).
+ *   the user can't cause it: ads turned off by us (config, `ads_enabled`), or no ad available while online (P14);
+ * - while the user has paid to remove ads ([adFree], P15), nothing loads or shows and rewards are given at once.
  *
  * Runs on the main thread ([scope] and callers), as the SDKs require; [clock] is the elapsed real time in ms.
  */
@@ -35,6 +36,7 @@ internal class AdsManager(
     private val scope: CoroutineScope,
     private val clock: () -> Long,
     private val isOnline: () -> Boolean,
+    private val adFree: AdFree,
 ) : InterstitialAds, RewardedAds, AdConsent {
     private val privacyRequired = MutableStateFlow(false)
     override val privacyOptionsRequired: StateFlow<Boolean> = privacyRequired.asStateFlow()
@@ -122,7 +124,8 @@ internal class AdsManager(
         }
     }
 
-    private suspend fun adsOn(): Boolean = config.enabled && flags.isEnabled(FeatureFlag.ADS_ENABLED).first()
+    private suspend fun adsOn(): Boolean =
+        config.enabled && flags.isEnabled(FeatureFlag.ADS_ENABLED).first() && !adFree.isAdFree()
 
     private suspend fun allowed(): Boolean = adsOn() && consent.canRequestAds()
 

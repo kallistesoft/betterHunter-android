@@ -78,6 +78,10 @@ ICONS = {
     "first_aid": '<rect x="3" y="6" width="18" height="14" rx="2"/><path d="M9 6V4h6v2"/><path d="M12 10v6"/><path d="M9 13h6"/>',
     "bell": '<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/>',
     "calendar": '<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17"/><path d="M8 3v4"/><path d="M16 3v4"/>',
+    "block": '<circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/>',
+    "phone": '<rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18h2"/>',
+    "verified": '<path d="M12 2.5l2.4 1.9 3-.3.9 2.9 2.6 1.6-.9 2.9.9 2.9-2.6 1.6-.9 2.9-3-.3L12 21.5l-2.4-1.9-3 .3-.9-2.9-2.6-1.6.9-2.9-.9-2.9 2.6-1.6.9-2.9 3 .3z"/><path d="M8.5 12l2.4 2.4 4.6-4.8"/>',
+    "restore": '<path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v4.5h4.5"/><path d="M12 8v4l2.5 2"/>',
     "moon": '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
     "expand": '<path d="M4 9V4h5"/><path d="M20 9V4h-5"/><path d="M4 15v5h5"/><path d="M20 15v5h-5"/>',
 }
@@ -215,6 +219,7 @@ def settings(t):
   {label(t, "App", t["muted"])}
   {card(t, row(t, tile(t, "globe"), "Language", None, trail=pill, divider=False)
         + row(t, tile(t, "goal"), "Daily goal", "Questions a day", trail=goal), pad="2px 16px", gap=0)}
+  {card(t, row(t, tile(t, "block", "orange"), "Remove ads", "7 days or forever", target=href(t, "RemoveAds"), divider=False), pad="2px 16px", gap=0)}
   {label(t, "About", t["muted"])}
   {card(t, row(t, tile(t, "info"), "About BetterHunter", "How it works, sources, disclaimer", target=href(t, "About"), divider=False)
         + row(t, tile(t, "mail"), "Contact", "contact@kallistesoft.ca", trail="external", target="#")
@@ -954,7 +959,8 @@ def settings_hunter(t):
         + f'<p style="margin: 0; padding: 10px 0 12px; border-top: 1px solid {t["border"]}; font-size: 13px; color: {t["muted"]}; display: flex; align-items: center; gap: 8px">{icon("moon", 16)} {QUIET}</p>', pad="2px 16px", gap=0)}
   {label(t, "App", t["muted"])}
   {card(t, row(t, tile(t, "globe"), "Language", "English", divider=False)
-        + row(t, tile(t, "info"), "About BetterHunter", "How it works, sources, disclaimer", target=href(t, "About")), pad="2px 16px", gap=0)}'''
+        + row(t, tile(t, "info"), "About BetterHunter", "How it works, sources, disclaimer", target=href(t, "About")), pad="2px 16px", gap=0)}
+  {card(t, row(t, tile(t, "block", "orange"), "Remove ads", "7 days or forever", target=href(t, "RemoveAds"), divider=False), pad="2px 16px", gap=0)}'''
     return page(t, "BetterHunter settings, hunter", body, gap=10)
 
 
@@ -1075,8 +1081,9 @@ def retake_ad(t):
       <h2 id="retake-title" style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px">Retake Mock 2?</h2>
       <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">Watch a short ad to take a new Mock 2: new questions, in a new order. Your best score is kept.</p>
       <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-top: 8px; align-self: stretch">
-        <a href="{href(t, "MockExams")}" style="height: 48px; padding: 0 16px; display: flex; align-items: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none">Cancel</a>
-        {primary(t, "Watch ad", href(t, "ExamQuestion"), "; height: 48px; padding: 0 24px")}
+        <a href="{href(t, "RemoveAds")}" style="height: 48px; padding: 0 8px; display: flex; align-items: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none; margin-right: auto">Remove ads</a>
+        <a href="{href(t, "MockExams")}" style="height: 48px; padding: 0 8px; display: flex; align-items: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none">Cancel</a>
+        {primary(t, "Watch ad", href(t, "ExamQuestion"), "; height: 48px; padding: 0 20px")}
       </div>
       <a href="{href(t, "AdOffline")}" style="font-size: 12px; color: {t["muted"]}">Offline? →</a>
     </div>
@@ -1100,11 +1107,69 @@ def ad_offline(t):
     return page(t, "BetterHunter retake offline", under + "\n  " + dialog, gap=10)
 
 
+def note(t, name, text, warning=False):
+    color = t["label"] if warning else t["muted"]
+    weight = "600" if warning else "400"
+    return (f'<span style="display: flex; gap: 8px; font-size: 14px; line-height: 1.4; color: {color}; font-weight: {weight}">'
+            f'<span style="flex-shrink: 0; padding-top: 1px">{icon(name, 18)}</span><span>{text}</span></span>')
+
+
+WEEK_LOST = "Kept on this phone only: if you delete the app or change phones, the days left are lost. Not restored by Play."
+
+
+def notice(t, text):
+    return (f'<section style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 16px; background: {t["green_tint"]}; '
+            f'border: 1px solid {t["border"]}; font-size: 14px; line-height: 1.4">{icon("check", 20, t["green"], 2.6)}<span>{text}</span></section>')
+
+
+def remove_ads(t, state="offers"):
+    """Remove ads (P15): the two offers; "week": a 7-day pass running; "forever": bought."""
+    week = card(t, f'''<div style="display: flex; align-items: center; gap: 12px">{tile(t, "calendar")}<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px">7 days without ads</span></div>
+    {note(t, "phone", WEEK_LOST, warning=True)}
+    {note(t, "info", "Bought again before it ends: 7 more days.")}
+    {secondary(t, "Buy · CA$1.99", href(t, "RemoveAdsConfirm"), "; height: 50px")}''', pad="16px", gap=12, radius=22)
+    forever = card(t, f'''<div style="display: flex; align-items: center; gap: 12px">{tile(t, "verified")}<span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 21px">No ads, forever</span></div>
+    {note(t, "restore", "Restored by Play on your other devices with the same Google account.")}
+    {primary(t, "Buy · CA$14.99", href(t, "RemoveAdsForever"), "; height: 50px")}''', pad="16px", gap=12, radius=22)
+    if state == "forever":
+        offers = notice(t, "No ads, forever. Thank you!")
+    elif state == "week":
+        offers = notice(t, "No ads until Nov 1. Kept on this phone only.") + week + forever
+    else:
+        offers = week + forever
+    restore = f'<a href="#" style="display: flex; align-items: center; gap: 8px; min-height: 44px; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none">{icon("restore", 18)} Restore purchases</a>'
+    body = f'''{header(t, "Remove ads", back=href(t, "Settings"))}
+  <p style="margin: 0; font-size: 14px; line-height: 1.45; color: {t["muted"]}">No ad after a test, and mock exam retakes start at once.</p>
+  {offers}
+  {restore}'''
+    return page(t, "BetterHunter remove ads" + ("" if state == "offers" else f", {state}"), body, gap=12)
+
+
+def remove_ads_confirm(t):
+    body = f'''{header(t, "Remove ads", back="#")}
+  <p style="margin: 0; font-size: 14px; line-height: 1.45; color: {t["muted"]}">No ad after a test, and mock exam retakes start at once.</p>
+  {card(t, f'<div style="display: flex; align-items: center; gap: 12px">{tile(t, "calendar")}<span style="font-family: \'Barlow Condensed\', sans-serif; font-weight: 600; font-size: 21px">7 days without ads</span></div>{note(t, "phone", WEEK_LOST, warning=True)}', pad="16px", gap=12, radius=22)}
+  <div style="position: absolute; inset: 0; background: {t["dim"]}; display: flex; align-items: center; justify-content: center; padding: 24px">
+    <div role="dialog" aria-labelledby="week-title" style="width: 100%; background: {t["dialog"]}; border-radius: 28px; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.35)">
+      <span style="color: {t["green"]}">{icon("phone", 28)}</span>
+      <h2 id="week-title" style="margin: 0; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 26px">Buy 7 days without ads?</h2>
+      <p style="margin: 0; font-size: 15px; line-height: 1.4; color: {t["muted"]}">{WEEK_LOST}</p>
+      <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-top: 8px; align-self: stretch">
+        <a href="{href(t, "RemoveAds")}" style="height: 48px; padding: 0 12px; display: flex; align-items: center; color: {t["link"]}; font-weight: 600; font-size: 15px; text-decoration: none">Cancel</a>
+        {primary(t, "Continue to Google Play", href(t, "RemoveAdsWeek"), "; height: 48px; padding: 0 20px")}
+      </div>
+    </div>
+  </div>'''
+    return page(t, "BetterHunter remove ads, confirm the week", body, gap=12)
+
+
 SCREENS = {
     "Settings": settings, "About": about, "ExamTraining": exam_training, "PracticeQuestion": practice_question,
     "PracticeResults": lambda t: results(t, exam=False), "ExamResults": lambda t: results(t, exam=True),
     "QuitDialog": quit_dialog, "PhotoZoom": photo_zoom,
-    "MockExams": mock_exams, "MockExamsAllDone": lambda t: mock_exams(t, all_done=True), "RetakeAd": retake_ad, "AdOffline": ad_offline, "NothingToReview": nothing_to_review,
+    "MockExams": mock_exams, "MockExamsAllDone": lambda t: mock_exams(t, all_done=True), "RetakeAd": retake_ad, "AdOffline": ad_offline,
+    "RemoveAds": remove_ads, "RemoveAdsConfirm": remove_ads_confirm, "RemoveAdsWeek": lambda t: remove_ads(t, "week"),
+    "RemoveAdsForever": lambda t: remove_ads(t, "forever"), "NothingToReview": nothing_to_review,
     "Recognition": recognition, "UpdateRequired": update_required, "PassedExam": passed_exam,
     "HomeHunterPassed": lambda t: home_hunter(t, passed=True), "HuntWith": hunt_with, "HuntWhere": hunt_where, "Provinces": provinces,
     # Flow: hunter
