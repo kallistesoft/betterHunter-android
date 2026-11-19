@@ -11,6 +11,7 @@ Steps to do outside the code, in the Firebase, AdMob and Play consoles. They use
 - [5. Hunter: skill check and look-alikes (mockup, not built)](#5-hunter-skill-check-and-look-alikes-mockup-not-built)
 - [6. Store screenshots: retake the exam ones](#6-store-screenshots-retake-the-exam-ones)
 - [7. Remove ads: products in Play (P15)](#7-remove-ads-products-in-play-p15)
+- [8. Age signals: California and Brazil (by January 2027)](#8-age-signals-california-and-brazil-by-january-2027)
 
 ---
 
@@ -376,3 +377,23 @@ release build on a Play testing track.
    and when a 7-day pass ends.
 6. **Pro later:** a future Pro (features, about CA$9.99/year) also gives `Entitlement.NO_ADS`; "Remove ads forever" stays
    honoured as sold (DECISIONS.md, P15).
+
+## 8. Age signals: California and Brazil (by January 2027)
+
+Google's email of 2026-11-19: from January 2027, Google Play shares an age signal for **every** user in California
+(AB 1043) and Brazil (Digital ECA) through the Play Age Signals API. A new global version can also show a Play prompt
+asking any user to share their age, and can say whether sharing is mandatory for that user. Under AB 1043 the
+developer requests the signal when the app is downloaded and launched, and the answer then counts as knowing the user's
+age. Brazil's Digital ECA covers apps that minors are likely to use. With ads that matters: a known under-13 user must
+not get personalised ads (COPPA too). Not legal advice: check Google's docs, including "Regional age-related
+protections on Play" for Alabama HB 161, and the law texts before building. Not started: record only.
+
+- [ ] At launch, ask the Play Age Signals API for the user's age range and keep the answer. No answer or an error =
+      today's behaviour.
+- [ ] Under 13: AdMob child-directed treatment on (`tagForChildDirectedTreatment`), non-personalised ads only, ad
+      content rating G.
+- [ ] 13 to 17: under-age-of-consent tag on (`tagForUnderAgeOfConsent`), ad content rating at most T.
+- [ ] Adult or unknown: unchanged (T rating, consent flow as today).
+- [ ] Kotlin: call the `com.google.android.play:age-signals` library directly, then `MobileAds.setRequestConfiguration(...)` before the first ad loads.
+- [ ] Check the Data safety form and the privacy page still match.
+- [ ] Release before January 2027.
