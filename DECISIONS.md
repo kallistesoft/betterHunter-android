@@ -225,3 +225,10 @@ emulator in CI: flow tests on the real app (no fakes; the Test Orchestrator clea
 and a UiAutomator smoke test of the release build (`qa` build type: release, debug-signed), so R8 problems show up
 before a Play upload. *Rejected:* Hilt test modules replacing storage or Firebase in flow tests (a fresh process and
 no `google-services.json` give the same isolation with the real wiring).
+
+## Pending validation
+
+Non-blocking choices Claude made with its default; owner validates later.
+
+| Date | Decision | Default taken | Status |
+|------|----------|---------------|--------|
