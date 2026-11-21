@@ -1,5 +1,34 @@
 # Notes for Claude
 
+BetterHunter, native Android (Kotlin, Compose, Hilt, Nav3), package `ca.kallistesoft.hunt` (debug: `.debug`,
+"BetterHunter Dev"). Not the Flutter app in kallistesoft/hunt (~/Sources/Repos/HuntExamPrep): that one is the retired
+proof of concept. To-dos live in `FOLLOW-UP.md` and `IDEAS.md`; product decisions in `DECISIONS.md`, which also has
+the table of non-blocking choices Claude made with its default for the owner to validate later (ask only when
+blocked). Never show provincial course names in the UI (DECISIONS P13; guard tests enforce it).
+
+## Branch model
+
+- Feature branch → push → PR against `main`; the owner merges. Never stacked PRs.
+- `main` has the "Protect main" ruleset (PR + 1 approval + `build` and `integration` checks). The owner merges with
+  his admin bypass; never run `gh pr merge --admin` or bypass it any other way. No bot commits, no "approve
+  workflow" step. Report CI on the PR; never suggest merging with red CI.
+
+## Build, check, release
+
+- Local builds: prefix Gradle with
+  `JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home" ANDROID_HOME=~/Library/Android/sdk`.
+- `tools/check.sh` (conventions, unit tests, Kover 90 % per class, `:app:lintDebug`) runs before every push (global
+  pre-push hook). Screenshot verification fails locally on macOS for 4 references even on main: Linux CI is the
+  reference for those (`scripts/record-screenshots.sh` records them).
+- `tools/build_release.sh` (clean, up-to-date `main` only; needs `keystore.properties`): automatic versionCode
+  (commits on main; check the Play track's last code, `VERSION_CODE=<n>` overrides), signed AAB + release APK, then
+  `tools/smoke_release.sh` on `emulator-5554`. Never send a build to Play without that R8 smoke test passing.
+  Building is fine; Play releases and uploads only when the owner asks.
+- `tools/install_dev.sh [SERIAL]` installs the debug app next to the Play app (never uninstall the store app);
+  announce installs on the owner's devices first.
+- `connectedAndroidTest` (or any connected* task) only with `ANDROID_SERIAL=emulator-5554`: it once ran on the
+  owner's Pixel and uninstalled BetterHunter with its progress.
+
 ## Design mockup
 
 The BetterHunter design mockup (dark and light screens) is a claude.ai Design canvas:
